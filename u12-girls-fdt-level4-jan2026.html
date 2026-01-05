@@ -196,10 +196,140 @@
 
     /* Print styles */
     @media print {
-      body { background-color: white; }
-      table, .stats-section, .tournament-details-page { box-shadow: none; }
-      tbody tr:hover { background-color: inherit !important; }
-      .tournament-details-page { page-break-before: always; }
+      /* Page setup */
+      @page {
+        size: letter;
+        margin: 0.5in;
+      }
+
+      body {
+        background-color: white;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Remove shadows and unnecessary decorations */
+      table, .stats-section, .tournament-details-page {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+
+      /* Table optimizations */
+      table {
+        font-size: 10pt;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+
+      tbody tr:hover {
+        background-color: inherit !important;
+      }
+
+      /* Keep alternating row colors for readability */
+      tbody tr:nth-child(odd) {
+        background-color: white !important;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #f0f0f0 !important;
+      }
+
+      /* Highlight Alexis in print */
+      tr.highlight-player td {
+        color: #000 !important;
+        font-weight: bold !important;
+        background-color: #ffffcc !important;
+      }
+
+      /* Column widths for print */
+      .col-rank {
+        width: 30px;
+      }
+
+      th, td {
+        padding: 6px 8px;
+      }
+
+      /* Stats section */
+      .stats-section {
+        page-break-before: auto;
+        page-break-after: auto;
+        page-break-inside: avoid;
+        margin: 20px 0;
+        padding: 15px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      .stat-box {
+        background-color: #f8f9fa !important;
+        border: 1px solid #ddd;
+      }
+
+      /* Tournament details page */
+      .tournament-details-page {
+        page-break-before: always;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .tournament-info {
+        font-size: 11pt;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 18pt;
+        margin-bottom: 5px;
+      }
+
+      h2 {
+        font-size: 16pt;
+        margin-top: 15px;
+      }
+
+      h3 {
+        font-size: 13pt;
+        margin-top: 15px;
+        margin-bottom: 8px;
+      }
+
+      /* Make links visible in print */
+      a {
+        color: #000;
+        text-decoration: underline;
+      }
+
+      a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        color: #666;
+      }
+
+      /* Important note styling */
+      .important-note {
+        background-color: #f9f9f9 !important;
+        border: 2px solid #666;
+        padding: 12px;
+        margin-top: 15px;
+      }
+
+      .detail-row {
+        padding: 6px 0;
+        font-size: 11pt;
+      }
     }
   </style>
 </head>
