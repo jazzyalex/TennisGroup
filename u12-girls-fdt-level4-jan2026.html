@@ -194,6 +194,128 @@
       border-radius: 4px;
     }
 
+    /* Mobile/Tablet Responsive Styles */
+    @media screen and (max-width: 768px) {
+      body {
+        margin: 10px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+        margin-bottom: 8px;
+      }
+
+      .tournament-info {
+        font-size: 12px;
+        margin-bottom: 15px;
+      }
+
+      /* Table container for horizontal scrolling */
+      table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 12px;
+      }
+
+      thead, tbody {
+        display: table;
+        width: 100%;
+      }
+
+      /* Larger tap targets for sortable headers */
+      th.sortable {
+        padding: 15px 8px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(68, 114, 196, 0.3);
+      }
+
+      th, td {
+        padding: 10px 6px;
+      }
+
+      /* Make row numbers and ratings more prominent */
+      .col-rank {
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .col-wtn, .col-utr {
+        font-size: 13px;
+      }
+
+      /* Hide Location column on very small screens (under 480px) */
+      @media screen and (max-width: 480px) {
+        th:last-child,
+        td:last-child {
+          display: none;
+        }
+      }
+
+      /* Stats section - stack on mobile */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .stat-box {
+        padding: 12px;
+      }
+
+      .stat-label {
+        font-size: 10px;
+      }
+
+      .stat-value {
+        font-size: 16px;
+      }
+
+      /* Tournament details - better mobile layout */
+      .tournament-details-page {
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .tournament-details-page h2 {
+        font-size: 1.5em;
+      }
+
+      .tournament-details-page h3 {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+
+      .detail-row {
+        padding: 8px 0;
+        font-size: 13px;
+      }
+
+      .detail-label {
+        display: block;
+        width: 100%;
+        margin-bottom: 3px;
+        font-size: 11px;
+      }
+
+      .detail-value {
+        display: block;
+        padding-left: 0;
+      }
+
+      /* Touch-friendly links */
+      .detail-value a {
+        display: inline-block;
+        padding: 8px 0;
+        line-height: 1.4;
+        -webkit-tap-highlight-color: rgba(68, 114, 196, 0.2);
+      }
+
+      .important-note {
+        padding: 12px;
+        font-size: 13px;
+      }
+    }
+
     /* Print styles */
     @media print {
       /* Page setup */
@@ -312,12 +434,6 @@
         text-decoration: underline;
       }
 
-      a[href]:after {
-        content: " (" attr(href) ")";
-        font-size: 9pt;
-        color: #666;
-      }
-
       /* Important note styling */
       .important-note {
         background-color: #f9f9f9 !important;
@@ -347,9 +463,9 @@
         <th class="col-rank">#</th>
         <th>FirstName</th>
         <th>LastName</th>
-        <th>Location</th>
         <th class="col-wtn sortable">WTN_Singles</th>
         <th class="col-utr sortable">UTR_Singles</th>
+        <th>Location</th>
       </tr>
     </thead>
     <tbody>
@@ -357,313 +473,352 @@
         <td class="col-rank">1</td>
         <td>Ziva</td>
         <td>GADGIL</td>
-        <td>San Mateo CA</td>
+        
         <td class="col-wtn">30.63</td>
         <td class="col-utr">5.95</td>
+        <td>San Mateo CA</td>
       </tr>
       <tr>
         <td class="col-rank">2</td>
         <td>Alexi</td>
         <td>LABRECQUE</td>
-        <td>Mountain View CA</td>
+        
         <td class="col-wtn">31.76</td>
         <td class="col-utr">5.6</td>
+        <td>Mountain View CA</td>
       </tr>
       <tr>
         <td class="col-rank">3</td>
         <td>Harper</td>
         <td>WANG</td>
-        <td>San Jose CA</td>
+        
         <td class="col-wtn">32.06</td>
         <td class="col-utr">5.53</td>
+        <td>San Jose CA</td>
       </tr>
       <tr>
         <td class="col-rank">4</td>
         <td>Margaret</td>
         <td>DORAN</td>
-        <td>Atherton CA</td>
+        
         <td class="col-wtn">32.11</td>
         <td class="col-utr">4.63</td>
+        <td>Atherton CA</td>
       </tr>
       <tr>
         <td class="col-rank">5</td>
         <td>Zhiyan</td>
         <td>DUAN</td>
-        <td>San Jose CA</td>
+        
         <td class="col-wtn">32.27</td>
         <td class="col-utr">5.09</td>
+        <td>San Jose CA</td>
       </tr>
       <tr>
         <td class="col-rank">6</td>
         <td>Camille</td>
         <td>KUNKEL</td>
-        <td>Fremont CA</td>
+        
         <td class="col-wtn">32.88</td>
         <td class="col-utr">5.09</td>
+        <td>Fremont CA</td>
       </tr>
       <tr>
         <td class="col-rank">7</td>
         <td>Olivia</td>
         <td>LI</td>
-        <td>Palo Alto CA</td>
+        
         <td class="col-wtn">32.9</td>
         <td class="col-utr">4.94</td>
+        <td>Palo Alto CA</td>
       </tr>
       <tr>
         <td class="col-rank">8</td>
         <td>Siya</td>
         <td>DALAL</td>
-        <td>Cupertino CA</td>
+        
         <td class="col-wtn">33.31</td>
         <td class="col-utr">4.26</td>
+        <td>Cupertino CA</td>
       </tr>
       <tr>
         <td class="col-rank">9</td>
         <td>Misha</td>
         <td>KATARIA</td>
-        <td>Fremont CA</td>
+        
         <td class="col-wtn">33.52</td>
         <td class="col-utr">4</td>
+        <td>Fremont CA</td>
       </tr>
       <tr>
         <td class="col-rank">10</td>
         <td>Summer</td>
         <td>STIRITZ</td>
-        <td>Ross CA</td>
+        
         <td class="col-wtn">33.68</td>
         <td class="col-utr">4.72</td>
+        <td>Ross CA</td>
       </tr>
       <tr>
         <td class="col-rank">11</td>
         <td>Paneez</td>
         <td>SHAHAB</td>
-        <td>Los Gatos CA</td>
+        
         <td class="col-wtn">33.76</td>
         <td class="col-utr">3.98</td>
+        <td>Los Gatos CA</td>
       </tr>
       <tr>
         <td class="col-rank">12</td>
         <td>Eileen</td>
         <td>LI</td>
-        <td>Sunnyvale CA</td>
+        
         <td class="col-wtn">33.79</td>
         <td class="col-utr">4.23</td>
+        <td>Sunnyvale CA</td>
       </tr>
       <tr class="highlight-player">
         <td class="col-rank">13</td>
         <td>Alexis</td>
         <td>MALAKHOVA</td>
-        <td>Mountain View CA</td>
+        
         <td class="col-wtn">33.85</td>
         <td class="col-utr">4.02</td>
+        <td>Mountain View CA</td>
       </tr>
       <tr>
         <td class="col-rank">14</td>
         <td>Damayanthi</td>
         <td>ARUNKUMAR</td>
-        <td>Fremont CA</td>
+        
         <td class="col-wtn">33.86</td>
         <td class="col-utr">4.00</td>
+        <td>Fremont CA</td>
       </tr>
       <tr>
         <td class="col-rank">15</td>
         <td>Noor</td>
         <td>DESAI</td>
-        <td>San Francisco CA</td>
+        
         <td class="col-wtn">33.93</td>
         <td class="col-utr">4.36</td>
+        <td>San Francisco CA</td>
       </tr>
       <tr>
         <td class="col-rank">16</td>
         <td>Ruoyu</td>
         <td>SUN</td>
-        <td>San Jose CA</td>
+        
         <td class="col-wtn">33.97</td>
         <td class="col-utr">3.99</td>
+        <td>San Jose CA</td>
       </tr>
       <tr>
         <td class="col-rank">17</td>
         <td>Megan</td>
         <td>LAI</td>
-        <td>San Ramon CA</td>
+        
         <td class="col-wtn">34.03</td>
         <td class="col-utr">3.58</td>
+        <td>San Ramon CA</td>
       </tr>
       <tr>
         <td class="col-rank">18</td>
         <td>Annabel</td>
         <td>HU</td>
-        <td>Palo Alto CA</td>
+        
         <td class="col-wtn">34.21</td>
         <td class="col-utr">4.3</td>
+        <td>Palo Alto CA</td>
       </tr>
       <tr>
         <td class="col-rank">19</td>
         <td>Stephanie</td>
         <td>LI</td>
-        <td>Cupertino CA</td>
+        
         <td class="col-wtn">34.25</td>
         <td class="col-utr">3.68</td>
+        <td>Cupertino CA</td>
       </tr>
       <tr>
         <td class="col-rank">20</td>
         <td>Jenna</td>
         <td>YU</td>
-        <td>Foster City CA</td>
+        
         <td class="col-wtn">34.42</td>
         <td class="col-utr">3.85</td>
+        <td>Foster City CA</td>
       </tr>
       <tr>
         <td class="col-rank">21</td>
         <td>Kateryna</td>
         <td>MOLOCHKO</td>
-        <td>Castro Valley CA</td>
+        
         <td class="col-wtn">34.44</td>
         <td class="col-utr">3.68</td>
+        <td>Castro Valley CA</td>
       </tr>
       <tr>
         <td class="col-rank">22</td>
         <td>Elise</td>
         <td>WATT</td>
-        <td>Hillsborough CA</td>
+        
         <td class="col-wtn">34.48</td>
         <td class="col-utr">3.47</td>
+        <td>Hillsborough CA</td>
       </tr>
       <tr>
         <td class="col-rank">23</td>
         <td>Bella</td>
         <td>WU</td>
-        <td>Los Gatos CA</td>
+        
         <td class="col-wtn">34.68</td>
         <td class="col-utr">3.68</td>
+        <td>Los Gatos CA</td>
       </tr>
       <tr>
         <td class="col-rank">24</td>
         <td>Avaline</td>
         <td>WANG</td>
-        <td>Saratoga CA</td>
+        
         <td class="col-wtn">34.86</td>
         <td class="col-utr">3.6</td>
+        <td>Saratoga CA</td>
       </tr>
       <tr>
         <td class="col-rank">25</td>
         <td>Aashna</td>
         <td>MODI</td>
-        <td>San Jose CA</td>
+        
         <td class="col-wtn">35.01</td>
         <td class="col-utr">3.15</td>
+        <td>San Jose CA</td>
       </tr>
       <tr>
         <td class="col-rank">26</td>
         <td>Ellie</td>
         <td>WANG</td>
-        <td>Palo Alto CA</td>
+        
         <td class="col-wtn">35.09</td>
         <td class="col-utr">3.06</td>
+        <td>Palo Alto CA</td>
       </tr>
       <tr>
         <td class="col-rank">27</td>
         <td>Amy</td>
         <td>LI</td>
-        <td>Saratoga CA</td>
+        
         <td class="col-wtn">35.1</td>
         <td class="col-utr">3.36</td>
+        <td>Saratoga CA</td>
       </tr>
       <tr>
         <td class="col-rank">28</td>
         <td>Emma</td>
         <td>LI</td>
-        <td>Pleasanton CA</td>
+        
         <td class="col-wtn">35.23</td>
         <td class="col-utr">3.48</td>
+        <td>Pleasanton CA</td>
       </tr>
       <tr>
         <td class="col-rank">29</td>
         <td>MAY</td>
         <td>SUN</td>
-        <td>Sunnyvale CA</td>
+        
         <td class="col-wtn">35.35</td>
         <td class="col-utr">3.29</td>
+        <td>Sunnyvale CA</td>
       </tr>
       <tr>
         <td class="col-rank">30</td>
         <td>Zaira</td>
         <td>GADGIL</td>
-        <td>San Mateo CA</td>
+        
         <td class="col-wtn">35.4</td>
         <td class="col-utr">3.17</td>
+        <td>San Mateo CA</td>
       </tr>
       <tr>
         <td class="col-rank">31</td>
         <td>Akshaya</td>
         <td>ASHOK</td>
-        <td>Milpitas CA</td>
+        
         <td class="col-wtn">35.41</td>
         <td class="col-utr">3.53</td>
+        <td>Milpitas CA</td>
       </tr>
       <tr>
         <td class="col-rank">32</td>
         <td>Sania</td>
         <td>BHAMBANI</td>
-        <td>Saratoga CA</td>
+        
         <td class="col-wtn">35.72</td>
         <td class="col-utr">3.14</td>
+        <td>Saratoga CA</td>
       </tr>
       <tr>
         <td class="col-rank">33</td>
         <td>Eliana</td>
         <td>MOGLEN</td>
-        <td>Mill Valley CA</td>
+        
         <td class="col-wtn">36.06</td>
         <td class="col-utr">3.06</td>
+        <td>Mill Valley CA</td>
       </tr>
       <tr>
         <td class="col-rank">34</td>
         <td>Olivia</td>
         <td>WANG</td>
-        <td>Fremont CA</td>
+        
         <td class="col-wtn">36.13</td>
         <td class="col-utr">2.74</td>
+        <td>Fremont CA</td>
       </tr>
       <tr>
         <td class="col-rank">35</td>
         <td>Liana</td>
         <td>CAI</td>
-        <td>San Jose CA</td>
+        
         <td class="col-wtn">36.32</td>
         <td class="col-utr">2.79</td>
+        <td>San Jose CA</td>
       </tr>
       <tr>
         <td class="col-rank">36</td>
         <td>Cassia</td>
         <td>GARCIA</td>
-        <td>Pacifica CA</td>
+        
         <td class="col-wtn">36.72</td>
         <td class="col-utr">2.27</td>
+        <td>Pacifica CA</td>
       </tr>
       <tr>
         <td class="col-rank">37</td>
         <td>Sanaia</td>
         <td>GOUDIE</td>
-        <td>Oakley CA</td>
+        
         <td class="col-wtn">36.84</td>
         <td class="col-utr">3.05</td>
+        <td>Oakley CA</td>
       </tr>
       <tr>
         <td class="col-rank">38</td>
         <td>Katherine</td>
         <td>CAO</td>
-        <td>Los Altos CA</td>
+        
         <td class="col-wtn">36.92</td>
         <td class="col-utr">2.27</td>
+        <td>Los Altos CA</td>
       </tr>
       <tr>
         <td class="col-rank">39</td>
         <td>Sarahana</td>
         <td>CHITAURE</td>
-        <td>El Sobrante CA</td>
+        
         <td class="col-wtn">38.89</td>
         <td class="col-utr">2.1</td>
+        <td>El Sobrante CA</td>
       </tr>
     </tbody>
   </table>
@@ -797,8 +952,8 @@
     const tbody = document.querySelector('tbody');
 
     headers.forEach((header, columnIndex) => {
-      // Only enable sorting for WTN (column 4) and UTR (column 5)
-      if (columnIndex === 4 || columnIndex === 5) {
+      // Only enable sorting for WTN (column 3) and UTR (column 4)
+      if (columnIndex === 3 || columnIndex === 4) {
         header.addEventListener('click', () => {
           const rows = Array.from(tbody.querySelectorAll('tr'));
 
