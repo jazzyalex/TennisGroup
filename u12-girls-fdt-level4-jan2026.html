@@ -273,6 +273,80 @@
       color: #2c3e50;
     }
 
+    .utr-histogram {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 16px 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .utr-histogram h3 {
+      color: #2c3e50;
+      margin-top: 0;
+      border-bottom: 2px solid #4472C4;
+      padding-bottom: 8px;
+    }
+
+    .utr-subtitle {
+      font-weight: normal;
+      font-size: 12px;
+      color: #5a6b7d;
+    }
+
+    .utr-histogram-chart {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .utr-bin {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #2c3e50;
+    }
+
+    .utr-bin-label {
+      width: 90px;
+      text-align: right;
+      color: #5a6b7d;
+    }
+
+    .utr-bin-bar-wrap {
+      flex: 1;
+      height: 12px;
+      background-color: #eef2f8;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .utr-bin-bar {
+      height: 100%;
+      background-color: #4472C4;
+      border-radius: 999px;
+    }
+
+    .utr-bin.is-highlight .utr-bin-bar {
+      background-color: #f5c542;
+    }
+
+    .utr-bin-count {
+      width: 28px;
+      text-align: right;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .utr-histogram-caption {
+      font-size: 11px;
+      color: #666;
+      margin-top: 6px;
+    }
+
     /* Tournament Details Page */
     .tournament-details-page {
       max-width: 1000px;
@@ -430,12 +504,12 @@
         border-bottom: 1px solid #404040;
       }
 
-      .stats-section, .tournament-details-page {
+      .stats-section, .tournament-details-page, .utr-histogram {
         background-color: #2a2a2a;
         color: #e0e0e0;
       }
 
-      .stats-section h3, .tournament-details-page h2, .tournament-details-page h3 {
+      .stats-section h3, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h3 {
         color: #ffffff;
         border-bottom-color: #3a5a8a;
       }
@@ -447,6 +521,38 @@
 
       .stat-value, .stat-label {
         color: #e0e0e0;
+      }
+
+      .utr-subtitle {
+        color: #9aa9c0;
+      }
+
+      .utr-bin {
+        color: #e0e0e0;
+      }
+
+      .utr-bin-label {
+        color: #9aa9c0;
+      }
+
+      .utr-bin-bar-wrap {
+        background-color: #2f3644;
+      }
+
+      .utr-bin-bar {
+        background-color: #6b9bd1;
+      }
+
+      .utr-bin.is-highlight .utr-bin-bar {
+        background-color: #f5c542;
+      }
+
+      .utr-bin-count {
+        color: #e0e0e0;
+      }
+
+      .utr-histogram-caption {
+        color: #b0b0b0;
       }
 
       .detail-row {
@@ -581,6 +687,21 @@
         gap: 10px;
       }
 
+      .utr-histogram {
+        padding: 15px;
+        margin: 20px 0;
+      }
+
+      .utr-bin-label {
+        width: 70px;
+        font-size: 10px;
+      }
+
+      .utr-bin-count {
+        width: 24px;
+        font-size: 10px;
+      }
+
       .stat-box {
         padding: 12px;
       }
@@ -668,7 +789,7 @@
       }
 
       /* Remove shadows and unnecessary decorations */
-      table, .stats-section, .tournament-details-page {
+      table, .stats-section, .tournament-details-page, .utr-histogram {
         box-shadow: none;
         border: 1px solid #ddd;
       }
@@ -725,6 +846,12 @@
       .stats-section {
         page-break-before: auto;
         page-break-after: auto;
+        page-break-inside: avoid;
+        margin: 20px 0;
+        padding: 15px;
+      }
+
+      .utr-histogram {
         page-break-inside: avoid;
         margin: 20px 0;
         padding: 15px;
@@ -1214,6 +1341,12 @@
     </tbody>
   </table>
 
+  <div class="utr-histogram">
+    <h3>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span></h3>
+    <div id="utr-histogram-chart" class="utr-histogram-chart"></div>
+    <div class="utr-histogram-caption" id="utr-histogram-caption">Based on UTR values from the player list.</div>
+  </div>
+
   <div class="stats-section">
     <h3>Tournament Statistics</h3>
     <div class="stats-grid">
@@ -1405,6 +1538,124 @@
       });
     }
 
+    function formatUtrRangeLabel(start, binSize) {
+      const end = start + binSize - 0.01;
+      return `${start.toFixed(1)}-${end.toFixed(2)}`;
+    }
+
+    function getDrawSizeFromKeyStats() {
+      const stats = Array.from(document.querySelectorAll('.key-stat'));
+      for (const stat of stats) {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase() === 'draw') {
+          const size = parseInt(value.textContent.trim(), 10);
+          if (Number.isFinite(size)) return size;
+        }
+      }
+      return null;
+    }
+
+    function buildUtrHistogram() {
+      const container = document.getElementById('utr-histogram-chart');
+      if (!container) return;
+      const rows = Array.from(document.querySelectorAll('tbody tr'));
+      if (!rows.length) return;
+
+      const players = rows.map(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 6) return null;
+        const utr = parseFloat(cells[4].textContent.trim());
+        const natRank = parseInt(cells[5].textContent.trim(), 10);
+        if (!Number.isFinite(natRank)) return null;
+        return {
+          utr: Number.isFinite(utr) ? utr : null,
+          natRank,
+          highlight: row.classList.contains('highlight-player'),
+        };
+      }).filter(Boolean);
+
+      if (!players.length) return;
+
+      players.sort((a, b) => a.natRank - b.natRank);
+      const drawSize = getDrawSizeFromKeyStats() || players.length;
+      const drawPlayers = players.slice(0, drawSize);
+      const values = drawPlayers
+        .map(player => player.utr)
+        .filter(value => Number.isFinite(value));
+
+      if (!values.length) return;
+
+      const highlightPlayer = drawPlayers.find(
+        player => player.highlight && Number.isFinite(player.utr)
+      );
+      const highlightUtr = highlightPlayer ? highlightPlayer.utr : null;
+
+      const binSize = 0.5;
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const startBin = Math.floor(min / binSize) * binSize;
+      const endBin = Math.floor(max / binSize) * binSize;
+      const binCount = Math.round((endBin - startBin) / binSize) + 1;
+      const bins = new Array(binCount).fill(0);
+
+      values.forEach(value => {
+        const idx = Math.floor((value - startBin) / binSize);
+        if (idx >= 0 && idx < bins.length) {
+          bins[idx] += 1;
+        }
+      });
+
+      const maxCount = Math.max(...bins, 1);
+      container.innerHTML = '';
+
+      const highlightIndex =
+        highlightUtr !== null ? Math.floor((highlightUtr - startBin) / binSize) : null;
+
+      bins.forEach((count, index) => {
+        if (count === 0) return;
+        const start = startBin + index * binSize;
+        const row = document.createElement('div');
+        row.className = 'utr-bin';
+
+        if (highlightIndex !== null && highlightIndex === index) {
+          row.classList.add('is-highlight');
+        }
+
+        const label = document.createElement('div');
+        label.className = 'utr-bin-label';
+        label.textContent = formatUtrRangeLabel(start, binSize);
+
+        const barWrap = document.createElement('div');
+        barWrap.className = 'utr-bin-bar-wrap';
+
+        const bar = document.createElement('div');
+        bar.className = 'utr-bin-bar';
+        bar.style.width = `${(count / maxCount) * 100}%`;
+        barWrap.appendChild(bar);
+
+        const countEl = document.createElement('div');
+        countEl.className = 'utr-bin-count';
+        countEl.textContent = String(count);
+
+        row.appendChild(label);
+        row.appendChild(barWrap);
+        row.appendChild(countEl);
+
+        container.appendChild(row);
+      });
+
+      const captionEl = document.getElementById('utr-histogram-caption');
+      if (captionEl) {
+        let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
+        if (highlightUtr !== null) {
+          caption += ' Alexis bin highlighted.';
+        }
+        captionEl.textContent = caption;
+      }
+    }
+
     // Update row numbers dynamically
     function updateRowNumbers() {
       const tbody = document.querySelector('tbody');
@@ -1480,6 +1731,7 @@
     // Initialize row numbers on page load
     updateRowNumbers();
     decoratePlayerLinks();
+    buildUtrHistogram();
 
     // Share button functionality
     const shareButton = document.createElement('button');
