@@ -181,8 +181,9 @@
     .table-meta {
       max-width: 1000px;
       margin: 10px auto 6px;
+      width: 100%;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 12px;
     }
@@ -190,20 +191,20 @@
     .key-stats {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       justify-content: flex-start;
+      font-size: 12px;
+      color: #2c3e50;
     }
 
     .key-stat {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
-      font-size: 11px;
-      color: #2c3e50;
-      background-color: #f3f6fb;
-      border: 1px solid #d6e0f0;
-      border-radius: 999px;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
     }
 
     .key-stat .key-value {
@@ -211,9 +212,15 @@
       color: #1f3b68;
     }
 
+    .key-stat:not(:last-child)::after {
+      content: "•";
+      margin-left: 8px;
+      color: #9aa9c0;
+    }
+
     .link-legend {
       text-align: right;
-      font-size: 10px;
+      font-size: 11px;
       color: #666;
       white-space: nowrap;
     }
@@ -280,6 +287,8 @@
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
     }
 
     .utr-histogram h3 {
@@ -344,7 +353,9 @@
     .utr-histogram-caption {
       font-size: 11px;
       color: #666;
-      margin-top: 6px;
+      margin-top: 12px;
+      padding-bottom: 4px;
+      text-align: center;
     }
 
     /* Tournament Details Page */
@@ -569,8 +580,8 @@
 
       .key-stat {
         color: #e0e0e0;
-        background-color: #2f3644;
-        border-color: #3a465c;
+        background-color: transparent;
+        border: none;
       }
 
       .key-stat .key-value {
@@ -636,7 +647,8 @@
       }
 
       .link-legend {
-        align-self: flex-end;
+        align-self: stretch;
+        text-align: left;
       }
 
       /* Table container for horizontal scrolling */
@@ -1538,6 +1550,45 @@
       });
     }
 
+    function toTitleCase(value) {
+      return value
+        .toLowerCase()
+        .replace(/\b\w/g, letter => letter.toUpperCase());
+    }
+
+    function normalizeLastNames() {
+      const tbody = document.querySelector('tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 3) return;
+        const lastCell = cells[2];
+        const text = lastCell.textContent.trim();
+        if (!text) return;
+        lastCell.textContent = toTitleCase(text);
+      });
+    }
+
+    function normalizeLocations() {
+      const tbody = document.querySelector('tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 7) return;
+        const locationCell = cells[6];
+        const text = locationCell.textContent.trim();
+        if (!text) return;
+        if (text.includes(',')) return;
+        const parts = text.split(/\s+/);
+        if (parts.length < 2) return;
+        const state = parts.pop();
+        const city = parts.join(' ');
+        locationCell.textContent = `${city}, ${state}`;
+      });
+    }
+
     function formatUtrRangeLabel(start, binSize) {
       const end = start + binSize - 0.01;
       return `${start.toFixed(1)}-${end.toFixed(2)}`;
@@ -1731,6 +1782,8 @@
     // Initialize row numbers on page load
     updateRowNumbers();
     decoratePlayerLinks();
+    normalizeLastNames();
+    normalizeLocations();
     buildUtrHistogram();
 
     // Share button functionality
