@@ -96,7 +96,7 @@
 
     /* Hover effect */
     tbody tr:hover {
-      background-color: #BDD7EE !important;
+      background-color: #EAF2FB !important;
       cursor: pointer;
     }
 
@@ -105,9 +105,26 @@
       background-color: white !important;
     }
 
+    tr.highlight-player:hover {
+      background-color: white !important;
+    }
+
     tr.highlight-player td {
       color: #FF0000;
       font-weight: bold;
+    }
+
+    .player-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #b30000;
+      background-color: #ffe5e5;
+      border: 1px solid #ffb3b3;
+      border-radius: 999px;
+      vertical-align: middle;
     }
 
     /* Column alignment */
@@ -121,6 +138,10 @@
     .col-wtn, .col-utr, .col-national {
       text-align: right;
       font-weight: 600;
+    }
+
+    .col-wtn, .col-utr {
+      width: 70px;
     }
 
     .col-national {
@@ -149,6 +170,32 @@
     .tournament-info a {
       color: inherit;
       text-decoration: underline;
+    }
+
+    .key-stats {
+      max-width: 1000px;
+      margin: 10px auto 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .key-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      color: #2c3e50;
+      background-color: #f3f6fb;
+      border: 1px solid #d6e0f0;
+      border-radius: 999px;
+    }
+
+    .key-stat .key-value {
+      font-weight: 700;
+      color: #1f3b68;
     }
 
 
@@ -336,8 +383,18 @@
         background-color: #2a2a2a !important;
       }
 
+      tr.highlight-player:hover {
+        background-color: #2a2a2a !important;
+      }
+
       tr.highlight-player td {
         color: #ffd700;
+      }
+
+      .player-badge {
+        color: #ffd1d1;
+        background-color: #5a2a2a;
+        border-color: #7a3a3a;
       }
 
       td {
@@ -373,6 +430,16 @@
 
       .detail-value {
         color: #e0e0e0;
+      }
+
+      .key-stat {
+        color: #e0e0e0;
+        background-color: #2f3644;
+        border-color: #3a465c;
+      }
+
+      .key-stat .key-value {
+        color: #cfe0ff;
       }
 
       .link-legend {
@@ -681,6 +748,12 @@
     Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA • 39 Players
   </div>
   <div class="link-legend">Click on WTN for USTA profile • on UTR for UTR profile</div>
+  <div class="key-stats">
+    <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
+    <div class="key-stat"><span class="key-label">Cut Line</span><span class="key-value">NS #32</span></div>
+    <div class="key-stat"><span class="key-label">Alexis Seed</span><span class="key-value">20 / 39</span></div>
+    <div class="key-stat"><span class="key-label">% Above Alexis (UTR)</span><span class="key-value">31%</span></div>
+  </div>
 
   <table>
     <thead class="sticky-header">
@@ -817,7 +890,7 @@
       </tr>
       <tr class="highlight-player">
         <td class="col-rank">13</td>
-        <td>Alexis</td>
+        <td>Alexis <span class="player-badge">Your Player</span></td>
         <td>MALAKHOVA</td>
         
         <td class="col-wtn">33.85</td>
@@ -1298,6 +1371,7 @@
 
     sortableHeaders.forEach(header => {
       if (!header.dataset.sort) header.dataset.sort = 'none';
+      if (!header.title) header.title = 'Click to sort';
     });
 
     const defaultHeader = sortableHeaders.find(header => header.classList.contains('col-wtn'));
