@@ -23,14 +23,16 @@
       position: sticky;
       top: 0;
       z-index: 200;
-      background-color: #f5f5f5;
+      background-color: rgba(245, 245, 245, 0.6);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(6px);
     }
 
     .report-banner img {
       width: 100%;
       height: auto;
       display: block;
+      opacity: 0.6;
     }
 
     h1 {
@@ -497,7 +499,7 @@
       }
 
       .report-banner {
-        background-color: #1a1a1a;
+        background-color: rgba(26, 26, 26, 0.6);
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
       }
 
@@ -826,6 +828,12 @@
       .report-banner {
         position: static;
         box-shadow: none;
+        background-color: transparent;
+        backdrop-filter: none;
+      }
+
+      .report-banner img {
+        opacity: 1;
       }
 
       .link-legend {
