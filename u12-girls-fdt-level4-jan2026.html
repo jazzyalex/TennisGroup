@@ -19,6 +19,20 @@
       background-color: #f5f5f5;
     }
 
+    .report-banner {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background-color: #f5f5f5;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .report-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     h1 {
       color: #2c3e50;
       text-align: center;
@@ -482,6 +496,11 @@
         color: #ffffff;
       }
 
+      .report-banner {
+        background-color: #1a1a1a;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      }
+
       .tournament-dates {
         color: #ffffff;
       }
@@ -652,6 +671,10 @@
         margin: 10px;
       }
 
+      .report-banner {
+        top: 0;
+      }
+
       h1 {
         font-size: 1.8em;
         margin-bottom: 8px;
@@ -800,6 +823,11 @@
 
     /* Print styles */
     @media print {
+      .report-banner {
+        position: static;
+        box-shadow: none;
+      }
+
       .link-legend {
         display: none;
       }
@@ -951,6 +979,9 @@
   </style>
 </head>
 <body>
+  <div class="report-banner">
+    <img src="assets/tennis-report/header-2560x200.svg" alt="Tournament report header">
+  </div>
   <h1>L4 Closed - U12 Girls Singles</h1>
   <div class="tournament-dates">
     January 10-18, 2026
