@@ -273,71 +273,6 @@
       color: #2c3e50;
     }
 
-    .utr-distribution {
-      max-width: 1000px;
-      margin: 20px auto;
-      padding: 16px 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .utr-distribution h3 {
-      color: #2c3e50;
-      margin-top: 0;
-      border-bottom: 2px solid #4472C4;
-      padding-bottom: 8px;
-    }
-
-    .utr-subtitle {
-      font-weight: normal;
-      font-size: 12px;
-      color: #5a6b7d;
-    }
-
-    .utr-plot {
-      margin-top: 12px;
-    }
-
-    .utr-plot svg {
-      width: 100%;
-      height: 120px;
-      display: block;
-    }
-
-    .utr-axis {
-      stroke: #a8b8d2;
-      stroke-width: 2;
-    }
-
-    .utr-tick {
-      stroke: #c1cde0;
-      stroke-width: 1;
-    }
-
-    .utr-dot {
-      fill: #4472C4;
-      opacity: 0.75;
-    }
-
-    .utr-dot.highlight {
-      fill: #f5c542;
-      stroke: #8a6d3b;
-      stroke-width: 1;
-      opacity: 1;
-    }
-
-    .utr-label {
-      font-size: 10px;
-      fill: #5a6b7d;
-    }
-
-    .utr-plot-caption {
-      font-size: 11px;
-      color: #666;
-      margin-top: 6px;
-    }
-
     /* Tournament Details Page */
     .tournament-details-page {
       max-width: 1000px;
@@ -495,12 +430,12 @@
         border-bottom: 1px solid #404040;
       }
 
-      .stats-section, .tournament-details-page, .utr-distribution {
+      .stats-section, .tournament-details-page {
         background-color: #2a2a2a;
         color: #e0e0e0;
       }
 
-      .stats-section h3, .tournament-details-page h2, .tournament-details-page h3, .utr-distribution h3 {
+      .stats-section h3, .tournament-details-page h2, .tournament-details-page h3 {
         color: #ffffff;
         border-bottom-color: #3a5a8a;
       }
@@ -512,36 +447,6 @@
 
       .stat-value, .stat-label {
         color: #e0e0e0;
-      }
-
-      .utr-subtitle {
-        color: #9aa9c0;
-      }
-
-      .utr-axis {
-        stroke: #4d647f;
-      }
-
-      .utr-tick {
-        stroke: #3c4a5e;
-      }
-
-      .utr-dot {
-        fill: #6b9bd1;
-        opacity: 0.85;
-      }
-
-      .utr-dot.highlight {
-        fill: #f5c542;
-        stroke: #b58d2b;
-      }
-
-      .utr-label {
-        fill: #9aa9c0;
-      }
-
-      .utr-plot-caption {
-        color: #b0b0b0;
       }
 
       .detail-row {
@@ -676,15 +581,6 @@
         gap: 10px;
       }
 
-      .utr-distribution {
-        padding: 15px;
-        margin: 20px 0;
-      }
-
-      .utr-plot svg {
-        height: 110px;
-      }
-
       .stat-box {
         padding: 12px;
       }
@@ -772,7 +668,7 @@
       }
 
       /* Remove shadows and unnecessary decorations */
-      table, .stats-section, .tournament-details-page, .utr-distribution {
+      table, .stats-section, .tournament-details-page {
         box-shadow: none;
         border: 1px solid #ddd;
       }
@@ -829,12 +725,6 @@
       .stats-section {
         page-break-before: auto;
         page-break-after: auto;
-        page-break-inside: avoid;
-        margin: 20px 0;
-        padding: 15px;
-      }
-
-      .utr-distribution {
         page-break-inside: avoid;
         margin: 20px 0;
         padding: 15px;
@@ -1324,12 +1214,6 @@
     </tbody>
   </table>
 
-  <div class="utr-distribution">
-    <h3>UTR Distribution <span class="utr-subtitle">(Top <span id="utr-draw-count">32</span> by Nat Rank)</span></h3>
-    <div id="utr-distribution-plot" class="utr-plot"></div>
-    <div class="utr-plot-caption" id="utr-plot-caption-text">Dots show available UTR values for players who fit into the draw by National Rank.</div>
-  </div>
-
   <div class="stats-section">
     <h3>Tournament Statistics</h3>
     <div class="stats-grid">
@@ -1521,142 +1405,6 @@
       });
     }
 
-    function formatUtrLabel(value) {
-      const fixed = value.toFixed(2);
-      return fixed.replace(/\.00$/, '');
-    }
-
-    function getDrawSizeFromKeyStats() {
-      const stats = Array.from(document.querySelectorAll('.key-stat'));
-      for (const stat of stats) {
-        const label = stat.querySelector('.key-label');
-        const value = stat.querySelector('.key-value');
-        if (!label || !value) continue;
-        if (label.textContent.trim().toLowerCase() === 'draw') {
-          const size = parseInt(value.textContent.trim(), 10);
-          if (Number.isFinite(size)) return size;
-        }
-      }
-      return null;
-    }
-
-    function renderUtrDistribution() {
-      const container = document.getElementById('utr-distribution-plot');
-      if (!container) return;
-      const rows = Array.from(document.querySelectorAll('tbody tr'));
-      if (!rows.length) return;
-
-      const players = rows.map(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length < 6) return null;
-        const utr = parseFloat(cells[4].textContent.trim());
-        const natRank = parseInt(cells[5].textContent.trim(), 10);
-        if (!Number.isFinite(utr) || !Number.isFinite(natRank)) return null;
-        const first = cells[1].textContent.trim();
-        const last = cells[2].textContent.trim();
-        return {
-          name: `${first} ${last}`.trim(),
-          utr,
-          natRank,
-          highlight: row.classList.contains('highlight-player'),
-        };
-      }).filter(Boolean);
-
-      if (!players.length) return;
-
-      players.sort((a, b) => a.natRank - b.natRank);
-      const drawSize = getDrawSizeFromKeyStats() || players.length;
-      const drawPlayers = players.slice(0, drawSize);
-      if (!drawPlayers.length) return;
-
-      const drawCountEl = document.getElementById('utr-draw-count');
-      if (drawCountEl) {
-        drawCountEl.textContent = String(drawPlayers.length);
-      }
-
-      const highlightPlayer = drawPlayers.find(player => player.highlight);
-      const captionEl = document.getElementById('utr-plot-caption-text');
-      if (captionEl) {
-        let caption = 'Dots show available UTR values for players who fit into the draw by National Rank.';
-        if (highlightPlayer) {
-          caption += ` Highlighted: ${highlightPlayer.name}.`;
-        }
-        captionEl.textContent = caption;
-      }
-
-      const utrValues = drawPlayers.map(player => player.utr);
-      let minUtr = Math.min(...utrValues);
-      let maxUtr = Math.max(...utrValues);
-      if (minUtr === maxUtr) {
-        minUtr -= 0.25;
-        maxUtr += 0.25;
-      }
-
-      const width = 900;
-      const height = 120;
-      const padding = { left: 36, right: 36 };
-      const axisY = Math.round(height / 2);
-      const range = maxUtr - minUtr || 1;
-      const xScale = value =>
-        padding.left + ((value - minUtr) / range) * (width - padding.left - padding.right);
-
-      const ns = 'http://www.w3.org/2000/svg';
-      container.innerHTML = '';
-      const svg = document.createElementNS(ns, 'svg');
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-      svg.setAttribute('role', 'img');
-      svg.setAttribute(
-        'aria-label',
-        `UTR distribution for top ${drawPlayers.length} by National Rank`
-      );
-      container.appendChild(svg);
-
-      const axis = document.createElementNS(ns, 'line');
-      axis.setAttribute('class', 'utr-axis');
-      axis.setAttribute('x1', padding.left);
-      axis.setAttribute('x2', width - padding.right);
-      axis.setAttribute('y1', axisY);
-      axis.setAttribute('y2', axisY);
-      svg.appendChild(axis);
-
-      const addTick = (value, anchor) => {
-        const x = xScale(value);
-        const tick = document.createElementNS(ns, 'line');
-        tick.setAttribute('class', 'utr-tick');
-        tick.setAttribute('x1', x);
-        tick.setAttribute('x2', x);
-        tick.setAttribute('y1', axisY - 6);
-        tick.setAttribute('y2', axisY + 6);
-        svg.appendChild(tick);
-
-        const label = document.createElementNS(ns, 'text');
-        label.setAttribute('class', 'utr-label');
-        label.setAttribute('x', x);
-        label.setAttribute('y', axisY + 20);
-        label.setAttribute('text-anchor', anchor);
-        label.textContent = formatUtrLabel(value);
-        svg.appendChild(label);
-      };
-
-      addTick(minUtr, 'start');
-      addTick(maxUtr, 'end');
-
-      drawPlayers.forEach((player, index) => {
-        const x = xScale(player.utr);
-        const jitter = ((index * 13) % 12) - 6;
-        const y = axisY + jitter * 2;
-        const dot = document.createElementNS(ns, 'circle');
-        dot.setAttribute('class', player.highlight ? 'utr-dot highlight' : 'utr-dot');
-        dot.setAttribute('cx', x);
-        dot.setAttribute('cy', y);
-        dot.setAttribute('r', player.highlight ? 6 : 4);
-        const title = document.createElementNS(ns, 'title');
-        title.textContent = `${player.name} \u2022 UTR ${formatUtrLabel(player.utr)} \u2022 Nat ${player.natRank}`;
-        dot.appendChild(title);
-        svg.appendChild(dot);
-      });
-    }
-
     // Update row numbers dynamically
     function updateRowNumbers() {
       const tbody = document.querySelector('tbody');
@@ -1732,7 +1480,6 @@
     // Initialize row numbers on page load
     updateRowNumbers();
     decoratePlayerLinks();
-    renderUtrDistribution();
 
     // Share button functionality
     const shareButton = document.createElement('button');
