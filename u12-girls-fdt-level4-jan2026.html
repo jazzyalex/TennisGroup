@@ -686,12 +686,12 @@
     <thead class="sticky-header">
       <tr>
         <th class="col-rank">#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th class="sortable">First Name</th>
+        <th class="sortable">Last Name</th>
         <th class="col-wtn sortable">WTN</th>
         <th class="col-utr sortable">UTR</th>
         <th class="col-national sortable">Nat Rank</th>
-        <th>Location</th>
+        <th class="sortable">Location</th>
       </tr>
     </thead>
     <tbody>
@@ -1290,8 +1290,10 @@
     // Add click-to-sort functionality (only for WTN, UTR, and Nat Rank columns)
     const headers = document.querySelectorAll('th');
     const tbody = document.querySelector('tbody');
+    const sortableColumns = new Set([1, 2, 3, 4, 5, 6]);
+    const numericColumns = new Set([3, 4, 5]);
     const sortableHeaders = Array.from(headers).filter((header, columnIndex) =>
-      columnIndex === 3 || columnIndex === 4 || columnIndex === 5
+      sortableColumns.has(columnIndex)
     );
 
     sortableHeaders.forEach(header => {
@@ -1304,8 +1306,8 @@
     }
 
     headers.forEach((header, columnIndex) => {
-      // Only enable sorting for WTN (column 3), UTR (column 4), Nat Rank (column 5)
-      if (columnIndex === 3 || columnIndex === 4 || columnIndex === 5) {
+      // Only enable sorting for First/Last, WTN, UTR, Nat Rank, Location
+      if (sortableColumns.has(columnIndex)) {
         header.addEventListener('click', () => {
           const rows = Array.from(tbody.querySelectorAll('tr'));
 
@@ -1318,14 +1320,19 @@
           header.dataset.sort = newSort;
 
           rows.sort((a, b) => {
-            let aVal = parseFloat(a.cells[columnIndex].textContent.trim());
-            let bVal = parseFloat(b.cells[columnIndex].textContent.trim());
-
-            if (newSort === 'asc') {
-              return aVal - bVal;
-            } else {
-              return bVal - aVal;
+            const aText = a.cells[columnIndex].textContent.trim();
+            const bText = b.cells[columnIndex].textContent.trim();
+            const isNumeric = numericColumns.has(columnIndex);
+            if (isNumeric) {
+              const aVal = parseFloat(aText);
+              const bVal = parseFloat(bText);
+              if (Number.isNaN(aVal) && Number.isNaN(bVal)) return 0;
+              if (Number.isNaN(aVal)) return 1;
+              if (Number.isNaN(bVal)) return -1;
+              return newSort === 'asc' ? aVal - bVal : bVal - aVal;
             }
+            const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
+            return newSort === 'asc' ? cmp : -cmp;
           });
 
           // Re-render rows
