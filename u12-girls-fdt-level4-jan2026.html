@@ -117,6 +117,18 @@
       width: 85px;
     }
 
+    /* Links inside metric cells (keep visual style) */
+    td.col-wtn a, td.col-national a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+    }
+
+    td.col-wtn a:hover, td.col-national a:hover {
+      text-decoration: underline;
+    }
+
     /* Statistics section */
     .stats-section {
       max-width: 1000px;
@@ -1159,6 +1171,81 @@
   </div>
 
   <script>
+    // Player profile links keyed by "FIRST|LAST" (uppercase)
+    const playerProfileUrlByName = {
+      "AASHNA|MODI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563728",
+      "AKSHAYA|ASHOK": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018948492",
+      "ALEXIS|MALAKHOVA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796",
+      "ALEXI|LABRECQUE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018998280",
+      "AMY|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019389340",
+      "ANNABEL|HU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637000",
+      "AVALINE|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019122088",
+      "BELLA|WU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018791290",
+      "CAMILLE|KUNKEL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018867069",
+      "CASSIA|GARCIA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019177416",
+      "DAMAYANTHI|ARUNKUMAR": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637289",
+      "EILEEN|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732",
+      "ELIANA|MOGLEN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018969157",
+      "ELISE|WATT": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019258117",
+      "ELLIE|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019241036",
+      "EMMA|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736",
+      "HARPER|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018622907",
+      "JENNA|YU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832337",
+      "KATERYNA|MOLOCHKO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019450380",
+      "KATHERINE|CAO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019303547",
+      "LIANA|CAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019456865",
+      "MARGARET|DORAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019941530",
+      "MAY|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027",
+      "MEGAN|LAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678",
+      "MISHA|KATARIA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835",
+      "NOOR|DESAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018653862",
+      "OLIVIA|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018636218",
+      "OLIVIA|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019404801",
+      "PANEEZ|SHAHAB": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018690020",
+      "RUOYU|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144",
+      "SANAIA|GOUDIE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018414359",
+      "SANIA|BHAMBANI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668291",
+      "SARAHANA|CHITAURE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019291144",
+      "SIYA|DALAL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018529839",
+      "STEPHANIE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832557",
+      "SUMMER|STIRITZ": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018746621",
+      "ZAIRA|GADGIL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018667343",
+      "ZHIYAN|DUAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019107218",
+      "ZIVA|GADGIL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018658341",
+    };
+
+    function decorateMetricCellWithProfileLink(cell, url) {
+      if (!cell || !url) return;
+      if (cell.querySelector('a')) return;
+      const text = cell.textContent.trim();
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = text;
+      a.title = 'Open player profile';
+      cell.textContent = '';
+      cell.appendChild(a);
+    }
+
+    function decoratePlayerLinks() {
+      const tbody = document.querySelector('tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 7) return;
+        const first = cells[1].textContent.trim().toUpperCase();
+        const last = cells[2].textContent.trim().toUpperCase();
+        const key = `${first}|${last}`;
+        const url = playerProfileUrlByName[key];
+        if (!url) return;
+        // WTN (col 3) and Nat Rank (col 5)
+        decorateMetricCellWithProfileLink(cells[3], url);
+        decorateMetricCellWithProfileLink(cells[5], url);
+      });
+    }
+
     // Update row numbers dynamically
     function updateRowNumbers() {
       const tbody = document.querySelector('tbody');
@@ -1210,6 +1297,7 @@
 
     // Initialize row numbers on page load
     updateRowNumbers();
+    decoratePlayerLinks();
 
     // Share button functionality
     const shareButton = document.createElement('button');
