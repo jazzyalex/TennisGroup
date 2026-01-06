@@ -110,21 +110,18 @@
     }
 
     tr.highlight-player td {
-      color: #FF0000;
-      font-weight: bold;
+      color: #222;
+      font-weight: 600;
     }
 
-    .player-badge {
-      display: inline-block;
-      margin-left: 6px;
-      padding: 2px 6px;
-      font-size: 10px;
-      font-weight: 700;
-      color: #b30000;
-      background-color: #ffe5e5;
-      border: 1px solid #ffb3b3;
-      border-radius: 999px;
-      vertical-align: middle;
+    tr.highlight-player td:nth-child(2) {
+      background-color: #fff3cd;
+      border-left: 4px solid #f5c542;
+      padding-left: 6px;
+    }
+
+    tr.highlight-player:hover td:nth-child(2) {
+      background-color: #fff3cd;
     }
 
     /* Column alignment */
@@ -148,6 +145,10 @@
       width: 85px;
     }
 
+    td.col-wtn, td.col-utr, td.col-national {
+      box-shadow: inset 0 0 0 9999px rgba(68, 114, 196, 0.06);
+    }
+
     /* Links inside metric cells (keep visual style) */
     td.col-wtn a, td.col-utr a, td.col-national a {
       color: inherit;
@@ -159,26 +160,25 @@
     td.col-wtn a:hover, td.col-utr a:hover, td.col-national a:hover {
       text-decoration: underline;
     }
-    .link-legend {
-      text-align: right;
-      font-size: 10px;
-      color: #666;
-      margin: 6px auto 0;
-      max-width: 1000px;
-    }
-
     .tournament-info a {
       color: inherit;
       text-decoration: underline;
     }
 
-    .key-stats {
+    .table-meta {
       max-width: 1000px;
       margin: 10px auto 6px;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .key-stats {
+      display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      justify-content: flex-end;
+      justify-content: flex-start;
     }
 
     .key-stat {
@@ -196,6 +196,23 @@
     .key-stat .key-value {
       font-weight: 700;
       color: #1f3b68;
+    }
+
+    .link-legend {
+      text-align: right;
+      font-size: 10px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .selection-callout {
+      margin: 8px 0 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #2c3e50;
+      background-color: #f3f6fb;
+      border-left: 3px solid #4472C4;
+      border-radius: 4px;
     }
 
 
@@ -325,7 +342,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
     }
 
     /* Click-to-call phone link */
@@ -391,10 +408,9 @@
         color: #ffd700;
       }
 
-      .player-badge {
-        color: #ffd1d1;
-        background-color: #5a2a2a;
-        border-color: #7a3a3a;
+      tr.highlight-player td:nth-child(2) {
+        background-color: #3b2f1a;
+        border-left-color: #d4a700;
       }
 
       td {
@@ -442,6 +458,16 @@
         color: #cfe0ff;
       }
 
+      td.col-wtn, td.col-utr, td.col-national {
+        box-shadow: inset 0 0 0 9999px rgba(120, 160, 220, 0.08);
+      }
+
+      .selection-callout {
+        color: #e0e0e0;
+        background-color: #2f3644;
+        border-left-color: #6b9bd1;
+      }
+
       .link-legend {
         color: #b0b0b0;
       }
@@ -483,6 +509,15 @@
       .tournament-info {
         font-size: 12px;
         margin-bottom: 15px;
+      }
+
+      .table-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .link-legend {
+        align-self: flex-end;
       }
 
       /* Table container for horizontal scrolling */
@@ -747,12 +782,13 @@
     <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/EAD0497A-559C-4765-9253-2BF848B4FC4A" target="_blank" rel="noopener noreferrer" title="Open tournament page">Level 4 Closed - FDT Level 4 Junior 12s & 14s Singles Excellence</a><br>
     Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA • 39 Players
   </div>
-  <div class="link-legend">Click on WTN for USTA profile • on UTR for UTR profile</div>
-  <div class="key-stats">
-    <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
-    <div class="key-stat"><span class="key-label">Cut Line</span><span class="key-value">NS #32</span></div>
-    <div class="key-stat"><span class="key-label">Alexis Seed</span><span class="key-value">20 / 39</span></div>
-    <div class="key-stat"><span class="key-label">% Above Alexis (UTR)</span><span class="key-value">31%</span></div>
+  <div class="table-meta">
+    <div class="key-stats">
+      <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
+      <div class="key-stat"><span class="key-label">Alexis Seed</span><span class="key-value">20 / 39</span></div>
+      <div class="key-stat"><span class="key-label">% Above Alexis (UTR)</span><span class="key-value">31%</span></div>
+    </div>
+    <div class="link-legend">Click on WTN for USTA profile • on UTR for UTR profile</div>
   </div>
 
   <table>
@@ -890,7 +926,7 @@
       </tr>
       <tr class="highlight-player">
         <td class="col-rank">13</td>
-        <td>Alexis <span class="player-badge">Your Player</span></td>
+        <td>Alexis</td>
         <td>MALAKHOVA</td>
         
         <td class="col-wtn">33.85</td>
@@ -1203,6 +1239,7 @@
     <h2>Tournament Information & Details</h2>
 
     <h3>Draw & Selection</h3>
+    <div class="selection-callout">Selection uses the most recent National Standings List order for U12 events.</div>
     <div class="detail-row">
       <span class="detail-label">Draw Size:</span>
       <span class="detail-value">32 players (12s/14s combined)</span>
