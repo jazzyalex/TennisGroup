@@ -63,10 +63,20 @@
     }
 
     th.sortable::after {
-      content: ' ▼';
+      content: ' ↕';
       font-size: 0.7em;
       opacity: 0.6;
       margin-left: 5px;
+    }
+
+    th.sortable[data-sort="asc"]::after {
+      content: ' ↑';
+      opacity: 0.9;
+    }
+
+    th.sortable[data-sort="desc"]::after {
+      content: ' ↓';
+      opacity: 0.9;
     }
 
     td {
@@ -1280,6 +1290,18 @@
     // Add click-to-sort functionality (only for WTN, UTR, and Nat Rank columns)
     const headers = document.querySelectorAll('th');
     const tbody = document.querySelector('tbody');
+    const sortableHeaders = Array.from(headers).filter((header, columnIndex) =>
+      columnIndex === 3 || columnIndex === 4 || columnIndex === 5
+    );
+
+    sortableHeaders.forEach(header => {
+      if (!header.dataset.sort) header.dataset.sort = 'none';
+    });
+
+    const defaultHeader = sortableHeaders.find(header => header.classList.contains('col-wtn'));
+    if (defaultHeader) {
+      defaultHeader.dataset.sort = 'asc';
+    }
 
     headers.forEach((header, columnIndex) => {
       // Only enable sorting for WTN (column 3), UTR (column 4), Nat Rank (column 5)
@@ -1288,8 +1310,11 @@
           const rows = Array.from(tbody.querySelectorAll('tr'));
 
           // Toggle sort direction
-          const currentSort = header.dataset.sort || 'asc';
+          const currentSort = header.dataset.sort || 'none';
           const newSort = currentSort === 'asc' ? 'desc' : 'asc';
+          sortableHeaders.forEach(h => {
+            if (h !== header) h.dataset.sort = 'none';
+          });
           header.dataset.sort = newSort;
 
           rows.sort((a, b) => {
