@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/x-icon" href="assets/tennis-report/favicon-32thin.ico">
   <link rel="icon" type="image/png" sizes="128x128" href="assets/tennis-report/favicon-128.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/tennis-report/favicon-64.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="L4 Closed - U12 Girls Singles">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
@@ -19,19 +20,27 @@
       background-color: #f5f5f5;
     }
 
+    .report-header {
+      max-width: 1000px;
+      margin: 10px auto 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
     h1 {
       color: #2c3e50;
-      text-align: center;
-      margin-bottom: 10px;
+      text-align: left;
+      margin: 0;
       font-size: 2.2em;
       font-weight: bold;
     }
 
     .report-logo {
-      display: block;
-      width: 128px;
-      height: 128px;
-      margin: 10px auto 6px;
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
     }
 
     .tournament-dates {
@@ -663,9 +672,18 @@
         margin: 10px;
       }
 
+      .report-header {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
       .report-logo {
-        width: 96px;
-        height: 96px;
+        width: 56px;
+        height: 56px;
       }
 
       h1 {
@@ -967,8 +985,10 @@
   </style>
 </head>
 <body>
-  <img class="report-logo" src="assets/tennis-report/favicon-128.png" alt="Tournament report logo">
-  <h1>L4 Closed - U12 Girls Singles</h1>
+  <div class="report-header">
+    <h1>L4 Closed - U12 Girls Singles</h1>
+    <img class="report-logo" src="assets/tennis-report/favicon-64.png" alt="Tournament report logo">
+  </div>
   <div class="tournament-dates">
     January 10-18, 2026
   </div>
