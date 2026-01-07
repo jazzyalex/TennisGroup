@@ -1785,7 +1785,7 @@
       });
     }
 
-    // Add click-to-sort functionality (only for WTN, UTR, and Nat Rank columns)
+    // Add click-to-sort functionality
     const headers = document.querySelectorAll('th');
     const tbody = document.querySelector('tbody');
     const sortableColumns = new Set([1, 2, 3, 4, 5, 6]);
@@ -1799,17 +1799,48 @@
       if (!header.title) header.title = 'Click to sort';
     });
 
-    const defaultHeader = sortableHeaders.find(header => header.classList.contains('col-wtn'));
+    function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+
+      rows.sort((a, b) => {
+        const aText = a.cells[columnIndex].textContent.trim();
+        const bText = b.cells[columnIndex].textContent.trim();
+        const isNumeric = numericColumns.has(columnIndex);
+        if (isNumeric) {
+          const aVal = parseFloat(aText);
+          const bVal = parseFloat(bText);
+          if (Number.isNaN(aVal) && Number.isNaN(bVal)) return 0;
+          if (Number.isNaN(aVal)) return 1;
+          if (Number.isNaN(bVal)) return -1;
+          return direction === 'asc' ? aVal - bVal : bVal - aVal;
+        }
+        const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
+        return direction === 'asc' ? cmp : -cmp;
+      });
+
+      tbody.innerHTML = '';
+      rows.forEach(row => tbody.appendChild(row));
+      updateRowNumbers();
+
+      if (updateHeaderStyle) {
+        headers.forEach(h => h.style.backgroundColor = '#4472C4');
+        if (activeHeader) activeHeader.style.backgroundColor = '#2c5aa0';
+      }
+    }
+
+    const defaultHeader = sortableHeaders.find(header => header.classList.contains('col-national'));
     if (defaultHeader) {
+      sortableHeaders.forEach(h => {
+        if (h !== defaultHeader) h.dataset.sort = 'none';
+      });
       defaultHeader.dataset.sort = 'asc';
+      applySort(5, 'asc', defaultHeader, true);
     }
 
     headers.forEach((header, columnIndex) => {
       // Only enable sorting for First/Last, WTN, UTR, Nat Rank, Location
       if (sortableColumns.has(columnIndex)) {
         header.addEventListener('click', () => {
-          const rows = Array.from(tbody.querySelectorAll('tr'));
-
           // Toggle sort direction
           const currentSort = header.dataset.sort || 'none';
           const newSort = currentSort === 'asc' ? 'desc' : 'asc';
@@ -1817,39 +1848,13 @@
             if (h !== header) h.dataset.sort = 'none';
           });
           header.dataset.sort = newSort;
-
-          rows.sort((a, b) => {
-            const aText = a.cells[columnIndex].textContent.trim();
-            const bText = b.cells[columnIndex].textContent.trim();
-            const isNumeric = numericColumns.has(columnIndex);
-            if (isNumeric) {
-              const aVal = parseFloat(aText);
-              const bVal = parseFloat(bText);
-              if (Number.isNaN(aVal) && Number.isNaN(bVal)) return 0;
-              if (Number.isNaN(aVal)) return 1;
-              if (Number.isNaN(bVal)) return -1;
-              return newSort === 'asc' ? aVal - bVal : bVal - aVal;
-            }
-            const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
-            return newSort === 'asc' ? cmp : -cmp;
-          });
-
-          // Re-render rows
-          tbody.innerHTML = '';
-          rows.forEach(row => tbody.appendChild(row));
-
-          // Update row numbers
-          updateRowNumbers();
-
-          // Update header indicators
-          headers.forEach(h => h.style.backgroundColor = '#4472C4');
-          header.style.backgroundColor = '#2c5aa0';
+          applySort(columnIndex, newSort, header, true);
         });
       }
     });
 
     // Initialize row numbers on page load
-    updateRowNumbers();
+    if (!defaultHeader) updateRowNumbers();
     decoratePlayerLinks();
     normalizeLastNames();
     normalizeLocations();
