@@ -23,17 +23,18 @@
     .report-header {
       max-width: 1000px;
       margin: 12px auto 16px;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 24px;
-      align-items: center;
+      position: relative;
     }
 
     .report-header-logo {
-      width: 200px;
-      height: 200px;
+      width: 160px;
+      height: 160px;
       display: block;
       object-fit: contain;
+      position: absolute;
+      left: 25%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .report-header-text {
@@ -679,8 +680,9 @@
       }
 
       .report-header {
-        grid-template-columns: 1fr;
-        justify-items: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: 10px;
         margin: 8px auto 10px;
       }
@@ -688,6 +690,8 @@
       .report-header-logo {
         width: 96px;
         height: 96px;
+        position: static;
+        transform: none;
       }
 
       h1 {
