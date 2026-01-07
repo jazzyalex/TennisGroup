@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Banners — Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: #0a0a0a;
+            color: #fafafa;
+            min-height: 100vh;
+        }
+
+        .demo-page {
+            margin-bottom: 80px;
+        }
+
+        .header-banner {
+            width: 100%;
+        }
+
+        .header-banner svg {
+            width: 100%;
+            display: block;
+        }
+
+        .page-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            margin-top: 48px;
+        }
+
+        .sizes-list {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: #888;
+            line-height: 2;
+        }
+
+        .sizes-list span {
+            color: #c4f04d;
+        }
+
+        .divider {
+            height: 1px;
+            background: #222;
+            margin: 60px 0;
+        }
+
+        .preview-container {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .preview-container svg {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .preview-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: #444;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo: Header in context -->
+    <div class="demo-page">
+        <div class="header-banner">
+            <svg viewBox="0 0 1920 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="1920" height="160" fill="#2d5a27"/>
+                <rect x="0" y="32" width="1920" height="19" fill="#fafafa"/>
+                <rect x="950" y="32" width="19" height="128" fill="#fafafa"/>
+            </svg>
+        </div>
+        <div class="page-content">
+            <h1>Tennis Report</h1>
+            <p class="subtitle">Demo: Header banner in context</p>
+            
+            <p style="color: #888; font-size: 14px; line-height: 1.8; max-width: 600px;">
+                This is how the header looks on an actual page. The T extends from the top edge, creating a strong brand presence without overwhelming the content below.
+            </p>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="divider"></div>
+        
+        <div class="section-label">Available Sizes</div>
+        <div class="sizes-list">
+            <span>header-1920x200.png</span> — Standard HD, tall<br>
+            <span>header-1920x160.png</span> — Standard HD, medium<br>
+            <span>header-1920x120.png</span> — Standard HD, compact<br>
+            <span>header-2560x200.png</span> — 2K displays
+        </div>
+
+        <div class="section-label">Height Comparison</div>
+        
+        <div class="preview-container">
+            <svg viewBox="0 0 1920 200" fill="none">
+                <rect width="1920" height="200" fill="#2d5a27"/>
+                <rect x="0" y="40" width="1920" height="24" fill="#fafafa"/>
+                <rect x="948" y="40" width="24" height="160" fill="#fafafa"/>
+            </svg>
+            <p class="preview-label">200px height — Bold presence</p>
+        </div>
+
+        <div class="preview-container">
+            <svg viewBox="0 0 1920 160" fill="none">
+                <rect width="1920" height="160" fill="#2d5a27"/>
+                <rect x="0" y="32" width="1920" height="19" fill="#fafafa"/>
+                <rect x="950" y="32" width="19" height="128" fill="#fafafa"/>
+            </svg>
+            <p class="preview-label">160px height — Balanced</p>
+        </div>
+
+        <div class="preview-container">
+            <svg viewBox="0 0 1920 120" fill="none">
+                <rect width="1920" height="120" fill="#2d5a27"/>
+                <rect x="0" y="24" width="1920" height="14" fill="#fafafa"/>
+                <rect x="953" y="24" width="14" height="96" fill="#fafafa"/>
+            </svg>
+            <p class="preview-label">120px height — Compact</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -22,25 +22,28 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0;
+      padding: 20px;
+      padding-top: 24px;
       background-color: #f5f5f5;
+      border-top: 4px solid #4472C4;
     }
 
     .report-header {
       max-width: 1000px;
-      margin: 12px auto 16px;
-      position: relative;
+      margin: 12px auto 24px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 74px;
     }
 
     .report-header-logo {
-      width: 160px;
-      height: 160px;
+      width: 108px;
+      height: 108px;
       display: block;
       object-fit: contain;
-      position: absolute;
-      left: 25%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      flex-shrink: 0;
     }
 
     .report-header-text {
@@ -67,7 +70,7 @@
       text-align: center;
       color: #7f8c8d;
       margin: 0 0 10px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.6;
     }
 
