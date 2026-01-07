@@ -994,9 +994,663 @@
         font-size: 11pt;
       }
     }
+
+    /* ========================================
+       MOBILE DARK THEME STYLES
+       ======================================== */
+    
+    /* CSS Variables for Mobile */
+    :root {
+      --mobile-bg: #0a0a0f;
+      --mobile-surface: #16161e;
+      --mobile-surface-elevated: #1e1e28;
+      --mobile-border: #2a2a38;
+      --mobile-text-primary: #f5f5f7;
+      --mobile-text-secondary: #8e8e93;
+      --mobile-text-muted: #636366;
+      --mobile-accent: #ff9f0a;
+      --mobile-accent-soft: rgba(255, 159, 10, 0.15);
+      --mobile-green: #30d158;
+      --mobile-green-soft: rgba(48, 209, 88, 0.15);
+      --mobile-blue: #0a84ff;
+      --mobile-blue-soft: rgba(10, 132, 255, 0.15);
+      --mobile-purple: #bf5af2;
+    }
+
+    /* Default: Hide mobile, show desktop */
+    .mobile-view {
+      display: none;
+    }
+
+    .desktop-view {
+      display: block;
+    }
+
+    .desktop-view-toggle {
+      display: none;
+    }
+
+    /* Mobile Layout Styles */
+    .mobile-view {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: var(--mobile-bg);
+      color: var(--mobile-text-primary);
+      line-height: 1.5;
+      max-width: 440px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+      padding: 16px 20px;
+      background: var(--mobile-surface);
+      border-bottom: 1px solid var(--mobile-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .mobile-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--mobile-accent-soft);
+      color: var(--mobile-accent);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .mobile-header-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin: 0;
+    }
+
+    .mobile-header-meta {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Hero Stats */
+    .mobile-hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 16px 20px;
+      background: var(--mobile-surface);
+    }
+
+    .mobile-stat-card {
+      background: var(--mobile-surface-elevated);
+      border-radius: 14px;
+      padding: 14px 12px;
+      text-align: center;
+      border: 1px solid var(--mobile-border);
+    }
+
+    .mobile-stat-card.highlight {
+      background: var(--mobile-accent-soft);
+      border-color: rgba(255, 159, 10, 0.3);
+    }
+
+    .mobile-stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .mobile-stat-card.highlight .mobile-stat-value {
+      color: var(--mobile-accent);
+    }
+
+    .mobile-stat-label {
+      font-size: 11px;
+      color: var(--mobile-text-secondary);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* Alexis Spotlight Card */
+    .mobile-alexis-card {
+      margin: 16px 20px;
+      background: linear-gradient(135deg, rgba(255, 159, 10, 0.12) 0%, rgba(191, 90, 242, 0.08) 100%);
+      border: 1px solid rgba(255, 159, 10, 0.25);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .mobile-alexis-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .mobile-alexis-avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--mobile-accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .mobile-alexis-name {
+      flex: 1;
+    }
+
+    .mobile-alexis-name h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .mobile-alexis-name span {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+    }
+
+    .mobile-alexis-seed {
+      background: var(--mobile-accent);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .mobile-alexis-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .mobile-alexis-stat {
+      text-align: center;
+      padding: 10px 4px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+    }
+
+    .mobile-alexis-stat-value {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .mobile-alexis-stat-label {
+      font-size: 10px;
+      color: var(--mobile-text-secondary);
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Position Gauge */
+    .mobile-position-gauge {
+      margin: 16px 20px;
+      background: var(--mobile-surface);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid var(--mobile-border);
+    }
+
+    .mobile-gauge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .mobile-gauge-title {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+    }
+
+    .mobile-gauge-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--mobile-green);
+    }
+
+    .mobile-gauge-bar {
+      height: 8px;
+      background: var(--mobile-surface-elevated);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mobile-gauge-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--mobile-green) 0%, var(--mobile-accent) 100%);
+      border-radius: 4px;
+      position: relative;
+      transition: width 1s ease-out;
+    }
+
+    .mobile-gauge-marker {
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      width: 3px;
+      height: 16px;
+      background: var(--mobile-text-primary);
+      border-radius: 2px;
+    }
+
+    .mobile-gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--mobile-text-muted);
+    }
+
+    .mobile-gauge-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: var(--mobile-green-soft);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--mobile-green);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Section Headers */
+    .mobile-section-header {
+      padding: 20px 20px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mobile-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Sort Controls */
+    .mobile-sort-controls {
+      padding: 0 20px 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .mobile-sort-btn {
+      flex: 1;
+      padding: 8px 12px;
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 10px;
+      color: var(--mobile-text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mobile-sort-btn.active {
+      background: var(--mobile-accent-soft);
+      border-color: rgba(255, 159, 10, 0.3);
+      color: var(--mobile-accent);
+      font-weight: 600;
+    }
+
+    /* Player Cards */
+    .mobile-player-list {
+      padding: 0 20px;
+    }
+
+    .mobile-player-card {
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mobile-player-card.top-seed {
+      border-color: rgba(48, 209, 88, 0.3);
+      background: linear-gradient(135deg, var(--mobile-surface) 0%, var(--mobile-green-soft) 100%);
+    }
+
+    .mobile-player-card.target-player {
+      border: 1px solid rgba(255, 159, 10, 0.4);
+      background: linear-gradient(135deg, rgba(255, 159, 10, 0.12) 0%, rgba(191, 90, 242, 0.08) 100%);
+    }
+
+    .mobile-player-rank {
+      width: 28px;
+      height: 28px;
+      background: var(--mobile-surface-elevated);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--mobile-text-secondary);
+      flex-shrink: 0;
+    }
+
+    .mobile-player-card.top-seed .mobile-player-rank {
+      background: var(--mobile-green);
+      color: #000;
+    }
+
+    .mobile-player-card.target-player .mobile-player-rank {
+      background: var(--mobile-accent);
+      color: #000;
+    }
+
+    .mobile-player-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mobile-player-name {
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mobile-player-location {
+      font-size: 12px;
+      color: var(--mobile-text-muted);
+    }
+
+    .mobile-player-ratings {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .mobile-rating-badge {
+      padding: 6px 10px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 52px;
+    }
+
+    .mobile-rating-badge.utr {
+      background: var(--mobile-blue-soft);
+    }
+
+    .mobile-rating-badge.nat {
+      background: var(--mobile-surface-elevated);
+    }
+
+    .mobile-rating-value {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mobile-rating-badge.utr .mobile-rating-value {
+      color: var(--mobile-blue);
+    }
+
+    .mobile-rating-label {
+      font-size: 9px;
+      color: var(--mobile-text-muted);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    /* Cutoff Divider */
+    .mobile-cutoff-divider {
+      margin: 8px 20px;
+      padding: 8px 12px;
+      background: var(--mobile-surface);
+      border: 1px dashed var(--mobile-border);
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--mobile-text-muted);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Show More Button */
+    .mobile-show-more {
+      margin: 8px 20px 20px;
+      padding: 14px;
+      width: calc(100% - 40px);
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--mobile-blue);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mobile-show-more:hover {
+      background: var(--mobile-surface-elevated);
+    }
+
+    /* Histogram */
+    .mobile-chart-section {
+      padding: 0 20px;
+      margin-bottom: 16px;
+    }
+
+    .mobile-chart-card {
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .mobile-histogram {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 80px;
+      margin-bottom: 8px;
+    }
+
+    .mobile-histogram-bar {
+      flex: 1;
+      background: var(--mobile-blue-soft);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      min-height: 4px;
+      transition: height 0.6s ease-out;
+    }
+
+    .mobile-histogram-bar.alexis-range {
+      background: var(--mobile-accent);
+    }
+
+    .mobile-histogram-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--mobile-text-muted);
+    }
+
+    .mobile-chart-legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--mobile-text-secondary);
+    }
+
+    .mobile-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    .mobile-legend-dot.blue {
+      background: var(--mobile-blue);
+    }
+
+    .mobile-legend-dot.orange {
+      background: var(--mobile-accent);
+    }
+
+    /* Tournament Info Cards */
+    .mobile-info-section {
+      padding: 0 20px 20px;
+    }
+
+    .mobile-info-card {
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .mobile-info-card-header {
+      padding: 14px 16px;
+      background: var(--mobile-surface-elevated);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--mobile-border);
+    }
+
+    .mobile-info-row {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--mobile-border);
+    }
+
+    .mobile-info-row:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-info-label {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+      flex-shrink: 0;
+    }
+
+    .mobile-info-value {
+      font-size: 13px;
+      text-align: right;
+      color: var(--mobile-text-primary);
+    }
+
+    .mobile-info-value a {
+      color: var(--mobile-blue);
+      text-decoration: none;
+    }
+
+    /* View Toggle */
+    .mobile-view-toggle {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .mobile-view-toggle a {
+      color: var(--mobile-text-secondary);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    /* Media Query: Show Mobile on Small Screens */
+    @media (max-width: 600px) {
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--mobile-bg);
+        border-top: none;
+      }
+
+      .mobile-view {
+        display: block;
+      }
+
+      .desktop-view {
+        display: none;
+      }
+
+      .desktop-view-toggle {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      .desktop-view-toggle a {
+        display: inline-block;
+        padding: 12px 20px;
+        background: var(--mobile-surface);
+        border: 1px solid var(--mobile-border);
+        border-radius: 12px;
+        color: var(--mobile-text-secondary);
+        font-size: 14px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    /* Force View Classes (for manual toggle) */
+    body.force-mobile {
+      margin: 0;
+      padding: 0;
+      background-color: var(--mobile-bg);
+      border-top: none;
+    }
+
+    body.force-mobile .mobile-view {
+      display: block !important;
+    }
+
+    body.force-mobile .desktop-view {
+      display: none !important;
+    }
+
+    body.force-desktop .mobile-view {
+      display: none !important;
+    }
+
+    body.force-desktop .desktop-view {
+      display: block !important;
+    }
   </style>
 </head>
 <body>
+  <div class="desktop-view">
   <div class="report-header">
     <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
     <div class="report-header-text">
@@ -1546,6 +2200,691 @@
     </div>
   </div>
 
+  <div class="desktop-view-toggle">
+    <a href="#" id="desktop-toggle-mobile">View Mobile Version</a>
+  </div>
+  </div><!-- end desktop-view -->
+
+  <!-- Mobile View Container -->
+  <div class="mobile-view">
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="mobile-header-badge">⚡ Level 4 Closed</div>
+      <h1 class="mobile-header-title" id="mobile-title"></h1>
+      <div class="mobile-header-meta" id="mobile-meta"></div>
+    </header>
+
+    <!-- Hero Stats -->
+    <div class="mobile-hero-stats">
+      <div class="mobile-stat-card">
+        <div class="mobile-stat-value" id="mobile-draw-size"></div>
+        <div class="mobile-stat-label">Draw Size</div>
+      </div>
+      <div class="mobile-stat-card highlight">
+        <div class="mobile-stat-value" id="mobile-seed"></div>
+        <div class="mobile-stat-label">Seed</div>
+      </div>
+      <div class="mobile-stat-card">
+        <div class="mobile-stat-value" id="mobile-registered"></div>
+        <div class="mobile-stat-label">Registered</div>
+      </div>
+    </div>
+
+    <!-- Alexis Spotlight Card -->
+    <div class="mobile-alexis-card" id="mobile-alexis-card"></div>
+
+    <!-- Position Gauge -->
+    <div class="mobile-position-gauge" id="mobile-position-gauge"></div>
+
+    <!-- UTR Distribution -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">UTR Distribution</span>
+    </div>
+    <div class="mobile-chart-section">
+      <div class="mobile-chart-card" id="mobile-histogram"></div>
+    </div>
+
+    <!-- Player List -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">All Players (<span id="mobile-player-count"></span>)</span>
+    </div>
+    <div class="mobile-sort-controls">
+      <button class="mobile-sort-btn active" data-sort="rank">Seed</button>
+      <button class="mobile-sort-btn" data-sort="utr">UTR</button>
+      <button class="mobile-sort-btn" data-sort="natRank">Nat Rank</button>
+    </div>
+    <div class="mobile-player-list" id="mobile-player-list"></div>
+    <button class="mobile-show-more" id="mobile-show-more">Show all players ↓</button>
+
+    <!-- Tournament Details -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">Tournament Details</span>
+    </div>
+    <div class="mobile-info-section" id="mobile-info-section"></div>
+
+    <!-- View Toggle -->
+    <div class="mobile-view-toggle">
+      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
+    </div>
+  </div><!-- end mobile-view -->
+
+  <!-- Mobile View JavaScript -->
+  <script>
+    // ========================================
+    // MOBILE VIEW IMPLEMENTATION
+    // ========================================
+
+    let currentSort = 'rank';
+    let isExpanded = false;
+    let allPlayers = [];
+    let targetPlayer = null;
+
+    // ========================================
+    // DATA PARSING FUNCTIONS
+    // ========================================
+
+    function parsePlayerData() {
+      const players = [];
+      const rows = document.querySelectorAll('.desktop-view tbody tr');
+      
+      rows.forEach((row, index) => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 7) return;
+        
+        const rank = parseInt(cells[0].textContent.trim());
+        const firstName = cells[1].textContent.trim();
+        const lastName = cells[2].textContent.trim();
+        const wtn = cells[3].textContent.trim();
+        const utrCell = cells[4];
+        const utrLink = utrCell.querySelector('a');
+        const utr = parseFloat(utrLink ? utrLink.textContent.trim() : utrCell.textContent.trim());
+        const utrUrl = utrLink ? utrLink.href : null;
+        const natRank = parseInt(cells[5].textContent.trim());
+        const location = cells[6].textContent.trim();
+        const isTarget = row.classList.contains('highlight-player');
+        
+        players.push({
+          rank,
+          firstName,
+          lastName,
+          fullName: `${firstName} ${lastName}`,
+          wtn,
+          utr,
+          utrUrl,
+          natRank,
+          location,
+          isTarget
+        });
+      });
+      
+      return players;
+    }
+
+    function parseKeyStats() {
+      const stats = {
+        drawSize: 32,
+        seed: 20,
+        registered: 39,
+        percentAbove: 31
+      };
+      
+      const keyStats = document.querySelectorAll('.desktop-view .key-stat');
+      keyStats.forEach(stat => {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) return;
+        
+        const labelText = label.textContent.trim();
+        const valueText = value.textContent.trim();
+        
+        if (labelText === 'Draw') {
+          stats.drawSize = parseInt(valueText);
+        } else if (labelText === 'Alexis Seed') {
+          const parts = valueText.split('/');
+          if (parts.length === 2) {
+            stats.seed = parseInt(parts[0].trim());
+            stats.registered = parseInt(parts[1].trim());
+          }
+        } else if (labelText === '% Above Alexis (UTR)') {
+          stats.percentAbove = parseInt(valueText);
+        }
+      });
+      
+      return stats;
+    }
+
+    function parseTournamentInfo() {
+      const info = {
+        title: '',
+        dates: '',
+        location: '',
+        format: {},
+        venues: [],
+        contact: {}
+      };
+      
+      // Parse header info
+      const h1 = document.querySelector('.desktop-view h1');
+      if (h1) info.title = h1.textContent.trim();
+      
+      const datesEl = document.querySelector('.desktop-view .tournament-dates');
+      if (datesEl) info.dates = datesEl.textContent.trim();
+      
+      const tournamentInfo = document.querySelector('.desktop-view .tournament-info');
+      if (tournamentInfo) {
+        const text = tournamentInfo.textContent.trim();
+        const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+        if (lines.length > 1) {
+          info.location = lines[1].replace(/•.*$/, '').trim();
+        }
+      }
+      
+      // Parse tournament details
+      const detailsPage = document.querySelector('.desktop-view .tournament-details-page');
+      if (detailsPage) {
+        const detailRows = detailsPage.querySelectorAll('.detail-row');
+        detailRows.forEach(row => {
+          const label = row.querySelector('.detail-label');
+          const value = row.querySelector('.detail-value');
+          if (!label || !value) return;
+          
+          const labelText = label.textContent.trim().replace(':', '');
+          const valueText = value.textContent.trim();
+          
+          // Format & Scoring
+          if (labelText === 'Match Format') info.format.matchFormat = valueText;
+          if (labelText === 'Set Tiebreak') info.format.setTiebreak = valueText;
+          if (labelText === 'Match Tiebreak') info.format.matchTiebreak = valueText;
+          
+          // Venues
+          if (labelText.startsWith('Site')) {
+            const link = value.querySelector('a');
+            info.venues.push({
+              name: valueText.split(',')[0].trim(),
+              url: link ? link.href : null
+            });
+          }
+          
+          // Contact
+          if (labelText === 'Tournament Director') info.contact.director = valueText;
+          if (labelText === 'Email') {
+            const link = value.querySelector('a');
+            info.contact.email = link ? link.href.replace('mailto:', '') : valueText;
+          }
+          if (labelText === 'Phone') {
+            const link = value.querySelector('a');
+            info.contact.phone = link ? link.textContent.trim() : valueText;
+            info.contact.phoneUrl = link ? link.href : null;
+          }
+        });
+      }
+      
+      return info;
+    }
+
+    // ========================================
+    // RENDERING FUNCTIONS
+    // ========================================
+
+    function buildAlexisCard(player) {
+      if (!player) return '';
+      
+      const initials = `${player.firstName[0]}${player.lastName[0]}`;
+      const strongerCount = allPlayers.filter(p => p.utr > player.utr).length;
+      
+      return `
+        <div class="mobile-alexis-header">
+          <div class="mobile-alexis-avatar">${initials}</div>
+          <div class="mobile-alexis-name">
+            <h3>${player.fullName}</h3>
+            <span>${player.location}</span>
+          </div>
+          <div class="mobile-alexis-seed">#${player.rank}</div>
+        </div>
+        <div class="mobile-alexis-stats">
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${player.wtn}</div>
+            <div class="mobile-alexis-stat-label">WTN</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${player.utr}</div>
+            <div class="mobile-alexis-stat-label">UTR</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${player.natRank}</div>
+            <div class="mobile-alexis-stat-label">Nat Rank</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${strongerCount}</div>
+            <div class="mobile-alexis-stat-label">Stronger</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildPositionGauge(players, targetPlayer) {
+      if (!targetPlayer || players.length === 0) return '';
+      
+      const targetIndex = players.findIndex(p => p.isTarget);
+      const percentage = ((targetIndex / (players.length - 1)) * 100).toFixed(0);
+      const percentAbove = Math.round((targetIndex / players.length) * 100);
+      const firstPlayer = players[0];
+      const lastPlayer = players[players.length - 1];
+      const stats = parseKeyStats();
+      const cushion = stats.drawSize - targetPlayer.rank;
+      
+      return `
+        <div class="mobile-gauge-header">
+          <span class="mobile-gauge-title">Position in Draw</span>
+          <span class="mobile-gauge-value">${percentAbove}% above her</span>
+        </div>
+        <div class="mobile-gauge-bar">
+          <div class="mobile-gauge-fill" id="gauge-fill" style="width: 0%;" data-width="${percentage}%">
+            <div class="mobile-gauge-marker"></div>
+          </div>
+        </div>
+        <div class="mobile-gauge-labels">
+          <span>#1 ${firstPlayer.firstName} ${firstPlayer.lastName[0]}.</span>
+          <span>#${targetPlayer.rank} ${targetPlayer.firstName}</span>
+          <span>#${players.length}</span>
+        </div>
+        ${cushion > 0 ? `
+        <div class="mobile-gauge-note">
+          <span>✓</span>
+          ${cushion}-player cushion above cutoff — safe entry
+        </div>
+        ` : ''}
+      `;
+    }
+
+    function buildUtrHistogramMobile() {
+      // Find existing histogram data from desktop view
+      const desktopHistogram = document.querySelector('.desktop-view .utr-histogram-chart');
+      if (!desktopHistogram) return '';
+      
+      const bins = desktopHistogram.querySelectorAll('.utr-bin');
+      if (bins.length === 0) return '';
+      
+      let maxCount = 0;
+      const binData = [];
+      
+      bins.forEach(bin => {
+        const countEl = bin.querySelector('.utr-bin-count');
+        const count = parseInt(countEl.textContent.trim());
+        const isHighlight = bin.classList.contains('is-highlight');
+        binData.push({ count, isHighlight });
+        maxCount = Math.max(maxCount, count);
+      });
+      
+      // Build histogram bars
+      const bars = binData.map((bin, i) => {
+        const height = (bin.count / maxCount) * 100;
+        const className = bin.isHighlight ? 'mobile-histogram-bar alexis-range' : 'mobile-histogram-bar';
+        return `<div class="${className}" style="height: ${height}%;"></div>`;
+      }).join('');
+      
+      return `
+        <div class="mobile-histogram">
+          ${bars}
+        </div>
+        <div class="mobile-histogram-labels">
+          <span>2.0</span>
+          <span>3.0</span>
+          <span>4.0</span>
+          <span>5.0</span>
+          <span>6.0</span>
+        </div>
+        <div class="mobile-chart-legend">
+          <div class="mobile-legend-item">
+            <div class="mobile-legend-dot blue"></div>
+            <span>Other players</span>
+          </div>
+          <div class="mobile-legend-item">
+            <div class="mobile-legend-dot orange"></div>
+            <span>Alexis's range</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function sortPlayers(players, sortBy) {
+      const sorted = [...players];
+      
+      if (sortBy === 'rank') {
+        sorted.sort((a, b) => a.rank - b.rank);
+      } else if (sortBy === 'utr') {
+        sorted.sort((a, b) => b.utr - a.utr); // Descending (higher is better)
+      } else if (sortBy === 'natRank') {
+        sorted.sort((a, b) => a.natRank - b.natRank); // Ascending (lower is better)
+      }
+      
+      return sorted;
+    }
+
+    function buildPlayerCards(players, sortBy, limit = null) {
+      const sorted = sortPlayers(players, sortBy);
+      const displayPlayers = limit ? sorted.slice(0, limit) : sorted;
+      const stats = parseKeyStats();
+      const showCutoff = sortBy === 'rank'; // Only show cutoff when sorted by seed
+      
+      let html = '';
+      let cutoffAdded = false;
+      
+      displayPlayers.forEach((player, index) => {
+        // Add cutoff divider after player #32 (only in seed order)
+        if (showCutoff && !cutoffAdded && player.rank === stats.drawSize && index < displayPlayers.length - 1) {
+          html += '<div class="mobile-cutoff-divider">✂️ Draw cutoff after player #' + stats.drawSize + '</div>';
+          cutoffAdded = true;
+        }
+        
+        const isTopSeed = player.rank <= 8;
+        const cardClass = ['mobile-player-card'];
+        if (isTopSeed) cardClass.push('top-seed');
+        if (player.isTarget) cardClass.push('target-player');
+        
+        html += `
+          <div class="${cardClass.join(' ')}">
+            <div class="mobile-player-rank">${player.rank}</div>
+            <div class="mobile-player-info">
+              <div class="mobile-player-name">${player.fullName}</div>
+              <div class="mobile-player-location">${player.location}</div>
+            </div>
+            <div class="mobile-player-ratings">
+              <div class="mobile-rating-badge utr">
+                <div class="mobile-rating-value">${player.utr}</div>
+                <div class="mobile-rating-label">UTR</div>
+              </div>
+              <div class="mobile-rating-badge nat">
+                <div class="mobile-rating-value">${player.natRank}</div>
+                <div class="mobile-rating-label">Nat</div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      return html;
+    }
+
+    function buildInfoCards(info) {
+      let html = '';
+      
+      // Format & Scoring Card
+      if (info.format.matchFormat) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">🎾</span>
+              Format & Scoring
+            </div>
+            ${info.format.matchFormat ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Match Format</span>
+              <span class="mobile-info-value">${info.format.matchFormat}</span>
+            </div>` : ''}
+            ${info.format.setTiebreak ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Set Tiebreak</span>
+              <span class="mobile-info-value">${info.format.setTiebreak}</span>
+            </div>` : ''}
+            ${info.format.matchTiebreak ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">3rd Set</span>
+              <span class="mobile-info-value">${info.format.matchTiebreak}</span>
+            </div>` : ''}
+          </div>
+        `;
+      }
+      
+      // Venues Card
+      if (info.venues.length > 0) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">📍</span>
+              Venues
+            </div>
+        `;
+        info.venues.forEach((venue, i) => {
+          html += `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Site ${i + 1}</span>
+              <span class="mobile-info-value">
+                ${venue.url ? `<a href="${venue.url}" target="_blank">${venue.name} →</a>` : venue.name}
+              </span>
+            </div>
+          `;
+        });
+        html += '</div>';
+      }
+      
+      // Contact Card
+      if (info.contact.director || info.contact.email || info.contact.phone) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">📞</span>
+              Contact
+            </div>
+            ${info.contact.director ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Director</span>
+              <span class="mobile-info-value">${info.contact.director}</span>
+            </div>` : ''}
+            ${info.contact.email ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Email</span>
+              <span class="mobile-info-value"><a href="mailto:${info.contact.email}">${info.contact.email}</a></span>
+            </div>` : ''}
+            ${info.contact.phone ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Phone</span>
+              <span class="mobile-info-value">
+                ${info.contact.phoneUrl ? `<a href="${info.contact.phoneUrl}">${info.contact.phone}</a>` : info.contact.phone}
+              </span>
+            </div>` : ''}
+          </div>
+        `;
+      }
+      
+      return html;
+    }
+
+    // ========================================
+    // MAIN RENDER FUNCTION
+    // ========================================
+
+    function renderMobileView() {
+      // Parse all data
+      allPlayers = parsePlayerData();
+      targetPlayer = allPlayers.find(p => p.isTarget);
+      const stats = parseKeyStats();
+      const info = parseTournamentInfo();
+      
+      // Render header
+      document.getElementById('mobile-title').textContent = info.title || 'U12 Girls Singles';
+      document.getElementById('mobile-meta').textContent = `${info.dates} • ${info.location}`;
+      
+      // Render hero stats
+      document.getElementById('mobile-draw-size').textContent = stats.drawSize;
+      document.getElementById('mobile-seed').textContent = stats.seed;
+      document.getElementById('mobile-registered').textContent = stats.registered;
+      
+      // Render Alexis card
+      if (targetPlayer) {
+        document.getElementById('mobile-alexis-card').innerHTML = buildAlexisCard(targetPlayer);
+      }
+      
+      // Render position gauge
+      if (targetPlayer && allPlayers.length > 0) {
+        document.getElementById('mobile-position-gauge').innerHTML = buildPositionGauge(allPlayers, targetPlayer);
+        // Animate gauge after render
+        setTimeout(() => {
+          const fill = document.getElementById('gauge-fill');
+          if (fill) {
+            fill.style.width = fill.getAttribute('data-width');
+          }
+        }, 100);
+      }
+      
+      // Render UTR histogram
+      document.getElementById('mobile-histogram').innerHTML = buildUtrHistogramMobile();
+      
+      // Render player count
+      document.getElementById('mobile-player-count').textContent = allPlayers.length;
+      
+      // Render player list (initially show top 8)
+      renderPlayerList(currentSort, 8);
+      
+      // Render tournament info
+      document.getElementById('mobile-info-section').innerHTML = buildInfoCards(info);
+    }
+
+    function renderPlayerList(sortBy, limit = null) {
+      const html = buildPlayerCards(allPlayers, sortBy, limit);
+      document.getElementById('mobile-player-list').innerHTML = html;
+      
+      // Update show more button
+      const showMoreBtn = document.getElementById('mobile-show-more');
+      if (limit && limit < allPlayers.length) {
+        showMoreBtn.style.display = 'block';
+        showMoreBtn.textContent = `Show all ${allPlayers.length} players ↓`;
+        isExpanded = false;
+      } else if (limit === null) {
+        showMoreBtn.style.display = 'block';
+        showMoreBtn.textContent = `Show less ↑`;
+        isExpanded = true;
+      } else {
+        showMoreBtn.style.display = 'none';
+      }
+    }
+
+    // ========================================
+    // EVENT HANDLERS
+    // ========================================
+
+    function handleSort(sortBy) {
+      currentSort = sortBy;
+      
+      // Update active button
+      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-sort') === sortBy) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Re-render with current expansion state
+      const limit = isExpanded ? null : 8;
+      renderPlayerList(sortBy, limit);
+    }
+
+    function handleShowMore() {
+      if (isExpanded) {
+        renderPlayerList(currentSort, 8);
+      } else {
+        renderPlayerList(currentSort, null);
+      }
+    }
+
+    // ========================================
+    // VIEW TOGGLE
+    // ========================================
+
+    function getUserViewPreference() {
+      return localStorage.getItem('tennisReportViewPref');
+    }
+
+    function setUserViewPreference(view) {
+      localStorage.setItem('tennisReportViewPref', view);
+    }
+
+    function detectMobileDevice() {
+      return window.innerWidth <= 600;
+    }
+
+    function toggleView(targetView) {
+      setUserViewPreference(targetView);
+      
+      if (targetView === 'mobile') {
+        document.body.classList.add('force-mobile');
+        document.body.classList.remove('force-desktop');
+      } else {
+        document.body.classList.add('force-desktop');
+        document.body.classList.remove('force-mobile');
+      }
+    }
+
+    function applyViewPreference() {
+      const pref = getUserViewPreference();
+      const isMobile = detectMobileDevice();
+      
+      // On desktop (>600px), always show desktop regardless of preference
+      if (!isMobile) {
+        document.body.classList.remove('force-mobile', 'force-desktop');
+        return;
+      }
+      
+      // On mobile (≤600px), apply preference if set
+      if (pref === 'desktop') {
+        document.body.classList.add('force-desktop');
+        document.body.classList.remove('force-mobile');
+      } else if (pref === 'mobile') {
+        document.body.classList.add('force-mobile');
+        document.body.classList.remove('force-desktop');
+      }
+      // If no preference, let CSS media query handle it
+    }
+
+    // ========================================
+    // INITIALIZATION
+    // ========================================
+
+    function initMobileView() {
+      // Apply view preference
+      applyViewPreference();
+      
+      // Render mobile view
+      renderMobileView();
+      
+      // Setup event listeners
+      
+      // Sort buttons
+      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          handleSort(btn.getAttribute('data-sort'));
+        });
+      });
+      
+      // Show more/less button
+      document.getElementById('mobile-show-more').addEventListener('click', handleShowMore);
+      
+      // View toggle links
+      document.getElementById('mobile-toggle-desktop').addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleView('desktop');
+      });
+      
+      document.getElementById('desktop-toggle-mobile').addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleView('mobile');
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        applyViewPreference();
+      });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMobileView);
+    } else {
+      initMobileView();
+    }
+  </script>
+
+  <!-- Share Button -->
   <script>
     // Player profile links keyed by "FIRST|LAST" (uppercase)
     const playerProfileUrlByName = {
