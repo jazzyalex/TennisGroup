@@ -19,6 +19,26 @@
       background-color: #f5f5f5;
     }
 
+    .report-header {
+      max-width: 1000px;
+      margin: 12px auto 16px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .report-header-logo {
+      width: 200px;
+      height: 200px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .report-header-text {
+      text-align: center;
+    }
+
     h1 {
       color: #2c3e50;
       text-align: center;
@@ -27,39 +47,18 @@
       font-weight: bold;
     }
 
-    .report-title-row {
-      max-width: 1000px;
-      margin: 10px auto 10px;
-      display: grid;
-      grid-template-columns: 56px 1fr 56px;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .report-title-logo {
-      width: 56px;
-      height: 56px;
-      display: block;
-      object-fit: contain;
-    }
-
-    .report-title-spacer {
-      width: 56px;
-      height: 56px;
-    }
-
     .tournament-dates {
       text-align: center;
       color: #2c3e50;
       font-size: 1.3em;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin: 8px 0 12px;
     }
 
     .tournament-info {
       text-align: center;
       color: #7f8c8d;
-      margin-bottom: 30px;
+      margin: 0 0 10px;
       font-size: 13px;
       line-height: 1.6;
     }
@@ -210,10 +209,12 @@
       font-weight: normal;
     }
 
+    tr.highlight-player td:nth-child(1) {
+      border-left: 4px solid #f5c542;
+    }
+
     tr.highlight-player td:nth-child(2) {
       background-color: #fff3cd;
-      border-left: 4px solid #f5c542;
-      padding-left: 6px;
     }
 
     tr.highlight-player td:nth-child(3) {
@@ -503,6 +504,10 @@
         color: #ffffff;
       }
 
+      .report-header-logo {
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+      }
+
       .tournament-dates {
         color: #ffffff;
       }
@@ -546,11 +551,14 @@
 
       tr.highlight-player td:nth-child(2) {
         background-color: #3b2f1a;
-        border-left-color: #d4a700;
       }
 
       tr.highlight-player td:nth-child(3) {
         background-color: #3b2f1a;
+      }
+
+      tr.highlight-player td:nth-child(1) {
+        border-left-color: #d4a700;
       }
 
       td {
@@ -669,14 +677,16 @@
         margin: 10px;
       }
 
-      .report-title-row {
-        grid-template-columns: 40px 1fr 40px;
-        margin: 8px auto 8px;
+      .report-header {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 10px;
+        margin: 8px auto 10px;
       }
 
-      .report-title-logo, .report-title-spacer {
-        width: 40px;
-        height: 40px;
+      .report-header-logo {
+        width: 96px;
+        height: 96px;
       }
 
       h1 {
@@ -973,17 +983,18 @@
   </style>
 </head>
 <body>
-  <div class="report-title-row">
-    <img class="report-title-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
-    <h1>L4 Closed - U12 Girls Singles</h1>
-    <div class="report-title-spacer" aria-hidden="true"></div>
-  </div>
-  <div class="tournament-dates">
-    January 10-18, 2026
-  </div>
-  <div class="tournament-info">
-    <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/EAD0497A-559C-4765-9253-2BF848B4FC4A" target="_blank" rel="noopener noreferrer" title="Open tournament page">Level 4 Closed - FDT Level 4 Junior 12s & 14s Singles Excellence</a><br>
-    Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA • 39 Players
+  <div class="report-header">
+    <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
+    <div class="report-header-text">
+      <h1>L4 Closed - U12 Girls Singles</h1>
+      <div class="tournament-dates">
+        January 10-18, 2026
+      </div>
+      <div class="tournament-info">
+        <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/EAD0497A-559C-4765-9253-2BF848B4FC4A" target="_blank" rel="noopener noreferrer" title="Open tournament page">Level 4 Closed - FDT Level 4 Junior 12s & 14s Singles Excellence</a><br>
+        Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA • 39 Players
+      </div>
+    </div>
   </div>
   <div class="table-meta">
     <div class="key-stats">
