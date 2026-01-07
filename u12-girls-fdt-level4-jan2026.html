@@ -43,6 +43,68 @@
       line-height: 1.6;
     }
 
+    .tournament-info a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .table-meta {
+      max-width: 1000px;
+      margin: 10px auto 6px;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .key-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-start;
+      font-size: 12px;
+      color: #2c3e50;
+    }
+
+    .key-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+    }
+
+    .key-stat .key-value {
+      font-weight: 700;
+      color: #1f3b68;
+    }
+
+    .key-stat:not(:last-child)::after {
+      content: "•";
+      margin-left: 8px;
+      color: #9aa9c0;
+    }
+
+    .link-legend {
+      text-align: right;
+      font-size: 11px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .selection-callout {
+      margin: 8px 0 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #2c3e50;
+      background-color: #f3f6fb;
+      border-left: 3px solid #4472C4;
+      border-radius: 4px;
+    }
+
     table {
       width: 100%;
       max-width: 1000px;
@@ -190,68 +252,6 @@
     td.col-wtn a:hover, td.col-utr a:hover, td.col-national a:hover {
       text-decoration: underline;
     }
-    .tournament-info a {
-      color: inherit;
-      text-decoration: underline;
-    }
-
-    .table-meta {
-      max-width: 1000px;
-      margin: 10px auto 6px;
-      width: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .key-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: flex-start;
-      font-size: 12px;
-      color: #2c3e50;
-    }
-
-    .key-stat {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 0;
-      background: none;
-      border: none;
-      border-radius: 0;
-    }
-
-    .key-stat .key-value {
-      font-weight: 700;
-      color: #1f3b68;
-    }
-
-    .key-stat:not(:last-child)::after {
-      content: "•";
-      margin-left: 8px;
-      color: #9aa9c0;
-    }
-
-    .link-legend {
-      text-align: right;
-      font-size: 11px;
-      color: #666;
-      white-space: nowrap;
-    }
-
-    .selection-callout {
-      margin: 8px 0 12px;
-      padding: 8px 10px;
-      font-size: 12px;
-      color: #2c3e50;
-      background-color: #f3f6fb;
-      border-left: 3px solid #4472C4;
-      border-radius: 4px;
-    }
-
 
     /* Statistics section */
     .stats-section {
@@ -285,7 +285,7 @@
     }
 
     .stat-label {
-      font-size: 10px;
+      font-size: 11px;
       color: #666;
       text-transform: uppercase;
       margin-bottom: 5px;
@@ -619,10 +619,6 @@
         border-left-color: #6b9bd1;
       }
 
-      .link-legend {
-        color: #b0b0b0;
-      }
-
       .important-note {
         background-color: #3a3a1a;
         border-left-color: #d4a700;
@@ -775,7 +771,7 @@
         display: block;
         width: 100%;
         margin-bottom: 3px;
-        font-size: 10px;
+        font-size: 11px;
       }
 
       .detail-value {
@@ -804,10 +800,6 @@
 
     /* Print styles */
     @media print {
-      .link-legend {
-        display: none;
-      }
-
       /* Page setup */
       @page {
         size: letter;
@@ -991,7 +983,7 @@
         <td>GADGIL</td>
         
         <td class="col-wtn">30.63</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3415960" target="_blank" rel="noopener noreferrer" title="Open UTR profile">5.95</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3415960" target="_blank" rel="noopener noreferrer">5.95</a></td>
         <td class="col-national">124</td>
         <td>San Mateo CA</td>
       </tr>
@@ -1001,7 +993,7 @@
         <td>LABRECQUE</td>
         
         <td class="col-wtn">31.76</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3575442" target="_blank" rel="noopener noreferrer" title="Open UTR profile">5.6</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3575442" target="_blank" rel="noopener noreferrer">5.6</a></td>
         <td class="col-national">253</td>
         <td>Mountain View CA</td>
       </tr>
@@ -1011,7 +1003,7 @@
         <td>WANG</td>
         
         <td class="col-wtn">32.06</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/2774013" target="_blank" rel="noopener noreferrer" title="Open UTR profile">5.53</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/2774013" target="_blank" rel="noopener noreferrer">5.53</a></td>
         <td class="col-national">120</td>
         <td>San Jose CA</td>
       </tr>
@@ -1021,7 +1013,7 @@
         <td>DORAN</td>
         
         <td class="col-wtn">32.11</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5583125" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.63</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5583125" target="_blank" rel="noopener noreferrer">4.63</a></td>
         <td class="col-national">771</td>
         <td>Atherton CA</td>
       </tr>
@@ -1031,7 +1023,7 @@
         <td>DUAN</td>
         
         <td class="col-wtn">32.27</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4313318" target="_blank" rel="noopener noreferrer" title="Open UTR profile">5.09</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4313318" target="_blank" rel="noopener noreferrer">5.09</a></td>
         <td class="col-national">259</td>
         <td>San Jose CA</td>
       </tr>
@@ -1041,7 +1033,7 @@
         <td>KUNKEL</td>
         
         <td class="col-wtn">32.88</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3338600" target="_blank" rel="noopener noreferrer" title="Open UTR profile">5.09</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3338600" target="_blank" rel="noopener noreferrer">5.09</a></td>
         <td class="col-national">312</td>
         <td>Fremont CA</td>
       </tr>
@@ -1051,7 +1043,7 @@
         <td>LI</td>
         
         <td class="col-wtn">32.9</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4054757" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.94</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4054757" target="_blank" rel="noopener noreferrer">4.94</a></td>
         <td class="col-national">310</td>
         <td>Palo Alto CA</td>
       </tr>
@@ -1061,7 +1053,7 @@
         <td>DALAL</td>
         
         <td class="col-wtn">33.31</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/2674845" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.26</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/2674845" target="_blank" rel="noopener noreferrer">4.26</a></td>
         <td class="col-national">1182</td>
         <td>Cupertino CA</td>
       </tr>
@@ -1071,7 +1063,7 @@
         <td>KATARIA</td>
         
         <td class="col-wtn">33.52</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4426031" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4426031" target="_blank" rel="noopener noreferrer">4</a></td>
         <td class="col-national">1128</td>
         <td>Fremont CA</td>
       </tr>
@@ -1081,7 +1073,7 @@
         <td>STIRITZ</td>
         
         <td class="col-wtn">33.68</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3151147" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.72</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3151147" target="_blank" rel="noopener noreferrer">4.72</a></td>
         <td class="col-national">382</td>
         <td>Ross CA</td>
       </tr>
@@ -1091,7 +1083,7 @@
         <td>SHAHAB</td>
         
         <td class="col-wtn">33.76</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5325217" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.98</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5325217" target="_blank" rel="noopener noreferrer">3.98</a></td>
         <td class="col-national">615</td>
         <td>Los Gatos CA</td>
       </tr>
@@ -1101,7 +1093,7 @@
         <td>LI</td>
         
         <td class="col-wtn">33.79</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3110205" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.23</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3110205" target="_blank" rel="noopener noreferrer">4.23</a></td>
         <td class="col-national">559</td>
         <td>Sunnyvale CA</td>
       </tr>
@@ -1121,7 +1113,7 @@
         <td>ARUNKUMAR</td>
         
         <td class="col-wtn">33.86</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3247327" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.00</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3247327" target="_blank" rel="noopener noreferrer">4.00</a></td>
         <td class="col-national">457</td>
         <td>Fremont CA</td>
       </tr>
@@ -1131,7 +1123,7 @@
         <td>DESAI</td>
         
         <td class="col-wtn">33.93</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3728581" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.36</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3728581" target="_blank" rel="noopener noreferrer">4.36</a></td>
         <td class="col-national">463</td>
         <td>San Francisco CA</td>
       </tr>
@@ -1141,7 +1133,7 @@
         <td>SUN</td>
         
         <td class="col-wtn">33.97</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4324163" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.99</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4324163" target="_blank" rel="noopener noreferrer">3.99</a></td>
         <td class="col-national">1028</td>
         <td>San Jose CA</td>
       </tr>
@@ -1151,7 +1143,7 @@
         <td>LAI</td>
         
         <td class="col-wtn">34.03</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5078823" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.58</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5078823" target="_blank" rel="noopener noreferrer">3.58</a></td>
         <td class="col-national">1016</td>
         <td>San Ramon CA</td>
       </tr>
@@ -1161,7 +1153,7 @@
         <td>HU</td>
         
         <td class="col-wtn">34.21</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3095546" target="_blank" rel="noopener noreferrer" title="Open UTR profile">4.3</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3095546" target="_blank" rel="noopener noreferrer">4.3</a></td>
         <td class="col-national">562</td>
         <td>Palo Alto CA</td>
       </tr>
@@ -1171,7 +1163,7 @@
         <td>LI</td>
         
         <td class="col-wtn">34.25</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4315954" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.68</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4315954" target="_blank" rel="noopener noreferrer">3.68</a></td>
         <td class="col-national">1926</td>
         <td>Cupertino CA</td>
       </tr>
@@ -1181,7 +1173,7 @@
         <td>YU</td>
         
         <td class="col-wtn">34.42</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3432127" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.85</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3432127" target="_blank" rel="noopener noreferrer">3.85</a></td>
         <td class="col-national">451</td>
         <td>Foster City CA</td>
       </tr>
@@ -1191,7 +1183,7 @@
         <td>MOLOCHKO</td>
         
         <td class="col-wtn">34.44</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4427419" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.68</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4427419" target="_blank" rel="noopener noreferrer">3.68</a></td>
         <td class="col-national">610</td>
         <td>Castro Valley CA</td>
       </tr>
@@ -1201,7 +1193,7 @@
         <td>WATT</td>
         
         <td class="col-wtn">34.48</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4209273" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.47</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4209273" target="_blank" rel="noopener noreferrer">3.47</a></td>
         <td class="col-national">1043</td>
         <td>Hillsborough CA</td>
       </tr>
@@ -1211,7 +1203,7 @@
         <td>WU</td>
         
         <td class="col-wtn">34.68</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3504317" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.68</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3504317" target="_blank" rel="noopener noreferrer">3.68</a></td>
         <td class="col-national">751</td>
         <td>Los Gatos CA</td>
       </tr>
@@ -1221,7 +1213,7 @@
         <td>WANG</td>
         
         <td class="col-wtn">34.86</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3987069" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.6</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3987069" target="_blank" rel="noopener noreferrer">3.6</a></td>
         <td class="col-national">975</td>
         <td>Saratoga CA</td>
       </tr>
@@ -1231,7 +1223,7 @@
         <td>MODI</td>
         
         <td class="col-wtn">35.01</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3173877" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.15</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3173877" target="_blank" rel="noopener noreferrer">3.15</a></td>
         <td class="col-national">1509</td>
         <td>San Jose CA</td>
       </tr>
@@ -1241,7 +1233,7 @@
         <td>WANG</td>
         
         <td class="col-wtn">35.09</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5327345" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.06</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5327345" target="_blank" rel="noopener noreferrer">3.06</a></td>
         <td class="col-national">1319</td>
         <td>Palo Alto CA</td>
       </tr>
@@ -1251,7 +1243,7 @@
         <td>LI</td>
         
         <td class="col-wtn">35.1</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4747020" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.36</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4747020" target="_blank" rel="noopener noreferrer">3.36</a></td>
         <td class="col-national">899</td>
         <td>Saratoga CA</td>
       </tr>
@@ -1261,7 +1253,7 @@
         <td>LI</td>
         
         <td class="col-wtn">35.23</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5524070" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.48</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5524070" target="_blank" rel="noopener noreferrer">3.48</a></td>
         <td class="col-national">736</td>
         <td>Pleasanton CA</td>
       </tr>
@@ -1271,7 +1263,7 @@
         <td>SUN</td>
         
         <td class="col-wtn">35.35</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3860946" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.29</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3860946" target="_blank" rel="noopener noreferrer">3.29</a></td>
         <td class="col-national">1130</td>
         <td>Sunnyvale CA</td>
       </tr>
@@ -1281,7 +1273,7 @@
         <td>GADGIL</td>
         
         <td class="col-wtn">35.4</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3729362" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.17</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3729362" target="_blank" rel="noopener noreferrer">3.17</a></td>
         <td class="col-national">750</td>
         <td>San Mateo CA</td>
       </tr>
@@ -1291,7 +1283,7 @@
         <td>ASHOK</td>
         
         <td class="col-wtn">35.41</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3505558" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.53</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3505558" target="_blank" rel="noopener noreferrer">3.53</a></td>
         <td class="col-national">1251</td>
         <td>Milpitas CA</td>
       </tr>
@@ -1301,7 +1293,7 @@
         <td>BHAMBANI</td>
         
         <td class="col-wtn">35.72</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3114224" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.14</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3114224" target="_blank" rel="noopener noreferrer">3.14</a></td>
         <td class="col-national">1456</td>
         <td>Saratoga CA</td>
       </tr>
@@ -1311,7 +1303,7 @@
         <td>MOGLEN</td>
         
         <td class="col-wtn">36.06</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4845382" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.06</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4845382" target="_blank" rel="noopener noreferrer">3.06</a></td>
         <td class="col-national">1065</td>
         <td>Mill Valley CA</td>
       </tr>
@@ -1321,7 +1313,7 @@
         <td>WANG</td>
         
         <td class="col-wtn">36.13</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4400838" target="_blank" rel="noopener noreferrer" title="Open UTR profile">2.74</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4400838" target="_blank" rel="noopener noreferrer">2.74</a></td>
         <td class="col-national">1213</td>
         <td>Fremont CA</td>
       </tr>
@@ -1331,7 +1323,7 @@
         <td>CAI</td>
         
         <td class="col-wtn">36.32</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4513492" target="_blank" rel="noopener noreferrer" title="Open UTR profile">2.79</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4513492" target="_blank" rel="noopener noreferrer">2.79</a></td>
         <td class="col-national">644</td>
         <td>San Jose CA</td>
       </tr>
@@ -1341,7 +1333,7 @@
         <td>GARCIA</td>
         
         <td class="col-wtn">36.72</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5385839" target="_blank" rel="noopener noreferrer" title="Open UTR profile">2.27</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5385839" target="_blank" rel="noopener noreferrer">2.27</a></td>
         <td class="col-national">1653</td>
         <td>Pacifica CA</td>
       </tr>
@@ -1351,7 +1343,7 @@
         <td>GOUDIE</td>
         
         <td class="col-wtn">36.84</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/2816542" target="_blank" rel="noopener noreferrer" title="Open UTR profile">3.05</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/2816542" target="_blank" rel="noopener noreferrer">3.05</a></td>
         <td class="col-national">1133</td>
         <td>Oakley CA</td>
       </tr>
@@ -1361,7 +1353,7 @@
         <td>CAO</td>
         
         <td class="col-wtn">36.92</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5096309" target="_blank" rel="noopener noreferrer" title="Open UTR profile">2.27</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5096309" target="_blank" rel="noopener noreferrer">2.27</a></td>
         <td class="col-national">2091</td>
         <td>Los Altos CA</td>
       </tr>
@@ -1371,7 +1363,7 @@
         <td>CHITAURE</td>
         
         <td class="col-wtn">38.89</td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4449589" target="_blank" rel="noopener noreferrer" title="Open UTR profile">2.1</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4449589" target="_blank" rel="noopener noreferrer">2.1</a></td>
         <td class="col-national">1267</td>
         <td>El Sobrante CA</td>
       </tr>
@@ -1552,7 +1544,7 @@
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.textContent = text;
-      a.title = 'Open USTA profile';
+      a.title = 'Open player profile';
       cell.textContent = '';
       cell.appendChild(a);
     }
