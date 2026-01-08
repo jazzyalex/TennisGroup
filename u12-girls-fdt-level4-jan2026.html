@@ -1044,7 +1044,7 @@
 
     /* Mobile Header */
     .mobile-header {
-      padding: 16px 20px;
+      padding: 12px 20px;
       background: var(--mobile-surface);
       border-bottom: 1px solid var(--mobile-border);
       position: sticky;
@@ -1052,40 +1052,41 @@
       z-index: 100;
     }
 
-    .mobile-header-badge {
-      display: inline-flex;
+    .mobile-header-top {
+      display: flex;
       align-items: center;
-      gap: 6px;
-      background: var(--mobile-accent-soft);
-      color: var(--mobile-accent);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 100px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      gap: 8px;
+      margin-bottom: 6px;
     }
 
     .mobile-header-logo {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       object-fit: contain;
-      vertical-align: middle;
-      margin-right: -2px;
+      flex-shrink: 0;
+    }
+
+    .mobile-header-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--mobile-border);
     }
 
     .mobile-header-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
       margin: 0;
+      color: var(--mobile-accent);
+      text-transform: uppercase;
     }
 
     .mobile-header-meta {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--mobile-text-secondary);
-      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Hero Stats */
@@ -2218,11 +2219,11 @@
   <div class="mobile-view">
     <!-- Mobile Header -->
     <header class="mobile-header">
-      <div class="mobile-header-badge">
+      <div class="mobile-header-top">
         <img src="assets/tennis-report/favicon-256.png" alt="Logo" class="mobile-header-logo">
-        Level 4 Closed
+        <div class="mobile-header-divider"></div>
+        <h1 class="mobile-header-title" id="mobile-title"></h1>
       </div>
-      <h1 class="mobile-header-title" id="mobile-title"></h1>
       <div class="mobile-header-meta" id="mobile-meta"></div>
     </header>
 
@@ -2714,7 +2715,11 @@
       const info = parseTournamentInfo();
       
       // Render header
-      document.getElementById('mobile-title').textContent = info.title || 'U12 Girls Singles';
+      // Format: "L4 Closed - U12 Girls Singles"
+      const titleText = info.title || 'U12 Girls Singles';
+      document.getElementById('mobile-title').textContent = 'L4 Closed - ' + titleText;
+      
+      // Format: "Jan 10-18, 2026 • San Jose, CA"
       document.getElementById('mobile-meta').textContent = `${info.dates} • ${info.location}`;
       
       // Render hero stats
