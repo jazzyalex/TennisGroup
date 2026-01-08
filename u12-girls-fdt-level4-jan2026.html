@@ -1128,7 +1128,7 @@
       gap: 10px;
       padding: 12px 20px;
       margin: 16px 0;
-      background: transparent;
+      background: var(--mobile-surface);
     }
 
     .mobile-stat-card {
@@ -1435,6 +1435,13 @@
       border-radius: 8px;
       text-align: center;
       min-width: 52px;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    a.mobile-rating-badge:active {
+      opacity: 0.6;
     }
 
     .mobile-rating-badge.utr {
@@ -2407,6 +2414,20 @@
       'Sanaia Goudie': 69, 'Katherine Cao': 134, 'Sarahana Chitaure': 82
     };
 
+    // USTA UAID mapping from rankings_results_v1.csv
+    const PLAYER_UAIDS = {
+      'Ziva Gadgil': '2018741098', 'Alexi Labrecque': '2018637356', 'Harper Wang': '2016922555', 'Margaret Doran': '2019612308',
+      'Zhiyan Duan': '2018846134', 'Camille Kunkel': '2017775536', 'Olivia Li': '2018664451', 'Siya Dalal': '2016424869',
+      'Misha Kataria': '2018898951', 'Summer Stiritz': '2017334063', 'Paneez Shahab': '2019450090', 'Eileen Li': '2017327994',
+      'Alexis Malakhova': '2018710796', 'Damayanthi Arunkumar': '2018637289', 'Noor Desai': '2018731933', 'Ruoyu Sun': '2018846852',
+      'Megan Lai': '2019431103', 'Annabel Hu': '2017331788', 'Stephanie Li': '2018846683', 'Jenna Yu': '2017798043',
+      'Kateryna Molochko': '2018899029', 'Elise Watt': '2018830421', 'Bella Wu': '2017922069', 'Avaline Wang': '2018646092',
+      'Aashna Modi': '2017343949', 'Ellie Wang': '2019450294', 'Amy Li': '2019146866', 'Emma Li': '2019481085',
+      'May Sun': '2018703655', 'Zaira Gadgil': '2018731991', 'Akshaya Ashok': '2018948492', 'Sania Bhambani': '2018668291',
+      'Eliana Moglen': '2019223826', 'Olivia Wang': '2018893743', 'Liana Cai': '2019456865', 'Cassia Garcia': '2019534066',
+      'Sanaia Goudie': '2016564819', 'Katherine Cao': '2019439166', 'Sarahana Chitaure': '2018900379'
+    };
+
     // ========================================
     // DATA PARSING FUNCTIONS
     // ========================================
@@ -2433,6 +2454,7 @@
         
         const fullName = `${firstName} ${lastName}`;
         const sectionRank = SECTION_RANKS[fullName] || null;
+        const uaid = PLAYER_UAIDS[fullName] || null;
         
         players.push({
           rank,
@@ -2444,6 +2466,7 @@
           utrUrl,
           natRank,
           sectionRank,
+          uaid,
           location,
           isTarget
         });
@@ -2732,14 +2755,28 @@
               <div class="mobile-player-location">${player.location}</div>
             </div>
             <div class="mobile-player-ratings">
-              <div class="mobile-rating-badge utr">
-                <div class="mobile-rating-value">${player.utr}</div>
-                <div class="mobile-rating-label">UTR</div>
-              </div>
-              <div class="mobile-rating-badge nat">
-                <div class="mobile-rating-value">${player.natRank}</div>
-                <div class="mobile-rating-label">Nat</div>
-              </div>
+              ${player.utrUrl ? `
+                <a href="${player.utrUrl}" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
+                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-label">UTR</div>
+                </a>
+              ` : `
+                <div class="mobile-rating-badge utr">
+                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-label">UTR</div>
+                </div>
+              `}
+              ${player.uaid ? `
+                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
+                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-label">Nat</div>
+                </a>
+              ` : `
+                <div class="mobile-rating-badge nat">
+                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-label">Nat</div>
+                </div>
+              `}
             </div>
             <div class="mobile-player-expand-icon">▼</div>
           </div>
