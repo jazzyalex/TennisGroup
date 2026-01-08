@@ -1044,7 +1044,7 @@
 
     /* Mobile Header */
     .mobile-header {
-      padding: 12px 20px;
+      padding: 16px 20px;
       background: var(--mobile-surface);
       border-bottom: 1px solid var(--mobile-border);
       position: sticky;
@@ -1055,44 +1055,31 @@
     .mobile-header-top {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 6px;
+      gap: 16px;
+      margin-bottom: 8px;
     }
 
     .mobile-header-logo {
-      width: 28px;
-      height: 28px;
+      width: 48px;
+      height: 48px;
       object-fit: contain;
       flex-shrink: 0;
     }
 
-    .mobile-header-divider {
-      width: 1px;
-      height: 20px;
-      background: var(--mobile-border);
-      flex-shrink: 0;
-    }
-
     .mobile-header-title {
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 700;
       letter-spacing: 0.3px;
       margin: 0;
       color: var(--mobile-accent);
       text-transform: uppercase;
-      text-align: left;
-      flex-shrink: 1;
-      min-width: 0;
+      flex: 1;
     }
 
     .mobile-header-meta {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--mobile-text-secondary);
       text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     /* Hero Stats */
@@ -1434,6 +1421,63 @@
       margin-top: 1px;
     }
 
+    /* Player Card Expand Icon */
+    .mobile-player-expand-icon {
+      font-size: 10px;
+      color: var(--mobile-text-muted);
+      margin-left: 4px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .mobile-player-card.expanded .mobile-player-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Player Details (Expandable) */
+    .mobile-player-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      margin: 0 20px;
+      margin-top: -8px;
+    }
+
+    .mobile-player-details.expanded {
+      max-height: 200px;
+    }
+
+    .mobile-player-details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 12px;
+      background: var(--mobile-surface-elevated);
+      border: 1px solid var(--mobile-border);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .mobile-detail-item {
+      text-align: center;
+      padding: 8px 4px;
+      background: var(--mobile-surface);
+      border-radius: 8px;
+    }
+
+    .mobile-detail-label {
+      font-size: 9px;
+      color: var(--mobile-text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .mobile-detail-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--mobile-text-primary);
+    }
+
     /* Cutoff Divider */
     .mobile-cutoff-divider {
       margin: 8px 20px;
@@ -1699,10 +1743,11 @@
         <th class="col-utr sortable">UTR</th>
         <th class="col-national sortable">Nat Rank</th>
         <th class="sortable">Location</th>
+        <th class="col-section-hidden" style="display: none;">Section</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr data-section-rank="5">
         <td class="col-rank">1</td>
         <td>Ziva</td>
         <td>GADGIL</td>
@@ -1711,6 +1756,7 @@
         <td class="col-utr"><a href="https://app.utrsports.net/profiles/3415960" target="_blank" rel="noopener noreferrer">5.95</a></td>
         <td class="col-national">124</td>
         <td>San Mateo CA</td>
+        <td style="display: none;">5</td>
       </tr>
       <tr>
         <td class="col-rank">2</td>
@@ -2235,7 +2281,6 @@
     <header class="mobile-header">
       <div class="mobile-header-top">
         <img src="assets/tennis-report/favicon-256.png" alt="Logo" class="mobile-header-logo">
-        <div class="mobile-header-divider"></div>
         <h1 class="mobile-header-title" id="mobile-title"></h1>
       </div>
       <div class="mobile-header-meta" id="mobile-meta"></div>
@@ -2306,6 +2351,20 @@
     let allPlayers = [];
     let targetPlayer = null;
 
+    // Section rank mapping from rankings_results_v1.csv
+    const SECTION_RANKS = {
+      'Ziva GADGIL': 5, 'Alexi LABRECQUE': 11, 'Harper WANG': 4, 'Margaret DORAN': 50,
+      'Zhiyan DUAN': 12, 'Camille KUNKEL': 16, 'Olivia LI': 14, 'Siya DALAL': 73,
+      'Misha KATARIA': 67, 'Summer STIRITZ': 22, 'Paneez SHAHAB': 42, 'Eileen LI': 38,
+      'Alexis MALAKHOVA': 54, 'Damayanthi ARUNKUMAR': 32, 'Noor DESAI': 33, 'Ruoyu SUN': 63,
+      'Megan LAI': 60, 'Annabel HU': 39, 'Stephanie LI': 123, 'Jenna YU': 30,
+      'Kateryna MOLOCHKO': 41, 'Elise WATT': 64, 'Bella WU': 48, 'Avaline WANG': 57,
+      'Aashna MODI': 89, 'Ellie WANG': 84, 'Amy LI': 56, 'Emma LI': 46,
+      'MAY SUN': 68, 'Zaira GADGIL': 47, 'Akshaya ASHOK': 80, 'Sania BHAMBANI': 87,
+      'Eliana MOGLEN': 65, 'Olivia WANG': 77, 'Liana CAI': 44, 'Cassia GARCIA': 96,
+      'Sanaia GOUDIE': 69, 'Katherine CAO': 134, 'Sarahana CHITAURE': 82
+    };
+
     // ========================================
     // DATA PARSING FUNCTIONS
     // ========================================
@@ -2330,15 +2389,19 @@
         const location = cells[6].textContent.trim();
         const isTarget = row.classList.contains('highlight-player');
         
+        const fullName = `${firstName} ${lastName}`;
+        const sectionRank = SECTION_RANKS[fullName] || null;
+        
         players.push({
           rank,
           firstName,
           lastName,
-          fullName: `${firstName} ${lastName}`,
+          fullName,
           wtn,
           utr,
           utrUrl,
           natRank,
+          sectionRank,
           location,
           isTarget
         });
@@ -2620,7 +2683,7 @@
         if (player.isTarget) cardClass.push('target-player');
         
         html += `
-          <div class="${cardClass.join(' ')}">
+          <div class="${cardClass.join(' ')}" data-player-id="${player.rank}">
             <div class="mobile-player-rank">${player.rank}</div>
             <div class="mobile-player-info">
               <div class="mobile-player-name">${player.fullName}</div>
@@ -2634,6 +2697,23 @@
               <div class="mobile-rating-badge nat">
                 <div class="mobile-rating-value">${player.natRank}</div>
                 <div class="mobile-rating-label">Nat</div>
+              </div>
+            </div>
+            <div class="mobile-player-expand-icon">▼</div>
+          </div>
+          <div class="mobile-player-details" data-player-id="${player.rank}">
+            <div class="mobile-player-details-grid">
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">WTN</div>
+                <div class="mobile-detail-value">${player.wtn}</div>
+              </div>
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Section Rank</div>
+                <div class="mobile-detail-value">${player.sectionRank || 'N/A'}</div>
+              </div>
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Seed</div>
+                <div class="mobile-detail-value">#${player.rank}</div>
               </div>
             </div>
           </div>
@@ -2878,6 +2958,33 @@
     }
 
     // ========================================
+    // PLAYER CARD INTERACTION
+    // ========================================
+
+    function togglePlayerDetails(playerId) {
+      const card = document.querySelector(`.mobile-player-card[data-player-id="${playerId}"]`);
+      const details = document.querySelector(`.mobile-player-details[data-player-id="${playerId}"]`);
+      
+      if (!card || !details) return;
+      
+      const isExpanded = card.classList.contains('expanded');
+      
+      // Close all other expanded cards
+      document.querySelectorAll('.mobile-player-card.expanded').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.mobile-player-details.expanded').forEach(d => {
+        d.classList.remove('expanded');
+      });
+      
+      // Toggle current card
+      if (!isExpanded) {
+        card.classList.add('expanded');
+        details.classList.add('expanded');
+      }
+    }
+
+    // ========================================
     // INITIALIZATION
     // ========================================
 
@@ -2889,6 +2996,17 @@
       renderMobileView();
       
       // Setup event listeners
+      
+      // Player card click handlers
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.mobile-player-card');
+        if (card) {
+          const playerId = card.getAttribute('data-player-id');
+          if (playerId) {
+            togglePlayerDetails(playerId);
+          }
+        }
+      });
       
       // Sort buttons
       document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
