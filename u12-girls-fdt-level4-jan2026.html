@@ -1079,11 +1079,14 @@
       margin: 0;
       color: var(--mobile-accent);
       text-transform: uppercase;
+      flex: 1;
+      text-align: center;
     }
 
     .mobile-header-meta {
       font-size: 12px;
       color: var(--mobile-text-secondary);
+      text-align: center;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -2127,6 +2130,10 @@
         <div class="stat-value">31%</div>
       </div>
       <div class="stat-box">
+        <div class="stat-label">Alexis Section Rank</div>
+        <div class="stat-value">54</div>
+      </div>
+      <div class="stat-box">
         <div class="stat-label">Top UTR</div>
         <div class="stat-value">5.95</div>
       </div>
@@ -2185,6 +2192,10 @@
     <div class="detail-row">
       <span class="detail-label">Site 3:</span>
       <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=Piedmont+Hills+High+School+San+Jose+CA" target="_blank" style="color: #4472C4; text-decoration: none;">Piedmont Hills High School, 1377 Piedmont Rd, San Jose, CA 95132</a></span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Site 4:</span>
+      <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=Yerba+Buena+High+School+San+Jose+CA" target="_blank" style="color: #4472C4; text-decoration: none;">Yerba Buena High School, 1855 Lucretia Ave, San Jose, CA 95122</a></span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Tournament Dates:</span>
@@ -2447,7 +2458,7 @@
       if (!player) return '';
       
       const initials = `${player.firstName[0]}${player.lastName[0]}`;
-      const strongerCount = allPlayers.filter(p => p.utr > player.utr).length;
+      const sectionRank = 54; // Alexis's sectional rank from MEMORY_BANK.md
       
       return `
         <div class="mobile-alexis-header">
@@ -2456,7 +2467,7 @@
             <h3>${player.fullName}</h3>
             <span>${player.location}</span>
           </div>
-          <div class="mobile-alexis-seed">#${player.rank}</div>
+          <div class="mobile-alexis-seed">#${player.rank} Seed</div>
         </div>
         <div class="mobile-alexis-stats">
           <div class="mobile-alexis-stat">
@@ -2472,8 +2483,8 @@
             <div class="mobile-alexis-stat-label">Nat Rank</div>
           </div>
           <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${strongerCount}</div>
-            <div class="mobile-alexis-stat-label">Stronger</div>
+            <div class="mobile-alexis-stat-value">${sectionRank}</div>
+            <div class="mobile-alexis-stat-label">Section</div>
           </div>
         </div>
       `;
