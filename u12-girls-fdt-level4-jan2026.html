@@ -2715,9 +2715,9 @@
       const info = parseTournamentInfo();
       
       // Render header
-      // Format: "L4 Closed - U12 Girls Singles"
-      const titleText = info.title || 'U12 Girls Singles';
-      document.getElementById('mobile-title').textContent = 'L4 Closed - ' + titleText;
+      // Use title as-is (already contains "L4 Closed - U12 Girls Singles")
+      const titleText = info.title || 'L4 Closed - U12 Girls Singles';
+      document.getElementById('mobile-title').textContent = titleText;
       
       // Format: "Jan 10-18, 2026 • San Jose, CA"
       document.getElementById('mobile-meta').textContent = `${info.dates} • ${info.location}`;
