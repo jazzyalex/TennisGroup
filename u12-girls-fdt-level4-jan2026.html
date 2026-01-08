@@ -2388,7 +2388,11 @@
         const text = tournamentInfo.textContent.trim();
         const lines = text.split('\n').map(l => l.trim()).filter(l => l);
         if (lines.length > 1) {
-          info.location = lines[1].replace(/•.*$/, '').trim();
+          const fullLocation = lines[1].replace(/•.*$/, '').trim();
+          // Extract just "City, State" from full venue addresses
+          // Example: "Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA" -> "San Jose, CA"
+          const cityStateMatch = fullLocation.match(/([^,]+,\s*[A-Z]{2})$/);
+          info.location = cityStateMatch ? cityStateMatch[1].trim() : fullLocation;
         }
       }
       
