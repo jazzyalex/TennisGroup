@@ -1055,6 +1055,7 @@
     .mobile-header-top {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       margin-bottom: 6px;
     }
@@ -1070,6 +1071,7 @@
       width: 1px;
       height: 20px;
       background: var(--mobile-border);
+      flex-shrink: 0;
     }
 
     .mobile-header-title {
@@ -1079,8 +1081,9 @@
       margin: 0;
       color: var(--mobile-accent);
       text-transform: uppercase;
-      flex: 1;
-      text-align: center;
+      text-align: left;
+      flex-shrink: 1;
+      min-width: 0;
     }
 
     .mobile-header-meta {
