@@ -1121,30 +1121,37 @@
       text-align: center;
     }
 
-    /* Hero Stats */
+    /* Hero Stats Container */
+    .mobile-hero-stats {
+      padding: 16px 20px;
+      margin: 16px 20px;
+      background: var(--mobile-surface);
+      border-radius: 14px;
+      border: 1px solid var(--mobile-border);
+    }
+
+    /* Tournament Name Link (inside hero stats card) */
     .mobile-tournament-link {
       display: block;
       text-align: center;
-      padding: 8px 20px;
-      margin: 16px 20px 0;
-      font-size: 12px;
+      padding: 0 0 12px 0;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.5;
       color: var(--mobile-text-secondary);
       text-decoration: none;
+      border-bottom: 1px solid var(--mobile-border);
     }
 
     .mobile-tournament-link:active {
       opacity: 0.6;
     }
 
-    .mobile-hero-stats {
+    /* Stats Grid */
+    .mobile-stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      padding: 12px 20px;
-      margin: 0 20px 16px;
-      background: var(--mobile-surface);
-      border-radius: 14px;
-      border: 1px solid var(--mobile-border);
     }
 
     .mobile-stat-card {
@@ -2351,24 +2358,27 @@
       </div>
     </header>
 
-    <!-- Tournament Name Link -->
-    <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/EAD0497A-559C-4765-9253-2BF848B4FC4A" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
-      Level 4 Closed - FDT Level 4 Junior 12s & 14s Singles Excellence
-    </a>
-
     <!-- Hero Stats -->
     <div class="mobile-hero-stats">
-      <div class="mobile-stat-card">
-        <div class="mobile-stat-value" id="mobile-draw-size"></div>
-        <div class="mobile-stat-label">Draw Size</div>
-      </div>
-      <div class="mobile-stat-card highlight">
-        <div class="mobile-stat-value" id="mobile-seed"></div>
-        <div class="mobile-stat-label">Seed</div>
-      </div>
-      <div class="mobile-stat-card">
-        <div class="mobile-stat-value" id="mobile-registered"></div>
-        <div class="mobile-stat-label">Registered</div>
+      <!-- Tournament Name Link (inside card) -->
+      <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/EAD0497A-559C-4765-9253-2BF848B4FC4A" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
+        Level 4 Closed - FDT Level 4 Junior 12s & 14s<br>Singles Excellence
+      </a>
+
+      <!-- Stats Grid -->
+      <div class="mobile-stats-grid">
+        <div class="mobile-stat-card">
+          <div class="mobile-stat-value" id="mobile-draw-size"></div>
+          <div class="mobile-stat-label">Draw Size</div>
+        </div>
+        <div class="mobile-stat-card highlight">
+          <div class="mobile-stat-value" id="mobile-seed"></div>
+          <div class="mobile-stat-label">Seed</div>
+        </div>
+        <div class="mobile-stat-card">
+          <div class="mobile-stat-value" id="mobile-registered"></div>
+          <div class="mobile-stat-label">Registered</div>
+        </div>
       </div>
     </div>
 
