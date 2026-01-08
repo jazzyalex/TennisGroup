@@ -1122,13 +1122,29 @@
     }
 
     /* Hero Stats */
+    .mobile-tournament-link {
+      display: block;
+      text-align: center;
+      padding: 8px 20px;
+      margin: 16px 20px 0;
+      font-size: 12px;
+      color: var(--mobile-text-secondary);
+      text-decoration: none;
+    }
+
+    .mobile-tournament-link:active {
+      opacity: 0.6;
+    }
+
     .mobile-hero-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       padding: 12px 20px;
-      margin: 16px 0;
+      margin: 0 20px 16px;
       background: var(--mobile-surface);
+      border-radius: 14px;
+      border: 1px solid var(--mobile-border);
     }
 
     .mobile-stat-card {
@@ -2335,6 +2351,11 @@
       </div>
     </header>
 
+    <!-- Tournament Name Link -->
+    <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/EAD0497A-559C-4765-9253-2BF848B4FC4A" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
+      Level 4 Closed - FDT Level 4 Junior 12s & 14s Singles Excellence
+    </a>
+
     <!-- Hero Stats -->
     <div class="mobile-hero-stats">
       <div class="mobile-stat-card">
@@ -2756,7 +2777,7 @@
             </div>
             <div class="mobile-player-ratings">
               ${player.utrUrl ? `
-                <a href="${player.utrUrl}" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
+                <a href="${player.utrUrl}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
                   <div class="mobile-rating-value">${player.utr}</div>
                   <div class="mobile-rating-label">UTR</div>
                 </a>
@@ -2767,7 +2788,7 @@
                 </div>
               `}
               ${player.uaid ? `
-                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
+                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
                   <div class="mobile-rating-value">${player.natRank}</div>
                   <div class="mobile-rating-label">Nat</div>
                 </a>
