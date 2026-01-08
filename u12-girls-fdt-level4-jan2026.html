@@ -1067,6 +1067,14 @@
       letter-spacing: 0.5px;
     }
 
+    .mobile-header-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      vertical-align: middle;
+      margin-right: -2px;
+    }
+
     .mobile-header-title {
       font-size: 20px;
       font-weight: 700;
@@ -2210,7 +2218,10 @@
   <div class="mobile-view">
     <!-- Mobile Header -->
     <header class="mobile-header">
-      <div class="mobile-header-badge">⚡ Level 4 Closed</div>
+      <div class="mobile-header-badge">
+        <img src="assets/tennis-report/favicon-256.png" alt="Logo" class="mobile-header-logo">
+        Level 4 Closed
+      </div>
       <h1 class="mobile-header-title" id="mobile-title"></h1>
       <div class="mobile-header-meta" id="mobile-meta"></div>
     </header>
