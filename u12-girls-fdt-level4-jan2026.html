@@ -1050,36 +1050,49 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 80px;
     }
 
     .mobile-header-top {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 8px;
+      gap: 12px;
+      position: relative;
     }
 
     .mobile-header-logo {
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       object-fit: contain;
       flex-shrink: 0;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .mobile-header-content {
+      flex: 1;
+      padding-left: 68px;
     }
 
     .mobile-header-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
       letter-spacing: 0.3px;
-      margin: 0;
+      margin: 0 0 4px 0;
       color: var(--mobile-accent);
       text-transform: uppercase;
-      flex: 1;
+      line-height: 1.2;
     }
 
     .mobile-header-meta {
       font-size: 13px;
       color: var(--mobile-text-secondary);
-      text-align: center;
+      line-height: 1.3;
     }
 
     /* Hero Stats */
@@ -2281,9 +2294,11 @@
     <header class="mobile-header">
       <div class="mobile-header-top">
         <img src="assets/tennis-report/favicon-256.png" alt="Logo" class="mobile-header-logo">
-        <h1 class="mobile-header-title" id="mobile-title"></h1>
+        <div class="mobile-header-content">
+          <h1 class="mobile-header-title" id="mobile-title"></h1>
+          <div class="mobile-header-meta" id="mobile-meta"></div>
+        </div>
       </div>
-      <div class="mobile-header-meta" id="mobile-meta"></div>
     </header>
 
     <!-- Hero Stats -->
@@ -2351,18 +2366,18 @@
     let allPlayers = [];
     let targetPlayer = null;
 
-    // Section rank mapping from rankings_results_v1.csv
+    // Section rank mapping from rankings_results_v1.csv (using title case to match normalized table)
     const SECTION_RANKS = {
-      'Ziva GADGIL': 5, 'Alexi LABRECQUE': 11, 'Harper WANG': 4, 'Margaret DORAN': 50,
-      'Zhiyan DUAN': 12, 'Camille KUNKEL': 16, 'Olivia LI': 14, 'Siya DALAL': 73,
-      'Misha KATARIA': 67, 'Summer STIRITZ': 22, 'Paneez SHAHAB': 42, 'Eileen LI': 38,
-      'Alexis MALAKHOVA': 54, 'Damayanthi ARUNKUMAR': 32, 'Noor DESAI': 33, 'Ruoyu SUN': 63,
-      'Megan LAI': 60, 'Annabel HU': 39, 'Stephanie LI': 123, 'Jenna YU': 30,
-      'Kateryna MOLOCHKO': 41, 'Elise WATT': 64, 'Bella WU': 48, 'Avaline WANG': 57,
-      'Aashna MODI': 89, 'Ellie WANG': 84, 'Amy LI': 56, 'Emma LI': 46,
-      'MAY SUN': 68, 'Zaira GADGIL': 47, 'Akshaya ASHOK': 80, 'Sania BHAMBANI': 87,
-      'Eliana MOGLEN': 65, 'Olivia WANG': 77, 'Liana CAI': 44, 'Cassia GARCIA': 96,
-      'Sanaia GOUDIE': 69, 'Katherine CAO': 134, 'Sarahana CHITAURE': 82
+      'Ziva Gadgil': 5, 'Alexi Labrecque': 11, 'Harper Wang': 4, 'Margaret Doran': 50,
+      'Zhiyan Duan': 12, 'Camille Kunkel': 16, 'Olivia Li': 14, 'Siya Dalal': 73,
+      'Misha Kataria': 67, 'Summer Stiritz': 22, 'Paneez Shahab': 42, 'Eileen Li': 38,
+      'Alexis Malakhova': 54, 'Damayanthi Arunkumar': 32, 'Noor Desai': 33, 'Ruoyu Sun': 63,
+      'Megan Lai': 60, 'Annabel Hu': 39, 'Stephanie Li': 123, 'Jenna Yu': 30,
+      'Kateryna Molochko': 41, 'Elise Watt': 64, 'Bella Wu': 48, 'Avaline Wang': 57,
+      'Aashna Modi': 89, 'Ellie Wang': 84, 'Amy Li': 56, 'Emma Li': 46,
+      'May Sun': 68, 'Zaira Gadgil': 47, 'Akshaya Ashok': 80, 'Sania Bhambani': 87,
+      'Eliana Moglen': 65, 'Olivia Wang': 77, 'Liana Cai': 44, 'Cassia Garcia': 96,
+      'Sanaia Goudie': 69, 'Katherine Cao': 134, 'Sarahana Chitaure': 82
     };
 
     // ========================================
