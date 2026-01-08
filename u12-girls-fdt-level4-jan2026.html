@@ -2276,9 +2276,9 @@
       <span class="mobile-section-title">All Players (<span id="mobile-player-count"></span>)</span>
     </div>
     <div class="mobile-sort-controls">
-      <button class="mobile-sort-btn active" data-sort="rank">Seed</button>
       <button class="mobile-sort-btn" data-sort="utr">UTR</button>
-      <button class="mobile-sort-btn" data-sort="natRank">Nat Rank</button>
+      <button class="mobile-sort-btn active" data-sort="natRank">Nat Rank</button>
+      <button class="mobile-sort-btn" data-sort="wtn">WTN</button>
     </div>
     <div class="mobile-player-list" id="mobile-player-list"></div>
     <button class="mobile-show-more" id="mobile-show-more">Show all players ↓</button>
@@ -2301,7 +2301,7 @@
     // MOBILE VIEW IMPLEMENTATION
     // ========================================
 
-    let currentSort = 'rank';
+    let currentSort = 'natRank';
     let isExpanded = false;
     let allPlayers = [];
     let targetPlayer = null;
@@ -2587,6 +2587,12 @@
         sorted.sort((a, b) => b.utr - a.utr); // Descending (higher is better)
       } else if (sortBy === 'natRank') {
         sorted.sort((a, b) => a.natRank - b.natRank); // Ascending (lower is better)
+      } else if (sortBy === 'wtn') {
+        sorted.sort((a, b) => {
+          const aWtn = parseFloat(a.wtn) || 999;
+          const bWtn = parseFloat(b.wtn) || 999;
+          return aWtn - bWtn; // Ascending (lower is better)
+        });
       }
       
       return sorted;
