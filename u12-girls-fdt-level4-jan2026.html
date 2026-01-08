@@ -1001,21 +1001,42 @@
        ======================================== */
     
     /* CSS Variables for Mobile */
+    /* Mobile Theme Variables - Light Mode (Default) */
     :root {
-      --mobile-bg: #0a0a0f;
-      --mobile-surface: #16161e;
-      --mobile-surface-elevated: #1e1e28;
-      --mobile-border: #2a2a38;
-      --mobile-text-primary: #f5f5f7;
-      --mobile-text-secondary: #8e8e93;
-      --mobile-text-muted: #636366;
+      --mobile-bg: #f5f5f7;
+      --mobile-surface: #ffffff;
+      --mobile-surface-elevated: #f8f8f8;
+      --mobile-border: #d1d1d6;
+      --mobile-text-primary: #000000;
+      --mobile-text-secondary: #6e6e73;
+      --mobile-text-muted: #8e8e93;
       --mobile-accent: #ff9f0a;
-      --mobile-accent-soft: rgba(255, 159, 10, 0.15);
-      --mobile-green: #30d158;
-      --mobile-green-soft: rgba(48, 209, 88, 0.15);
-      --mobile-blue: #0a84ff;
-      --mobile-blue-soft: rgba(10, 132, 255, 0.15);
-      --mobile-purple: #bf5af2;
+      --mobile-accent-soft: rgba(255, 159, 10, 0.12);
+      --mobile-green: #34c759;
+      --mobile-green-soft: rgba(52, 199, 89, 0.12);
+      --mobile-blue: #007aff;
+      --mobile-blue-soft: rgba(0, 122, 255, 0.12);
+      --mobile-purple: #af52de;
+    }
+
+    /* Mobile Theme Variables - Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --mobile-bg: #0a0a0f;
+        --mobile-surface: #16161e;
+        --mobile-surface-elevated: #1e1e28;
+        --mobile-border: #2a2a38;
+        --mobile-text-primary: #f5f5f7;
+        --mobile-text-secondary: #8e8e93;
+        --mobile-text-muted: #636366;
+        --mobile-accent: #ff9f0a;
+        --mobile-accent-soft: rgba(255, 159, 10, 0.15);
+        --mobile-green: #30d158;
+        --mobile-green-soft: rgba(48, 209, 88, 0.15);
+        --mobile-blue: #0a84ff;
+        --mobile-blue-soft: rgba(10, 132, 255, 0.15);
+        --mobile-purple: #bf5af2;
+      }
     }
 
     /* Default: Hide mobile, show desktop */
