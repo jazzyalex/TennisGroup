@@ -8,330 +8,548 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
   <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
     :root {
-      --blue: #4472C4;
-      --dark: #2c3e50;
-      --muted: #7f8c8d;
-      --row-alt: #f8fafc;
-      --bg: #f5f5f5;
-      --chip-local: #d1f4e0;
-      --chip-local-text: #0d6832;
-      --chip-road: #fef3c7;
-      --chip-road-text: #78350f;
-      --chip-flight: #e0e7ff;
-      --chip-flight-text: #3730a3;
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --accent-local: #10b981;
+      --accent-road: #f59e0b;
+      --accent-flight: #6366f1;
+      --accent-national: #8b5cf6;
     }
 
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --border: rgba(255,255,255,0.08);
+        --border-subtle: rgba(255,255,255,0.04);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      padding: 32px 20px;
-      background-color: var(--bg);
-      border-top: 4px solid var(--blue);
-      color: var(--dark);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 32px;
       line-height: 1.5;
     }
 
-    .report-header {
-      max-width: 95%;
-      margin: 0 auto 32px;
-      text-align: center;
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .accent-bar {
+      width: 8px;
+      height: 32px;
+      background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%);
+      border-radius: 4px;
     }
 
     h1 {
-      margin: 0 0 8px;
-      font-size: 2.2em;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
       font-weight: 700;
-      color: var(--dark);
-      letter-spacing: -0.02em;
+      margin: 0;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .year-badge {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
     }
 
     .subtitle {
-      color: #64748b;
-      font-size: 15px;
-      margin: 0;
-      line-height: 1.6;
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-left: 20px;
     }
 
-    .filters {
-      max-width: 95%;
-      margin: 20px auto 16px;
+    /* Stats Row */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      background: white;
-      border: 1px solid #e2e6ef;
-      border-radius: 10px;
-      padding: 20px 24px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      gap: 4px;
     }
 
-    .filter-group {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+    .stat-card.local { border-color: rgba(16, 185, 129, 0.3); }
+    .stat-card.road { border-color: rgba(245, 158, 11, 0.3); }
+    .stat-card.flight { border-color: rgba(99, 102, 241, 0.3); }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .stat-card.local .stat-number { color: var(--accent-local); }
+    .stat-card.road .stat-number { color: var(--accent-road); }
+    .stat-card.flight .stat-number { color: var(--accent-flight); }
+
+    .stat-label {
+      color: var(--text-secondary);
       font-size: 13px;
     }
 
-    .filter-group label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 500;
-      color: var(--dark);
-      cursor: pointer;
-      padding: 6px 0;
-    }
-
-    .filter-group label:hover {
-      color: var(--blue);
-    }
-
-    .filter-group > span {
-      font-weight: 600;
-      color: var(--dark);
-      margin-right: 4px;
-    }
-
-    .search-input {
-      padding: 10px 14px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 14px;
-      width: 300px;
-      transition: border-color 0.2s;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.1);
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      background: #e5e7eb;
-      color: #374151;
-    }
-
-    .chip.local {
-      background: var(--chip-local);
-      color: var(--chip-local-text);
-    }
-
-    .chip.road {
-      background: var(--chip-road);
-      color: var(--chip-road-text);
-    }
-
-    .chip.flight {
-      background: var(--chip-flight);
-      color: var(--chip-flight-text);
-    }
-
-    .meta {
-      max-width: 95%;
-      margin: 16px auto 12px;
+    /* Filter Bar */
+    .filter-bar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 13px;
-      color: var(--muted);
-      padding: 0 4px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .meta > div {
+    .search-container {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .search-input {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px 12px 44px;
+      font-size: 14px;
+      color: var(--text-primary);
+      width: 320px;
+      outline: none;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .search-input:focus {
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .filter-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 13px;
       font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      user-select: none;
+      background: var(--bg-tertiary);
     }
 
-    .table-wrap {
-      max-width: 95%;
-      margin: 0 auto 24px;
-      overflow-x: auto;
-      background: white;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
+    .filter-chip.active {
+      background: var(--bg-secondary);
+      border-color: var(--border);
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: white;
-      table-layout: auto;
+    .filter-chip:not(.active) {
+      opacity: 0.5;
     }
 
-    th {
-      background-color: var(--blue);
-      color: white;
-      padding: 14px 16px;
-      text-align: left;
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 0.02em;
-      border-right: 1px solid rgba(255,255,255,0.2);
-      position: sticky;
-      top: 0;
-      z-index: 1;
+    .filter-chip:hover {
+      opacity: 1;
     }
 
-    th:last-child { border-right: none; }
-
-    td {
-      padding: 14px 16px;
-      font-size: 13px;
-      border-bottom: 1px solid #e5e7eb;
-      vertical-align: middle;
-      white-space: nowrap;
-      color: var(--dark);
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
     }
 
-    td:nth-child(1) { /* Dates - lighter */
-      color: var(--muted);
-      font-size: 12px;
+    .divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
     }
 
-    td:nth-child(2) { /* Level - bold and clickable */
-      font-weight: 600;
-      color: var(--blue);
+    /* Table Container */
+    .table-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
     }
 
-    td:nth-child(4), td:nth-child(5) { /* City, Site - allow wrapping */
-      white-space: normal;
-      max-width: 200px;
-    }
-
-    td:nth-child(5) { /* Site - lighter */
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    tbody tr:nth-child(even) { background-color: var(--row-alt); }
-    tbody tr:hover { background-color: #f1f5f9; }
-
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
+    .table-header {
+      display: grid;
+      grid-template-columns: 140px 1fr 100px 140px 1fr 100px 100px 100px;
+      padding: 12px 24px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      background: #e0e7ff;
-      color: #4338ca;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    .badge.sectional {
-      background: #dbeafe;
-      color: #1e40af;
+    .month-group {
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .badge.national {
-      background: #fce7f3;
-      color: #be185d;
+    .month-group:last-child {
+      border-bottom: none;
     }
 
-    .notes {
-      max-width: 95%;
-      margin: 16px auto 24px;
+    .month-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      background: var(--bg-tertiary);
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .month-header:hover {
+      background: var(--bg-secondary);
+    }
+
+    .chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-secondary);
+    }
+
+    .chevron.collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .month-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .count-badge {
+      background: var(--bg-secondary);
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: normal;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .month-rows {
+      max-height: 10000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .month-rows.collapsed {
+      max-height: 0;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 100px 140px 1fr 100px 100px 100px;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.15s ease;
+      cursor: default;
+    }
+
+    .table-row:hover {
+      background: var(--bg-tertiary);
+      border-left: 3px solid #6366f1;
+      margin-left: -3px;
+      padding-left: 21px;
+    }
+
+    .cell-dates {
+      color: var(--text-secondary);
       font-size: 13px;
-      color: #64748b;
-      padding: 12px 16px;
-      background: #f8fafc;
-      border-radius: 8px;
-      border-left: 3px solid var(--blue);
     }
 
-    .link {
-      color: var(--blue);
+    .cell-tournament {
+      font-weight: 500;
+      font-size: 14px;
+      padding-right: 16px;
+    }
+
+    .cell-tournament a {
+      color: var(--text-primary);
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color 0.2s;
     }
 
-    .link:hover {
-      border-bottom-color: var(--blue);
+    .cell-tournament a:hover {
+      border-bottom-color: #6366f1;
     }
 
-    input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-      accent-color: var(--blue);
+    .cell-divisions {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-block;
     }
 
-    .tight { white-space: nowrap; }
+    .cell-city {
+      font-size: 13px;
+    }
+
+    .cell-venue {
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding-right: 16px;
+    }
+
+    .cell-draw {
+      font-size: 13px;
+      font-family: monospace;
+    }
+
+    .type-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .type-badge.national {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+      color: #a78bfa;
+    }
+
+    .type-badge.sectional {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+    }
+
+    .proximity-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .proximity-indicator.local {
+      background: rgba(16, 185, 129, 0.08);
+      color: var(--accent-local);
+    }
+
+    .proximity-indicator.road {
+      background: rgba(245, 158, 11, 0.08);
+      color: var(--accent-road);
+    }
+
+    .proximity-indicator.flight {
+      background: rgba(99, 102, 241, 0.08);
+      color: var(--accent-flight);
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1200px) {
+      .table-header,
+      .table-row {
+        grid-template-columns: 120px 1fr 90px 120px 1fr 90px 90px 90px;
+      }
+    }
 
     @media (max-width: 768px) {
-      body { padding: 12px; }
-      h1 { font-size: 1.6em; }
-      .filters { flex-direction: column; align-items: stretch; }
-      .filter-group { justify-content: flex-start; }
-      .search-input { width: 100%; }
-      .table-wrap { max-width: 100%; }
-      td { white-space: normal; }
+      body {
+        padding: 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      .table-header,
+      .table-row {
+        min-width: 1000px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="report-header">
-    <h1>USTA G12 Tournaments 2025-2026 (NorCal + National)</h1>
-    <p class="subtitle">Levels 2-5 (NorCal Sectional) and Levels 1-4 (National), filtered to G12. Distances from Los Altos, CA.</p>
-  </div>
-
-  <div class="filters">
-    <div class="filter-group">
-      <span>Search:</span>
-      <input id="search" class="search-input" type="text" placeholder="City, level, site...">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div class="accent-bar"></div>
+        <h1>USTA G12 Tournaments</h1>
+        <span class="year-badge">2025-2026</span>
+      </div>
+      <p class="subtitle">NorCal Sectional (Levels 2-5) + National (Levels 1-4) • Distances from Los Altos, CA</p>
     </div>
-    <div class="filter-group">
-      <span>Tournament Type:</span>
-      <label><input type="checkbox" id="show-sectional" checked> Sectional</label>
-      <label><input type="checkbox" id="show-national" checked> National</label>
-      <label><input type="checkbox" id="show-doubles"> Doubles only</label>
+
+    <!-- Stats Row -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-number" id="stat-total">0</span>
+        <span class="stat-label">Total Tournaments</span>
+      </div>
+      <div class="stat-card local">
+        <span class="stat-number" id="stat-local">0</span>
+        <span class="stat-label">Local (≤75mi)</span>
+      </div>
+      <div class="stat-card road">
+        <span class="stat-number" id="stat-road">0</span>
+        <span class="stat-label">Road Trip (≤500mi)</span>
+      </div>
+      <div class="stat-card flight">
+        <span class="stat-number" id="stat-flight">0</span>
+        <span class="stat-label">Flight (>500mi)</span>
+      </div>
     </div>
-    <div class="filter-group">
-      <span>Distance from Los Altos:</span>
-      <label><input type="checkbox" id="filter-local" checked> Local (≤75mi)</label>
-      <label><input type="checkbox" id="filter-road" checked> Road trip (≤500mi)</label>
-      <label><input type="checkbox" id="filter-flight" checked> Flight (>500mi)</label>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <div class="search-container">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="text" id="search" class="search-input" placeholder="Search tournaments...">
+      </div>
+
+      <div class="filter-chips">
+        <div class="filter-chip active" id="chip-sectional">
+          <span class="chip-dot" style="background: #64748b"></span>
+          Sectional
+        </div>
+        <div class="filter-chip active" id="chip-national">
+          <span class="chip-dot" style="background: #8b5cf6"></span>
+          National
+        </div>
+        <div class="divider"></div>
+        <div class="filter-chip active" id="chip-local">
+          <span class="chip-dot" style="background: #10b981"></span>
+          Local
+        </div>
+        <div class="filter-chip active" id="chip-road">
+          <span class="chip-dot" style="background: #f59e0b"></span>
+          Road Trip
+        </div>
+        <div class="filter-chip active" id="chip-flight">
+          <span class="chip-dot" style="background: #6366f1"></span>
+          Flight
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="meta">
-    <div id="count"></div>
-    <div id="proximity-counts"></div>
-  </div>
+    <!-- Table -->
+    <div class="table-container">
+      <div class="table-header">
+        <span>Dates</span>
+        <span>Tournament</span>
+        <span>Divisions</span>
+        <span>City</span>
+        <span>Venue</span>
+        <span>Draw</span>
+        <span>Type</span>
+        <span>Distance</span>
+      </div>
+      <div id="table-body"></div>
+    </div>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Dates</th>
-          <th class="tight">Level</th>
-          <th>Divisions</th>
-          <th>City</th>
-          <th>Site</th>
-          <th>Draw</th>
-          <th>Doubles Only</th>
-          <th>National</th>
-          <th>Miles</th>
-          <th>Proximity</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-
-  <div class="notes">
-    Driving distances from Los Altos, CA. Tournaments categorized as Local (≤75mi), Road Trip (≤500mi), or Flight (>500mi).
+    <div class="footer">
+      Driving distances from Los Altos, CA • Last updated January 2026
+    </div>
   </div>
 
   <script id="csv-data" type="text/plain">Month,Date(s),# of Days,Home Page,Level,Doubles Only,National,Divisions,B18,B16,B14,B12,G18,G16,G14,G12,Singles Draw,Doubles Draw,Organization,Tournament Director,Primary Site,City,Notes
@@ -438,7 +656,9 @@ November,November 30,1,,Level 2,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
 December,December 7-13,7,,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: SE,64: SE,,Robert Gomez,Biltmore Tennis Center,"Coral Gables, FL",Surface: H
 December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: Compass,64: SE,,Brian Notis,University of Texas - San Antonio,"San Antonio, TX",Surface: H
 </script>
+
   <script>
+    // Parse CSV
     const csvNode = document.getElementById('csv-data');
     const rawCsv = csvNode ? csvNode.textContent.trim() : '';
 
@@ -485,10 +705,6 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       return rows;
     }
 
-    if (!rawCsv) {
-      document.getElementById('count').textContent = 'No data loaded.';
-    }
-
     const rows = parseCsv(rawCsv);
     const header = rows[0];
     const data = rows.slice(1).map(row => {
@@ -499,107 +715,46 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       return obj;
     });
 
-    // Driving miles from Los Altos, CA
+    // Distance lookup
     const drivingMilesLookup = {
-      // California - Local/Regional
       'San Jose': 12, 'Orinda': 30, 'Larkspur': 35, 'Walnut Creek': 35,
       'Soquel': 40, 'Fairfield': 55, 'Manteca': 65, 'Stockton': 70,
       'Davis': 110, 'Fair Oaks': 115, 'Sacramento': 115, 'Roseville': 125,
       'Clovis': 170, 'Fresno': 170,
-      // California - SoCal
       'Irvine': 365, 'Lakewood': 370, 'Long Beach': 370,
       'Anaheim': 380, 'Claremont': 380, 'Indian Wells': 440,
-      // Southwest
       'Las Vegas': 570, 'Tempe': 750, 'Tucson': 770,
-      // Texas
       'Austin': 1700, 'San Antonio': 1400, 'Spring': 1800, 'Tulsa': 1600,
-      // Southeast
       'Birmingham': 2200, 'Marietta': 2500, 'Peachtree Corners': 2500,
       'Rome': 2500, 'Greensboro': 2700, 'Cayce': 2700, 'Hilton Head': 2800,
       'Ridgeland': 2100, 'Memphis': 2000, 'New Orleans': 1900, 'Lafayette': 1900,
       'Naples': 2900, 'Bradenton': 2800, 'Seminole': 2800, 'Boca Raton': 2900,
       'Boynton Beach': 2900, 'Coral Gables': 3000, 'College Grove': 2200,
-      // Midwest
       'Grand Rapids': 2300, 'Hudsonville': 2300, 'Evansville': 2000,
       'Rochester': 2000, 'Omaha': 1700,
-      // Northeast
       'Glen Cove': 2900, 'Medford': 3000, 'Manchester': 3100, 'Annapolis': 2800,
-      // Colorado
       'Boulder': 1200
     };
 
-    const memoryStore = new Map();
-    const storage = (() => {
-      try {
-        const testKey = '__drive_hours_test__';
-        window.localStorage.setItem(testKey, '1');
-        window.localStorage.removeItem(testKey);
-        return window.localStorage;
-      } catch (err) {
-        return null;
-      }
-    })();
-
-    function getStoredValue(key) {
-      if (storage) {
-        return storage.getItem(key);
-      }
-      return memoryStore.get(key) || '';
-    }
-
-    function setStoredValue(key, value) {
-      if (storage) {
-        storage.setItem(key, value);
-        return;
-      }
-      if (value === '') {
-        memoryStore.delete(key);
-      } else {
-        memoryStore.set(key, value);
-      }
-    }
-
-    function removeStoredValue(key) {
-      if (storage) {
-        storage.removeItem(key);
-        return;
-      }
-      memoryStore.delete(key);
-    }
-
-    function rowId(row) {
-      return [
-        row['National'],
-        row['Date(s)'],
-        row['Level'],
-        row['Divisions'],
-        row['City'],
-        row['Primary Site']
-      ].join('|');
-    }
-
     function getDrivingMiles(row) {
-      // Use lookup table for default values
       const city = row['City'].replace(/,.*$/, '').trim();
       return drivingMilesLookup[city] || '';
     }
 
     function proximityFromMiles(miles) {
       const m = parseFloat(miles);
-      if (Number.isNaN(m) || m === '') return 'Flight';
-      if (m <= 75) return 'Local';
-      if (m <= 500) return 'Road Trip';
-      return 'Flight';
+      if (Number.isNaN(m) || m === '') return 'flight';
+      if (m <= 75) return 'local';
+      if (m <= 500) return 'road';
+      return 'flight';
     }
 
     function parseDate(month, dateStr) {
-      // Parse month name to number
       const months = {
         'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
         'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
       };
 
-      // Handle dates with month name in dateStr (e.g., "February 7-9")
       let monthNum = months[month];
       let dateStrClean = dateStr;
 
@@ -613,12 +768,10 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 
       if (monthNum === undefined) return null;
 
-      // Extract first date number from dateStr (e.g., "10-11; 17-18" -> 10, "7-9" -> 7)
       const match = dateStrClean.match(/\d+/);
       if (!match) return null;
 
       const day = parseInt(match[0]);
-      // Use 2025 for Jan-July, 2026 for Aug-December to handle year transition
       const year = monthNum >= 7 ? 2026 : 2025;
       return new Date(year, monthNum, day);
     }
@@ -626,137 +779,199 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
     function formatDates(row) {
       const month = row['Month'];
       const dates = row['Date(s)'];
-
-      // Check if dates already contains the month name (national tournaments)
       if (dates.includes(month)) {
         return dates;
       }
       return month + ' ' + dates;
     }
 
+    // State
     const filters = {
       search: '',
-      showSectional: true,
-      showNational: true,
-      showDoubles: false,
+      sectional: true,
+      national: true,
       local: true,
       road: true,
       flight: true
     };
 
-    const tbody = document.getElementById('tbody');
-    const countEl = document.getElementById('count');
-    const proximityCountsEl = document.getElementById('proximity-counts');
+    const expandedMonths = new Set();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    // Initialize all months as expanded
+    months.forEach(m => expandedMonths.add(m));
+
+    // Proximity config
+    const proximityConfig = {
+      local: { icon: '◉', class: 'local' },
+      road: { icon: '◎', class: 'road' },
+      flight: { icon: '✈', class: 'flight' }
+    };
+
+    function toggleMonth(month) {
+      if (expandedMonths.has(month)) {
+        expandedMonths.delete(month);
+      } else {
+        expandedMonths.add(month);
+      }
+      render();
+    }
 
     function render() {
-      try {
-        const search = filters.search.toLowerCase();
-        let localCount = 0;
-        let roadCount = 0;
-        let flightCount = 0;
-        let shown = 0;
+      const search = filters.search.toLowerCase();
 
-        tbody.innerHTML = '';
+      // Sort data by date
+      const sortedData = [...data].sort((a, b) => {
+        const dateA = parseDate(a['Month'], a['Date(s)']);
+        const dateB = parseDate(b['Month'], b['Date(s)']);
+        if (!dateA) return 1;
+        if (!dateB) return -1;
+        return dateA - dateB;
+      });
 
-        // Sort data by date
-        const sortedData = [...data].sort((a, b) => {
-          const dateA = parseDate(a['Month'], a['Date(s)']);
-          const dateB = parseDate(b['Month'], b['Date(s)']);
-          if (!dateA) return 1;
-          if (!dateB) return -1;
-          return dateA - dateB;
-        });
+      // Filter data
+      const filteredData = sortedData.filter(row => {
+        const isNational = row['National'] === 'TRUE';
+        if (isNational && !filters.national) return false;
+        if (!isNational && !filters.sectional) return false;
 
-        sortedData.forEach(row => {
+        const combined = [
+          row['Month'], row['Date(s)'], row['Level'], row['Divisions'], row['City'],
+          row['Primary Site'], row['Tournament Director'], row['Notes']
+        ].join(' ').toLowerCase();
+        if (search && !combined.includes(search)) return false;
+
+        const miles = getDrivingMiles(row);
+        const proximity = proximityFromMiles(miles);
+        if (!filters[proximity]) return false;
+
+        return true;
+      });
+
+      // Group by month
+      const groupedByMonth = {};
+      filteredData.forEach(row => {
+        const month = row['Month'];
+        if (!groupedByMonth[month]) groupedByMonth[month] = [];
+        groupedByMonth[month].push(row);
+      });
+
+      // Calculate stats
+      let localCount = 0, roadCount = 0, flightCount = 0;
+      filteredData.forEach(row => {
+        const p = proximityFromMiles(getDrivingMiles(row));
+        if (p === 'local') localCount++;
+        else if (p === 'road') roadCount++;
+        else flightCount++;
+      });
+
+      // Update stats
+      document.getElementById('stat-total').textContent = filteredData.length;
+      document.getElementById('stat-local').textContent = localCount;
+      document.getElementById('stat-road').textContent = roadCount;
+      document.getElementById('stat-flight').textContent = flightCount;
+
+      // Render table
+      const tableBody = document.getElementById('table-body');
+      tableBody.innerHTML = '';
+
+      months.forEach(month => {
+        const monthData = groupedByMonth[month];
+        if (!monthData || monthData.length === 0) return;
+
+        const isExpanded = expandedMonths.has(month);
+
+        // Month group container
+        const monthGroup = document.createElement('div');
+        monthGroup.className = 'month-group';
+
+        // Month header
+        const monthHeader = document.createElement('div');
+        monthHeader.className = 'month-header';
+        monthHeader.onclick = () => toggleMonth(month);
+        monthHeader.innerHTML = `
+          <svg class="chevron ${!isExpanded ? 'collapsed' : ''}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+          <span class="month-name">${month}</span>
+          <span class="count-badge">${monthData.length} tournament${monthData.length !== 1 ? 's' : ''}</span>
+        `;
+        monthGroup.appendChild(monthHeader);
+
+        // Month rows container
+        const monthRows = document.createElement('div');
+        monthRows.className = `month-rows ${!isExpanded ? 'collapsed' : ''}`;
+
+        monthData.forEach(row => {
           const isNational = row['National'] === 'TRUE';
-          if (isNational && !filters.showNational) return;
-          if (!isNational && !filters.showSectional) return;
-          if (filters.showDoubles && row['Doubles Only'] !== 'TRUE') return;
-
-          const combined = [
-            row['Month'], row['Date(s)'], row['Level'], row['Divisions'], row['City'],
-            row['Primary Site'], row['Tournament Director'], row['Notes']
-          ].join(' ').toLowerCase();
-          if (search && !combined.includes(search)) return;
-
           const miles = getDrivingMiles(row);
           const proximity = proximityFromMiles(miles);
-          if (proximity === 'Local' && !filters.local) return;
-          if (proximity === 'Road Trip' && !filters.road) return;
-          if (proximity === 'Flight' && !filters.flight) return;
-
-          if (proximity === 'Local') localCount++;
-          if (proximity === 'Road Trip') roadCount++;
-          if (proximity === 'Flight') flightCount++;
-
-          shown++;
+          const config = proximityConfig[proximity];
 
           // Check if Home Page is a valid URL
           const homePage = row['Home Page'] || '';
           const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
           const levelHtml = isValidUrl
-            ? '<a class="link" href="' + homePage + '" target="_blank" rel="noopener">' + row['Level'] + '</a>'
+            ? `<a href="${homePage}" target="_blank" rel="noopener">${row['Level']}</a>`
             : row['Level'];
 
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${formatDates(row)}</td>
-            <td class="tight">${levelHtml}</td>
-            <td>${row['Divisions']}</td>
-            <td>${row['City']}</td>
-            <td>${row['Primary Site']}</td>
-            <td>${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</td>
-            <td>${row['Doubles Only'] === 'TRUE' ? 'Yes' : 'No'}</td>
-            <td><span class="badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></td>
-            <td>${miles}</td>
-            <td><span class="chip ${proximity === 'Local' ? 'local' : (proximity === 'Road Trip' ? 'road' : 'flight')}">${proximity}</span></td>
+          const tableRow = document.createElement('div');
+          tableRow.className = 'table-row';
+          tableRow.innerHTML = `
+            <span class="cell-dates">${formatDates(row)}</span>
+            <span class="cell-tournament">${levelHtml}</span>
+            <span class="cell-divisions">${row['Divisions']}</span>
+            <span class="cell-city">${row['City']}</span>
+            <span class="cell-venue">${row['Primary Site']}</span>
+            <span class="cell-draw">${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</span>
+            <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
+            <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
           `;
-          tbody.appendChild(tr);
+          monthRows.appendChild(tableRow);
         });
 
-        countEl.textContent = `Showing ${shown} tournaments`;
-        proximityCountsEl.textContent = `Local: ${localCount} | Road trip: ${roadCount} | Flight: ${flightCount}`;
-      } catch (err) {
-        countEl.textContent = 'Error rendering data. Check console for details.';
-        console.error(err);
-      }
+        monthGroup.appendChild(monthRows);
+        tableBody.appendChild(monthGroup);
+      });
     }
 
+    // Event listeners
     document.getElementById('search').addEventListener('input', (e) => {
       filters.search = e.target.value || '';
       render();
     });
 
-    document.getElementById('show-sectional').addEventListener('change', (e) => {
-      filters.showSectional = e.target.checked;
+    document.getElementById('chip-sectional').addEventListener('click', () => {
+      filters.sectional = !filters.sectional;
+      document.getElementById('chip-sectional').classList.toggle('active');
       render();
     });
 
-    document.getElementById('show-national').addEventListener('change', (e) => {
-      filters.showNational = e.target.checked;
+    document.getElementById('chip-national').addEventListener('click', () => {
+      filters.national = !filters.national;
+      document.getElementById('chip-national').classList.toggle('active');
       render();
     });
 
-    document.getElementById('show-doubles').addEventListener('change', (e) => {
-      filters.showDoubles = e.target.checked;
+    document.getElementById('chip-local').addEventListener('click', () => {
+      filters.local = !filters.local;
+      document.getElementById('chip-local').classList.toggle('active');
       render();
     });
 
-    document.getElementById('filter-local').addEventListener('change', (e) => {
-      filters.local = e.target.checked;
+    document.getElementById('chip-road').addEventListener('click', () => {
+      filters.road = !filters.road;
+      document.getElementById('chip-road').classList.toggle('active');
       render();
     });
 
-    document.getElementById('filter-road').addEventListener('change', (e) => {
-      filters.road = e.target.checked;
+    document.getElementById('chip-flight').addEventListener('click', () => {
+      filters.flight = !filters.flight;
+      document.getElementById('chip-flight').classList.toggle('active');
       render();
     });
 
-    document.getElementById('filter-flight').addEventListener('change', (e) => {
-      filters.flight = e.target.checked;
-      render();
-    });
-
+    // Initial render
     render();
   </script>
 </body>
