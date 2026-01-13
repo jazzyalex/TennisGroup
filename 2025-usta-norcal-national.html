@@ -354,7 +354,8 @@ December,December 7-13,7,,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE
 December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: Compass,64: SE,,Brian Notis,University of Texas - San Antonio,"San Antonio, TX",Surface: H
 </script>
   <script>
-    const rawCsv = document.getElementById('csv-data').textContent.trim();
+    const csvNode = document.getElementById('csv-data');
+    const rawCsv = csvNode ? csvNode.textContent.trim() : '';
 
     function parseCsv(text) {
       const rows = [];
@@ -400,6 +401,10 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       return rows;
     }
 
+    if (!rawCsv) {
+      document.getElementById('count').textContent = 'No data loaded.';
+    }
+
     const rows = parseCsv(rawCsv);
     const header = rows[0];
     const data = rows.slice(1).map(row => {
@@ -409,6 +414,45 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       });
       return obj;
     });
+
+    const memoryStore = new Map();
+    const storage = (() => {
+      try {
+        const testKey = '__drive_hours_test__';
+        window.localStorage.setItem(testKey, '1');
+        window.localStorage.removeItem(testKey);
+        return window.localStorage;
+      } catch (err) {
+        return null;
+      }
+    })();
+
+    function getStoredValue(key) {
+      if (storage) {
+        return storage.getItem(key);
+      }
+      return memoryStore.get(key) || '';
+    }
+
+    function setStoredValue(key, value) {
+      if (storage) {
+        storage.setItem(key, value);
+        return;
+      }
+      if (value === '') {
+        memoryStore.delete(key);
+      } else {
+        memoryStore.set(key, value);
+      }
+    }
+
+    function removeStoredValue(key) {
+      if (storage) {
+        storage.removeItem(key);
+        return;
+      }
+      memoryStore.delete(key);
+    }
 
     function rowId(row) {
       return [
@@ -423,7 +467,7 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 
     function getDriveHours(row) {
       const key = 'driveHours:' + rowId(row);
-      const saved = localStorage.getItem(key);
+      const saved = getStoredValue(key);
       if (saved === null || saved === '') return '';
       return saved;
     }
@@ -431,9 +475,9 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
     function setDriveHours(row, value) {
       const key = 'driveHours:' + rowId(row);
       if (value === '') {
-        localStorage.removeItem(key);
+        removeStoredValue(key);
       } else {
-        localStorage.setItem(key, value);
+        setStoredValue(key, value);
       }
     }
 
@@ -460,73 +504,78 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
     const proximityCountsEl = document.getElementById('proximity-counts');
 
     function render() {
-      const search = filters.search.toLowerCase();
-      let localCount = 0;
-      let roadCount = 0;
-      let flightCount = 0;
-      let shown = 0;
+      try {
+        const search = filters.search.toLowerCase();
+        let localCount = 0;
+        let roadCount = 0;
+        let flightCount = 0;
+        let shown = 0;
 
-      tbody.innerHTML = '';
+        tbody.innerHTML = '';
 
-      data.forEach(row => {
-        const isNational = row['National'] === 'TRUE';
-        if (isNational && !filters.showNational) return;
-        if (!isNational && !filters.showSectional) return;
-        if (filters.showDoubles && row['Doubles Only'] !== 'TRUE') return;
+        data.forEach(row => {
+          const isNational = row['National'] === 'TRUE';
+          if (isNational && !filters.showNational) return;
+          if (!isNational && !filters.showSectional) return;
+          if (filters.showDoubles && row['Doubles Only'] !== 'TRUE') return;
 
-        const combined = [
-          row['Month'], row['Date(s)'], row['Level'], row['Divisions'], row['City'],
-          row['Primary Site'], row['Tournament Director'], row['Notes']
-        ].join(' ').toLowerCase();
-        if (search && !combined.includes(search)) return;
+          const combined = [
+            row['Month'], row['Date(s)'], row['Level'], row['Divisions'], row['City'],
+            row['Primary Site'], row['Tournament Director'], row['Notes']
+          ].join(' ').toLowerCase();
+          if (search && !combined.includes(search)) return;
 
-        const hours = getDriveHours(row);
-        const proximity = proximityFromHours(hours);
-        if (proximity === 'Local' && !filters.local) return;
-        if (proximity === 'Road Trip' && !filters.road) return;
-        if (proximity === 'Flight' && !filters.flight) return;
+          const hours = getDriveHours(row);
+          const proximity = proximityFromHours(hours);
+          if (proximity === 'Local' && !filters.local) return;
+          if (proximity === 'Road Trip' && !filters.road) return;
+          if (proximity === 'Flight' && !filters.flight) return;
 
-        if (proximity === 'Local') localCount++;
-        if (proximity === 'Road Trip') roadCount++;
-        if (proximity === 'Flight') flightCount++;
+          if (proximity === 'Local') localCount++;
+          if (proximity === 'Road Trip') roadCount++;
+          if (proximity === 'Flight') flightCount++;
 
-        shown++;
+          shown++;
 
-        const linkHtml = row['Home Page']
-          ? '<a class="link" href="' + row['Home Page'] + '" target="_blank" rel="noopener">Link</a>'
-          : '';
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${row['Month']}</td>
-          <td>${row['Date(s)']}</td>
-          <td class="tight">${row['Level']}</td>
-          <td>${row['Divisions']}</td>
-          <td>${row['City']}</td>
-          <td>${row['Primary Site']}</td>
-          <td>${row['Tournament Director']}</td>
-          <td>${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</td>
-          <td>${row['Doubles Only'] === 'TRUE' ? 'Yes' : 'No'}</td>
-          <td><span class="badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></td>
-          <td><input class="input-hours" type="number" min="0" step="0.1" value="${hours}" data-row-id="${rowId(row)}" placeholder="hrs"></td>
-          <td><span class="chip ${proximity === 'Local' ? 'local' : (proximity === 'Road Trip' ? 'road' : 'flight')}">${proximity}</span></td>
-          <td>${linkHtml}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      countEl.textContent = `Showing ${shown} tournaments`;
-      proximityCountsEl.textContent = `Local: ${localCount} | Road trip: ${roadCount} | Flight: ${flightCount}`;
-
-      tbody.querySelectorAll('.input-hours').forEach(input => {
-        input.addEventListener('change', (event) => {
-          const value = event.target.value;
-          const id = event.target.getAttribute('data-row-id');
-          const row = data.find(item => rowId(item) === id);
-          if (!row) return;
-          setDriveHours(row, value);
-          render();
+          const linkHtml = row['Home Page']
+            ? '<a class="link" href="' + row['Home Page'] + '" target="_blank" rel="noopener">Link</a>'
+            : '';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${row['Month']}</td>
+            <td>${row['Date(s)']}</td>
+            <td class="tight">${row['Level']}</td>
+            <td>${row['Divisions']}</td>
+            <td>${row['City']}</td>
+            <td>${row['Primary Site']}</td>
+            <td>${row['Tournament Director']}</td>
+            <td>${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</td>
+            <td>${row['Doubles Only'] === 'TRUE' ? 'Yes' : 'No'}</td>
+            <td><span class="badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></td>
+            <td><input class="input-hours" type="number" min="0" step="0.1" value="${hours}" data-row-id="${rowId(row)}" placeholder="hrs"></td>
+            <td><span class="chip ${proximity === 'Local' ? 'local' : (proximity === 'Road Trip' ? 'road' : 'flight')}">${proximity}</span></td>
+            <td>${linkHtml}</td>
+          `;
+          tbody.appendChild(tr);
         });
-      });
+
+        countEl.textContent = `Showing ${shown} tournaments`;
+        proximityCountsEl.textContent = `Local: ${localCount} | Road trip: ${roadCount} | Flight: ${flightCount}`;
+
+        tbody.querySelectorAll('.input-hours').forEach(input => {
+          input.addEventListener('change', (event) => {
+            const value = event.target.value;
+            const id = event.target.getAttribute('data-row-id');
+            const row = data.find(item => rowId(item) === id);
+            if (!row) return;
+            setDriveHours(row, value);
+            render();
+          });
+        });
+      } catch (err) {
+        countEl.textContent = 'Error rendering data. Check console for details.';
+        console.error(err);
+      }
     }
 
     document.getElementById('search').addEventListener('input', (e) => {
