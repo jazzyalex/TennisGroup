@@ -9,129 +9,171 @@
       --blue: #4472C4;
       --dark: #2c3e50;
       --muted: #7f8c8d;
-      --row-alt: #D9E2F3;
+      --row-alt: #f8fafc;
       --bg: #f5f5f5;
-      --chip-local: #1f7a4d;
-      --chip-road: #8a6d1a;
-      --chip-flight: #5d6677;
+      --chip-local: #d1f4e0;
+      --chip-local-text: #0d6832;
+      --chip-road: #fef3c7;
+      --chip-road-text: #78350f;
+      --chip-flight: #e0e7ff;
+      --chip-flight-text: #3730a3;
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       margin: 0;
-      padding: 20px;
-      padding-top: 24px;
+      padding: 32px 20px;
       background-color: var(--bg);
       border-top: 4px solid var(--blue);
       color: var(--dark);
+      line-height: 1.5;
     }
 
     .report-header {
-      max-width: 1100px;
-      margin: 12px auto 18px;
+      max-width: 95%;
+      margin: 0 auto 32px;
       text-align: center;
     }
 
     h1 {
-      margin: 0 0 6px;
-      font-size: 2.1em;
-      font-weight: bold;
+      margin: 0 0 8px;
+      font-size: 2.2em;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.02em;
     }
 
     .subtitle {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0 0 6px;
+      color: #64748b;
+      font-size: 15px;
+      margin: 0;
+      line-height: 1.6;
     }
 
     .filters {
-      max-width: 1100px;
-      margin: 12px auto 10px;
+      max-width: 95%;
+      margin: 20px auto 16px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 16px;
       background: white;
       border: 1px solid #e2e6ef;
-      border-radius: 8px;
-      padding: 12px 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     .filter-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 16px;
       flex-wrap: wrap;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .filter-group label {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      font-weight: 500;
+      color: var(--dark);
+      cursor: pointer;
+      padding: 6px 0;
+    }
+
+    .filter-group label:hover {
+      color: var(--blue);
+    }
+
+    .filter-group > span {
       font-weight: 600;
+      color: var(--dark);
+      margin-right: 4px;
     }
 
     .search-input {
-      padding: 6px 8px;
-      border: 1px solid #ccd6e6;
-      border-radius: 6px;
-      font-size: 12px;
-      width: 210px;
+      padding: 10px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 300px;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.1);
     }
 
     .chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 700;
-      color: white;
-      background: #3f4d63;
+      font-weight: 600;
+      background: #e5e7eb;
+      color: #374151;
     }
 
-    .chip.local { background: var(--chip-local); }
-    .chip.road { background: var(--chip-road); }
-    .chip.flight { background: var(--chip-flight); }
+    .chip.local {
+      background: var(--chip-local);
+      color: var(--chip-local-text);
+    }
+
+    .chip.road {
+      background: var(--chip-road);
+      color: var(--chip-road-text);
+    }
+
+    .chip.flight {
+      background: var(--chip-flight);
+      color: var(--chip-flight-text);
+    }
 
     .meta {
-      max-width: 1100px;
-      margin: 8px auto 6px;
+      max-width: 95%;
+      margin: 16px auto 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
+      padding: 0 4px;
+    }
+
+    .meta > div {
+      font-weight: 500;
     }
 
     .table-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
+      max-width: 95%;
+      margin: 0 auto 24px;
       overflow-x: auto;
       background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       background-color: white;
-      min-width: 1100px;
+      table-layout: auto;
     }
 
     th {
       background-color: var(--blue);
       color: white;
-      padding: 10px 8px;
+      padding: 14px 16px;
       text-align: left;
-      font-weight: bold;
-      font-size: 12px;
-      border-right: 1px solid white;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      border-right: 1px solid rgba(255,255,255,0.2);
       position: sticky;
       top: 0;
       z-index: 1;
@@ -140,47 +182,86 @@
     th:last-child { border-right: none; }
 
     td {
-      padding: 8px 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: middle;
+      white-space: nowrap;
+      color: var(--dark);
+    }
+
+    td:nth-child(1) { /* Dates - lighter */
+      color: var(--muted);
       font-size: 12px;
-      border-bottom: 1px solid #ddd;
-      vertical-align: top;
+    }
+
+    td:nth-child(2) { /* Level - bold and clickable */
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    td:nth-child(4), td:nth-child(5) { /* City, Site - allow wrapping */
+      white-space: normal;
+      max-width: 200px;
+    }
+
+    td:nth-child(5) { /* Site - lighter */
+      color: #64748b;
+      font-size: 12px;
     }
 
     tbody tr:nth-child(even) { background-color: var(--row-alt); }
+    tbody tr:hover { background-color: #f1f5f9; }
 
     .badge {
       display: inline-block;
-      padding: 2px 6px;
+      padding: 3px 8px;
       border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 10px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
-      background: #1f3b68;
-      color: white;
+      letter-spacing: 0.05em;
+      background: #e0e7ff;
+      color: #4338ca;
     }
 
-    .badge.sectional { background: #415a77; }
-    .badge.national { background: #2a6f97; }
+    .badge.sectional {
+      background: #dbeafe;
+      color: #1e40af;
+    }
 
-    .input-hours {
-      width: 60px;
-      padding: 4px 6px;
-      font-size: 12px;
-      border: 1px solid #c7d3e6;
-      border-radius: 4px;
+    .badge.national {
+      background: #fce7f3;
+      color: #be185d;
     }
 
     .notes {
-      max-width: 1100px;
-      margin: 8px auto 0;
-      font-size: 12px;
-      color: var(--muted);
+      max-width: 95%;
+      margin: 16px auto 24px;
+      font-size: 13px;
+      color: #64748b;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 3px solid var(--blue);
     }
 
     .link {
-      color: #1f3b68;
-      text-decoration: underline;
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .link:hover {
+      border-bottom-color: var(--blue);
+    }
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: var(--blue);
     }
 
     .tight { white-space: nowrap; }
@@ -191,29 +272,33 @@
       .filters { flex-direction: column; align-items: stretch; }
       .filter-group { justify-content: flex-start; }
       .search-input { width: 100%; }
+      .table-wrap { max-width: 100%; }
+      td { white-space: normal; }
     }
   </style>
 </head>
 <body>
   <div class="report-header">
-    <h1>USTA G12 Tournaments (NorCal + National)</h1>
-    <p class="subtitle">Levels 2-5 (NorCal Sectional) and Levels 1-4 (National), filtered to G12.</p>
+    <h1>USTA G12 Tournaments 2025-2026 (NorCal + National)</h1>
+    <p class="subtitle">Levels 2-5 (NorCal Sectional) and Levels 1-4 (National), filtered to G12. Distances from Los Altos, CA.</p>
   </div>
 
   <div class="filters">
     <div class="filter-group">
-      <label>Search <input id="search" class="search-input" type="text" placeholder="City, level, director, site"></label>
+      <span>Search:</span>
+      <input id="search" class="search-input" type="text" placeholder="City, level, site...">
     </div>
     <div class="filter-group">
+      <span>Tournament Type:</span>
       <label><input type="checkbox" id="show-sectional" checked> Sectional</label>
       <label><input type="checkbox" id="show-national" checked> National</label>
       <label><input type="checkbox" id="show-doubles"> Doubles only</label>
     </div>
     <div class="filter-group">
-      <span>Proximity from Los Altos:</span>
-      <label><input type="checkbox" id="filter-local" checked> Local (<= 1.5h)</label>
-      <label><input type="checkbox" id="filter-road" checked> Road trip (<= 6h)</label>
-      <label><input type="checkbox" id="filter-flight" checked> Flight (other)</label>
+      <span>Distance from Los Altos:</span>
+      <label><input type="checkbox" id="filter-local" checked> Local (≤75mi)</label>
+      <label><input type="checkbox" id="filter-road" checked> Road trip (≤300mi)</label>
+      <label><input type="checkbox" id="filter-flight" checked> Flight (>300mi)</label>
     </div>
   </div>
 
@@ -226,19 +311,16 @@
     <table>
       <thead>
         <tr>
-          <th>Month</th>
-          <th>Date(s)</th>
+          <th>Dates</th>
           <th class="tight">Level</th>
           <th>Divisions</th>
           <th>City</th>
           <th>Site</th>
-          <th>Director</th>
           <th>Draw</th>
           <th>Doubles Only</th>
           <th>National</th>
-          <th>Drive Hours</th>
+          <th>Miles</th>
           <th>Proximity</th>
-          <th>Home Page</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -246,7 +328,7 @@
   </div>
 
   <div class="notes">
-    Set Drive Hours to auto-categorize proximity. Values are stored in your browser so you only set them once.
+    Driving distances from Los Altos, CA. Tournaments categorized as Local (≤75mi), Road Trip (≤300mi), or Flight (>300mi).
   </div>
 
   <script id="csv-data" type="text/plain">Month,Date(s),# of Days,Home Page,Level,Doubles Only,National,Divisions,B18,B16,B14,B12,G18,G16,G14,G12,Singles Draw,Doubles Draw,Organization,Tournament Director,Primary Site,City,Notes
@@ -381,13 +463,12 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
           } else if (char === ',') {
             row.push(field);
             field = '';
-          } else if (char === '
-') {
+          } else if (char === '\n') {
             row.push(field);
             rows.push(row);
             row = [];
             field = '';
-          } else if (char === '') {
+          } else if (char === '\r') {
             // ignore
           } else {
             field += char;
@@ -414,6 +495,15 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       });
       return obj;
     });
+
+    // Driving miles from Los Altos, CA
+    const drivingMilesLookup = {
+      'San Jose': 12, 'Larkspur': 35, 'Stockton': 70, 'Fair Oaks': 115,
+      'Sacramento': 115, 'Manteca': 65, 'Roseville': 125, 'Davis': 110,
+      'Walnut Creek': 35, 'Clovis': 170, 'Soquel': 40, 'Orinda': 30,
+      'Fairfield': 55, 'Anaheim': 380, 'Indian Wells': 440, 'Irvine': 365,
+      'Lakewood': 370, 'Long Beach': 370, 'Claremont': 380, 'Las Vegas': 570
+    };
 
     const memoryStore = new Map();
     const storage = (() => {
@@ -465,28 +555,60 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       ].join('|');
     }
 
-    function getDriveHours(row) {
-      const key = 'driveHours:' + rowId(row);
-      const saved = getStoredValue(key);
-      if (saved === null || saved === '') return '';
-      return saved;
+    function getDrivingMiles(row) {
+      // Use lookup table for default values
+      const city = row['City'].replace(/,.*$/, '').trim();
+      return drivingMilesLookup[city] || '';
     }
 
-    function setDriveHours(row, value) {
-      const key = 'driveHours:' + rowId(row);
-      if (value === '') {
-        removeStoredValue(key);
-      } else {
-        setStoredValue(key, value);
-      }
-    }
-
-    function proximityFromHours(hours) {
-      const h = parseFloat(hours);
-      if (Number.isNaN(h)) return 'Flight';
-      if (h <= 1.5) return 'Local';
-      if (h <= 6) return 'Road Trip';
+    function proximityFromMiles(miles) {
+      const m = parseFloat(miles);
+      if (Number.isNaN(m) || m === '') return 'Flight';
+      if (m <= 75) return 'Local';
+      if (m <= 300) return 'Road Trip';
       return 'Flight';
+    }
+
+    function parseDate(month, dateStr) {
+      // Parse month name to number
+      const months = {
+        'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+        'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+      };
+
+      // Handle dates with month name in dateStr (e.g., "February 7-9")
+      let monthNum = months[month];
+      let dateStrClean = dateStr;
+
+      for (const [monthName, num] of Object.entries(months)) {
+        if (dateStr.includes(monthName)) {
+          monthNum = num;
+          dateStrClean = dateStr.replace(monthName, '').trim();
+          break;
+        }
+      }
+
+      if (monthNum === undefined) return null;
+
+      // Extract first date number from dateStr (e.g., "10-11; 17-18" -> 10, "7-9" -> 7)
+      const match = dateStrClean.match(/\d+/);
+      if (!match) return null;
+
+      const day = parseInt(match[0]);
+      // Use 2025 for Jan-July, 2026 for Aug-December to handle year transition
+      const year = monthNum >= 7 ? 2026 : 2025;
+      return new Date(year, monthNum, day);
+    }
+
+    function formatDates(row) {
+      const month = row['Month'];
+      const dates = row['Date(s)'];
+
+      // Check if dates already contains the month name (national tournaments)
+      if (dates.includes(month)) {
+        return dates;
+      }
+      return month + ' ' + dates;
     }
 
     const filters = {
@@ -513,7 +635,16 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 
         tbody.innerHTML = '';
 
-        data.forEach(row => {
+        // Sort data by date
+        const sortedData = [...data].sort((a, b) => {
+          const dateA = parseDate(a['Month'], a['Date(s)']);
+          const dateB = parseDate(b['Month'], b['Date(s)']);
+          if (!dateA) return 1;
+          if (!dateB) return -1;
+          return dateA - dateB;
+        });
+
+        sortedData.forEach(row => {
           const isNational = row['National'] === 'TRUE';
           if (isNational && !filters.showNational) return;
           if (!isNational && !filters.showSectional) return;
@@ -525,8 +656,8 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
           ].join(' ').toLowerCase();
           if (search && !combined.includes(search)) return;
 
-          const hours = getDriveHours(row);
-          const proximity = proximityFromHours(hours);
+          const miles = getDrivingMiles(row);
+          const proximity = proximityFromMiles(miles);
           if (proximity === 'Local' && !filters.local) return;
           if (proximity === 'Road Trip' && !filters.road) return;
           if (proximity === 'Flight' && !filters.flight) return;
@@ -537,41 +668,31 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 
           shown++;
 
-          const linkHtml = row['Home Page']
-            ? '<a class="link" href="' + row['Home Page'] + '" target="_blank" rel="noopener">Link</a>'
-            : '';
+          // Check if Home Page is a valid URL
+          const homePage = row['Home Page'] || '';
+          const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
+          const levelHtml = isValidUrl
+            ? '<a class="link" href="' + homePage + '" target="_blank" rel="noopener">' + row['Level'] + '</a>'
+            : row['Level'];
+
           const tr = document.createElement('tr');
           tr.innerHTML = `
-            <td>${row['Month']}</td>
-            <td>${row['Date(s)']}</td>
-            <td class="tight">${row['Level']}</td>
+            <td>${formatDates(row)}</td>
+            <td class="tight">${levelHtml}</td>
             <td>${row['Divisions']}</td>
             <td>${row['City']}</td>
             <td>${row['Primary Site']}</td>
-            <td>${row['Tournament Director']}</td>
             <td>${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</td>
             <td>${row['Doubles Only'] === 'TRUE' ? 'Yes' : 'No'}</td>
             <td><span class="badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></td>
-            <td><input class="input-hours" type="number" min="0" step="0.1" value="${hours}" data-row-id="${rowId(row)}" placeholder="hrs"></td>
+            <td>${miles}</td>
             <td><span class="chip ${proximity === 'Local' ? 'local' : (proximity === 'Road Trip' ? 'road' : 'flight')}">${proximity}</span></td>
-            <td>${linkHtml}</td>
           `;
           tbody.appendChild(tr);
         });
 
         countEl.textContent = `Showing ${shown} tournaments`;
         proximityCountsEl.textContent = `Local: ${localCount} | Road trip: ${roadCount} | Flight: ${flightCount}`;
-
-        tbody.querySelectorAll('.input-hours').forEach(input => {
-          input.addEventListener('change', (event) => {
-            const value = event.target.value;
-            const id = event.target.getAttribute('data-row-id');
-            const row = data.find(item => rowId(item) === id);
-            if (!row) return;
-            setDriveHours(row, value);
-            render();
-          });
-        });
       } catch (err) {
         countEl.textContent = 'Error rendering data. Check console for details.';
         console.error(err);
