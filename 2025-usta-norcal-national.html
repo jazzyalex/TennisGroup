@@ -242,7 +242,7 @@
 
     .table-header {
       display: grid;
-      grid-template-columns: 140px 1fr 140px 1fr 100px 100px 100px;
+      grid-template-columns: 50px 140px 1fr 140px 1fr 100px 100px 100px;
       padding: 12px 24px;
       background: var(--bg-tertiary);
       border-bottom: 1px solid var(--border);
@@ -303,7 +303,7 @@
 
     .table-row {
       display: grid;
-      grid-template-columns: 140px 1fr 140px 1fr 100px 100px 100px;
+      grid-template-columns: 50px 140px 1fr 140px 1fr 100px 100px 100px;
       align-items: center;
       padding: 16px 24px;
       border-bottom: 1px solid var(--border-subtle);
@@ -311,11 +311,23 @@
       cursor: default;
     }
 
+    .table-row.even-row {
+      background: var(--bg-tertiary);
+    }
+
     .table-row:hover {
       background: var(--bg-tertiary);
       border-left: 3px solid #0891b2;
       margin-left: -3px;
       padding-left: 21px;
+    }
+
+    .cell-number {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-family: monospace;
+      text-align: right;
+      padding-right: 12px;
     }
 
     .cell-dates {
@@ -420,7 +432,7 @@
     @media (max-width: 1200px) {
       .table-header,
       .table-row {
-        grid-template-columns: 120px 1fr 120px 1fr 90px 90px 90px;
+        grid-template-columns: 45px 120px 1fr 120px 1fr 90px 90px 90px;
       }
     }
 
@@ -522,7 +534,8 @@
     <!-- Table -->
     <div class="table-container">
       <div class="table-header">
-        <span class="sortable" data-sort="none" data-column="dates">Dates</span>
+        <span>#</span>
+        <span class="sortable" data-sort="asc" data-column="dates">Dates</span>
         <span class="sortable" data-sort="none" data-column="tournament">Tournament</span>
         <span class="sortable" data-sort="none" data-column="city">City</span>
         <span data-column="venue">Venue</span>
@@ -877,14 +890,6 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
         return true;
       });
 
-      // Group by month
-      const groupedByMonth = {};
-      filteredData.forEach(row => {
-        const month = row['Month'];
-        if (!groupedByMonth[month]) groupedByMonth[month] = [];
-        groupedByMonth[month].push(row);
-      });
-
       // Calculate stats
       let localCount = 0, roadCount = 0, flightCount = 0;
       filteredData.forEach(row => {
@@ -904,27 +909,70 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       const tableBody = document.getElementById('table-body');
       tableBody.innerHTML = '';
 
-      months.forEach(month => {
-        const monthData = groupedByMonth[month];
-        if (!monthData || monthData.length === 0) return;
+      const sortedByDate = sortState.column === 'dates';
 
-        // Month group container
-        const monthGroup = document.createElement('div');
-        monthGroup.className = 'month-group';
+      if (sortedByDate) {
+        // Group by month when sorted by date
+        const groupedByMonth = {};
+        filteredData.forEach(row => {
+          const month = row['Month'];
+          if (!groupedByMonth[month]) groupedByMonth[month] = [];
+          groupedByMonth[month].push(row);
+        });
 
-        // Month separator
-        const monthSeparator = document.createElement('div');
-        monthSeparator.className = 'month-separator';
-        monthSeparator.textContent = `${month} (${monthData.length} tournament${monthData.length !== 1 ? 's' : ''})`;
-        monthGroup.appendChild(monthSeparator);
+        let rowNumber = 0;
+        months.forEach(month => {
+          const monthData = groupedByMonth[month];
+          if (!monthData || monthData.length === 0) return;
 
-        monthData.forEach(row => {
+          // Month group container
+          const monthGroup = document.createElement('div');
+          monthGroup.className = 'month-group';
+
+          // Month separator
+          const monthSeparator = document.createElement('div');
+          monthSeparator.className = 'month-separator';
+          monthSeparator.textContent = `${month} (${monthData.length} tournament${monthData.length !== 1 ? 's' : ''})`;
+          monthGroup.appendChild(monthSeparator);
+
+          monthData.forEach(row => {
+            rowNumber++;
+            const isNational = row['National'] === 'TRUE';
+            const miles = getDrivingMiles(row);
+            const proximity = proximityFromMiles(miles);
+            const config = proximityConfig[proximity];
+
+            const homePage = row['Home Page'] || '';
+            const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
+            const levelHtml = isValidUrl
+              ? `<a href="${homePage}" target="_blank" rel="noopener">${row['Level']}</a>`
+              : row['Level'];
+
+            const tableRow = document.createElement('div');
+            tableRow.className = `table-row ${rowNumber % 2 === 0 ? 'even-row' : ''}`;
+            tableRow.innerHTML = `
+              <span class="cell-number">${rowNumber}</span>
+              <span class="cell-dates">${formatDates(row)}</span>
+              <span class="cell-tournament">${levelHtml}</span>
+              <span class="cell-city">${formatCityWithState(row['City'])}</span>
+              <span class="cell-venue">${row['Primary Site']}</span>
+              <span class="cell-draw">${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</span>
+              <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
+              <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
+            `;
+            monthGroup.appendChild(tableRow);
+          });
+
+          tableBody.appendChild(monthGroup);
+        });
+      } else {
+        // Simple table without month grouping
+        filteredData.forEach((row, index) => {
           const isNational = row['National'] === 'TRUE';
           const miles = getDrivingMiles(row);
           const proximity = proximityFromMiles(miles);
           const config = proximityConfig[proximity];
 
-          // Check if Home Page is a valid URL
           const homePage = row['Home Page'] || '';
           const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
           const levelHtml = isValidUrl
@@ -932,8 +980,9 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
             : row['Level'];
 
           const tableRow = document.createElement('div');
-          tableRow.className = 'table-row';
+          tableRow.className = `table-row ${(index + 1) % 2 === 0 ? 'even-row' : ''}`;
           tableRow.innerHTML = `
+            <span class="cell-number">${index + 1}</span>
             <span class="cell-dates">${formatDates(row)}</span>
             <span class="cell-tournament">${levelHtml}</span>
             <span class="cell-city">${formatCityWithState(row['City'])}</span>
@@ -942,11 +991,9 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
             <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
             <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
           `;
-          monthGroup.appendChild(tableRow);
+          tableBody.appendChild(tableRow);
         });
-
-        tableBody.appendChild(monthGroup);
-      });
+      }
     }
 
     // Event listeners
