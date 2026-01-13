@@ -492,6 +492,9 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 
         shown++;
 
+        const linkHtml = row['Home Page']
+          ? '<a class="link" href="' + row['Home Page'] + '" target="_blank" rel="noopener">Link</a>'
+          : '';
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>${row['Month']}</td>
@@ -506,7 +509,7 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
           <td><span class="badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></td>
           <td><input class="input-hours" type="number" min="0" step="0.1" value="${hours}" data-row-id="${rowId(row)}" placeholder="hrs"></td>
           <td><span class="chip ${proximity === 'Local' ? 'local' : (proximity === 'Road Trip' ? 'road' : 'flight')}">${proximity}</span></td>
-          <td>${row['Home Page'] ? `<a class="link" href="${row['Home Page']}" target="_blank" rel="noopener">Link</a>` : ''}</td>
+          <td>${linkHtml}</td>
         `;
         tbody.appendChild(tr);
       });
