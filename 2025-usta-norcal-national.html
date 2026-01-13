@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USTA G12 Tournaments - NorCal and National</title>
+  <style>
+    :root {
+      --blue: #4472C4;
+      --dark: #2c3e50;
+      --muted: #7f8c8d;
+      --row-alt: #D9E2F3;
+      --bg: #f5f5f5;
+      --chip-local: #1f7a4d;
+      --chip-road: #8a6d1a;
+      --chip-flight: #5d6677;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      padding-top: 24px;
+      background-color: var(--bg);
+      border-top: 4px solid var(--blue);
+      color: var(--dark);
+    }
+
+    .report-header {
+      max-width: 1100px;
+      margin: 12px auto 18px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 2.1em;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 6px;
+    }
+
+    .filters {
+      max-width: 1100px;
+      margin: 12px auto 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border: 1px solid #e2e6ef;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+
+    .filter-group label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    .search-input {
+      padding: 6px 8px;
+      border: 1px solid #ccd6e6;
+      border-radius: 6px;
+      font-size: 12px;
+      width: 210px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      background: #3f4d63;
+    }
+
+    .chip.local { background: var(--chip-local); }
+    .chip.road { background: var(--chip-road); }
+    .chip.flight { background: var(--chip-flight); }
+
+    .meta {
+      max-width: 1100px;
+      margin: 8px auto 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .table-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow-x: auto;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      min-width: 1100px;
+    }
+
+    th {
+      background-color: var(--blue);
+      color: white;
+      padding: 10px 8px;
+      text-align: left;
+      font-weight: bold;
+      font-size: 12px;
+      border-right: 1px solid white;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th:last-child { border-right: none; }
+
+    td {
+      padding: 8px 8px;
+      font-size: 12px;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) { background-color: var(--row-alt); }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      background: #1f3b68;
+      color: white;
+    }
+
+    .badge.sectional { background: #415a77; }
+    .badge.national { background: #2a6f97; }
+
+    .input-hours {
+      width: 60px;
+      padding: 4px 6px;
+      font-size: 12px;
+      border: 1px solid #c7d3e6;
+      border-radius: 4px;
+    }
+
+    .notes {
+      max-width: 1100px;
+      margin: 8px auto 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .link {
+      color: #1f3b68;
+      text-decoration: underline;
+    }
+
+    .tight { white-space: nowrap; }
+
+    @media (max-width: 768px) {
+      body { padding: 12px; }
+      h1 { font-size: 1.6em; }
+      .filters { flex-direction: column; align-items: stretch; }
+      .filter-group { justify-content: flex-start; }
+      .search-input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-header">
+    <h1>USTA G12 Tournaments (NorCal + National)</h1>
+    <p class="subtitle">Levels 2-5 (NorCal Sectional) and Levels 1-4 (National), filtered to G12.</p>
+  </div>
+
+  <div class="filters">
+    <div class="filter-group">
+      <label>Search <input id="search" class="search-input" type="text" placeholder="City, level, director, site"></label>
+    </div>
+    <div class="filter-group">
+      <label><input type="checkbox" id="show-sectional" checked> Sectional</label>
+      <label><input type="checkbox" id="show-national" checked> National</label>
+      <label><input type="checkbox" id="show-doubles"> Doubles only</label>
+    </div>
+    <div class="filter-group">
+      <span>Proximity from Los Altos:</span>
+      <label><input type="checkbox" id="filter-local" checked> Local (<= 1.5h)</label>
+      <label><input type="checkbox" id="filter-road" checked> Road trip (<= 6h)</label>
+      <label><input type="checkbox" id="filter-flight" checked> Flight (other)</label>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div id="count"></div>
+    <div id="proximity-counts"></div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Date(s)</th>
+          <th class="tight">Level</th>
+          <th>Divisions</th>
+          <th>City</th>
+          <th>Site</th>
+          <th>Director</th>
+          <th>Draw</th>
+          <th>Doubles Only</th>
+          <th>National</th>
+          <th>Drive Hours</th>
+          <th>Proximity</th>
+          <th>Home Page</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="notes">
+    Set Drive Hours to auto-categorize proximity. Values are stored in your browser so you only set them once.
+  </div>
+
+  <script id="csv-data" type="text/plain">Month,Date(s),# of Days,Home Page,Level,Doubles Only,National,Divisions,B18,B16,B14,B12,G18,G16,G14,G12,Singles Draw,Doubles Draw,Organization,Tournament Director,Primary Site,City,Notes
+January,10-11; 17-18,5,Link,Closed Level 4 Excellence Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,Singles Only
+January,31-1,2,Link,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,Singles Only
+January,31-1,2,Link,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+January,31-1,2,Link,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles Only
+February,7-8,2,,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,Singles Only
+February,14-16,3,,Open Level 5 Championship,FALSE,FALSE,"BG 18, 14-12",TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,32,16,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles & Doubles
+February,21-22,2,,Closed Level 3 Mixed Sectionals,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Mixed Doubles Only
+March,7-8,2,,Closed Level 5 Super Series,FALSE,FALSE,"BG 18, 14-12",TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,32,,Johnson Ranch Sports Club,Scott Pothast,Johnson Ranch Sports Club,Roseville,Singles Only
+March,14-15,2,,Closed Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+March,21-22,2,,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Doubles Only
+April,4-5,2,,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+April,4-5,2,,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+April,18-19,2,,Level 3 Mixed Doubles Sectionals,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Mixed Doubles Only
+May,2-3,2,,Closed Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Rio del Oro Sports Club,Todd Stanley,Rio del Oro Sports Club,Sacramento,Singles Only
+May,9-10,2,,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,Doubles Only
+May,16-17,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,Singles Only
+May,16-17,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+May,23-25,3,,Closed Level 4 Excellence,FALSE,FALSE,"BG 18, 12",TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,32,16,Valley Premier Tennis,Phil King,Clovis East High School,Clovis,Singles & Doubles
+May,30-31,2,,Open Level 5 Dominant Duo,TRUE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16,,Eventsmanagers,Ron Ward,Soquel High School,Soquel,
+June,6-7; 13-15,5,,Closed Level 3 Sectionals,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,64,32,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,Singles Only
+June,20-21,2,,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+July,4-5,2,,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Eventsmanagers,Ron Ward,Soquel High School,Soquel,Singles Only
+July,18-20,3,,Open Level 5 Championship,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,16,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles & Doubles
+August,31-2,3,,Level 4 Team Intersectionals,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,24 boys & 24 Girls,,USTA Pacific Northwest,Krista Mikalatos,TBD - Pacific Northwest,TBD,Intersectional Team Event - 5 Sections
+August,8-9,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+August,8-9,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
+August,8-9,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+August,15-16,2,,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+August,22-23,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+August,22-23,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Sleepy Hollow Swim and Tennis Club,Darrin Cohen,Sleepy Hollow Swim and Tennis Club,Orinda,Singles Only
+August,29-30,2,,Closed Level 4 Mixed Dominant Duo,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,
+September,5-6,2,,Open Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Valley Pride Racket & Paddle,Denise Dy,Fresno State University,"Fresno ,CA",Singles Only
+September,5-6,2,,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+September,11-13,3,,Level 2 Team Intersectionals Team,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,24 boys & 24 Girls,,USTA SoCal,Dianne Matias,TBD - SoCal,TBD,Intersectional Team Event - 4 Sections
+September,12-13,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+September,12-13,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Yolo Tennis Club,Lukas Burger,Marya Welch Tennis Center,Davis,Singles Only
+September,12-13,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+September,19-20,1,,Closed Level 3 Sectionals Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
+September,26-27; 3-4,4,,Closed Level 3 Sectionals Singles,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,64,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+October,10-11,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+October,10-11,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles Only
+October,24-25,4,,Closed Level 4 Excellence,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,16,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles & Doubles
+November,7-8,2,,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
+November,14-15,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+November,14-15,2,,Open Level 5 Championship Singles,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
+December,5-6,2,,Open Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,Singles Only
+December,5-6,2,,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+December,12-13,2,,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
+February,February 7-9,3,https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Barry Friedman,The Claremont Club,"Claremont, CA",Surface: H
+February,February 7-9,3,https://playtennis.usta.com/competitions/giammalvaracquetclub/Tournaments/overview/AA054BB8-C361-49D5-BC70-224C1796566B,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Victor Pinones,Giammalva RC & Elite Academy,"Spring, TX",Surface: H
+February,February 7-9,3,https://playtennis.usta.com/competitions/seminolelakefamilytennis/Tournaments/overview/F9C40D4E-A5CE-49FC-856F-E4BDEE233F50,Level 2,FALSE,TRUE,G12-14,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Erick Chall,Seminole Lake Country Club,"Seminole, FL",Surface: C
+February,February 7-9,3,https://playtennis.usta.com/competitions/el-conquistador-tennis/Tournaments/overview/3D925667-96FD-4BEA-931A-400A2CE9C74B,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Jennifer Fuchs,El Conquistador Tennis,"Tucson, AZ",Surface: H
+February,February 16-22,7,https://playtennis.usta.com/competitions/el-conquistador-tennis/Tournaments/overview/94F38D3B-2F9B-4038-9A60-28EDA4E8BF3D,Level 1,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,48: Team Event,,,Jennifer Fuchs,Hilton El Conquistador,"Tucson, AZ",Surface: H
+March,March 14-16,3,https://playtennis.usta.com/competitions/caycetennis/Tournaments/overview/CA5AA81A-E95B-4ED4-8807-982C3D6D1974,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Brian Clary,Cayce Tennis & Fitness Center,"Cayce, SC",Surface: H
+March,March 14-16,3,https://playtennis.usta.com/competitions/evansvilletc/Tournaments/overview/1652DA82-A95B-47D8-98E5-CD49BB4A1117,Level 3,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Ryan McDaniel,Evansville Tennis Center,"Evansville, IN",Surface: IH
+March,March 14-16,3,https://playtennis.usta.com/competitions/darlingmemorialtenniscenter/Tournaments/overview/E18DEEDF-CC6B-4838-899E-EF712F875098,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Memorial Tennis Center,"Las Vegas, NV",Surface: H
+March,March 14-16,3,https://playtennis.usta.com/competitions/arrowheadtennis/Tournaments/overview/F1385D70-628F-4546-9E10-F4B0CF2AF0FF,Level 3,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,32: FIC 16,16: SE,,Venku Mandalap,Arrowhead Tennis Club,"Medford, NJ",Surface: IH
+March,March 14-16,3,https://playtennis.usta.com/competitions/davenowickstennis/Tournaments/overview/AF9B3C12-7E35-4C13-B0EB-9DFC863E195A,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,David Nowick,Kiwanis Tennis Center,"Tempe, AZ",Surface: H
+March,March 14-16,3,https://playtennis.usta.com/competitions/metro-tennis-associates/Tournaments/overview/54D501A1-EDFE-4ACC-AAC3-3F2A47744C0D,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Sandy Bowie,Rome Tennis Center at Berry College,"Rome, GA",Surface: H
+March,March 14-16,3,https://playtennis.usta.com/competitions/blossomtennis/Tournaments/overview/4AB6612E-17E9-412F-809E-9D41F6AFF7B3,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Arnaud Guillemard,Blossom Tennis Center,"San Antonio, TX",Surface: H
+March,March 14-16,3,https://playtennis.usta.com/competitions/lafortunetenniscentertulsacountyparks/Tournaments/overview/9E4F476A-AAF6-4DB0-8542-EA9B35FC4EEA,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: Compass,,Peter McCorkle,LaFortune Park Tennis Center,"Tulsa, OK",Surface: H
+March,March 21-29,9,https://playtennis.usta.com/competitions/desertchampionsllc/Tournaments/overview/78CE4C97-6EAE-4CF4-969E-9238DA03B64F,Level 1,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,64: FIC-QF,32: SE,,Eric Stephens,Indian Wells Tennis Garden,"Indian Wells, CA",Surface: H
+April,April 11-13,3,https://playtennis.usta.com/competitions/robbiewagnertournamenttrainingatglencove/Tournaments/overview/493357A3-3B22-4D59-BFF7-FFA0319D2A5A,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alex Alcantara,RWTT at Glencove,"Glen Cove, NY",Surface: IC
+April,April 11-13,3,https://playtennis.usta.com/competitions/racquetclubofirvine/Tournaments/overview/3A0E3F36-53F5-4DEC-91A6-39299E166207,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Greg Prudhomme,Racquet Club of Irvine,"Irvine, CA",Surface: H
+April,April 11-13,3,https://playtennis.usta.com/competitions/darlingmemorialtenniscenter/Tournaments/overview/E18DEEDF-CC6B-4838-899E-EF712F875098,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Memorial Tennis Center,"Las Vegas, NV",Surface: H
+April,April 11-13,3,https://playtennis.usta.com/competitions/farmforgeclub/Tournaments/overview/30151FB9-8BE8-451C-87D4-3E0EC80A738B,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: Dominant Duo Team Event,,,Tiffany Milner,Farm & Forge Club,"College Grove, TN",Surface: H
+April,April 11-13,3,https://playtennis.usta.com/competitions/emiliosanchezacademyflorida/Tournaments/overview/B14858FC-7D45-4F9A-A605-B6CA08A74ED8,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Lucas Regas,Emilio Sanchez Academy,"Naples, FL",Surface: C
+April,April 11-13,3,https://playtennis.usta.com/competitions/ridgelandtenniscenter0/Tournaments/overview/0D1400A6-1D18-4C37-8B78-4759648D64DA?previewMode=true,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Justyn Schelver,Ridgeland Tennis Center,"Ridgeland, MS",Surface: H
+May,May 2-4,3,,Level 3,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,,,,,,,Surface: H
+May,May 2-4,3,,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Kendall Chitambar,University of Colorado,"Boulder, CO",Surface: H
+May,May 2-4,3,https://playtennis.usta.com/competitions/grand-rapids-racquetfitness/Tournaments/overview/15507C7D-EF04-4B2C-867E-1D72F2F02FDF,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Tom Walker,Grand Rapids Racquet & Fitness,"Grand Rapids, MI",Surface: H
+May,May 2-4,3,https://playtennis.usta.com/competitions/triad-tennis-management/Tournaments/overview/A027708E-8626-408D-BF5A-C68DB2B75213,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
+May,May 2-4,3,https://playtennis.usta.com/competitions/martyhennessyinspiringchildrenfounda/Tournaments/overview/46112A7E-C83B-464A-8115-643857F8F784?previewMode=true,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Tennis Center,"Las Vegas, NV",Surface: H
+May,May 2-4,3,,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: Dominant Duo Team Event,,,Josh Pletka,Manchester Athletic Club,"Manchester, MA",Surface: IH
+May,May 2-4,3,https://playtennis.usta.com/competitions/brigade-sports-complex/Tournaments/overview/5B47FD8C-E218-466F-AF54-DE821E08F10B,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Keith Puryear,Brigade Sports Tennis Center,"Annapolis, MD",Surface: H
+May,May 16-18,3,https://playtennis.usta.com/competitions/harrison-tennis-center/Tournaments/overview/EBBC43A4-5E08-4676-9B33-80462826B56D?previewMode=true,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alice Reen,Harrison Tennis Center,"Marietta, GA",Surface: H
+May,May 16-18,3,https://playtennis.usta.com/competitions/southerncaliforniatennisacademy/Tournaments/overview/E812F60F-0760-4E2E-A350-2499F33DD951?previewMode=true,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Mitch Bridge,El Dorado Park Tennis Center,"Long Beach, CA",Surface: H
+May,May 16-18,3,https://playtennis.usta.com/competitions/robbiewagnertournamenttrainingatglencove/Tournaments/overview/7B7CE5A3-EB99-45A7-BE3C-4D6819B4F023,Level 2,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alex Alcantara,Robbie Wagner Tournament Training,"Glen Cove, NY",Surface: IC
+May,May 16-18,3,https://playtennis.usta.com/competitions/players-international-management/Tournaments/overview/54223FF9-C667-4A51-BDE1-2284B0D5BA4A?previewMode=true,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Ivan Baron,Boca Raton Racquet Center,"Boca Raton, FL",Surface: C
+June,June 27-29,3,https://playtennis.usta.com/competitions/inthezonetennis/Tournaments/overview/ED16BC52-CAFA-4528-AD39-570B7746251E,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Steve Greene,Hudsonville High School,"Hudsonville, MI",Surface: H
+June,June 27-29,3,https://playtennis.usta.com/competitions/samforduniversity1/Tournaments/overview/15043322-6DAE-425B-ACE9-A3E9531CE017,Level 2,FALSE,TRUE,BG12 ,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Oliver Reynolds,The Lakeshore Foundation ,"Birmingham, AL",Surface: H
+June,June 27-29,3,https://playtennis.usta.com/competitions/ststephensepiscopalschool0/Tournaments/overview/4CE0F578-4412-42FD-A99C-577F6CBF6ED4,Level 2,FALSE,TRUE,G12-14,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Carlos Di Laura,St. Stephen's Episcopal School,"Austin, TX",Surface: H
+June,June 27-29,3,https://playtennis.usta.com/competitions/triad-tennis-management/Tournaments/overview/CC8FE69A-61E7-4D18-81A9-5424665BD4E2,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
+July,July 4-12,9,,Level 1,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,128: Compass,64: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
+August,August 7-16,10,,Level 1,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,128: Compass,64: SE,,Turhan Berne,Hudlow Tennis Center (Aug 9th - 15th),"Peachtree Corners, GA",Surface: H
+September,September 12-14,3,https://playtennis.usta.com/competitions/martyhennessyinspiringchildrenfounda/Tournaments/overview/46112A7E-C83B-464A-8115-643857F8F784?previewMode=true,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Tennis Center,"Las Vegas, NV",Surface: H
+September,September 12-14,3,https://playtennis.usta.com/competitions/players-international-management/Tournaments/overview/48FB80A3-19BB-48F6-8184-373EEC128EEB,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Ivan Baron,The Club at Quail Ridge,"Boynton Beach, FL",Surface: C
+September,September 12-14,3,https://playtennis.usta.com/competitions/smithstearnstennisacademy/Tournaments/overview/5FF0F15B-4DD1-4084-8611-53CBFB14B0DA,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Nico Guillon,Sea Pines Racquet Club,"Hilton Head, SC",Surface: C
+September,September 12-14,3,https://playtennis.usta.com/competitions/cityclubriverranch/Tournaments/overview/7B05AE0E-0107-4C7C-BA93-85594FEF9831,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Emily Ory,The City Club at River Ranch,"Lafayette, LA",Surface: C
+September,September 12-14,3,,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Mike Nelson,Anaheim Tennis Center,"Anaheim, CA",Surface: H
+September,September 12-14,3,,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Ryan McDaniel,Wesselman Tennis Center,"Evansville, IN",Surface: H
+September,September 12-14,3,,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Tracy Wright,Koch Family Tennis Center,"Omaha, NE",Surface: H
+September,September 12-14,3,,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Ben Maes,Rochester Athletic Club,"Rochester, MN",Surface: IH
+October,October 10-12,3,https://playtennis.usta.com/competitions/giammalvaracquetclub/Tournaments/overview/D40B0DA2-724B-4BE1-BFA9-4A9F5D5596BA,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Victor Pinones,Giammalva Racquet Club,"Spring, TX",Surface: H
+October,October 10-12,3,https://playtennis.usta.com/competitions/lakewoodtenniscenter/Tournaments/overview/B6181E16-6D14-43F7-A684-ADB23DA1A2DF,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Eric Stephens,Lakewood Tennis Center,"Lakewood, CA",Surface: H
+October,October 10-12,3,https://playtennis.usta.com/competitions/robbiewagnertournamenttrainingatglencove/Tournaments/overview/97EF6FE3-B22B-4F43-82F9-C3AB4BAA74A3,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alexandre de Alcantara,Robbie Wagner Tournament Training at Glencove,"Glen Cove, NY",Surface: IC
+October,October 10-12,3,,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
+November,November 7-9,3,,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Courtney Dugas,New Orleans City Park Tennis Center,"New Orleans, LA",Surface: H/C
+November,November 16-22,7,,Level 1,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,64: Curtis,32: SE,,Cedric De Zutter,Leftwich Tennis Center - University of Memphis,"Memphis, TN",Surface: IH
+November,November 30,1,,Level 2,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,64 Q/64 MD:SE,32: SE,,Hisa Sato,IMG Academy,"Bradenton, FL",Surface: H
+December,December 7-13,7,,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: SE,64: SE,,Robert Gomez,Biltmore Tennis Center,"Coral Gables, FL",Surface: H
+December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: Compass,64: SE,,Brian Notis,University of Texas - San Antonio,"San Antonio, TX",Surface: H
+</script>
+  <script>
+    const rawCsv = document.getElementById('csv-data').textContent.trim();
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let field = '';
+      let inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (inQuotes) {
+          if (char === '"') {
+            if (text[i + 1] === '"') {
+              field += '"';
+              i++;
+            } else {
+              inQuotes = false;
+            }
+          } else {
+            field += char;
+          }
+        } else {
+          if (char === '"') {
+            inQuotes = true;
+          } else if (char === ',') {
+            row.push(field);
+            field = '';
+          } else if (char === '
+') {
+            row.push(field);
+            rows.push(row);
+            row = [];
+            field = '';
+          } else if (char === '') {
+            // ignore
+          } else {
+            field += char;
+          }
+        }
+      }
+      if (field.length || row.length) {
+        row.push(field);
+        rows.push(row);
+      }
+      return rows;
+    }
+
+    const rows = parseCsv(rawCsv);
+    const header = rows[0];
+    const data = rows.slice(1).map(row => {
+      const obj = {};
+      header.forEach((key, idx) => {
+        obj[key] = row[idx] || '';
+      });
+      return obj;
+    });
+
+    function rowId(row) {
+      return [
+        row['National'],
+        row['Date(s)'],
+        row['Level'],
+        row['Divisions'],
+        row['City'],
+        row['Primary Site']
+      ].join('|');
+    }
+
+    function getDriveHours(row) {
+      const key = 'driveHours:' + rowId(row);
+      const saved = localStorage.getItem(key);
+      if (saved === null || saved === '') return '';
+      return saved;
+    }
+
+    function setDriveHours(row, value) {
+      const key = 'driveHours:' + rowId(row);
+      if (value === '') {
+        localStorage.removeItem(key);
+      } else {
+        localStorage.setItem(key, value);
+      }
+    }
+
+    function proximityFromHours(hours) {
+      const h = parseFloat(hours);
+      if (Number.isNaN(h)) return 'Flight';
+      if (h <= 1.5) return 'Local';
+      if (h <= 6) return 'Road Trip';
+      return 'Flight';
+    }
+
+    const filters = {
+      search: '',
+      showSectional: true,
+      showNational: true,
+      showDoubles: false,
+      local: true,
+      road: true,
+      flight: true
+    };
+
+    const tbody = document.getElementById('tbody');
+    const countEl = document.getElementById('count');
+    const proximityCountsEl = document.getElementById('proximity-counts');
+
+    function render() {
+      const search = filters.search.toLowerCase();
+      let localCount = 0;
+      let roadCount = 0;
+      let flightCount = 0;
+      let shown = 0;
+
+      tbody.innerHTML = '';
+
+      data.forEach(row => {
+        const isNational = row['National'] === 'TRUE';
+        if (isNational && !filters.showNational) return;
+        if (!isNational && !filters.showSectional) return;
+        if (filters.showDoubles && row['Doubles Only'] !== 'TRUE') return;
+
+        const combined = [
+          row['Month'], row['Date(s)'], row['Level'], row['Divisions'], row['City'],
+          row['Primary Site'], row['Tournament Director'], row['Notes']
+        ].join(' ').toLowerCase();
+        if (search && !combined.includes(search)) return;
+
+        const hours = getDriveHours(row);
+        const proximity = proximityFromHours(hours);
+        if (proximity === 'Local' && !filters.local) return;
+        if (proximity === 'Road Trip' && !filters.road) return;
+        if (proximity === 'Flight' && !filters.flight) return;
+
+        if (proximity === 'Local') localCount++;
+        if (proximity === 'Road Trip') roadCount++;
+        if (proximity === 'Flight') flightCount++;
+
+        shown++;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row['Month']}</td>
+          <td>${row['Date(s)']}</td>
+          <td class="tight">${row['Level']}</td>
+          <td>${row['Divisions']}</td>
+          <td>${row['City']}</td>
+          <td>${row['Primary Site']}</td>
+          <td>${row['Tournament Director']}</td>
+          <td>${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</td>
+          <td>${row['Doubles Only'] === 'TRUE' ? 'Yes' : 'No'}</td>
+          <td><span class="badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></td>
+          <td><input class="input-hours" type="number" min="0" step="0.1" value="${hours}" data-row-id="${rowId(row)}" placeholder="hrs"></td>
+          <td><span class="chip ${proximity === 'Local' ? 'local' : (proximity === 'Road Trip' ? 'road' : 'flight')}">${proximity}</span></td>
+          <td>${row['Home Page'] ? `<a class="link" href="${row['Home Page']}" target="_blank" rel="noopener">Link</a>` : ''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      countEl.textContent = `Showing ${shown} tournaments`;
+      proximityCountsEl.textContent = `Local: ${localCount} | Road trip: ${roadCount} | Flight: ${flightCount}`;
+
+      tbody.querySelectorAll('.input-hours').forEach(input => {
+        input.addEventListener('change', (event) => {
+          const value = event.target.value;
+          const id = event.target.getAttribute('data-row-id');
+          const row = data.find(item => rowId(item) === id);
+          if (!row) return;
+          setDriveHours(row, value);
+          render();
+        });
+      });
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      filters.search = e.target.value || '';
+      render();
+    });
+
+    document.getElementById('show-sectional').addEventListener('change', (e) => {
+      filters.showSectional = e.target.checked;
+      render();
+    });
+
+    document.getElementById('show-national').addEventListener('change', (e) => {
+      filters.showNational = e.target.checked;
+      render();
+    });
+
+    document.getElementById('show-doubles').addEventListener('change', (e) => {
+      filters.showDoubles = e.target.checked;
+      render();
+    });
+
+    document.getElementById('filter-local').addEventListener('change', (e) => {
+      filters.local = e.target.checked;
+      render();
+    });
+
+    document.getElementById('filter-road').addEventListener('change', (e) => {
+      filters.road = e.target.checked;
+      render();
+    });
+
+    document.getElementById('filter-flight').addEventListener('change', (e) => {
+      filters.flight = e.target.checked;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
