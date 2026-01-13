@@ -21,8 +21,8 @@
       --border-subtle: #f1f5f9;
       --accent-local: #10b981;
       --accent-road: #f59e0b;
-      --accent-flight: #6366f1;
-      --accent-national: #8b5cf6;
+      --accent-flight: #0891b2;
+      --accent-national: #0891b2;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -69,7 +69,7 @@
     .accent-bar {
       width: 8px;
       height: 32px;
-      background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%);
+      background: linear-gradient(180deg, #0891b2 0%, #06b6d4 100%);
       border-radius: 4px;
     }
 
@@ -85,7 +85,7 @@
     }
 
     .year-badge {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
       padding: 4px 12px;
       border-radius: 100px;
       font-size: 12px;
@@ -110,19 +110,19 @@
     .stat-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px 24px;
+      border-radius: 12px;
+      padding: 12px 16px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
     }
 
     .stat-card.local { border-color: rgba(16, 185, 129, 0.3); }
     .stat-card.road { border-color: rgba(245, 158, 11, 0.3); }
-    .stat-card.flight { border-color: rgba(99, 102, 241, 0.3); }
+    .stat-card.flight { border-color: rgba(8, 145, 178, 0.3); }
 
     .stat-number {
-      font-size: 32px;
+      font-size: 20px;
       font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
     }
@@ -133,7 +133,7 @@
 
     .stat-label {
       color: var(--text-secondary);
-      font-size: 13px;
+      font-size: 11px;
     }
 
     /* Filter Bar */
@@ -177,8 +177,8 @@
     }
 
     .search-input:focus {
-      border-color: rgba(99, 102, 241, 0.5);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      border-color: rgba(8, 145, 178, 0.5);
+      box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
     }
 
     .search-input::placeholder {
@@ -242,7 +242,7 @@
 
     .table-header {
       display: grid;
-      grid-template-columns: 140px 1fr 100px 140px 1fr 100px 100px 100px;
+      grid-template-columns: 140px 1fr 140px 1fr 100px 100px 100px;
       padding: 12px 24px;
       background: var(--bg-tertiary);
       border-bottom: 1px solid var(--border);
@@ -256,68 +256,54 @@
       z-index: 10;
     }
 
-    .month-group {
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .month-group:last-child {
-      border-bottom: none;
-    }
-
-    .month-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 24px;
-      background: var(--bg-tertiary);
+    .table-header span.sortable {
       cursor: pointer;
-      transition: background 0.2s;
-      border-bottom: 1px solid var(--border-subtle);
+      user-select: none;
+      transition: color 0.2s;
     }
 
-    .month-header:hover {
-      background: var(--bg-secondary);
+    .table-header span.sortable:hover {
+      color: var(--text-primary);
     }
 
-    .chevron {
-      transition: transform 0.2s ease;
-      color: var(--text-secondary);
+    .table-header span.sortable::after {
+      content: ' ↕';
+      font-size: 0.9em;
+      opacity: 0.4;
+      margin-left: 4px;
     }
 
-    .chevron.collapsed {
-      transform: rotate(-90deg);
+    .table-header span.sortable[data-sort="asc"]::after {
+      content: ' ↑';
+      opacity: 0.9;
     }
 
-    .month-name {
+    .table-header span.sortable[data-sort="desc"]::after {
+      content: ' ↓';
+      opacity: 0.9;
+    }
+
+    .month-group {
+      margin-top: 32px;
+    }
+
+    .month-group:first-child {
+      margin-top: 0;
+    }
+
+    .month-separator {
+      padding: 12px 24px;
+      background: var(--bg-tertiary);
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 600;
-      font-size: 15px;
-    }
-
-    .count-badge {
-      background: var(--bg-secondary);
-      padding: 2px 10px;
-      border-radius: 100px;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: normal;
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .month-rows {
-      max-height: 10000px;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .month-rows.collapsed {
-      max-height: 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
     }
 
     .table-row {
       display: grid;
-      grid-template-columns: 140px 1fr 100px 140px 1fr 100px 100px 100px;
+      grid-template-columns: 140px 1fr 140px 1fr 100px 100px 100px;
       align-items: center;
       padding: 16px 24px;
       border-bottom: 1px solid var(--border-subtle);
@@ -327,7 +313,7 @@
 
     .table-row:hover {
       background: var(--bg-tertiary);
-      border-left: 3px solid #6366f1;
+      border-left: 3px solid #0891b2;
       margin-left: -3px;
       padding-left: 21px;
     }
@@ -346,12 +332,13 @@
     .cell-tournament a {
       color: var(--text-primary);
       text-decoration: none;
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px dotted var(--text-muted);
       transition: border-color 0.2s;
     }
 
     .cell-tournament a:hover {
-      border-bottom-color: #6366f1;
+      border-bottom-style: solid;
+      border-bottom-color: #0891b2;
     }
 
     .cell-divisions {
@@ -389,8 +376,8 @@
     }
 
     .type-badge.national {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
-      color: #a78bfa;
+      background: linear-gradient(135deg, rgba(8, 145, 178, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+      color: #06b6d4;
     }
 
     .type-badge.sectional {
@@ -419,7 +406,7 @@
     }
 
     .proximity-indicator.flight {
-      background: rgba(99, 102, 241, 0.08);
+      background: rgba(8, 145, 178, 0.08);
       color: var(--accent-flight);
     }
 
@@ -433,7 +420,7 @@
     @media (max-width: 1200px) {
       .table-header,
       .table-row {
-        grid-template-columns: 120px 1fr 90px 120px 1fr 90px 90px 90px;
+        grid-template-columns: 120px 1fr 120px 1fr 90px 90px 90px;
       }
     }
 
@@ -473,7 +460,7 @@
       <div class="header-top">
         <div class="accent-bar"></div>
         <h1>USTA G12 Tournaments</h1>
-        <span class="year-badge">2025-2026</span>
+        <span class="year-badge">2026</span>
       </div>
       <p class="subtitle">NorCal Sectional (Levels 2-5) + National (Levels 1-4) • Distances from Los Altos, CA</p>
     </div>
@@ -513,7 +500,7 @@
           Sectional
         </div>
         <div class="filter-chip active" id="chip-national">
-          <span class="chip-dot" style="background: #8b5cf6"></span>
+          <span class="chip-dot" style="background: #0891b2"></span>
           National
         </div>
         <div class="divider"></div>
@@ -526,7 +513,7 @@
           Road Trip
         </div>
         <div class="filter-chip active" id="chip-flight">
-          <span class="chip-dot" style="background: #6366f1"></span>
+          <span class="chip-dot" style="background: #0891b2"></span>
           Flight
         </div>
       </div>
@@ -535,14 +522,13 @@
     <!-- Table -->
     <div class="table-container">
       <div class="table-header">
-        <span>Dates</span>
-        <span>Tournament</span>
-        <span>Divisions</span>
-        <span>City</span>
-        <span>Venue</span>
-        <span>Draw</span>
-        <span>Type</span>
-        <span>Distance</span>
+        <span class="sortable" data-sort="none" data-column="dates">Dates</span>
+        <span class="sortable" data-sort="none" data-column="tournament">Tournament</span>
+        <span class="sortable" data-sort="none" data-column="city">City</span>
+        <span data-column="venue">Venue</span>
+        <span data-column="draw">Draw</span>
+        <span data-column="type">Type</span>
+        <span data-column="distance">Distance</span>
       </div>
       <div id="table-body"></div>
     </div>
@@ -736,9 +722,41 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       'Boulder': 1200
     };
 
+    // City to state mapping
+    const cityToState = {
+      'San Jose': 'CA', 'Orinda': 'CA', 'Larkspur': 'CA', 'Walnut Creek': 'CA',
+      'Soquel': 'CA', 'Fairfield': 'CA', 'Manteca': 'CA', 'Stockton': 'CA',
+      'Davis': 'CA', 'Fair Oaks': 'CA', 'Sacramento': 'CA', 'Roseville': 'CA',
+      'Clovis': 'CA', 'Fresno': 'CA',
+      'Irvine': 'CA', 'Lakewood': 'CA', 'Long Beach': 'CA',
+      'Anaheim': 'CA', 'Claremont': 'CA', 'Indian Wells': 'CA',
+      'Las Vegas': 'NV', 'Tempe': 'AZ', 'Tucson': 'AZ',
+      'Austin': 'TX', 'San Antonio': 'TX', 'Spring': 'TX', 'Tulsa': 'OK',
+      'Birmingham': 'AL', 'Marietta': 'GA', 'Peachtree Corners': 'GA',
+      'Rome': 'GA', 'Greensboro': 'NC', 'Cayce': 'SC', 'Hilton Head': 'SC',
+      'Ridgeland': 'MS', 'Memphis': 'TN', 'New Orleans': 'LA', 'Lafayette': 'LA',
+      'Naples': 'FL', 'Bradenton': 'FL', 'Seminole': 'FL', 'Boca Raton': 'FL',
+      'Boynton Beach': 'FL', 'Coral Gables': 'FL', 'College Grove': 'TN',
+      'Grand Rapids': 'MI', 'Hudsonville': 'MI', 'Evansville': 'IN',
+      'Rochester': 'MN', 'Omaha': 'NE',
+      'Glen Cove': 'NY', 'Medford': 'NJ', 'Manchester': 'MA', 'Annapolis': 'MD',
+      'Boulder': 'CO'
+    };
+
     function getDrivingMiles(row) {
       const city = row['City'].replace(/,.*$/, '').trim();
       return drivingMilesLookup[city] || '';
+    }
+
+    function formatCityWithState(cityStr) {
+      // If already has state (contains comma), return as is
+      if (cityStr.includes(',')) {
+        return cityStr;
+      }
+      // Otherwise, add state from lookup
+      const city = cityStr.trim();
+      const state = cityToState[city];
+      return state ? `${city}, ${state}` : cityStr;
     }
 
     function proximityFromMiles(miles) {
@@ -795,11 +813,12 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       flight: true
     };
 
-    const expandedMonths = new Set();
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const sortState = {
+      column: 'dates',
+      direction: 'asc'
+    };
 
-    // Initialize all months as expanded
-    months.forEach(m => expandedMonths.add(m));
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     // Proximity config
     const proximityConfig = {
@@ -808,26 +827,36 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       flight: { icon: '✈', class: 'flight' }
     };
 
-    function toggleMonth(month) {
-      if (expandedMonths.has(month)) {
-        expandedMonths.delete(month);
-      } else {
-        expandedMonths.add(month);
-      }
-      render();
+    function sortData(dataToSort, column, direction) {
+      return [...dataToSort].sort((a, b) => {
+        let aVal, bVal;
+
+        if (column === 'dates') {
+          aVal = parseDate(a['Month'], a['Date(s)']);
+          bVal = parseDate(b['Month'], b['Date(s)']);
+          if (!aVal) return 1;
+          if (!bVal) return -1;
+          return direction === 'asc' ? aVal - bVal : bVal - aVal;
+        } else if (column === 'tournament') {
+          aVal = a['Level'].toLowerCase();
+          bVal = b['Level'].toLowerCase();
+        } else if (column === 'city') {
+          aVal = formatCityWithState(a['City']).toLowerCase();
+          bVal = formatCityWithState(b['City']).toLowerCase();
+        }
+
+        if (typeof aVal === 'string' && typeof bVal === 'string') {
+          return direction === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+        }
+        return 0;
+      });
     }
 
     function render() {
       const search = filters.search.toLowerCase();
 
-      // Sort data by date
-      const sortedData = [...data].sort((a, b) => {
-        const dateA = parseDate(a['Month'], a['Date(s)']);
-        const dateB = parseDate(b['Month'], b['Date(s)']);
-        if (!dateA) return 1;
-        if (!dateB) return -1;
-        return dateA - dateB;
-      });
+      // Sort data
+      const sortedData = sortData(data, sortState.column, sortState.direction);
 
       // Filter data
       const filteredData = sortedData.filter(row => {
@@ -879,28 +908,15 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
         const monthData = groupedByMonth[month];
         if (!monthData || monthData.length === 0) return;
 
-        const isExpanded = expandedMonths.has(month);
-
         // Month group container
         const monthGroup = document.createElement('div');
         monthGroup.className = 'month-group';
 
-        // Month header
-        const monthHeader = document.createElement('div');
-        monthHeader.className = 'month-header';
-        monthHeader.onclick = () => toggleMonth(month);
-        monthHeader.innerHTML = `
-          <svg class="chevron ${!isExpanded ? 'collapsed' : ''}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-          <span class="month-name">${month}</span>
-          <span class="count-badge">${monthData.length} tournament${monthData.length !== 1 ? 's' : ''}</span>
-        `;
-        monthGroup.appendChild(monthHeader);
-
-        // Month rows container
-        const monthRows = document.createElement('div');
-        monthRows.className = `month-rows ${!isExpanded ? 'collapsed' : ''}`;
+        // Month separator
+        const monthSeparator = document.createElement('div');
+        monthSeparator.className = 'month-separator';
+        monthSeparator.textContent = `${month} (${monthData.length} tournament${monthData.length !== 1 ? 's' : ''})`;
+        monthGroup.appendChild(monthSeparator);
 
         monthData.forEach(row => {
           const isNational = row['National'] === 'TRUE';
@@ -920,17 +936,15 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
           tableRow.innerHTML = `
             <span class="cell-dates">${formatDates(row)}</span>
             <span class="cell-tournament">${levelHtml}</span>
-            <span class="cell-divisions">${row['Divisions']}</span>
-            <span class="cell-city">${row['City']}</span>
+            <span class="cell-city">${formatCityWithState(row['City'])}</span>
             <span class="cell-venue">${row['Primary Site']}</span>
             <span class="cell-draw">${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</span>
             <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
             <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
           `;
-          monthRows.appendChild(tableRow);
+          monthGroup.appendChild(tableRow);
         });
 
-        monthGroup.appendChild(monthRows);
         tableBody.appendChild(monthGroup);
       });
     }
@@ -969,6 +983,28 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       filters.flight = !filters.flight;
       document.getElementById('chip-flight').classList.toggle('active');
       render();
+    });
+
+    // Sorting functionality
+    document.querySelectorAll('.table-header span.sortable').forEach(header => {
+      header.addEventListener('click', () => {
+        const column = header.dataset.column;
+
+        // Toggle sort direction
+        if (sortState.column === column) {
+          sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+          sortState.column = column;
+          sortState.direction = 'asc';
+        }
+
+        // Update header attributes
+        document.querySelectorAll('.table-header span.sortable').forEach(h => {
+          h.dataset.sort = h.dataset.column === column ? sortState.direction : 'none';
+        });
+
+        render();
+      });
     });
 
     // Initial render
