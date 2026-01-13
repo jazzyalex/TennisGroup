@@ -297,8 +297,8 @@
     <div class="filter-group">
       <span>Distance from Los Altos:</span>
       <label><input type="checkbox" id="filter-local" checked> Local (≤75mi)</label>
-      <label><input type="checkbox" id="filter-road" checked> Road trip (≤300mi)</label>
-      <label><input type="checkbox" id="filter-flight" checked> Flight (>300mi)</label>
+      <label><input type="checkbox" id="filter-road" checked> Road trip (≤500mi)</label>
+      <label><input type="checkbox" id="filter-flight" checked> Flight (>500mi)</label>
     </div>
   </div>
 
@@ -328,7 +328,7 @@
   </div>
 
   <div class="notes">
-    Driving distances from Los Altos, CA. Tournaments categorized as Local (≤75mi), Road Trip (≤300mi), or Flight (>300mi).
+    Driving distances from Los Altos, CA. Tournaments categorized as Local (≤75mi), Road Trip (≤500mi), or Flight (>500mi).
   </div>
 
   <script id="csv-data" type="text/plain">Month,Date(s),# of Days,Home Page,Level,Doubles Only,National,Divisions,B18,B16,B14,B12,G18,G16,G14,G12,Singles Draw,Doubles Draw,Organization,Tournament Director,Primary Site,City,Notes
@@ -565,7 +565,7 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       const m = parseFloat(miles);
       if (Number.isNaN(m) || m === '') return 'Flight';
       if (m <= 75) return 'Local';
-      if (m <= 300) return 'Road Trip';
+      if (m <= 500) return 'Road Trip';
       return 'Flight';
     }
 
