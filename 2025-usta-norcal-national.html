@@ -688,7 +688,8 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
   <script>
     // localStorage utilities for starred tournaments
     function getTournamentId(row) {
-      return `${row['Month']}:${row['Date(s)']}:${row['Level']}`;
+      // Include city to ensure uniqueness when same level tournaments occur on same dates
+      return `${row['Month']}:${row['Date(s)']}:${row['Level']}:${row['City']}`;
     }
 
     function loadStarredTournaments() {
