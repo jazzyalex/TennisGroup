@@ -242,7 +242,7 @@
 
     .table-header {
       display: grid;
-      grid-template-columns: 50px 140px 1fr 140px 1fr 100px 100px 100px;
+      grid-template-columns: 40px 50px 140px 1fr 140px 1fr 100px 100px 100px;
       padding: 12px 24px;
       background: var(--bg-tertiary);
       border-bottom: 1px solid var(--border);
@@ -303,9 +303,9 @@
 
     .table-row {
       display: grid;
-      grid-template-columns: 50px 140px 1fr 140px 1fr 100px 100px 100px;
+      grid-template-columns: 40px 50px 140px 1fr 140px 1fr 100px 100px 100px;
       align-items: center;
-      padding: 16px 24px;
+      padding: 20px 24px;
       border-bottom: 1px solid var(--border-subtle);
       transition: all 0.15s ease;
       cursor: default;
@@ -320,6 +320,29 @@
       border-left: 3px solid #0891b2;
       margin-left: -3px;
       padding-left: 21px;
+    }
+
+    .cell-star {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+
+    .cell-star:hover {
+      transform: scale(1.2);
+    }
+
+    .cell-star.starred {
+      color: #f59e0b;
+    }
+
+    .cell-star.unstarred {
+      color: var(--text-muted);
+      opacity: 0.4;
     }
 
     .cell-number {
@@ -432,7 +455,7 @@
     @media (max-width: 1200px) {
       .table-header,
       .table-row {
-        grid-template-columns: 45px 120px 1fr 120px 1fr 90px 90px 90px;
+        grid-template-columns: 35px 45px 120px 1fr 120px 1fr 90px 90px 90px;
       }
     }
 
@@ -507,6 +530,11 @@
       </div>
 
       <div class="filter-chips">
+        <div class="filter-chip" id="chip-starred">
+          <span class="chip-dot" style="background: #f59e0b"></span>
+          Starred
+        </div>
+        <div class="divider"></div>
         <div class="filter-chip active" id="chip-sectional">
           <span class="chip-dot" style="background: #64748b"></span>
           Sectional
@@ -534,6 +562,7 @@
     <!-- Table -->
     <div class="table-container">
       <div class="table-header">
+        <span></span>
         <span>#</span>
         <span class="sortable" data-sort="asc" data-column="dates">Dates</span>
         <span class="sortable" data-sort="none" data-column="tournament">Tournament</span>
@@ -657,6 +686,22 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 </script>
 
   <script>
+    // localStorage utilities for starred tournaments
+    function getTournamentId(row) {
+      return `${row['Month']}:${row['Date(s)']}:${row['Level']}`;
+    }
+
+    function loadStarredTournaments() {
+      const stored = localStorage.getItem('starred-tournaments');
+      return stored ? new Set(JSON.parse(stored)) : new Set();
+    }
+
+    function saveStarredTournaments(starredSet) {
+      localStorage.setItem('starred-tournaments', JSON.stringify([...starredSet]));
+    }
+
+    let starredTournaments = loadStarredTournaments();
+
     // Parse CSV
     const csvNode = document.getElementById('csv-data');
     const rawCsv = csvNode ? csvNode.textContent.trim() : '';
@@ -819,6 +864,7 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
     // State
     const filters = {
       search: '',
+      starred: false,
       sectional: true,
       national: true,
       local: true,
@@ -873,6 +919,12 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 
       // Filter data
       const filteredData = sortedData.filter(row => {
+        // Starred filter
+        if (filters.starred) {
+          const id = getTournamentId(row);
+          if (!starredTournaments.has(id)) return false;
+        }
+
         const isNational = row['National'] === 'TRUE';
         if (isNational && !filters.national) return false;
         if (!isNational && !filters.sectional) return false;
@@ -937,6 +989,11 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
 
           monthData.forEach(row => {
             rowNumber++;
+            const tournamentId = getTournamentId(row);
+            const isStarred = starredTournaments.has(tournamentId);
+            const starIcon = isStarred ? '★' : '☆';
+            const starClass = isStarred ? 'starred' : 'unstarred';
+
             const isNational = row['National'] === 'TRUE';
             const miles = getDrivingMiles(row);
             const proximity = proximityFromMiles(miles);
@@ -951,6 +1008,7 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
             const tableRow = document.createElement('div');
             tableRow.className = `table-row ${rowNumber % 2 === 0 ? 'even-row' : ''}`;
             tableRow.innerHTML = `
+              <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
               <span class="cell-number">${rowNumber}</span>
               <span class="cell-dates">${formatDates(row)}</span>
               <span class="cell-tournament">${levelHtml}</span>
@@ -968,6 +1026,11 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       } else {
         // Simple table without month grouping
         filteredData.forEach((row, index) => {
+          const tournamentId = getTournamentId(row);
+          const isStarred = starredTournaments.has(tournamentId);
+          const starIcon = isStarred ? '★' : '☆';
+          const starClass = isStarred ? 'starred' : 'unstarred';
+
           const isNational = row['National'] === 'TRUE';
           const miles = getDrivingMiles(row);
           const proximity = proximityFromMiles(miles);
@@ -982,6 +1045,7 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
           const tableRow = document.createElement('div');
           tableRow.className = `table-row ${(index + 1) % 2 === 0 ? 'even-row' : ''}`;
           tableRow.innerHTML = `
+            <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
             <span class="cell-number">${index + 1}</span>
             <span class="cell-dates">${formatDates(row)}</span>
             <span class="cell-tournament">${levelHtml}</span>
@@ -996,9 +1060,36 @@ December,December 28,1,,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,F
       }
     }
 
+    // Star toggle functionality
+    function toggleStar(tournamentId) {
+      if (starredTournaments.has(tournamentId)) {
+        starredTournaments.delete(tournamentId);
+      } else {
+        starredTournaments.add(tournamentId);
+      }
+      saveStarredTournaments(starredTournaments);
+      render();
+    }
+
+    // Event delegation for star clicks
+    document.getElementById('table-body').addEventListener('click', (e) => {
+      if (e.target.classList.contains('cell-star')) {
+        const tournamentId = e.target.dataset.id;
+        if (tournamentId) {
+          toggleStar(tournamentId);
+        }
+      }
+    });
+
     // Event listeners
     document.getElementById('search').addEventListener('input', (e) => {
       filters.search = e.target.value || '';
+      render();
+    });
+
+    document.getElementById('chip-starred').addEventListener('click', () => {
+      filters.starred = !filters.starred;
+      document.getElementById('chip-starred').classList.toggle('active');
       render();
     });
 
