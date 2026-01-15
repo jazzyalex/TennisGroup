@@ -1,122 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malakhov Tennis</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .logo {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .logo img {
-            width: 150px;
-        }
-        header {
-            text-align: center;
-            padding: 50px 0;
-        }
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1.2em;
-            color: #666;
-        }
-        section {
-            margin: 50px 0;
-        }
-        section h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #222;
-        }
-        section p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .register-btn {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 10px;
-            text-align: center;
-            background-color: #0056b3;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-        }
-        .register-btn:hover {
-            background-color: #003d80;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tennis Tournament Reports</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
+  <link rel="apple-touch-icon" href="assets/tennis-report/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tennis Tournament Reports">
+  <meta property="og:description" content="Tournament calendars, match reports, and player analysis for junior tennis">
+  <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --court-green: #2d5a27;
+      --court-green-light: #3d7a37;
+      --accent-cyan: #0891b2;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --border: rgba(255,255,255,0.08);
+        --border-subtle: rgba(255,255,255,0.04);
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+        --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 60px 32px 80px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.15) 49.5%, rgba(255,255,255,0.15) 50.5%, transparent 50.5%),
+        linear-gradient(0deg, transparent 85%, rgba(255,255,255,0.15) 85%, rgba(255,255,255,0.15) 88%, transparent 88%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .logo svg {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-bar {
+      width: 6px;
+      height: 28px;
+      background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-emerald) 100%);
+      border-radius: 3px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .section-badge {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-left: auto;
+    }
+
+    /* Tournament Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .tournament-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tournament-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--court-green) 0%, var(--court-green-light) 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .tournament-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-4px);
+      border-color: var(--court-green);
+    }
+
+    .tournament-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .card-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-type.calendar {
+      background: rgba(8, 145, 178, 0.12);
+      color: var(--accent-cyan);
+    }
+
+    .card-type.report {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--accent-amber);
+    }
+
+    .card-type-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .card-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .tournament-card:hover .card-arrow {
+      background: var(--court-green);
+      color: white;
+      transform: translateX(4px);
+    }
+
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-icon {
+      width: 16px;
+      height: 16px;
+      opacity: 0.7;
+    }
+
+    /* Coming Soon Section */
+    .coming-soon {
+      background: var(--bg-tertiary);
+      border: 1px dashed var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .coming-soon-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    .coming-soon h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .coming-soon p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--accent-cyan);
+      transition: opacity 0.2s;
+    }
+
+    .footer a:hover {
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 20px 60px;
+      }
+
+      .main {
+        padding: 32px 16px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tournament-card {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="MT-logo.jpg" alt="Malakhov Tennis Logo" style="width: 300px; height: auto;">
-        </div>
-        <header>
-            <h1>Malakhov Tennis</h1>
-            <p>Focused, Balanced Training for Future Champions</p>
-        </header>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJu60nJ7w9YFRFCf1XwoKzS8Wj6IQwHVEi1RIxkhrmhQBQ0A/viewform" class="register-btn">Join the Waitlist!</a>
-        <section>
-            <h2>Join Our Intensive 2-Hour Sessions!</h2>
-            <p>Welcome to  Summer Tennis Mini Group! Designed for U10/U12 tournament players with a UTR of 1.5-3 (flexible) our program focus on developing consistency and mindful play through competitive games that push kids to level up their skills. Our approach ensures that every player gains valuable experience and improves their game significantly.</p>
-        </section>
-        <section>
-            <h2>What to Expect</h2>
-            <p><strong>Shot Tolerance Training:</strong> Using both yellow and green balls, we work on extending rallies and improving your shot tolerance—a crucial skill at any level of play.</p>
-            <p><strong>Defensive Skills Development:</strong> Learn how to turn defense into offense with drills that enhance your ability to stay in the point.</p>
-            <p><strong>Live Game Experience:</strong> Experience real match situations with single and double matches, helping you apply what you've learned in a competitive setting.</p>
-            <p><strong>Serve Drills and Games:</strong> Master your serve with targeted drills and strategic games designed to improve accuracy and consistency.</p>
-            <p><strong>Movement Challenges:</strong> Improve your footwork and agility with dynamic movement challenges, inspired by the Spanish method, ensuring focused and intensive training.</p>
-        </section>
-        <section>
-            <h2>Small Group, Big Impact </h2>
-            <p>With only up to 4 kids per court, our sessions ensure personalized attention and ample opportunity for each player to practice and improve.</p>
-        </section>
-        <section>
-            <h2>Consistent Training for Consistent Results</h2>
-            <p>"To be solid brings confidence and reduces anxiety. To be solid does not mean to be a defensive player." – Sergi Bruguera</p>
-            <p>Consistent players win a lot of tennis matches, and consistency is the foundation for future high-level play. Our training program is built on this principle, helping young players develop the resilience and skills needed for long-term success.</p>
-        </section>
-        <section>
-            <h2>Led by a PTR Affiliate Rec Coach</h2>
-            <p>Our sessions are led by a PTR Rec Coach affiliate, ensuring top-quality instruction and adherence to the highest coaching standards.</p>
-        </section>
-        <section>
-            <h2>Who Can Join?</h2>
-            <p>U10 and U12 tennis tournament players with a UTR of 1.5-3 (flexible) looking to elevate their game and gain valuable match experience.</p>
-            <p><strong>Duration:</strong> 2 Hours</p>
-            <p><strong>Location:</strong> Los Altos/Mountain View/Cupertino</p>
-        </section>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJu60nJ7w9YFRFCf1XwoKzS8Wj6IQwHVEi1RIxkhrmhQBQ0A/viewform" class="register-btn">Join the Waitlist!</a>
-      
-            <p>For more information, feel free to reach out to us at <a href="mailto:malakhovtennis@gmail.com">malakhovtennis@gmail.com</a></p>
-     
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" fill="#2d5a27"/>
+          <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+          <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+        </svg>
+      </div>
+      <h1>Tennis Tournament Reports</h1>
+      <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
     </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Active Reports Section -->
+    <section>
+      <div class="section-header">
+        <div class="section-bar"></div>
+        <h2 class="section-title">Tournament Reports</h2>
+        <span class="section-badge">2 Reports</span>
+      </div>
+
+      <div class="cards-grid">
+        <!-- USTA NorCal & National Calendar -->
+        <a href="2025-usta-norcal-national.html" class="tournament-card">
+          <div class="card-header">
+            <span class="card-type calendar">
+              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              Calendar
+            </span>
+            <div class="card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="card-title">USTA G12 Tournaments 2026</h3>
+          <p class="card-description">Complete calendar of NorCal Sectional (Levels 2-5) and National (Levels 1-4) tournaments with distances from Los Altos, CA. Includes filtering, search, and starred favorites.</p>
+          <div class="card-meta">
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              Full Year
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              NorCal + National
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Favorites
+            </span>
+          </div>
+        </a>
+
+        <!-- L4 Excellence Tournament Report -->
+        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card">
+          <div class="card-header">
+            <span class="card-type report">
+              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              Report
+            </span>
+            <div class="card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="card-title">L4 Closed Excellence - U12 Girls</h3>
+          <p class="card-description">Detailed tournament report with player standings, match history, UTR analysis, and performance metrics for the January 2026 Level 4 tournament in San Jose.</p>
+          <div class="card-meta">
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              Jan 10-18, 2026
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              San Jose, CA
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              32 Players
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section>
+      <div class="section-header">
+        <div class="section-bar"></div>
+        <h2 class="section-title">Coming Soon</h2>
+      </div>
+
+      <div class="coming-soon">
+        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <h3>More Reports on the Way</h3>
+        <p>Additional tournament reports and analysis tools will be added throughout the 2026 season.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Tournament data sourced from USTA NorCal and USTA National calendars.</p>
+      <p>Built with care for the junior tennis community.</p>
+    </div>
+  </footer>
 </body>
 </html>
