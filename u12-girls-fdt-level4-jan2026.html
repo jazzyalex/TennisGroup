@@ -30,6 +30,46 @@
       border-top: 4px solid #4472C4;
     }
 
+    .home-link {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(68, 114, 196, 0.35);
+      background: rgba(255, 255, 255, 0.9);
+      color: #1f2a44;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(31, 45, 68, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      z-index: 1000;
+    }
+
+    .home-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .home-link:hover {
+      transform: translateY(-1px);
+      background: rgba(243, 246, 255, 0.95);
+      box-shadow: 0 12px 24px rgba(31, 45, 68, 0.22);
+    }
+
+    @media (max-width: 720px) {
+      .home-link {
+        top: 12px;
+        left: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+    }
+
     .report-header {
       max-width: 1000px;
       margin: 12px auto 24px;
@@ -1780,6 +1820,14 @@
   </style>
 </head>
 <body>
+  <a class="home-link" href="index.html" aria-label="Back to tournament dashboard">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M3 11l9-7 9 7"/>
+      <path d="M9 22V12h6v10"/>
+      <path d="M5 22h14"/>
+    </svg>
+    Home
+  </a>
   <div class="desktop-view">
   <div class="report-header">
     <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">

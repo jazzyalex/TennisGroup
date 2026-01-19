@@ -174,8 +174,48 @@
     }
 
     .calendar-card {
-      min-height: 220px;
-      padding: 22px 26px;
+      min-height: 160px;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
+      border-color: rgba(255, 255, 255, 0.28);
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .calendar-card::before {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.9) 100%);
+    }
+
+    .calendar-card .card-title,
+    .calendar-card .card-description {
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .calendar-card .card-description {
+      margin-bottom: 16px;
+    }
+
+    .calendar-card .card-type.calendar {
+      background: rgba(255, 255, 255, 0.18);
+      color: #f8fafc;
+    }
+
+    .calendar-card .calendar-header-meta .meta-item {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .calendar-card .calendar-header-meta .meta-icon {
+      opacity: 0.8;
+    }
+
+    .calendar-card .card-arrow {
+      background: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .calendar-card:hover .card-arrow {
+      background: rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      transform: translateX(4px);
     }
 
     .tournament-card.is-upcoming {
