@@ -2744,7 +2744,7 @@
       
       // Render header
       // Use title as-is (already contains "Open Level 5 Championship Singles - Girls' 12 Singles")
-      const titleText = info.title || 'Open Level 5 Championship Singles - Girls' 12 Singles';
+      const titleText = info.title || "Open Level 5 Championship Singles - Girls' 12 Singles";
       document.getElementById('mobile-title').textContent = titleText;
       
       // Format: "Jan 10-18, 2026 • San Jose, CA"
@@ -3305,7 +3305,7 @@
       if (navigator.share) {
         try {
           await navigator.share({
-            title: 'Open Level 5 Championship Singles - Girls' 12 Singles',
+            title: "Open Level 5 Championship Singles - Girls' 12 Singles",
             text: 'Tournament Report - January 31 - February 1, 2026',
             url: window.location.href
           });
