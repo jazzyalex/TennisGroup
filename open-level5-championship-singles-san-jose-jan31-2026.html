@@ -2288,8 +2288,7 @@
         
         const fullName = `${firstName} ${lastName}`;
         const sectionCell = cells[7];
-        const sectionValue = sectionCell ? parseInt(sectionCell.textContent.trim(), 10) : NaN;
-        const sectionRank = Number.isFinite(sectionValue) ? sectionValue : (SECTION_RANKS[fullName] || null);
+        const sectionRank = sectionCell ? parseInt(sectionCell.textContent.trim(), 10) || null : null;
         
         // Get USTA profile URL from desktop version's mapping (uses "FIRST|LAST" uppercase key)
         const profileKey = `${firstName.toUpperCase()}|${lastName.toUpperCase()}`;
@@ -2325,9 +2324,10 @@
 
     function parseKeyStats() {
       const stats = {
-        drawSize: 0,
-        seed: '',
-        registered: 0
+        drawSize: 32,
+        seed: 20,
+        registered: 39,
+        percentAbove: 31
       };
       
       const keyStats = document.querySelectorAll('.desktop-view .key-stat');
@@ -2340,13 +2340,15 @@
         const valueText = value.textContent.trim();
         
         if (labelText === 'Draw') {
-          const size = parseInt(valueText, 10);
-          if (Number.isFinite(size)) stats.drawSize = size;
-        }else if (labelText === 'Registered') {
-          const reg = parseInt(valueText, 10);
-          if (Number.isFinite(reg)) stats.registered = reg;
-        }else if (labelText === 'Closes') {
-          stats.seed = valueText;
+          stats.drawSize = parseInt(valueText);
+        } else if (labelText === 'Alexis Seed') {
+          const parts = valueText.split('/');
+          if (parts.length === 2) {
+            stats.seed = parseInt(parts[0].trim());
+            stats.registered = parseInt(parts[1].trim());
+          }
+        } else if (labelText === '% Above Alexis (UTR)') {
+          stats.percentAbove = parseInt(valueText);
         }
       });
       
@@ -2443,7 +2445,7 @@
             <h3>${player.fullName}</h3>
             <span>${player.location}</span>
           </div>
-          <div class="mobile-alexis-seed">#${player.rank}Seed</div>
+          <div class="mobile-alexis-seed">#${player.rank} Seed</div>
         </div>
         <div class="mobile-alexis-stats">
           <div class="mobile-alexis-stat">
@@ -2488,8 +2490,8 @@
           </div>
         </div>
         <div class="mobile-gauge-labels">
-          <span>#1 ${firstPlayer.firstName}${firstPlayer.lastName[0]}.</span>
-          <span>#${targetPlayer.rank}${targetPlayer.firstName}</span>
+          <span>#1 ${firstPlayer.firstName} ${firstPlayer.lastName[0]}.</span>
+          <span>#${targetPlayer.rank} ${targetPlayer.firstName}</span>
           <span>#${players.length}</span>
         </div>
         ${cushion > 0 ? `
@@ -2556,11 +2558,11 @@
       
       if (sortBy === 'rank') {
         sorted.sort((a, b) => a.rank - b.rank);
-      }else if (sortBy === 'utr') {
+      } else if (sortBy === 'utr') {
         sorted.sort((a, b) => b.utr - a.utr); // Descending (higher is better)
-      }else if (sortBy === 'natRank') {
+      } else if (sortBy === 'natRank') {
         sorted.sort((a, b) => a.natRank - b.natRank); // Ascending (lower is better)
-      }else if (sortBy === 'wtn') {
+      } else if (sortBy === 'wtn') {
         sorted.sort((a, b) => {
           const aWtn = parseFloat(a.wtn) || 999;
           const bWtn = parseFloat(b.wtn) || 999;
@@ -2691,7 +2693,7 @@
             <div class="mobile-info-row">
               <span class="mobile-info-label">Site ${i + 1}</span>
               <span class="mobile-info-value">
-                ${venue.url ? `<a href="${venue.url}" target="_blank">${venue.name}→</a>` : venue.name}
+                ${venue.url ? `<a href="${venue.url}" target="_blank">${venue.name} →</a>` : venue.name}
               </span>
             </div>
           `;
@@ -2748,7 +2750,7 @@
       document.getElementById('mobile-title').textContent = titleText;
       
       // Format: "Jan 10-18, 2026 • San Jose, CA"
-      document.getElementById('mobile-meta').textContent = `${info.dates}• ${info.location}`;
+      document.getElementById('mobile-meta').textContent = `${info.dates} • ${info.location}`;
       
       // Render hero stats
       document.getElementById('mobile-draw-size').textContent = stats.drawSize;
@@ -2758,9 +2760,6 @@
       // Render Alexis card
       if (targetPlayer) {
         document.getElementById('mobile-alexis-card').innerHTML = buildAlexisCard(targetPlayer);
-      }else {
-        const card = document.getElementById('mobile-alexis-card');
-        if (card) card.style.display = 'none';
       }
       
       // Render position gauge
@@ -2775,11 +2774,6 @@
         }, 100);
       }
       
-      if (!targetPlayer) {
-        const gauge = document.getElementById('mobile-position-gauge');
-        if (gauge) gauge.style.display = 'none';
-      }
-
       // Render UTR histogram
       document.getElementById('mobile-histogram').innerHTML = buildUtrHistogramMobile();
       
@@ -2801,13 +2795,13 @@
       const showMoreBtn = document.getElementById('mobile-show-more');
       if (limit && limit < allPlayers.length) {
         showMoreBtn.style.display = 'block';
-        showMoreBtn.textContent = `Show all ${allPlayers.length}players ↓`;
+        showMoreBtn.textContent = `Show all ${allPlayers.length} players ↓`;
         isExpanded = false;
-      }else if (limit === null) {
+      } else if (limit === null) {
         showMoreBtn.style.display = 'block';
         showMoreBtn.textContent = `Show less ↑`;
         isExpanded = true;
-      }else {
+      } else {
         showMoreBtn.style.display = 'none';
       }
     }
@@ -2835,7 +2829,7 @@
     function handleShowMore() {
       if (isExpanded) {
         renderPlayerList(currentSort, 8);
-      }else {
+      } else {
         renderPlayerList(currentSort, null);
       }
     }
@@ -2862,7 +2856,7 @@
       if (targetView === 'mobile') {
         document.body.classList.add('force-mobile');
         document.body.classList.remove('force-desktop');
-      }else {
+      } else {
         document.body.classList.add('force-desktop');
         document.body.classList.remove('force-mobile');
       }
@@ -2882,7 +2876,7 @@
       if (pref === 'desktop') {
         document.body.classList.add('force-desktop');
         document.body.classList.remove('force-mobile');
-      }else if (pref === 'mobile') {
+      } else if (pref === 'mobile') {
         document.body.classList.add('force-mobile');
         document.body.classList.remove('force-desktop');
       }
@@ -2970,7 +2964,7 @@
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initMobileView);
-    }else {
+    } else {
       initMobileView();
     }
   </script>
@@ -2982,43 +2976,26 @@
     window.playerProfileUrlByName = {
       "AASHNA|MODI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563728",
       "AKSHAYA|ASHOK": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018948492",
-      "ALEXIS|MALAKHOVA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796",
-      "ALEXI|LABRECQUE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018998280",
       "AMY|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019389340",
-      "ANNABEL|HU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637000",
+      "ANGELA|ZHANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018972786",
+      "ANISHKA|AGRAWAL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018819017",
       "AVALINE|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019122088",
-      "BELLA|WU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018791290",
-      "CAMILLE|KUNKEL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018867069",
-      "CASSIA|GARCIA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019177416",
-      "DAMAYANTHI|ARUNKUMAR": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637289",
-      "EILEEN|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732",
-      "ELIANA|MOGLEN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018969157",
-      "ELISE|WATT": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019258117",
+      "CECILIA|XIE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018947627",
+      "ELIZABETH|CHEN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018900730",
       "ELLIE|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019241036",
       "EMMA|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736",
-      "HARPER|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018622907",
-      "JENNA|YU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832337",
-      "KATERYNA|MOLOCHKO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019450380",
+      "GRACE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018760264",
       "KATHERINE|CAO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019303547",
-      "LIANA|CAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019456865",
+      "LYRA|YAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018557375",
       "MARGARET|DORAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019941530",
       "MAY|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027",
       "MEGAN|LAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678",
+      "MIHIKA|SINGH": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382",
       "MISHA|KATARIA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835",
-      "NOOR|DESAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018653862",
-      "OLIVIA|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018636218",
-      "OLIVIA|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019404801",
-      "PANEEZ|SHAHAB": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018690020",
-      "RUOYU|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144",
-      "SANAIA|GOUDIE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018414359",
+      "OLIVIA|KNAPP": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018820003",
       "SANIA|BHAMBANI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668291",
-      "SARAHANA|CHITAURE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019291144",
-      "SIYA|DALAL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018529839",
-      "STEPHANIE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832557",
-      "SUMMER|STIRITZ": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018746621",
-      "ZAIRA|GADGIL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018667343",
-      "ZHIYAN|DUAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019107218",
-      "ZIVA|GADGIL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018658341",
+      "VALENTINA|KUKEEVA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502",
+      "ZOE|GOUDIE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018414360",
     };
 
     function decorateMetricCellWithProfileLink(cell, url) {
@@ -3202,7 +3179,7 @@
 
       const captionEl = document.getElementById('utr-histogram-caption');
       if (captionEl) {
-        let caption = `Based on ${values.length}of ${drawPlayers.length}draw players with UTR ratings.`;
+        let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
         if (highlightUtr !== null) {
           caption += ' Alexis bin highlighted.';
         }
@@ -3309,12 +3286,12 @@
             text: 'Tournament Report - January 31 - February 1, 2026',
             url: window.location.href
           });
-        }catch (err) {
+        } catch (err) {
           if (err.name !== 'AbortError') {
             console.error('Share failed:', err);
           }
         }
-      }else {
+      } else {
         // Fallback: Copy link to clipboard
         navigator.clipboard.writeText(window.location.href).then(() => {
           shareButton.innerHTML = '✓';
