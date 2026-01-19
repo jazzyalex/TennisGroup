@@ -59,12 +59,45 @@
       font-weight: bold;
     }
 
+    .tournament-dates-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 8px 0 12px;
+    }
+
     .tournament-dates {
       text-align: center;
       color: #2c3e50;
       font-size: 1.3em;
       font-weight: 600;
-      margin: 8px 0 12px;
+    }
+
+    .deadline-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      border: 1px solid #c9d6f5;
+      background: #f3f6ff;
+      font-size: 12px;
+      line-height: 1.2;
+      color: #2c3e50;
+      white-space: nowrap;
+    }
+
+    .deadline-countdown {
+      font-weight: 700;
+      color: #2c5aa0;
+    }
+
+    .deadline-date {
+      font-size: 11px;
+      color: #5f6c7b;
     }
 
     .tournament-info {
@@ -1785,8 +1818,14 @@
     <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
     <div class="report-header-text">
       <h1>Open Level 5 Championship Singles - Girls' 12 Singles</h1>
-      <div class="tournament-dates">
-        January 31 - February 1, 2026
+      <div class="tournament-dates-row">
+        <div class="tournament-dates">
+          January 31 - February 1, 2026
+        </div>
+        <div class="deadline-badge" id="registration-deadline-badge">
+          <div class="deadline-countdown" id="registration-countdown">Closes in --</div>
+          <div class="deadline-date" id="registration-deadline-date">--</div>
+        </div>
       </div>
       <div class="tournament-info">
         <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" title="Open tournament page">Open Level 5 Championship Singles</a><br>
@@ -3282,6 +3321,96 @@
     normalizeLastNames();
     normalizeLocations();
     buildUtrHistogram();
+    updateRegistrationCountdown();
+    setInterval(updateRegistrationCountdown, 60 * 1000);
+
+    function getRegistrationCloseText() {
+      const keyStats = document.querySelectorAll('.desktop-view .key-stat');
+      for (const stat of keyStats) {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase() === 'closes') {
+          return value.textContent.trim();
+        }
+      }
+
+      const detailRows = document.querySelectorAll('.desktop-view .detail-row');
+      for (const row of detailRows) {
+        const label = row.querySelector('.detail-label');
+        const value = row.querySelector('.detail-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase().startsWith('registration closes')) {
+          return value.textContent.trim();
+        }
+      }
+
+      return null;
+    }
+
+    function parseCloseDate(text) {
+      if (!text) return null;
+      const match = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)\s+([A-Z]{2,4})/);
+      if (!match) return null;
+
+      const monthName = match[1];
+      const day = parseInt(match[2], 10);
+      const year = parseInt(match[3], 10);
+      let hour = parseInt(match[4], 10);
+      const minute = parseInt(match[5], 10);
+      const ampm = match[6];
+      const tz = match[7];
+
+      const months = {
+        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+      };
+      const month = months[monthName];
+      if (month === undefined) return null;
+
+      hour = hour % 12 + (ampm === 'PM' ? 12 : 0);
+
+      const offsets = {
+        PST: -8, PDT: -7, PT: -8,
+        MST: -7, MDT: -6,
+        CST: -6, CDT: -5,
+        EST: -5, EDT: -4
+      };
+      const offset = offsets[tz] ?? 0;
+      const utcHour = hour - offset;
+      const utcMs = Date.UTC(year, month, day, utcHour, minute, 0);
+      return new Date(utcMs);
+    }
+
+    function updateRegistrationCountdown() {
+      const badge = document.getElementById('registration-deadline-badge');
+      const countdownEl = document.getElementById('registration-countdown');
+      const dateEl = document.getElementById('registration-deadline-date');
+      if (!badge || !countdownEl || !dateEl) return;
+
+      const closeText = getRegistrationCloseText();
+      if (!closeText) {
+        badge.style.display = 'none';
+        return;
+      }
+
+      const closeDate = parseCloseDate(closeText);
+      if (!closeDate) {
+        badge.style.display = 'none';
+        return;
+      }
+
+      const diffMs = closeDate.getTime() - Date.now();
+      if (diffMs <= 0) {
+        countdownEl.textContent = 'Registration closed';
+      } else {
+        const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+        const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+        countdownEl.textContent = `Closes in ${days}d ${hours}h`;
+      }
+
+      dateEl.textContent = closeText;
+    }
 
     // Share button functionality
     const shareButton = document.createElement('button');
