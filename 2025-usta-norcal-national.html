@@ -64,6 +64,34 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .header-logo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 4px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .header-logo-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.15);
+    }
+
+    .header-logo-link:focus-visible {
+      outline: 2px solid #0891b2;
+      outline-offset: 3px;
+    }
+
+    .header-logo {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      display: block;
     }
 
     .accent-bar {
@@ -493,6 +521,9 @@
     <!-- Header -->
     <div class="header">
       <div class="header-top">
+        <a class="header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
+          <img src="assets/tennis-report/favicon-256.png" alt="Tennis report logo" class="header-logo">
+        </a>
         <div class="accent-bar"></div>
         <h1>USTA G12 Tournaments</h1>
         <span class="year-badge">2026</span>

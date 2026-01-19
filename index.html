@@ -176,12 +176,15 @@
     .calendar-card {
       min-height: 140px;
       padding: 16px 24px;
+    }
+
+    .tournament-card.calendar-card {
       background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
       border-color: rgba(255, 255, 255, 0.28);
       color: rgba(255, 255, 255, 0.92);
     }
 
-    .calendar-card::before {
+    .tournament-card.calendar-card::before {
       background: linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.9) 100%);
     }
 
@@ -210,6 +213,10 @@
     .calendar-card .card-arrow {
       background: rgba(255, 255, 255, 0.2);
       color: rgba(255, 255, 255, 0.85);
+    }
+
+    .tournament-card.calendar-card:hover {
+      border-color: rgba(255, 255, 255, 0.65);
     }
 
     .calendar-card:hover .card-arrow {
