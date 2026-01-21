@@ -77,7 +77,7 @@
       background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
       position: relative;
       overflow: hidden;
-      padding: 60px 32px 80px;
+      padding: 44px 32px 54px;
     }
 
     .hero::before {
@@ -98,7 +98,7 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(260px, 1fr);
-      gap: 32px;
+      gap: 24px;
       align-items: center;
       text-align: left;
       position: relative;
@@ -108,7 +108,7 @@
     .hero-left {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
@@ -119,8 +119,8 @@
     }
 
     .logo svg {
-      width: 80px;
-      height: 80px;
+      width: 68px;
+      height: 68px;
       border-radius: 16px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
@@ -263,13 +263,13 @@
     }
 
     .calendar-card {
-      min-height: 140px;
-      padding: 16px 24px;
+      min-height: 110px;
+      padding: 14px 20px;
     }
 
     .tournament-card.calendar-card {
-      background: var(--bg-secondary);
-      border-color: var(--border);
+      background: var(--court-green);
+      border-color: rgba(255, 255, 255, 0.22);
     }
 
     .tournament-card.calendar-card::before {
@@ -278,39 +278,39 @@
 
     .calendar-card .card-title,
     .calendar-card .card-description {
-      color: var(--text-primary);
+      color: rgba(255, 255, 255, 0.95);
     }
 
     .calendar-card .card-description {
-      color: var(--text-secondary);
-      margin-bottom: 16px;
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 12px;
     }
 
     .calendar-card .card-type.calendar {
-      background: rgba(8, 145, 178, 0.12);
-      color: var(--accent-cyan);
+      background: rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .calendar-card .calendar-header-meta .meta-item {
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .calendar-card .calendar-header-meta .meta-icon {
-      opacity: 0.65;
+      opacity: 0.9;
     }
 
     .calendar-card .card-arrow {
-      background: var(--bg-tertiary);
-      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.95);
     }
 
     .tournament-card.calendar-card:hover {
-      border-color: var(--court-green);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .calendar-card:hover .card-arrow {
-      background: var(--court-green);
-      color: white;
+      background: rgba(255, 255, 255, 0.24);
       transform: translateX(4px);
     }
 
@@ -539,7 +539,7 @@
     /* Responsive */
     @media (max-width: 768px) {
       .hero {
-        padding: 40px 20px 60px;
+        padding: 32px 16px 44px;
       }
 
       .hero-content {
@@ -604,19 +604,19 @@
           </div>
           <div class="player-stat">
             <span class="stat-label">WTN</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" [.59</a></span>
+            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.59</a></span>
           </div>
           <div class="player-stat">
             <span class="stat-label">USTA Pts</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" t7</a></span>
+            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_points_total">647</a></span>
           </div>
           <div class="player-stat">
             <span class="stat-label">USTA S Pts</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" t2</a></span>
+            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_points_singles">642</a></span>
           </div>
           <div class="player-stat">
             <span class="stat-label">USTA D Pts</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" Z</a></span>
+            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_points_doubles">32</a></span>
           </div>
           <div class="player-stat">
             <span class="stat-label">NorCal</span>
@@ -646,7 +646,7 @@
       <div class="section-header">
         <div class="section-bar"></div>
         <h2 class="section-title">Tournament Reports</h2>
-        <span class="section-badge">3 Reports</span>
+        <span class="section-badge">5 Reports</span>
       </div>
 
       <div class="calendar-row">
@@ -693,7 +693,7 @@
             </div>
           </div>
           <h3 class="card-title">USTA G12 Tournaments 2026</h3>
-          <p class="card-description">Complete calendar of NorCal Sectional (Levels 2-5) and National (Levels 1-4) tournaments with distances from Los Altos, CA.</p>
+          <p class="card-description">NorCal + National calendar with distances from Los Altos, CA.</p>
         </a>
       </div>
 
@@ -734,6 +734,98 @@
                 <circle cx="12" cy="10" r="3"/>
               </svg>
               San Jose, CA
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Level 5
+            </span>
+          </div>
+        </a>
+
+        <!-- Open Level 5 Championship Singles (Larkspur) -->
+        <a href="open-level5-championship-singles-larkspur-jan31-2026.html" class="tournament-card is-upcoming">
+          <div class="card-header">
+            <span class="card-type report">
+              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              Report
+            </span>
+            <div class="card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="card-title">Open Level 5 Championship Singles - G12</h3>
+          <p class="card-description">Daily roster tracking with USTA WTN, national/section rankings, and UTR ratings for the Jan 31 - Feb 1, 2026 Level 5 event in Larkspur.</p>
+          <div class="card-meta">
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              Jan 31 - Feb 1, 2026
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Larkspur, CA
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Level 5
+            </span>
+          </div>
+        </a>
+
+        <!-- Open Level 5 Championship Singles (Stockton) -->
+        <a href="open-level5-championship-singles-stockton-jan31-2026.html" class="tournament-card is-upcoming">
+          <div class="card-header">
+            <span class="card-type report">
+              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              Report
+            </span>
+            <div class="card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="card-title">Open Level 5 Championship Singles - G12</h3>
+          <p class="card-description">Daily roster tracking with USTA WTN, national/section rankings, and UTR ratings for the Jan 31 - Feb 1, 2026 Level 5 event in Stockton.</p>
+          <div class="card-meta">
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              Jan 31 - Feb 1, 2026
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Stockton, CA
             </span>
             <span class="meta-item">
               <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
