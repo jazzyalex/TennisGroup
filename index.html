@@ -231,6 +231,25 @@
       font-weight: 600;
     }
 
+    .player-links {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .player-links a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--accent-cyan);
+    }
+
+    .player-links a:hover {
+      opacity: 0.8;
+    }
+
     /* Main Content */
     .main {
       max-width: 1200px;
@@ -620,37 +639,54 @@
       <aside class="player-card">
         <div class="player-card-top">
           <span class="player-badge">Our Player</span>
-          <span class="player-updated">Updated Jan 21, 2026</span>
+          <span class="player-updated" data-player-updated>Updated Jan 21, 2026</span>
         </div>
-        <div class="player-name">Alexis Malakhova</div>
-        <div class="player-meta">Springer Elementary • 4th Grade • Class of 2034</div>
+        <div class="player-name" data-player-name>Alexis Malakhova</div>
+        <div class="player-meta" data-player-meta>Springer Elementary • 4th Grade • Class of 2034</div>
         <div class="player-stats-grid">
           <div class="player-stat">
             <span class="stat-label">UTR</span>
-            <span class="stat-value">4.04</span>
+            <span class="stat-value" data-player-stat="utr">4.04</span>
           </div>
           <div class="player-stat">
             <span class="stat-label">WTN</span>
-            <span class="stat-value">33.57</span>
+            <span class="stat-value" [.59</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">USTA Pts</span>
+            <span class="stat-value" t7</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">USTA S Pts</span>
+            <span class="stat-value" t2</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">USTA D Pts</span>
+            <span class="stat-value" Z</span>
           </div>
           <div class="player-stat">
             <span class="stat-label">Section</span>
-            <span class="stat-value">#48</span>
+            <span class="stat-value" data-player-stat="usta_section">#41</span>
           </div>
           <div class="player-stat">
             <span class="stat-label">National</span>
-            <span class="stat-value">#775</span>
+            <span class="stat-value" data-player-stat="usta_national">#681</span>
           </div>
           <div class="player-stat">
             <span class="stat-label">TR Nat</span>
-            <span class="stat-value">#6</span>
+            <span class="stat-value" data-player-stat="tr_national">#6</span>
           </div>
           <div class="player-stat">
             <span class="stat-label">TR CA</span>
-            <span class="stat-value">#3</span>
+            <span class="stat-value" data-player-stat="tr_california">#3</span>
           </div>
         </div>
         <div class="player-recruiting">Tennis Recruiting rankings • National &amp; California</div>
+        <div class="player-links">
+          <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">UTR Profile</a>
+          <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener">USTA Profile</a>
+          <a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">TR Profile</a>
+        </div>
       </aside>
     </div>
   </section>

@@ -284,6 +284,10 @@
       z-index: 10;
     }
 
+    .table-header span {
+      white-space: nowrap;
+    }
+
     .table-header span.sortable {
       cursor: pointer;
       user-select: none;
@@ -607,6 +611,11 @@
           <span class="chip-dot" style="background: #f97316"></span>
           Doubles
         </div>
+        <div class="divider"></div>
+        <div class="filter-chip" id="chip-past">
+          <span class="chip-dot" style="background: #94a3b8"></span>
+          Past
+        </div>
       </div>
     </div>
 
@@ -617,7 +626,7 @@
         <span>#</span>
         <span class="sortable" data-sort="asc" data-column="dates">Dates</span>
         <span class="sortable" data-sort="none" data-column="tournament">Tournament</span>
-        <span class="sortable" data-sort="none" data-column="format">Format</span>
+        <span data-column="format">Format</span>
         <span class="sortable" data-sort="none" data-column="city">City</span>
         <span data-column="venue">Venue</span>
         <span data-column="draw">Draw</span>
@@ -744,6 +753,51 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
 </script>
 
   <script>
+    const FILTER_STORAGE_KEY = 'tournament-filters-v1';
+
+    function loadFilters() {
+      try {
+        const raw = localStorage.getItem(FILTER_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (err) {
+        return {};
+      }
+    }
+
+    function saveFilters() {
+      const payload = {
+        search: filters.search,
+        sectional: filters.sectional,
+        national: filters.national,
+        local: filters.local,
+        road: filters.road,
+        flight: filters.flight,
+        formatS: filters.formatS,
+        formatSD: filters.formatSD,
+        formatD: filters.formatD,
+        showPast: filters.showPast
+      };
+      localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(payload));
+    }
+
+    function syncFilterChips() {
+      const setActive = (id, active) => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', !!active);
+      };
+      setActive('chip-sectional', filters.sectional);
+      setActive('chip-national', filters.national);
+      setActive('chip-local', filters.local);
+      setActive('chip-road', filters.road);
+      setActive('chip-flight', filters.flight);
+      setActive('chip-format-s', filters.formatS);
+      setActive('chip-format-sd', filters.formatSD);
+      setActive('chip-format-d', filters.formatD);
+      setActive('chip-past', filters.showPast);
+      const searchInput = document.getElementById('search');
+      if (searchInput) searchInput.value = filters.search || '';
+    }
+
     // localStorage utilities for starred tournaments
     function getTournamentTitle(row) {
       return row['Tournament Name'] || row['Level'] || '';
@@ -888,6 +942,12 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       return 'flight';
     }
 
+    function scheduleYear() {
+      const yearText = document.querySelector('.year-badge')?.textContent?.trim();
+      const year = parseInt(yearText || '', 10);
+      return Number.isFinite(year) ? year : new Date().getFullYear();
+    }
+
     function parseDate(month, dateStr) {
       const months = {
         'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
@@ -911,8 +971,41 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       if (!match) return null;
 
       const day = parseInt(match[0]);
-      const year = monthNum >= 7 ? 2026 : 2025;
+      const year = scheduleYear();
       return new Date(year, monthNum, day);
+    }
+
+    function parseEndDate(row) {
+      const months = {
+        'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+        'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+      };
+      let month = row['Month'];
+      let dates = row['Date(s)'] || '';
+      const embedded = dates.match(/^([A-Za-z]+)\s+(.*)$/);
+      if (embedded) {
+        month = embedded[1];
+        dates = embedded[2];
+      }
+      const monthNum = months[month];
+      if (monthNum === undefined) return null;
+
+      const parts = dates.split(';').map(part => part.trim()).filter(Boolean);
+      const lastPart = parts[parts.length - 1] || '';
+      const rangeMatch = lastPart.match(/(\d{1,2})(?:\s*-\s*(\d{1,2}))?$/);
+      if (!rangeMatch) return null;
+      const startDay = parseInt(rangeMatch[1], 10);
+      const endDay = parseInt(rangeMatch[2] || rangeMatch[1], 10);
+      let year = scheduleYear();
+      let endMonth = monthNum;
+      if (endDay < startDay) {
+        endMonth = monthNum + 1;
+        if (endMonth === 12) {
+          endMonth = 0;
+          year += 1;
+        }
+      }
+      return new Date(year, endMonth, endDay);
     }
 
     function formatDates(row) {
@@ -936,6 +1029,15 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       return 'S';
     }
 
+    function formatDraw(row) {
+      const singles = (row['Singles Draw'] || '').trim();
+      const doubles = (row['Doubles Draw'] || '').trim();
+      if (singles && doubles) return `${singles} / ${doubles}`;
+      if (singles) return singles;
+      if (doubles) return doubles;
+      return '';
+    }
+
     // State
     const filters = {
       search: '',
@@ -947,8 +1049,12 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       flight: true,
       formatS: true,
       formatSD: true,
-      formatD: true
+      formatD: true,
+      showPast: false
     };
+
+    Object.assign(filters, loadFilters());
+    syncFilterChips();
 
     const sortState = {
       column: 'dates',
@@ -999,6 +1105,9 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       const sortedData = sortData(data, sortState.column, sortState.direction);
 
       // Filter data
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
       const filteredData = sortedData.filter(row => {
         // Starred filter
         if (filters.starred) {
@@ -1009,6 +1118,9 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
         const isNational = row['National'] === 'TRUE';
         if (isNational && !filters.national) return false;
         if (!isNational && !filters.sectional) return false;
+
+        const endDate = parseEndDate(row);
+        if (endDate && endDate < today && !filters.showPast) return false;
 
         const combined = [
           row['Month'], row['Date(s)'], getTournamentTitle(row), row['Divisions'], row['City'],
@@ -1103,7 +1215,7 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
               <span class="cell-format">${format}</span>
               <span class="cell-city">${formatCityWithState(row['City'])}</span>
               <span class="cell-venue">${row['Primary Site']}</span>
-              <span class="cell-draw">${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</span>
+              <span class="cell-draw">${formatDraw(row)}</span>
               <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
               <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
             `;
@@ -1143,7 +1255,7 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
             <span class="cell-format">${format}</span>
             <span class="cell-city">${formatCityWithState(row['City'])}</span>
             <span class="cell-venue">${row['Primary Site']}</span>
-            <span class="cell-draw">${row['Singles Draw'] || ''}${row['Doubles Draw'] ? ' / ' + row['Doubles Draw'] : ''}</span>
+            <span class="cell-draw">${formatDraw(row)}</span>
             <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
             <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
           `;
@@ -1176,6 +1288,7 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
     // Event listeners
     document.getElementById('search').addEventListener('input', (e) => {
       filters.search = e.target.value || '';
+      saveFilters();
       render();
     });
 
@@ -1188,48 +1301,63 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
     document.getElementById('chip-sectional').addEventListener('click', () => {
       filters.sectional = !filters.sectional;
       document.getElementById('chip-sectional').classList.toggle('active');
+      saveFilters();
       render();
     });
 
     document.getElementById('chip-national').addEventListener('click', () => {
       filters.national = !filters.national;
       document.getElementById('chip-national').classList.toggle('active');
+      saveFilters();
       render();
     });
 
     document.getElementById('chip-local').addEventListener('click', () => {
       filters.local = !filters.local;
       document.getElementById('chip-local').classList.toggle('active');
+      saveFilters();
       render();
     });
 
     document.getElementById('chip-road').addEventListener('click', () => {
       filters.road = !filters.road;
       document.getElementById('chip-road').classList.toggle('active');
+      saveFilters();
       render();
     });
 
     document.getElementById('chip-flight').addEventListener('click', () => {
       filters.flight = !filters.flight;
       document.getElementById('chip-flight').classList.toggle('active');
+      saveFilters();
       render();
     });
 
     document.getElementById('chip-format-s').addEventListener('click', () => {
       filters.formatS = !filters.formatS;
       document.getElementById('chip-format-s').classList.toggle('active');
+      saveFilters();
       render();
     });
 
     document.getElementById('chip-format-sd').addEventListener('click', () => {
       filters.formatSD = !filters.formatSD;
       document.getElementById('chip-format-sd').classList.toggle('active');
+      saveFilters();
       render();
     });
 
     document.getElementById('chip-format-d').addEventListener('click', () => {
       filters.formatD = !filters.formatD;
       document.getElementById('chip-format-d').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-past').addEventListener('click', () => {
+      filters.showPast = !filters.showPast;
+      document.getElementById('chip-past').classList.toggle('active');
+      saveFilters();
       render();
     });
 
