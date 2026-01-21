@@ -2238,7 +2238,7 @@
     <div class="utr-histogram-caption" id="utr-histogram-caption">Based on UTR values from the player list.</div>
   </div>
 
-                <div class="stats-section">
+                  <div class="stats-section">
     <h3>Tournament Statistics</h3>
     <div class="stats-grid">
       <div class="stat-box">
@@ -2478,17 +2478,16 @@
         const sectionCell = cells[7];
         const sectionRank = sectionCell ? parseInt(sectionCell.textContent.trim(), 10) || null : null;
         
-        // Get USTA profile URL from desktop version's mapping (uses "FIRST|LAST" uppercase key)
-        const profileKey = `${firstName.toUpperCase()}|${lastName.toUpperCase()}`;
-        const ustaUrl = window.playerProfileUrlByName ? window.playerProfileUrlByName[profileKey] : null;
-        
+        const ustaLink =
+          (cells[3] ? cells[3].querySelector('a') : null) ||
+          (cells[5] ? cells[5].querySelector('a') : null);
+        const ustaUrl = ustaLink ? ustaLink.href : null;
+
         // Extract UAID from USTA URL if available
         let uaid = null;
         if (ustaUrl) {
           const uaidMatch = ustaUrl.match(/uaid=(\d+)/);
-          if (uaidMatch) {
-            uaid = uaidMatch[1];
-          }
+          if (uaidMatch) uaid = uaidMatch[1];
         }
         
         players.push({
@@ -3174,19 +3173,19 @@
       "OLIVIA|KNAPP": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018820003",
       "VALENTINA|KUKEEVA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502",
       "MEGAN|LAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678",
-      "EMMA|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736",
-      "GRACE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018760264",
+      "EILEEN|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732",
       "AMY|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019389340",
       "GRACE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018857955",
+      "GRACE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018760264",
+      "EMMA|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736",
       "STEPHANIE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832557",
-      "EILEEN|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732",
       "ANGELA|LIU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018981779",
       "ALEXIS|MALAKHOVA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796",
       "AASHNA|MODI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563728",
       "SHARANYA|PRASAD": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018706747",
       "MIHIKA|SINGH": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382",
-      "MAY|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027",
       "RUOYU|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144",
+      "MAY|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027",
       "JULIANA|TYNDALL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019392484",
       "AVALINE|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019122088",
       "ELLIE|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019241036",
