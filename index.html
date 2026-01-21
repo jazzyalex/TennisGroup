@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tennis Tournament Reports</title>
+  <title>Tennis Tracker</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
   <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
   <link rel="apple-touch-icon" href="assets/tennis-report/apple-touch-icon.png">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Tennis Tournament Reports">
+  <meta property="og:title" content="Tennis Tracker">
   <meta property="og:description" content="Tournament calendars, match reports, and player analysis for junior tennis">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
   <style>
@@ -31,6 +31,13 @@
       --accent-emerald: #10b981;
       --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
       --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      --hero-card-bg: rgba(255, 255, 255, 0.94);
+      --hero-card-text: #0f172a;
+      --hero-card-muted: #475569;
+      --hero-card-border: rgba(255, 255, 255, 0.6);
+      --hero-card-stat-bg: rgba(15, 23, 42, 0.08);
+      --hero-badge-bg: rgba(16, 185, 129, 0.15);
+      --hero-badge-text: #065f46;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -45,6 +52,13 @@
         --border-subtle: rgba(255,255,255,0.04);
         --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
         --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        --hero-card-bg: rgba(15, 23, 42, 0.85);
+        --hero-card-text: #e2e8f0;
+        --hero-card-muted: #cbd5f5;
+        --hero-card-border: rgba(148, 163, 184, 0.3);
+        --hero-card-stat-bg: rgba(255, 255, 255, 0.08);
+        --hero-badge-bg: rgba(16, 185, 129, 0.25);
+        --hero-badge-text: #d1fae5;
       }
     }
 
@@ -80,18 +94,28 @@
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
-      text-align: center;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 1fr);
+      gap: 32px;
+      align-items: center;
+      text-align: left;
       position: relative;
       z-index: 1;
+    }
+
+    .hero-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
     }
 
     .logo {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 24px;
     }
 
     .logo svg {
@@ -106,15 +130,105 @@
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
       color: white;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       letter-spacing: -0.02em;
     }
 
     .hero-subtitle {
       font-size: 1.125rem;
       color: rgba(255,255,255,0.85);
-      max-width: 500px;
-      margin: 0 auto;
+      max-width: 520px;
+      margin: 0;
+    }
+
+    .player-card {
+      background: var(--hero-card-bg);
+      color: var(--hero-card-text);
+      border: 1px solid var(--hero-card-border);
+      border-radius: 20px;
+      padding: 20px 22px;
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.2);
+      backdrop-filter: blur(6px);
+    }
+
+    .player-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .player-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--hero-badge-bg);
+      color: var(--hero-badge-text);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .player-updated {
+      font-size: 0.75rem;
+      color: var(--hero-card-muted);
+      font-weight: 600;
+    }
+
+    .player-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .player-meta {
+      font-size: 0.85rem;
+      color: var(--hero-card-muted);
+      margin-bottom: 14px;
+    }
+
+    .player-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .player-stat {
+      background: var(--hero-card-stat-bg);
+      border-radius: 12px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .player-stat .stat-label {
+      font-size: 0.7rem;
+      color: var(--hero-card-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .player-stat .stat-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--hero-card-text);
+    }
+
+    .player-recruiting {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      font-size: 0.8rem;
+      color: var(--hero-card-muted);
+      font-weight: 600;
     }
 
     /* Main Content */
@@ -179,18 +293,17 @@
     }
 
     .tournament-card.calendar-card {
-      background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
-      border-color: rgba(255, 255, 255, 0.28);
-      color: rgba(255, 255, 255, 0.92);
+      background: var(--bg-secondary);
+      border-color: var(--border);
     }
 
     .tournament-card.calendar-card::before {
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.9) 100%);
+      background: none;
     }
 
     .calendar-card .card-title,
     .calendar-card .card-description {
-      color: rgba(255, 255, 255, 0.94);
+      color: var(--text-primary);
     }
 
     .calendar-card .card-description {
@@ -198,30 +311,30 @@
     }
 
     .calendar-card .card-type.calendar {
-      background: rgba(255, 255, 255, 0.18);
-      color: #f8fafc;
+      background: rgba(8, 145, 178, 0.12);
+      color: var(--accent-cyan);
     }
 
     .calendar-card .calendar-header-meta .meta-item {
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--text-muted);
     }
 
     .calendar-card .calendar-header-meta .meta-icon {
-      opacity: 0.8;
+      opacity: 0.65;
     }
 
     .calendar-card .card-arrow {
-      background: rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.85);
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
     }
 
     .tournament-card.calendar-card:hover {
-      border-color: rgba(255, 255, 255, 0.65);
+      border-color: var(--court-green);
     }
 
     .calendar-card:hover .card-arrow {
-      background: rgba(255, 255, 255, 0.35);
-      color: #ffffff;
+      background: var(--court-green);
+      color: white;
       transform: translateX(4px);
     }
 
@@ -453,6 +566,25 @@
         padding: 40px 20px 60px;
       }
 
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: left;
+      }
+
+      .hero-left {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .player-card {
+        width: 100%;
+      }
+
+      .player-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .main {
         padding: 32px 16px;
       }
@@ -471,15 +603,54 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="logo">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" fill="#2d5a27"/>
-          <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
-          <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
-        </svg>
+      <div class="hero-left">
+        <div class="logo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </div>
+        <div class="hero-text">
+          <h1>Tennis Tracker</h1>
+          <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
+        </div>
       </div>
-      <h1>Tennis Tournament Reports</h1>
-      <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
+      <aside class="player-card">
+        <div class="player-card-top">
+          <span class="player-badge">Our Player</span>
+          <span class="player-updated">Updated Jan 21, 2026</span>
+        </div>
+        <div class="player-name">Alexis Malakhova</div>
+        <div class="player-meta">Springer Elementary • 4th Grade • Class of 2034</div>
+        <div class="player-stats-grid">
+          <div class="player-stat">
+            <span class="stat-label">UTR</span>
+            <span class="stat-value">4.04</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">WTN</span>
+            <span class="stat-value">33.57</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">Section</span>
+            <span class="stat-value">#48</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">National</span>
+            <span class="stat-value">#775</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">TR Nat</span>
+            <span class="stat-value">#6</span>
+          </div>
+          <div class="player-stat">
+            <span class="stat-label">TR CA</span>
+            <span class="stat-value">#3</span>
+          </div>
+        </div>
+        <div class="player-recruiting">Tennis Recruiting rankings • National &amp; California</div>
+      </aside>
     </div>
   </section>
 
