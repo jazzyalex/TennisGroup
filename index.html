@@ -87,7 +87,7 @@
       background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
       position: relative;
       overflow: hidden;
-      padding: 28px 32px 64px;
+      padding: 28px 32px 120px;
     }
 
     .hero::before {
@@ -116,22 +116,28 @@
     }
 
     .hero-left {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-header {
+      display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
 
     .logo {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
     .logo svg {
-      width: 84px;
-      height: 84px;
-      border-radius: 18px;
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
 
@@ -140,14 +146,14 @@
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
       color: white;
-      margin-bottom: 12px;
+      margin: 0;
       letter-spacing: -0.02em;
     }
 
     .hero-subtitle {
       font-size: 1.125rem;
       color: rgba(255,255,255,0.85);
-      max-width: 520px;
+      max-width: 600px;
       margin: 0;
     }
 
@@ -161,7 +167,8 @@
       width: 100%;
       max-width: 520px;
       justify-self: end;
-      margin-top: 6px;
+      margin-top: 0;
+      align-self: start;
     }
 
     .player-card__header {
@@ -820,7 +827,7 @@
 
     @media (max-width: 768px) {
       .hero {
-        padding: 32px 16px 44px;
+        padding: 32px 16px 80px;
       }
 
       .hero-content {
@@ -829,9 +836,14 @@
         text-align: left;
       }
 
-      .hero-left {
-        grid-template-columns: 1fr;
+      .hero-header {
+        flex-direction: column;
         align-items: flex-start;
+      }
+
+      .logo svg {
+        width: 48px;
+        height: 48px;
       }
 
       .player-card {
@@ -857,17 +869,17 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-left">
-        <div class="hero-text">
+        <div class="hero-header">
           <h1>Tennis Tracker</h1>
-          <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
+          <div class="logo">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" fill="#2d5a27"/>
+              <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+              <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+            </svg>
+          </div>
         </div>
-        <div class="logo">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="64" height="64" fill="#2d5a27"/>
-            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
-            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
-          </svg>
-        </div>
+        <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
       </div>
       <aside class="player-card" aria-labelledby="player-card-name">
         <header class="player-card__header">
