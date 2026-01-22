@@ -87,7 +87,7 @@
       background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
       position: relative;
       overflow: hidden;
-      padding: 34px 32px 48px;
+      padding: 28px 32px 64px;
     }
 
     .hero::before {
@@ -104,12 +104,12 @@
     }
 
     .hero-content {
-      max-width: 1200px;
+      max-width: 1180px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(520px, 1.35fr);
-      gap: 24px;
-      align-items: center;
+      grid-template-columns: minmax(0, 1.7fr) minmax(460px, 1fr);
+      gap: 18px;
+      align-items: flex-start;
       text-align: left;
       position: relative;
       z-index: 1;
@@ -154,12 +154,14 @@
     .player-card {
       background: #ffffff;
       color: var(--player-text);
-      border-radius: 20px;
-      padding: 20px 22px 22px;
+      border-radius: 18px;
+      padding: 16px 18px 18px;
       box-shadow: var(--player-card-shadow);
-      min-width: 520px;
+      min-width: 0;
       width: 100%;
-      max-width: 640px;
+      max-width: 520px;
+      justify-self: end;
+      margin-top: 6px;
     }
 
     .player-card__header {
@@ -171,14 +173,14 @@
 
     .player-card__name {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--player-text);
     }
 
     .player-card__updated {
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: var(--player-text-muted);
       font-weight: 600;
       white-space: nowrap;
@@ -187,22 +189,22 @@
     .player-card__divider {
       height: 1px;
       background: #e5e7eb;
-      margin: 14px 0 18px;
+      margin: 10px 0 12px;
     }
 
     .player-card__metrics {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
+      gap: 6px;
     }
 
     .player-card__metric,
     .player-card__panel {
       background: #ffffff;
       border: 1px solid var(--player-border);
-      border-left: 4px solid var(--player-green);
-      border-radius: 14px;
-      padding: 12px 14px;
+      border-left: 3px solid var(--player-green);
+      border-radius: 12px;
+      padding: 10px 12px;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     }
@@ -220,7 +222,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.78rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -228,13 +230,13 @@
     }
 
     .player-card__metric-value {
-      font-size: 1.1rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--player-green);
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 4px;
       font-variant-numeric: tabular-nums;
     }
 
@@ -245,10 +247,10 @@
     }
 
     .player-card__metric-sub {
-      margin-top: 8px;
+      margin-top: 6px;
       display: flex;
-      gap: 14px;
-      font-size: 0.85rem;
+      gap: 10px;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--player-text-muted);
     }
@@ -268,24 +270,24 @@
     }
 
     .player-card__ranking-list {
-      margin-top: 8px;
+      margin-top: 6px;
       display: grid;
-      gap: 6px;
+      gap: 4px;
       font-weight: 700;
       color: var(--player-green);
       font-variant-numeric: tabular-nums;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     .player-card__ranking-row {
       display: flex;
       justify-content: space-between;
       gap: 8px;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     .player-card__ranking-row span:first-child {
-      font-size: 0.78rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--player-text-light);
@@ -293,10 +295,10 @@
     }
 
     .player-card__bottom {
-      margin-top: 12px;
+      margin-top: 10px;
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 8px;
+      gap: 6px;
     }
 
     .player-card__panel--points {
@@ -305,18 +307,18 @@
     }
 
     .player-card__panel-title {
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--player-green);
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .player-card__points-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
+      gap: 6px;
       text-align: center;
     }
 
@@ -325,7 +327,7 @@
     }
 
     .player-card__points-label {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--player-text-light);
@@ -333,7 +335,7 @@
     }
 
     .player-card__points-value {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--player-green);
       margin-top: 4px;
@@ -351,11 +353,11 @@
       font-weight: 700;
       color: var(--player-green);
       font-variant-numeric: tabular-nums;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
     }
 
     .player-card__tr-row span:first-child {
-      font-size: 0.78rem;
+      font-size: 0.7rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--player-text-light);
@@ -368,13 +370,13 @@
     }
 
     .player-card__info {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       border: 1px solid var(--player-border);
       background: #ffffff;
       color: var(--player-text-light);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
@@ -394,9 +396,9 @@
       transform: translateX(-50%);
       background: #1f2937;
       color: #ffffff;
-      padding: 8px;
+      padding: 6px;
       border-radius: 6px;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
