@@ -87,7 +87,7 @@
       background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
       position: relative;
       overflow: hidden;
-      padding: 28px 32px 120px;
+      padding: 48px 32px;
     }
 
     .hero::before {
@@ -99,7 +99,7 @@
       bottom: 0;
       background:
         linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.15) 49.5%, rgba(255,255,255,0.15) 50.5%, transparent 50.5%),
-        linear-gradient(0deg, transparent 85%, rgba(255,255,255,0.15) 85%, rgba(255,255,255,0.15) 88%, transparent 88%);
+        linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.15) 3%, transparent 3%);
       pointer-events: none;
     }
 
@@ -107,9 +107,9 @@
       max-width: 1180px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(460px, 1fr);
-      gap: 18px;
-      align-items: flex-start;
+      grid-template-columns: minmax(0, 1.5fr) minmax(380px, 1fr);
+      gap: 24px;
+      align-items: center;
       text-align: left;
       position: relative;
       z-index: 1;
@@ -160,15 +160,15 @@
     .player-card {
       background: #ffffff;
       color: var(--player-text);
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 16px 18px 18px;
       box-shadow: var(--player-card-shadow);
       min-width: 0;
       width: 100%;
-      max-width: 520px;
+      max-width: 380px;
       justify-self: end;
-      margin-top: 0;
-      align-self: start;
+      align-self: center;
+      border-top: 3px solid var(--player-green);
     }
 
     .player-card__header {
@@ -176,73 +176,68 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
+      margin-bottom: 14px;
     }
 
     .player-card__name {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.4rem;
+      font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--player-text);
     }
 
     .player-card__updated {
-      font-size: 0.78rem;
-      color: var(--player-text-muted);
-      font-weight: 600;
+      font-size: 0.7rem;
+      color: var(--player-text-light);
+      font-weight: 500;
       white-space: nowrap;
     }
 
     .player-card__divider {
-      height: 1px;
-      background: #e5e7eb;
-      margin: 10px 0 12px;
+      display: none;
     }
 
     .player-card__metrics {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
+      gap: 8px;
     }
 
     .player-card__metric,
     .player-card__panel {
-      background: #ffffff;
-      border: 1px solid var(--player-border);
-      border-left: 3px solid var(--player-green);
-      border-radius: 12px;
+      background: #f8f9fa;
+      border: 1px solid #eaeaea;
+      border-radius: 10px;
       padding: 10px 12px;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .player-card__metric:hover,
     .player-card__metric:focus-within,
     .player-card__panel:hover,
     .player-card__panel:focus-within {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
-      background-color: #f9fcf9;
+      background-color: #f0f4f0;
+      border-color: #d4e5d4;
     }
 
     .player-card__metric-title {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--player-text-light);
+      gap: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--player-text-muted);
     }
 
     .player-card__metric-value {
-      font-size: 1.02rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--player-green);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       margin-top: 4px;
       font-variant-numeric: tabular-nums;
     }
@@ -253,18 +248,45 @@
       text-decoration: none;
     }
 
-    .player-card__metric-sub {
-      margin-top: 6px;
+    .player-card__utr-values {
       display: flex;
-      gap: 10px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 6px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .player-card__utr-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .player-card__utr-label {
+      font-size: 0.65rem;
       color: var(--player-text-muted);
+      font-weight: 500;
+      min-width: 10px;
+    }
+
+    .player-card__utr-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__utr-value-small {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
     }
 
     .player-card__trend {
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 0.8rem;
+      font-weight: 600;
       line-height: 1;
     }
 
@@ -277,49 +299,46 @@
     }
 
     .player-card__ranking-list {
-      margin-top: 6px;
+      margin-top: 4px;
       display: grid;
-      gap: 4px;
-      font-weight: 700;
+      gap: 3px;
+      font-weight: 600;
       color: var(--player-green);
       font-variant-numeric: tabular-nums;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .player-card__ranking-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 8px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .player-card__ranking-row span:first-child {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--player-text-light);
-      font-weight: 700;
+      font-size: 0.65rem;
+      color: var(--player-text-muted);
+      font-weight: 500;
     }
 
     .player-card__bottom {
       margin-top: 10px;
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 6px;
+      gap: 8px;
     }
 
     .player-card__panel--points {
-      background: linear-gradient(135deg, #f6fbf6, var(--player-light));
-      border-color: var(--player-border);
+      background: #f8f9fa;
     }
 
     .player-card__panel-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
       color: var(--player-green);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .player-card__points-grid {
@@ -334,91 +353,40 @@
     }
 
     .player-card__points-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--player-text-light);
-      font-weight: 700;
+      font-size: 0.6rem;
+      color: var(--player-text-muted);
+      font-weight: 500;
     }
 
     .player-card__points-value {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--player-green);
-      margin-top: 4px;
+      margin-top: 3px;
       font-variant-numeric: tabular-nums;
     }
 
     .player-card__tr-grid {
       display: grid;
-      gap: 6px;
+      gap: 4px;
     }
 
     .player-card__tr-row {
       display: flex;
       justify-content: space-between;
-      font-weight: 700;
+      align-items: center;
+      font-weight: 600;
       color: var(--player-green);
       font-variant-numeric: tabular-nums;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
     }
 
     .player-card__tr-row span:first-child {
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--player-text-light);
-    }
-
-    .player-card__info-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .player-card__info {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 1px solid var(--player-border);
-      background: #ffffff;
-      color: var(--player-text-light);
-      font-size: 10px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .player-card__info:focus-visible {
-      outline: 2px solid var(--player-green);
-      outline-offset: 2px;
-    }
-
-    .player-card__tooltip {
-      position: absolute;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1f2937;
-      color: #ffffff;
-      padding: 6px;
-      border-radius: 6px;
       font-size: 0.65rem;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      transform-origin: bottom center;
-      z-index: 2;
+      color: var(--player-text-muted);
+      font-weight: 500;
     }
 
-    .player-card__info:hover + .player-card__tooltip,
-    .player-card__info:focus-visible + .player-card__tooltip {
-      opacity: 1;
-      transform: translateX(-50%) translateY(-4px);
-    }
 
     /* Main Content */
     .main {
@@ -827,18 +795,13 @@
 
     @media (max-width: 768px) {
       .hero {
-        padding: 32px 16px 80px;
+        padding: 32px 16px;
       }
 
       .hero-content {
         grid-template-columns: 1fr;
         gap: 20px;
         text-align: left;
-      }
-
-      .hero-header {
-        flex-direction: column;
-        align-items: flex-start;
       }
 
       .logo svg {
@@ -848,6 +811,7 @@
 
       .player-card {
         width: 100%;
+        max-width: 100%;
       }
 
       .main {
@@ -884,44 +848,36 @@
       <aside class="player-card" aria-labelledby="player-card-name">
         <header class="player-card__header">
           <h2 class="player-card__name" id="player-card-name" data-player-name>Alexis Malakhova</h2>
-          <span class="player-card__updated" data-player-updated>Updated Jan 21, 2026</span>
+          <span class="player-card__updated" data-player-updated>Updated Jan 22, 2026</span>
         </header>
         <div class="player-card__divider"></div>
         <section class="player-card__metrics" aria-label="Player metrics">
           <div class="player-card__metric">
-            <div class="player-card__metric-title">
-              <span>UTR</span>
-              <span class="player-card__info-wrap">
-                <button class="player-card__info" type="button" aria-label="Universal Tennis Rating" aria-describedby="utr-tooltip">i</button>
-                <span class="player-card__tooltip" id="utr-tooltip" role="tooltip">Universal Tennis Rating</span>
+            <div class="player-card__metric-title">UTR</div>
+            <a class="player-card__utr-values" href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
+              <span class="player-card__utr-row">
+                <span class="player-card__utr-label">S</span>
+                <span class="player-card__utr-value" data-player-stat="utr">4.04</span>
+                <span class="player-card__trend player-card__trend--up">↑</span>
               </span>
-            </div>
-            <div class="player-card__metric-value">
-              <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" data-player-stat="utr">4.04</a>
-              <span class="player-card__trend player-card__trend--up" aria-label="Trending up">↑</span>
-            </div>
-            <div class="player-card__metric-sub">
-              <span>S: 4.04</span>
-              <span>D: 3.87</span>
-            </div>
+              <span class="player-card__utr-row">
+                <span class="player-card__utr-label">D</span>
+                <span class="player-card__utr-value-small" data-player-stat="utr_doubles">3.97</span>
+              </span>
+            </a>
           </div>
           <div class="player-card__metric">
-            <div class="player-card__metric-title">
-              <span>WTN</span>
-              <span class="player-card__info-wrap">
-                <button class="player-card__info" type="button" aria-label="World Tennis Number" aria-describedby="wtn-tooltip">i</button>
-                <span class="player-card__tooltip" id="wtn-tooltip" role="tooltip">World Tennis Number</span>
-              </span>
-            </div>
+            <div class="player-card__metric-title">WTN</div>
             <div class="player-card__metric-value">
               <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.59</a>
+              <span class="player-card__trend player-card__trend--down" aria-label="Trending down">↓</span>
             </div>
           </div>
           <div class="player-card__metric">
             <div class="player-card__metric-title">Rankings</div>
             <a class="player-card__ranking-list" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
               <div class="player-card__ranking-row">
-                <span>National</span>
+                <span>Nat</span>
                 <span data-player-stat="usta_national">#681</span>
               </div>
               <div class="player-card__ranking-row">
