@@ -116,10 +116,10 @@
     }
 
     .hero-left {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      gap: 18px;
     }
 
     .logo {
@@ -129,9 +129,9 @@
     }
 
     .logo svg {
-      width: 68px;
-      height: 68px;
-      border-radius: 16px;
+      width: 84px;
+      height: 84px;
+      border-radius: 18px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
 
@@ -830,7 +830,7 @@
       }
 
       .hero-left {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         align-items: flex-start;
       }
 
@@ -857,16 +857,16 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-left">
+        <div class="hero-text">
+          <h1>Tennis Tracker</h1>
+          <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
+        </div>
         <div class="logo">
           <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="64" height="64" fill="#2d5a27"/>
             <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
             <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
           </svg>
-        </div>
-        <div class="hero-text">
-          <h1>Tennis Tracker</h1>
-          <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
         </div>
       </div>
       <aside class="player-card" aria-labelledby="player-card-name">
