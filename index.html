@@ -87,7 +87,7 @@
       background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
       position: relative;
       overflow: hidden;
-      padding: 44px 32px 54px;
+      padding: 34px 32px 48px;
     }
 
     .hero::before {
@@ -104,10 +104,10 @@
     }
 
     .hero-content {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 1fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(520px, 1.35fr);
       gap: 24px;
       align-items: center;
       text-align: left;
@@ -155,11 +155,11 @@
       background: #ffffff;
       color: var(--player-text);
       border-radius: 20px;
-      padding: 22px 24px 24px;
+      padding: 20px 22px 22px;
       box-shadow: var(--player-card-shadow);
-      min-width: 480px;
+      min-width: 520px;
       width: 100%;
-      max-width: 560px;
+      max-width: 640px;
     }
 
     .player-card__header {
@@ -178,7 +178,7 @@
     }
 
     .player-card__updated {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--player-text-muted);
       font-weight: 600;
       white-space: nowrap;
@@ -193,7 +193,7 @@
     .player-card__metrics {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      gap: 8px;
     }
 
     .player-card__metric,
@@ -202,7 +202,7 @@
       border: 1px solid var(--player-border);
       border-left: 4px solid var(--player-green);
       border-radius: 14px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     }
@@ -228,7 +228,7 @@
     }
 
     .player-card__metric-value {
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--player-green);
       display: flex;
@@ -248,7 +248,7 @@
       margin-top: 8px;
       display: flex;
       gap: 14px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       color: var(--player-text-muted);
     }
@@ -274,13 +274,14 @@
       font-weight: 700;
       color: var(--player-green);
       font-variant-numeric: tabular-nums;
+      font-size: 0.95rem;
     }
 
     .player-card__ranking-row {
       display: flex;
       justify-content: space-between;
       gap: 8px;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     .player-card__ranking-row span:first-child {
@@ -292,10 +293,10 @@
     }
 
     .player-card__bottom {
-      margin-top: 14px;
+      margin-top: 12px;
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 12px;
+      gap: 8px;
     }
 
     .player-card__panel--points {
@@ -315,7 +316,7 @@
     .player-card__points-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
+      gap: 8px;
       text-align: center;
     }
 
@@ -332,7 +333,7 @@
     }
 
     .player-card__points-value {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--player-green);
       margin-top: 4px;
@@ -350,6 +351,7 @@
       font-weight: 700;
       color: var(--player-green);
       font-variant-numeric: tabular-nums;
+      font-size: 0.95rem;
     }
 
     .player-card__tr-row span:first-child {
@@ -420,7 +422,7 @@
     .section-header {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       margin-bottom: 24px;
     }
 
@@ -571,7 +573,7 @@
 	    .card-actions {
 	      display: flex;
 	      align-items: center;
-	      gap: 10px;
+	      gap: 8px;
 	    }
 
 	    .card-usta-link {
@@ -616,7 +618,7 @@
     .calendar-header-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -686,7 +688,7 @@
     }
 
     .card-description {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
       margin-bottom: 20px;
       line-height: 1.5;
