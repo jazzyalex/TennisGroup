@@ -201,10 +201,51 @@
       color: var(--hero-card-text);
     }
 
-    .player-stat a {
-      color: inherit;
-      text-decoration: none;
-    }
+	    .player-stat a {
+	      color: inherit;
+	      text-decoration: none;
+	    }
+
+	    .player-stat.multi .stat-value {
+	      font-size: 0.82rem;
+	      line-height: 1.2;
+	    }
+
+	    .player-stat.multi .stat-multi {
+	      display: flex;
+	      flex-direction: column;
+	      gap: 2px;
+	    }
+
+	    .player-stat.multi .stat-row {
+	      display: flex;
+	      align-items: baseline;
+	      justify-content: space-between;
+	      gap: 10px;
+	    }
+
+	    .player-stat.multi .stat-row.inline {
+	      justify-content: flex-start;
+	      flex-wrap: wrap;
+	      gap: 6px;
+	    }
+
+	    .player-stat.multi .stat-k {
+	      font-size: 0.6rem;
+	      font-weight: 700;
+	      color: var(--hero-card-muted);
+	      text-transform: uppercase;
+	      letter-spacing: 0.08em;
+	    }
+
+	    .player-stat.multi .stat-v {
+	      font-variant-numeric: tabular-nums;
+	    }
+
+	    .player-stat.multi .stat-sep {
+	      opacity: 0.6;
+	      font-weight: 700;
+	    }
 
     /* Main Content */
     .main {
@@ -358,12 +399,46 @@
       transform: scaleX(1);
     }
 
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
+	    .card-header {
+	      display: flex;
+	      align-items: flex-start;
+	      justify-content: space-between;
+	      margin-bottom: 16px;
+	    }
+
+	    .card-actions {
+	      display: flex;
+	      align-items: center;
+	      gap: 10px;
+	    }
+
+	    .card-usta-link {
+	      display: inline-flex;
+	      align-items: center;
+	      justify-content: center;
+	      padding: 6px 10px;
+	      border-radius: 999px;
+	      border: 1px solid var(--border);
+	      background: var(--bg-tertiary);
+	      color: var(--text-secondary);
+	      font-size: 0.7rem;
+	      font-weight: 700;
+	      text-transform: uppercase;
+	      letter-spacing: 0.05em;
+	      cursor: pointer;
+	      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+	      user-select: none;
+	    }
+
+	    .card-usta-link:hover {
+	      opacity: 0.9;
+	      transform: translateY(-1px);
+	    }
+
+	    .card-usta-link:focus-visible {
+	      outline: 2px solid var(--accent-cyan);
+	      outline-offset: 3px;
+	    }
 
     .calendar-header {
       align-items: center;
@@ -596,46 +671,50 @@
         <div class="player-card-top">
           <div class="player-name" data-player-name>Alexis Malakhova</div>
           <span class="player-updated" data-player-updated>Updated Jan 21, 2026</span>
-        </div>
-        <div class="player-stats-grid">
-          <div class="player-stat">
-            <span class="stat-label">UTR</span>
-            <span class="stat-value"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" data-player-stat="utr">4.04</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">WTN</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.59</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">USTA Pts</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_points_total">647</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">USTA S Pts</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_points_singles">642</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">USTA D Pts</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_points_doubles">32</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">NorCal</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_section">#41</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">National</span>
-            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_national">#681</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">TR Nat</span>
-            <span class="stat-value"><a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener" data-player-stat="tr_national">#6</a></span>
-          </div>
-          <div class="player-stat">
-            <span class="stat-label">TR CA</span>
-            <span class="stat-value"><a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener" data-player-stat="tr_california">#3</a></span>
-          </div>
-        </div>
-      </aside>
+	        </div>
+	        <div class="player-stats-grid">
+	          <div class="player-stat">
+	            <span class="stat-label">UTR</span>
+	            <span class="stat-value"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" data-player-stat="utr">4.04</a></span>
+	          </div>
+	          <div class="player-stat">
+	            <span class="stat-label">WTN</span>
+	            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.59</a></span>
+	          </div>
+	          <div class="player-stat multi">
+	            <span class="stat-label">Ranking</span>
+	            <span class="stat-value">
+	              <a class="stat-multi" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+	                <span class="stat-row"><span class="stat-k">Nat</span><span class="stat-v" data-player-stat="usta_national">#681</span></span>
+	                <span class="stat-row"><span class="stat-k">NorCal</span><span class="stat-v" data-player-stat="usta_section">#41</span></span>
+	              </a>
+	            </span>
+	          </div>
+	          <div class="player-stat multi">
+	            <span class="stat-label">USTA Pts</span>
+	            <span class="stat-value">
+	              <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+	                <span class="stat-row inline">
+	                  <span class="stat-k">T</span><span class="stat-v" data-player-stat="usta_points_total">647</span>
+	                  <span class="stat-sep">/</span>
+	                  <span class="stat-k">S</span><span class="stat-v" data-player-stat="usta_points_singles">642</span>
+	                  <span class="stat-sep">/</span>
+	                  <span class="stat-k">D</span><span class="stat-v" data-player-stat="usta_points_doubles">32</span>
+	                </span>
+	              </a>
+	            </span>
+	          </div>
+	          <div class="player-stat multi">
+	            <span class="stat-label">TR</span>
+	            <span class="stat-value">
+	              <a class="stat-multi" href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">
+	                <span class="stat-row"><span class="stat-k">Nat</span><span class="stat-v" data-player-stat="tr_national">#6</span></span>
+	                <span class="stat-row"><span class="stat-k">CA</span><span class="stat-v" data-player-stat="tr_california">#3</span></span>
+	              </a>
+	            </span>
+	          </div>
+	        </div>
+	      </aside>
     </div>
   </section>
 
@@ -644,10 +723,10 @@
     <!-- Active Reports Section -->
     <section>
       <div class="section-header">
-        <div class="section-bar"></div>
-        <h2 class="section-title">Tournament Reports</h2>
-        <span class="section-badge">5 Reports</span>
-      </div>
+	        <div class="section-bar"></div>
+	        <h2 class="section-title">Tournament Reports</h2>
+	        <span class="section-badge">4 Reports</span>
+	      </div>
 
       <div class="calendar-row">
         <!-- USTA NorCal & National Calendar -->
@@ -699,23 +778,26 @@
 
       <div class="cards-grid">
         <!-- Open Level 5 Championship Singles -->
-        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming">
-          <div class="card-header">
-            <span class="card-type report">
+	        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming">
+	          <div class="card-header">
+	            <span class="card-type report">
               <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                 <polyline points="14 2 14 8 20 8"/>
                 <line x1="16" y1="13" x2="8" y2="13"/>
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
-              Report
-            </span>
-            <div class="card-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
+	              Report
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
           <h3 class="card-title">Open Level 5 Championship Singles - G12</h3>
           <p class="card-description">Daily roster tracking with USTA WTN, national/section rankings, and UTR ratings for the Jan 31 - Feb 1, 2026 Level 5 event in San Jose.</p>
           <div class="card-meta">
@@ -745,23 +827,26 @@
         </a>
 
         <!-- Open Level 5 Championship Singles (Larkspur) -->
-        <a href="open-level5-championship-singles-larkspur-jan31-2026.html" class="tournament-card is-upcoming">
-          <div class="card-header">
-            <span class="card-type report">
+	        <a href="open-level5-championship-singles-larkspur-jan31-2026.html" class="tournament-card is-upcoming">
+	          <div class="card-header">
+	            <span class="card-type report">
               <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                 <polyline points="14 2 14 8 20 8"/>
                 <line x1="16" y1="13" x2="8" y2="13"/>
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
-              Report
-            </span>
-            <div class="card-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
+	              Report
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/8EA9DB88-B9C3-4C1A-8723-1F34CB0F6AC9">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
           <h3 class="card-title">Open Level 5 Championship Singles - G12</h3>
           <p class="card-description">Daily roster tracking with USTA WTN, national/section rankings, and UTR ratings for the Jan 31 - Feb 1, 2026 Level 5 event in Larkspur.</p>
           <div class="card-meta">
@@ -790,70 +875,27 @@
           </div>
         </a>
 
-        <!-- Open Level 5 Championship Singles (Stockton) -->
-        <a href="open-level5-championship-singles-stockton-jan31-2026.html" class="tournament-card is-upcoming">
-          <div class="card-header">
-            <span class="card-type report">
+	        <!-- L4 Excellence Tournament Report -->
+	        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past">
+	          <div class="card-header">
+	            <span class="card-type report">
               <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                 <polyline points="14 2 14 8 20 8"/>
                 <line x1="16" y1="13" x2="8" y2="13"/>
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
-              Report
-            </span>
-            <div class="card-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
-          <h3 class="card-title">Open Level 5 Championship Singles - G12</h3>
-          <p class="card-description">Daily roster tracking with USTA WTN, national/section rankings, and UTR ratings for the Jan 31 - Feb 1, 2026 Level 5 event in Stockton.</p>
-          <div class="card-meta">
-            <span class="meta-item">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              Jan 31 - Feb 1, 2026
-            </span>
-            <span class="meta-item">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              Stockton, CA
-            </span>
-            <span class="meta-item">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-              Level 5
-            </span>
-          </div>
-        </a>
-
-        <!-- L4 Excellence Tournament Report -->
-        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past">
-          <div class="card-header">
-            <span class="card-type report">
-              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-              Report
-            </span>
-            <div class="card-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
+	              Report
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/EAD0497A-559C-4765-9253-2BF848B4FC4A">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
           <h3 class="card-title">L4 Closed Excellence - U12 Girls</h3>
           <p class="card-description">Detailed tournament report with player standings, match history, UTR analysis, and performance metrics for the January 2026 Level 4 tournament in San Jose.</p>
           <div class="card-meta">
@@ -912,5 +954,22 @@
       <p>Built with care for the junior tennis community.</p>
     </div>
   </footer>
+
+  <script>
+    document.querySelectorAll('.card-usta-link').forEach((el) => {
+      const openUsta = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const url = el.getAttribute('data-usta-url');
+        if (!url) return;
+        window.open(url, '_blank', 'noopener');
+      };
+
+      el.addEventListener('click', openUsta);
+      el.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') openUsta(event);
+      });
+    });
+  </script>
 </body>
 </html>
