@@ -38,6 +38,16 @@
       --hero-card-stat-bg: rgba(15, 23, 42, 0.08);
       --hero-badge-bg: rgba(16, 185, 129, 0.15);
       --hero-badge-text: #065f46;
+      --player-green: #2d5a2d;
+      --player-green-soft: #3d6f3d;
+      --player-light: #e8f5e9;
+      --player-border: #c8e6c9;
+      --player-text: #1f2937;
+      --player-text-muted: #6b7280;
+      --player-text-light: #9ca3af;
+      --player-trend-up: #10b981;
+      --player-trend-down: #ef4444;
+      --player-card-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -142,110 +152,262 @@
     }
 
     .player-card {
-      background: var(--hero-card-bg);
-      color: var(--hero-card-text);
-      border: 1px solid var(--hero-card-border);
-      border-radius: 18px;
-      padding: 14px 16px;
-      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.18);
-      backdrop-filter: blur(6px);
+      background: #ffffff;
+      color: var(--player-text);
+      border-radius: 20px;
+      padding: 22px 24px 24px;
+      box-shadow: var(--player-card-shadow);
+      min-width: 480px;
+      width: 100%;
+      max-width: 560px;
     }
 
-    .player-card-top {
+    .player-card__header {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
+      gap: 16px;
     }
 
-    .player-updated {
-      font-size: 0.7rem;
-      color: var(--hero-card-muted);
+    .player-card__name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--player-text);
+    }
+
+    .player-card__updated {
+      font-size: 0.9rem;
+      color: var(--player-text-muted);
       font-weight: 600;
       white-space: nowrap;
     }
 
-    .player-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
+    .player-card__divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 14px 0 18px;
     }
 
-    .player-stats-grid {
+    .player-card__metrics {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px 8px;
+      gap: 12px;
     }
 
-    .player-stat {
-      background: var(--hero-card-stat-bg);
-      border-radius: 10px;
-      padding: 6px 8px;
+    .player-card__metric,
+    .player-card__panel {
+      background: #ffffff;
+      border: 1px solid var(--player-border);
+      border-left: 4px solid var(--player-green);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .player-card__metric:hover,
+    .player-card__metric:focus-within,
+    .player-card__panel:hover,
+    .player-card__panel:focus-within {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
+      background-color: #f9fcf9;
+    }
+
+    .player-card__metric-title {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .player-stat .stat-label {
-      font-size: 0.62rem;
-      color: var(--hero-card-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-    }
-
-    .player-stat .stat-value {
-      font-size: 0.9rem;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
       font-weight: 700;
-      color: var(--hero-card-text);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--player-text-light);
     }
 
-	    .player-stat a {
-	      color: inherit;
-	      text-decoration: none;
-	    }
+    .player-card__metric-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--player-green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      font-variant-numeric: tabular-nums;
+    }
 
-	    .player-stat.multi .stat-value {
-	      font-size: 0.82rem;
-	      line-height: 1.2;
-	    }
+    .player-card__metric-value a,
+    .player-card__panel a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-	    .player-stat.multi .stat-multi {
-	      display: flex;
-	      flex-direction: column;
-	      gap: 2px;
-	    }
+    .player-card__metric-sub {
+      margin-top: 8px;
+      display: flex;
+      gap: 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--player-text-muted);
+    }
 
-	    .player-stat.multi .stat-row {
-	      display: flex;
-	      align-items: baseline;
-	      justify-content: space-between;
-	      gap: 10px;
-	    }
+    .player-card__trend {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+    }
 
-	    .player-stat.multi .stat-row.inline {
-	      justify-content: flex-start;
-	      flex-wrap: wrap;
-	      gap: 6px;
-	    }
+    .player-card__trend--up {
+      color: var(--player-trend-up);
+    }
 
-	    .player-stat.multi .stat-k {
-	      font-size: 0.6rem;
-	      font-weight: 700;
-	      color: var(--hero-card-muted);
-	      text-transform: uppercase;
-	      letter-spacing: 0.08em;
-	    }
+    .player-card__trend--down {
+      color: var(--player-trend-down);
+    }
 
-	    .player-stat.multi .stat-v {
-	      font-variant-numeric: tabular-nums;
-	    }
+    .player-card__ranking-list {
+      margin-top: 8px;
+      display: grid;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+    }
 
-	    .player-stat.multi .stat-sep {
-	      opacity: 0.6;
-	      font-weight: 700;
-	    }
+    .player-card__ranking-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 1.1rem;
+    }
+
+    .player-card__ranking-row span:first-child {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--player-text-light);
+      font-weight: 700;
+    }
+
+    .player-card__bottom {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+    }
+
+    .player-card__panel--points {
+      background: linear-gradient(135deg, #f6fbf6, var(--player-light));
+      border-color: var(--player-border);
+    }
+
+    .player-card__panel-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--player-green);
+      margin-bottom: 10px;
+    }
+
+    .player-card__points-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      text-align: center;
+    }
+
+    .player-card__points-grid span {
+      display: block;
+    }
+
+    .player-card__points-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--player-text-light);
+      font-weight: 700;
+    }
+
+    .player-card__points-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--player-green);
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__tr-grid {
+      display: grid;
+      gap: 6px;
+    }
+
+    .player-card__tr-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__tr-row span:first-child {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--player-text-light);
+    }
+
+    .player-card__info-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .player-card__info {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--player-border);
+      background: #ffffff;
+      color: var(--player-text-light);
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .player-card__info:focus-visible {
+      outline: 2px solid var(--player-green);
+      outline-offset: 2px;
+    }
+
+    .player-card__tooltip {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1f2937;
+      color: #ffffff;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform-origin: bottom center;
+      z-index: 2;
+    }
+
+    .player-card__info:hover + .player-card__tooltip,
+    .player-card__info:focus-visible + .player-card__tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
 
     /* Main Content */
     .main {
@@ -612,6 +774,46 @@
     }
 
     /* Responsive */
+    @media (max-width: 1200px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .player-card {
+        min-width: 0;
+        max-width: 720px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .player-card__metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .player-card__bottom {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .player-card__metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .player-card {
+        padding: 18px;
+      }
+
+      .player-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .player-card__updated {
+        font-size: 0.8rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .hero {
         padding: 32px 16px 44px;
@@ -630,10 +832,6 @@
 
       .player-card {
         width: 100%;
-      }
-
-      .player-stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .main {
@@ -667,54 +865,89 @@
           <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
         </div>
       </div>
-      <aside class="player-card">
-        <div class="player-card-top">
-          <div class="player-name" data-player-name>Alexis Malakhova</div>
-          <span class="player-updated" data-player-updated>Updated Jan 21, 2026</span>
-	        </div>
-	        <div class="player-stats-grid">
-	          <div class="player-stat">
-	            <span class="stat-label">UTR</span>
-	            <span class="stat-value"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" data-player-stat="utr">4.04</a></span>
-	          </div>
-	          <div class="player-stat">
-	            <span class="stat-label">WTN</span>
-	            <span class="stat-value"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.59</a></span>
-	          </div>
-	          <div class="player-stat multi">
-	            <span class="stat-label">Ranking</span>
-	            <span class="stat-value">
-	              <a class="stat-multi" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
-	                <span class="stat-row"><span class="stat-k">Nat</span><span class="stat-v" data-player-stat="usta_national">#681</span></span>
-	                <span class="stat-row"><span class="stat-k">NorCal</span><span class="stat-v" data-player-stat="usta_section">#41</span></span>
-	              </a>
-	            </span>
-	          </div>
-	          <div class="player-stat multi">
-	            <span class="stat-label">USTA Pts</span>
-	            <span class="stat-value">
-	              <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
-	                <span class="stat-row inline">
-	                  <span class="stat-k">T</span><span class="stat-v" data-player-stat="usta_points_total">647</span>
-	                  <span class="stat-sep">/</span>
-	                  <span class="stat-k">S</span><span class="stat-v" data-player-stat="usta_points_singles">642</span>
-	                  <span class="stat-sep">/</span>
-	                  <span class="stat-k">D</span><span class="stat-v" data-player-stat="usta_points_doubles">32</span>
-	                </span>
-	              </a>
-	            </span>
-	          </div>
-	          <div class="player-stat multi">
-	            <span class="stat-label">TR</span>
-	            <span class="stat-value">
-	              <a class="stat-multi" href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">
-	                <span class="stat-row"><span class="stat-k">Nat</span><span class="stat-v" data-player-stat="tr_national">#6</span></span>
-	                <span class="stat-row"><span class="stat-k">CA</span><span class="stat-v" data-player-stat="tr_california">#3</span></span>
-	              </a>
-	            </span>
-	          </div>
-	        </div>
-	      </aside>
+      <aside class="player-card" aria-labelledby="player-card-name">
+        <header class="player-card__header">
+          <h2 class="player-card__name" id="player-card-name" data-player-name>Alexis Malakhova</h2>
+          <span class="player-card__updated" data-player-updated>Updated Jan 21, 2026</span>
+        </header>
+        <div class="player-card__divider"></div>
+        <section class="player-card__metrics" aria-label="Player metrics">
+          <div class="player-card__metric">
+            <div class="player-card__metric-title">
+              <span>UTR</span>
+              <span class="player-card__info-wrap">
+                <button class="player-card__info" type="button" aria-label="Universal Tennis Rating" aria-describedby="utr-tooltip">i</button>
+                <span class="player-card__tooltip" id="utr-tooltip" role="tooltip">Universal Tennis Rating</span>
+              </span>
+            </div>
+            <div class="player-card__metric-value">
+              <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" data-player-stat="utr">4.04</a>
+              <span class="player-card__trend player-card__trend--up" aria-label="Trending up">↑</span>
+            </div>
+            <div class="player-card__metric-sub">
+              <span>S: 4.04</span>
+              <span>D: 3.87</span>
+            </div>
+          </div>
+          <div class="player-card__metric">
+            <div class="player-card__metric-title">
+              <span>WTN</span>
+              <span class="player-card__info-wrap">
+                <button class="player-card__info" type="button" aria-label="World Tennis Number" aria-describedby="wtn-tooltip">i</button>
+                <span class="player-card__tooltip" id="wtn-tooltip" role="tooltip">World Tennis Number</span>
+              </span>
+            </div>
+            <div class="player-card__metric-value">
+              <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.59</a>
+            </div>
+          </div>
+          <div class="player-card__metric">
+            <div class="player-card__metric-title">Rankings</div>
+            <a class="player-card__ranking-list" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+              <div class="player-card__ranking-row">
+                <span>National</span>
+                <span data-player-stat="usta_national">#681</span>
+              </div>
+              <div class="player-card__ranking-row">
+                <span>NorCal</span>
+                <span data-player-stat="usta_section">#41</span>
+              </div>
+            </a>
+          </div>
+        </section>
+        <section class="player-card__bottom" aria-label="Ranking summaries">
+          <div class="player-card__panel player-card__panel--points">
+            <div class="player-card__panel-title">USTA Points</div>
+            <a class="player-card__points-grid" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+              <span>
+                <span class="player-card__points-label">Total</span>
+                <span class="player-card__points-value" data-player-stat="usta_points_total">647</span>
+              </span>
+              <span>
+                <span class="player-card__points-label">Singles</span>
+                <span class="player-card__points-value" data-player-stat="usta_points_singles">642</span>
+              </span>
+              <span>
+                <span class="player-card__points-label">Doubles</span>
+                <span class="player-card__points-value" data-player-stat="usta_points_doubles">32</span>
+              </span>
+            </a>
+          </div>
+          <div class="player-card__panel">
+            <div class="player-card__panel-title">TR</div>
+            <a class="player-card__tr-grid" href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">
+              <div class="player-card__tr-row">
+                <span>Nat</span>
+                <span data-player-stat="tr_national">#6</span>
+              </div>
+              <div class="player-card__tr-row">
+                <span>CA</span>
+                <span data-player-stat="tr_california">#3</span>
+              </div>
+            </a>
+          </div>
+        </section>
+      </aside>
     </div>
   </section>
 
