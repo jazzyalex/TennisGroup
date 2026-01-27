@@ -1,131 +1,4153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 2: Claremont, CA</title>
+  <link rel="icon" type="image/x-icon" href="assets/tennis-report/favicon-32thin.ico">
+  <link rel="shortcut icon" href="assets/tennis-report/favicon-32thin.ico">
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/tennis-report/favicon-128.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Level 2: Claremont, CA">
+  <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tournament report preview">
+  <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image:alt" content="Tournament report preview">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
+  <meta name="twitter:image:alt" content="Tournament report preview">
+  <title>Level 2: Claremont, CA, February 7 - 9, 2026, Claremont, CA</title>
   <style>
     body {
-      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 24px;
-      background: #f5f7fb;
-      color: #1f2937;
+      padding: 20px;
+      padding-top: 24px;
+      background-color: #f5f5f5;
+      border-top: 4px solid #4472C4;
     }
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-    .header {
+
+    .report-header {
+      max-width: 1000px;
+      margin: 12px auto 24px;
       display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 18px;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 74px;
     }
-    .logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #2d5a27;
-      color: #fff;
+
+    .report-header-logo-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 24px;
+      border-radius: 18px;
+      padding: 4px;
       text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
+    .report-header-logo-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(31, 45, 68, 0.18);
+    }
+
+    .report-header-logo-link:focus-visible {
+      outline: 2px solid #4472C4;
+      outline-offset: 4px;
+    }
+
+    .report-header-logo {
+      width: 108px;
+      height: 108px;
+      display: block;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .report-header-text {
+      text-align: center;
+    }
+
     h1 {
+      color: #2c3e50;
+      text-align: center;
       margin: 0;
-      font-size: 1.8rem;
+      font-size: 2.2em;
+      font-weight: bold;
     }
-    .meta {
-      display: flex;
+
+    .tournament-dates-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
       flex-wrap: wrap;
-      gap: 12px;
-      margin: 6px 0 18px;
-      color: #475569;
-      font-size: 0.95rem;
+      margin: 8px 0 12px;
     }
-    .meta span {
-      background: #fff;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid #e2e8f0;
-    }
-    .links {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .links a {
-      text-decoration: none;
-      color: #1d4ed8;
+
+    .tournament-dates {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 1.3em;
       font-weight: 600;
     }
+
+    .deadline-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      border: 1px solid #c9d6f5;
+      background: #f3f6ff;
+      font-size: 12px;
+      line-height: 1.2;
+      color: #2c3e50;
+      white-space: nowrap;
+    }
+
+    .deadline-countdown {
+      font-weight: 700;
+      color: #2c5aa0;
+    }
+
+    .deadline-date {
+      font-size: 11px;
+      color: #5f6c7b;
+    }
+
+    .tournament-info {
+      text-align: center;
+      color: #7f8c8d;
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .tournament-info a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .table-meta {
+      max-width: 1000px;
+      margin: 10px auto 6px;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .key-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-start;
+      font-size: 12px;
+      color: #2c3e50;
+    }
+
+    .key-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+    }
+
+    .key-stat .key-value {
+      font-weight: 700;
+      color: #1f3b68;
+    }
+
+    .key-stat:not(:last-child)::after {
+      content: "•";
+      margin-left: 8px;
+      color: #9aa9c0;
+    }
+
+    .link-legend {
+      text-align: right;
+      font-size: 11px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .selection-callout {
+      margin: 8px 0 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #2c3e50;
+      background-color: #f3f6fb;
+      border-left: 3px solid #4472C4;
+      border-radius: 4px;
+    }
+
     table {
       width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
       border-collapse: collapse;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    th, td {
-      text-align: left;
-      padding: 10px 12px;
-      border-bottom: 1px solid #e2e8f0;
-      font-size: 0.95rem;
-    }
+
     th {
-      background: #f1f5f9;
+      background-color: #4472C4;
+      color: white;
+      padding: 12px 10px;
+      text-align: left;
+      font-weight: bold;
+      font-size: 13px;
+      border-right: 1px solid white;
+    }
+
+    th:last-child {
+      border-right: none;
+    }
+
+    /* Sortable column indicator */
+    th.sortable {
+      cursor: pointer;
+    }
+
+    th.sortable::after {
+      content: ' ↕';
+      font-size: 0.7em;
+      opacity: 0.6;
+      margin-left: 5px;
+    }
+
+    th.sortable[data-sort="asc"]::after {
+      content: ' ↑';
+      opacity: 0.9;
+    }
+
+    th.sortable[data-sort="desc"]::after {
+      content: ' ↓';
+      opacity: 0.9;
+    }
+
+    td {
+      padding: 8px 10px;
+      font-size: 13px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* Alternating row colors - exactly like the sample */
+    tbody tr:nth-child(odd) {
+      background-color: white;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #D9E2F3;
+    }
+
+    /* Hover effect */
+    tbody tr:hover {
+      background-color: #EAF2FB !important;
+      cursor: pointer;
+    }
+
+    /* Highlighted player (Alexis) */
+    tr.highlight-player {
+      background-color: white !important;
+    }
+
+    tr.highlight-player:hover {
+      background-color: white !important;
+    }
+
+    tr.highlight-player td {
+      color: #222;
+      font-weight: 600;
+    }
+
+    tr.highlight-player td.col-wtn {
+      font-weight: normal;
+    }
+
+    tr.highlight-player td:nth-child(1) {
+      border-left: 4px solid #f5c542;
+    }
+
+    tr.highlight-player td:nth-child(2) {
+      background-color: #fff3cd;
+    }
+
+    tr.highlight-player td:nth-child(3) {
+      background-color: #fff3cd;
+    }
+
+    tr.highlight-player:hover td:nth-child(2) {
+      background-color: #fff3cd;
+    }
+
+    tr.highlight-player:hover td:nth-child(3) {
+      background-color: #fff3cd;
+    }
+
+    /* Column alignment */
+    .col-rank {
+      text-align: center;
+      width: 50px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .col-wtn {
+      text-align: right;
+      font-weight: normal;
+    }
+
+    .col-utr, .col-national {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .col-wtn, .col-utr {
+      width: 70px;
+    }
+
+    .col-national {
+      width: 85px;
+    }
+
+    tbody td:nth-child(3) {
+      text-transform: capitalize;
+    }
+
+    td.col-wtn, td.col-utr, td.col-national {
+      box-shadow: inset 0 0 0 9999px rgba(68, 114, 196, 0.06);
+    }
+
+    /* Links inside metric cells (keep visual style) */
+    td.col-wtn a, td.col-utr a, td.col-national a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+    }
+
+    td.col-wtn a:hover, td.col-utr a:hover, td.col-national a:hover {
+      text-decoration: underline;
+    }
+
+    /* Statistics section */
+    .stats-section {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .stats-section h3 {
+      color: #2c3e50;
+      margin-top: 0;
+      border-bottom: 2px solid #4472C4;
+      padding-bottom: 10px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .stat-box {
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #4472C4;
+      border-radius: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .utr-histogram {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 16px 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .utr-histogram h3 {
+      color: #2c3e50;
+      margin-top: 0;
+      border-bottom: 2px solid #4472C4;
+      padding-bottom: 8px;
+    }
+
+    .utr-subtitle {
+      font-weight: normal;
+      font-size: 12px;
+      color: #5a6b7d;
+    }
+
+    .utr-histogram-chart {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .utr-bin {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #2c3e50;
+    }
+
+    .utr-bin-label {
+      width: 90px;
+      text-align: right;
+      color: #5a6b7d;
+    }
+
+    .utr-bin-bar-wrap {
+      flex: 1;
+      height: 12px;
+      background-color: #eef2f8;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .utr-bin-bar {
+      height: 100%;
+      background-color: #4472C4;
+      border-radius: 999px;
+    }
+
+    .utr-bin.is-highlight .utr-bin-bar {
+      background-color: #f5c542;
+    }
+
+    .utr-bin-count {
+      width: 28px;
+      text-align: right;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .utr-histogram-caption {
+      font-size: 11px;
+      color: #666;
+      margin-top: 12px;
+      padding-bottom: 4px;
+      text-align: center;
+    }
+
+    /* Tournament Details Page */
+    .tournament-details-page {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      page-break-before: always;
+    }
+
+    .tournament-details-page h2 {
+      color: #2c3e50;
+      border-bottom: 3px solid #4472C4;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    .tournament-details-page h3 {
+      color: #4472C4;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    .detail-row {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-label {
+      font-weight: bold;
+      color: #555;
+      display: inline-block;
+      width: 180px;
+    }
+
+    .detail-value {
+      color: #2c3e50;
+    }
+
+    .important-note {
+      background-color: #fff9e6;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+
+    /* Share button */
+    .share-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4472C4;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .share-button:hover {
+      background-color: #2c5aa0;
+      transform: scale(1.05);
+    }
+
+    .share-button:active {
+      transform: scale(0.95);
+    }
+
+    /* Sticky header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    }
+
+    /* Click-to-call phone link */
+    a[href^="tel"] {
+      color: #4472C4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a[href^="tel"]:hover {
+      text-decoration: underline;
+    }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      h1 {
+        color: #ffffff;
+      }
+
+      .report-header-logo {
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+      }
+
+      .tournament-dates {
+        color: #ffffff;
+      }
+
+      .tournament-info {
+        color: #b0b0b0;
+      }
+
+      table {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+      }
+
+      th {
+        background-color: #3a5a8a;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #2a2a2a;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #333333;
+      }
+
+      tbody tr:hover {
+        background-color: #404040 !important;
+      }
+
+      tr.highlight-player {
+        background-color: #2a2a2a !important;
+      }
+
+      tr.highlight-player:hover {
+        background-color: #2a2a2a !important;
+      }
+
+      tr.highlight-player td {
+        color: #ffd700;
+      }
+
+      tr.highlight-player td:nth-child(2) {
+        background-color: #3b2f1a;
+      }
+
+      tr.highlight-player td:nth-child(3) {
+        background-color: #3b2f1a;
+      }
+
+      tr.highlight-player td:nth-child(1) {
+        border-left-color: #d4a700;
+      }
+
+      td {
+        border-bottom: 1px solid #404040;
+      }
+
+      .stats-section, .tournament-details-page, .utr-histogram {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+      }
+
+      .stats-section h3, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h3 {
+        color: #ffffff;
+        border-bottom-color: #3a5a8a;
+      }
+
+      .stat-box {
+        background-color: #333333;
+        border-left-color: #3a5a8a;
+      }
+
+      .stat-value, .stat-label {
+        color: #e0e0e0;
+      }
+
+      .utr-subtitle {
+        color: #9aa9c0;
+      }
+
+      .utr-bin {
+        color: #e0e0e0;
+      }
+
+      .utr-bin-label {
+        color: #9aa9c0;
+      }
+
+      .utr-bin-bar-wrap {
+        background-color: #2f3644;
+      }
+
+      .utr-bin-bar {
+        background-color: #6b9bd1;
+      }
+
+      .utr-bin.is-highlight .utr-bin-bar {
+        background-color: #f5c542;
+      }
+
+      .utr-bin-count {
+        color: #e0e0e0;
+      }
+
+      .utr-histogram-caption {
+        color: #b0b0b0;
+      }
+
+      .detail-row {
+        border-bottom: 1px solid #404040;
+      }
+
+      .detail-label {
+        color: #b0b0b0;
+      }
+
+      .detail-value {
+        color: #e0e0e0;
+      }
+
+      .key-stat {
+        color: #e0e0e0;
+        background-color: transparent;
+        border: none;
+      }
+
+      .key-stat .key-value {
+        color: #cfe0ff;
+      }
+
+      td.col-wtn, td.col-utr, td.col-national {
+        box-shadow: inset 0 0 0 9999px rgba(120, 160, 220, 0.08);
+      }
+
+      .selection-callout {
+        color: #e0e0e0;
+        background-color: #2f3644;
+        border-left-color: #6b9bd1;
+      }
+
+      .important-note {
+        background-color: #3a3a1a;
+        border-left-color: #d4a700;
+        color: #e0e0e0;
+      }
+
+      a {
+        color: #6b9bd1;
+      }
+
+      a:hover {
+        color: #8bb3e0;
+      }
+
+      .share-button {
+        background-color: #3a5a8a;
+      }
+
+      .share-button:hover {
+        background-color: #4a6a9a;
+      }
+    }
+
+    /* Mobile/Tablet Responsive Styles */
+    @media screen and (max-width: 768px) {
+      body {
+        margin: 10px;
+      }
+
+      .report-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin: 8px auto 10px;
+      }
+
+      .report-header-logo {
+        width: 96px;
+        height: 96px;
+        position: static;
+        transform: none;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .tournament-info {
+        font-size: 12px;
+        margin-bottom: 15px;
+      }
+
+      .table-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .link-legend {
+        align-self: stretch;
+        text-align: left;
+      }
+
+      /* Table container for horizontal scrolling */
+      table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 12px;
+      }
+
+      thead, tbody {
+        display: table;
+        width: 100%;
+      }
+
+      /* Larger tap targets for sortable headers */
+      th.sortable {
+        padding: 15px 8px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(68, 114, 196, 0.3);
+      }
+
+      th, td {
+        padding: 10px 6px;
+      }
+
+      /* Make row numbers and ratings more prominent */
+      .col-rank {
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .col-wtn, .col-utr {
+        font-size: 13px;
+      }
+
+      /* Hide Location column on very small screens (under 480px) */
+      @media screen and (max-width: 480px) {
+        th:last-child,
+        td:last-child {
+          display: none;
+        }
+      }
+
+      /* Stats section - stack on mobile */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .utr-histogram {
+        padding: 15px;
+        margin: 20px 0;
+      }
+
+      .utr-bin-label {
+        width: 70px;
+        font-size: 10px;
+      }
+
+      .utr-bin-count {
+        width: 24px;
+        font-size: 10px;
+      }
+
+      .stat-box {
+        padding: 12px;
+      }
+
+      .stat-label {
+        font-size: 10px;
+      }
+
+      .stat-value {
+        font-size: 16px;
+      }
+
+      /* Tournament details - better mobile layout */
+      .tournament-details-page {
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .tournament-details-page h2 {
+        font-size: 1.5em;
+      }
+
+      .tournament-details-page h3 {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+
+      .detail-row {
+        padding: 8px 0;
+        font-size: 13px;
+      }
+
+      .detail-label {
+        display: block;
+        width: 100%;
+        margin-bottom: 3px;
+        font-size: 11px;
+      }
+
+      .detail-value {
+        display: block;
+        padding-left: 0;
+      }
+
+      /* Touch-friendly links */
+      .detail-value a {
+        display: inline-block;
+        padding: 8px 0;
+        line-height: 1.4;
+        -webkit-tap-highlight-color: rgba(68, 114, 196, 0.2);
+      }
+
+      .important-note {
+        padding: 12px;
+        font-size: 13px;
+      }
+
+      /* Show share button on mobile */
+      .share-button {
+        display: flex;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      /* Page setup */
+      @page {
+        size: letter;
+        margin: 0.5in;
+      }
+
+      body {
+        background-color: white;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Hide share button in print */
+      .share-button {
+        display: none !important;
+      }
+
+      /* Remove shadows and unnecessary decorations */
+      table, .stats-section, .tournament-details-page, .utr-histogram {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+
+      /* Table optimizations */
+      table {
+        font-size: 10pt;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+
+      tbody tr:hover {
+        background-color: inherit !important;
+      }
+
+      /* Keep alternating row colors for readability */
+      tbody tr:nth-child(odd) {
+        background-color: white !important;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #f0f0f0 !important;
+      }
+
+      /* Highlight Alexis in print */
+      tr.highlight-player td {
+        color: #000 !important;
+        font-weight: bold !important;
+        background-color: #ffffcc !important;
+      }
+
+      tr.highlight-player td.col-wtn {
+        font-weight: normal !important;
+      }
+
+      /* Column widths for print */
+      .col-rank {
+        width: 30px;
+      }
+
+      th, td {
+        padding: 6px 8px;
+      }
+
+      /* Stats section */
+      .stats-section {
+        page-break-before: auto;
+        page-break-after: auto;
+        page-break-inside: avoid;
+        margin: 20px 0;
+        padding: 15px;
+      }
+
+      .utr-histogram {
+        page-break-inside: avoid;
+        margin: 20px 0;
+        padding: 15px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      .stat-box {
+        background-color: #f8f9fa !important;
+        border: 1px solid #ddd;
+      }
+
+      /* Tournament details page */
+      .tournament-details-page {
+        page-break-before: always;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .tournament-info {
+        font-size: 11pt;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 18pt;
+        margin-bottom: 5px;
+      }
+
+      h2 {
+        font-size: 16pt;
+        margin-top: 15px;
+      }
+
+      h3 {
+        font-size: 13pt;
+        margin-top: 15px;
+        margin-bottom: 8px;
+      }
+
+      /* Make links visible in print */
+      a {
+        color: #000;
+        text-decoration: underline;
+      }
+
+      /* Important note styling */
+      .important-note {
+        background-color: #f9f9f9 !important;
+        border: 2px solid #666;
+        padding: 12px;
+        margin-top: 15px;
+      }
+
+      .detail-row {
+        padding: 6px 0;
+        font-size: 11pt;
+      }
+    }
+
+    /* ========================================
+       MOBILE DARK THEME STYLES
+       ======================================== */
+    
+    /* CSS Variables for Mobile */
+    /* Mobile Theme Variables - Light Mode (Default) */
+    :root {
+      --mobile-bg: #f5f5f7;
+      --mobile-surface: #ffffff;
+      --mobile-surface-elevated: #f8f8f8;
+      --mobile-border: #d1d1d6;
+      --mobile-text-primary: #000000;
+      --mobile-text-secondary: #6e6e73;
+      --mobile-text-muted: #8e8e93;
+      --mobile-accent: #ff9f0a;
+      --mobile-accent-soft: rgba(255, 159, 10, 0.12);
+      --mobile-green: #34c759;
+      --mobile-green-soft: rgba(52, 199, 89, 0.12);
+      --mobile-blue: #007aff;
+      --mobile-blue-soft: rgba(0, 122, 255, 0.12);
+      --mobile-purple: #af52de;
+    }
+
+    /* Mobile Theme Variables - Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --mobile-bg: #0a0a0f;
+        --mobile-surface: #16161e;
+        --mobile-surface-elevated: #1e1e28;
+        --mobile-border: #2a2a38;
+        --mobile-text-primary: #f5f5f7;
+        --mobile-text-secondary: #8e8e93;
+        --mobile-text-muted: #636366;
+        --mobile-accent: #ff9f0a;
+        --mobile-accent-soft: rgba(255, 159, 10, 0.15);
+        --mobile-green: #30d158;
+        --mobile-green-soft: rgba(48, 209, 88, 0.15);
+        --mobile-blue: #0a84ff;
+        --mobile-blue-soft: rgba(10, 132, 255, 0.15);
+        --mobile-purple: #bf5af2;
+      }
+    }
+
+    /* Default: Hide mobile, show desktop */
+    .mobile-view {
+      display: none;
+    }
+
+    .desktop-view {
+      display: block;
+    }
+
+    .desktop-view-toggle {
+      display: none;
+    }
+
+    /* Mobile Layout Styles */
+    .mobile-view {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: var(--mobile-bg);
+      color: var(--mobile-text-primary);
+      line-height: 1.5;
+      max-width: 440px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+      padding: 16px 20px;
+      background: var(--mobile-surface);
+      border-bottom: 1px solid var(--mobile-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 80px;
+    }
+
+    .mobile-header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+
+    .mobile-header-logo-link {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      padding: 2px;
+      text-decoration: none;
+    }
+
+    .mobile-header-logo-link:focus-visible {
+      outline: 2px solid var(--mobile-accent);
+      outline-offset: 4px;
+    }
+
+    .mobile-header-logo {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .mobile-header-content {
+      flex: 1;
+      padding-left: 68px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mobile-header-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin: 0 0 4px 0;
+      color: var(--mobile-accent);
+      text-transform: uppercase;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .mobile-header-meta {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .mobile-deadline-badge {
+      margin-top: 6px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--mobile-border);
+      background: var(--mobile-surface);
+      font-size: 11px;
+      line-height: 1.2;
+      color: var(--mobile-text-secondary);
+    }
+
+    .mobile-deadline-countdown {
+      font-weight: 700;
+      color: var(--mobile-accent);
+      font-size: 12px;
+    }
+
+    .mobile-deadline-date {
+      font-size: 11px;
+      color: var(--mobile-text-secondary);
+    }
+
+    /* Hero Stats Container */
+    .mobile-hero-stats {
+      padding: 16px 20px;
+      margin: 16px 20px;
+      background: var(--mobile-surface);
+      border-radius: 14px;
+      border: 1px solid var(--mobile-border);
+    }
+
+    /* Tournament Name Link (inside hero stats card) */
+    .mobile-tournament-link {
+      display: block;
+      text-align: center;
+      padding: 0 0 12px 0;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--mobile-text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--mobile-border);
+    }
+
+    .mobile-tournament-link:active {
+      opacity: 0.6;
+    }
+
+    /* Stats Grid */
+    .mobile-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mobile-stat-card {
+      background: var(--mobile-surface-elevated);
+      border-radius: 14px;
+      padding: 14px 12px;
+      text-align: center;
+      border: 1px solid var(--mobile-border);
+    }
+
+    .mobile-stat-card.highlight {
+      background: var(--mobile-accent-soft);
+      border-color: rgba(255, 159, 10, 0.3);
+    }
+
+    .mobile-stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .mobile-stat-card.highlight .mobile-stat-value {
+      color: var(--mobile-accent);
+    }
+
+    .mobile-stat-label {
+      font-size: 11px;
+      color: var(--mobile-text-secondary);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* Alexis Spotlight Card */
+    .mobile-alexis-card {
+      margin: 16px 20px;
+      background: linear-gradient(135deg, rgba(255, 159, 10, 0.12) 0%, rgba(191, 90, 242, 0.08) 100%);
+      border: 1px solid rgba(255, 159, 10, 0.25);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .mobile-alexis-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .mobile-alexis-avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--mobile-accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .mobile-alexis-name {
+      flex: 1;
+    }
+
+    .mobile-alexis-name h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .mobile-alexis-name span {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+    }
+
+    .mobile-alexis-seed {
+      background: var(--mobile-accent);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .mobile-alexis-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .mobile-alexis-stat {
+      text-align: center;
+      padding: 10px 4px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+    }
+
+    .mobile-alexis-stat-value {
+      font-size: 16px;
       font-weight: 700;
     }
-    tr:last-child td {
+
+    .mobile-alexis-stat-label {
+      font-size: 10px;
+      color: var(--mobile-text-secondary);
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Position Gauge */
+    .mobile-position-gauge {
+      margin: 16px 20px;
+      background: var(--mobile-surface);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid var(--mobile-border);
+    }
+
+    .mobile-gauge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .mobile-gauge-title {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+    }
+
+    .mobile-gauge-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--mobile-green);
+    }
+
+    .mobile-gauge-bar {
+      height: 8px;
+      background: var(--mobile-surface-elevated);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mobile-gauge-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--mobile-green) 0%, var(--mobile-accent) 100%);
+      border-radius: 4px;
+      position: relative;
+      transition: width 1s ease-out;
+    }
+
+    .mobile-gauge-marker {
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      width: 3px;
+      height: 16px;
+      background: var(--mobile-text-primary);
+      border-radius: 2px;
+    }
+
+    .mobile-gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--mobile-text-muted);
+    }
+
+    .mobile-gauge-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: var(--mobile-green-soft);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--mobile-green);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Section Headers */
+    .mobile-section-header {
+      padding: 20px 20px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mobile-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Sort Controls */
+    .mobile-sort-controls {
+      padding: 0 20px 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .mobile-sort-btn {
+      flex: 1;
+      padding: 8px 12px;
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 10px;
+      color: var(--mobile-text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mobile-sort-btn.active {
+      background: var(--mobile-accent-soft);
+      border-color: rgba(255, 159, 10, 0.3);
+      color: var(--mobile-accent);
+      font-weight: 600;
+    }
+
+    /* Player Cards */
+    .mobile-player-list {
+      padding: 0 20px;
+    }
+
+    .mobile-player-card {
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mobile-player-card.top-seed {
+      border-color: rgba(48, 209, 88, 0.3);
+      background: linear-gradient(135deg, var(--mobile-surface) 0%, var(--mobile-green-soft) 100%);
+    }
+
+    .mobile-player-card.target-player {
+      border: 1px solid rgba(255, 159, 10, 0.4);
+      background: linear-gradient(135deg, rgba(255, 159, 10, 0.12) 0%, rgba(191, 90, 242, 0.08) 100%);
+    }
+
+    .mobile-player-rank {
+      width: 28px;
+      height: 28px;
+      background: var(--mobile-surface-elevated);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--mobile-text-secondary);
+      flex-shrink: 0;
+    }
+
+    .mobile-player-card.top-seed .mobile-player-rank {
+      background: var(--mobile-green);
+      color: #000;
+    }
+
+    .mobile-player-card.target-player .mobile-player-rank {
+      background: var(--mobile-accent);
+      color: #000;
+    }
+
+    .mobile-player-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mobile-player-name {
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mobile-player-location {
+      font-size: 12px;
+      color: var(--mobile-text-muted);
+    }
+
+    .mobile-player-ratings {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .mobile-rating-badge {
+      padding: 6px 10px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 52px;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    a.mobile-rating-badge:active {
+      opacity: 0.6;
+    }
+
+    .mobile-rating-badge.utr {
+      background: var(--mobile-blue-soft);
+    }
+
+    .mobile-rating-badge.nat {
+      background: var(--mobile-surface-elevated);
+    }
+
+    .mobile-rating-value {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mobile-rating-badge.utr .mobile-rating-value {
+      color: var(--mobile-blue);
+    }
+
+    .mobile-rating-label {
+      font-size: 9px;
+      color: var(--mobile-text-muted);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    /* Player Card Expand Icon */
+    .mobile-player-expand-icon {
+      font-size: 10px;
+      color: var(--mobile-text-muted);
+      margin-left: 4px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .mobile-player-card.expanded .mobile-player-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Player Details (Expandable) */
+    .mobile-player-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      margin: 0 20px;
+      margin-top: -8px;
+    }
+
+    .mobile-player-details.expanded {
+      max-height: 200px;
+    }
+
+    .mobile-player-details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 12px;
+      background: var(--mobile-surface-elevated);
+      border: 1px solid var(--mobile-border);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .mobile-detail-item {
+      text-align: center;
+      padding: 8px 4px;
+      background: var(--mobile-surface);
+      border-radius: 8px;
+    }
+
+    .mobile-detail-label {
+      font-size: 9px;
+      color: var(--mobile-text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .mobile-detail-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--mobile-text-primary);
+    }
+
+    /* Cutoff Divider */
+    .mobile-cutoff-divider {
+      margin: 8px 20px;
+      padding: 8px 12px;
+      background: var(--mobile-surface);
+      border: 1px dashed var(--mobile-border);
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--mobile-text-muted);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Show More Button */
+    .mobile-show-more {
+      margin: 8px 20px 20px;
+      padding: 14px;
+      width: calc(100% - 40px);
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--mobile-blue);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mobile-show-more:hover {
+      background: var(--mobile-surface-elevated);
+    }
+
+    /* Histogram */
+    .mobile-chart-section {
+      padding: 0 20px;
+      margin-bottom: 16px;
+    }
+
+    .mobile-chart-card {
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .mobile-histogram {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 80px;
+      margin-bottom: 8px;
+    }
+
+    .mobile-histogram-bar {
+      flex: 1;
+      background: var(--mobile-blue-soft);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      min-height: 4px;
+      transition: height 0.6s ease-out;
+    }
+
+    .mobile-histogram-bar.alexis-range {
+      background: var(--mobile-accent);
+    }
+
+    .mobile-histogram-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--mobile-text-muted);
+    }
+
+    .mobile-chart-legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--mobile-text-secondary);
+    }
+
+    .mobile-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    .mobile-legend-dot.blue {
+      background: var(--mobile-blue);
+    }
+
+    .mobile-legend-dot.orange {
+      background: var(--mobile-accent);
+    }
+
+    /* Tournament Info Cards */
+    .mobile-info-section {
+      padding: 0 20px 20px;
+    }
+
+    .mobile-info-card {
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .mobile-info-card-header {
+      padding: 14px 16px;
+      background: var(--mobile-surface-elevated);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--mobile-border);
+    }
+
+    .mobile-info-row {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--mobile-border);
+    }
+
+    .mobile-info-row:last-child {
       border-bottom: none;
     }
-    .note {
-      margin-top: 16px;
-      color: #64748b;
-      font-size: 0.9rem;
+
+    .mobile-info-label {
+      font-size: 13px;
+      color: var(--mobile-text-secondary);
+      flex-shrink: 0;
+    }
+
+    .mobile-info-value {
+      font-size: 13px;
+      text-align: right;
+      color: var(--mobile-text-primary);
+    }
+
+    .mobile-info-value a {
+      color: var(--mobile-blue);
+      text-decoration: none;
+    }
+
+    /* View Toggle */
+    .mobile-view-toggle {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .mobile-view-toggle a {
+      color: var(--mobile-text-secondary);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    /* Media Query: Show Mobile on Small Screens */
+    @media (max-width: 600px) {
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--mobile-bg);
+        border-top: none;
+      }
+
+      .mobile-view {
+        display: block;
+      }
+
+      .desktop-view {
+        display: none;
+      }
+
+      .desktop-view-toggle {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      .desktop-view-toggle a {
+        display: inline-block;
+        padding: 12px 20px;
+        background: var(--mobile-surface);
+        border: 1px solid var(--mobile-border);
+        border-radius: 12px;
+        color: var(--mobile-text-secondary);
+        font-size: 14px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    /* Force View Classes (for manual toggle) */
+    body.force-mobile {
+      margin: 0;
+      padding: 0;
+      background-color: var(--mobile-bg);
+      border-top: none;
+    }
+
+    body.force-mobile .mobile-view {
+      display: block !important;
+    }
+
+    body.force-mobile .desktop-view {
+      display: none !important;
+    }
+
+    body.force-desktop .mobile-view {
+      display: none !important;
+    }
+
+    body.force-desktop .desktop-view {
+      display: block !important;
     }
   </style>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <a class="logo" href="index.html" aria-label="Back to home">T</a>
-      <div>
-        <h1>Level 2: Claremont, CA</h1>
-        <div class="meta">
-          <span>FEBRUARY 7 - 9, 2026</span>
-          <span>Level 2: Claremont, CA</span>
-          <span>81 players</span>
-          
+  <div class="desktop-view">
+  <div class="report-header">
+    <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
+      <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
+    </a>
+    <div class="report-header-text">
+      <h1>Level 2: Claremont, CA</h1>
+      <div class="tournament-dates-row">
+        <div class="tournament-dates">February 7 - 9, 2026</div>
+        <div class="deadline-badge" id="registration-deadline-badge">
+          <div class="deadline-countdown" id="registration-countdown">Closes in --</div>
+          <div class="deadline-date" id="registration-deadline-date">--</div>
+        </div>
+      </div>
+      <div class="tournament-info">
+        <a href="https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198" target="_blank" rel="noopener noreferrer" title="Open tournament page">Level 2: Claremont, CA</a><br>The Claremont Club, Claremont, CA • 81 Players
+      </div>
+    </div>
+  </div>
+    <div class="table-meta">
+    <div class="key-stats">
+      <div class="key-stat">Z</span></div>
+      <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">Registration closed</span></div>
+      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">81</span></div>
+    </div>
+    <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
+  </div>
+
+  <table>
+    <thead class="sticky-header">
+      <tr>
+        <th class="col-rank">#</th>
+        <th class="sortable">First Name</th>
+        <th class="sortable">Last Name</th>
+        <th class="col-wtn sortable">WTN</th>
+        <th class="col-utr sortable">UTR</th>
+        <th class="col-national sortable">Nat Rank</th>
+        <th class="sortable">Location</th>
+        <th class="col-section-hidden" style="display: none;">Section</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-section-rank="">
+        <td class="col-rank">1</td>
+        <td>Ved</td>
+        <td>Iyengar</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Paradise Valley AZ</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">2</td>
+        <td>William</td>
+        <td>Zhou</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Glendale CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">3</td>
+        <td>Sanath</td>
+        <td>Anand</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Foster City CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">4</td>
+        <td>Jesse</td>
+        <td>Goldman</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Paradise Valley AZ</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">5</td>
+        <td>Aleksander</td>
+        <td>Denisov</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Redmond WA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">6</td>
+        <td>Jaden</td>
+        <td>Joyner</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Tarzana CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">7</td>
+        <td>Andy</td>
+        <td>Xu</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Sonoma CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">8</td>
+        <td>Reed</td>
+        <td>Kuai</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Newbury Park CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">9</td>
+        <td>Isaac</td>
+        <td>Milner</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Piedmont CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">10</td>
+        <td>Pavel</td>
+        <td>Abadzhev</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Montrose CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">11</td>
+        <td>Kade</td>
+        <td>Grover</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Laguna Beach CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">12</td>
+        <td>Henrik</td>
+        <td>Khemiy</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Studio City CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">13</td>
+        <td>Roman</td>
+        <td>Gabriel</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Santa Monica CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">14</td>
+        <td>Philip</td>
+        <td>Bogomolny</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Rancho Mission Viejo CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">15</td>
+        <td>Benedict</td>
+        <td>Zhong</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Irvine CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">16</td>
+        <td>Wayne</td>
+        <td>Lee</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Denver CO</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">17</td>
+        <td>Harvey</td>
+        <td>Baek</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Rancho Palos Verdes CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">18</td>
+        <td>Patrick</td>
+        <td>Hopkins</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Hawthorne CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">19</td>
+        <td>Alexander</td>
+        <td>Yang</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Cupertino CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">20</td>
+        <td>Anthony</td>
+        <td>Gallo</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Corona CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">21</td>
+        <td>Imangali</td>
+        <td>Kanat</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Los Angeles CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">22</td>
+        <td>Junsang</td>
+        <td>Yu</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Cupertino CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">23</td>
+        <td>Tavish</td>
+        <td>Sharma</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>San Diego CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">24</td>
+        <td>Damian</td>
+        <td>Kasralikar</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Tarzana CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">25</td>
+        <td>Dustin</td>
+        <td>Shmuely</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Melville NY</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">26</td>
+        <td>Anay</td>
+        <td>Gaur</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Millburn NJ</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">27</td>
+        <td>Ryan</td>
+        <td>Driscoll</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Easton CT</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">28</td>
+        <td>Owen</td>
+        <td>Corey</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Menlo Park CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">29</td>
+        <td>Vihan</td>
+        <td>Jain</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Great Falls VA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">30</td>
+        <td>Alessandro</td>
+        <td>Yang</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Palo Alto CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">31</td>
+        <td>Dorian</td>
+        <td>Zeldin</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Laguna Niguel CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">32</td>
+        <td>Jack</td>
+        <td>Turen</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Toluca Lake CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">33</td>
+        <td>Samuel</td>
+        <td>Hong</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Manhasset NY</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">34</td>
+        <td>James</td>
+        <td>Mestre Plourde</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Lake Forest Park WA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">35</td>
+        <td>Colby</td>
+        <td>Beeler</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Elm Grove WI</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">36</td>
+        <td>Myles</td>
+        <td>Walker</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>El Paso TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">37</td>
+        <td>Vetri</td>
+        <td>Vignesh</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Montrose CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">38</td>
+        <td>Mac</td>
+        <td>London</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Saint Louis MO</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">39</td>
+        <td>Matias</td>
+        <td>Rubio Molano</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Houston TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">40</td>
+        <td>Graydon</td>
+        <td>St John</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>The Colony TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">41</td>
+        <td>Stephen</td>
+        <td>Sasala</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Little Elm TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">42</td>
+        <td>David</td>
+        <td>Melkonyan</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Pasadena CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">43</td>
+        <td>Viaan</td>
+        <td>Sinha</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Folsom CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">44</td>
+        <td>Timothy</td>
+        <td>Kolomeyer</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Tarzana CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">45</td>
+        <td>Vadin</td>
+        <td>Acharya</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Frisco TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">46</td>
+        <td>Victor Jingyao Deng</td>
+        <td>Yang</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Irvine CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">47</td>
+        <td>Daniel</td>
+        <td>Sasala</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Little Elm TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">48</td>
+        <td>Aaditya Veer</td>
+        <td>Jain</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Delray Beach FL</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">49</td>
+        <td>Wilber</td>
+        <td>Wu</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Irvine CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">50</td>
+        <td>John Enke</td>
+        <td>Wang</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Chino Hills CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">51</td>
+        <td>Roman</td>
+        <td>Vig</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>San Francisco CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">52</td>
+        <td>Yisen</td>
+        <td>Shi</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Irvine CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">53</td>
+        <td>Andres</td>
+        <td>Urrea De La Torre</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>La Jolla CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">54</td>
+        <td>Gaelan</td>
+        <td>Thompson-Healy</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Carpinteria CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">55</td>
+        <td>Shuo</td>
+        <td>Li</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Oyster Bay NY</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">56</td>
+        <td>Yifan</td>
+        <td>Nie</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Great Neck NY</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">57</td>
+        <td>Roark</td>
+        <td>Gmirkin</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Boise ID</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">58</td>
+        <td>Ethan</td>
+        <td>Kim</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Wesley Chapel FL</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">59</td>
+        <td>Rayan</td>
+        <td>Fathi El Idrissi</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>New York NY</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">60</td>
+        <td>Ritwik</td>
+        <td>Srinivasan</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Cupertino CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">61</td>
+        <td>Caleb</td>
+        <td>Wang</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Bellevue WA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">62</td>
+        <td>Kiran</td>
+        <td>Siruvuri</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Austin TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">63</td>
+        <td>Landon</td>
+        <td>Sen</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Tulsa OK</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">64</td>
+        <td>Jace</td>
+        <td>Swigart</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>La Jolla CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">65</td>
+        <td>Ahren</td>
+        <td>Rafiq</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Santa Ana CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">66</td>
+        <td>Howie</td>
+        <td>Ho</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Lynnwood WA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">67</td>
+        <td>Kabir</td>
+        <td>Gudavalli</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Paradise Valley AZ</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">68</td>
+        <td>Preston</td>
+        <td>Renfrow</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Winter Park FL</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">69</td>
+        <td>Idan</td>
+        <td>Tam</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Las Vegas NV</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">70</td>
+        <td>Griffin</td>
+        <td>Carlisle</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Henderson NV</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">71</td>
+        <td>Christian</td>
+        <td>Winkler</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Fallbrook CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">72</td>
+        <td>Varshith Reddy</td>
+        <td>Basireddy</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Apex NC</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">73</td>
+        <td>Prajval</td>
+        <td>Vinay</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Everett WA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">74</td>
+        <td>Aarav</td>
+        <td>Agrawal</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Foster City CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">75</td>
+        <td>Dawson</td>
+        <td>Dugan</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Wichita KS</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">76</td>
+        <td>Devansh</td>
+        <td>Patra</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Cupertino CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">77</td>
+        <td>Elnur</td>
+        <td>Chorshanbiev</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Plainsboro NJ</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">78</td>
+        <td>Eridan</td>
+        <td>Copeland</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Keller TX</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">79</td>
+        <td>Corbin Kayden Kai</td>
+        <td>Cooks</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Henderson NV</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">80</td>
+        <td>Jonathan</td>
+        <td>Qu</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Sherman Oaks CA</td>
+        <td style="display: none;"></td>
+      </tr>
+      <tr data-section-rank="">
+        <td class="col-rank">81</td>
+        <td>Aden Lok Yin</td>
+        <td>Tam</td>
+        <td class="col-wtn"></td>
+        <td class="col-utr"></td>
+        <td class="col-national"></td>
+        <td>Las Vegas NV</td>
+        <td style="display: none;"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="utr-histogram">
+    <h3>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span></h3>
+    <div id="utr-histogram-chart" class="utr-histogram-chart"></div>
+    <div class="utr-histogram-caption" id="utr-histogram-caption">Based on UTR values from the player list.</div>
+  </div>
+
+                            <div class="stats-section">
+    <h3>Tournament Statistics</h3>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Total Players</div>
+        <div class="stat-value">81</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">WTN Range</div>
+        <div class="stat-value">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avg WTN</div>
+        <div class="stat-value">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avg UTR (known)</div>
+        <div class="stat-value">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Draw Size</div>
+        <div class="stat-value">16</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Registered</div>
+        <div class="stat-value">81</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Registration Closes</div>
+        <div class="stat-value">Registration closed</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Best Nat Rank</div>
+        <div class="stat-value">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Top UTR</div>
+        <div class="stat-value">—</div>
+      </div>
+    </div>
+  </div>
+<div class="tournament-details-page">
+    <h2>Tournament Information & Details</h2>
+
+    <h3>Draw & Registration</h3>
+    <div class="selection-callout">Details are based on the current USTA PlayTennis entry list.</div>
+    <div class="detail-row">
+      Z</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Registered:</span>
+      <span class="detail-value">81</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Registration Closes:</span>
+      <span class="detail-value">Registration closed</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Selection / Seeding:</span>
+      <span class="detail-value">See USTA tournament page</span>
+    </div>
+
+    <h3>Format & Scoring</h3>
+    <div class="detail-row">
+      <span class="detail-label">Match Format:</span>
+      <span class="detail-value">See USTA tournament page</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Tiebreaks:</span>
+      <span class="detail-value">See USTA tournament page</span>
+    </div>
+
+    <h3>Venue Information</h3>
+    <div class="detail-row">
+      <span class="detail-label">Site:</span>
+      <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=The+Claremont+Club+Claremont+CA" target="_blank" style="color: #4472C4; text-decoration: none;">The Claremont Club, Claremont, CA</a></span>
+    </div>
+
+    <h3>Tournament Location</h3>
+    <div class="detail-row">
+      <span class="detail-label">Tournament Location:</span>
+      <span class="detail-value">The Claremont Club, Claremont, CA</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Tournament Dates:</span>
+      <span class="detail-value">February 7 - 9, 2026</span>
+    </div>
+
+    <h3>Tournament Contact</h3>
+    <div class="detail-row">
+      <span class="detail-label">Tournament Director:</span>
+      <span class="detail-value">Barry Friedman</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Email:</span>
+      <span class="detail-value">N/A</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Phone:</span>
+      <span class="detail-value">N/A</span>
+    </div>
+
+    <div class="important-note">
+      <strong>Note:</strong> Registration status and roster are updated daily from USTA PlayTennis.
+    </div>
+  </div>
+
+  <div class="desktop-view-toggle">
+    <a href="#" id="desktop-toggle-mobile">View Mobile Version</a>
+  </div>
+  </div><!-- end desktop-view -->
+
+  <!-- Mobile View Container -->
+  <div class="mobile-view">
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="mobile-header-top">
+        <a class="mobile-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
+          <img src="assets/tennis-report/favicon-256.png" alt="Logo" class="mobile-header-logo">
+        </a>
+        <div class="mobile-header-content">
+          <h1 class="mobile-header-title" id="mobile-title"></h1>
+          <div class="mobile-header-meta" id="mobile-meta"></div>
+          <div class="mobile-deadline-badge" id="mobile-deadline-badge">
+            <div class="mobile-deadline-countdown" id="mobile-registration-countdown">Closes in --</div>
+            <div class="mobile-deadline-date" id="mobile-registration-date">--</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Stats -->
+    <div class="mobile-hero-stats">
+      <!-- Tournament Name Link (inside card) -->
+      <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
+        Open Level 5 Championship Singles
+      </a>
+
+      <!-- Stats Grid -->
+      <div class="mobile-stats-grid">
+        <div class="mobile-stat-card">
+          <div class="mobile-stat-value" id="mobile-draw-size"></div>
+          <div class="mobile-stat-label">Draw Size</div>
+        </div>
+        <div class="mobile-stat-card highlight">
+          <div class="mobile-stat-value" id="mobile-seed"></div>
+          <div class="mobile-stat-label">Closes</div>
+        </div>
+        <div class="mobile-stat-card">
+          <div class="mobile-stat-value" id="mobile-registered"></div>
+          <div class="mobile-stat-label">Registered</div>
         </div>
       </div>
     </div>
-    <div class="links">
-      <a href="https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198" target="_blank" rel="noopener">USTA overview</a>
-      <a href="https://playtennis.usta.com/Competitions/theclaremontclub/Tournaments/players/3C4952C5-18F6-4E77-8273-3F941EF00198" target="_blank" rel="noopener">USTA players list</a>
+
+    <!-- Alexis Spotlight Card -->
+    <div class="mobile-alexis-card" id="mobile-alexis-card"></div>
+
+    <!-- Position Gauge -->
+    <div class="mobile-position-gauge" id="mobile-position-gauge"></div>
+
+    <!-- UTR Distribution -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">UTR Distribution</span>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First</th>
-          <th>Last</th>
-          <th>Events</th>
-          <th>City, State</th>
-          <th>Gender</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>1</td><td></td><td>IYENGAR, Ved</td><td>Boys' 14 &amp; under Singles, Boys' 12 &amp; under Singles, Boys' 14 &amp; under Doubles, Boys' 12 &amp; under Doubles</td><td>Paradise Valley, AZ</td></tr><tr><td>2</td><td>2</td><td></td><td>ZHOU, William</td><td>Boys' 14 &amp; under Singles, Boys' 12 &amp; under Singles, Boys' 14 &amp; under Doubles, Boys' 12 &amp; under Doubles</td><td>Glendale, CA</td></tr><tr><td>3</td><td>3</td><td></td><td>ANAND, Sanath</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Foster City, CA</td></tr><tr><td>4</td><td>4</td><td></td><td>GOLDMAN, Jesse</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Paradise Valley, AZ</td></tr><tr><td>5</td><td>5</td><td></td><td>DENISOV, Aleksander</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Redmond, WA</td></tr><tr><td>6</td><td>6</td><td></td><td>JOYNER, Jaden</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Tarzana, CA</td></tr><tr><td>7</td><td>7</td><td></td><td>XU, Andy</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Sonoma, CA</td></tr><tr><td>8</td><td>8</td><td></td><td>KUAI, Reed</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Newbury Park, CA</td></tr><tr><td>9</td><td>9</td><td></td><td>MILNER, Isaac</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Piedmont, CA</td></tr><tr><td>10</td><td>10</td><td></td><td>ABADZHEV, Pavel</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Montrose, CA</td></tr><tr><td>11</td><td>11</td><td></td><td>GROVER, Kade</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Laguna Beach, CA</td></tr><tr><td>12</td><td>12</td><td></td><td>KHEMIY, Henrik</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Studio City, CA</td></tr><tr><td>13</td><td>13</td><td></td><td>GABRIEL, Roman</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Santa Monica, CA</td></tr><tr><td>14</td><td>14</td><td></td><td>BOGOMOLNY, Philip</td><td>Boys' 12 &amp; under Singles</td><td>Rancho Mission Viejo, CA</td></tr><tr><td>15</td><td>15</td><td></td><td>ZHONG, Benedict</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Irvine, CA</td></tr><tr><td>16</td><td>16</td><td></td><td>LEE, Wayne</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Denver, CO</td></tr><tr><td>17</td><td>17</td><td></td><td>BAEK, Harvey</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Rancho Palos Verdes, CA</td></tr><tr><td>18</td><td>18</td><td></td><td>HOPKINS, Patrick</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Hawthorne, CA</td></tr><tr><td>19</td><td>19</td><td></td><td>YANG, Alexander</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Cupertino, CA</td></tr><tr><td>20</td><td>20</td><td></td><td>GALLO, Anthony</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Corona, CA</td></tr><tr><td>21</td><td>21</td><td></td><td>KANAT, Imangali</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Los Angeles, CA</td></tr><tr><td>22</td><td>22</td><td></td><td>YU, Junsang</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Cupertino, CA</td></tr><tr><td>23</td><td>23</td><td></td><td>SHARMA, Tavish</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>San Diego, CA</td></tr><tr><td>24</td><td>24</td><td></td><td>KASRALIKAR, Damian</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Tarzana, CA</td></tr><tr><td>25</td><td>25</td><td></td><td>SHMUELY, Dustin</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Melville, NY</td></tr><tr><td>26</td><td>26</td><td></td><td>GAUR, Anay</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Millburn, NJ</td></tr><tr><td>27</td><td>27</td><td></td><td>DRISCOLL, Ryan</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Easton, CT</td></tr><tr><td>28</td><td>28</td><td></td><td>COREY, Owen</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Menlo Park, CA</td></tr><tr><td>29</td><td>29</td><td></td><td>JAIN, Vihan</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Great Falls, VA</td></tr><tr><td>30</td><td>30</td><td></td><td>YANG, Alessandro</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Palo Alto, CA</td></tr><tr><td>31</td><td>31</td><td></td><td>ZELDIN, Dorian</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Laguna Niguel, CA</td></tr><tr><td>32</td><td>32</td><td></td><td>TUREN, Jack</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Toluca Lake, CA</td></tr><tr><td>33</td><td>1</td><td></td><td>HONG, Samuel</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Manhasset, NY</td></tr><tr><td>34</td><td>2</td><td></td><td>MESTRE PLOURDE, James</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Lake Forest Park, WA</td></tr><tr><td>35</td><td>3</td><td></td><td>BEELER, Colby</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Elm Grove, WI</td></tr><tr><td>36</td><td>4</td><td></td><td>WALKER, Myles</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>El Paso, TX</td></tr><tr><td>37</td><td>5</td><td></td><td>VIGNESH, Vetri</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Montrose, CA</td></tr><tr><td>38</td><td>6</td><td></td><td>LONDON, Mac</td><td>Boys' 12 &amp; under Singles</td><td>Saint Louis, MO</td></tr><tr><td>39</td><td>7</td><td></td><td>RUBIO MOLANO, Matias</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Houston, TX</td></tr><tr><td>40</td><td>8</td><td></td><td>ST JOHN, Graydon</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>The Colony, TX</td></tr><tr><td>41</td><td>9</td><td></td><td>SASALA, Stephen</td><td>Boys' 12 &amp; under Singles</td><td>Little Elm, TX</td></tr><tr><td>42</td><td>10</td><td></td><td>MELKONYAN, David</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Pasadena, CA</td></tr><tr><td>43</td><td>11</td><td></td><td>SINHA, Viaan</td><td>Boys' 12 &amp; under Singles</td><td>Folsom, CA</td></tr><tr><td>44</td><td>12</td><td></td><td>KOLOMEYER, Timothy</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Tarzana, CA</td></tr><tr><td>45</td><td>13</td><td></td><td>ACHARYA, Vadin</td><td>Boys' 12 &amp; under Singles</td><td>Frisco, TX</td></tr><tr><td>46</td><td>14</td><td></td><td>YANG, Victor Jingyao Deng</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Irvine, CA</td></tr><tr><td>47</td><td>15</td><td></td><td>SASALA, Daniel</td><td>Boys' 12 &amp; under Singles</td><td>Little Elm, TX</td></tr><tr><td>48</td><td>16</td><td></td><td>JAIN, Aaditya Veer</td><td>Boys' 12 &amp; under Singles</td><td>Delray Beach, FL</td></tr><tr><td>49</td><td>17</td><td></td><td>WU, Wilber</td><td>Boys' 12 &amp; under Singles</td><td>Irvine, CA</td></tr><tr><td>50</td><td>18</td><td></td><td>WANG, John Enke</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Chino Hills, CA</td></tr><tr><td>51</td><td>19</td><td></td><td>VIG, Roman</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>San Francisco, CA</td></tr><tr><td>52</td><td>20</td><td></td><td>SHI, YiSen</td><td>Boys' 12 &amp; under Singles</td><td>Irvine, CA</td></tr><tr><td>53</td><td>21</td><td></td><td>URREA DE LA TORRE, Andres</td><td>Boys' 12 &amp; under Singles</td><td>La Jolla, CA</td></tr><tr><td>54</td><td>22</td><td></td><td>THOMPSON-HEALY, Gaelan</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Carpinteria, CA</td></tr><tr><td>55</td><td>1</td><td></td><td>LI, SHUO</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Oyster Bay, NY</td></tr><tr><td>56</td><td>2</td><td></td><td>NIE, Yifan</td><td>Boys' 14 &amp; under Singles, Boys' 12 &amp; under Singles, Boys' 14 &amp; under Doubles, Boys' 12 &amp; under Doubles</td><td>Great Neck, NY</td></tr><tr><td>57</td><td>3</td><td></td><td>GMIRKIN, Roark</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Boise, ID</td></tr><tr><td>58</td><td>4</td><td></td><td>KIM, Ethan</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Wesley Chapel, FL</td></tr><tr><td>59</td><td>5</td><td></td><td>FATHI EL IDRISSI, Rayan</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>New York, NY</td></tr><tr><td>60</td><td>6</td><td></td><td>SRINIVASAN, Ritwik</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Cupertino, CA</td></tr><tr><td>61</td><td>7</td><td></td><td>WANG, Caleb</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Bellevue, WA</td></tr><tr><td>62</td><td>8</td><td></td><td>SIRUVURI, KIRAN</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Austin, TX</td></tr><tr><td>63</td><td>9</td><td></td><td>SEN, Landon</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Tulsa, OK</td></tr><tr><td>64</td><td>10</td><td></td><td>SWIGART, Jace</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>La Jolla, CA</td></tr><tr><td>65</td><td>11</td><td></td><td>RAFIQ, Ahren</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Santa Ana, CA</td></tr><tr><td>66</td><td>12</td><td></td><td>HO, Howie</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Lynnwood, WA</td></tr><tr><td>67</td><td>13</td><td></td><td>GUDAVALLI, Kabir</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Paradise Valley, AZ</td></tr><tr><td>68</td><td>14</td><td></td><td>RENFROW, Preston</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Winter Park, FL</td></tr><tr><td>69</td><td>15</td><td></td><td>TAM, Idan</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Las Vegas, NV</td></tr><tr><td>70</td><td>16</td><td></td><td>CARLISLE, Griffin</td><td>Boys' 12 &amp; under Singles</td><td>Henderson, NV</td></tr><tr><td>71</td><td>17</td><td></td><td>WINKLER, Christian</td><td>Boys' 12 &amp; under Singles</td><td>Fallbrook, CA</td></tr><tr><td>72</td><td>18</td><td></td><td>BASIREDDY, Varshith Reddy</td><td>Boys' 12 &amp; under Singles</td><td>Apex, NC</td></tr><tr><td>73</td><td>19</td><td></td><td>VINAY, Prajval</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Everett, WA</td></tr><tr><td>74</td><td>20</td><td></td><td>AGRAWAL, Aarav</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Foster City, CA</td></tr><tr><td>75</td><td>21</td><td></td><td>DUGAN, Dawson</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Wichita, KS</td></tr><tr><td>76</td><td>22</td><td></td><td>PATRA, Devansh</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Cupertino, CA</td></tr><tr><td>77</td><td>23</td><td></td><td>CHORSHANBIEV, Elnur</td><td>Boys' 12 &amp; under Singles</td><td>Plainsboro, NJ</td></tr><tr><td>78</td><td>24</td><td></td><td>COPELAND, Eridan</td><td>Boys' 12 &amp; under Singles</td><td>Keller, TX</td></tr><tr><td>79</td><td>25</td><td></td><td>COOKS, Corbin Kayden Kai</td><td>Boys' 14 &amp; under Singles, Boys' 12 &amp; under Singles, Boys' 14 &amp; under Doubles, Boys' 12 &amp; under Doubles</td><td>Henderson, NV</td></tr><tr><td>80</td><td>26</td><td></td><td>QU, Jonathan</td><td>Boys' 12 &amp; under Singles</td><td>Sherman Oaks, CA</td></tr><tr><td>81</td><td>27</td><td></td><td>TAM, Aden Lok Yin</td><td>Boys' 12 &amp; under Singles, Boys' 12 &amp; under Doubles</td><td>Las Vegas, NV</td></tr>
-      </tbody>
-    </table>
-    <div class="note">Last updated: January 26, 2026</div>
-  </div>
+    <div class="mobile-chart-section">
+      <div class="mobile-chart-card" id="mobile-histogram"></div>
+    </div>
+
+    <!-- Player List -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">All Players (<span id="mobile-player-count"></span>)</span>
+    </div>
+    <div class="mobile-sort-controls">
+      <button class="mobile-sort-btn" data-sort="utr">UTR</button>
+      <button class="mobile-sort-btn active" data-sort="natRank">Nat Rank</button>
+      <button class="mobile-sort-btn" data-sort="wtn">WTN</button>
+    </div>
+    <div class="mobile-player-list" id="mobile-player-list"></div>
+    <button class="mobile-show-more" id="mobile-show-more">Show all players ↓</button>
+
+    <!-- Tournament Details -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">Tournament Details</span>
+    </div>
+    <div class="mobile-info-section" id="mobile-info-section"></div>
+
+    <!-- View Toggle -->
+    <div class="mobile-view-toggle">
+      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
+    </div>
+  </div><!-- end mobile-view -->
+
+  <!-- Mobile View JavaScript -->
+  <script>
+    // ========================================
+    // MOBILE VIEW IMPLEMENTATION
+    // ========================================
+
+    let currentSort = 'natRank';
+    let isExpanded = false;
+    let allPlayers = [];
+    let targetPlayer = null;
+
+    // Section ranks are sourced directly from the hidden table column.
+    const SECTION_RANKS = {};
+
+    // USTA UAID mapping from rankings_results_v1.csv
+    // USTA profile links - will be populated from desktop version's playerProfileUrlByName
+    const PLAYER_USTA_URLS = {};
+
+    // ========================================
+    // DATA PARSING FUNCTIONS
+    // ========================================
+
+    function parsePlayerData() {
+      const players = [];
+      const rows = document.querySelectorAll('.desktop-view tbody tr');
+      
+      rows.forEach((row, index) => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 7) return;
+        
+        const rank = parseInt(cells[0].textContent.trim());
+        const firstName = cells[1].textContent.trim();
+        const lastName = cells[2].textContent.trim();
+        const wtn = cells[3].textContent.trim();
+        const utrCell = cells[4];
+        const utrLink = utrCell.querySelector('a');
+        const utr = parseFloat(utrLink ? utrLink.textContent.trim() : utrCell.textContent.trim());
+        const utrUrl = utrLink ? utrLink.href : null;
+        const natRank = parseInt(cells[5].textContent.trim());
+        const location = cells[6].textContent.trim();
+        const isTarget = row.classList.contains('highlight-player');
+        
+        const fullName = `${firstName} ${lastName}`;
+        const sectionCell = cells[7];
+        const sectionRank = sectionCell ? parseInt(sectionCell.textContent.trim(), 10) || null : null;
+        
+        const ustaLink =
+          (cells[3] ? cells[3].querySelector('a') : null) ||
+          (cells[5] ? cells[5].querySelector('a') : null);
+        const ustaUrl = ustaLink ? ustaLink.href : null;
+
+        // Extract UAID from USTA URL if available
+        let uaid = null;
+        if (ustaUrl) {
+          const uaidMatch = ustaUrl.match(/uaid=(\d+)/);
+          if (uaidMatch) uaid = uaidMatch[1];
+        }
+        
+        players.push({
+          rank,
+          firstName,
+          lastName,
+          fullName,
+          wtn,
+          utr,
+          utrUrl,
+          natRank,
+          sectionRank,
+          uaid,
+          location,
+          isTarget
+        });
+      });
+      
+      return players;
+    }
+
+    function parseKeyStats() {
+      const stats = {
+        drawSize: 32,
+        seed: 20,
+        registered: 39,
+        percentAbove: 31
+      };
+      
+      const keyStats = document.querySelectorAll('.desktop-view .key-stat');
+      keyStats.forEach(stat => {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) return;
+        
+        const labelText = label.textContent.trim();
+        const valueText = value.textContent.trim();
+        
+        if (labelText === 'Draw') {
+          stats.drawSize = parseInt(valueText);
+        } else if (labelText === 'Alexis Seed') {
+          const parts = valueText.split('/');
+          if (parts.length === 2) {
+            stats.seed = parseInt(parts[0].trim());
+            stats.registered = parseInt(parts[1].trim());
+          }
+        } else if (labelText === '% Above Alexis (UTR)') {
+          stats.percentAbove = parseInt(valueText);
+        }
+      });
+      
+      return stats;
+    }
+
+    function parseTournamentInfo() {
+      const info = {
+        title: '',
+        dates: '',
+        location: '',
+        format: {},
+        venues: [],
+        contact: {}
+      };
+      
+      // Parse header info
+      const h1 = document.querySelector('.desktop-view h1');
+      if (h1) info.title = h1.textContent.trim();
+      
+      const datesEl = document.querySelector('.desktop-view .tournament-dates');
+      if (datesEl) info.dates = datesEl.textContent.trim();
+      
+      const tournamentInfo = document.querySelector('.desktop-view .tournament-info');
+      if (tournamentInfo) {
+        const text = tournamentInfo.textContent.trim();
+        const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+        if (lines.length > 1) {
+          const fullLocation = lines[1].replace(/•.*$/, '').trim();
+          // Extract just "City, State" from full venue addresses
+          // Example: "Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA" -> "San Jose, CA"
+          const cityStateMatch = fullLocation.match(/([^,]+,\s*[A-Z]{2})$/);
+          info.location = cityStateMatch ? cityStateMatch[1].trim() : fullLocation;
+        }
+      }
+      
+      // Parse tournament details
+      const detailsPage = document.querySelector('.desktop-view .tournament-details-page');
+      if (detailsPage) {
+        const detailRows = detailsPage.querySelectorAll('.detail-row');
+        detailRows.forEach(row => {
+          const label = row.querySelector('.detail-label');
+          const value = row.querySelector('.detail-value');
+          if (!label || !value) return;
+          
+          const labelText = label.textContent.trim().replace(':', '');
+          const valueText = value.textContent.trim();
+          
+          // Format & Scoring
+          if (labelText === 'Match Format') info.format.matchFormat = valueText;
+          if (labelText === 'Set Tiebreak') info.format.setTiebreak = valueText;
+          if (labelText === 'Match Tiebreak') info.format.matchTiebreak = valueText;
+          
+          // Venues
+          if (labelText.startsWith('Site')) {
+            const link = value.querySelector('a');
+            info.venues.push({
+              name: valueText.split(',')[0].trim(),
+              url: link ? link.href : null
+            });
+          }
+          
+          // Contact
+          if (labelText === 'Tournament Director') info.contact.director = valueText;
+          if (labelText === 'Email') {
+            const link = value.querySelector('a');
+            info.contact.email = link ? link.href.replace('mailto:', '') : valueText;
+          }
+          if (labelText === 'Phone') {
+            const link = value.querySelector('a');
+            info.contact.phone = link ? link.textContent.trim() : valueText;
+            info.contact.phoneUrl = link ? link.href : null;
+          }
+        });
+      }
+      
+      return info;
+    }
+
+    // ========================================
+    // RENDERING FUNCTIONS
+    // ========================================
+
+    function buildAlexisCard(player) {
+      if (!player) return '';
+      
+      const initials = `${player.firstName[0]}${player.lastName[0]}`;
+      const sectionRank = 54; // Alexis's sectional rank from MEMORY_BANK.md
+      
+      return `
+        <div class="mobile-alexis-header">
+          <div class="mobile-alexis-avatar">${initials}</div>
+          <div class="mobile-alexis-name">
+            <h3>${player.fullName}</h3>
+            <span>${player.location}</span>
+          </div>
+          <div class="mobile-alexis-seed">#${player.rank} Seed</div>
+        </div>
+        <div class="mobile-alexis-stats">
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${player.wtn}</div>
+            <div class="mobile-alexis-stat-label">WTN</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${player.utr}</div>
+            <div class="mobile-alexis-stat-label">UTR</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${player.natRank}</div>
+            <div class="mobile-alexis-stat-label">Nat Rank</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${sectionRank}</div>
+            <div class="mobile-alexis-stat-label">Section</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildPositionGauge(players, targetPlayer) {
+      if (!targetPlayer || players.length === 0) return '';
+      
+      const targetIndex = players.findIndex(p => p.isTarget);
+      const percentage = ((targetIndex / (players.length - 1)) * 100).toFixed(0);
+      const percentAbove = Math.round((targetIndex / players.length) * 100);
+      const firstPlayer = players[0];
+      const lastPlayer = players[players.length - 1];
+      const stats = parseKeyStats();
+      const cushion = stats.drawSize - targetPlayer.rank;
+      
+      return `
+        <div class="mobile-gauge-header">
+          <span class="mobile-gauge-title">Position in Draw</span>
+          <span class="mobile-gauge-value">${percentAbove}% above her</span>
+        </div>
+        <div class="mobile-gauge-bar">
+          <div class="mobile-gauge-fill" id="gauge-fill" style="width: 0%;" data-width="${percentage}%">
+            <div class="mobile-gauge-marker"></div>
+          </div>
+        </div>
+        <div class="mobile-gauge-labels">
+          <span>#1 ${firstPlayer.firstName} ${firstPlayer.lastName[0]}.</span>
+          <span>#${targetPlayer.rank} ${targetPlayer.firstName}</span>
+          <span>#${players.length}</span>
+        </div>
+        ${cushion > 0 ? `
+        <div class="mobile-gauge-note">
+          <span>✓</span>
+          ${cushion}-player cushion above cutoff — safe entry
+        </div>
+        ` : ''}
+      `;
+    }
+
+    function buildUtrHistogramMobile() {
+      // Find existing histogram data from desktop view
+      const desktopHistogram = document.querySelector('.desktop-view .utr-histogram-chart');
+      if (!desktopHistogram) return '';
+      
+      const bins = desktopHistogram.querySelectorAll('.utr-bin');
+      if (bins.length === 0) return '';
+      
+      let maxCount = 0;
+      const binData = [];
+      
+      bins.forEach(bin => {
+        const countEl = bin.querySelector('.utr-bin-count');
+        const count = parseInt(countEl.textContent.trim());
+        const isHighlight = bin.classList.contains('is-highlight');
+        binData.push({ count, isHighlight });
+        maxCount = Math.max(maxCount, count);
+      });
+      
+      // Build histogram bars
+      const bars = binData.map((bin, i) => {
+        const height = (bin.count / maxCount) * 100;
+        const className = bin.isHighlight ? 'mobile-histogram-bar alexis-range' : 'mobile-histogram-bar';
+        return `<div class="${className}" style="height: ${height}%;"></div>`;
+      }).join('');
+      
+      return `
+        <div class="mobile-histogram">
+          ${bars}
+        </div>
+        <div class="mobile-histogram-labels">
+          <span>2.0</span>
+          <span>3.0</span>
+          <span>4.0</span>
+          <span>5.0</span>
+          <span>6.0</span>
+        </div>
+        <div class="mobile-chart-legend">
+          <div class="mobile-legend-item">
+            <div class="mobile-legend-dot blue"></div>
+            <span>Other players</span>
+          </div>
+          <div class="mobile-legend-item">
+            <div class="mobile-legend-dot orange"></div>
+            <span>Alexis's range</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function sortPlayers(players, sortBy) {
+      const sorted = [...players];
+      
+      if (sortBy === 'rank') {
+        sorted.sort((a, b) => a.rank - b.rank);
+      } else if (sortBy === 'utr') {
+        sorted.sort((a, b) => b.utr - a.utr); // Descending (higher is better)
+      } else if (sortBy === 'natRank') {
+        sorted.sort((a, b) => a.natRank - b.natRank); // Ascending (lower is better)
+      } else if (sortBy === 'wtn') {
+        sorted.sort((a, b) => {
+          const aWtn = parseFloat(a.wtn) || 999;
+          const bWtn = parseFloat(b.wtn) || 999;
+          return aWtn - bWtn; // Ascending (lower is better)
+        });
+      }
+      
+      return sorted;
+    }
+
+    function buildPlayerCards(players, sortBy, limit = null) {
+      const sorted = sortPlayers(players, sortBy);
+      const displayPlayers = limit ? sorted.slice(0, limit) : sorted;
+      const stats = parseKeyStats();
+      const showCutoff = sortBy === 'rank'; // Only show cutoff when sorted by seed
+      
+      let html = '';
+      let cutoffAdded = false;
+      
+      displayPlayers.forEach((player, index) => {
+        // Add cutoff divider after player #32 (only in seed order)
+        if (showCutoff && !cutoffAdded && player.rank === stats.drawSize && index < displayPlayers.length - 1) {
+          html += '<div class="mobile-cutoff-divider">✂️ Draw cutoff after player #' + stats.drawSize + '</div>';
+          cutoffAdded = true;
+        }
+        
+        const isTopSeed = player.rank <= 8;
+        const cardClass = ['mobile-player-card'];
+        if (isTopSeed) cardClass.push('top-seed');
+        if (player.isTarget) cardClass.push('target-player');
+        
+        html += `
+          <div class="${cardClass.join(' ')}" data-player-id="${player.rank}">
+            <div class="mobile-player-rank">${player.rank}</div>
+            <div class="mobile-player-info">
+              <div class="mobile-player-name">${player.fullName}</div>
+              <div class="mobile-player-location">${player.location}</div>
+            </div>
+            <div class="mobile-player-ratings">
+              ${player.utrUrl ? `
+                <a href="${player.utrUrl}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
+                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-label">UTR</div>
+                </a>
+              ` : `
+                <div class="mobile-rating-badge utr">
+                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-label">UTR</div>
+                </div>
+              `}
+              ${player.uaid ? `
+                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
+                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-label">Nat</div>
+                </a>
+              ` : `
+                <div class="mobile-rating-badge nat">
+                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-label">Nat</div>
+                </div>
+              `}
+            </div>
+            <div class="mobile-player-expand-icon">▼</div>
+          </div>
+          <div class="mobile-player-details" data-player-id="${player.rank}">
+            <div class="mobile-player-details-grid">
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">WTN</div>
+                <div class="mobile-detail-value">${player.wtn}</div>
+              </div>
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Sec Rank</div>
+                <div class="mobile-detail-value">${player.sectionRank || 'N/A'}</div>
+              </div>
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Seed</div>
+                <div class="mobile-detail-value">#${player.rank}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      return html;
+    }
+
+    function buildInfoCards(info) {
+      let html = '';
+      
+      // Format & Scoring Card
+      if (info.format.matchFormat) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">🎾</span>
+              Format & Scoring
+            </div>
+            ${info.format.matchFormat ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Match Format</span>
+              <span class="mobile-info-value">${info.format.matchFormat}</span>
+            </div>` : ''}
+            ${info.format.setTiebreak ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Set Tiebreak</span>
+              <span class="mobile-info-value">${info.format.setTiebreak}</span>
+            </div>` : ''}
+            ${info.format.matchTiebreak ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">3rd Set</span>
+              <span class="mobile-info-value">${info.format.matchTiebreak}</span>
+            </div>` : ''}
+          </div>
+        `;
+      }
+      
+      // Venues Card
+      if (info.venues.length > 0) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">📍</span>
+              Venues
+            </div>
+        `;
+        info.venues.forEach((venue, i) => {
+          html += `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Site ${i + 1}</span>
+              <span class="mobile-info-value">
+                ${venue.url ? `<a href="${venue.url}" target="_blank">${venue.name} →</a>` : venue.name}
+              </span>
+            </div>
+          `;
+        });
+        html += '</div>';
+      }
+      
+      // Contact Card
+      if (info.contact.director || info.contact.email || info.contact.phone) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">📞</span>
+              Contact
+            </div>
+            ${info.contact.director ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Director</span>
+              <span class="mobile-info-value">${info.contact.director}</span>
+            </div>` : ''}
+            ${info.contact.email ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Email</span>
+              <span class="mobile-info-value"><a href="mailto:${info.contact.email}">${info.contact.email}</a></span>
+            </div>` : ''}
+            ${info.contact.phone ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Phone</span>
+              <span class="mobile-info-value">
+                ${info.contact.phoneUrl ? `<a href="${info.contact.phoneUrl}">${info.contact.phone}</a>` : info.contact.phone}
+              </span>
+            </div>` : ''}
+          </div>
+        `;
+      }
+      
+      return html;
+    }
+
+    // ========================================
+    // MAIN RENDER FUNCTION
+    // ========================================
+
+    function renderMobileView() {
+      // Parse all data
+      allPlayers = parsePlayerData();
+      targetPlayer = allPlayers.find(p => p.isTarget);
+      const stats = parseKeyStats();
+      const info = parseTournamentInfo();
+      
+      // Render header
+      // Use title as-is (already contains "Open Level 5 Championship Singles - Girls' 12 Singles")
+      const titleText = info.title || "Open Level 5 Championship Singles - Girls' 12 Singles";
+      document.getElementById('mobile-title').textContent = titleText;
+      
+      // Format: "Jan 10-18, 2026 • San Jose, CA"
+      document.getElementById('mobile-meta').textContent = `${info.dates} • ${info.location}`;
+      
+      // Render hero stats
+      document.getElementById('mobile-draw-size').textContent = stats.drawSize;
+      document.getElementById('mobile-seed').textContent = stats.seed;
+      document.getElementById('mobile-registered').textContent = stats.registered;
+      
+      // Render Alexis card
+      if (targetPlayer) {
+        document.getElementById('mobile-alexis-card').innerHTML = buildAlexisCard(targetPlayer);
+      }
+      
+      // Render position gauge
+      if (targetPlayer && allPlayers.length > 0) {
+        document.getElementById('mobile-position-gauge').innerHTML = buildPositionGauge(allPlayers, targetPlayer);
+        // Animate gauge after render
+        setTimeout(() => {
+          const fill = document.getElementById('gauge-fill');
+          if (fill) {
+            fill.style.width = fill.getAttribute('data-width');
+          }
+        }, 100);
+      }
+      
+      // Render UTR histogram
+      document.getElementById('mobile-histogram').innerHTML = buildUtrHistogramMobile();
+      
+      // Render player count
+      document.getElementById('mobile-player-count').textContent = allPlayers.length;
+      
+      // Render player list (initially show top 8)
+      renderPlayerList(currentSort, 8);
+      
+      // Render tournament info
+      document.getElementById('mobile-info-section').innerHTML = buildInfoCards(info);
+    }
+
+    function renderPlayerList(sortBy, limit = null) {
+      const html = buildPlayerCards(allPlayers, sortBy, limit);
+      document.getElementById('mobile-player-list').innerHTML = html;
+      
+      // Update show more button
+      const showMoreBtn = document.getElementById('mobile-show-more');
+      if (limit && limit < allPlayers.length) {
+        showMoreBtn.style.display = 'block';
+        showMoreBtn.textContent = `Show all ${allPlayers.length} players ↓`;
+        isExpanded = false;
+      } else if (limit === null) {
+        showMoreBtn.style.display = 'block';
+        showMoreBtn.textContent = `Show less ↑`;
+        isExpanded = true;
+      } else {
+        showMoreBtn.style.display = 'none';
+      }
+    }
+
+    // ========================================
+    // EVENT HANDLERS
+    // ========================================
+
+    function handleSort(sortBy) {
+      currentSort = sortBy;
+      
+      // Update active button
+      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-sort') === sortBy) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Re-render with current expansion state
+      const limit = isExpanded ? null : 8;
+      renderPlayerList(sortBy, limit);
+    }
+
+    function handleShowMore() {
+      if (isExpanded) {
+        renderPlayerList(currentSort, 8);
+      } else {
+        renderPlayerList(currentSort, null);
+      }
+    }
+
+    // ========================================
+    // VIEW TOGGLE
+    // ========================================
+
+    function getUserViewPreference() {
+      return localStorage.getItem('tennisReportViewPref');
+    }
+
+    function setUserViewPreference(view) {
+      localStorage.setItem('tennisReportViewPref', view);
+    }
+
+    function detectMobileDevice() {
+      return window.innerWidth <= 600;
+    }
+
+    function toggleView(targetView) {
+      setUserViewPreference(targetView);
+      
+      if (targetView === 'mobile') {
+        document.body.classList.add('force-mobile');
+        document.body.classList.remove('force-desktop');
+      } else {
+        document.body.classList.add('force-desktop');
+        document.body.classList.remove('force-mobile');
+      }
+    }
+
+    function applyViewPreference() {
+      const pref = getUserViewPreference();
+      const isMobile = detectMobileDevice();
+      
+      // On desktop (>600px), always show desktop regardless of preference
+      if (!isMobile) {
+        document.body.classList.remove('force-mobile', 'force-desktop');
+        return;
+      }
+      
+      // On mobile (≤600px), apply preference if set
+      if (pref === 'desktop') {
+        document.body.classList.add('force-desktop');
+        document.body.classList.remove('force-mobile');
+      } else if (pref === 'mobile') {
+        document.body.classList.add('force-mobile');
+        document.body.classList.remove('force-desktop');
+      }
+      // If no preference, let CSS media query handle it
+    }
+
+    // ========================================
+    // PLAYER CARD INTERACTION
+    // ========================================
+
+    function togglePlayerDetails(playerId) {
+      const card = document.querySelector(`.mobile-player-card[data-player-id="${playerId}"]`);
+      const details = document.querySelector(`.mobile-player-details[data-player-id="${playerId}"]`);
+      
+      if (!card || !details) return;
+      
+      const isExpanded = card.classList.contains('expanded');
+      
+      // Close all other expanded cards
+      document.querySelectorAll('.mobile-player-card.expanded').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.mobile-player-details.expanded').forEach(d => {
+        d.classList.remove('expanded');
+      });
+      
+      // Toggle current card
+      if (!isExpanded) {
+        card.classList.add('expanded');
+        details.classList.add('expanded');
+      }
+    }
+
+    // ========================================
+    // INITIALIZATION
+    // ========================================
+
+    function initMobileView() {
+      // Apply view preference
+      applyViewPreference();
+      
+      // Render mobile view
+      renderMobileView();
+      
+      // Setup event listeners
+      
+      // Player card click handlers
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.mobile-player-card');
+        if (card) {
+          const playerId = card.getAttribute('data-player-id');
+          if (playerId) {
+            togglePlayerDetails(playerId);
+          }
+        }
+      });
+      
+      // Sort buttons
+      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          handleSort(btn.getAttribute('data-sort'));
+        });
+      });
+      
+      // Show more/less button
+      document.getElementById('mobile-show-more').addEventListener('click', handleShowMore);
+      
+      // View toggle links
+      document.getElementById('mobile-toggle-desktop').addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleView('desktop');
+      });
+      
+      document.getElementById('desktop-toggle-mobile').addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleView('mobile');
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        applyViewPreference();
+      });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMobileView);
+    } else {
+      initMobileView();
+    }
+  </script>
+
+  <!-- Share Button -->
+  <script>
+    // Player profile links keyed by "FIRST|LAST" (uppercase)
+    // Made global so mobile view can access it
+    window.playerProfileUrlByName = {
+      "VED|IYENGAR": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018393272",
+      "WILLIAM|ZHOU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018824112",
+      "SANATH|ANAND": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018222516",
+      "JESSE|GOLDMAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018532154",
+      "ALEKSANDER|DENISOV": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260444",
+      "JADEN|JOYNER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019045108",
+      "ANDY|XU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018666069",
+      "REED|KUAI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018554307",
+      "ISAAC|MILNER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018848067",
+      "PAVEL|ABADZHEV": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018487618",
+      "KADE|GROVER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018369539",
+      "HENRIK|KHEMIY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018564132",
+      "ROMAN|GABRIEL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018399451",
+      "PHILIP|BOGOMOLNY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018455326",
+      "BENEDICT|ZHONG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018621533",
+      "WAYNE|LEE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018655042",
+      "HARVEY|BAEK": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018582554",
+      "PATRICK|HOPKINS": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018643739",
+      "ALEXANDER|YANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019267792",
+      "ANTHONY|GALLO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018611875",
+      "IMANGALI|KANAT": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018778516",
+      "JUNSANG|YU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019006069",
+      "TAVISH|SHARMA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018415851",
+      "DAMIAN|KASRALIKAR": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018860794",
+      "DUSTIN|SHMUELY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018572401",
+      "ANAY|GAUR": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018533064",
+      "RYAN|DRISCOLL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018505695",
+      "OWEN|COREY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018904776",
+      "VIHAN|JAIN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018460943",
+      "ALESSANDRO|YANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018803645",
+      "DORIAN|ZELDIN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019156545",
+      "JACK|TUREN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018705067",
+      "SAMUEL|HONG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019262409",
+      "JAMES|MESTRE PLOURDE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018572903",
+      "COLBY|BEELER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019156314",
+      "MYLES|WALKER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018759970",
+      "VETRI|VIGNESH": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018428656",
+      "MAC|LONDON": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019310354",
+      "MATIAS|RUBIO MOLANO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018869990",
+      "GRAYDON|ST JOHN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018775445",
+      "STEPHEN|SASALA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018572095",
+      "DAVID|MELKONYAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018988316",
+      "VIAAN|SINHA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018664370",
+      "TIMOTHY|KOLOMEYER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018614025",
+      "VADIN|ACHARYA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019626114",
+      "VICTOR JINGYAO DENG|YANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018368757",
+      "DANIEL|SASALA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018685394",
+      "AADITYA VEER|JAIN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018396449",
+      "WILBER|WU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019039703",
+      "JOHN ENKE|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018508386",
+      "ROMAN|VIG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018857961",
+      "YISEN|SHI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018638284",
+      "ANDRES|URREA DE LA TORRE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019740811",
+      "GAELAN|THOMPSON-HEALY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018888254",
+      "SHUO|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019313822",
+      "YIFAN|NIE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019647323",
+      "ROARK|GMIRKIN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018893027",
+      "ETHAN|KIM": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018508211",
+      "RAYAN|FATHI EL IDRISSI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018534530",
+      "RITWIK|SRINIVASAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018692686",
+      "CALEB|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905072",
+      "KIRAN|SIRUVURI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019263046",
+      "LANDON|SEN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018628876",
+      "JACE|SWIGART": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018778143",
+      "AHREN|RAFIQ": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018374360",
+      "HOWIE|HO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019083641",
+      "KABIR|GUDAVALLI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018527323",
+      "PRESTON|RENFROW": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018392577",
+      "IDAN|TAM": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018418741",
+      "GRIFFIN|CARLISLE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018961581",
+      "CHRISTIAN|WINKLER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019418953",
+      "VARSHITH REDDY|BASIREDDY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019283978",
+      "PRAJVAL|VINAY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018925196",
+      "AARAV|AGRAWAL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018544793",
+      "DAWSON|DUGAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018575344",
+      "DEVANSH|PATRA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018670408",
+      "ELNUR|CHORSHANBIEV": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018671112",
+      "ERIDAN|COPELAND": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018468180",
+      "CORBIN KAYDEN KAI|COOKS": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018737819",
+      "JONATHAN|QU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018910062",
+      "ADEN LOK YIN|TAM": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018477629",
+    };
+
+    function decorateMetricCellWithProfileLink(cell, url) {
+      if (!cell || !url) return;
+      if (cell.querySelector('a')) return;
+      const text = cell.textContent.trim();
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = text;
+      a.title = 'Open player profile';
+      cell.textContent = '';
+      cell.appendChild(a);
+    }
+
+    function decoratePlayerLinks() {
+      const tbody = document.querySelector('tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 7) return;
+        const first = cells[1].textContent.trim().toUpperCase();
+        const last = cells[2].textContent.trim().toUpperCase();
+        const key = `${first}|${last}`;
+        const url = window.playerProfileUrlByName[key];
+        if (!url) return;
+        // WTN (col 3) and Nat Rank (col 5)
+        decorateMetricCellWithProfileLink(cells[3], url);
+        decorateMetricCellWithProfileLink(cells[5], url);
+      });
+    }
+
+    function toTitleCase(value) {
+      return value
+        .toLowerCase()
+        .replace(/\b\w/g, letter => letter.toUpperCase());
+    }
+
+    function normalizeLastNames() {
+      const tbody = document.querySelector('tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 3) return;
+        const lastCell = cells[2];
+        const text = lastCell.textContent.trim();
+        if (!text) return;
+        lastCell.textContent = toTitleCase(text);
+      });
+    }
+
+    function normalizeLocations() {
+      const tbody = document.querySelector('tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 7) return;
+        const locationCell = cells[6];
+        const text = locationCell.textContent.trim();
+        if (!text) return;
+        if (text.includes(',')) return;
+        const parts = text.split(/\s+/);
+        if (parts.length < 2) return;
+        const state = parts.pop();
+        const city = parts.join(' ');
+        locationCell.textContent = `${city}, ${state}`;
+      });
+    }
+
+    function formatUtrRangeLabel(start, binSize) {
+      const end = start + binSize - 0.01;
+      return `${start.toFixed(1)}-${end.toFixed(2)}`;
+    }
+
+    function getDrawSizeFromKeyStats() {
+      const stats = Array.from(document.querySelectorAll('.key-stat'));
+      for (const stat of stats) {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase() === 'draw') {
+          const size = parseInt(value.textContent.trim(), 10);
+          if (Number.isFinite(size)) return size;
+        }
+      }
+      return null;
+    }
+
+    function buildUtrHistogram() {
+      const container = document.getElementById('utr-histogram-chart');
+      if (!container) return;
+      const rows = Array.from(document.querySelectorAll('tbody tr'));
+      if (!rows.length) return;
+
+      const players = rows.map(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 6) return null;
+        const utr = parseFloat(cells[4].textContent.trim());
+        const natRank = parseInt(cells[5].textContent.trim(), 10);
+        if (!Number.isFinite(natRank)) return null;
+        return {
+          utr: Number.isFinite(utr) ? utr : null,
+          natRank,
+          highlight: row.classList.contains('highlight-player'),
+        };
+      }).filter(Boolean);
+
+      if (!players.length) return;
+
+      players.sort((a, b) => a.natRank - b.natRank);
+      const drawSize = getDrawSizeFromKeyStats() || players.length;
+      const drawPlayers = players.slice(0, drawSize);
+      const values = drawPlayers
+        .map(player => player.utr)
+        .filter(value => Number.isFinite(value));
+
+      if (!values.length) return;
+
+      const highlightPlayer = drawPlayers.find(
+        player => player.highlight && Number.isFinite(player.utr)
+      );
+      const highlightUtr = highlightPlayer ? highlightPlayer.utr : null;
+
+      const binSize = 0.5;
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const startBin = Math.floor(min / binSize) * binSize;
+      const endBin = Math.floor(max / binSize) * binSize;
+      const binCount = Math.round((endBin - startBin) / binSize) + 1;
+      const bins = new Array(binCount).fill(0);
+
+      values.forEach(value => {
+        const idx = Math.floor((value - startBin) / binSize);
+        if (idx >= 0 && idx < bins.length) {
+          bins[idx] += 1;
+        }
+      });
+
+      const maxCount = Math.max(...bins, 1);
+      container.innerHTML = '';
+
+      const highlightIndex =
+        highlightUtr !== null ? Math.floor((highlightUtr - startBin) / binSize) : null;
+
+      bins.forEach((count, index) => {
+        if (count === 0) return;
+        const start = startBin + index * binSize;
+        const row = document.createElement('div');
+        row.className = 'utr-bin';
+
+        if (highlightIndex !== null && highlightIndex === index) {
+          row.classList.add('is-highlight');
+        }
+
+        const label = document.createElement('div');
+        label.className = 'utr-bin-label';
+        label.textContent = formatUtrRangeLabel(start, binSize);
+
+        const barWrap = document.createElement('div');
+        barWrap.className = 'utr-bin-bar-wrap';
+
+        const bar = document.createElement('div');
+        bar.className = 'utr-bin-bar';
+        bar.style.width = `${(count / maxCount) * 100}%`;
+        barWrap.appendChild(bar);
+
+        const countEl = document.createElement('div');
+        countEl.className = 'utr-bin-count';
+        countEl.textContent = String(count);
+
+        row.appendChild(label);
+        row.appendChild(barWrap);
+        row.appendChild(countEl);
+
+        container.appendChild(row);
+      });
+
+      const captionEl = document.getElementById('utr-histogram-caption');
+      if (captionEl) {
+        let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
+        if (highlightUtr !== null) {
+          caption += ' Alexis bin highlighted.';
+        }
+        captionEl.textContent = caption;
+      }
+    }
+
+    // Update row numbers dynamically
+    function updateRowNumbers() {
+      const tbody = document.querySelector('tbody');
+      const rows = tbody.querySelectorAll('tr');
+      rows.forEach((row, index) => {
+        row.cells[0].textContent = index + 1;
+      });
+    }
+
+    // Add click-to-sort functionality
+    const headers = document.querySelectorAll('th');
+    const tbody = document.querySelector('tbody');
+    const sortableColumns = new Set([1, 2, 3, 4, 5, 6]);
+    const numericColumns = new Set([3, 4, 5]);
+    const sortableHeaders = Array.from(headers).filter((header, columnIndex) =>
+      sortableColumns.has(columnIndex)
+    );
+
+    sortableHeaders.forEach(header => {
+      if (!header.dataset.sort) header.dataset.sort = 'none';
+      if (!header.title) header.title = 'Click to sort';
+    });
+
+    function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+
+      rows.sort((a, b) => {
+        const aText = a.cells[columnIndex].textContent.trim();
+        const bText = b.cells[columnIndex].textContent.trim();
+        const isNumeric = numericColumns.has(columnIndex);
+        if (isNumeric) {
+          const aVal = parseFloat(aText);
+          const bVal = parseFloat(bText);
+          if (Number.isNaN(aVal) && Number.isNaN(bVal)) return 0;
+          if (Number.isNaN(aVal)) return 1;
+          if (Number.isNaN(bVal)) return -1;
+          return direction === 'asc' ? aVal - bVal : bVal - aVal;
+        }
+        const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
+        return direction === 'asc' ? cmp : -cmp;
+      });
+
+      tbody.innerHTML = '';
+      rows.forEach(row => tbody.appendChild(row));
+      updateRowNumbers();
+
+      if (updateHeaderStyle) {
+        headers.forEach(h => h.style.backgroundColor = '#4472C4');
+        if (activeHeader) activeHeader.style.backgroundColor = '#2c5aa0';
+      }
+    }
+
+    const defaultHeader = sortableHeaders.find(header => header.classList.contains('col-national'));
+    if (defaultHeader) {
+      sortableHeaders.forEach(h => {
+        if (h !== defaultHeader) h.dataset.sort = 'none';
+      });
+      defaultHeader.dataset.sort = 'asc';
+      applySort(5, 'asc', defaultHeader, true);
+    }
+
+    headers.forEach((header, columnIndex) => {
+      // Only enable sorting for First/Last, WTN, UTR, Nat Rank, Location
+      if (sortableColumns.has(columnIndex)) {
+        header.addEventListener('click', () => {
+          // Toggle sort direction
+          const currentSort = header.dataset.sort || 'none';
+          const newSort = currentSort === 'asc' ? 'desc' : 'asc';
+          sortableHeaders.forEach(h => {
+            if (h !== header) h.dataset.sort = 'none';
+          });
+          header.dataset.sort = newSort;
+          applySort(columnIndex, newSort, header, true);
+        });
+      }
+    });
+
+    // Initialize row numbers on page load
+    if (!defaultHeader) updateRowNumbers();
+    decoratePlayerLinks();
+    normalizeLastNames();
+    normalizeLocations();
+    buildUtrHistogram();
+    updateRegistrationCountdown();
+    setInterval(updateRegistrationCountdown, 60 * 1000);
+
+    function getRegistrationCloseText() {
+      const keyStats = document.querySelectorAll('.desktop-view .key-stat');
+      for (const stat of keyStats) {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase() === 'closes') {
+          return value.textContent.trim();
+        }
+      }
+
+      const detailRows = document.querySelectorAll('.desktop-view .detail-row');
+      for (const row of detailRows) {
+        const label = row.querySelector('.detail-label');
+        const value = row.querySelector('.detail-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase().startsWith('registration closes')) {
+          return value.textContent.trim();
+        }
+      }
+
+      return null;
+    }
+
+    function parseCloseDate(text) {
+      if (!text) return null;
+      const match = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)\s+([A-Z]{2,4})/);
+      if (!match) return null;
+
+      const monthName = match[1];
+      const day = parseInt(match[2], 10);
+      const year = parseInt(match[3], 10);
+      let hour = parseInt(match[4], 10);
+      const minute = parseInt(match[5], 10);
+      const ampm = match[6];
+      const tz = match[7];
+
+      const months = {
+        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+      };
+      const month = months[monthName];
+      if (month === undefined) return null;
+
+      hour = hour % 12 + (ampm === 'PM' ? 12 : 0);
+
+      const offsets = {
+        PST: -8, PDT: -7, PT: -8,
+        MST: -7, MDT: -6,
+        CST: -6, CDT: -5,
+        EST: -5, EDT: -4
+      };
+      const offset = offsets[tz] ?? 0;
+      const utcHour = hour - offset;
+      const utcMs = Date.UTC(year, month, day, utcHour, minute, 0);
+      return new Date(utcMs);
+    }
+
+    function updateRegistrationCountdown() {
+      const badge = document.getElementById('registration-deadline-badge');
+      const countdownEl = document.getElementById('registration-countdown');
+      const dateEl = document.getElementById('registration-deadline-date');
+      const mobileBadge = document.getElementById('mobile-deadline-badge');
+      const mobileCountdown = document.getElementById('mobile-registration-countdown');
+      const mobileDate = document.getElementById('mobile-registration-date');
+
+      const closeText = getRegistrationCloseText();
+      if (!closeText) {
+        if (badge) badge.style.display = 'none';
+        if (mobileBadge) mobileBadge.style.display = 'none';
+        return;
+      }
+
+      const closeDate = parseCloseDate(closeText);
+      if (!closeDate) {
+        if (badge) badge.style.display = 'none';
+        if (mobileBadge) mobileBadge.style.display = 'none';
+        return;
+      }
+
+      const diffMs = closeDate.getTime() - Date.now();
+      const timeText =
+        diffMs <= 0
+          ? 'Registration closed'
+          : (() => {
+              const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+              const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+              return `Closes in ${days}d ${hours}h`;
+            })();
+
+      if (badge && countdownEl && dateEl) {
+        countdownEl.textContent = timeText;
+        dateEl.textContent = closeText;
+      }
+
+      if (mobileBadge && mobileCountdown && mobileDate) {
+        mobileCountdown.textContent = timeText;
+        mobileDate.textContent = closeText;
+      }
+    }
+
+    // Share button functionality
+    const shareButton = document.createElement('button');
+    shareButton.className = 'share-button';
+    shareButton.innerHTML = '↗';
+    shareButton.title = 'Share this report';
+    shareButton.setAttribute('aria-label', 'Share tournament report');
+
+    shareButton.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "Open Level 5 Championship Singles - Girls' 12 Singles",
+            text: 'Tournament Report - January 31 - February 1, 2026',
+            url: window.location.href
+          });
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.error('Share failed:', err);
+          }
+        }
+      } else {
+        // Fallback: Copy link to clipboard
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          shareButton.innerHTML = '✓';
+          setTimeout(() => {
+            shareButton.innerHTML = '↗';
+          }, 2000);
+        });
+      }
+    });
+
+    document.body.appendChild(shareButton);
+  </script>
 </body>
 </html>
