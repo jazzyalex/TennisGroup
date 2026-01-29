@@ -793,33 +793,43 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      /* Keep Rankings in normal grid flow for tablet */
       .player-card__bottom {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1.5fr 1fr;
       }
     }
 
     @media (max-width: 640px) {
-      .player-card__metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .player-card {
-        padding: 18px;
-      }
+      /* Remove single column layout - keep 2 columns from 768px breakpoint */
 
       .player-card__header {
         flex-direction: column;
         align-items: flex-start;
+        gap: 6px;
       }
 
       .player-card__updated {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+      }
+
+      .player-card__name {
+        font-size: 1.1rem;
       }
     }
 
     @media (max-width: 768px) {
       .hero {
         padding: 32px 16px;
+      }
+
+      /* Hide decorative court pattern on mobile */
+      .hero::before {
+        display: none;
+      }
+
+      /* Hide subtitle on mobile */
+      .hero-subtitle {
+        display: none;
       }
 
       .hero-content {
@@ -836,6 +846,28 @@
       .player-card {
         width: 100%;
         max-width: 100%;
+        padding: 14px 16px 16px;
+      }
+
+      /* Redesign player card for better horizontal space usage */
+      .player-card__header {
+        margin-bottom: 12px;
+      }
+
+      .player-card__metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      /* Make Rankings span full width on the second row */
+      .player-card__metric:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+
+      .player-card__bottom {
+        grid-template-columns: 1.5fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
       }
 
       .main {
