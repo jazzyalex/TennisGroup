@@ -293,6 +293,10 @@
       white-space: nowrap;
     }
 
+    .table-header .col-age {
+      text-align: center;
+    }
+
     .table-header span.sortable {
       cursor: pointer;
       user-select: none;
@@ -674,7 +678,7 @@
         <span class="sortable" data-sort="asc" data-column="dates">Dates</span>
         <span class="sortable" data-sort="none" data-column="tournament">Tournament</span>
         <span data-column="format">Format</span>
-        <span data-column="age">Age</span>
+        <span data-column="age" class="col-age">Age</span>
         <span class="sortable" data-sort="none" data-column="city">City</span>
         <span data-column="venue">Venue</span>
         <span data-column="draw">Draw</span>
@@ -1231,7 +1235,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
     function getAgeInfo(row) {
       const isU12 = row['G12'] === 'TRUE';
       const isU14 = row['G14'] === 'TRUE';
-      const label = (isU12 && isU14) ? 'U12/U14' : (isU12 ? 'U12' : (isU14 ? 'U14' : ''));
+      const label = (isU12 && isU14) ? '12/14' : (isU12 ? '12' : (isU14 ? '14' : ''));
       return { isU12, isU14, label };
     }
 
