@@ -2488,6 +2488,518 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 
     // Initial render
     render();
+
+    // ===============================
+    // MOBILE VIEW FUNCTIONALITY
+    // ===============================
+
+    const VIEW_STORAGE_KEY = 'tournament-view-preference';
+    const MOBILE_THEME_KEY = 'tournament-mobile-theme';
+    const MOBILE_BREAKPOINT = 600;
+
+    let mobileFilters = {
+      search: '',
+      starred: false,
+      month: 'all',
+      sectional: true,
+      national: true,
+      local: true,
+      road: true,
+      flight: true,
+      formatS: true,
+      formatSD: true,
+      formatD: true,
+      level1: true,
+      level2: true,
+      level3: true,
+      level4: true,
+      level5: true,
+      level6: false,
+      u12: true,
+      u14: true,
+      showPast: false
+    };
+
+    function isMobileViewport() {
+      return window.innerWidth <= MOBILE_BREAKPOINT;
+    }
+
+    function getViewPreference() {
+      const stored = localStorage.getItem(VIEW_STORAGE_KEY);
+      if (stored) return stored;
+      return isMobileViewport() ? 'mobile' : 'desktop';
+    }
+
+    function setViewPreference(view) {
+      localStorage.setItem(VIEW_STORAGE_KEY, view);
+    }
+
+    function getMobileTheme() {
+      const stored = localStorage.getItem(MOBILE_THEME_KEY);
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function setMobileTheme(theme) {
+      localStorage.setItem(MOBILE_THEME_KEY, theme);
+      document.body.classList.toggle('mobile-dark', theme === 'dark');
+      const toggle = document.getElementById('m-theme-toggle');
+      if (toggle) toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function setView(view) {
+      document.body.classList.toggle('mobile-view', view === 'mobile');
+      if (view === 'mobile') {
+        renderMobileView();
+        setMobileTheme(getMobileTheme());
+      }
+    }
+
+    function syncFiltersToMobile() {
+      mobileFilters.search = filters.search;
+      mobileFilters.starred = filters.starred;
+      mobileFilters.sectional = filters.sectional;
+      mobileFilters.national = filters.national;
+      mobileFilters.local = filters.local;
+      mobileFilters.road = filters.road;
+      mobileFilters.flight = filters.flight;
+      mobileFilters.formatS = filters.formatS;
+      mobileFilters.formatSD = filters.formatSD;
+      mobileFilters.formatD = filters.formatD;
+      mobileFilters.level1 = filters.level1;
+      mobileFilters.level2 = filters.level2;
+      mobileFilters.level3 = filters.level3;
+      mobileFilters.level4 = filters.level4;
+      mobileFilters.level5 = filters.level5;
+      mobileFilters.level6 = filters.level6;
+      mobileFilters.u12 = filters.u12;
+      mobileFilters.u14 = filters.u14;
+      mobileFilters.showPast = filters.showPast;
+    }
+
+    function syncFiltersToDesktop() {
+      filters.search = mobileFilters.search;
+      filters.starred = mobileFilters.starred;
+      filters.sectional = mobileFilters.sectional;
+      filters.national = mobileFilters.national;
+      filters.local = mobileFilters.local;
+      filters.road = mobileFilters.road;
+      filters.flight = mobileFilters.flight;
+      filters.formatS = mobileFilters.formatS;
+      filters.formatSD = mobileFilters.formatSD;
+      filters.formatD = mobileFilters.formatD;
+      filters.level1 = mobileFilters.level1;
+      filters.level2 = mobileFilters.level2;
+      filters.level3 = mobileFilters.level3;
+      filters.level4 = mobileFilters.level4;
+      filters.level5 = mobileFilters.level5;
+      filters.level6 = mobileFilters.level6;
+      filters.u12 = mobileFilters.u12;
+      filters.u14 = mobileFilters.u14;
+      filters.showPast = mobileFilters.showPast;
+      saveFilters();
+      syncFilterChips();
+    }
+
+    function getMobileFilteredData() {
+      const search = mobileFilters.search.toLowerCase();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      return data.filter(row => {
+        if (mobileFilters.starred) {
+          const id = getTournamentId(row);
+          if (!starredTournaments.has(id)) return false;
+        }
+
+        if (mobileFilters.month !== 'all' && row['Month'] !== mobileFilters.month) return false;
+
+        const lvl = getLevelNum(row);
+        if (lvl === 1 && !mobileFilters.level1) return false;
+        if (lvl === 2 && !mobileFilters.level2) return false;
+        if (lvl === 3 && !mobileFilters.level3) return false;
+        if (lvl === 4 && !mobileFilters.level4) return false;
+        if (lvl === 5 && !mobileFilters.level5) return false;
+        if (lvl === 6 && !mobileFilters.level6) return false;
+
+        const age = getAgeInfo(row);
+        if (!age.isU12 && !age.isU14) return false;
+        if (!((mobileFilters.u12 && age.isU12) || (mobileFilters.u14 && age.isU14))) return false;
+
+        const isNational = row['National'] === 'TRUE';
+        if (isNational && !mobileFilters.national) return false;
+        if (!isNational && !mobileFilters.sectional) return false;
+
+        const endDate = parseEndDate(row);
+        if (endDate && endDate < today && !mobileFilters.showPast) return false;
+
+        const combined = [
+          row['Month'], row['Date(s)'], getTournamentTitle(row), row['Divisions'], row['City'],
+          row['Primary Site'], row['Tournament Director'], row['Notes']
+        ].join(' ').toLowerCase();
+        if (search && !combined.includes(search)) return false;
+
+        const miles = getDrivingMiles(row);
+        const proximity = proximityFromMiles(miles);
+        if (!mobileFilters[proximity]) return false;
+
+        const format = getFormat(row);
+        if (format === 'S' && !mobileFilters.formatS) return false;
+        if (format === 'SD' && !mobileFilters.formatSD) return false;
+        if (format === 'D' && !mobileFilters.formatD) return false;
+
+        return true;
+      });
+    }
+
+    function renderMobileView() {
+      const filteredData = getMobileFilteredData().sort((a, b) => {
+        const aDate = parseDate(a['Month'], a['Date(s)']);
+        const bDate = parseDate(b['Month'], b['Date(s)']);
+        if (!aDate) return 1;
+        if (!bDate) return -1;
+        return aDate - bDate;
+      });
+
+      let localCount = 0, roadCount = 0, flightCount = 0;
+      filteredData.forEach(row => {
+        const p = proximityFromMiles(getDrivingMiles(row));
+        if (p === 'local') localCount++;
+        else if (p === 'road') roadCount++;
+        else flightCount++;
+      });
+
+      document.getElementById('m-stat-total').textContent = filteredData.length;
+      document.getElementById('m-stat-local').textContent = localCount;
+      document.getElementById('m-stat-road').textContent = roadCount;
+      document.getElementById('m-stat-flight').textContent = flightCount;
+      document.getElementById('m-filter-count').textContent = `${filteredData.length} tournament${filteredData.length !== 1 ? 's' : ''}`;
+
+      const starredChip = document.getElementById('m-chip-starred');
+      starredChip.classList.toggle('active', mobileFilters.starred);
+      starredChip.querySelector('span:first-child').textContent = mobileFilters.starred ? '★' : '☆';
+
+      const hasActiveFilters = !mobileFilters.sectional || !mobileFilters.national ||
+        !mobileFilters.local || !mobileFilters.road || !mobileFilters.flight ||
+        !mobileFilters.formatS || !mobileFilters.formatSD || !mobileFilters.formatD ||
+        !mobileFilters.level2 || !mobileFilters.level3 || !mobileFilters.level4 || !mobileFilters.level5 ||
+        !mobileFilters.u12 || !mobileFilters.u14 || mobileFilters.showPast || mobileFilters.level6;
+      document.getElementById('m-filter-dot').style.display = hasActiveFilters ? 'inline-block' : 'none';
+
+      document.querySelectorAll('.m-month-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.month === mobileFilters.month);
+      });
+
+      const groupedByMonth = {};
+      filteredData.forEach(row => {
+        const month = row['Month'];
+        if (!groupedByMonth[month]) groupedByMonth[month] = [];
+        groupedByMonth[month].push(row);
+      });
+
+      const container = document.getElementById('m-tournament-list');
+      container.innerHTML = '';
+
+      if (filteredData.length === 0) {
+        container.innerHTML = `
+          <div class="m-empty-state">
+            <div class="m-empty-icon">🎾</div>
+            <div class="m-empty-text">No tournaments match your filters</div>
+          </div>
+        `;
+        return;
+      }
+
+      const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June',
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+
+      monthOrder.forEach(month => {
+        const monthData = groupedByMonth[month];
+        if (!monthData || monthData.length === 0) return;
+
+        const section = document.createElement('div');
+        section.className = 'm-month-section';
+        section.innerHTML = `
+          <div class="m-month-header">
+            <span class="m-month-title">${month}</span>
+            <span class="m-month-count">(${monthData.length})</span>
+          </div>
+        `;
+
+        monthData.forEach(row => {
+          const tournamentId = getTournamentId(row);
+          const isStarred = starredTournaments.has(tournamentId);
+          const isNational = row['National'] === 'TRUE';
+          const miles = getDrivingMiles(row);
+          const proximity = proximityFromMiles(miles);
+          const format = getFormat(row);
+          const formatLabel = format === 'S' ? 'Singles' : format === 'D' ? 'Doubles' : 'Singles+Doubles';
+          const tournamentName = getTournamentTitle(row);
+          const draw = getDrawCell(row);
+          const homePage = row['Home Page'] || '';
+          const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
+
+          const card = document.createElement('div');
+          card.className = 'm-tournament-card';
+          card.innerHTML = `
+            <div class="m-card-header">
+              <div class="m-card-top">
+                <div class="m-card-title">
+                  <div class="m-card-name">${isValidUrl ? `<a href="${homePage}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${tournamentName}</a>` : tournamentName}</div>
+                  <div class="m-card-meta">
+                    <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NATIONAL' : 'SECTIONAL'}</span>
+                    <span class="m-format-badge">• ${formatLabel}</span>
+                  </div>
+                </div>
+                <button class="m-star-btn ${isStarred ? 'starred' : ''}" data-id="${tournamentId}">
+                  ${isStarred ? '★' : '☆'}
+                </button>
+              </div>
+            </div>
+            <div class="m-card-details">
+              <div class="m-detail-item">
+                <svg class="m-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span class="m-detail-text">${formatDates(row)}</span>
+              </div>
+              <div class="m-detail-item">
+                <svg class="m-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span class="m-detail-text">${formatCityWithState(row['City'])}</span>
+              </div>
+              <div class="m-detail-item">
+                <svg class="m-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span class="m-detail-text">Draw: ${draw.display || '—'}</span>
+              </div>
+              <div class="m-detail-item m-distance-badge">
+                <span class="m-distance-dot ${proximity}"></span>
+                <span class="m-detail-text m-distance-text ${proximity}">${miles ? miles + ' mi' : '—'}</span>
+              </div>
+            </div>
+            <div class="m-card-footer">
+              <div class="m-venue-text">📍 ${row['Primary Site']}</div>
+            </div>
+          `;
+
+          section.appendChild(card);
+        });
+
+        container.appendChild(section);
+      });
+    }
+
+    function initMobileView() {
+      document.getElementById('m-theme-toggle').addEventListener('click', () => {
+        const newTheme = getMobileTheme() === 'dark' ? 'light' : 'dark';
+        setMobileTheme(newTheme);
+      });
+
+      document.getElementById('m-search').addEventListener('input', (e) => {
+        mobileFilters.search = e.target.value;
+        renderMobileView();
+      });
+
+      document.getElementById('m-chip-starred').addEventListener('click', () => {
+        mobileFilters.starred = !mobileFilters.starred;
+        renderMobileView();
+      });
+
+      document.getElementById('m-month-pills').addEventListener('click', (e) => {
+        const pill = e.target.closest('.m-month-pill');
+        if (pill) {
+          mobileFilters.month = pill.dataset.month;
+          renderMobileView();
+        }
+      });
+
+      document.getElementById('m-tournament-list').addEventListener('click', (e) => {
+        const starBtn = e.target.closest('.m-star-btn');
+        if (starBtn) {
+          const id = starBtn.dataset.id;
+          toggleStar(id);
+          renderMobileView();
+        }
+      });
+
+      document.getElementById('m-chip-filters').addEventListener('click', () => {
+        document.getElementById('m-filter-overlay').classList.add('open');
+        syncSheetToFilters();
+      });
+
+      document.getElementById('m-filter-overlay').addEventListener('click', (e) => {
+        if (e.target.id === 'm-filter-overlay') {
+          document.getElementById('m-filter-overlay').classList.remove('open');
+        }
+      });
+
+      document.querySelectorAll('.m-sheet-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          const filter = opt.dataset.filter;
+          const value = opt.dataset.value;
+
+          if (filter === 'type') {
+            if (value === 'all') {
+              mobileFilters.sectional = true;
+              mobileFilters.national = true;
+            } else if (value === 'sectional') {
+              mobileFilters.sectional = !mobileFilters.sectional;
+            } else if (value === 'national') {
+              mobileFilters.national = !mobileFilters.national;
+            }
+          } else if (filter === 'distance') {
+            if (value === 'all') {
+              mobileFilters.local = true;
+              mobileFilters.road = true;
+              mobileFilters.flight = true;
+            } else {
+              mobileFilters[value] = !mobileFilters[value];
+            }
+          } else if (filter === 'format') {
+            if (value === 'all') {
+              mobileFilters.formatS = true;
+              mobileFilters.formatSD = true;
+              mobileFilters.formatD = true;
+            } else if (value === 'S') {
+              mobileFilters.formatS = !mobileFilters.formatS;
+              mobileFilters.formatSD = mobileFilters.formatS && mobileFilters.formatD;
+            } else if (value === 'D') {
+              mobileFilters.formatD = !mobileFilters.formatD;
+              mobileFilters.formatSD = mobileFilters.formatS && mobileFilters.formatD;
+            }
+          } else if (filter === 'level') {
+            if (value === 'all') {
+              mobileFilters.level1 = true;
+              mobileFilters.level2 = true;
+              mobileFilters.level3 = true;
+              mobileFilters.level4 = true;
+              mobileFilters.level5 = true;
+              mobileFilters.level6 = false;
+            } else {
+              mobileFilters['level' + value] = !mobileFilters['level' + value];
+            }
+          } else if (filter === 'age') {
+            if (value === 'all') {
+              mobileFilters.u12 = true;
+              mobileFilters.u14 = true;
+            } else {
+              mobileFilters[value] = !mobileFilters[value];
+            }
+          } else if (filter === 'past') {
+            mobileFilters.showPast = !mobileFilters.showPast;
+          }
+
+          syncSheetToFilters();
+        });
+      });
+
+      document.getElementById('m-filter-reset').addEventListener('click', () => {
+        mobileFilters.sectional = true;
+        mobileFilters.national = true;
+        mobileFilters.local = true;
+        mobileFilters.road = true;
+        mobileFilters.flight = true;
+        mobileFilters.formatS = true;
+        mobileFilters.formatSD = true;
+        mobileFilters.formatD = true;
+        mobileFilters.level1 = true;
+        mobileFilters.level2 = true;
+        mobileFilters.level3 = true;
+        mobileFilters.level4 = true;
+        mobileFilters.level5 = true;
+        mobileFilters.level6 = false;
+        mobileFilters.u12 = true;
+        mobileFilters.u14 = true;
+        mobileFilters.showPast = false;
+        syncSheetToFilters();
+      });
+
+      document.getElementById('m-filter-apply').addEventListener('click', () => {
+        document.getElementById('m-filter-overlay').classList.remove('open');
+        syncFiltersToDesktop();
+        renderMobileView();
+        render();
+      });
+
+      document.getElementById('m-desktop-toggle').addEventListener('click', () => {
+        setViewPreference('desktop');
+        setView('desktop');
+      });
+
+      const scrollBtn = document.getElementById('m-scroll-top');
+      window.addEventListener('scroll', () => {
+        if (document.body.classList.contains('mobile-view')) {
+          scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        }
+      });
+
+      scrollBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    function syncSheetToFilters() {
+      document.querySelectorAll('.m-sheet-option').forEach(opt => {
+        const filter = opt.dataset.filter;
+        const value = opt.dataset.value;
+        let isActive = false;
+
+        if (filter === 'type') {
+          if (value === 'all') isActive = mobileFilters.sectional && mobileFilters.national;
+          else if (value === 'sectional') isActive = mobileFilters.sectional;
+          else if (value === 'national') isActive = mobileFilters.national;
+        } else if (filter === 'distance') {
+          if (value === 'all') isActive = mobileFilters.local && mobileFilters.road && mobileFilters.flight;
+          else isActive = mobileFilters[value];
+        } else if (filter === 'format') {
+          if (value === 'all') isActive = mobileFilters.formatS && mobileFilters.formatD;
+          else if (value === 'S') isActive = mobileFilters.formatS;
+          else if (value === 'D') isActive = mobileFilters.formatD;
+        } else if (filter === 'level') {
+          if (value === 'all') isActive = mobileFilters.level1 && mobileFilters.level2 && mobileFilters.level3 && mobileFilters.level4 && mobileFilters.level5;
+          else isActive = mobileFilters['level' + value];
+        } else if (filter === 'age') {
+          if (value === 'all') isActive = mobileFilters.u12 && mobileFilters.u14;
+          else isActive = mobileFilters[value];
+        } else if (filter === 'past') {
+          isActive = mobileFilters.showPast;
+        }
+
+        opt.classList.toggle('active', isActive);
+      });
+
+      const count = getMobileFilteredData().length;
+      document.getElementById('m-filter-apply').textContent = `Show ${count} Tournament${count !== 1 ? 's' : ''}`;
+    }
+
+    initMobileView();
+    syncFiltersToMobile();
+
+    const viewPref = getViewPreference();
+    if (viewPref === 'mobile' || (isMobileViewport() && !localStorage.getItem(VIEW_STORAGE_KEY))) {
+      setView('mobile');
+    }
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const currentPref = localStorage.getItem(VIEW_STORAGE_KEY);
+        if (!currentPref) {
+          setView(isMobileViewport() ? 'mobile' : 'desktop');
+        }
+      }, 250);
+    });
   </script>
 </body>
 </html>
