@@ -1285,6 +1285,7 @@
             <button class="m-sheet-option active" data-filter="format" data-value="all">All</button>
             <button class="m-sheet-option active" data-filter="format" data-value="S">Singles</button>
             <button class="m-sheet-option active" data-filter="format" data-value="D">Doubles</button>
+            <button class="m-sheet-option active" data-filter="format" data-value="SD">Singles + Doubles</button>
           </div>
         </div>
 
@@ -2682,7 +2683,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
       const hasActiveFilters = !mobileFilters.sectional || !mobileFilters.national ||
         !mobileFilters.local || !mobileFilters.road || !mobileFilters.flight ||
         !mobileFilters.formatS || !mobileFilters.formatSD || !mobileFilters.formatD ||
-        !mobileFilters.level2 || !mobileFilters.level3 || !mobileFilters.level4 || !mobileFilters.level5 ||
+        !mobileFilters.level1 || !mobileFilters.level2 || !mobileFilters.level3 || !mobileFilters.level4 || !mobileFilters.level5 ||
         !mobileFilters.u12 || !mobileFilters.u14 || mobileFilters.showPast || mobileFilters.level6;
       document.getElementById('m-filter-dot').style.display = hasActiveFilters ? 'inline-block' : 'none';
 
@@ -2733,8 +2734,11 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
           const miles = getDrivingMiles(row);
           const proximity = proximityFromMiles(miles);
           const format = getFormat(row);
-          const formatLabel = format === 'S' ? 'Singles' : format === 'D' ? 'Doubles' : 'Singles+Doubles';
+          const formatLabel = format === 'S' ? 'Singles' : format === 'D' ? 'Doubles' : 'S+D';
           const tournamentName = getTournamentTitle(row);
+          const age = getAgeInfo(row);
+          const lvl = getLevelNum(row);
+          const levelLabel = lvl ? `L${lvl}` : '';
           const draw = getDrawCell(row);
           const homePage = row['Home Page'] || '';
           const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
@@ -2749,6 +2753,8 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
                   <div class="m-card-meta">
                     <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NATIONAL' : 'SECTIONAL'}</span>
                     <span class="m-format-badge">• ${formatLabel}</span>
+                    ${levelLabel ? `<span class="m-format-badge">• ${levelLabel}</span>` : ''}
+                    ${age.label ? `<span class="m-format-badge">• ${age.label}</span>` : ''}
                   </div>
                 </div>
                 <button class="m-star-btn ${isStarred ? 'starred' : ''}" data-id="${tournamentId}">
@@ -2780,7 +2786,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span class="m-detail-text">Draw: ${draw.display || '—'}</span>
+                <span class="m-detail-text"${draw.tooltip ? ` title="${escapeAttr(draw.tooltip)}"` : ''}>Draw: ${draw.display || '—'}</span>
               </div>
               <div class="m-detail-item m-distance-badge">
                 <span class="m-distance-dot ${proximity}"></span>
@@ -2872,10 +2878,10 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
               mobileFilters.formatD = true;
             } else if (value === 'S') {
               mobileFilters.formatS = !mobileFilters.formatS;
-              mobileFilters.formatSD = mobileFilters.formatS && mobileFilters.formatD;
             } else if (value === 'D') {
               mobileFilters.formatD = !mobileFilters.formatD;
-              mobileFilters.formatSD = mobileFilters.formatS && mobileFilters.formatD;
+            } else if (value === 'SD') {
+              mobileFilters.formatSD = !mobileFilters.formatSD;
             }
           } else if (filter === 'level') {
             if (value === 'all') {
@@ -2962,8 +2968,9 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
           if (value === 'all') isActive = mobileFilters.local && mobileFilters.road && mobileFilters.flight;
           else isActive = mobileFilters[value];
         } else if (filter === 'format') {
-          if (value === 'all') isActive = mobileFilters.formatS && mobileFilters.formatD;
+          if (value === 'all') isActive = mobileFilters.formatS && mobileFilters.formatSD && mobileFilters.formatD;
           else if (value === 'S') isActive = mobileFilters.formatS;
+          else if (value === 'SD') isActive = mobileFilters.formatSD;
           else if (value === 'D') isActive = mobileFilters.formatD;
         } else if (filter === 'level') {
           if (value === 'all') isActive = mobileFilters.level1 && mobileFilters.level2 && mobileFilters.level3 && mobileFilters.level4 && mobileFilters.level5;
