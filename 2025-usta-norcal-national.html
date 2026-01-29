@@ -962,6 +962,10 @@
       padding: 8px 12px;
       background: var(--m-surface-elevated);
       border-top: 1px solid var(--m-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
 
     .m-venue-text {
@@ -970,6 +974,62 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .m-expand-btn {
+      background: transparent;
+      border: 1px solid var(--m-border);
+      color: var(--m-accent);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .m-expand-btn:active { transform: scale(0.98); }
+
+    .m-expand-chevron {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .m-tournament-card.expanded .m-expand-chevron {
+      transform: rotate(180deg);
+    }
+
+    .m-card-extra {
+      padding: 10px 12px 12px;
+      border-top: 1px solid var(--m-border);
+      background: var(--m-surface);
+      display: none;
+    }
+
+    .m-tournament-card.expanded .m-card-extra { display: block; }
+
+    .m-extra-line {
+      font-size: 12px;
+      color: var(--m-text);
+      line-height: 1.35;
+      margin-top: 6px;
+      word-break: break-word;
+    }
+
+    .m-extra-line:first-child { margin-top: 0; }
+
+    .m-extra-label {
+      color: var(--m-text-muted);
+      font-weight: 700;
+      margin-right: 6px;
     }
 
     /* Bottom Sheet Filters */
@@ -2576,6 +2636,17 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
       mobileFilters.u12 = filters.u12;
       mobileFilters.u14 = filters.u14;
       mobileFilters.showPast = filters.showPast;
+
+      const mobileSearchInput = document.getElementById('m-search');
+      if (mobileSearchInput && mobileSearchInput.value !== mobileFilters.search) {
+        mobileSearchInput.value = mobileFilters.search || '';
+      }
+    }
+
+    function persistDesktopSearchStarFromMobile() {
+      filters.search = mobileFilters.search;
+      filters.starred = mobileFilters.starred;
+      saveFilters();
     }
 
     function syncFiltersToDesktop() {
@@ -2742,6 +2813,22 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
           const draw = getDrawCell(row);
           const homePage = row['Home Page'] || '';
           const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
+          const divisions = (row['Divisions'] || '').trim();
+          const director = (row['Tournament Director'] || '').trim();
+          const notes = (row['Notes'] || '').trim();
+
+          function escapeHtml(text) {
+            return (text || '')
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;');
+          }
+
+          const extraLines = [];
+          if (divisions) extraLines.push(`<div class="m-extra-line"><span class="m-extra-label">Divisions</span>${escapeHtml(divisions)}</div>`);
+          if (director) extraLines.push(`<div class="m-extra-line"><span class="m-extra-label">Director</span>${escapeHtml(director)}</div>`);
+          if (notes) extraLines.push(`<div class="m-extra-line"><span class="m-extra-label">Notes</span>${escapeHtml(notes)}</div>`);
+          const hasExtra = extraLines.length > 0;
 
           const card = document.createElement('div');
           card.className = 'm-tournament-card';
@@ -2795,7 +2882,9 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
             </div>
             <div class="m-card-footer">
               <div class="m-venue-text">📍 ${row['Primary Site']}</div>
+              ${hasExtra ? `<button class="m-expand-btn" type="button" aria-expanded="false">Details <span class="m-expand-chevron">▾</span></button>` : ''}
             </div>
+            ${hasExtra ? `<div class="m-card-extra">${extraLines.join('')}</div>` : ''}
           `;
 
           section.appendChild(card);
@@ -2813,11 +2902,13 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 
       document.getElementById('m-search').addEventListener('input', (e) => {
         mobileFilters.search = e.target.value;
+        persistDesktopSearchStarFromMobile();
         renderMobileView();
       });
 
       document.getElementById('m-chip-starred').addEventListener('click', () => {
         mobileFilters.starred = !mobileFilters.starred;
+        persistDesktopSearchStarFromMobile();
         renderMobileView();
       });
 
@@ -2830,6 +2921,15 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
       });
 
       document.getElementById('m-tournament-list').addEventListener('click', (e) => {
+        const expandBtn = e.target.closest('.m-expand-btn');
+        if (expandBtn) {
+          const card = expandBtn.closest('.m-tournament-card');
+          if (!card) return;
+          const isExpanded = card.classList.toggle('expanded');
+          expandBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+          return;
+        }
+
         const starBtn = e.target.closest('.m-star-btn');
         if (starBtn) {
           const id = starBtn.dataset.id;
