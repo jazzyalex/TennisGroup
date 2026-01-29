@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>USTA G12 Tournaments - NorCal and National</title>
+  <title>USTA Girls U12/U14 Tournaments - NorCal and National</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
   <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
@@ -269,7 +269,7 @@
 
     .table-header {
       display: grid;
-      grid-template-columns: 40px 50px 140px 1fr 80px 140px 1fr 100px 100px 100px;
+      grid-template-columns: 40px 50px 140px 1fr 80px 90px 140px 1fr 90px 100px 110px;
       padding: 12px 24px;
       background: var(--bg-tertiary);
       border-bottom: 1px solid var(--border);
@@ -334,7 +334,7 @@
 
     .table-row {
       display: grid;
-      grid-template-columns: 40px 50px 140px 1fr 80px 140px 1fr 100px 100px 100px;
+      grid-template-columns: 40px 50px 140px 1fr 80px 90px 140px 1fr 90px 100px 110px;
       align-items: center;
       padding: 20px 24px;
       border-bottom: 1px solid var(--border-subtle);
@@ -347,6 +347,14 @@
       font-size: 12px;
       color: var(--text-secondary);
       text-align: center;
+    }
+
+    .cell-age {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+      font-weight: 600;
+      font-family: monospace;
     }
 
     .table-row.even-row {
@@ -493,7 +501,7 @@
     @media (max-width: 1200px) {
       .table-header,
       .table-row {
-        grid-template-columns: 35px 45px 120px 1fr 70px 120px 1fr 90px 90px 90px;
+        grid-template-columns: 35px 45px 120px 1fr 70px 80px 120px 1fr 80px 90px 100px;
       }
     }
 
@@ -535,10 +543,10 @@
           <img src="assets/tennis-report/favicon-256.png" alt="Tennis report logo" class="header-logo">
         </a>
         <div class="accent-bar"></div>
-        <h1>USTA G12 Tournaments</h1>
+        <h1>USTA Girls U12/U14 Tournaments</h1>
         <span class="year-badge">2026</span>
       </div>
-      <p class="subtitle">NorCal Sectional (Levels 2-5) + National (Levels 1-4) • Distances from Los Altos, CA</p>
+      <p class="subtitle">NorCal (Levels 2-6) + National (Levels 1-4) • Distances from Los Altos, CA</p>
     </div>
 
     <!-- Stats Row -->
@@ -585,6 +593,36 @@
           National
         </div>
         <div class="divider"></div>
+        <div class="filter-chip active" id="chip-level-2">
+          <span class="chip-dot" style="background: #22c55e"></span>
+          L2
+        </div>
+        <div class="filter-chip active" id="chip-level-3">
+          <span class="chip-dot" style="background: #0ea5e9"></span>
+          L3
+        </div>
+        <div class="filter-chip active" id="chip-level-4">
+          <span class="chip-dot" style="background: #a78bfa"></span>
+          L4
+        </div>
+        <div class="filter-chip active" id="chip-level-5">
+          <span class="chip-dot" style="background: #f59e0b"></span>
+          L5
+        </div>
+        <div class="filter-chip" id="chip-level-6">
+          <span class="chip-dot" style="background: #94a3b8"></span>
+          L6
+        </div>
+        <div class="divider"></div>
+        <div class="filter-chip active" id="chip-age-u12">
+          <span class="chip-dot" style="background: #10b981"></span>
+          U12
+        </div>
+        <div class="filter-chip active" id="chip-age-u14">
+          <span class="chip-dot" style="background: #0891b2"></span>
+          U14
+        </div>
+        <div class="divider"></div>
         <div class="filter-chip active" id="chip-local">
           <span class="chip-dot" style="background: #10b981"></span>
           Local
@@ -626,6 +664,7 @@
         <span class="sortable" data-sort="asc" data-column="dates">Dates</span>
         <span class="sortable" data-sort="none" data-column="tournament">Tournament</span>
         <span data-column="format">Format</span>
+        <span data-column="age">Age</span>
         <span class="sortable" data-sort="none" data-column="city">City</span>
         <span data-column="venue">Venue</span>
         <span data-column="draw">Draw</span>
@@ -636,7 +675,7 @@
     </div>
 
     <div class="footer">
-      Driving distances from Los Altos, CA • Last updated January 2026
+      Driving distances from Los Altos, CA • Last updated January 29, 2026
       <br><br>
       <strong>Data Sources:</strong><br>
       <a href="https://docs.google.com/spreadsheets/d/1-Z_cWfSqRozPabU5mBqYnY-dZEmsFQh2_GcIED3pQ9I/edit?gid=1626566793#gid=1626566793" target="_blank" rel="noopener" style="color: #0891b2; text-decoration: none; border-bottom: 1px dotted #0891b2;">2026 USTA NorCal Junior Tournaments</a>
@@ -647,59 +686,46 @@
 
   <script id="csv-data" type="text/plain">
 Tournament Name,Month,Date(s),# of Days,Home Page,Level,Doubles Only,National,Divisions,B18,B16,B14,B12,G18,G16,G14,G12,Singles Draw,Doubles Draw,Organization,Tournament Director,Primary Site,City,Notes
+,January,2-3,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,January,2-3,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
 Level 4 Closed: FDT Level 4 Junior 12s & 14s Singles Excellence,January,10-11; 17-18,5,https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/EAD0497A-559C-4765-9253-2BF848B4FC4A,Closed Level 4 Excellence Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,Singles Only
+,January,17-18,2,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/4799AC8E-A004-4003-BE15-57E0E645B2F3,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
+,January,17-18,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/009F17B0-1B78-4B01-8D50-D9886D358C6B,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,January,24-25,2,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/31DEDB9B-B95A-4EFF-9C5B-6FA8A2DABFF9,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,January,24-25,2,https://playtennis.usta.com/competitions/trivalleytennisacademy/Tournaments/overview/117958CA-32D9-49B3-BB95-24476A4C11DC,Level 6,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,United by Tennis,Calvin Thompson,Northgate High School,Walnut Creek,
+,January,31-1,2,https://playtennis.usta.com/competitions/longs-tennis-academy/Tournaments/overview/E8905488-6FA6-4DDE-8955-B30276F389C4,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,January,31-1,2,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/A4FF5AAF-9036-43FE-819D-2678AFACB541,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
 Level 5 Open: FDT Level 5 Junior Singles Championship,January,31-1,2,https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,Singles Only
 Level 5 Open: HRT Level 5 Junior 14s & 12s Singles Championship,January,31-1,2,https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/8EA9DB88-B9C3-4C1A-8723-1F34CB0F6AC9,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
 Level 5 Open: SJVTA Level 5 Junior 14s & 12s Singles Championship,January,31-1,2,https://playtennis.usta.com/competitions/sanjoaquinvalleytennisacademyfuturestars200/Tournaments/overview/EA3204F8-086A-4AA0-A82A-3290F67BE8FF,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles Only
-MTA Manteca Level 5 Junior 12s Super Series,February,7-8,2,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/37F6D812-42CD-46A9-AF22-DA651D0450B5,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,Singles Only
-,February,14-16,3,n/a,Open Level 5 Championship,FALSE,FALSE,"BG 18, 14-12",TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,32,16,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles & Doubles
-HRT Level 3 Junior 12s & 14s Mixed Doubles Sectionals,February,21-22,2,https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/B725D590-9D1A-4061-BAD6-DD7BD89100E0,Closed Level 3 Mixed Sectionals,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Mixed Doubles Only
-,March,7-8,2,https://playtennis.usta.com/competitions/aroratennisandfitness/Tournaments/overview/2E3C2DBA-B750-4A79-9655-3E8E36BE42E6,Closed Level 5 Super Series,FALSE,FALSE,"BG 18, 14-12",TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,32,,Johnson Ranch Sports Club,Scott Pothast,Johnson Ranch Sports Club,Roseville,Singles Only
-,March,14-15,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/1292A9E4-D462-42F2-B12D-524B76F97693,Closed Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
-,March,21-22,2,https://playtennis.usta.com/competitions/longs-tennis-academy/Tournaments/overview/BCF815F6-AA02-4DBD-95C2-9C95215DBCD2,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Doubles Only
-,April,4-5,2,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/32E14C4E-BDC7-4CBD-863B-E0F1D860DB95,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,April,4-5,2,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/D7E49DF9-6AC2-4CAC-81FE-5F3F2718B761,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
-,April,18-19,2,https://playtennis.usta.com/competitions/equalchancefoundation/Tournaments/overview/E2029E09-58CA-4BF4-9B8A-48A8E9B1DD08,Level 3 Mixed Doubles Sectionals,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Mixed Doubles Only
-,May,2-3,2,n/a,Closed Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Rio del Oro Sports Club,Todd Stanley,Rio del Oro Sports Club,Sacramento,Singles Only
-,May,9-10,2,https://playtennis.usta.com/competitions/trivalleytennisacademy/Tournaments/overview/0DCDF4B9-E404-42AE-B856-5D3FCAEBB4D7,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,Doubles Only
-,May,16-17,2,https://playtennis.usta.com/competitions/reutsacademy/Tournaments/overview/49415CCC-3F6B-4D03-BB71-AEED049D83B4,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,Singles Only
-,May,16-17,2,https://playtennis.usta.com/competitions/aroratennisandfitness/Tournaments/overview/13D1C120-078E-4D4E-9380-A36B137ADC99,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,May,23-25,3,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/1C0B576C-B83A-4BAC-AD7B-30E0FA70F37F,Closed Level 4 Excellence,FALSE,FALSE,"BG 18, 12",TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,32,16,Valley Premier Tennis,Phil King,Clovis East High School,Clovis,Singles & Doubles
-,May,30-31,2,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/10DC2F84-8E92-46BC-A41D-9C509AB5EA29,Open Level 5 Dominant Duo,TRUE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16,,Eventsmanagers,Ron Ward,Soquel High School,Soquel,
-,June,6-7; 13-15,5,https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/60E006D8-52A2-4868-8192-8AA096032A47,Closed Level 3 Sectionals,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,64,32,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,Singles Only
-,June,20-21,2,https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/EAD0497A-559C-4765-9253-2BF848B4FC4A,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
-,July,4-5,2,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/07472EFD-3DF9-4A04-A974-1ED29233B2FC,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Eventsmanagers,Ron Ward,Soquel High School,Soquel,Singles Only
-,July,18-20,3,https://playtennis.usta.com/competitions/equalchancefoundation/Tournaments/overview/175C68A3-8881-4608-996A-C7627EE4B02A,Open Level 5 Championship,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,16,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles & Doubles
-,August,31-2,3,n/a,Level 4 Team Intersectionals,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,24 boys & 24 Girls,,USTA Pacific Northwest,Krista Mikalatos,TBD - Pacific Northwest,TBD,Intersectional Team Event - 5 Sections
-,August,8-9,2,https://playtennis.usta.com/competitions/aroratennisandfitness/Tournaments/overview/E504D69E-1EA7-4B79-9C16-33566F58CF27,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
-,August,8-9,2,https://playtennis.usta.com/competitions/reutsacademy/Tournaments/overview/bdaca80d-37c1-4e73-8e9f-d20e2b0be3a4,Open Level 5 Championship Singles,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
-,August,8-9,2,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/4799AC8E-A004-4003-BE15-57E0E645B2F3,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,August,15-16,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/009F17B0-1B78-4B01-8D50-D9886D358C6B,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
-,August,22-23,2,https://playtennis.usta.com/competitions/equalchancefoundation/Tournaments/overview/9BC4F074-B5FD-4460-B3DD-A09D9E06A7CE,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
-,August,22-23,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Sleepy Hollow Swim and Tennis Club,Darrin Cohen,Sleepy Hollow Swim and Tennis Club,Orinda,Singles Only
-,August,29-30,2,https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/AF187A5D-995F-4EE2-BF70-797948CE3C4D,Closed Level 4 Mixed Dominant Duo,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,
-,September,5-6,2,https://playtennis.usta.com/competitions/aroratennisandfitness/Tournaments/overview/F677A527-CAB2-4DF3-BA4A-29FF506FB8B0,Open Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Valley Pride Racket & Paddle,Denise Dy,Fresno State University,"Fresno ,CA",Singles Only
-,September,5-6,2,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/31DEDB9B-B95A-4EFF-9C5B-6FA8A2DABFF9,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,September,11-13,3,https://playtennis.usta.com/competitions/trivalleytennisacademy/Tournaments/overview/117958CA-32D9-49B3-BB95-24476A4C11DC,Level 2 Team Intersectionals Team,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,24 boys & 24 Girls,,USTA SoCal,Dianne Matias,TBD - SoCal,TBD,Intersectional Team Event - 4 Sections
-,September,12-13,2,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/0F6CCF9B-80D8-43CC-B1DF-CE289DF6710D,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
-,September,12-13,2,https://playtennis.usta.com/competitions/acerstennisacademy/Tournaments/overview/0BAC05A6-D068-412C-BEEC-12CA9BBB93DF,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Yolo Tennis Club,Lukas Burger,Marya Welch Tennis Center,Davis,Singles Only
-,September,12-13,2,https://playtennis.usta.com/competitions/equalchancefoundation/Tournaments/overview/81AAD77D-7F44-4632-B36B-912D67BB7B37,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,September,19-20,1,n/a,Closed Level 3 Sectionals Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
-,September,26-27; 3-4,4,https://playtennis.usta.com/competitions/reutsacademy/Tournaments/overview/19085CBC-CD9C-405E-A646-5BD8CCBD48D8,Closed Level 3 Sectionals Singles,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,64,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,October,10-11,2,https://playtennis.usta.com/competitions/trivalleytennisacademy/Tournaments/overview/153A2D81-3379-4E7D-A3A4-1405E5CCB1D7,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,October,10-11,2,https://playtennis.usta.com/competitions/longs-tennis-academy/Tournaments/overview/E8905488-6FA6-4DDE-8955-B30276F389C4,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles Only
-,October,24-25,4,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/A4FF5AAF-9036-43FE-819D-2678AFACB541,Closed Level 4 Excellence,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,16,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles & Doubles
-,November,7-8,2,https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
-,November,14-15,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/9D719A94-93E7-4DAD-BB20-5E77119FB9F2,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
-,November,14-15,2,https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/overview/DBA6D7B1-4148-431F-8AC6-7C1626BE513C,Open Level 5 Championship Singles,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
-,December,5-6,2,https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/8EA9DB88-B9C3-4C1A-8723-1F34CB0F6AC9,Open Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,Singles Only
-,December,5-6,2,https://playtennis.usta.com/competitions/sanjoaquinvalleytennisacademyfuturestars200/Tournaments/overview/EA3204F8-086A-4AA0-A82A-3290F67BE8FF,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
-,December,12-13,2,https://playtennis.usta.com/competitions/equalchancefoundation/Tournaments/overview/C5C6ADA2-0ABB-41A3-A1A2-9875F2D74CE2,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
+,February,3-4,2,n/a,Closed Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Rio del Oro Sports Club,Todd Stanley,Rio del Oro Sports Club,Sacramento,Singles Only
+,February,3-4,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,February,3-4,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
 "Level 2: Claremont, CA",February,February 7-9,3,https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Barry Friedman,The Claremont Club,"Claremont, CA",Surface: H
 "Level 2: Spring, TX",February,February 7-9,3,https://playtennis.usta.com/competitions/giammalvaracquetclub/Tournaments/overview/AA054BB8-C361-49D5-BC70-224C1796566B,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Victor Pinones,Giammalva RC & Elite Academy,"Spring, TX",Surface: H
 "Level 2: Seminole, FL",February,February 7-9,3,https://playtennis.usta.com/competitions/seminolelakefamilytennis/Tournaments/overview/F9C40D4E-A5CE-49FC-856F-E4BDEE233F50,Level 2,FALSE,TRUE,G12-14,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Erick Chall,Seminole Lake Country Club,"Seminole, FL",Surface: C
 "Level 2: Tucson, AZ",February,February 7-9,3,https://playtennis.usta.com/competitions/el-conquistador-tennis/Tournaments/overview/3D925667-96FD-4BEA-931A-400A2CE9C74B,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Jennifer Fuchs,El Conquistador Tennis,"Tucson, AZ",Surface: H
+,February,14-15,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/AE5B873B-779E-46F0-BA47-DD4407520329,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,February,14-15,2,https://playtennis.usta.com/competitions/bayareawheelchairtennis/Tournaments/overview/E7B9D0EA-50E1-4C67-AEC7-0151B1E0036A,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
+,February,14-15,2,https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/DCE1B70F-CBBC-4853-B6D3-BA32CB7B5413,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,February,14-16,3,https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/overview/832420EF-F6CC-48A4-AC06-1C54E9C8533D,Open Level 5 Championship,FALSE,FALSE,"BG 18, 14-12",TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,32,16,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles & Doubles
 Level 1: Brewer Team Cup BG 12's,February,February 16-22,7,https://playtennis.usta.com/competitions/el-conquistador-tennis/Tournaments/overview/94F38D3B-2F9B-4038-9A60-28EDA4E8BF3D,Level 1,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,48: Team Event,,,Jennifer Fuchs,Hilton El Conquistador,"Tucson, AZ",Surface: H
+,February,21-22,2,https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/B725D590-9D1A-4061-BAD6-DD7BD89100E0,Closed Level 3 Mixed Sectionals,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Mixed Doubles Only
+,February,21-22,2,https://playtennis.usta.com/competitions/trivalleytennisacademy/Tournaments/overview/C527493D-0019-4228-832B-001B611EFFCB,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,February,21-22,2,n/a,Level 6,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Valli Sports,Ashwin Veeravalli,Gunderson High School,San Jose,
+,February,21-22,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,NextGen Sports,Lokesh Sisodiya,River Island High School,Lathrop,
+,February,28-29,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,February,28-29,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,March,4-5,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/1292A9E4-D462-42F2-B12D-524B76F97693,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,March,4-5,2,https://playtennis.usta.com/competitions/longs-tennis-academy/Tournaments/overview/BCF815F6-AA02-4DBD-95C2-9C95215DBCD2,Level 6,FALSE,FALSE,BG 18-12,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,March,4-5,2,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/32E14C4E-BDC7-4CBD-863B-E0F1D860DB95,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,March,4-5,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,March,4-5,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,March,5-6,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Alpine Hills Tennis & Swimming Club,Ogidi Obi,Alpine Hills Tennis & Swimming Club,Portola Valley,
+,March,14-15,2,n/a,Closed Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,March,14-15,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,
+,March,14-15,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16.0,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,March,14-15,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24.0,,Sun Oaks,Austin Kische,Sun Oaks,Redding,
 "Level 3 Open: Cayce, SC",March,March 14-16,3,https://playtennis.usta.com/competitions/caycetennis/Tournaments/overview/CA5AA81A-E95B-4ED4-8807-982C3D6D1974,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Brian Clary,Cayce Tennis & Fitness Center,"Cayce, SC",Surface: H
 "Level 3 Open: Evansville, IN",March,March 14-16,3,https://playtennis.usta.com/competitions/evansvilletc/Tournaments/overview/1652DA82-A95B-47D8-98E5-CD49BB4A1117,Level 3,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Ryan McDaniel,Evansville Tennis Center,"Evansville, IN",Surface: IH
 "Level 3 Open: Las Vegas, NV",March,March 14-16,3,https://playtennis.usta.com/competitions/darlingmemorialtenniscenter/Tournaments/overview/68DE1C49-3DE7-4F4A-AD83-842BEDEF1833,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Memorial Tennis Center,"Las Vegas, NV",Surface: H
@@ -708,31 +734,130 @@ Level 1: Brewer Team Cup BG 12's,February,February 16-22,7,https://playtennis.us
 "Level 3 Open: Rome, GA - Georgia Bowl",March,March 14-16,3,https://playtennis.usta.com/competitions/metro-tennis-associates/Tournaments/overview/54D501A1-EDFE-4ACC-AAC3-3F2A47744C0D,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Sandy Bowie,Rome Tennis Center at Berry College,"Rome, GA",Surface: H
 "Level 3 Open: San Antonio, TX",March,March 14-16,3,https://playtennis.usta.com/competitions/blossomtennis/Tournaments/overview/4AB6612E-17E9-412F-809E-9D41F6AFF7B3,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Arnaud Guillemard,Blossom Tennis Center,"San Antonio, TX",Surface: H
 "Level 3 Open: Tulsa, OK",March,March 14-16,3,https://playtennis.usta.com/competitions/lafortunetenniscentertulsacountyparks/Tournaments/overview/9E4F476A-AAF6-4DB0-8542-EA9B35FC4EEA,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: Compass,,Peter McCorkle,LaFortune Park Tennis Center,"Tulsa, OK",Surface: H
+,March,21-22,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,March,21-22,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,March,21-22,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,
+,March,21-22,2,n/a,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Doubles Only
 Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,https://playtennis.usta.com/competitions/desertchampionsllc/Tournaments/overview/78CE4C97-6EAE-4CF4-969E-9238DA03B64F,Level 1,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,64: FIC-QF,32: SE,,Eric Stephens,Indian Wells Tennis Garden,"Indian Wells, CA",Surface: H
+,March,28-29,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
+,March,28-29,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,March,28-29,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,April,5-6,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,April,5-6,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,April,5-6,2,n/a,Open Level 4 Super Series,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,32,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
+,April,5-6,2,n/a,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+,April,5-6,2,n/a,Open Level 5 Super Series,FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,32,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,Singles Only
+,April,5-6,2,n/a,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,April,5-6,2,n/a,Open Level 5 Super Series,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,April,5-6,2,n/a,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Eventsmanagers,Ron Ward,Soquel High School,Soquel,Singles Only
 "Level 3 Open: Glen Cove, NY",April,April 11-13,3,https://playtennis.usta.com/competitions/robbiewagnertournamenttrainingatglencove/Tournaments/overview/493357A3-3B22-4D59-BFF7-FFA0319D2A5A,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alex Alcantara,RWTT at Glencove,"Glen Cove, NY",Surface: IC
 "Level 3 Open: Irvine, CA",April,April 11-13,3,https://playtennis.usta.com/competitions/racquetclubofirvine/Tournaments/overview/3A0E3F36-53F5-4DEC-91A6-39299E166207,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Greg Prudhomme,Racquet Club of Irvine,"Irvine, CA",Surface: H
 "Level 3 Open: Las Vegas, NV",April,April 11-13,3,https://playtennis.usta.com/competitions/darlingmemorialtenniscenter/Tournaments/overview/E18DEEDF-CC6B-4838-899E-EF712F875098,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Memorial Tennis Center,"Las Vegas, NV",Surface: H
 "Level 3 Open: College Grove, TN - Farm & Forge Dominant Duo Team Event",April,April 11-13,3,https://playtennis.usta.com/competitions/farmforgeclub/Tournaments/overview/30151FB9-8BE8-451C-87D4-3E0EC80A738B,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: Dominant Duo Team Event,,,Tiffany Milner,Farm & Forge Club,"College Grove, TN",Surface: H
 "Level 3 Open: Naples, FL",April,April 11-13,3,https://playtennis.usta.com/competitions/emiliosanchezacademyflorida/Tournaments/overview/B14858FC-7D45-4F9A-A605-B6CA08A74ED8,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Lucas Regas,Emilio Sanchez Academy,"Naples, FL",Surface: C
 "Level 3 Open: Ridgeland, MS - Crossroads of the South",April,April 11-13,3,https://playtennis.usta.com/competitions/ridgelandtenniscenter0/Tournaments/overview/0D1400A6-1D18-4C37-8B78-4759648D64DA,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Justyn Schelver,Ridgeland Tennis Center,"Ridgeland, MS",Surface: H
+,April,18-19,2,n/a,Level 3 Mixed Doubles Sectionals,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Mixed Doubles Only
+,April,18-19,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,
+,April,18-19,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24.0,,Sun Oaks,Austin Kische,Sun Oaks,Redding,
+,April,25-26,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
+,April,25-26,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,April,25-26,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,
 ,May,May 2-4,3,https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/5CFF3D3B-039E-458C-BFAE-7E470B3350CA,Level 3,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,,,,,,,Surface: H
 "Boulder, CO",May,May 2-4,3,https://playtennis.usta.com/competitions/rockymountaintenniscenter/Tournaments/overview/59262F9E-D0CD-485D-8D00-9A2AAA7CF4F2,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Kendall Chitambar,University of Colorado,"Boulder, CO",Surface: H
 "Level 3 Open: Grand Rapids, MI",May,May 2-4,3,https://playtennis.usta.com/competitions/grand-rapids-racquetfitness/Tournaments/overview/15507C7D-EF04-4B2C-867E-1D72F2F02FDF,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Tom Walker,Grand Rapids Racquet & Fitness,"Grand Rapids, MI",Surface: H
 "Level 3 Open: Greensboro, NC",May,May 2-4,3,https://playtennis.usta.com/competitions/triad-tennis-management/Tournaments/overview/A027708E-8626-408D-BF5A-C68DB2B75213,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
-,May,May 2-4,3,https://playtennis.usta.com/competitions/reutsacademy/Tournaments/overview/680B1FD7-CEFA-486F-ACF7-0582E7A9D75D,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Tennis Center,"Las Vegas, NV",Surface: H
+,May,May 2-4,3,n/a,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Tennis Center,"Las Vegas, NV",Surface: H
 "Manchester, MA - Dominant Duo Team Event",May,May 2-4,3,https://playtennis.usta.com/competitions/manchester-athletic-club/Tournaments/overview/49C8D5DC-15C4-4950-8A81-749437A78AA5,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: Dominant Duo Team Event,,,Josh Pletka,Manchester Athletic Club,"Manchester, MA",Surface: IH
 "Level 3 Open: Annapolis, MD - Robert Hoffman National Open",May,May 2-4,3,https://playtennis.usta.com/competitions/brigade-sports-complex/Tournaments/overview/5B47FD8C-E218-466F-AF54-DE821E08F10B,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Keith Puryear,Brigade Sports Tennis Center,"Annapolis, MD",Surface: H
+,May,6-7,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,May,6-7,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,12,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,May,6-7,2,n/a,Open Level 4 Super Series,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,32,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles Only
+,May,6-7,2,n/a,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,May,6-7,2,n/a,Open Level 4 Super Series,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,32,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles Only
+,May,6-7,2,n/a,Open Level 4 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,May,6-7,2,n/a,Open Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32.0,,Valley Pride Racket & Paddle,Denise Dy,Fresno State University,"Fresno ,CA",Singles Only
+,May,6-7,2,n/a,Open Level 5 Super Series,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,Singles Only
+,May,16-17,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Sierra View Country Club,Steve Dunmore,Sierra View Country Club,Roseville,
+,May,16-17,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,NextGen Sports,Lokesh Sisodiya,River Island High School,Lathrop,
+,May,16-17,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
+,May,16-17,2,n/a,Level 6,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,24,,Yolo Tennis Club,Lukas Burger,Marya Welch Tennis Center,Davis,
+,May,16-17,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,Singles Only
+,May,16-17,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
 ,May,May 16-18,3,n/a,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alice Reen,Harrison Tennis Center,"Marietta, GA",Surface: H
 "Level 2: Long Beach, CA",May,May 16-18,3,https://playtennis.usta.com/competitions/southerncaliforniatennisacademy/Tournaments/overview/E812F60F-0760-4E2E-A350-2499F33DD951,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Mitch Bridge,El Dorado Park Tennis Center,"Long Beach, CA",Surface: H
 "Level 2: Glen Cove, NY",May,May 16-18,3,https://playtennis.usta.com/competitions/robbiewagnertournamenttrainingatglencove/Tournaments/overview/7B7CE5A3-EB99-45A7-BE3C-4D6819B4F023,Level 2,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alex Alcantara,Robbie Wagner Tournament Training,"Glen Cove, NY",Surface: IC
 "Level 2: Boca Raton, FL - YellowTennisBall.com Jr Championships",May,May 16-18,3,https://playtennis.usta.com/competitions/players-international-management/Tournaments/overview/54223FF9-C667-4A51-BDE1-2284B0D5BA4A,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Ivan Baron,Boca Raton Racquet Center,"Boca Raton, FL",Surface: C
+,May,23-25,3,n/a,Closed Level 4 Excellence,FALSE,FALSE,"BG 18, 12",TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,32,16,Valley Premier Tennis,Phil King,Clovis East High School,Clovis,Singles & Doubles
+,May,23-25,3,n/a,Closed Level 4 Excellence,FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,32,16,Valley Pride Racket & Paddle,Denise Dy,Fresno State University,Fresno,Singles & Doubles
+,May,23-24,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,May,30-31,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
+,May,30-31,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,May,30-31,2,n/a,Open Level 5 Dominant Duo,TRUE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,16,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,
+,May,30-31,2,n/a,Open Level 5 Dominant Duo,TRUE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16,,Eventsmanagers,Ron Ward,Soquel High School,Soquel,
+,June,6-7; 13-15,5,n/a,Closed Level 3 Sectionals,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,64,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,June,6-7; 13-15,5,n/a,Closed Level 3 Sectionals,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,64,32,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,Singles Only
+,June,7-8,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,June,7-8,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,June,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,June,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,
+,June,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,June,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Tenacious Tennis Academy,Jesse Inghelram,San Francisco State University,San Francisco,
+,June,20-21,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32,,Sleepy Hollow Swim and Tennis Club,Darrin Cohen,Sleepy Hollow Swim and Tennis Club,Orinda,
+,June,20-21,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Valley Pride Racket & Paddle,Denise Dy,Fresno State University,Fresno,
+,June,20-21,2,https://playtennis.usta.com/competitions/fourdirectionstennis/Tournaments/overview/EAD0497A-559C-4765-9253-2BF848B4FC4A,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,June,27-28,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,June,27-28,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Valley Pride Racket & Paddle,Denise Dy,Fresno State University,Fresno,
+,June,27-28,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Willow Glen High School,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,June,27-28,2,n/a,"The West Quest
+Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,16,,USTA NorCal,Andrea Norman,Saint Mary's College,Moraga,Team Event
 "Level 2: Hudsonville, MI",June,June 27-29,3,https://playtennis.usta.com/competitions/inthezonetennis/Tournaments/overview/ED16BC52-CAFA-4528-AD39-570B7746251E,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Steve Greene,Hudsonville High School,"Hudsonville, MI",Surface: H
 "Level 2: Birmingham, AL",June,June 27-29,3,https://playtennis.usta.com/competitions/samforduniversity1/Tournaments/overview/15043322-6DAE-425B-ACE9-A3E9531CE017,Level 2,FALSE,TRUE,BG12 ,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Oliver Reynolds,The Lakeshore Foundation ,"Birmingham, AL",Surface: H
 "Level 2: Austin, TX - DiLaura Tennis",June,June 27-29,3,https://playtennis.usta.com/competitions/austin-tennis-academy/Tournaments/overview/18BB45D8-71FD-4691-BB99-C364CB898726,Level 2,FALSE,TRUE,G12-14,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Carlos Di Laura,St. Stephen's Episcopal School,"Austin, TX",Surface: H
 "Level 2: Greensboro, NC",June,June 27-29,3,https://playtennis.usta.com/competitions/triad-tennis-management/Tournaments/overview/CC8FE69A-61E7-4D18-81A9-5424665BD4E2,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
+,June,29-30,2,n/a,Level 6,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Lisa & Douglas Goldman Tennis Center - Lifetime Activities,Joe Noth,Lisa & Douglas Goldman Tennis Center,San Francisco,
 ,July,July 4-12,9,n/a,Level 1,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,128: Compass,64: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
-,August,August 7-16,10,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/DEE8F6A5-B5EF-40A5-BC8D-10C5A00FF2EE,Level 1,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,128: Compass,64: SE,,Turhan Berne,Hudlow Tennis Center (Aug 9th - 15th),"Peachtree Corners, GA",Surface: H
-,September,September 12-14,3,https://playtennis.usta.com/competitions/trivalleytennisacademy/Tournaments/overview/C3FB0427-3C3C-4FE4-B807-F519BFDB2ECE,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Tennis Center,"Las Vegas, NV",Surface: H
+,July,8-9,2,n/a,Closed Level 5 Super Series,FALSE,FALSE,"BG 18, 14-12",TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,32,,Johnson Ranch Sports Club,Scott Pothast,Johnson Ranch Sports Club,Roseville,Singles Only
+,July,8-9,2,https://playtennis.usta.com/competitions/longs-tennis-academy/Tournaments/overview/5714FBF5-E22D-4543-9972-068629EB627A,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,July,8-9,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/D6A37A95-6D38-4FFB-B81A-D44C237DBF48,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,July,8-9,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
+,July,8-9,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,July,8-9,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,July,8-9,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,July,8-9,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Fig Garden Swim and Racquet Club,Jack Busby,Fig Garden Swim and Racquet Club,Fresno,
+,July,8-9,2,n/a,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
+,July,8-9,2,https://playtennis.usta.com/competitions/cellointernationaltennisacademy/Tournaments/overview/0CE888CB-F82A-4DBA-93C5-1741E18CDCC7,Open Level 5 Super Series,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,32,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
+,July,8-9,2,https://playtennis.usta.com/competitions/mantecatennisacademy/Tournaments/overview/37F6D812-42CD-46A9-AF22-DA651D0450B5,Open Level 5 Super Series,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,Singles Only
+,July,18-19,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,July,18-19,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
+,July,18-20,3,n/a,Open Level 5 Championship,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,32,16,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles & Doubles
+,July,18-20,3,n/a,Open Level 5 Championship,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,16,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles & Doubles
+,July,25-26,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,July,25-26,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,August,August 7-16,10,n/a,Level 1,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,128: Compass,64: SE,,Turhan Berne,Hudlow Tennis Center (Aug 9th - 15th),"Peachtree Corners, GA",Surface: H
+,August,9-10,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,August,9-10,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+,August,9-10,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
+,August,9-10,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,August,15-16,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,August,15-16,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,August,15-16,2,n/a,Level 6,FALSE,FALSE,BG 16-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Yolo Tennis Club,Lukas Burger,Marya Welch Tennis Center,Davis,
+,August,15-16,2,n/a,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,August,22-23,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Sierra View Country Club,Steve Dunmore,Sierra View Country Club,Roseville,
+,August,22-23,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,August,22-23,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,NextGen Sports,Lokesh Sisodiya,River Island High School,Lathrop,
+,August,22-23,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+,August,22-23,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Sleepy Hollow Swim and Tennis Club,Darrin Cohen,Sleepy Hollow Swim and Tennis Club,Orinda,Singles Only
+,August,29-30,2,n/a,Closed Level 4 Mixed Dominant Duo,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,
+,August,29-30,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,August,29-30,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,August,31-2,3,n/a,Level 4 Team Intersectionals,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,24 boys & 24 Girls,,USTA Intermountain,Josh Cossitt,TBD - Intermountain,TBD,Intersectional Team Event - 5 Sections
+,August,31-2,3,n/a,Level 4 Team Intersectionals,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,24 boys & 24 Girls,,USTA Pacific Northwest,Krista Mikalatos,TBD - Pacific Northwest,TBD,Intersectional Team Event - 5 Sections
+,September,10-11,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Operation Pride,Mary Bedford,San Pablo Park,Berkeley,
+,September,10-11,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
+,September,10-11,2,n/a,Open Level 4 Excellence Doubles,TRUE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,32,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,Doubles Only
+,September,11-13,3,n/a,Level 2 Team Intersectionals Team,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,24 boys & 24 Girls,,USTA Intermountain,Josh Cossitt,TBD - Intermountain,TBD,Intersectional Team Event - 4 Sections
+,September,11-13,3,n/a,Level 2 Team Intersectionals Team,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,24 boys & 24 Girls,,USTA SoCal,Dianne Matias,TBD - SoCal,TBD,Intersectional Team Event - 4 Sections
+,September,September 12-14,3,n/a,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Rob Merriman,Darling Tennis Center,"Las Vegas, NV",Surface: H
 "Level 3 Open: Boynton Beach, FL - Sunshine State Open",September,September 12-14,3,https://playtennis.usta.com/competitions/players-international-management/Tournaments/overview/48FB80A3-19BB-48F6-8184-373EEC128EEB,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Ivan Baron,The Club at Quail Ridge,"Boynton Beach, FL",Surface: C
 "Hilton Head Island, SC",September,September 12-14,3,https://playtennis.usta.com/competitions/smithstearnstennisacademy/Tournaments/overview/5FF0F15B-4DD1-4084-8611-53CBFB14B0DA,Level 3,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,32: FIC-16,16: SE,,Nico Guillon,Sea Pines Racquet Club,"Hilton Head, SC",Surface: C
 "Level 3 Open: Lafayette, LA",September,September 12-14,3,https://playtennis.usta.com/competitions/cityclubriverranch/Tournaments/overview/7B05AE0E-0107-4C7C-BA93-85594FEF9831,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Emily Ory,The City Club at River Ranch,"Lafayette, LA",Surface: C
@@ -740,19 +865,64 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
 ,September,September 12-14,3,n/a,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Ryan McDaniel,Wesselman Tennis Center,"Evansville, IN",Surface: H
 "Omaha, NE",September,September 12-14,3,https://playtennis.usta.com/competitions/omahatennis/Tournaments/overview/790E5BEC-2A14-4B7C-B11A-4D6E515BA488,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Tracy Wright,Koch Family Tennis Center,"Omaha, NE",Surface: H
 "Rochester, MN",September,September 12-14,3,https://playtennis.usta.com/competitions/rochester-athletic-club0/Tournaments/overview/0C26ECED-45D7-4BF1-B103-63D2BADF9383,Level 3,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,16: Compass,8: SE,,Ben Maes,Rochester Athletic Club,"Rochester, MN",Surface: IH
+,September,19-20,1,n/a,Closed Level 3 Sectionals Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
+,September,19-20,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,September,26-27; 3-4,4,n/a,Closed Level 3 Sectionals Singles,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,64,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+,September,26-27; 3-4,4,n/a,Closed Level 3 Sectionals Singles,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,64,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,September,26-27,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Longs Tennis Academy,Long Phan,Pioneer High School,San Jose,
+,September,26-27,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
 "Level 2: Spring, TX",October,October 10-12,3,https://playtennis.usta.com/competitions/giammalvaracquetclub/Tournaments/overview/D40B0DA2-724B-4BE1-BFA9-4A9F5D5596BA,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Victor Pinones,Giammalva Racquet Club,"Spring, TX",Surface: H
 "Level 2: Lakewood, CA",October,October 10-12,3,https://playtennis.usta.com/competitions/lakewoodtenniscenter/Tournaments/overview/B6181E16-6D14-43F7-A684-ADB23DA1A2DF,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Eric Stephens,Lakewood Tennis Center,"Lakewood, CA",Surface: H
 "Level 2: Glen Cove, NY",October,October 10-12,3,https://playtennis.usta.com/competitions/robbiewagnertournamenttrainingatglencove/Tournaments/overview/97EF6FE3-B22B-4F43-82F9-C3AB4BAA74A3,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Alexandre de Alcantara,Robbie Wagner Tournament Training at Glencove,"Glen Cove, NY",Surface: IC
 ,October,October 10-12,3,n/a,Level 2,FALSE,TRUE,BG12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32: FIC-16,16: SE,,Mark Falcon,Spencer Love Tennis Center,"Greensboro, NC",Surface: C
+,October,11-12,2,https://playtennis.usta.com/competitions/aroratennisandfitness/Tournaments/overview/13D1C120-078E-4D4E-9380-A36B137ADC99,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
+,October,11-12,2,https://playtennis.usta.com/competitions/lafayettetennisclub/Tournaments/overview/1C0B576C-B83A-4BAC-AD7B-30E0FA70F37F,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,October,11-12,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,
+,October,11-12,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,October,11-12,2,n/a,Level 6,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,8,,Operation Pride,Mary Bedford,San Pablo Park,Berkeley,
+,October,11-12,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,October,11-12,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles Only
+,October,17-18,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,October,17-18,2,n/a,Level 6 Ratings Round Robin,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,NextGen Sports,Lokesh Sisodiya,River Island High School,Lathrop,
+,October,24-25,4,n/a,Closed Level 4 Excellence,FALSE,FALSE,BG 14,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,32,16,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles & Doubles
+,October,24-25,4,n/a,Closed Level 4 Excellence,FALSE,FALSE,BG 12,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,32,16,SJVTA,Edward Melfort,Bear Creek High School,Stockton,Singles & Doubles
+,October,24-25,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
+,October,24-25,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,October,24-25,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,
+,October,31,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Arora Tennis and Fitness,Akshay Arora,The Club at Livermore,Livermore,
 ,November,November 7-9,3,n/a,Level 3,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,32: FIC-16,16: SE,,Courtney Dugas,New Orleans City Park Tennis Center,"New Orleans, LA",Surface: H/C
+,November,12-13,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,November,12-13,2,n/a,Level 6,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,Operation Pride,Mary Bedford,San Pablo Park,Berkeley,
+,November,12-13,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Operation Pride,Mary Bedford,San Pablo Park,Berkeley,
+,November,12-13,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
+,November,12-13,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,United by Tennis,Tanner Thompson,Northgate High School,Walnut Creek,
+,November,14-15,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
+,November,14-15,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,November,14-15,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Yolo Tennis Club,Lukas Burger,Marya Welch Tennis Center,Davis,
+,November,14-15,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+,November,14-15,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,16,,Cello International Tennis Academy,Phil Cello,Solano Community College,Fairfield,Singles Only
 ,November,November 16-22,7,n/a,Level 1,FALSE,TRUE,G12,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,64: Curtis,32: SE,,Cedric De Zutter,Leftwich Tennis Center - University of Memphis,"Memphis, TN",Surface: IH
+,November,21-22,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
+,November,28-29,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,November,28-29,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,24,,Four Directions Tennis,Lyn Pasqua,Willow Glen High School & Middle School,San Jose,
 ,November,November 30,1,n/a,Level 2,FALSE,TRUE,BG12-18,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,64 Q/64 MD:SE,32: SE,,Hisa Sato,IMG Academy,"Bradenton, FL",Surface: H
-,December,December 7-13,7,https://playtennis.usta.com/competitions/equalchancefoundation/Tournaments/overview/B0538367-9518-4BA0-BB90-DF6BB4CFB5C7,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: SE,64: SE,,Robert Gomez,Biltmore Tennis Center,"Coral Gables, FL",Surface: H
+,December,December 7-13,7,n/a,Level 2,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: SE,64: SE,,Robert Gomez,Biltmore Tennis Center,"Coral Gables, FL",Surface: H
+,December,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
+,December,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Operation Pride,Mary Bedford,San Pablo Park,Berkeley,
+,December,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,December,13-14,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Manteca Tennis Academy,Roberto Lopez-Ellis,Manteca Tennis Center,Manteca,
+,December,13-14,2,n/a,Level 6,FALSE,FALSE,BG 16-12,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,8,,Operation Pride,Mary Bedford,San Pablo Park,Berkeley,
+,December,13-14,2,n/a,Open Level 5 Championship Doubles,TRUE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,,32,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Doubles Only
+,December,13-14,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Rollingwood YMCA,Matt Brunner,Rollingwood YMCA,Fair Oaks,Singles Only
+,December,13-14,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,Yolo Tennis Club,Lukas Burger,Marya Welch Tennis Center,Davis,Singles Only
+,December,13-14,2,n/a,Open Level 5 Championship Singles,FALSE,FALSE,BG 14-12,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,16,,HRT Academia de Tenis,Hugo Colpart,Redwood High School,Larkspur,Singles Only
+,December,19-20,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,16,,Lafayette Tennis Club,Hunter Gallaway,Lafayette Tennis Club,Lafayette,
+,December,19-20,2,n/a,Level 6,FALSE,FALSE,BG 18-12,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,8,,Bay Area Wheel Chair Tennis,RL Scott,Independence High School,San Jose,
 ,December,December 28,1,n/a,Level 1,FALSE,TRUE,BG12-14,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,128: Compass,64: SE,,Brian Notis,University of Texas - San Antonio,"San Antonio, TX",Surface: H
 </script>
 
   <script>
-    const FILTER_STORAGE_KEY = 'tournament-filters-v1';
+    const FILTER_STORAGE_KEY = 'tournament-filters-v2';
 
     function loadFilters() {
       try {
@@ -766,8 +936,16 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
     function saveFilters() {
       const payload = {
         search: filters.search,
+        starred: filters.starred,
         sectional: filters.sectional,
         national: filters.national,
+        level2: filters.level2,
+        level3: filters.level3,
+        level4: filters.level4,
+        level5: filters.level5,
+        level6: filters.level6,
+        u12: filters.u12,
+        u14: filters.u14,
         local: filters.local,
         road: filters.road,
         flight: filters.flight,
@@ -784,8 +962,16 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
         const el = document.getElementById(id);
         if (el) el.classList.toggle('active', !!active);
       };
+      setActive('chip-starred', filters.starred);
       setActive('chip-sectional', filters.sectional);
       setActive('chip-national', filters.national);
+      setActive('chip-level-2', filters.level2);
+      setActive('chip-level-3', filters.level3);
+      setActive('chip-level-4', filters.level4);
+      setActive('chip-level-5', filters.level5);
+      setActive('chip-level-6', filters.level6);
+      setActive('chip-age-u12', filters.u12);
+      setActive('chip-age-u14', filters.u14);
       setActive('chip-local', filters.local);
       setActive('chip-road', filters.road);
       setActive('chip-flight', filters.flight);
@@ -880,6 +1066,8 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       'San Jose': 12, 'Orinda': 30, 'Larkspur': 35, 'Walnut Creek': 35,
       'Soquel': 40, 'Fairfield': 55, 'Manteca': 65, 'Stockton': 70,
       'Davis': 110, 'Fair Oaks': 115, 'Sacramento': 115, 'Roseville': 125,
+      'Berkeley': 40, 'Livermore': 45, 'Lafayette': 45, 'Moraga': 45,
+      'Portola Valley': 10, 'San Francisco': 35, 'Lathrop': 75, 'Redding': 250,
       'Clovis': 170, 'Fresno': 170,
       'Irvine': 365, 'Lakewood': 370, 'Long Beach': 370,
       'Anaheim': 380, 'Claremont': 380, 'Indian Wells': 440,
@@ -902,6 +1090,8 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       'Soquel': 'CA', 'Fairfield': 'CA', 'Manteca': 'CA', 'Stockton': 'CA',
       'Davis': 'CA', 'Fair Oaks': 'CA', 'Sacramento': 'CA', 'Roseville': 'CA',
       'Clovis': 'CA', 'Fresno': 'CA',
+      'Berkeley': 'CA', 'Livermore': 'CA', 'Lafayette': 'CA', 'Moraga': 'CA',
+      'Portola Valley': 'CA', 'San Francisco': 'CA', 'Lathrop': 'CA', 'Redding': 'CA',
       'Irvine': 'CA', 'Lakewood': 'CA', 'Long Beach': 'CA',
       'Anaheim': 'CA', 'Claremont': 'CA', 'Indian Wells': 'CA',
       'Las Vegas': 'NV', 'Tempe': 'AZ', 'Tucson': 'AZ',
@@ -1028,13 +1218,48 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       return 'S';
     }
 
-    function formatDraw(row) {
-      const singles = (row['Singles Draw'] || '').trim();
-      const doubles = (row['Doubles Draw'] || '').trim();
-      if (singles && doubles) return `${singles} / ${doubles}`;
-      if (singles) return singles;
-      if (doubles) return doubles;
-      return '';
+    function getAgeInfo(row) {
+      const isU12 = row['G12'] === 'TRUE';
+      const isU14 = row['G14'] === 'TRUE';
+      const label = (isU12 && isU14) ? 'U12/U14' : (isU12 ? 'U12' : (isU14 ? 'U14' : ''));
+      return { isU12, isU14, label };
+    }
+
+    function getLevelNum(row) {
+      const raw = (row['Level'] || '');
+      const m = raw.match(/\bLevel\s*(\d+)\b/i);
+      if (!m) return null;
+      const n = parseInt(m[1], 10);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function drawSizeOnly(drawStr) {
+      const s = (drawStr || '').trim();
+      if (!s) return '';
+      const m = s.match(/\d{1,3}/);
+      return m ? m[0] : '';
+    }
+
+    function escapeAttr(val) {
+      return (val || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+    }
+
+    function getDrawCell(row) {
+      const singlesRaw = (row['Singles Draw'] || '').trim();
+      const doublesRaw = (row['Doubles Draw'] || '').trim();
+      const singles = drawSizeOnly(singlesRaw);
+      const doubles = drawSizeOnly(doublesRaw);
+
+      let display = '';
+      if (singles && doubles) display = `${singles} / ${doubles}`;
+      else display = singles || doubles || '';
+
+      let full = '';
+      if (singlesRaw && doublesRaw) full = `${singlesRaw} / ${doublesRaw}`;
+      else full = singlesRaw || doublesRaw || '';
+
+      const tooltip = full && full !== display ? full : '';
+      return { display, tooltip };
     }
 
     // State
@@ -1043,6 +1268,13 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
       starred: false,
       sectional: true,
       national: true,
+      level2: true,
+      level3: true,
+      level4: true,
+      level5: true,
+      level6: false,
+      u12: true,
+      u14: true,
       local: true,
       road: true,
       flight: true,
@@ -1113,6 +1345,19 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
           const id = getTournamentId(row);
           if (!starredTournaments.has(id)) return false;
         }
+
+        // Level filter (L2-L6); allow non-matching/unknown levels through.
+        const lvl = getLevelNum(row);
+        if (lvl === 2 && !filters.level2) return false;
+        if (lvl === 3 && !filters.level3) return false;
+        if (lvl === 4 && !filters.level4) return false;
+        if (lvl === 5 && !filters.level5) return false;
+        if (lvl === 6 && !filters.level6) return false;
+
+        // Age filter (Girls U12 / U14)
+        const age = getAgeInfo(row);
+        if (!age.isU12 && !age.isU14) return false;
+        if (!((filters.u12 && age.isU12) || (filters.u14 && age.isU14))) return false;
 
         const isNational = row['National'] === 'TRUE';
         if (isNational && !filters.national) return false;
@@ -1200,6 +1445,8 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
             const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
             const tournamentName = getTournamentTitle(row);
             const format = getFormat(row);
+            const age = getAgeInfo(row);
+            const draw = getDrawCell(row);
             const tournamentHtml = isValidUrl
               ? `<a href="${homePage}" target="_blank" rel="noopener">${tournamentName}</a>`
               : tournamentName;
@@ -1212,9 +1459,10 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
               <span class="cell-dates">${formatDates(row)}</span>
               <span class="cell-tournament">${tournamentHtml}</span>
               <span class="cell-format">${format}</span>
+              <span class="cell-age">${age.label}</span>
               <span class="cell-city">${formatCityWithState(row['City'])}</span>
               <span class="cell-venue">${row['Primary Site']}</span>
-              <span class="cell-draw">${formatDraw(row)}</span>
+              <span class="cell-draw"${draw.tooltip ? ` title="${escapeAttr(draw.tooltip)}"` : ''}>${draw.display}</span>
               <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
               <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
             `;
@@ -1240,6 +1488,8 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
           const isValidUrl = homePage.startsWith('http://') || homePage.startsWith('https://');
           const tournamentName = getTournamentTitle(row);
           const format = getFormat(row);
+          const age = getAgeInfo(row);
+          const draw = getDrawCell(row);
           const tournamentHtml = isValidUrl
             ? `<a href="${homePage}" target="_blank" rel="noopener">${tournamentName}</a>`
             : tournamentName;
@@ -1252,9 +1502,10 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
             <span class="cell-dates">${formatDates(row)}</span>
             <span class="cell-tournament">${tournamentHtml}</span>
             <span class="cell-format">${format}</span>
+            <span class="cell-age">${age.label}</span>
             <span class="cell-city">${formatCityWithState(row['City'])}</span>
             <span class="cell-venue">${row['Primary Site']}</span>
-            <span class="cell-draw">${formatDraw(row)}</span>
+            <span class="cell-draw"${draw.tooltip ? ` title="${escapeAttr(draw.tooltip)}"` : ''}>${draw.display}</span>
             <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
             <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
           `;
@@ -1294,6 +1545,56 @@ Level 1: USTA National Spring Championship: Easter Bowl,March,March 21-29,9,http
     document.getElementById('chip-starred').addEventListener('click', () => {
       filters.starred = !filters.starred;
       document.getElementById('chip-starred').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-level-2').addEventListener('click', () => {
+      filters.level2 = !filters.level2;
+      document.getElementById('chip-level-2').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-level-3').addEventListener('click', () => {
+      filters.level3 = !filters.level3;
+      document.getElementById('chip-level-3').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-level-4').addEventListener('click', () => {
+      filters.level4 = !filters.level4;
+      document.getElementById('chip-level-4').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-level-5').addEventListener('click', () => {
+      filters.level5 = !filters.level5;
+      document.getElementById('chip-level-5').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-level-6').addEventListener('click', () => {
+      filters.level6 = !filters.level6;
+      document.getElementById('chip-level-6').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-age-u12').addEventListener('click', () => {
+      filters.u12 = !filters.u12;
+      document.getElementById('chip-age-u12').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-age-u14').addEventListener('click', () => {
+      filters.u14 = !filters.u14;
+      document.getElementById('chip-age-u14').classList.toggle('active');
+      saveFilters();
       render();
     });
 
