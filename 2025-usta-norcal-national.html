@@ -620,6 +620,10 @@
           National
         </div>
         <div class="divider"></div>
+        <div class="filter-chip active" id="chip-level-1">
+          <span class="chip-dot" style="background: #14b8a6"></span>
+          L1
+        </div>
         <div class="filter-chip active" id="chip-level-2">
           <span class="chip-dot" style="background: #22c55e"></span>
           L2
@@ -953,6 +957,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
         starred: filters.starred,
         sectional: filters.sectional,
         national: filters.national,
+        level1: filters.level1,
         level2: filters.level2,
         level3: filters.level3,
         level4: filters.level4,
@@ -979,6 +984,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
       setActive('chip-starred', filters.starred);
       setActive('chip-sectional', filters.sectional);
       setActive('chip-national', filters.national);
+      setActive('chip-level-1', filters.level1);
       setActive('chip-level-2', filters.level2);
       setActive('chip-level-3', filters.level3);
       setActive('chip-level-4', filters.level4);
@@ -1282,6 +1288,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
       starred: false,
       sectional: true,
       national: true,
+      level1: true,
       level2: true,
       level3: true,
       level4: true,
@@ -1362,6 +1369,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 
         // Level filter (L2-L6); allow non-matching/unknown levels through.
         const lvl = getLevelNum(row);
+        if (lvl === 1 && !filters.level1) return false;
         if (lvl === 2 && !filters.level2) return false;
         if (lvl === 3 && !filters.level3) return false;
         if (lvl === 4 && !filters.level4) return false;
@@ -1559,6 +1567,13 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
     document.getElementById('chip-starred').addEventListener('click', () => {
       filters.starred = !filters.starred;
       document.getElementById('chip-starred').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
+    document.getElementById('chip-level-1').addEventListener('click', () => {
+      filters.level1 = !filters.level1;
+      document.getElementById('chip-level-1').classList.toggle('active');
       saveFilters();
       render();
     });
