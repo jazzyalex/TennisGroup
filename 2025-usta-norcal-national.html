@@ -171,10 +171,16 @@
       padding: 20px 24px;
       margin-bottom: 24px;
       display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+    }
+
+    .filter-top {
+      display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
       flex-wrap: wrap;
-      gap: 16px;
     }
 
     .search-container {
@@ -571,11 +577,28 @@
 
     <!-- Filter Bar -->
     <div class="filter-bar">
-      <div class="search-container">
-        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        <input type="text" id="search" class="search-input" placeholder="Search tournaments...">
+      <div class="filter-top">
+        <div class="search-container">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" id="search" class="search-input" placeholder="Search tournaments...">
+        </div>
+        <div class="filter-chips">
+          <div class="filter-chip active" id="chip-format-sd">
+            <span class="chip-dot" style="background: #0ea5e9"></span>
+            Singles + Doubles
+          </div>
+          <div class="filter-chip active" id="chip-format-d">
+            <span class="chip-dot" style="background: #f97316"></span>
+            Doubles
+          </div>
+          <div class="divider"></div>
+          <div class="filter-chip" id="chip-past">
+            <span class="chip-dot" style="background: #94a3b8"></span>
+            Past
+          </div>
+        </div>
       </div>
 
       <div class="filter-chips">
@@ -639,19 +662,6 @@
         <div class="filter-chip active" id="chip-format-s">
           <span class="chip-dot" style="background: #22c55e"></span>
           Singles
-        </div>
-        <div class="filter-chip active" id="chip-format-sd">
-          <span class="chip-dot" style="background: #0ea5e9"></span>
-          Singles + Doubles
-        </div>
-        <div class="filter-chip active" id="chip-format-d">
-          <span class="chip-dot" style="background: #f97316"></span>
-          Doubles
-        </div>
-        <div class="divider"></div>
-        <div class="filter-chip" id="chip-past">
-          <span class="chip-dot" style="background: #94a3b8"></span>
-          Past
         </div>
       </div>
     </div>
