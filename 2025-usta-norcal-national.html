@@ -40,6 +40,32 @@
       }
     }
 
+    /* Mobile Theme Variables */
+    :root {
+      --m-bg: #f8fafc;
+      --m-surface: #ffffff;
+      --m-surface-elevated: #f1f5f9;
+      --m-border: #e2e8f0;
+      --m-text: #1e293b;
+      --m-text-secondary: #64748b;
+      --m-text-muted: #94a3b8;
+      --m-accent: #0891b2;
+      --m-local: #10b981;
+      --m-road: #f59e0b;
+      --m-flight: #0891b2;
+      --m-star: #f59e0b;
+    }
+
+    body.mobile-dark {
+      --m-bg: #0f172a;
+      --m-surface: #1e293b;
+      --m-surface-elevated: #334155;
+      --m-border: rgba(255,255,255,0.1);
+      --m-text: #f1f5f9;
+      --m-text-secondary: #94a3b8;
+      --m-text-muted: #64748b;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -251,6 +277,17 @@
 
     .filter-chip:hover {
       opacity: 1;
+    }
+
+    .filter-chip.star-only {
+      padding: 8px 12px;
+      font-size: 16px;
+      line-height: 1;
+      justify-content: center;
+    }
+
+    .filter-chip.star-only:not(.active) {
+      opacity: 0.7;
     }
 
     .chip-dot {
@@ -516,35 +553,775 @@
     }
 
     @media (max-width: 768px) {
-      body {
+      body:not(.mobile-view) {
         padding: 16px;
       }
 
-      .stats-grid {
+      body:not(.mobile-view) .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .filter-bar {
+      body:not(.mobile-view) .filter-bar {
         flex-direction: column;
         align-items: stretch;
       }
 
-      .search-input {
+      body:not(.mobile-view) .search-input {
         width: 100%;
       }
 
-      .table-container {
+      body:not(.mobile-view) .table-container {
         overflow-x: auto;
       }
 
-      .table-header,
-      .table-row {
+      body:not(.mobile-view) .table-header,
+      body:not(.mobile-view) .table-row {
         min-width: 1080px;
+      }
+    }
+
+    /* === MOBILE VIEW STYLES === */
+    .mobile-container { display: none; }
+    body.mobile-view .container { display: none; }
+    body.mobile-view .mobile-container { display: block; }
+    body.mobile-view { padding: 0; background: var(--m-bg); }
+
+    .mobile-container {
+      max-width: 100%;
+      min-height: 100vh;
+      background: var(--m-bg);
+      color: var(--m-text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding-bottom: 80px;
+    }
+
+    /* Mobile Header */
+    .m-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--m-surface);
+      border-bottom: 1px solid var(--m-border);
+      padding: 12px 16px 0;
+    }
+
+    .m-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .m-header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .m-header-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #0891b2, #0d9488);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .m-header-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--m-text);
+      line-height: 1.2;
+    }
+
+    .m-header-subtitle {
+      font-size: 11px;
+      color: var(--m-text-secondary);
+    }
+
+    .m-theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--m-surface-elevated);
+      border: 1px solid var(--m-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .m-theme-toggle:active { transform: scale(0.95); }
+
+    /* Mobile Search */
+    .m-search-container {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .m-search-input {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px 0 40px;
+      border-radius: 10px;
+      border: 1px solid var(--m-border);
+      background: var(--m-surface-elevated);
+      font-size: 14px;
+      color: var(--m-text);
+      font-family: inherit;
+    }
+
+    .m-search-input::placeholder { color: var(--m-text-muted); }
+    .m-search-input:focus { outline: none; border-color: var(--m-accent); }
+
+    .m-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--m-text-muted);
+      pointer-events: none;
+    }
+
+    /* Mobile Stats */
+    .m-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .m-stat-card {
+      background: var(--m-surface-elevated);
+      border: 1px solid var(--m-border);
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    .m-stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .m-stat-card.local .m-stat-value { color: var(--m-local); }
+    .m-stat-card.road .m-stat-value { color: var(--m-road); }
+    .m-stat-card.flight .m-stat-value { color: var(--m-flight); }
+
+    .m-stat-label {
+      font-size: 9px;
+      color: var(--m-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* Mobile Month Pills */
+    .m-month-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin: 0 -16px;
+      padding-left: 16px;
+      padding-right: 16px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .m-month-pills::-webkit-scrollbar { display: none; }
+
+    .m-month-pill {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      background: var(--m-surface-elevated);
+      color: var(--m-text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .m-month-pill.active {
+      background: var(--m-accent);
+      color: white;
+      border-color: var(--m-accent);
+    }
+
+    /* Mobile Filter Bar */
+    .m-filter-bar {
+      position: sticky;
+      top: 178px;
+      z-index: 90;
+      background: var(--m-surface);
+      border-bottom: 1px solid var(--m-border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .m-filter-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--m-surface-elevated);
+      color: var(--m-text-secondary);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .m-filter-chip.active {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--m-star);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .m-filter-chip svg { width: 14px; height: 14px; }
+
+    .m-filter-count {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--m-text-muted);
+    }
+
+    /* Mobile Tournament Cards */
+    .m-tournament-list {
+      padding: 16px;
+    }
+
+    .m-month-section {
+      margin-bottom: 24px;
+    }
+
+    .m-month-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .m-month-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--m-text);
+    }
+
+    .m-month-count {
+      font-size: 12px;
+      color: var(--m-text-muted);
+    }
+
+    .m-tournament-card {
+      background: var(--m-surface);
+      border: 1px solid var(--m-border);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: transform 0.15s;
+    }
+
+    .m-tournament-card:active { transform: scale(0.98); }
+
+    .m-card-header {
+      padding: 12px 12px 8px;
+    }
+
+    .m-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .m-card-title {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .m-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--m-text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .m-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .m-type-badge {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .m-type-badge.national { color: var(--m-accent); }
+    .m-type-badge.sectional { color: var(--m-text-muted); }
+
+    .m-format-badge {
+      font-size: 11px;
+      color: var(--m-text-muted);
+    }
+
+    .m-star-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--m-surface-elevated);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      color: var(--m-text-muted);
+    }
+
+    .m-star-btn.starred {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--m-star);
+    }
+
+    .m-star-btn:active { transform: scale(0.9); }
+
+    /* Card Details Grid */
+    .m-card-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      padding: 0 12px 10px;
+    }
+
+    .m-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .m-detail-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--m-text-muted);
+      flex-shrink: 0;
+    }
+
+    .m-detail-text {
+      font-size: 12px;
+      color: var(--m-text);
+    }
+
+    .m-distance-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .m-distance-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .m-distance-dot.local { background: var(--m-local); }
+    .m-distance-dot.road { background: var(--m-road); }
+    .m-distance-dot.flight { background: var(--m-flight); }
+
+    .m-distance-text { font-weight: 500; }
+    .m-distance-text.local { color: var(--m-local); }
+    .m-distance-text.road { color: var(--m-road); }
+    .m-distance-text.flight { color: var(--m-flight); }
+
+    /* Card Footer (Venue) */
+    .m-card-footer {
+      padding: 8px 12px;
+      background: var(--m-surface-elevated);
+      border-top: 1px solid var(--m-border);
+    }
+
+    .m-venue-text {
+      font-size: 11px;
+      color: var(--m-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Bottom Sheet Filters */
+    .m-filter-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .m-filter-overlay.open { opacity: 1; visibility: visible; }
+
+    .m-filter-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--m-surface);
+      border-radius: 20px 20px 0 0;
+      max-height: 75vh;
+      overflow-y: auto;
+      z-index: 201;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .m-filter-overlay.open .m-filter-sheet { transform: translateY(0); }
+
+    .m-sheet-handle {
+      width: 36px;
+      height: 4px;
+      background: var(--m-border);
+      border-radius: 2px;
+      margin: 12px auto;
+    }
+
+    .m-sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px 16px;
+    }
+
+    .m-sheet-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--m-text);
+    }
+
+    .m-sheet-reset {
+      font-size: 14px;
+      color: var(--m-accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .m-sheet-section {
+      padding: 0 20px 20px;
+    }
+
+    .m-sheet-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--m-text-muted);
+      margin-bottom: 10px;
+    }
+
+    .m-sheet-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .m-sheet-option {
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--m-surface-elevated);
+      color: var(--m-text-secondary);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .m-sheet-option.active {
+      background: var(--m-accent);
+      color: white;
+      border-color: var(--m-accent);
+    }
+
+    .m-sheet-apply {
+      margin: 0 20px 20px;
+      padding: 14px;
+      width: calc(100% - 40px);
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0891b2, #0d9488);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .m-sheet-apply:active { transform: scale(0.98); }
+
+    /* Mobile Empty State */
+    .m-empty-state {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .m-empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .m-empty-text { color: var(--m-text-muted); font-size: 14px; }
+
+    /* Mobile Footer */
+    .m-footer {
+      padding: 24px 16px;
+      text-align: center;
+      border-top: 1px solid var(--m-border);
+      margin-top: 16px;
+    }
+
+    .m-footer-text {
+      font-size: 11px;
+      color: var(--m-text-muted);
+      margin-bottom: 12px;
+    }
+
+    .m-view-toggle {
+      font-size: 13px;
+      color: var(--m-accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Scroll to top FAB */
+    .m-scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--m-surface);
+      border: 1px solid var(--m-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      transition: transform 0.2s;
+    }
+
+    .m-scroll-top:active { transform: scale(0.95); }
+    .m-scroll-top svg { color: var(--m-text-secondary); }
+
+    /* Desktop view toggle link */
+    .desktop-mobile-toggle {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .desktop-mobile-toggle {
+        display: inline-block;
+        margin-left: 16px;
+        font-size: 12px;
+        color: var(--m-accent);
+        cursor: pointer;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Mobile View Container -->
+  <div class="mobile-container" id="mobile-view">
+    <!-- Mobile Header -->
+    <header class="m-header">
+      <div class="m-header-top">
+        <div class="m-header-brand">
+          <div class="m-header-logo">🎾</div>
+          <div>
+            <div class="m-header-title">USTA Girls U12/U14</div>
+            <div class="m-header-subtitle">NorCal + National 2026</div>
+          </div>
+        </div>
+        <button class="m-theme-toggle" id="m-theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+
+      <!-- Search -->
+      <div class="m-search-container">
+        <svg class="m-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input type="text" class="m-search-input" id="m-search" placeholder="Search tournaments or cities...">
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="m-stats-grid">
+        <div class="m-stat-card">
+          <div class="m-stat-value" id="m-stat-total">0</div>
+          <div class="m-stat-label">Total</div>
+        </div>
+        <div class="m-stat-card local">
+          <div class="m-stat-value" id="m-stat-local">0</div>
+          <div class="m-stat-label">Local</div>
+        </div>
+        <div class="m-stat-card road">
+          <div class="m-stat-value" id="m-stat-road">0</div>
+          <div class="m-stat-label">Road Trip</div>
+        </div>
+        <div class="m-stat-card flight">
+          <div class="m-stat-value" id="m-stat-flight">0</div>
+          <div class="m-stat-label">Flight</div>
+        </div>
+      </div>
+
+      <!-- Month Pills -->
+      <div class="m-month-pills" id="m-month-pills">
+        <button class="m-month-pill active" data-month="all">All Months</button>
+        <button class="m-month-pill" data-month="January">Jan</button>
+        <button class="m-month-pill" data-month="February">Feb</button>
+        <button class="m-month-pill" data-month="March">Mar</button>
+        <button class="m-month-pill" data-month="April">Apr</button>
+        <button class="m-month-pill" data-month="May">May</button>
+        <button class="m-month-pill" data-month="June">Jun</button>
+        <button class="m-month-pill" data-month="July">Jul</button>
+        <button class="m-month-pill" data-month="August">Aug</button>
+        <button class="m-month-pill" data-month="September">Sep</button>
+        <button class="m-month-pill" data-month="October">Oct</button>
+        <button class="m-month-pill" data-month="November">Nov</button>
+        <button class="m-month-pill" data-month="December">Dec</button>
+      </div>
+    </header>
+
+    <!-- Filter Bar -->
+    <div class="m-filter-bar">
+      <button class="m-filter-chip" id="m-chip-starred">
+        <span>☆</span>
+        <span>Starred</span>
+      </button>
+      <button class="m-filter-chip" id="m-chip-filters">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+        </svg>
+        <span>Filters</span>
+        <span class="m-filter-dot" id="m-filter-dot" style="display:none;width:6px;height:6px;background:var(--m-accent);border-radius:50%;"></span>
+      </button>
+      <span class="m-filter-count" id="m-filter-count">0 tournaments</span>
+    </div>
+
+    <!-- Tournament List -->
+    <div class="m-tournament-list" id="m-tournament-list">
+      <!-- Cards rendered by JavaScript -->
+    </div>
+
+    <!-- Footer -->
+    <div class="m-footer">
+      <div class="m-footer-text">Distances from Los Altos, CA</div>
+      <button class="m-view-toggle" id="m-desktop-toggle">View Desktop Version</button>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="m-scroll-top" id="m-scroll-top" style="display:none;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+
+    <!-- Filter Bottom Sheet -->
+    <div class="m-filter-overlay" id="m-filter-overlay">
+      <div class="m-filter-sheet">
+        <div class="m-sheet-handle"></div>
+        <div class="m-sheet-header">
+          <span class="m-sheet-title">Filters</span>
+          <button class="m-sheet-reset" id="m-filter-reset">Reset</button>
+        </div>
+
+        <div class="m-sheet-section">
+          <div class="m-sheet-label">Type</div>
+          <div class="m-sheet-options">
+            <button class="m-sheet-option active" data-filter="type" data-value="all">All</button>
+            <button class="m-sheet-option active" data-filter="type" data-value="sectional">Sectional</button>
+            <button class="m-sheet-option active" data-filter="type" data-value="national">National</button>
+          </div>
+        </div>
+
+        <div class="m-sheet-section">
+          <div class="m-sheet-label">Distance</div>
+          <div class="m-sheet-options">
+            <button class="m-sheet-option active" data-filter="distance" data-value="all">All</button>
+            <button class="m-sheet-option active" data-filter="distance" data-value="local">Local (≤75mi)</button>
+            <button class="m-sheet-option active" data-filter="distance" data-value="road">Road Trip</button>
+            <button class="m-sheet-option active" data-filter="distance" data-value="flight">Flight</button>
+          </div>
+        </div>
+
+        <div class="m-sheet-section">
+          <div class="m-sheet-label">Format</div>
+          <div class="m-sheet-options">
+            <button class="m-sheet-option active" data-filter="format" data-value="all">All</button>
+            <button class="m-sheet-option active" data-filter="format" data-value="S">Singles</button>
+            <button class="m-sheet-option active" data-filter="format" data-value="D">Doubles</button>
+          </div>
+        </div>
+
+        <div class="m-sheet-section">
+          <div class="m-sheet-label">Level</div>
+          <div class="m-sheet-options">
+            <button class="m-sheet-option active" data-filter="level" data-value="all">All</button>
+            <button class="m-sheet-option active" data-filter="level" data-value="1">L1</button>
+            <button class="m-sheet-option active" data-filter="level" data-value="2">L2</button>
+            <button class="m-sheet-option active" data-filter="level" data-value="3">L3</button>
+            <button class="m-sheet-option active" data-filter="level" data-value="4">L4</button>
+            <button class="m-sheet-option active" data-filter="level" data-value="5">L5</button>
+            <button class="m-sheet-option" data-filter="level" data-value="6">L6</button>
+          </div>
+        </div>
+
+        <div class="m-sheet-section">
+          <div class="m-sheet-label">Age</div>
+          <div class="m-sheet-options">
+            <button class="m-sheet-option active" data-filter="age" data-value="all">All</button>
+            <button class="m-sheet-option active" data-filter="age" data-value="u12">U12</button>
+            <button class="m-sheet-option active" data-filter="age" data-value="u14">U14</button>
+          </div>
+        </div>
+
+        <div class="m-sheet-section">
+          <div class="m-sheet-label">Other</div>
+          <div class="m-sheet-options">
+            <button class="m-sheet-option" data-filter="past" data-value="show">Show Past</button>
+          </div>
+        </div>
+
+        <button class="m-sheet-apply" id="m-filter-apply">Show Tournaments</button>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <!-- Header -->
     <div class="header">
@@ -589,13 +1366,17 @@
           <input type="text" id="search" class="search-input" placeholder="Search tournaments...">
         </div>
         <div class="filter-chips">
-          <div class="filter-chip active" id="chip-format-sd">
-            <span class="chip-dot" style="background: #0ea5e9"></span>
-            Singles + Doubles
+          <div class="filter-chip active" id="chip-format-s">
+            <span class="chip-dot" style="background: #22c55e"></span>
+            Singles
           </div>
           <div class="filter-chip active" id="chip-format-d">
             <span class="chip-dot" style="background: #f97316"></span>
             Doubles
+          </div>
+          <div class="filter-chip active" id="chip-format-sd">
+            <span class="chip-dot" style="background: #0ea5e9"></span>
+            Singles + Doubles
           </div>
           <div class="divider"></div>
           <div class="filter-chip" id="chip-past">
@@ -606,10 +1387,7 @@
       </div>
 
       <div class="filter-chips">
-        <div class="filter-chip" id="chip-starred">
-          <span class="chip-dot" style="background: #f59e0b"></span>
-          Starred
-        </div>
+        <div class="filter-chip star-only" id="chip-starred" title="Starred" aria-label="Starred">★</div>
         <div class="divider"></div>
         <div class="filter-chip active" id="chip-sectional">
           <span class="chip-dot" style="background: #64748b"></span>
@@ -667,10 +1445,6 @@
           Flight
         </div>
         <div class="divider"></div>
-        <div class="filter-chip active" id="chip-format-s">
-          <span class="chip-dot" style="background: #22c55e"></span>
-          Singles
-        </div>
       </div>
     </div>
 
