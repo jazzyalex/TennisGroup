@@ -2973,7 +2973,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
           else if (value === 'SD') isActive = mobileFilters.formatSD;
           else if (value === 'D') isActive = mobileFilters.formatD;
         } else if (filter === 'level') {
-          if (value === 'all') isActive = mobileFilters.level1 && mobileFilters.level2 && mobileFilters.level3 && mobileFilters.level4 && mobileFilters.level5;
+          if (value === 'all') isActive = mobileFilters.level1 && mobileFilters.level2 && mobileFilters.level3 && mobileFilters.level4 && mobileFilters.level5 && !mobileFilters.level6;
           else isActive = mobileFilters['level' + value];
         } else if (filter === 'age') {
           if (value === 'all') isActive = mobileFilters.u12 && mobileFilters.u14;
