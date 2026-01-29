@@ -819,7 +819,7 @@
 
     @media (max-width: 768px) {
       .hero {
-        padding: 32px 16px;
+        padding: 24px 16px;
       }
 
       /* Hide decorative court pattern on mobile */
@@ -834,7 +834,7 @@
 
       .hero-content {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
         text-align: left;
       }
 
@@ -843,34 +843,46 @@
         height: 48px;
       }
 
-      /* Compact and stylish mobile player card */
+      /* ========================================
+         MOBILE PLAYER CARD - Premium Design
+         ======================================== */
       .player-card {
         width: 100%;
         max-width: 100%;
-        padding: 12px 14px 14px;
-        border-radius: 12px;
+        padding: 0;
+        border-radius: 14px;
+        border-top: none;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
       }
 
+      /* Header with green accent background */
       .player-card__header {
-        margin-bottom: 10px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #e5e5e5;
+        background: linear-gradient(135deg, var(--player-green) 0%, var(--player-green-soft) 100%);
+        padding: 12px 14px;
+        margin-bottom: 0;
+        flex-direction: row;
+        align-items: center;
       }
 
       .player-card__name {
-        font-size: 1.05rem;
+        font-size: 1rem;
+        color: #ffffff;
       }
 
       .player-card__updated {
-        font-size: 0.7rem;
-        margin-top: 2px;
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.75);
+        margin-top: 0;
       }
 
-      /* 3-column grid for first row - more compact */
+      /* Metrics container */
       .player-card__metrics {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6px;
-        margin-bottom: 6px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: #e8e8e8;
+        margin-bottom: 1px;
       }
 
       /* Remove the full-width span for Rankings */
@@ -878,21 +890,30 @@
         grid-column: auto;
       }
 
-      .player-card__metric,
-      .player-card__panel {
-        padding: 8px 6px;
-        border-radius: 8px;
+      /* Individual metric boxes - equal height */
+      .player-card__metric {
+        background: #ffffff;
+        border: none;
+        border-radius: 0;
+        padding: 10px 8px;
+        display: flex;
+        flex-direction: column;
+        min-height: 68px;
       }
 
       .player-card__metric-title {
         font-size: 0.6rem;
-        margin-bottom: 4px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--player-green);
+        margin-bottom: auto;
       }
 
-      /* Compact UTR display */
+      /* UTR styling */
       .player-card__utr-values {
-        gap: 2px;
-        margin-top: 4px;
+        gap: 1px;
+        margin-top: 6px;
       }
 
       .player-card__utr-row {
@@ -900,77 +921,118 @@
       }
 
       .player-card__utr-label {
-        font-size: 0.6rem;
-        min-width: 8px;
+        font-size: 0.55rem;
+        min-width: 10px;
+        color: #888;
       }
 
       .player-card__utr-value {
-        font-size: 0.95rem;
+        font-size: 1rem;
+        font-weight: 700;
       }
 
       .player-card__utr-value-small {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        font-weight: 600;
       }
 
-      /* Compact WTN */
+      .player-card__trend {
+        font-size: 0.75rem;
+      }
+
+      /* WTN styling */
       .player-card__metric-value {
-        font-size: 0.95rem;
-        margin-top: 2px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-top: 6px;
       }
 
-      /* Compact Rankings */
+      /* Rankings styling */
       .player-card__ranking-list {
-        margin-top: 4px;
-        gap: 2px;
-        font-size: 0.8rem;
+        margin-top: 6px;
+        gap: 1px;
       }
 
       .player-card__ranking-row {
-        font-size: 0.8rem;
-        gap: 4px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        gap: 6px;
       }
 
       .player-card__ranking-row span:first-child {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
+        color: #888;
+        min-width: 32px;
       }
 
-      /* 2-column bottom row - more balanced */
+      /* Bottom section */
       .player-card__bottom {
-        grid-template-columns: 1.3fr 0.7fr;
-        gap: 6px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: #e8e8e8;
         margin-top: 0;
       }
 
+      .player-card__panel {
+        background: #ffffff;
+        border: none;
+        border-radius: 0;
+        padding: 10px 8px;
+        min-height: 64px;
+      }
+
       .player-card__panel-title {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--player-green);
         margin-bottom: 6px;
       }
 
-      /* Compact USTA Points */
+      /* USTA Points grid */
       .player-card__points-grid {
-        gap: 4px;
+        display: flex;
+        justify-content: space-between;
+        gap: 2px;
+      }
+
+      .player-card__points-grid > span {
+        flex: 1;
+        text-align: center;
+      }
+
+      .player-card__points-grid > span:first-child {
+        text-align: left;
       }
 
       .player-card__points-label {
-        font-size: 0.58rem;
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #888;
       }
 
       .player-card__points-value {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
+        font-weight: 700;
         margin-top: 2px;
       }
 
-      /* Compact TR */
+      /* TR grid */
       .player-card__tr-grid {
-        gap: 3px;
+        gap: 1px;
       }
 
       .player-card__tr-row {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
+        font-weight: 700;
       }
 
       .player-card__tr-row span:first-child {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
+        color: #888;
       }
 
       .main {
