@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alexis Malakhova - Player Profile | Tennis Tracker</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
+  <link rel="icon" type="image/x-icon" href="assets/tennis-report/favicon-32thin.ico">
+  <link rel="shortcut icon" href="assets/tennis-report/favicon-32thin.ico">
+  <link rel="apple-touch-icon" href="assets/tennis-report/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Alexis Malakhova - Player Profile">
+  <meta property="og:description" content="USTA points breakdown, rankings, and tournament results for junior tennis player">
+  <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --court-green: #2d5a27;
+      --court-green-light: #3d7a37;
+      --player-green: #2d5a2d;
+      --player-green-soft: #3d6f3d;
+      --player-light: #e8f5e9;
+      --player-border: #c8e6c9;
+      --accent-cyan: #0891b2;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      --status-critical: #ef4444;
+      --status-critical-bg: #fef2f2;
+      --status-warning: #f59e0b;
+      --status-warning-bg: #fffbeb;
+      --status-safe: #10b981;
+      --status-safe-bg: #ecfdf5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --border: rgba(255,255,255,0.08);
+        --border-subtle: rgba(255,255,255,0.04);
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+        --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        --status-critical-bg: rgba(239, 68, 68, 0.15);
+        --status-warning-bg: rgba(245, 158, 11, 0.15);
+        --status-safe-bg: rgba(16, 185, 129, 0.15);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .logo-link:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-link svg {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .player-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .player-subtitle {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .header-updated {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      text-align: right;
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow);
+    }
+
+    .stat-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-value-small {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--player-green);
+    }
+
+    .stat-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .stat-trend {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 3px;
+    }
+
+    .stat-trend--up { color: var(--accent-emerald); }
+    .stat-trend--down { color: var(--status-critical); }
+
+    @media (prefers-color-scheme: dark) {
+      .stat-value, .stat-value-small {
+        color: var(--accent-emerald);
+      }
+    }
+
+    /* Section */
+    .section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .section-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--player-green);
+      color: #ffffff;
+    }
+
+    /* Expiration Alert */
+    .expiration-alert {
+      padding: 12px 16px;
+      background: linear-gradient(90deg, #fef3c7 0%, #fef9c3 100%);
+      border-left: 4px solid var(--accent-amber);
+      border-radius: 8px;
+      color: #92400e;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .expiration-alert {
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.15) 100%);
+        color: #fbbf24;
+      }
+    }
+
+    /* Timeline */
+    .timeline-container {
+      overflow-x: auto;
+      padding: 8px 0;
+      margin: 0 -8px;
+      scrollbar-width: thin;
+    }
+
+    .timeline {
+      display: flex;
+      align-items: flex-end;
+      min-width: 100%;
+      padding: 0 8px;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      bottom: 34px;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .timeline-marker {
+      flex: 1;
+      min-width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 4px;
+      cursor: default;
+      transition: transform 0.15s ease;
+    }
+
+    .timeline-marker:hover {
+      transform: scale(1.05);
+    }
+
+    .timeline-points {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--player-green);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .timeline-points {
+        color: var(--accent-emerald);
+      }
+    }
+
+    .timeline-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid var(--bg-secondary);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-dot--critical { background: var(--status-critical); }
+    .timeline-dot--warning { background: var(--status-warning); }
+    .timeline-dot--safe { background: var(--status-safe); }
+
+    .timeline-days {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .timeline-date {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+
+    /* Events List */
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .event-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: all 0.15s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--card-shadow);
+    }
+
+    .event-card--critical {
+      background: var(--status-critical-bg);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .event-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .event-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .event-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .event-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .event-badge--l3 { background: #dbeafe; color: #1e40af; }
+    .event-badge--l4 { background: #d1fae5; color: #065f46; }
+    .event-badge--l5 { background: #fef3c7; color: #92400e; }
+    .event-badge--l6 { background: #e0e7ff; color: #3730a3; }
+
+    @media (prefers-color-scheme: dark) {
+      .event-badge--l3 { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+      .event-badge--l4 { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+      .event-badge--l5 { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+      .event-badge--l6 { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+    }
+
+    .event-points {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .event-points-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--player-green);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .event-points-value {
+        color: var(--accent-emerald);
+      }
+    }
+
+    .event-points-label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .event-expiration {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .event-expiration-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .event-expiration-indicator--critical { background: var(--status-critical); }
+    .event-expiration-indicator--warning { background: var(--status-warning); }
+    .event-expiration-indicator--safe { background: var(--status-safe); }
+
+    .event-matches {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+
+    .event-matches-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .match {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 0.8rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .match:last-child {
+      border-bottom: none;
+    }
+
+    .match-round {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      min-width: 45px;
+    }
+
+    .match-outcome {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .match-outcome--W {
+      background: var(--status-safe-bg);
+      color: var(--status-safe);
+    }
+
+    .match-outcome--L {
+      background: var(--status-critical-bg);
+      color: var(--status-critical);
+    }
+
+    .match-opponent {
+      flex: 1;
+      color: var(--text-primary);
+    }
+
+    .match-score {
+      font-variant-numeric: tabular-nums;
+      color: var(--text-secondary);
+    }
+
+    /* External Links */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 16px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .link-card:hover {
+      background: var(--player-green);
+      color: #ffffff;
+      border-color: var(--player-green);
+      transform: translateY(-2px);
+    }
+
+    .link-card svg {
+      width: 18px;
+      height: 18px;
+      opacity: 0.7;
+    }
+
+    .link-card:hover svg {
+      opacity: 1;
+    }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .page-footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    .page-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 12px 16px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .header-left {
+        width: 100%;
+      }
+
+      .logo-link svg {
+        width: 40px;
+        height: 40px;
+      }
+
+      .player-name {
+        font-size: 1.2rem;
+      }
+
+      .player-subtitle {
+        font-size: 0.7rem;
+      }
+
+      .header-updated {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        font-size: 0.65rem;
+      }
+
+      .main {
+        padding: 16px;
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .stat-card {
+        padding: 10px 8px;
+      }
+
+      .stat-label {
+        font-size: 0.6rem;
+      }
+
+      .stat-value {
+        font-size: 1rem;
+      }
+
+      .stat-value-small {
+        font-size: 0.8rem;
+      }
+
+      .section {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .section-title {
+        font-size: 1rem;
+      }
+
+      .timeline-marker {
+        min-width: 70px;
+      }
+
+      .timeline-points {
+        font-size: 0.8rem;
+      }
+
+      .event-card {
+        padding: 12px;
+      }
+
+      .event-name {
+        font-size: 0.85rem;
+      }
+
+      .event-points-value {
+        font-size: 1rem;
+      }
+
+      .match {
+        font-size: 0.75rem;
+        gap: 8px;
+      }
+
+      .match-round {
+        min-width: 38px;
+        font-size: 0.65rem;
+      }
+
+      .links-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .link-card {
+        padding: 12px 16px;
+      }
+    }
+
+    /* Very small screens */
+    @media (max-width: 480px) {
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .event-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .event-points {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="page-header">
+    <div class="header-content">
+      <div class="header-left">
+        <a href="index.html" class="logo-link" title="Back to Tennis Tracker">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </a>
+        <div class="header-title">
+          <h1 class="player-name" data-player-name>Alexis Malakhova</h1>
+          <span class="player-subtitle">Girls' 12 National Standings List</span>
+        </div>
+      </div>
+      <span class="header-updated" data-updated>Updated Jan 28, 2026</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Hero Stats -->
+    <section class="hero-stats" aria-label="Key statistics">
+      <div class="stat-card">
+        <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
+          <div class="stat-label">UTR Singles</div>
+          <div class="stat-value" data-stat="utr-singles">4.07<span class="stat-trend">→</span></div>
+        </a>
+      </div>
+      <div class="stat-card">
+        <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
+          <div class="stat-label">UTR Doubles</div>
+          <div class="stat-value-small" data-stat="utr-doubles">4.00</div>
+        </a>
+      </div>
+      <div class="stat-card">
+        <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener">
+          <div class="stat-label">WTN</div>
+          <div class="stat-value" data-stat="wtn">33.81</div>
+        </a>
+      </div>
+      <div class="stat-card">
+        <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+          <div class="stat-label">National Rank</div>
+          <div class="stat-value" data-stat="rank-national">#705</div>
+        </a>
+      </div>
+      <div class="stat-card">
+        <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+          <div class="stat-label">NorCal Rank</div>
+          <div class="stat-value" data-stat="rank-section">#42</div>
+        </a>
+      </div>
+      <div class="stat-card">
+        <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+          <div class="stat-label">Total Points</div>
+          <div class="stat-value" data-stat="total-points">627</div>
+          <div class="stat-sub">622 S / 5 D</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Points Expiration Overview -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Points Expiration Overview</h2>
+      </div>
+
+      <!-- Expiration Alert -->
+      <div class="expiration-alert" data-alert>
+        75 points expiring soon (23 days)
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline-container">
+        <div class="timeline" data-timeline>
+          <!-- Timeline markers populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Singles Events -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Singles Events (Best 6)</h2>
+        <span class="section-badge" data-singles-total>622 pts</span>
+      </div>
+      <div class="events-list" data-singles-events>
+        <!-- Events populated by JS -->
+      </div>
+    </section>
+
+    <!-- Doubles Events -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Doubles Events</h2>
+        <span class="section-badge" data-doubles-total>5 pts</span>
+      </div>
+      <div class="events-list" data-doubles-events>
+        <!-- Events populated by JS -->
+      </div>
+    </section>
+
+    <!-- External Links -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">External Profiles</h2>
+      </div>
+      <div class="links-grid">
+        <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" class="link-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          USTA Profile
+        </a>
+        <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" class="link-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          UTR Profile
+        </a>
+        <a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener" class="link-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          TennisRecruiting
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Data sourced from <a href="https://www.usta.com" target="_blank" rel="noopener">USTA</a>. Updated Jan 28, 2026.</p>
+    <p><a href="index.html">← Back to Tennis Tracker</a></p>
+  </footer>
+
+  <script>
+    // Player data (injected by Python script in production)
+    const PLAYER_DATA = {
+      name: "Alexis Malakhova",
+      uaid: "2018710796",
+      lastUpdated: "2026-01-28",
+      totals: {
+        singles: 622,
+        doubles: 5,
+        doublesRaw: 32,
+        total: 627
+      },
+      alert: {
+        show: true,
+        points: 75,
+        days: 23
+      },
+      events: {
+        singles: [
+          {
+            name: "FDT Level 4 Junior 12s & 14s Singles Excellence",
+            level: "L4",
+            division: "Girls' 12 & under singles",
+            points: 173,
+            startDate: "2026-01-10",
+            endDate: "2026-01-18",
+            expiresDate: "2027-01-17",
+            daysRemaining: 352,
+            urgency: "safe",
+            matches: [
+              { round: "P-F", opponent: "Margaret DORAN", outcome: "L", score: "0-4 2-4" },
+              { round: "P-SF", opponent: "Camille KUNKEL", outcome: "W", score: "Wd [inj]" },
+              { round: "QF", opponent: "Ziva GADGIL", outcome: "L", score: "0-6 0-6" },
+              { round: "R16", opponent: "Elise WATT", outcome: "W", score: "6-3 7-5" },
+              { round: "R32", opponent: "Summer STIRITZ", outcome: "W", score: "Wo [ill]" }
+            ]
+          },
+          {
+            name: "FDT Level 5 Junior 12s, 16s & 18s Singles Championship",
+            level: "L5",
+            division: "Girls' 12 & under singles",
+            points: 105,
+            startDate: "2025-11-15",
+            endDate: "2025-11-16",
+            expiresDate: "2026-11-15",
+            daysRemaining: 289,
+            urgency: "safe",
+            matches: [
+              { round: "QF", opponent: "Valentina KUKEEVA", outcome: "L", score: "2-4 1-4" },
+              { round: "R16", opponent: "Ellie WANG", outcome: "W", score: "4-0 4-1" },
+              { round: "R32", opponent: "Angela LIU", outcome: "W", score: "5-3 4-1" }
+            ]
+          },
+          {
+            name: "L5 BG14 Super Series at Solano CC",
+            level: "L5",
+            division: "Girls' 14 & under singles",
+            points: 98,
+            startDate: "2025-07-05",
+            endDate: "2025-07-06",
+            expiresDate: "2026-07-05",
+            daysRemaining: 156,
+            urgency: "safe",
+            matches: [
+              { round: "PL-F", opponent: "Leila LYONS", outcome: "L", score: "1-6 6-1 3-6" },
+              { round: "E-SF", opponent: "Anna YANG", outcome: "L", score: "3-6 4-6" },
+              { round: "E-QF", opponent: "Jennifer CHEN", outcome: "W", score: "3-6 7-6(2) 7-5" }
+            ]
+          },
+          {
+            name: "NPT Level 6 Junior Open",
+            level: "L6",
+            division: "Girls' 14 & under singles",
+            points: 95,
+            startDate: "2025-04-26",
+            endDate: "2025-04-27",
+            expiresDate: "2026-04-26",
+            daysRemaining: 86,
+            urgency: "safe",
+            matches: [
+              { round: "F", opponent: "Dana YEHIA", outcome: "W", score: "2-6 6-2 [10-3]" },
+              { round: "SF", opponent: "Ashna SAXENA", outcome: "W", score: "7-5 6-2" },
+              { round: "QF", opponent: "Sadie COHEN", outcome: "W", score: "6-1 6-0" },
+              { round: "R16", opponent: "Gayathri KOTIKALAPUDI", outcome: "W", score: "6-0 6-1" }
+            ]
+          },
+          {
+            name: "Santa Cruz Level 4 Juniors 12s Excellence",
+            level: "L4",
+            division: "Girls' 12 & under singles",
+            points: 76,
+            startDate: "2025-05-24",
+            endDate: "2025-05-26",
+            expiresDate: "2026-05-25",
+            daysRemaining: 115,
+            urgency: "safe",
+            matches: [
+              { round: "C-R16", opponent: "Emma LAI", outcome: "L", score: "2-6 3-6" },
+              { round: "R16", opponent: "Alexi LABRECQUE", outcome: "L", score: "3-6 4-6" },
+              { round: "R32", opponent: "Elina YAMAMOTO", outcome: "W", score: "6-4 6-2" }
+            ]
+          },
+          {
+            name: "NPT Level 6 Junior Open",
+            level: "L6",
+            division: "Girls' 12 & under singles",
+            points: 75,
+            startDate: "2025-02-22",
+            endDate: "2025-02-23",
+            expiresDate: "2026-02-22",
+            daysRemaining: 23,
+            urgency: "critical",
+            matches: [
+              { round: "F", opponent: "Madeleine CHAN", outcome: "W", score: "6-1 3-6 [12-10]" },
+              { round: "SF", opponent: "Hana KERN", outcome: "W", score: "6-0 6-1" },
+              { round: "QF", opponent: "Taeata TONG", outcome: "W", score: "6-3 6-4" },
+              { round: "R16", opponent: "BYE", outcome: "W", score: "N/A" }
+            ]
+          }
+        ],
+        doubles: [
+          {
+            name: "MTA Manteca Level 3 Doubles Sectionals",
+            level: "L3",
+            division: "Girls' 12 & under doubles",
+            points: 4,
+            startDate: "2025-09-20",
+            endDate: "2025-09-21",
+            expiresDate: "2026-09-20",
+            daysRemaining: 233,
+            urgency: "safe",
+            matches: [
+              { round: "W-F", opponent: "MAY SUN / Bella WU", outcome: "W", score: "5-4(3) 4-2", partner: "Zaira GADGIL" },
+              { round: "W-SF", opponent: "BYE", outcome: "W", score: "N/A", partner: "Zaira GADGIL" },
+              { round: "E-QF", opponent: "Zhiyan DUAN / Camille KUNKEL", outcome: "L", score: "0-4 1-4", partner: "Zaira GADGIL" }
+            ]
+          }
+        ]
+      }
+    };
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    }
+
+    function renderTimeline() {
+      const container = document.querySelector('[data-timeline]');
+      if (!container) return;
+
+      // Combine all events and sort by days remaining
+      const allEvents = [...PLAYER_DATA.events.singles, ...PLAYER_DATA.events.doubles]
+        .sort((a, b) => a.daysRemaining - b.daysRemaining);
+
+      const html = allEvents.map(event => `
+        <div class="timeline-marker" title="${event.name}">
+          <div class="timeline-points">${event.points}</div>
+          <div class="timeline-dot timeline-dot--${event.urgency}"></div>
+          <div class="timeline-days">${event.daysRemaining}d</div>
+          <div class="timeline-date">${formatDate(event.expiresDate).split(',')[0]}</div>
+        </div>
+      `).join('');
+
+      container.innerHTML = html;
+    }
+
+    function renderEvents(events, selector, isDoubles = false) {
+      const container = document.querySelector(selector);
+      if (!container) return;
+
+      if (!events || events.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 16px;">No events</p>';
+        return;
+      }
+
+      // Sort by days remaining (soonest first)
+      const sorted = [...events].sort((a, b) => a.daysRemaining - b.daysRemaining);
+
+      const html = sorted.map(event => {
+        const criticalClass = event.urgency === 'critical' ? 'event-card--critical' : '';
+        const levelClass = `event-badge--${event.level.toLowerCase()}`;
+
+        const matchesHtml = event.matches && event.matches.length > 0 ? `
+          <div class="event-matches">
+            <div class="event-matches-title">Match Results</div>
+            ${event.matches.map(match => `
+              <div class="match">
+                <span class="match-round">${match.round}</span>
+                <span class="match-outcome match-outcome--${match.outcome}">${match.outcome}</span>
+                <span class="match-opponent">${match.opponent}${match.partner ? ` (w/ ${match.partner})` : ''}</span>
+                <span class="match-score">${match.score}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : '';
+
+        return `
+          <div class="event-card ${criticalClass}">
+            <div class="event-header">
+              <div class="event-info">
+                <div class="event-name">${event.name}</div>
+                <div class="event-meta">
+                  <span class="event-badge ${levelClass}">${event.level}</span>
+                  <span>${event.division}</span>
+                  <span>${formatDate(event.startDate)} - ${formatDate(event.endDate)}</span>
+                </div>
+              </div>
+              <div class="event-points">
+                <span class="event-points-value">${event.points}</span>
+                <span class="event-points-label">pts</span>
+              </div>
+            </div>
+            <div class="event-expiration">
+              <span class="event-expiration-indicator event-expiration-indicator--${event.urgency}"></span>
+              <span>Expires ${formatDate(event.expiresDate)} (${event.daysRemaining} days)</span>
+            </div>
+            ${matchesHtml}
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = html;
+    }
+
+    function updateAlert() {
+      const alert = document.querySelector('[data-alert]');
+      if (alert && PLAYER_DATA.alert.show) {
+        alert.textContent = `${PLAYER_DATA.alert.points} points expiring soon (${PLAYER_DATA.alert.days} days)`;
+        alert.style.display = 'block';
+      } else if (alert) {
+        alert.style.display = 'none';
+      }
+    }
+
+    function updateTotals() {
+      const singlesTotal = document.querySelector('[data-singles-total]');
+      const doublesTotal = document.querySelector('[data-doubles-total]');
+
+      if (singlesTotal) singlesTotal.textContent = `${PLAYER_DATA.totals.singles} pts`;
+      if (doublesTotal) doublesTotal.textContent = `${PLAYER_DATA.totals.doubles} pts`;
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateAlert();
+      updateTotals();
+      renderTimeline();
+      renderEvents(PLAYER_DATA.events.singles, '[data-singles-events]');
+      renderEvents(PLAYER_DATA.events.doubles, '[data-doubles-events]', true);
+    });
+  </script>
+</body>
+</html>
