@@ -476,7 +476,54 @@
       font-size: 0.75rem;
       font-weight: 600;
       color: var(--text-secondary);
+    }
+
+    .section-actions {
       margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .favorites-filter-toggle {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+    }
+
+    .favorites-filter-toggle:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .favorites-filter-toggle:focus-visible {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 3px;
+    }
+
+    .favorites-filter-toggle svg {
+      width: 16px;
+      height: 16px;
+      fill: transparent;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .favorites-filter-toggle.is-active {
+      color: var(--accent-amber);
+      border-color: rgba(245, 158, 11, 0.55);
+    }
+
+    .favorites-filter-toggle.is-active svg {
+      fill: currentColor;
     }
 
     /* Tournament Cards Grid */
@@ -610,17 +657,75 @@
 	      margin-bottom: 16px;
 	    }
 
-	    .card-actions {
-	      display: flex;
-	      align-items: center;
-	      gap: 8px;
-	    }
+		    .card-actions {
+		      display: flex;
+		      align-items: center;
+		      gap: 8px;
+		    }
 
-	    .card-usta-link {
-	      display: inline-flex;
-	      align-items: center;
-	      justify-content: center;
-	      padding: 6px 10px;
+        .card-favorite-toggle {
+          width: 30px;
+          height: 30px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: var(--bg-tertiary);
+          color: var(--text-muted);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+          user-select: none;
+          flex-shrink: 0;
+        }
+
+        .card-favorite-toggle:hover {
+          opacity: 0.95;
+          transform: translateY(-1px);
+        }
+
+        .card-favorite-toggle:focus-visible {
+          outline: 2px solid var(--accent-cyan);
+          outline-offset: 3px;
+        }
+
+        .card-favorite-toggle svg {
+          width: 16px;
+          height: 16px;
+          fill: transparent;
+          stroke: currentColor;
+          stroke-width: 2;
+        }
+
+        .tournament-card[data-favorited="true"] .card-favorite-toggle {
+          color: var(--accent-amber);
+          border-color: rgba(245, 158, 11, 0.55);
+        }
+
+        .tournament-card[data-favorited="true"] .card-favorite-toggle svg {
+          fill: currentColor;
+        }
+
+        .tournament-card.is-hidden-by-favorite-filter {
+          display: none;
+        }
+
+        .calendar-card .card-favorite-toggle {
+          background: rgba(255, 255, 255, 0.16);
+          border-color: rgba(255, 255, 255, 0.22);
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .calendar-card[data-favorited="true"] .card-favorite-toggle {
+          color: #fbbf24;
+          border-color: rgba(251, 191, 36, 0.6);
+        }
+
+		    .card-usta-link {
+		      display: inline-flex;
+		      align-items: center;
+		      justify-content: center;
+		      padding: 6px 10px;
 	      border-radius: 999px;
 	      border: 1px solid var(--border);
 	      background: var(--bg-tertiary);
@@ -1197,12 +1302,19 @@
   <!-- Main Content -->
   <main class="main">
     <!-- Active Reports Section -->
-    <section>
-      <div class="section-header">
-        <div class="section-bar"></div>
-        <h2 class="section-title">Tournament Reports</h2>
-        <span class="section-badge">5 Tournaments</span>
-      </div>
+	    <section data-tournament-section="reports">
+	      <div class="section-header">
+	        <div class="section-bar"></div>
+	        <h2 class="section-title">Tournament Reports</h2>
+	        <div class="section-actions">
+	          <span class="section-badge" data-tournament-count>5 Tournaments</span>
+	          <button class="favorites-filter-toggle" type="button" aria-label="Show starred tournaments only" title="Show starred tournaments only" aria-pressed="false" data-favorites-filter-toggle>
+	            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	            </svg>
+	          </button>
+	        </div>
+	      </div>
 
       <div class="calendar-row">
         <!-- USTA NorCal & National Calendar -->
@@ -1241,12 +1353,12 @@
                 </span>
               </div>
             </div>
-            <div class="card-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
+	            <div class="card-arrow">
+	              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M5 12h14M12 5l7 7-7 7"/>
+	              </svg>
+	            </div>
+	          </div>
           <h3 class="card-title">USTA Girls U12/U14 Tournaments 2026</h3>
           <p class="card-description">NorCal + National calendar (U12/U14 + Level filters) with distances from Los Altos, CA.</p>
         </a>
@@ -1264,12 +1376,17 @@
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
               Report
-            </span>
-            <div class="card-actions">
-              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/B725D590-9D1A-4061-BAD6-DD7BD89100E0">USTA</span>
-              <div class="card-arrow">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/B725D590-9D1A-4061-BAD6-DD7BD89100E0">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </div>
             </div>
@@ -1313,12 +1430,17 @@
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
               Report
-            </span>
-            <div class="card-actions">
-              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198">USTA</span>
-              <div class="card-arrow">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </div>
             </div>
@@ -1362,12 +1484,17 @@
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
 	              Report
-	            </span>
-	            <div class="card-actions">
-	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/eventDetails/AADD3F01-D779-44EB-8F33-3CD79A3018F1/EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC">USTA</span>
-	              <div class="card-arrow">
-	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+		            </span>
+		            <div class="card-actions">
+		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		                </svg>
+		              </span>
+		              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/eventDetails/AADD3F01-D779-44EB-8F33-3CD79A3018F1/EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC">USTA</span>
+		              <div class="card-arrow">
+		                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                  <path d="M5 12h14M12 5l7 7-7 7"/>
 	                </svg>
 	              </div>
 	            </div>
@@ -1411,12 +1538,17 @@
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
 	              Report
-	            </span>
-	            <div class="card-actions">
-	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/Competitions/hrtacademiadetenis/Tournaments/eventDetails/8EA9DB88-B9C3-4C1A-8723-1F34CB0F6AC9/DE61D14F-E7EF-422D-B6FE-02B60085BA88">USTA</span>
-	              <div class="card-arrow">
-	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+		            </span>
+		            <div class="card-actions">
+		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		                </svg>
+		              </span>
+		              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/Competitions/hrtacademiadetenis/Tournaments/eventDetails/8EA9DB88-B9C3-4C1A-8723-1F34CB0F6AC9/DE61D14F-E7EF-422D-B6FE-02B60085BA88">USTA</span>
+		              <div class="card-arrow">
+		                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                  <path d="M5 12h14M12 5l7 7-7 7"/>
 	                </svg>
 	              </div>
 	            </div>
@@ -1460,12 +1592,17 @@
                 <line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
 	              Report
-	            </span>
-	            <div class="card-actions">
-	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/eventDetails/EAD0497A-559C-4765-9253-2BF848B4FC4A/3E14E70A-3EB5-4A9F-88AF-0053C061C79C">USTA</span>
-	              <div class="card-arrow">
-	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+		            </span>
+		            <div class="card-actions">
+		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		                </svg>
+		              </span>
+		              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/eventDetails/EAD0497A-559C-4765-9253-2BF848B4FC4A/3E14E70A-3EB5-4A9F-88AF-0053C061C79C">USTA</span>
+		              <div class="card-arrow">
+		                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                  <path d="M5 12h14M12 5l7 7-7 7"/>
 	                </svg>
 	              </div>
 	            </div>
@@ -1530,23 +1667,154 @@
   </footer>
 
   <script>
-    document.querySelectorAll('.card-usta-link').forEach((el) => {
-      const openUsta = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const url = el.getAttribute('data-usta-url');
-        if (!url) return;
-        window.open(url, '_blank', 'noopener');
-      };
+	    document.querySelectorAll('.card-usta-link').forEach((el) => {
+	      const openUsta = (event) => {
+	        event.preventDefault();
+	        event.stopPropagation();
+	        const url = el.getAttribute('data-usta-url');
+	        if (!url) return;
+	        window.open(url, '_blank', 'noopener');
+	      };
 
       el.addEventListener('click', openUsta);
-      el.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') openUsta(event);
-      });
-    });
+	      el.addEventListener('keydown', (event) => {
+	        if (event.key === 'Enter' || event.key === ' ') openUsta(event);
+	      });
+	    });
 
-    // Player expiration alert data (injected by Python script)
-    window.PLAYER_ALERT_DATA = {"show_alert": true, "critical_points": 75, "min_days_remaining": 23};
+	    (function initTournamentFavorites() {
+	      const STORAGE_KEY = 'tennis_tracker_starred_tournaments_v1';
+	      const FILTER_KEY = 'tennis_tracker_starred_filter_v1';
+
+	      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
+	      if (!tournamentSection) return;
+
+	      const countEl = tournamentSection.querySelector('[data-tournament-count]');
+	      const filterToggle = tournamentSection.querySelector('[data-favorites-filter-toggle]');
+	      const cardsRoot = tournamentSection.querySelector('.cards-grid') || tournamentSection;
+	      const cards = Array.from(cardsRoot.querySelectorAll('a.tournament-card'));
+
+	      const getTournamentId = (card) => {
+	        const explicit = card.getAttribute('data-tournament-id');
+	        if (explicit) return explicit;
+	        const href = card.getAttribute('href') || '';
+	        if (href) return href;
+	        const title = card.querySelector('.card-title')?.textContent?.trim() || '';
+	        return title || 'unknown';
+	      };
+
+	      const loadStarred = () => {
+	        try {
+	          const raw = window.localStorage.getItem(STORAGE_KEY);
+	          if (!raw) return new Set();
+	          const parsed = JSON.parse(raw);
+	          if (!Array.isArray(parsed)) return new Set();
+	          return new Set(parsed.filter((x) => typeof x === 'string'));
+	        } catch {
+	          return new Set();
+	        }
+	      };
+
+	      const saveStarred = (starredSet) => {
+	        try {
+	          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(starredSet)));
+	        } catch {
+	          // ignore
+	        }
+	      };
+
+	      const readFilterEnabled = () => {
+	        try {
+	          return window.localStorage.getItem(FILTER_KEY) === '1';
+	        } catch {
+	          return false;
+	        }
+	      };
+
+	      const writeFilterEnabled = (enabled) => {
+	        try {
+	          window.localStorage.setItem(FILTER_KEY, enabled ? '1' : '0');
+	        } catch {
+	          // ignore
+	        }
+	      };
+
+	      const starred = loadStarred();
+
+	      const updateCardUi = (card) => {
+	        const id = getTournamentId(card);
+	        const isFavorited = starred.has(id);
+	        card.setAttribute('data-favorited', isFavorited ? 'true' : 'false');
+	        const toggle = card.querySelector('[data-favorite-toggle]');
+	        if (toggle) toggle.setAttribute('aria-pressed', isFavorited ? 'true' : 'false');
+	      };
+
+	      const updateCount = () => {
+	        if (!countEl) return;
+	        const total = cards.length;
+	        const visible = cards.filter((card) => !card.classList.contains('is-hidden-by-favorite-filter')).length;
+	        const filterOn = filterToggle?.classList.contains('is-active');
+	        const shown = filterOn ? visible : total;
+	        countEl.textContent = `${shown} Tournaments`;
+	      };
+
+	      const applyFilter = () => {
+	        const filterOn = filterToggle?.classList.contains('is-active');
+	        cards.forEach((card) => {
+	          if (!filterOn) {
+	            card.classList.remove('is-hidden-by-favorite-filter');
+	            return;
+	          }
+	          const id = getTournamentId(card);
+	          card.classList.toggle('is-hidden-by-favorite-filter', !starred.has(id));
+	        });
+	        updateCount();
+	      };
+
+	      const toggleFavorite = (card) => {
+	        const id = getTournamentId(card);
+	        if (starred.has(id)) starred.delete(id);
+	        else starred.add(id);
+	        saveStarred(starred);
+	        updateCardUi(card);
+	        applyFilter();
+	      };
+
+	      cards.forEach((card) => {
+	        updateCardUi(card);
+	        const toggle = card.querySelector('[data-favorite-toggle]');
+	        if (!toggle) return;
+
+	        const handleToggle = (event) => {
+	          event.preventDefault();
+	          event.stopPropagation();
+	          toggleFavorite(card);
+	        };
+
+	        toggle.addEventListener('click', handleToggle);
+	        toggle.addEventListener('keydown', (event) => {
+	          if (event.key === 'Enter' || event.key === ' ') handleToggle(event);
+	        });
+	      });
+
+	      if (filterToggle) {
+	        const filterEnabled = readFilterEnabled();
+	        filterToggle.classList.toggle('is-active', filterEnabled);
+	        filterToggle.setAttribute('aria-pressed', filterEnabled ? 'true' : 'false');
+	        filterToggle.addEventListener('click', () => {
+	          const enabled = !filterToggle.classList.contains('is-active');
+	          filterToggle.classList.toggle('is-active', enabled);
+	          filterToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+	          writeFilterEnabled(enabled);
+	          applyFilter();
+	        });
+	      }
+
+	      applyFilter();
+	    })();
+
+	    // Player expiration alert data (injected by Python script)
+	    window.PLAYER_ALERT_DATA = {"show_alert": true, "critical_points": 75, "min_days_remaining": 23};
 
     function updateExpirationAlert() {
       const data = window.PLAYER_ALERT_DATA;
