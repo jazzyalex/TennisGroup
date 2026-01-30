@@ -1318,7 +1318,7 @@
               <span class="player-card__utr-row">
                 <span class="player-card__utr-label">S</span>
                 <span class="player-card__utr-value" data-player-stat="utr">4.07</span>
-                <span class="player-card__trend player-card__trend--up">↑</span>
+                <span class="player-card__trend">→</span>
               </span>
               <span class="player-card__utr-row">
                 <span class="player-card__utr-label">D</span>
@@ -1330,7 +1330,7 @@
             <div class="player-card__metric-title">WTN</div>
             <div class="player-card__metric-value">
               <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.81</a>
-              <span class="player-card__trend player-card__trend--down" aria-label="Trending down">↓</span>
+              <span class="player-card__trend" aria-label="No change">→</span>
             </div>
           </div>
           <div class="player-card__metric">
@@ -1789,11 +1789,7 @@
     }
 
     // Points Data (injected by Python script)
-    window.PLAYER_POINTS_DATA = {"singles": 622, "doubles": 5, "doubles_raw": 33, "total": 627, "last_updated": "2026-01-28", "expiration_alert": {"show_alert": true, "critical_points": 75, "min_days_remaining": 23}, "events": {"singles": [{"name": "FDT Level 4 Junior 12s & 14s Singles Excellence", "level": "L4", "division": "Girls' 12 & under singles", "points": 173, "start_date": "2026-01-10", "end_date": "2026-01-18", "expires_date": "2027-01-17", "days_remaining": 352, "urgency": "safe"}, {"name": "FDT Level 5 Junior 12s, 16s & 18s Singles Championship", "level": "L5", "division": "Girls' 12 & under singles", "points": 105, "start_date": "2025-11-15", "end_date": "2025-11-16", "expires_date": "2026-11-15", "days_remaining": 289, "urgency": "safe"}, {"name": "L5 BG14 Super Series at Solano Community College", "level": "L5", "division": "Girls' 14 & under singles", "points": 98, "start_date": "2025-07-05", "end_date": "2025-07-06", "expires_date": "2026-07-05", "days_remaining": 156, "urgency": "safe"}, {"name": "Santa Cruz Level 4 Juniors 12s Excellence @ La Madrona Athletic Club - Singles & Doubles", "level": "L4", "division": "Girls' 12 & under singles", "points": 76, "start_date": "2025-05-24", "end_date": "2025-05-26", "expires_date": "2026-05-25", "days_remaining": 115, "urgency": "safe"}, {"name": "NPT Level 6 Junior Open", "level": "L6", "division": "Girls' 14 & under singles", "points": 95, "start_date": "2025-04-26", "end_date": "2025-04-27", "expires_date": "2026-04-26", "days_remaining": 86, "urgency": "safe"}, {"name": "NPT Level 6 Junior Open", "level": "L6", "division": "Girls' 12 & under singles", "points": 75, "start_date": "2025-02-22", "end_date": "2025-02-23", "expires_date": "2026-02-22", "days_remaining": 23, "urgency": "critical"}], "doubles": [{"name": "MTA Manteca Level 3 Junior Boys and Girls 12 & 14s Doubles Sectionals", "level": "L3", "division": "Girls' 12 & under doubles", "points": 4, "start_date": "2025-09-20", "end_date": "2025-09-21", "expires_date": "2026-09-20", "days_remaining": 233, "urgency": "safe"}]}}
-
-    // Render points breakdown
-    function renderPointsBreakdown() {
-      if (!window.PLAYER_POINTS_DATA) return;
+    window.PLAYER_POINTS_DATA = {"singles": 622, "doubles": 5, "doubles_raw": 32, "total": 627, "last_updated": "2026-01-28", "expiration_alert": {"show_alert": true, "critical_points": 75, "min_days_remaining": 23}, "events": {"singles": [{"name": "FDT Level 4 Junior 12s & 14s Singles Excellence", "level": "L4", "division": "Girls' 12 & under singles", "points": 173, "start_date": "2026-01-10", "end_date": "2026-01-18", "expires_date": "2027-01-17", "days_remaining": 352, "urgency": "safe"}, {"name": "FDT Level 5 Junior 12s, 16s & 18s Singles Championship", "level": "L5", "division": "Girls' 12 & under singles", "points": 105, "start_date": "2025-11-15", "end_date": "2025-11-16", "expires_date": "2026-11-15", "days_remaining": 289, "urgency": "safe"}, {"name": "L5 BG14 Super Series at Solano Community College", "level": "L5", "division": "Girls' 14 & under singles", "points": 98, "start_date": "2025-07-05", "end_date": "2025-07-06", "expires_date": "2026-07-05", "days_remaining": 156, "urgency": "safe"}, {"name": "Santa Cruz Level 4 Juniors 12s Excellence @ La Madrona Athletic Club - Singles & Doubles", "level": "L4", "division": "Girls' 12 & under singles", "points": 76, "start_date": "2025-05-24", "end_date": "2025-05-26", "expires_date": "2026-05-25", "days_remaining": 115, "urgency": "safe"}, {"name": "NPT Level 6 Junior Open", "level": "L6", "division": "Girls' 14 & under singles", "points": 95, "start_date": "2025-04-26", "end_date": "2025-04-27", "expires_date": "2026-04-26", "days_remaining": 86, "urgency": "safe"}, {"name": "NPT Level 6 Junior Open", "level": "L6", "division": "Girls' 12 & under singles", "points": 75, "start_date": "2025-02-22", "end_date": "2025-02-23", "expires_date": "2026-02-22", "days_remaining": 23, "urgency": "critical"}], "doubles": [{"name": "MTA Manteca Level 3 Junior Boys and Girls 12 & 14s Doubles Sectionals", "level": "L3", "division": "Girls' 12 & under doubles", "points": 4, "start_date": "2025-09-20", "end_date": "2025-09-21", "expires_date": "2026-09-20", "days_remaining": 233, "urgency": "safe"}]}}
 
       const data = window.PLAYER_POINTS_DATA;
 
