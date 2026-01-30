@@ -399,43 +399,243 @@
       font-weight: 500;
     }
 
-    /* Expiration Alert - Simple banner style */
+    /* Expiration Alert */
     .player-card__alert {
       margin-top: 10px;
-      padding: 10px 14px;
-      background: linear-gradient(90deg, #fef3c7 0%, #fef9c3 100%);
-      border-left: 4px solid #f59e0b;
-      border-radius: 8px;
-      color: #92400e;
+      padding: 10px 12px;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #856404;
       font-size: 0.75rem;
       font-weight: 600;
     }
 
-    /* View Profile Link */
-    .player-card__profile-link {
+    .player-card__alert-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: #ffc107;
+    }
+
+    /* Breakdown Toggle Button */
+    .player-card__breakdown-toggle {
       margin-top: 10px;
+      width: 100%;
+      padding: 10px 12px;
+      background: #f8f9fa;
+      border: 1px solid #eaeaea;
+      border-radius: 10px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 12px;
-      background: var(--player-green);
-      border-radius: 10px;
-      color: #ffffff;
-      font-size: 0.8rem;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--player-green);
+      font-size: 0.75rem;
       font-weight: 600;
-      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .player-card__breakdown-toggle:hover {
+      background-color: #f0f4f0;
+      border-color: #d4e5d4;
+    }
+
+    .player-card__breakdown-toggle[aria-expanded="true"] .player-card__breakdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .player-card__breakdown-icon {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    /* Breakdown Content */
+    .player-card__breakdown {
+      margin-top: 10px;
+      padding: 12px;
+      background: #fafbfc;
+      border: 1px solid #eaeaea;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .player-card__timeline-section,
+    .player-card__events-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .player-card__timeline-title,
+    .player-card__events-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--player-green);
+    }
+
+    /* Timeline Visualization */
+    .player-card__timeline {
+      background: #ffffff;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px;
+      overflow-x: auto;
+    }
+
+    .player-card__timeline-track {
+      display: flex;
+      align-items: center;
+      min-width: 100%;
+      height: 60px;
+      position: relative;
+    }
+
+    .player-card__timeline-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, #d1d5db 0%, #d1d5db 100%);
+      transform: translateY(-50%);
+    }
+
+    .player-card__timeline-markers {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .player-card__timeline-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex: 0 0 auto;
+    }
+
+    .player-card__timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .player-card__timeline-dot--critical {
+      background: #ef4444;
+    }
+
+    .player-card__timeline-dot--warning {
+      background: #f59e0b;
+    }
+
+    .player-card__timeline-dot--safe {
+      background: #10b981;
+    }
+
+    .player-card__timeline-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--player-green);
+    }
+
+    .player-card__timeline-days {
+      font-size: 0.55rem;
+      color: var(--player-text-muted);
+    }
+
+    /* Events List */
+    .player-card__events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .player-card__event {
+      background: #ffffff;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       transition: all 0.15s ease;
     }
 
-    .player-card__profile-link:hover {
-      background: var(--player-green-soft);
-      transform: translateY(-1px);
+    .player-card__event:hover {
+      background-color: #f9fafb;
+      border-color: #d1d5db;
     }
 
-    .player-card__profile-link svg {
-      width: 16px;
-      height: 16px;
+    .player-card__event--critical {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    .player-card__event-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .player-card__event-indicator--critical {
+      background: #ef4444;
+    }
+
+    .player-card__event-indicator--warning {
+      background: #f59e0b;
+    }
+
+    .player-card__event-indicator--safe {
+      background: #10b981;
+    }
+
+    .player-card__event-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .player-card__event-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--player-text);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-card__event-meta {
+      font-size: 0.6rem;
+      color: var(--player-text-muted);
+    }
+
+    .player-card__event-points {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--player-green);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__event-warning {
+      color: #d97706;
+      font-size: 0.7rem;
     }
 
 
@@ -1181,15 +1381,44 @@
         </section>
         <!-- Expiration Alert (shown only if points expiring soon) -->
         <div class="player-card__alert" data-expiration-alert style="display: none;">
-          <span data-expiration-text>75 points expiring soon (23 days)</span>
-        </div>
-        <!-- View Full Profile Link -->
-        <a href="player.html" class="player-card__profile-link">
-          View Full Profile
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+          <svg class="player-card__alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
           </svg>
-        </a>
+          <span data-expiration-text>75 points expiring soon (24 days)</span>
+        </div>
+        <!-- Points Breakdown Toggle -->
+        <button class="player-card__breakdown-toggle" data-breakdown-toggle aria-expanded="false">
+          <span data-breakdown-toggle-text>View Points Breakdown</span>
+          <svg class="player-card__breakdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <!-- Points Breakdown (hidden by default) -->
+        <div class="player-card__breakdown" data-breakdown-content style="display: none;">
+          <!-- Timeline -->
+          <div class="player-card__timeline-section">
+            <div class="player-card__timeline-title">Points Expiration Timeline</div>
+            <div class="player-card__timeline" data-timeline>
+              <!-- Timeline will be populated by JavaScript -->
+            </div>
+          </div>
+          <!-- Singles Events -->
+          <div class="player-card__events-section">
+            <div class="player-card__events-title">Singles Events (Best 6) — <span data-singles-total>622</span> pts</div>
+            <div class="player-card__events-list" data-singles-events>
+              <!-- Events will be populated by JavaScript -->
+            </div>
+          </div>
+          <!-- Doubles Events -->
+          <div class="player-card__events-section">
+            <div class="player-card__events-title">Doubles Events (Best 6) — <span data-doubles-total>32</span> pts raw (<span data-doubles-weighted>5</span> pts weighted)</div>
+            <div class="player-card__events-list" data-doubles-events>
+              <!-- Events will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
       </aside>
     </div>
   </section>
@@ -1199,10 +1428,10 @@
     <!-- Active Reports Section -->
     <section>
       <div class="section-header">
-        <div class="section-bar"></div>
-        <h2 class="section-title">Tournament Reports</h2>
-        <span class="section-badge">5 Tournaments</span>
-      </div>
+	        <div class="section-bar"></div>
+	        <h2 class="section-title">Tournament Reports</h2>
+	        <span class="section-badge">6 Reports</span>
+	      </div>
 
       <div class="calendar-row">
         <!-- USTA NorCal & National Calendar -->
@@ -1545,26 +1774,128 @@
       });
     });
 
-    // Player expiration alert data (injected by Python script)
-    window.PLAYER_ALERT_DATA = {"show_alert": true, "critical_points": 75, "min_days_remaining": 23};
+    // Points Breakdown Toggle
+    const breakdownToggle = document.querySelector('[data-breakdown-toggle]');
+    const breakdownContent = document.querySelector('[data-breakdown-content]');
+    const breakdownToggleText = document.querySelector('[data-breakdown-toggle-text]');
 
-    function updateExpirationAlert() {
-      const data = window.PLAYER_ALERT_DATA;
+    if (breakdownToggle && breakdownContent) {
+      breakdownToggle.addEventListener('click', () => {
+        const isExpanded = breakdownToggle.getAttribute('aria-expanded') === 'true';
+        breakdownToggle.setAttribute('aria-expanded', !isExpanded);
+        breakdownContent.style.display = isExpanded ? 'none' : 'flex';
+        if (breakdownToggleText) {
+          breakdownToggleText.textContent = isExpanded ? 'View Points Breakdown' : 'Hide Points Breakdown';
+        }
+      });
+    }
+
+    // Points Data (injected by Python script)
+    window.PLAYER_POINTS_DATA = {"singles": 622, "doubles": 5, "doubles_raw": 32, "total": 627, "last_updated": "2026-01-28", "expiration_alert": {"show_alert": true, "critical_points": 75, "min_days_remaining": 23}, "events": {"singles": [{"name": "FDT Level 4 Junior 12s & 14s Singles Excellence", "level": "L4", "division": "Girls' 12 & under singles", "points": 173, "start_date": "2026-01-10", "end_date": "2026-01-18", "expires_date": "2027-01-17", "days_remaining": 352, "urgency": "safe"}, {"name": "FDT Level 5 Junior 12s, 16s & 18s Singles Championship", "level": "L5", "division": "Girls' 12 & under singles", "points": 105, "start_date": "2025-11-15", "end_date": "2025-11-16", "expires_date": "2026-11-15", "days_remaining": 289, "urgency": "safe"}, {"name": "L5 BG14 Super Series at Solano Community College", "level": "L5", "division": "Girls' 14 & under singles", "points": 98, "start_date": "2025-07-05", "end_date": "2025-07-06", "expires_date": "2026-07-05", "days_remaining": 156, "urgency": "safe"}, {"name": "Santa Cruz Level 4 Juniors 12s Excellence @ La Madrona Athletic Club - Singles & Doubles", "level": "L4", "division": "Girls' 12 & under singles", "points": 76, "start_date": "2025-05-24", "end_date": "2025-05-26", "expires_date": "2026-05-25", "days_remaining": 115, "urgency": "safe"}, {"name": "NPT Level 6 Junior Open", "level": "L6", "division": "Girls' 14 & under singles", "points": 95, "start_date": "2025-04-26", "end_date": "2025-04-27", "expires_date": "2026-04-26", "days_remaining": 86, "urgency": "safe"}, {"name": "NPT Level 6 Junior Open", "level": "L6", "division": "Girls' 12 & under singles", "points": 75, "start_date": "2025-02-22", "end_date": "2025-02-23", "expires_date": "2026-02-22", "days_remaining": 23, "urgency": "critical"}], "doubles": [{"name": "MTA Manteca Level 3 Junior Boys and Girls 12 & 14s Doubles Sectionals", "level": "L3", "division": "Girls' 12 & under doubles", "points": 4, "start_date": "2025-09-20", "end_date": "2025-09-21", "expires_date": "2026-09-20", "days_remaining": 233, "urgency": "safe"}]}};
+
+    function renderPointsBreakdown() {
+      const data = window.PLAYER_POINTS_DATA;
       if (!data) return;
 
+      // Show/hide expiration alert
       const alert = document.querySelector('[data-expiration-alert]');
       const alertText = document.querySelector('[data-expiration-text]');
-      if (data.show_alert && alert && alertText) {
-        alertText.textContent = `${data.critical_points} points expiring soon (${data.min_days_remaining} days)`;
-        alert.style.display = 'block';
+      if (data.expiration_alert && data.expiration_alert.show_alert) {
+        if (alert && alertText) {
+          alertText.textContent = `${data.expiration_alert.critical_points} points expiring soon (${data.expiration_alert.min_days_remaining} days)`;
+          alert.style.display = 'flex';
+        }
       }
+
+      // Update totals
+      const singlesTotal = document.querySelector('[data-singles-total]');
+      const doublesTotal = document.querySelector('[data-doubles-total]');
+      const doublesWeighted = document.querySelector('[data-doubles-weighted]');
+      if (singlesTotal) singlesTotal.textContent = data.singles;
+      if (doublesTotal) doublesTotal.textContent = data.doubles_raw || data.doubles;
+      if (doublesWeighted) doublesWeighted.textContent = data.doubles;
+
+      // Render timeline
+      renderTimeline(data.events.singles);
+
+      // Render events
+      renderEvents(data.events.singles, '[data-singles-events]');
+      renderEvents(data.events.doubles, '[data-doubles-events]');
+    }
+
+    function renderTimeline(events) {
+      const container = document.querySelector('[data-timeline]');
+      if (!container || !events || events.length === 0) return;
+
+      // Sort by expiration date (soonest first)
+      const sorted = [...events].sort((a, b) => a.days_remaining - b.days_remaining);
+      const maxEvents = 6; // Show up to 6 events on timeline
+      const toShow = sorted.slice(0, maxEvents);
+
+      const html = `
+        <div class="player-card__timeline-track">
+          <div class="player-card__timeline-line"></div>
+          <div class="player-card__timeline-markers">
+            ${toShow.map(event => `
+              <div class="player-card__timeline-marker" title="${event.name}">
+                <div class="player-card__timeline-dot player-card__timeline-dot--${event.urgency}"></div>
+                <div class="player-card__timeline-label">${event.points}</div>
+                <div class="player-card__timeline-days">${event.days_remaining}d</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      container.innerHTML = html;
+    }
+
+    function renderEvents(events, selector) {
+      const container = document.querySelector(selector);
+      if (!container || !events || events.length === 0) {
+        if (container) container.innerHTML = '<div class="player-card__event-meta" style="padding: 8px;">No events</div>';
+        return;
+      }
+
+      // Sort by expiration date (soonest first)
+      const sorted = [...events].sort((a, b) => a.days_remaining - b.days_remaining);
+
+      const html = sorted.map(event => {
+        const criticalClass = event.urgency === 'critical' ? 'player-card__event--critical' : '';
+        const warningIcon = event.urgency === 'critical' ? `
+          <svg class="player-card__event-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        ` : '';
+
+        return `
+          <div class="player-card__event ${criticalClass}">
+            <div class="player-card__event-indicator player-card__event-indicator--${event.urgency}"></div>
+            <div class="player-card__event-details">
+              <div class="player-card__event-name">${event.name}</div>
+              <div class="player-card__event-meta">${formatDate(event.end_date)} → Expires ${formatDate(event.expires_date)} (${event.days_remaining} days)</div>
+            </div>
+            <div class="player-card__event-points">${event.points} pts</div>
+            ${warningIcon}
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = html;
+    }
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
     }
 
     // Initialize on page load
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateExpirationAlert);
+      document.addEventListener('DOMContentLoaded', renderPointsBreakdown);
     } else {
-      updateExpirationAlert();
+      renderPointsBreakdown();
     }
   </script>
 </body>
