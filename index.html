@@ -1666,34 +1666,43 @@
     </div>
   </footer>
 
-  <script>
-	    document.querySelectorAll('.card-usta-link').forEach((el) => {
-	      const openUsta = (event) => {
+	  <script>
+	    function setupUstaLinkDelegation() {
+	      const openUsta = (target, event) => {
 	        event.preventDefault();
 	        event.stopPropagation();
-	        const url = el.getAttribute('data-usta-url');
+	        const url = target.getAttribute('data-usta-url');
 	        if (!url) return;
 	        window.open(url, '_blank', 'noopener');
 	      };
-
-      el.addEventListener('click', openUsta);
-	      el.addEventListener('keydown', (event) => {
-	        if (event.key === 'Enter' || event.key === ' ') openUsta(event);
+	
+	      document.addEventListener('click', (event) => {
+	        const el = event.target?.closest?.('.card-usta-link');
+	        if (!el) return;
+	        openUsta(el, event);
 	      });
-	    });
-
-	    (function initTournamentFavorites() {
+	
+	      document.addEventListener('keydown', (event) => {
+	        if (event.key !== 'Enter' && event.key !== ' ') return;
+	        const el = event.target?.closest?.('.card-usta-link');
+	        if (!el) return;
+	        openUsta(el, event);
+	      });
+	    }
+	
+	    function initTournamentFavorites() {
 	      const STORAGE_KEY = 'tennis_tracker_starred_tournaments_v1';
 	      const FILTER_KEY = 'tennis_tracker_starred_filter_v1';
-
+	
 	      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
-	      if (!tournamentSection) return;
-
+	      if (!tournamentSection) return null;
+	
 	      const countEl = tournamentSection.querySelector('[data-tournament-count]');
 	      const filterToggle = tournamentSection.querySelector('[data-favorites-filter-toggle]');
 	      const cardsRoot = tournamentSection.querySelector('.cards-grid') || tournamentSection;
-	      const cards = Array.from(cardsRoot.querySelectorAll('a.tournament-card'));
-
+	
+	      const getCards = () => Array.from(cardsRoot.querySelectorAll('a.tournament-card'));
+	
 	      const getTournamentId = (card) => {
 	        const explicit = card.getAttribute('data-tournament-id');
 	        if (explicit) return explicit;
@@ -1702,7 +1711,7 @@
 	        const title = card.querySelector('.card-title')?.textContent?.trim() || '';
 	        return title || 'unknown';
 	      };
-
+	
 	      const loadStarred = () => {
 	        try {
 	          const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -1714,7 +1723,7 @@
 	          return new Set();
 	        }
 	      };
-
+	
 	      const saveStarred = (starredSet) => {
 	        try {
 	          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(starredSet)));
@@ -1722,7 +1731,7 @@
 	          // ignore
 	        }
 	      };
-
+	
 	      const readFilterEnabled = () => {
 	        try {
 	          return window.localStorage.getItem(FILTER_KEY) === '1';
@@ -1730,7 +1739,7 @@
 	          return false;
 	        }
 	      };
-
+	
 	      const writeFilterEnabled = (enabled) => {
 	        try {
 	          window.localStorage.setItem(FILTER_KEY, enabled ? '1' : '0');
@@ -1738,9 +1747,9 @@
 	          // ignore
 	        }
 	      };
-
+	
 	      const starred = loadStarred();
-
+	
 	      const updateCardUi = (card) => {
 	        const id = getTournamentId(card);
 	        const isFavorited = starred.has(id);
@@ -1748,19 +1757,24 @@
 	        const toggle = card.querySelector('[data-favorite-toggle]');
 	        if (toggle) toggle.setAttribute('aria-pressed', isFavorited ? 'true' : 'false');
 	      };
-
+	
+	      const updateAllCardsUi = () => {
+	        getCards().forEach(updateCardUi);
+	      };
+	
 	      const updateCount = () => {
 	        if (!countEl) return;
+	        const cards = getCards();
 	        const total = cards.length;
 	        const visible = cards.filter((card) => !card.classList.contains('is-hidden-by-favorite-filter')).length;
 	        const filterOn = filterToggle?.classList.contains('is-active');
 	        const shown = filterOn ? visible : total;
 	        countEl.textContent = `${shown} Tournaments`;
 	      };
-
+	
 	      const applyFilter = () => {
 	        const filterOn = filterToggle?.classList.contains('is-active');
-	        cards.forEach((card) => {
+	        getCards().forEach((card) => {
 	          if (!filterOn) {
 	            card.classList.remove('is-hidden-by-favorite-filter');
 	            return;
@@ -1770,7 +1784,7 @@
 	        });
 	        updateCount();
 	      };
-
+	
 	      const toggleFavorite = (card) => {
 	        const id = getTournamentId(card);
 	        if (starred.has(id)) starred.delete(id);
@@ -1779,24 +1793,29 @@
 	        updateCardUi(card);
 	        applyFilter();
 	      };
-
-	      cards.forEach((card) => {
-	        updateCardUi(card);
-	        const toggle = card.querySelector('[data-favorite-toggle]');
+	
+	      // Event delegation so dynamically injected cards work too.
+	      cardsRoot.addEventListener('click', (event) => {
+	        const toggle = event.target?.closest?.('[data-favorite-toggle]');
 	        if (!toggle) return;
-
-	        const handleToggle = (event) => {
-	          event.preventDefault();
-	          event.stopPropagation();
-	          toggleFavorite(card);
-	        };
-
-	        toggle.addEventListener('click', handleToggle);
-	        toggle.addEventListener('keydown', (event) => {
-	          if (event.key === 'Enter' || event.key === ' ') handleToggle(event);
-	        });
+	        const card = toggle.closest('a.tournament-card');
+	        if (!card) return;
+	        event.preventDefault();
+	        event.stopPropagation();
+	        toggleFavorite(card);
 	      });
-
+	
+	      cardsRoot.addEventListener('keydown', (event) => {
+	        if (event.key !== 'Enter' && event.key !== ' ') return;
+	        const toggle = event.target?.closest?.('[data-favorite-toggle]');
+	        if (!toggle) return;
+	        const card = toggle.closest('a.tournament-card');
+	        if (!card) return;
+	        event.preventDefault();
+	        event.stopPropagation();
+	        toggleFavorite(card);
+	      });
+	
 	      if (filterToggle) {
 	        const filterEnabled = readFilterEnabled();
 	        filterToggle.classList.toggle('is-active', filterEnabled);
@@ -1809,31 +1828,266 @@
 	          applyFilter();
 	        });
 	      }
-
+	
+	      updateAllCardsUi();
 	      applyFilter();
-	    })();
-
+	
+	      return {
+	        starred,
+	        cardsRoot,
+	        refresh: () => {
+	          updateAllCardsUi();
+	          applyFilter();
+	        }
+	      };
+	    }
+	
+	    async function addStarredCalendarEventCards(favoritesApi) {
+	      const cardsRoot = favoritesApi?.cardsRoot;
+	      const starred = favoritesApi?.starred;
+	      if (!cardsRoot || !starred) return;
+	
+	      // Avoid duplicates if the script runs more than once.
+	      cardsRoot.querySelectorAll('[data-starred-calendar-event-card="true"]').forEach((el) => el.remove());
+	
+	      const calendarHref = '2025-usta-norcal-national.html';
+	      let html = '';
+	      try {
+	        const resp = await fetch(calendarHref, { cache: 'no-cache' });
+	        if (!resp.ok) return;
+	        html = await resp.text();
+	      } catch {
+	        return;
+	      }
+	
+	      const m = html.match(/<script\\s+id=\"csv-data\"\\s+type=\"text\\/plain\">([\\s\\S]*?)<\\/script>/i);
+	      const csvText = (m?.[1] || '').trim();
+	      if (!csvText) return;
+	
+	      function parseCsv(text) {
+	        const rows = [];
+	        let row = [];
+	        let field = '';
+	        let inQuotes = false;
+	        for (let i = 0; i < text.length; i++) {
+	          const char = text[i];
+	          if (inQuotes) {
+	            if (char === '\"') {
+	              if (text[i + 1] === '\"') {
+	                field += '\"';
+	                i++;
+	              } else {
+	                inQuotes = false;
+	              }
+	            } else {
+	              field += char;
+	            }
+	          } else {
+	            if (char === '\"') inQuotes = true;
+	            else if (char === ',') {
+	              row.push(field);
+	              field = '';
+	            } else if (char === '\\n') {
+	              row.push(field);
+	              rows.push(row);
+	              row = [];
+	              field = '';
+	            } else if (char !== '\\r') {
+	              field += char;
+	            }
+	          }
+	        }
+	        if (field.length || row.length) {
+	          row.push(field);
+	          rows.push(row);
+	        }
+	        return rows;
+	      }
+	
+	      function isTrue(val) {
+	        return (val || '').toString().trim().toUpperCase() === 'TRUE';
+	      }
+	
+	      function normalizeIdPart(value) {
+	        return (value || '')
+	          .toString()
+	          .trim()
+	          .toLowerCase()
+	          .replace(/\\s+/g, ' ')
+	          .replace(/[|]/g, '/');
+	      }
+	
+	      function getTournamentId(row) {
+	        return [
+	          normalizeIdPart(row['Month']),
+	          normalizeIdPart(row['Date(s)']),
+	          normalizeIdPart(row['Organization']),
+	          normalizeIdPart(row['Primary Site']),
+	          normalizeIdPart(row['City']),
+	          normalizeIdPart(row['Level'])
+	        ].join('|');
+	      }
+	
+	      function getTournamentTitle(row) {
+	        return row['Tournament Name'] || row['Level'] || '';
+	      }
+	
+	      function getAgeLabel(row) {
+	        const isU12 = isTrue(row['G12']);
+	        const isU14 = isTrue(row['G14']);
+	        if (isU12 && isU14) return '12/14';
+	        if (isU12) return '12';
+	        if (isU14) return '14';
+	        return '';
+	      }
+	
+	      function getFormat(row) {
+	        const notes = (row['Notes'] || '').toLowerCase();
+	        const doublesOnly = row['Doubles Only'] === 'TRUE' || notes.includes('doubles only') || notes.includes('mixed doubles');
+	        const singlesDraw = (row['Singles Draw'] || '').trim();
+	        const doublesDraw = (row['Doubles Draw'] || '').trim();
+	        const hasDoubles = !!doublesDraw || notes.includes('singles & doubles');
+	        if (doublesOnly) return 'D';
+	        if (singlesDraw && hasDoubles) return 'SD';
+	        return 'S';
+	      }
+	
+	      // Build row dicts.
+	      const parsed = parseCsv(csvText);
+	      const header = parsed[0] || [];
+	      const dicts = (parsed.slice(1) || []).map((cells) => {
+	        const obj = {};
+	        header.forEach((key, idx) => (obj[key] = cells[idx] || ''));
+	        return obj;
+	      });
+	
+	      // Merge by stable tournament id (OR division flags, keep best link/name).
+	      const merged = new Map();
+	      dicts.forEach((row) => {
+	        const id = getTournamentId(row);
+	        const existing = merged.get(id);
+	        if (!existing) {
+	          merged.set(id, { ...row });
+	          return;
+	        }
+	        ['B18','B16','B14','B12','G18','G16','G14','G12'].forEach((k) => {
+	          existing[k] = (isTrue(existing[k]) || isTrue(row[k])) ? 'TRUE' : 'FALSE';
+	        });
+	        const eHome = (existing['Home Page'] || '').trim();
+	        const rHome = (row['Home Page'] || '').trim();
+	        if (!/^https?:\\/\\//i.test(eHome) && /^https?:\\/\\//i.test(rHome)) existing['Home Page'] = rHome;
+	        if (!(existing['Tournament Name'] || '').trim() && (row['Tournament Name'] || '').trim()) existing['Tournament Name'] = row['Tournament Name'];
+	      });
+	
+	      const rows = Array.from(merged.values()).filter((row) => starred.has(getTournamentId(row)));
+	      if (!rows.length) return;
+	
+	      const fragment = document.createDocumentFragment();
+	      rows.forEach((row) => {
+	        const id = getTournamentId(row);
+	        const title = getTournamentTitle(row).trim() || 'Tournament';
+	        const format = getFormat(row);
+	        const age = getAgeLabel(row);
+	        const city = (row['City'] || '').trim();
+	        const level = (row['Level'] || '').trim();
+	        const site = (row['Primary Site'] || '').trim();
+	        const ustaUrl = (row['Home Page'] || '').trim();
+	        const ustaButton = /^https?:\\/\\//i.test(ustaUrl)
+	          ? `<span class=\"card-usta-link\" role=\"button\" tabindex=\"0\" data-usta-url=\"${ustaUrl}\">USTA</span>`
+	          : '';
+	
+	        const card = document.createElement('a');
+	        card.href = calendarHref;
+	        card.className = 'tournament-card is-upcoming';
+	        card.setAttribute('data-tournament-id', id);
+	        card.setAttribute('data-starred-calendar-event-card', 'true');
+	        card.innerHTML = `
+	          <div class=\"card-header\">
+	            <span class=\"card-type calendar\">
+	              <svg class=\"card-type-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
+	                <rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"/>
+	                <line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/>
+	                <line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/>
+	                <line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/>
+	              </svg>
+	              Event
+	            </span>
+	            <div class=\"card-actions\">
+	              <span class=\"card-favorite-toggle\" role=\"button\" tabindex=\"0\" aria-label=\"Star tournament\" aria-pressed=\"false\" data-favorite-toggle>
+	                <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">
+	                  <polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/>
+	                </svg>
+	              </span>
+	              ${ustaButton}
+	              <div class=\"card-arrow\">
+	                <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
+	                  <path d=\"M5 12h14M12 5l7 7-7 7\"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class=\"card-title\">${title}</h3>
+	          <p class=\"card-description\">${[format, age].filter(Boolean).join(' • ')}${site ? ` • ${site}` : ''}</p>
+	          <div class=\"card-meta\">
+	            <span class=\"meta-item\">
+	              <svg class=\"meta-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
+	                <rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"/>
+	                <line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/>
+	                <line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/>
+	                <line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/>
+	              </svg>
+	              ${(row['Month'] || '').trim()} ${(row['Date(s)'] || '').trim()}
+	            </span>
+	            <span class=\"meta-item\">
+	              <svg class=\"meta-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
+	                <path d=\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\"/>
+	                <circle cx=\"12\" cy=\"10\" r=\"3\"/>
+	              </svg>
+	              ${city}
+	            </span>
+	            <span class=\"meta-item\">
+	              <svg class=\"meta-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
+	                <polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/>
+	              </svg>
+	              ${level}
+	            </span>
+	          </div>
+	        `;
+	        fragment.appendChild(card);
+	      });
+	
+	      // Insert starred event cards at the top of the grid.
+	      cardsRoot.insertBefore(fragment, cardsRoot.firstChild);
+	      favoritesApi.refresh();
+	    }
+	
 	    // Player expiration alert data (injected by Python script)
 	    window.PLAYER_ALERT_DATA = {"show_alert": true, "critical_points": 75, "min_days_remaining": 23};
-
-    function updateExpirationAlert() {
-      const data = window.PLAYER_ALERT_DATA;
-      if (!data) return;
-
-      const alert = document.querySelector('[data-expiration-alert]');
-      const alertText = document.querySelector('[data-expiration-text]');
-      if (data.show_alert && alert && alertText) {
-        alertText.textContent = `${data.critical_points} points expiring soon (${data.min_days_remaining} days)`;
-        alert.style.display = 'block';
-      }
-    }
-
-    // Initialize on page load
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateExpirationAlert);
-    } else {
-      updateExpirationAlert();
-    }
-  </script>
+	
+	    function updateExpirationAlert() {
+	      const data = window.PLAYER_ALERT_DATA;
+	      if (!data) return;
+	
+	      const alert = document.querySelector('[data-expiration-alert]');
+	      const alertText = document.querySelector('[data-expiration-text]');
+	      if (data.show_alert && alert && alertText) {
+	        alertText.textContent = `${data.critical_points} points expiring soon (${data.min_days_remaining} days)`;
+	        alert.style.display = 'block';
+	      }
+	    }
+	
+	    function init() {
+	      setupUstaLinkDelegation();
+	      const favoritesApi = initTournamentFavorites();
+	      addStarredCalendarEventCards(favoritesApi);
+	      updateExpirationAlert();
+	    }
+	
+	    if (document.readyState === 'loading') {
+	      document.addEventListener('DOMContentLoaded', init);
+	    } else {
+	      init();
+	    }
+	  </script>
 </body>
 </html>
