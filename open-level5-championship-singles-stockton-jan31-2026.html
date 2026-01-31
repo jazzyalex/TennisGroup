@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
   <link rel="icon" type="image/x-icon" href="assets/tennis-report/favicon-32thin.ico">
   <link rel="shortcut icon" href="assets/tennis-report/favicon-32thin.ico">
-
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/tennis-report/favicon-128.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Open Level 5 Championship Singles - Girls' 12 Singles">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
@@ -2205,10 +2202,11 @@
 
     function parseKeyStats() {
       const stats = {
-        drawSize: 32,
-        seed: 20,
-        registered: 39,
-        percentAbove: 31
+        drawSize: 16,
+        seed: '',
+        closesText: '',
+        registered: 0,
+        percentAbove: null
       };
       
       const keyStats = document.querySelectorAll('.desktop-view .key-stat');
@@ -2221,17 +2219,32 @@
         const valueText = value.textContent.trim();
         
         if (labelText === 'Draw') {
-          stats.drawSize = parseInt(valueText);
+          const size = parseInt(valueText, 10);
+          if (Number.isFinite(size)) stats.drawSize = size;
+        } else if (labelText === 'Closes') {
+          stats.closesText = valueText;
+        } else if (labelText === 'Registered') {
+          const reg = parseInt(valueText, 10);
+          if (Number.isFinite(reg)) stats.registered = reg;
         } else if (labelText === 'Alexis Seed') {
           const parts = valueText.split('/');
           if (parts.length === 2) {
-            stats.seed = parseInt(parts[0].trim());
-            stats.registered = parseInt(parts[1].trim());
+            const seed = parseInt(parts[0].trim(), 10);
+            const reg = parseInt(parts[1].trim(), 10);
+            if (Number.isFinite(seed)) stats.seed = seed;
+            if (Number.isFinite(reg)) stats.registered = reg;
           }
         } else if (labelText === '% Above Alexis (UTR)') {
-          stats.percentAbove = parseInt(valueText);
+          const pct = parseInt(valueText, 10);
+          if (Number.isFinite(pct)) stats.percentAbove = pct;
         }
       });
+
+      if (stats.closesText) {
+        stats.seed = stats.closesText;
+      } else if (stats.seed === '' || stats.seed === null || stats.seed === undefined) {
+        stats.seed = '—';
+      }
       
       return stats;
     }
