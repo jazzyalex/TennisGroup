@@ -2231,7 +2231,7 @@
     <!-- Hero Stats -->
     <div class="mobile-hero-stats">
       <!-- Tournament Name Link (inside card) -->
-      <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
+      <a href="https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
         Level 2: Claremont, CA
       </a>
 
@@ -2459,10 +2459,11 @@
 
     function parseKeyStats() {
       const stats = {
-        drawSize: 32,
-        seed: 20,
-        registered: 39,
-        percentAbove: 31
+        drawSize: 16,
+        seed: '',
+        closesText: '',
+        registered: 0,
+        percentAbove: null
       };
       
       const keyStats = document.querySelectorAll('.desktop-view .key-stat');
@@ -2475,17 +2476,32 @@
         const valueText = value.textContent.trim();
         
         if (labelText === 'Draw') {
-          stats.drawSize = parseInt(valueText);
+          const size = parseInt(valueText, 10);
+          if (Number.isFinite(size)) stats.drawSize = size;
+        } else if (labelText === 'Closes') {
+          stats.closesText = valueText;
+        } else if (labelText === 'Registered') {
+          const reg = parseInt(valueText, 10);
+          if (Number.isFinite(reg)) stats.registered = reg;
         } else if (labelText === 'Alexis Seed') {
           const parts = valueText.split('/');
           if (parts.length === 2) {
-            stats.seed = parseInt(parts[0].trim());
-            stats.registered = parseInt(parts[1].trim());
+            const seed = parseInt(parts[0].trim(), 10);
+            const reg = parseInt(parts[1].trim(), 10);
+            if (Number.isFinite(seed)) stats.seed = seed;
+            if (Number.isFinite(reg)) stats.registered = reg;
           }
         } else if (labelText === '% Above Alexis (UTR)') {
-          stats.percentAbove = parseInt(valueText);
+          const pct = parseInt(valueText, 10);
+          if (Number.isFinite(pct)) stats.percentAbove = pct;
         }
       });
+
+      if (stats.closesText) {
+        stats.seed = stats.closesText;
+      } else if (stats.seed === '' || stats.seed === null || stats.seed === undefined) {
+        stats.seed = '—';
+      }
       
       return stats;
     }
