@@ -2077,7 +2077,7 @@
       display: block !important;
     }
   </style>
-  <style id="report-updated-badge-style">
+    <style id="report-updated-badge-style">
     .report-updated-badge {
       position: fixed;
       left: 16px;
@@ -2115,8 +2115,8 @@
   </style>
 </head>
 <body>
-  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-01-31T09:12:39-08:00" title="2026-01-31T09:12:39-08:00">
-    Updated Jan 31, 2026 9:12 AM PST
+    <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-01T20:16:24-08:00" title="2026-02-01T20:16:24-08:00">
+    Updated Feb 1, 2026 8:16 PM PST
   </div>
   <div class="desktop-view">
   <div class="report-header">
@@ -2156,15 +2156,12 @@
         <div class="path-to-final-subtitle" id="ptf-subtitle"></div>
       </div>
       <div class="ptf-controls">
-        <div class="ptf-segment" role="group" aria-label="Path to final data source">
-          <button class="ptf-mode" id="ptf-mode-projection" type="button" aria-pressed="true">Projection</button>
-          <button class="ptf-mode" id="ptf-mode-actual" type="button" aria-pressed="false" disabled title="No draw found yet">Actual draw</button>
-        </div>
+        <div class="ptf-muted" id="ptf-source"></div>
       </div>
     </div>
     <div id="ptf-body"></div>
     <details class="ptf-import" id="ptf-import">
-      <summary>Use actual draw (paste JSON)</summary>
+      <summary>Paste official draw (JSON positions)</summary>
       <textarea id="ptf-json" spellcheck="false" placeholder='Paste JSON array/object with bracket positions.\nExample: [\"Alexis Malakhova\",\"Grace Li\", ...]'></textarea>
       <div class="ptf-import-actions">
         <button class="ptf-button primary" id="ptf-apply" type="button">Apply</button>
@@ -2356,7 +2353,7 @@
     <div class="utr-histogram-caption" id="utr-histogram-caption">Based on UTR values from the player list.</div>
   </div>
 
-                          <div class="stats-section">
+                            <div class="stats-section">
     <h3>Tournament Statistics</h3>
     <div class="stats-grid">
       <div class="stat-box">
@@ -3598,7 +3595,6 @@
 
     const PTF_PRIMARY_PLAYER = { first: 'Alexis', last: 'Malakhova' };
     const PTF_ACTUAL_DRAW_KEY = `tennis_tracker_actual_draw_positions_v1:${window.location.pathname}`;
-    const PTF_MODE_KEY = `tennis_tracker_ptf_mode_v1:${window.location.pathname}`;
 
     function ptfNormalizeName(value) {
       return (value || '').toString().trim().replace(/\s+/g, ' ').toLowerCase();
@@ -3614,27 +3610,6 @@
       );
     }
 
-    function ptfStrength(player) {
-      const utr = Number.isFinite(player?.utr) ? player.utr : null;
-      if (utr !== null) return utr;
-      const wtnVal = parseFloat((player?.wtn || '').toString().trim());
-      if (Number.isFinite(wtnVal)) return -wtnVal;
-      return -9999;
-    }
-
-    function ptfWinProb(alexis, opp) {
-      if (!alexis || !opp) return null;
-      if (!Number.isFinite(alexis.utr) || !Number.isFinite(opp.utr)) return null;
-      const delta = alexis.utr - opp.utr;
-      const denom = 1 + Math.pow(10, -delta / 1.5);
-      return 1 / denom;
-    }
-
-    function ptfFormatProb(prob) {
-      if (!Number.isFinite(prob)) return '—';
-      return `${Math.round(prob * 100)}%`;
-    }
-
     function ptfRoundLabels(drawSize) {
       const labels = [];
       for (let size = drawSize; size >= 2; size = size / 2) {
@@ -3647,44 +3622,6 @@
         else labels.push(`Round of ${size}`);
       }
       return labels;
-    }
-
-    function ptfProjectionSeedPositions(drawSize) {
-      if (drawSize !== 16) return {};
-      return { 1: 1, 2: 16, 3: 9, 4: 8, 5: 5, 6: 12, 7: 13, 8: 4 };
-    }
-
-    function ptfBuildProjection(players, drawSize) {
-      const positions = new Array(drawSize).fill(null);
-      const sorted = [...players].sort((a, b) => {
-        const aNat = Number.isFinite(a.natRank) ? a.natRank : 999999;
-        const bNat = Number.isFinite(b.natRank) ? b.natRank : 999999;
-        if (aNat !== bNat) return aNat - bNat;
-        return ptfStrength(b) - ptfStrength(a);
-      });
-
-      const seeds = sorted.slice(0, Math.min(8, drawSize));
-      const rest = sorted.slice(seeds.length);
-
-      const seedMap = ptfProjectionSeedPositions(drawSize);
-      const seededPositions = new Set();
-      seeds.forEach((player, index) => {
-        const seed = index + 1;
-        const pos = seedMap[seed];
-        if (pos) {
-          positions[pos - 1] = player;
-          seededPositions.add(pos);
-        }
-      });
-
-      let restIndex = 0;
-      for (let pos = 1; pos <= drawSize; pos += 1) {
-        if (seededPositions.has(pos)) continue;
-        positions[pos - 1] = rest[restIndex] || null;
-        restIndex += 1;
-      }
-
-      return positions;
     }
 
     function ptfReadActualPositions(drawSize) {
@@ -3713,20 +3650,35 @@
       for (let i = 0; i < drawSize; i += 1) {
         const name = positions[i];
         if (!name) continue;
-        bracket[i] = byName.get(ptfNormalizeName(name)) || { fullName: String(name), utr: NaN, wtn: '', natRank: NaN };
+        bracket[i] =
+          byName.get(ptfNormalizeName(name)) || { fullName: String(name), utr: NaN, natRank: NaN, wtn: '' };
       }
       return bracket;
     }
 
-    function ptfPickBestOpponent(candidates, target) {
-      const filtered = candidates.filter(p => p && p !== target);
-      if (!filtered.length) return null;
-      return filtered.sort((a, b) => ptfStrength(b) - ptfStrength(a))[0] || null;
+    function ptfTopOpponents(candidates, limit) {
+      const filtered = (candidates || []).filter(Boolean);
+      const scored = filtered
+        .map(p => ({
+          p,
+          utr: Number.isFinite(p?.utr) ? p.utr : -1e9,
+          natRank: Number.isFinite(p?.natRank) ? p.natRank : 1e9,
+        }))
+        .sort((a, b) => {
+          if (b.utr !== a.utr) return b.utr - a.utr;
+          return a.natRank - b.natRank;
+        })
+        .map(x => x.p);
+      return scored.slice(0, Math.max(1, Math.min(2, limit || 2)));
     }
 
-    function ptfComputePath(bracket, targetPos, drawSize) {
-      const target = bracket[targetPos - 1];
+    function ptfFormatUtr(player) {
+      return Number.isFinite(player?.utr) ? `UTR ${player.utr.toFixed(2)}` : 'UTR —';
+    }
+
+    function ptfComputeLikelyOpponents(bracket, targetPos, drawSize) {
       const labels = ptfRoundLabels(drawSize);
+      const target = bracket[targetPos - 1];
       const path = [];
 
       for (let roundIndex = 0; roundIndex < labels.length; roundIndex += 1) {
@@ -3738,81 +3690,83 @@
 
         const candidates = [];
         for (let pos = otherHalfStart; pos < otherHalfStart + halfSize; pos += 1) {
-          candidates.push(bracket[pos - 1] || null);
+          const p = bracket[pos - 1] || null;
+          if (p && ptfNormalizeName(p.fullName) === ptfNormalizeName(target.fullName)) continue;
+          candidates.push(p);
         }
 
-        const opponent = ptfPickBestOpponent(candidates, target);
-        const prob = ptfWinProb(target, opponent);
-        path.push({ label: labels[roundIndex], opponent, prob });
+        const limit = roundIndex === 0 ? 1 : 2;
+        path.push({ label: labels[roundIndex], opponents: ptfTopOpponents(candidates, limit) });
       }
 
       return path;
     }
 
-    function ptfRenderHtml(path, alexis) {
-      if (!path || !path.length || !alexis) return '<div class="ptf-muted">Not enough data to compute a path.</div>';
+    function ptfRenderOpponentBlocks(opponents) {
+      const list = Array.isArray(opponents) ? opponents.filter(Boolean) : [];
+      if (!list.length) return '<div class="ptf-muted">—</div>';
+      return list
+        .map(
+          (p, idx) => `
+            <div${idx ? ' style="margin-top:10px;"' : ''}>
+              <div class="ptf-opponent">${p.fullName || '—'}</div>
+              <div class="ptf-muted">${ptfFormatUtr(p)}</div>
+            </div>`
+        )
+        .join('');
+    }
 
+    function ptfRenderHtml(path) {
+      if (!path || !path.length) return '<div class="ptf-muted">Not enough data to compute a path.</div>';
       const rows = path
-        .map(step => {
-          const opp = step.opponent;
-          const oppName = opp?.fullName || '—';
-          const metaParts = [];
-          if (Number.isFinite(opp?.utr)) metaParts.push(`UTR ${opp.utr.toFixed(2)}`);
-          if (Number.isFinite(opp?.natRank)) metaParts.push(`Nat ${opp.natRank}`);
-          const oppMeta = metaParts.join(' • ');
-          return `
+        .map(
+          step => `
           <tr>
             <td>${step.label}</td>
-            <td>
-              <div class="ptf-opponent">${oppName}</div>
-              ${oppMeta ? `<div class="ptf-muted">${oppMeta}</div>` : ''}
-            </td>
-            <td>${ptfFormatProb(step.prob)}</td>
-          </tr>`;
-        })
+            <td>${ptfRenderOpponentBlocks(step.opponents)}</td>
+          </tr>`
+        )
         .join('');
-
-      const note =
-        Number.isFinite(alexis?.utr)
-          ? '<div class="ptf-muted">Win% uses UTR delta only (fallback is blank when UTR is missing).</div>'
-          : '<div class="ptf-muted">Win% will appear once UTR is available for both players.</div>';
-
       return `
         <table class="ptf-table">
-          <thead>
-            <tr><th>Round</th><th>Opponent</th><th>Win%</th></tr>
-          </thead>
+          <thead><tr><th>Round</th><th>Likely opponents (UTR)</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
-        ${note}
       `;
     }
 
-    function ptfRenderMobileHtml(path, alexis) {
-      if (!path || !path.length || !alexis) return '<div class="mobile-ptf-meta">Not enough data to compute a path.</div>';
+    function ptfRenderMobileHtml(path) {
+      if (!path || !path.length) return '<div class="mobile-ptf-meta">Not enough data to compute a path.</div>';
       const rows = path
         .map(step => {
-          const opp = step.opponent;
-          const oppName = opp?.fullName || '—';
-          const metaParts = [];
-          if (Number.isFinite(opp?.utr)) metaParts.push(`UTR ${opp.utr.toFixed(2)}`);
-          if (Number.isFinite(opp?.natRank)) metaParts.push(`Nat ${opp.natRank}`);
-          metaParts.push(`Win ${ptfFormatProb(step.prob)}`);
-          const meta = metaParts.join(' • ');
+          const opponents = Array.isArray(step.opponents) ? step.opponents.filter(Boolean) : [];
+          if (!opponents.length) {
+            return `
+            <tr>
+              <td>${step.label}</td>
+              <td><div class="mobile-ptf-meta">—</div></td>
+            </tr>`;
+          }
+          const blocks = opponents
+            .map(
+              (p, idx) => `
+              <div${idx ? ' style="margin-top:8px;"' : ''}>
+                <div class="mobile-ptf-name">${p.fullName || '—'}</div>
+                <div class="mobile-ptf-meta">${ptfFormatUtr(p)}</div>
+              </div>`
+            )
+            .join('');
           return `
-          <tr>
-            <td>${step.label}</td>
-            <td>
-              <div class="mobile-ptf-name">${oppName}</div>
-              <div class="mobile-ptf-meta">${meta}</div>
-            </td>
-          </tr>`;
+            <tr>
+              <td>${step.label}</td>
+              <td>${blocks}</td>
+            </tr>`;
         })
         .join('');
 
       return `
         <table class="mobile-ptf-table">
-          <thead><tr><th>Round</th><th>Opponent</th></tr></thead>
+          <thead><tr><th>Round</th><th>Likely opponents</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       `;
@@ -3828,65 +3782,47 @@
       const mobileBody = document.getElementById('mobile-path-to-final');
       const subtitleEl = document.getElementById('ptf-subtitle');
       const titleEl = document.getElementById('ptf-title');
+      const sourceEl = document.getElementById('ptf-source');
       if (!desktopBody || !mobileBody || !subtitleEl || !titleEl) return;
 
       titleEl.textContent = alexis ? `Path to Final: ${alexis.fullName}` : 'Path to Final';
 
-      const projectionBtn = document.getElementById('ptf-mode-projection');
-      const actualBtn = document.getElementById('ptf-mode-actual');
       const applyBtn = document.getElementById('ptf-apply');
       const jsonTextarea = document.getElementById('ptf-json');
       const errorEl = document.getElementById('ptf-error');
 
-      const storedMode = localStorage.getItem(PTF_MODE_KEY) || 'projection';
-      let mode = storedMode === 'actual' ? 'actual' : 'projection';
+      function showEmpty(message) {
+        subtitleEl.textContent = message;
+        desktopBody.innerHTML = `<div class="ptf-muted">${message}</div>`;
+        mobileBody.innerHTML = `<div class="mobile-ptf-meta">${message}</div>`;
+      }
+
+      if (!alexis) {
+        if (sourceEl) sourceEl.textContent = '';
+        showEmpty('Primary player not found in entry list.');
+        return;
+      }
 
       const actualPositions = ptfReadActualPositions(drawSize);
-      if (actualBtn) {
-        actualBtn.disabled = !actualPositions;
-        actualBtn.title = actualPositions ? 'Use posted bracket positions' : 'No draw found yet';
-      }
-      if (mode === 'actual' && !actualPositions) mode = 'projection';
-
-      function setMode(nextMode) {
-        mode = nextMode;
-        localStorage.setItem(PTF_MODE_KEY, mode);
-        if (projectionBtn) projectionBtn.setAttribute('aria-pressed', mode === 'projection' ? 'true' : 'false');
-        if (actualBtn) actualBtn.setAttribute('aria-pressed', mode === 'actual' ? 'true' : 'false');
-        doRender();
+      if (!actualPositions) {
+        if (sourceEl) sourceEl.textContent = 'Official draw: not found';
+        showEmpty('Official draw not available yet.');
+        return;
       }
 
-      function doRender() {
-        if (!alexis) {
-          subtitleEl.textContent = 'Primary player not found in entry list.';
-          desktopBody.innerHTML = '<div class="ptf-muted">Alexis is not in the current entry list.</div>';
-          mobileBody.innerHTML = '<div class="mobile-ptf-meta">Alexis is not in the current entry list.</div>';
-          return;
-        }
+      if (sourceEl) sourceEl.textContent = 'Official draw';
 
-        const bracket =
-          mode === 'actual' && actualPositions ? ptfBuildActual(players, drawSize, actualPositions) : ptfBuildProjection(players, drawSize);
-
-        const targetPos = bracket.findIndex(p => ptfNormalizeName(p?.fullName) === ptfNormalizeName(alexis.fullName)) + 1;
-        if (!targetPos) {
-          subtitleEl.textContent = 'Primary player not placed in draw.';
-          desktopBody.innerHTML = '<div class="ptf-muted">Alexis was not found in the draw positions.</div>';
-          mobileBody.innerHTML = '<div class="mobile-ptf-meta">Alexis was not found in the draw positions.</div>';
-          return;
-        }
-
-        const path = ptfComputePath(bracket, targetPos, drawSize);
-        subtitleEl.textContent =
-          mode === 'actual'
-            ? 'Using posted bracket positions (best-opponent projection within each round).'
-            : 'Seeding-based projection (best-opponent projection within each round).';
-
-        desktopBody.innerHTML = ptfRenderHtml(path, alexis);
-        mobileBody.innerHTML = ptfRenderMobileHtml(path, alexis);
+      const bracket = ptfBuildActual(players, drawSize, actualPositions);
+      const targetPos = bracket.findIndex(p => ptfNormalizeName(p?.fullName) === ptfNormalizeName(alexis.fullName)) + 1;
+      if (!targetPos) {
+        showEmpty('Alexis was not found in the official draw positions.');
+        return;
       }
 
-      if (projectionBtn) projectionBtn.onclick = () => setMode('projection');
-      if (actualBtn) actualBtn.onclick = () => setMode('actual');
+      subtitleEl.textContent = 'Likely opponents = top 1–2 by UTR in each round’s opponent pool.';
+      const path = ptfComputeLikelyOpponents(bracket, targetPos, drawSize);
+      desktopBody.innerHTML = ptfRenderHtml(path);
+      mobileBody.innerHTML = ptfRenderMobileHtml(path);
 
       if (applyBtn && jsonTextarea) {
         applyBtn.onclick = () => {
@@ -3904,15 +3840,9 @@
             return;
           }
           localStorage.setItem(PTF_ACTUAL_DRAW_KEY, JSON.stringify({ positions }));
-          if (actualBtn) {
-            actualBtn.disabled = false;
-            actualBtn.title = 'Use posted bracket positions';
-          }
-          setMode('actual');
+          renderPathToFinal();
         };
       }
-
-      doRender();
     }
 
     if (document.readyState === 'loading') {
