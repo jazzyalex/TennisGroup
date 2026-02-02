@@ -349,6 +349,119 @@
       font-size: 12px;
     }
 
+    #ptf-source {
+      color: #4472C4;
+      text-decoration: underline;
+      font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    #ptf-source:hover {
+      color: #2c5aa0;
+    }
+
+    .ptf-results {
+      margin-top: 12px;
+    }
+
+    .ptf-results-title {
+      margin: 12px 0 6px;
+      font-size: 13px;
+      color: #2c3e50;
+    }
+
+    .ptf-results-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .ptf-result-item {
+      padding: 10px 10px;
+      border-radius: 10px;
+      border: 1px solid #eef2f8;
+      background: #fbfcff;
+    }
+
+    .ptf-result-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .ptf-result-round {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: #5a6a7f;
+    }
+
+    .ptf-result-score {
+      font-size: 12px;
+      font-weight: 800;
+      color: #2c3e50;
+      white-space: nowrap;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .path-to-final {
+        background: rgba(28, 28, 30, 0.92);
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+
+      .path-to-final-title {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .path-to-final-subtitle,
+      .ptf-muted {
+        color: rgba(255, 255, 255, 0.70);
+      }
+
+      .ptf-table th {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .ptf-table td {
+        color: rgba(255, 255, 255, 0.88);
+        border-bottom-color: rgba(255, 255, 255, 0.10);
+      }
+
+      .ptf-opponent {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      #ptf-source {
+        color: #8ab4f8;
+      }
+
+      #ptf-source:hover {
+        color: #b3d1ff;
+      }
+
+      .ptf-results-title {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .ptf-result-item {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .ptf-result-round {
+        color: rgba(255, 255, 255, 0.70);
+      }
+
+      .ptf-result-score {
+        color: rgba(255, 255, 255, 0.92);
+      }
+    }
+
     table {
       width: 100%;
       max-width: 1000px;
@@ -2156,7 +2269,7 @@
         <div class="path-to-final-subtitle" id="ptf-subtitle"></div>
       </div>
       <div class="ptf-controls">
-        <div class="ptf-muted" id="ptf-source"></div>
+        <a id="ptf-source" href="#" target="_blank" rel="noopener noreferrer"></a>
       </div>
     </div>
     <div id="ptf-body"></div>
@@ -3295,7 +3408,7 @@
     }
   </script>
 
-  <script type="application/json" id="actual-draw-json">{"tournamentId":"AADD3F01-D779-44EB-8F33-3CD79A3018F1","eventId":"EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC","source":"playtennis.draws","positions":["Valentina Kukeeva","Angela Liu","Avaline Wang","Misha Kataria","Annabel Hu","Amy Li","Ruoyu Sun","Sharanya Prasad","Grace Li","Akshaya Ashok","Margaret Doran","Eileen Li","Megan Lai","Emma Li","Alexis Malakhova","Kendra Wu"]}</script>
+  <script type="application/json" id="actual-draw-json">{"tournamentId":"AADD3F01-D779-44EB-8F33-3CD79A3018F1","eventId":"EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC","orgSegment":"fourdirectionstennis","drawUrl":"https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1/EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC","observedAt":"2026-02-02T05:08:59Z","source":"playtennis.draws.apollo","positions":["Valentina Kukeeva","Angela Liu","Avaline Wang","Misha Kataria","Annabel Hu","Amy Li","Ruoyu Sun","Sharanya Prasad","Grace Li","Akshaya Ashok","Margaret Doran","Eileen Li","Megan Lai","Emma Li","Alexis Malakhova","Kendra Wu"],"matches":[{"round":"Round of 16","status":"COMPLETED","result":"W","opponent":"Kendra Wu","score":"6-4 6-3"},{"round":"Quarterfinal","status":"COMPLETED","result":"W","opponent":"Megan Lai","score":"6-1 0-6 [11-9]"},{"round":"Semifinal","status":"COMPLETED","result":"L","opponent":"Margaret Doran","score":"2-6 2-6"}]}</script>
 
   <!-- Share Button -->
   <script>
@@ -3646,6 +3759,32 @@
       return null;
     }
 
+    function ptfReadActualPayload(drawSize) {
+      const scriptTag = document.getElementById('actual-draw-json');
+      if (scriptTag && scriptTag.textContent.trim()) {
+        try {
+          const parsed = JSON.parse(scriptTag.textContent.trim());
+          if (parsed && typeof parsed === 'object') {
+            const positions = Array.isArray(parsed.positions) ? parsed.positions : null;
+            if (positions && positions.length >= drawSize) return parsed;
+          }
+          if (Array.isArray(parsed) && parsed.length >= drawSize) return { positions: parsed };
+        } catch {}
+      }
+
+      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          const positions = Array.isArray(parsed.positions) ? parsed.positions : null;
+          if (positions && positions.length >= drawSize) return parsed;
+        }
+        if (Array.isArray(parsed) && parsed.length >= drawSize) return { positions: parsed };
+      } catch {}
+      return null;
+    }
+
     function ptfBuildActual(players, drawSize, positions) {
       const byName = new Map(players.map(p => [ptfNormalizeName(p.fullName), p]));
       const bracket = new Array(drawSize).fill(null);
@@ -3737,6 +3876,37 @@
       `;
     }
 
+    function ptfRenderResultsHtml(matches) {
+      const list = Array.isArray(matches) ? matches : [];
+      if (!list.length) return '';
+      const items = list
+        .map(m => {
+          const round = (m.round || m.roundName || '').toString() || 'Match';
+          const opponent = (m.opponent || '').toString() || 'TBD';
+          const status = (m.status || '').toString();
+          const result = (m.result || '').toString();
+          const score = (m.score || '').toString();
+          const meta = [status].filter(Boolean).join(' • ');
+          const scoreText = [result, score].filter(Boolean).join(' ');
+          return `
+            <li class="ptf-result-item">
+              <div class="ptf-result-top">
+                <div class="ptf-result-round">${round}</div>
+                <div class="ptf-result-score">${scoreText || '—'}</div>
+              </div>
+              <div class="ptf-opponent" style="margin-top:6px;">vs ${opponent}</div>
+              ${meta ? `<div class="ptf-muted" style="margin-top:4px;">${meta}</div>` : ''}
+            </li>`;
+        })
+        .join('');
+      return `
+        <div class="ptf-results">
+          <div class="ptf-results-title">Alexis Results</div>
+          <ul class="ptf-results-list">${items}</ul>
+        </div>
+      `;
+    }
+
     function ptfRenderMobileHtml(path) {
       if (!path || !path.length) return '<div class="mobile-ptf-meta">Not enough data to compute a path.</div>';
       const rows = path
@@ -3805,14 +3975,19 @@
         return;
       }
 
-      const actualPositions = ptfReadActualPositions(drawSize);
+      const drawUrl = `https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/${encodeURIComponent('AADD3F01-D779-44EB-8F33-3CD79A3018F1')}/${encodeURIComponent('EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC')}`;
+      if (sourceEl) {
+        sourceEl.href = drawUrl;
+        sourceEl.textContent = 'Official draw';
+        sourceEl.title = 'Open official draw on USTA PlayTennis';
+      }
+
+      const payload = ptfReadActualPayload(drawSize);
+      const actualPositions = payload?.positions || null;
       if (!actualPositions) {
-        if (sourceEl) sourceEl.textContent = 'Official draw: not found';
         showEmpty('Official draw not available yet.');
         return;
       }
-
-      if (sourceEl) sourceEl.textContent = 'Official draw';
 
       const bracket = ptfBuildActual(players, drawSize, actualPositions);
       const targetPos = bracket.findIndex(p => ptfNormalizeName(p?.fullName) === ptfNormalizeName(alexis.fullName)) + 1;
@@ -3823,8 +3998,9 @@
 
       subtitleEl.textContent = 'Likely opponents = top 1–2 by UTR in each round’s opponent pool.';
       const path = ptfComputeLikelyOpponents(bracket, targetPos, drawSize);
-      desktopBody.innerHTML = ptfRenderHtml(path);
-      mobileBody.innerHTML = ptfRenderMobileHtml(path);
+      const matches = Array.isArray(payload?.matches) ? payload.matches : [];
+      desktopBody.innerHTML = ptfRenderHtml(path) + ptfRenderResultsHtml(matches);
+	      mobileBody.innerHTML = ptfRenderMobileHtml(path) + ptfRenderResultsHtml(matches);
 
       if (applyBtn && jsonTextarea) {
         applyBtn.onclick = () => {
