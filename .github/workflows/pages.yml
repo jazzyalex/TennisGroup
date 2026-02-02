@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: [self-hosted, tennisgroup]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
