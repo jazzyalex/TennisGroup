@@ -26,11 +26,10 @@ jobs:
 
       - name: Ensure gtar
         run: |
-          if ! command -v gtar >/dev/null 2>&1; then
-            mkdir -p "$HOME/.local/bin"
-            ln -sf "$(command -v tar)" "$HOME/.local/bin/gtar"
-            echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          if [ -d "/opt/homebrew/bin" ]; then
+            echo "/opt/homebrew/bin" >> "$GITHUB_PATH"
           fi
+          command -v gtar >/dev/null 2>&1
 
       - name: Prepare site artifact
         run: |
