@@ -24,6 +24,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Ensure gtar
+        run: |
+          if ! command -v gtar >/dev/null 2>&1; then
+            mkdir -p "$HOME/.local/bin"
+            ln -sf "$(command -v tar)" "$HOME/.local/bin/gtar"
+            echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          fi
+
       - name: Prepare site artifact
         run: |
           mkdir -p _site
