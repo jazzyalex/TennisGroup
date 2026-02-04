@@ -538,6 +538,50 @@
       color: var(--text-secondary);
     }
 
+    /* Match player links */
+    .player-ref {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .player-ref__links {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .player-ref__link {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      padding: 1px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .player-ref__link:hover {
+      background: var(--bg-secondary);
+      border-color: rgba(8, 145, 178, 0.45);
+      color: var(--accent-cyan);
+    }
+
+    .player-ref__link:focus-visible {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 2px;
+    }
+
+    .match-partner {
+      color: var(--text-secondary);
+    }
+
     /* External Links */
     .links-grid {
       display: grid;
@@ -741,7 +785,7 @@
           <span class="player-subtitle">Girls' 12 National Standings List</span>
         </div>
       </div>
-      <span class="header-updated" data-updated>Updated Jan 28, 2026</span>
+      <span class="header-updated" data-updated>Updated Feb 4, 2026</span>
     </div>
   </header>
 
@@ -751,13 +795,13 @@
       <div class="stat-card">
         <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
           <div class="stat-label">UTR Singles</div>
-          <div class="stat-value" data-stat="utr-singles">4.07<span class="stat-trend">→</span></div>
+          <div class="stat-value" data-stat="utr-singles">4.04<span class="stat-trend">→</span></div>
         </a>
       </div>
       <div class="stat-card">
         <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
           <div class="stat-label">UTR Doubles</div>
-          <div class="stat-value-small" data-stat="utr-doubles">4.00</div>
+          <div class="stat-value-small" data-stat="utr-doubles">4.02</div>
         </a>
       </div>
       <div class="stat-card">
@@ -769,20 +813,20 @@
       <div class="stat-card">
         <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
           <div class="stat-label">National Rank</div>
-          <div class="stat-value" data-stat="rank-national">#705</div>
+          <div class="stat-value" data-stat="rank-national">#589</div>
         </a>
       </div>
       <div class="stat-card">
         <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
           <div class="stat-label">NorCal Rank</div>
-          <div class="stat-value" data-stat="rank-section">#42</div>
+          <div class="stat-value" data-stat="rank-section">#34</div>
         </a>
       </div>
       <div class="stat-card">
         <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
           <div class="stat-label">Total Points</div>
-          <div class="stat-value" data-stat="total-points">627</div>
-          <div class="stat-sub">622 S / 5 D</div>
+          <div class="stat-value" data-stat="total-points">713</div>
+          <div class="stat-sub">697 S / 5 D</div>
         </a>
       </div>
     </section>
@@ -810,7 +854,7 @@
     <section class="section">
       <div class="section-header">
         <h2 class="section-title">Singles Events (Best 6)</h2>
-        <span class="section-badge" data-singles-total>622 pts</span>
+        <span class="section-badge" data-singles-total>697 pts</span>
       </div>
       <div class="events-list" data-singles-events>
         <!-- Events populated by JS -->
@@ -863,145 +907,274 @@
   </main>
 
   <footer class="page-footer">
-    <p>Data sourced from <a href="https://www.usta.com" target="_blank" rel="noopener">USTA</a>. Updated Jan 28, 2026.</p>
+    <p>Data sourced from <a href="https://www.usta.com" target="_blank" rel="noopener">USTA</a>. Updated Feb 4, 2026.</p>
     <p><a href="index.html">← Back to Tennis Tracker</a></p>
   </footer>
 
   <script>
     // Player data (injected by Python script in production)
-    const PLAYER_DATA = {
-      name: "Alexis Malakhova",
-      uaid: "2018710796",
-      lastUpdated: "2026-01-28",
-      totals: {
-        singles: 622,
-        doubles: 5,
-        doublesRaw: 32,
-        total: 627
+    const PLAYER_DATA =
+    {
+      "name": "Alexis Malakhova",
+      "uaid": "2018710796",
+      "lastUpdated": "2026-02-04",
+      "totals": {
+        "singles": 697,
+        "doubles": 5,
+        "doublesRaw": 32,
+        "total": 713
       },
-      alert: {
-        show: true,
-        points: 75,
-        days: 23
+      "alert": {
+        "show": false,
+        "points": 0,
+        "days": 0
       },
-      events: {
-        singles: [
+      "events": {
+        "singles": [
           {
-            name: "FDT Level 4 Junior 12s & 14s Singles Excellence",
-            level: "L4",
-            division: "Girls' 12 & under singles",
-            points: 173,
-            startDate: "2026-01-10",
-            endDate: "2026-01-18",
-            expiresDate: "2027-01-17",
-            daysRemaining: 352,
-            urgency: "safe",
-            matches: [
-              { round: "P-F", opponent: "Margaret DORAN", outcome: "L", score: "0-4 2-4" },
-              { round: "P-SF", opponent: "Camille KUNKEL", outcome: "W", score: "Wd [inj]" },
-              { round: "QF", opponent: "Ziva GADGIL", outcome: "L", score: "0-6 0-6" },
-              { round: "R16", opponent: "Elise WATT", outcome: "W", score: "6-3 7-5" },
-              { round: "R32", opponent: "Summer STIRITZ", outcome: "W", score: "Wo [ill]" }
+            "name": "FDT Level 5 Junior Singles Championship",
+            "level": "L5",
+            "division": "Girls' 12 & under singles",
+            "points": 150,
+            "startDate": "2026-01-31",
+            "endDate": "2026-02-01",
+            "expiresDate": "2027-01-31",
+            "daysRemaining": 361,
+            "urgency": "safe",
+            "matches": [
+              {
+                "round": "BONUS",
+                "opponent": "P-F / Annabel HU",
+                "outcome": "L",
+                "score": "6-7(4) 1-6"
+              },
+              {
+                "round": "N/A",
+                "opponent": "SF / Margaret DORAN",
+                "outcome": "L",
+                "score": "2-6 2-6"
+              },
+              {
+                "round": "N/A",
+                "opponent": "QF / Megan LAI",
+                "outcome": "W",
+                "score": "6-1 0-6 [11-9]"
+              },
+              {
+                "round": "N/A",
+                "opponent": "R16 / Kendra WU",
+                "outcome": "W",
+                "score": "6-4 6-3"
+              }
             ]
           },
           {
-            name: "FDT Level 5 Junior 12s, 16s & 18s Singles Championship",
-            level: "L5",
-            division: "Girls' 12 & under singles",
-            points: 105,
-            startDate: "2025-11-15",
-            endDate: "2025-11-16",
-            expiresDate: "2026-11-15",
-            daysRemaining: 289,
-            urgency: "safe",
-            matches: [
-              { round: "QF", opponent: "Valentina KUKEEVA", outcome: "L", score: "2-4 1-4" },
-              { round: "R16", opponent: "Ellie WANG", outcome: "W", score: "4-0 4-1" },
-              { round: "R32", opponent: "Angela LIU", outcome: "W", score: "5-3 4-1" }
+            "name": "FDT Level 4 Junior 12s & 14s Singles Excellence",
+            "level": "L4",
+            "division": "Girls' 12 & under singles",
+            "points": 173,
+            "startDate": "2026-01-10",
+            "endDate": "2026-01-18",
+            "expiresDate": "2027-01-17",
+            "daysRemaining": 347,
+            "urgency": "safe",
+            "matches": [
+              {
+                "round": "P-F",
+                "opponent": "Margaret DORAN",
+                "outcome": "L",
+                "score": "0-4 2-4"
+              },
+              {
+                "round": "P-SF",
+                "opponent": "Camille KUNKEL",
+                "outcome": "W",
+                "score": "Wd [inj]"
+              },
+              {
+                "round": "QF",
+                "opponent": "Ziva GADGIL",
+                "outcome": "L",
+                "score": "0-6 0-6"
+              },
+              {
+                "round": "R16",
+                "opponent": "Elise WATT",
+                "outcome": "W",
+                "score": "6-3 7-5"
+              },
+              {
+                "round": "R32",
+                "opponent": "Summer STIRITZ",
+                "outcome": "W",
+                "score": "Wo [ill]"
+              }
             ]
           },
           {
-            name: "L5 BG14 Super Series at Solano CC",
-            level: "L5",
-            division: "Girls' 14 & under singles",
-            points: 98,
-            startDate: "2025-07-05",
-            endDate: "2025-07-06",
-            expiresDate: "2026-07-05",
-            daysRemaining: 156,
-            urgency: "safe",
-            matches: [
-              { round: "PL-F", opponent: "Leila LYONS", outcome: "L", score: "1-6 6-1 3-6" },
-              { round: "E-SF", opponent: "Anna YANG", outcome: "L", score: "3-6 4-6" },
-              { round: "E-QF", opponent: "Jennifer CHEN", outcome: "W", score: "3-6 7-6(2) 7-5" }
+            "name": "FDT Level 5 Junior 12s, 16s & 18s Singles Championship",
+            "level": "L5",
+            "division": "Girls' 12 & under singles",
+            "points": 105,
+            "startDate": "2025-11-15",
+            "endDate": "2025-11-16",
+            "expiresDate": "2026-11-15",
+            "daysRemaining": 284,
+            "urgency": "safe",
+            "matches": [
+              {
+                "round": "QF",
+                "opponent": "Valentina KUKEEVA",
+                "outcome": "L",
+                "score": "2-4 1-4"
+              },
+              {
+                "round": "R16",
+                "opponent": "Ellie WANG",
+                "outcome": "W",
+                "score": "4-0 4-1"
+              },
+              {
+                "round": "R32",
+                "opponent": "Angela LIU",
+                "outcome": "W",
+                "score": "5-3 4-1"
+              }
             ]
           },
           {
-            name: "NPT Level 6 Junior Open",
-            level: "L6",
-            division: "Girls' 14 & under singles",
-            points: 95,
-            startDate: "2025-04-26",
-            endDate: "2025-04-27",
-            expiresDate: "2026-04-26",
-            daysRemaining: 86,
-            urgency: "safe",
-            matches: [
-              { round: "F", opponent: "Dana YEHIA", outcome: "W", score: "2-6 6-2 [10-3]" },
-              { round: "SF", opponent: "Ashna SAXENA", outcome: "W", score: "7-5 6-2" },
-              { round: "QF", opponent: "Sadie COHEN", outcome: "W", score: "6-1 6-0" },
-              { round: "R16", opponent: "Gayathri KOTIKALAPUDI", outcome: "W", score: "6-0 6-1" }
+            "name": "L5 BG14 Super Series at Solano Community College",
+            "level": "L5",
+            "division": "Girls' 14 & under singles",
+            "points": 98,
+            "startDate": "2025-07-05",
+            "endDate": "2025-07-06",
+            "expiresDate": "2026-07-05",
+            "daysRemaining": 151,
+            "urgency": "safe",
+            "matches": [
+              {
+                "round": "PL-F",
+                "opponent": "Leila LYONS",
+                "outcome": "L",
+                "score": "1-6 6-1 3-6"
+              },
+              {
+                "round": "E-SF",
+                "opponent": "Anna YANG",
+                "outcome": "L",
+                "score": "3-6 4-6"
+              },
+              {
+                "round": "E-QF",
+                "opponent": "Jennifer CHEN",
+                "outcome": "W",
+                "score": "3-6 7-6(2) 7-5"
+              }
             ]
           },
           {
-            name: "Santa Cruz Level 4 Juniors 12s Excellence",
-            level: "L4",
-            division: "Girls' 12 & under singles",
-            points: 76,
-            startDate: "2025-05-24",
-            endDate: "2025-05-26",
-            expiresDate: "2026-05-25",
-            daysRemaining: 115,
-            urgency: "safe",
-            matches: [
-              { round: "C-R16", opponent: "Emma LAI", outcome: "L", score: "2-6 3-6" },
-              { round: "R16", opponent: "Alexi LABRECQUE", outcome: "L", score: "3-6 4-6" },
-              { round: "R32", opponent: "Elina YAMAMOTO", outcome: "W", score: "6-4 6-2" }
+            "name": "Santa Cruz Level 4 Juniors 12s Excellence @ La Madrona Athletic Club - Singles & Doubles",
+            "level": "L4",
+            "division": "Girls' 12 & under singles",
+            "points": 76,
+            "startDate": "2025-05-24",
+            "endDate": "2025-05-26",
+            "expiresDate": "2026-05-25",
+            "daysRemaining": 110,
+            "urgency": "safe",
+            "matches": [
+              {
+                "round": "C-R16",
+                "opponent": "Emma LAI",
+                "outcome": "L",
+                "score": "2-6 3-6"
+              },
+              {
+                "round": "R16",
+                "opponent": "Alexi LABRECQUE",
+                "outcome": "L",
+                "score": "3-6 4-6"
+              },
+              {
+                "round": "R32",
+                "opponent": "Elina YAMAMOTO",
+                "outcome": "W",
+                "score": "6-4 6-2"
+              }
             ]
           },
           {
-            name: "NPT Level 6 Junior Open",
-            level: "L6",
-            division: "Girls' 12 & under singles",
-            points: 75,
-            startDate: "2025-02-22",
-            endDate: "2025-02-23",
-            expiresDate: "2026-02-22",
-            daysRemaining: 23,
-            urgency: "critical",
-            matches: [
-              { round: "F", opponent: "Madeleine CHAN", outcome: "W", score: "6-1 3-6 [12-10]" },
-              { round: "SF", opponent: "Hana KERN", outcome: "W", score: "6-0 6-1" },
-              { round: "QF", opponent: "Taeata TONG", outcome: "W", score: "6-3 6-4" },
-              { round: "R16", opponent: "BYE", outcome: "W", score: "N/A" }
+            "name": "NPT Level 6 Junior Open",
+            "level": "L6",
+            "division": "Girls' 14 & under singles",
+            "points": 95,
+            "startDate": "2025-04-26",
+            "endDate": "2025-04-27",
+            "expiresDate": "2026-04-26",
+            "daysRemaining": 81,
+            "urgency": "safe",
+            "matches": [
+              {
+                "round": "F",
+                "opponent": "Dana YEHIA",
+                "outcome": "W",
+                "score": "2-6 6-2 [10-3]"
+              },
+              {
+                "round": "SF",
+                "opponent": "Ashna SAXENA",
+                "outcome": "W",
+                "score": "7-5 6-2"
+              },
+              {
+                "round": "QF",
+                "opponent": "Sadie COHEN",
+                "outcome": "W",
+                "score": "6-1 6-0"
+              },
+              {
+                "round": "R16",
+                "opponent": "Gayathri KOTIKALAPUDI",
+                "outcome": "W",
+                "score": "6-0 6-1"
+              }
             ]
           }
         ],
-        doubles: [
+        "doubles": [
           {
-            name: "MTA Manteca Level 3 Doubles Sectionals",
-            level: "L3",
-            division: "Girls' 12 & under doubles",
-            points: 4,
-            startDate: "2025-09-20",
-            endDate: "2025-09-21",
-            expiresDate: "2026-09-20",
-            daysRemaining: 233,
-            urgency: "safe",
-            matches: [
-              { round: "W-F", opponent: "MAY SUN / Bella WU", outcome: "W", score: "5-4(3) 4-2", partner: "Zaira GADGIL" },
-              { round: "W-SF", opponent: "BYE", outcome: "W", score: "N/A", partner: "Zaira GADGIL" },
-              { round: "E-QF", opponent: "Zhiyan DUAN / Camille KUNKEL", outcome: "L", score: "0-4 1-4", partner: "Zaira GADGIL" }
+            "name": "MTA Manteca Level 3 Junior Boys and Girls 12 & 14s Doubles Sectionals",
+            "level": "L3",
+            "division": "Girls' 12 & under doubles",
+            "points": 4,
+            "startDate": "2025-09-20",
+            "endDate": "2025-09-21",
+            "expiresDate": "2026-09-20",
+            "daysRemaining": 228,
+            "urgency": "safe",
+            "matches": [
+              {
+                "round": "W-F",
+                "opponent": "Bella WU / MAY SUN",
+                "outcome": "W",
+                "score": "5-4(3) 4-2",
+                "partner": "Zaira GADGIL"
+              },
+              {
+                "round": "W-SF",
+                "opponent": "",
+                "outcome": "W",
+                "score": "N/A",
+                "partner": "Zaira GADGIL"
+              },
+              {
+                "round": "E-QF",
+                "opponent": "Zhiyan DUAN / Camille KUNKEL",
+                "outcome": "L",
+                "score": "0-4 1-4",
+                "partner": "Zaira GADGIL"
+              }
             ]
           }
         ]
@@ -1012,6 +1185,50 @@
       const date = new Date(dateStr);
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    }
+
+    function escapeHtml(str) {
+      const s = (str ?? '').toString();
+      return s.replace(/[&<>"']/g, (ch) => {
+        const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+        return map[ch] || ch;
+      });
+    }
+
+    function buildUtrSearchUrl(name) {
+      const q = encodeURIComponent((name || '').trim());
+      return `https://app.utrsports.net/search?query=${q}`;
+    }
+
+    function buildUstaSearchUrl(name) {
+      const q = encodeURIComponent((name || '').trim());
+      return `https://www.usta.com/en/home/play/player-search.html#?search=${q}`;
+    }
+
+    function renderPlayerNameWithLinks(name) {
+      const cleaned = (name || '').trim();
+      if (!cleaned) return '';
+      if (cleaned.toUpperCase() === 'BYE') return escapeHtml(cleaned);
+
+      const utrUrl = buildUtrSearchUrl(cleaned);
+      const ustaUrl = buildUstaSearchUrl(cleaned);
+      return `
+        <span class="player-ref">
+          <span class="player-ref__name">${escapeHtml(cleaned)}</span>
+          <span class="player-ref__links">
+            <a class="player-ref__link" href="${utrUrl}" target="_blank" rel="noopener">UTR</a>
+            <a class="player-ref__link" href="${ustaUrl}" target="_blank" rel="noopener">USTA</a>
+          </span>
+        </span>
+      `.trim();
+    }
+
+    function renderNameListWithLinks(raw) {
+      const text = (raw || '').trim();
+      if (!text) return '';
+      const parts = text.split('/').map((p) => p.trim()).filter(Boolean);
+      if (parts.length <= 1) return renderPlayerNameWithLinks(text);
+      return parts.map(renderPlayerNameWithLinks).join(' / ');
     }
 
     function renderTimeline() {
@@ -1051,13 +1268,13 @@
         const levelClass = `event-badge--${event.level.toLowerCase()}`;
 
         const matchesHtml = event.matches && event.matches.length > 0 ? `
-          <div class="event-matches">
-            <div class="event-matches-title">Match Results</div>
+            <div class="event-matches">
+              <div class="event-matches-title">Match Results</div>
             ${event.matches.map(match => `
               <div class="match">
                 <span class="match-round">${match.round}</span>
                 <span class="match-outcome match-outcome--${match.outcome}">${match.outcome}</span>
-                <span class="match-opponent">${match.opponent}${match.partner ? ` (w/ ${match.partner})` : ''}</span>
+                <span class="match-opponent">${renderNameListWithLinks(match.opponent)}${match.partner ? ` <span class="match-partner">(w/ ${renderNameListWithLinks(match.partner)})</span>` : ''}</span>
                 <span class="match-score">${match.score}</span>
               </div>
             `).join('')}

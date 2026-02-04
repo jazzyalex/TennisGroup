@@ -1603,7 +1603,7 @@
 		                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
 		                </svg>
 		              </span>
-		              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/players/832420EF-F6CC-48A4-AC06-1C54E9C8533D">USTA</span>
+		              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/overview/832420EF-F6CC-48A4-AC06-1C54E9C8533D">USTA</span>
 		              <div class="card-arrow">
 		                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 		                  <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1829,6 +1829,38 @@
 
 		    function updateAllCardPastStatuses() {
 		      document.querySelectorAll('a.tournament-card').forEach(updateCardPastStatus);
+		    }
+
+		    function sortTournamentCardsByDate() {
+		      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
+		      const cardsRoot = tournamentSection?.querySelector('.cards-grid');
+		      if (!cardsRoot) return;
+
+		      const cards = Array.from(cardsRoot.querySelectorAll(':scope > a.tournament-card'));
+		      if (cards.length <= 1) return;
+
+		      const today = new Date();
+		      today.setHours(0, 0, 0, 0);
+		      const todayMs = today.getTime();
+
+		      const keyed = cards.map((card, idx) => {
+		        const dateText = card.querySelector('.card-meta .meta-item')?.textContent || '';
+		        const end = parseEndDateFromText(dateText);
+		        const endDate = end ? new Date(end.getFullYear(), end.getMonth(), end.getDate()) : null;
+		        const endMs = endDate ? endDate.getTime() : Number.NEGATIVE_INFINITY;
+		        const isPast = endDate ? endMs < todayMs : false;
+		        return { card, idx, endMs, isPast };
+		      });
+
+		      keyed.sort((a, b) => {
+		        if (a.isPast !== b.isPast) return a.isPast ? 1 : -1;
+		        if (a.endMs !== b.endMs) return b.endMs - a.endMs;
+		        return a.idx - b.idx;
+		      });
+
+		      const fragment = document.createDocumentFragment();
+		      keyed.forEach(({ card }) => fragment.appendChild(card));
+		      cardsRoot.appendChild(fragment);
 		    }
 
 		    function loadUpdatedCache() {
@@ -2309,7 +2341,7 @@
 		    }
 	
 	    // Player expiration alert data (injected by Python script)
-	    window.PLAYER_ALERT_DATA = {"show_alert": true, "critical_points": 75, "min_days_remaining": 18};
+	    window.PLAYER_ALERT_DATA = {"show_alert": false, "critical_points": 0, "min_days_remaining": 0};
 	
 	    function updateExpirationAlert() {
 	      const data = window.PLAYER_ALERT_DATA;
@@ -2329,6 +2361,7 @@
 		      addStarredCalendarEventCards(favoritesApi);
 		      updateExpirationAlert();
 		      updateAllCardPastStatuses();
+		      sortTournamentCardsByDate();
 		      populateReportCardUpdatedLabels();
 		    }
 	
