@@ -190,6 +190,291 @@
       border-radius: 4px;
     }
 
+    .path-to-final {
+      max-width: 1000px;
+      margin: 14px auto 18px;
+      padding: 14px 14px 12px;
+      background: #ffffff;
+      border: 1px solid #e1e6ef;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .path-to-final-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .path-to-final-header > div:first-child {
+      flex: 1 1 260px;
+      min-width: 0;
+    }
+
+    .path-to-final-title {
+      margin: 0;
+      font-size: 16px;
+      color: #2c3e50;
+    }
+
+    .path-to-final-subtitle {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #7f8c8d;
+      line-height: 1.3;
+    }
+
+    .ptf-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+    }
+
+    .ptf-segment {
+      display: inline-flex;
+      border: 1px solid #d6deeb;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #f7f9fc;
+    }
+
+    .ptf-mode {
+      appearance: none;
+      border: none;
+      background: transparent;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #2c3e50;
+      cursor: pointer;
+    }
+
+    .ptf-mode[aria-pressed="true"] {
+      background: #4472C4;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .ptf-mode:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .ptf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .ptf-table th,
+    .ptf-table td {
+      padding: 8px 6px;
+      border-bottom: 1px solid #eef2f8;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .ptf-table th {
+      background: #4472C4;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .ptf-opponent {
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .ptf-muted {
+      color: #7f8c8d;
+      font-size: 11px;
+      margin-top: 2px;
+      line-height: 1.25;
+    }
+
+    .ptf-import {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #e1e6ef;
+      color: #2c3e50;
+    }
+
+    .ptf-import summary {
+      cursor: pointer;
+      font-size: 12px;
+      color: #4472C4;
+      user-select: none;
+    }
+
+    .ptf-import textarea {
+      width: 100%;
+      min-height: 92px;
+      margin-top: 8px;
+      padding: 10px;
+      font-size: 12px;
+      border: 1px solid #d6deeb;
+      border-radius: 8px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;
+    }
+
+    .ptf-import-actions {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ptf-button {
+      border: 1px solid #d6deeb;
+      background: #f7f9fc;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #2c3e50;
+    }
+
+    .ptf-button.primary {
+      border-color: rgba(68, 114, 196, 0.35);
+      background: rgba(68, 114, 196, 0.12);
+      color: #1f3b68;
+      font-weight: 700;
+    }
+
+    .ptf-error {
+      color: #b00020;
+      font-size: 12px;
+    }
+
+    #ptf-source {
+      color: #4472C4;
+      text-decoration: underline;
+      font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    #ptf-source:hover {
+      color: #2c5aa0;
+    }
+
+    .ptf-results {
+      margin-top: 12px;
+    }
+
+    .ptf-results-title {
+      margin: 12px 0 6px;
+      font-size: 13px;
+      color: #2c3e50;
+    }
+
+    .ptf-results-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .ptf-result-item {
+      padding: 10px 10px;
+      border-radius: 10px;
+      border: 1px solid #eef2f8;
+      background: #fbfcff;
+    }
+
+    .ptf-result-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .ptf-result-round {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: #5a6a7f;
+    }
+
+    .ptf-result-score {
+      font-size: 12px;
+      font-weight: 800;
+      color: #2c3e50;
+      white-space: nowrap;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .path-to-final {
+        background: rgba(28, 28, 30, 0.92);
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+
+      .path-to-final-title {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .path-to-final-subtitle,
+      .ptf-muted {
+        color: rgba(255, 255, 255, 0.70);
+      }
+
+      .ptf-table th {
+        background: rgba(68, 114, 196, 0.86);
+        color: rgba(255, 255, 255, 0.96);
+      }
+
+      .ptf-table tbody tr:nth-child(even) td {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .ptf-table td {
+        color: rgba(255, 255, 255, 0.88);
+        border-bottom-color: rgba(255, 255, 255, 0.10);
+      }
+
+      .ptf-opponent {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      #ptf-source {
+        color: #8ab4f8;
+      }
+
+      #ptf-source:hover {
+        color: #b3d1ff;
+      }
+
+      .ptf-results-title {
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .ptf-result-item {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .ptf-result-round {
+        color: rgba(255, 255, 255, 0.70);
+      }
+
+      .ptf-result-score {
+        color: rgba(255, 255, 255, 0.92);
+      }
+    }
+
     table {
       width: 100%;
       max-width: 1000px;
@@ -350,7 +635,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    .stats-section h3 {
+    .stats-section h2 {
       color: #2c3e50;
       margin-top: 0;
       border-bottom: 2px solid #4472C4;
@@ -395,7 +680,7 @@
       flex-direction: column;
     }
 
-    .utr-histogram h3 {
+    .utr-histogram h2 {
       color: #2c3e50;
       margin-top: 0;
       border-bottom: 2px solid #4472C4;
@@ -581,6 +866,10 @@
         color: #b0b0b0;
       }
 
+      .link-legend {
+        color: #b0b0b0;
+      }
+
       table {
         background-color: #2a2a2a;
         color: #e0e0e0;
@@ -635,7 +924,7 @@
         color: #e0e0e0;
       }
 
-      .stats-section h3, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h3 {
+      .stats-section h2, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h2 {
         color: #ffffff;
         border-bottom-color: #3a5a8a;
       }
@@ -1080,8 +1369,8 @@
         --mobile-surface-elevated: #1e1e28;
         --mobile-border: #2a2a38;
         --mobile-text-primary: #f5f5f7;
-        --mobile-text-secondary: #8e8e93;
-        --mobile-text-muted: #636366;
+        --mobile-text-secondary: #c7c7cc;
+        --mobile-text-muted: #9a9aa0;
         --mobile-accent: #ff9f0a;
         --mobile-accent-soft: rgba(255, 159, 10, 0.15);
         --mobile-green: #30d158;
@@ -1436,6 +1725,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
     }
 
     .mobile-section-title {
@@ -1444,6 +1734,24 @@
       color: var(--mobile-text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .mobile-section-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--mobile-blue);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .mobile-section-link:active {
+      opacity: 0.6;
+    }
+
+    #mobile-ptf-source {
+      display: none;
     }
 
     /* Sort Controls */
@@ -1689,6 +1997,52 @@
       padding: 16px;
     }
 
+    /* Path to Final */
+    .mobile-path-section {
+      padding: 0 20px;
+      margin-bottom: 16px;
+    }
+
+    .mobile-path-card {
+      background: var(--mobile-surface);
+      border: 1px solid var(--mobile-border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .mobile-ptf-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      color: var(--mobile-text-primary);
+    }
+
+    .mobile-ptf-table th,
+    .mobile-ptf-table td {
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--mobile-border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .mobile-ptf-table th {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--mobile-text-muted);
+    }
+
+    .mobile-ptf-name {
+      font-weight: 700;
+      color: var(--mobile-text-primary);
+    }
+
+    .mobile-ptf-meta {
+      margin-top: 2px;
+      font-size: 11px;
+      color: var(--mobile-text-secondary);
+    }
+
     .mobile-histogram {
       display: flex;
       align-items: flex-end;
@@ -1905,6 +2259,27 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
 
+  <section class="path-to-final" id="path-to-final">
+    <div class="path-to-final-header">
+      <div>
+        <h2 class="path-to-final-title" id="ptf-title">Path to Final</h2>
+        <div class="path-to-final-subtitle" id="ptf-subtitle"></div>
+      </div>
+      <div class="ptf-controls">
+        <a id="ptf-source" href="#" target="_blank" rel="noopener noreferrer"></a>
+      </div>
+    </div>
+    <div id="ptf-body"></div>
+    <details class="ptf-import" id="ptf-import">
+      <summary>Paste official draw (JSON positions)</summary>
+      <textarea id="ptf-json" spellcheck="false" placeholder='Paste JSON array/object with bracket positions.\nExample: [\"Alexis Malakhova\",\"Grace Li\", ...]'></textarea>
+      <div class="ptf-import-actions">
+        <button class="ptf-button primary" id="ptf-apply" type="button">Apply</button>
+        <div class="ptf-error" id="ptf-error" aria-live="polite"></div>
+      </div>
+    </details>
+  </section>
+
   <table>
     <thead class="sticky-header">
       <tr>
@@ -1924,13 +2299,13 @@
   </table>
 
   <div class="utr-histogram">
-    <h3>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span></h3>
+    <h2>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span></h2>
     <div id="utr-histogram-chart" class="utr-histogram-chart"></div>
     <div class="utr-histogram-caption" id="utr-histogram-caption">Based on UTR values from the player list.</div>
   </div>
 
                   <div class="stats-section">
-    <h3>Tournament Statistics</h3>
+    <h2>Tournament Statistics</h2>
     <div class="stats-grid">
       <div class="stat-box">
         <div class="stat-label">Total Players</div>
@@ -2090,6 +2465,15 @@
 
     <!-- Position Gauge -->
     <div class="mobile-position-gauge" id="mobile-position-gauge"></div>
+
+    <!-- Path to Final -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title" id="mobile-ptf-title">Path to Final</span>
+      <a class="mobile-section-link" id="mobile-ptf-source" href="#" target="_blank" rel="noopener noreferrer">Official draw</a>
+    </div>
+    <div class="mobile-path-section">
+      <div class="mobile-path-card" id="mobile-path-to-final"></div>
+    </div>
 
     <!-- UTR Distribution -->
     <div class="mobile-section-header">
@@ -3145,6 +3529,405 @@
     buildUtrHistogram();
     updateRegistrationCountdown();
     setInterval(updateRegistrationCountdown, 60 * 1000);
+
+    const PTF_PRIMARY_PLAYER = { first: 'Alexis', last: 'Malakhova' };
+    const PTF_ACTUAL_DRAW_KEY = `tennis_tracker_actual_draw_positions_v1:${window.location.pathname}`;
+
+    function ptfNormalizeName(value) {
+      return (value || '').toString().trim().replace(/\s+/g, ' ').toLowerCase();
+    }
+
+    function ptfFindTarget(players) {
+      const first = PTF_PRIMARY_PLAYER.first.toLowerCase();
+      const last = PTF_PRIMARY_PLAYER.last.toLowerCase();
+      return (
+        players.find(
+          p => (p.firstName || '').toLowerCase() === first && (p.lastName || '').toLowerCase() === last
+        ) || null
+      );
+    }
+
+    function ptfRoundLabels(drawSize) {
+      const labels = [];
+      for (let size = drawSize; size >= 2; size = size / 2) {
+        if (size === 2) {
+          labels.push('Final');
+          break;
+        }
+        if (size === 4) labels.push('Semifinal');
+        else if (size === 8) labels.push('Quarterfinal');
+        else labels.push(`Round of ${size}`);
+      }
+      return labels;
+    }
+
+    function ptfReadActualPositions(drawSize) {
+      const scriptTag = document.getElementById('actual-draw-json');
+      if (scriptTag && scriptTag.textContent.trim()) {
+        try {
+          const parsed = JSON.parse(scriptTag.textContent.trim());
+          const positions = Array.isArray(parsed) ? parsed : parsed?.positions;
+          if (Array.isArray(positions) && positions.length >= drawSize) return positions;
+        } catch {}
+      }
+
+      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        const positions = Array.isArray(parsed) ? parsed : parsed?.positions;
+        if (Array.isArray(positions) && positions.length >= drawSize) return positions;
+      } catch {}
+      return null;
+    }
+
+    function ptfReadActualPayload(drawSize) {
+      const scriptTag = document.getElementById('actual-draw-json');
+      if (scriptTag && scriptTag.textContent.trim()) {
+        try {
+          const parsed = JSON.parse(scriptTag.textContent.trim());
+          if (parsed && typeof parsed === 'object') {
+            const positions = Array.isArray(parsed.positions) ? parsed.positions : null;
+            if (positions && positions.length >= drawSize) return parsed;
+          }
+          if (Array.isArray(parsed) && parsed.length >= drawSize) return { positions: parsed };
+        } catch {}
+      }
+
+      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          const positions = Array.isArray(parsed.positions) ? parsed.positions : null;
+          if (positions && positions.length >= drawSize) return parsed;
+        }
+        if (Array.isArray(parsed) && parsed.length >= drawSize) return { positions: parsed };
+      } catch {}
+      return null;
+    }
+
+    function ptfReadActualMeta() {
+      const scriptTag = document.getElementById('actual-draw-json');
+      if (scriptTag && scriptTag.textContent.trim()) {
+        try {
+          return JSON.parse(scriptTag.textContent.trim());
+        } catch {}
+      }
+
+      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
+      if (!raw) return null;
+      try {
+        return JSON.parse(raw);
+      } catch {}
+      return null;
+    }
+
+    function ptfGetOverviewUrl() {
+      const a = document.querySelector('.desktop-view .tournament-info a');
+      if (a && a.href) return a.href;
+      const b = document.querySelector('a.mobile-tournament-link');
+      if (b && b.href) return b.href;
+      return '';
+    }
+
+    function ptfResolveDrawUrl(meta) {
+      const m = meta && typeof meta === 'object' ? meta : null;
+      const direct = m?.drawUrl;
+      if (typeof direct === 'string' && /^https?:\\/\\//.test(direct)) return direct;
+
+      const org = m?.orgSegment;
+      const tournamentId = m?.tournamentId;
+      const eventId = m?.eventId;
+      if (org && tournamentId) {
+        const base = `https://playtennis.usta.com/Competitions/${encodeURIComponent(org)}/Tournaments/draws/${encodeURIComponent(tournamentId)}`;
+        return eventId ? `${base}/${encodeURIComponent(eventId)}` : base;
+      }
+
+      const overviewUrl = ptfGetOverviewUrl();
+      const match = (overviewUrl || '').match(/\\/Competitions\\/([^/]+)\\/Tournaments\\/Overview\\/([A-F0-9-]+)/i);
+      if (!match) return null;
+      return `https://playtennis.usta.com/Competitions/${encodeURIComponent(match[1])}/Tournaments/draws/${encodeURIComponent(match[2])}`;
+    }
+
+    function ptfBuildActual(players, drawSize, positions) {
+      const byName = new Map(players.map(p => [ptfNormalizeName(p.fullName), p]));
+      const bracket = new Array(drawSize).fill(null);
+      for (let i = 0; i < drawSize; i += 1) {
+        const name = positions[i];
+        if (!name) continue;
+        bracket[i] =
+          byName.get(ptfNormalizeName(name)) || { fullName: String(name), utr: NaN, natRank: NaN, wtn: '' };
+      }
+      return bracket;
+    }
+
+    function ptfTopOpponents(candidates, limit) {
+      const filtered = (candidates || []).filter(Boolean);
+      const scored = filtered
+        .map(p => ({
+          p,
+          utr: Number.isFinite(p?.utr) ? p.utr : -1e9,
+          natRank: Number.isFinite(p?.natRank) ? p.natRank : 1e9,
+        }))
+        .sort((a, b) => {
+          if (b.utr !== a.utr) return b.utr - a.utr;
+          return a.natRank - b.natRank;
+        })
+        .map(x => x.p);
+      return scored.slice(0, Math.max(1, Math.min(2, limit || 2)));
+    }
+
+    function ptfFormatUtr(player) {
+      return Number.isFinite(player?.utr) ? `UTR ${player.utr.toFixed(2)}` : 'UTR —';
+    }
+
+    function ptfComputeLikelyOpponents(bracket, targetPos, drawSize) {
+      const labels = ptfRoundLabels(drawSize);
+      const target = bracket[targetPos - 1];
+      const path = [];
+
+      for (let roundIndex = 0; roundIndex < labels.length; roundIndex += 1) {
+        const groupSize = Math.pow(2, roundIndex + 1);
+        const groupStart = Math.floor((targetPos - 1) / groupSize) * groupSize + 1;
+        const halfSize = groupSize / 2;
+        const inSecondHalf = targetPos > groupStart + halfSize - 1;
+        const otherHalfStart = groupStart + (inSecondHalf ? 0 : halfSize);
+
+        const candidates = [];
+        for (let pos = otherHalfStart; pos < otherHalfStart + halfSize; pos += 1) {
+          const p = bracket[pos - 1] || null;
+          if (p && ptfNormalizeName(p.fullName) === ptfNormalizeName(target.fullName)) continue;
+          candidates.push(p);
+        }
+
+        const limit = roundIndex === 0 ? 1 : 2;
+        path.push({ label: labels[roundIndex], opponents: ptfTopOpponents(candidates, limit) });
+      }
+
+      return path;
+    }
+
+    function ptfRenderOpponentBlocks(opponents) {
+      const list = Array.isArray(opponents) ? opponents.filter(Boolean) : [];
+      if (!list.length) return '<div class="ptf-muted">—</div>';
+      return list
+        .map(
+          (p, idx) => `
+            <div${idx ? ' style="margin-top:10px;"' : ''}>
+              <div class="ptf-opponent">${p.fullName || '—'}</div>
+              <div class="ptf-muted">${ptfFormatUtr(p)}</div>
+            </div>`
+        )
+        .join('');
+    }
+
+    function ptfRenderHtml(path) {
+      if (!path || !path.length) return '<div class="ptf-muted">Not enough data to compute a path.</div>';
+      const rows = path
+        .map(
+          step => `
+          <tr>
+            <td>${step.label}</td>
+            <td>${ptfRenderOpponentBlocks(step.opponents)}</td>
+          </tr>`
+        )
+        .join('');
+      return `
+        <table class="ptf-table">
+          <thead><tr><th>Round</th><th>Likely opponents (UTR)</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    function ptfRenderResultsHtml(matches, labelName) {
+      const list = Array.isArray(matches)
+        ? matches.filter(m => m && (m.round || m.roundName || m.opponent || m.score || m.result || m.status))
+        : [];
+      if (!list.length) return '';
+
+      const anyCompleted = list.some(m => {
+        const status = (m.status || '').toString().toUpperCase();
+        if (status === 'COMPLETED') return true;
+        if ((m.score || '').toString().trim()) return true;
+        if ((m.result || '').toString().trim()) return true;
+        return false;
+      });
+      const titleSuffix = anyCompleted ? 'Results' : 'Matches';
+      const titleText = (labelName || '').toString().trim()
+        ? `${(labelName || '').toString().trim()} ${titleSuffix}`
+        : titleSuffix;
+
+      const items = list
+        .map(m => {
+          const round = (m.round || m.roundName || '').toString() || 'Match';
+          const opponent = (m.opponent || '').toString() || 'TBD';
+          const status = (m.status || '').toString();
+          const result = (m.result || '').toString();
+          const score = (m.score || '').toString();
+          const meta = [status].filter(Boolean).join(' • ');
+          const scoreText = [result, score].filter(Boolean).join(' ');
+          return `
+            <li class="ptf-result-item">
+              <div class="ptf-result-top">
+                <div class="ptf-result-round">${round}</div>
+                <div class="ptf-result-score">${scoreText || '—'}</div>
+              </div>
+              <div class="ptf-opponent" style="margin-top:6px;">vs ${opponent}</div>
+              ${meta ? `<div class="ptf-muted" style="margin-top:4px;">${meta}</div>` : ''}
+            </li>`;
+        })
+        .join('');
+      return `
+        <div class="ptf-results">
+          <div class="ptf-results-title">${titleText}</div>
+          <ul class="ptf-results-list">${items}</ul>
+        </div>
+      `;
+    }
+
+    function ptfRenderMobileHtml(path) {
+      if (!path || !path.length) return '<div class="mobile-ptf-meta">Not enough data to compute a path.</div>';
+      const rows = path
+        .map(step => {
+          const opponents = Array.isArray(step.opponents) ? step.opponents.filter(Boolean) : [];
+          if (!opponents.length) {
+            return `
+            <tr>
+              <td>${step.label}</td>
+              <td><div class="mobile-ptf-meta">—</div></td>
+            </tr>`;
+          }
+          const blocks = opponents
+            .map(
+              (p, idx) => `
+              <div${idx ? ' style="margin-top:8px;"' : ''}>
+                <div class="mobile-ptf-name">${p.fullName || '—'}</div>
+                <div class="mobile-ptf-meta">${ptfFormatUtr(p)}</div>
+              </div>`
+            )
+            .join('');
+          return `
+            <tr>
+              <td>${step.label}</td>
+              <td>${blocks}</td>
+            </tr>`;
+        })
+        .join('');
+
+      return `
+        <table class="mobile-ptf-table">
+          <thead><tr><th>Round</th><th>Likely opponents</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    function renderPathToFinal() {
+      const players = Array.isArray(allPlayers) && allPlayers.length ? allPlayers : parsePlayerData();
+      const alexis = ptfFindTarget(players);
+      const stats = parseKeyStats();
+      const drawSize = Number.isFinite(stats.drawSize) ? stats.drawSize : 16;
+
+      const desktopBody = document.getElementById('ptf-body');
+      const mobileBody = document.getElementById('mobile-path-to-final');
+      const subtitleEl = document.getElementById('ptf-subtitle');
+      const titleEl = document.getElementById('ptf-title');
+      const sourceEl = document.getElementById('ptf-source');
+      const mobileTitleEl = document.getElementById('mobile-ptf-title');
+      const mobileSourceEl = document.getElementById('mobile-ptf-source');
+      if (!desktopBody || !subtitleEl || !titleEl) return;
+
+      const titleText = alexis ? `Path to Final: ${alexis.fullName}` : 'Path to Final';
+      titleEl.textContent = titleText;
+      if (mobileTitleEl) mobileTitleEl.textContent = titleText;
+
+      const meta = ptfReadActualMeta();
+      const drawUrl = ptfResolveDrawUrl(meta);
+      for (const el of [sourceEl, mobileSourceEl]) {
+        if (!el) continue;
+        if (drawUrl) {
+          el.href = drawUrl;
+          el.textContent = 'Official draw';
+          el.title = 'Open official draw on USTA PlayTennis';
+          el.style.display = '';
+        } else {
+          el.textContent = '';
+          el.removeAttribute('href');
+          el.style.display = 'none';
+        }
+      }
+
+      const applyBtn = document.getElementById('ptf-apply');
+      const jsonTextarea = document.getElementById('ptf-json');
+      const errorEl = document.getElementById('ptf-error');
+
+      function showEmpty(message) {
+        subtitleEl.textContent = message;
+        desktopBody.innerHTML = `<div class="ptf-muted">${message}</div>`;
+        if (mobileBody) mobileBody.innerHTML = `<div class="mobile-ptf-meta">${message}</div>`;
+      }
+
+      if (applyBtn && jsonTextarea) {
+        applyBtn.onclick = () => {
+          if (errorEl) errorEl.textContent = '';
+          let parsed;
+          try {
+            parsed = JSON.parse(jsonTextarea.value || 'null');
+          } catch {
+            if (errorEl) errorEl.textContent = 'Invalid JSON.';
+            return;
+          }
+
+          const payload = Array.isArray(parsed) ? { positions: parsed } : (parsed || {});
+          const positions = payload?.positions;
+          if (!Array.isArray(positions) || positions.length < drawSize) {
+            if (errorEl) errorEl.textContent = `Expected an array (or {positions:[...]}) with at least ${drawSize} entries.`;
+            return;
+          }
+
+          const stored = { positions };
+          if (Array.isArray(payload?.matches)) stored.matches = payload.matches;
+          localStorage.setItem(PTF_ACTUAL_DRAW_KEY, JSON.stringify(stored));
+          renderPathToFinal();
+        };
+      }
+
+      if (!alexis) {
+        showEmpty('Primary player not found in entry list.');
+        return;
+      }
+
+      const payload = ptfReadActualPayload(drawSize);
+      const actualPositions = payload?.positions || null;
+      if (!actualPositions) {
+        showEmpty('Paste official draw positions below to compute a path.');
+        return;
+      }
+
+      const bracket = ptfBuildActual(players, drawSize, actualPositions);
+      const targetPos = bracket.findIndex(p => ptfNormalizeName(p?.fullName) === ptfNormalizeName(alexis.fullName)) + 1;
+      if (!targetPos) {
+        showEmpty('Alexis was not found in the official draw positions.');
+        return;
+      }
+
+      subtitleEl.textContent = 'Likely opponents = top 1–2 by UTR in each round’s opponent pool.';
+      const path = ptfComputeLikelyOpponents(bracket, targetPos, drawSize);
+      const matches = Array.isArray(payload?.matches) ? payload.matches : [];
+      desktopBody.innerHTML = ptfRenderHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
+      if (mobileBody) {
+        mobileBody.innerHTML = ptfRenderMobileHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderPathToFinal);
+    } else {
+      renderPathToFinal();
+    }
+
 
     function getRegistrationCloseText() {
       const keyStats = document.querySelectorAll('.desktop-view .key-stat');
