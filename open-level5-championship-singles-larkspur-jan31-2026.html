@@ -205,6 +205,12 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .path-to-final-header > div:first-child {
+      flex: 1 1 260px;
+      min-width: 0;
     }
 
     .path-to-final-title {
@@ -226,6 +232,7 @@
       gap: 8px;
       flex-wrap: wrap;
       justify-content: flex-end;
+      flex: 0 0 auto;
     }
 
     .ptf-segment {
@@ -425,7 +432,12 @@
       }
 
       .ptf-table th {
-        color: rgba(255, 255, 255, 0.72);
+        background: rgba(68, 114, 196, 0.86);
+        color: rgba(255, 255, 255, 0.96);
+      }
+
+      .ptf-table tbody tr:nth-child(even) td {
+        background: rgba(255, 255, 255, 0.04);
       }
 
       .ptf-table td {
@@ -1357,8 +1369,8 @@
         --mobile-surface-elevated: #1e1e28;
         --mobile-border: #2a2a38;
         --mobile-text-primary: #f5f5f7;
-        --mobile-text-secondary: #8e8e93;
-        --mobile-text-muted: #636366;
+        --mobile-text-secondary: #c7c7cc;
+        --mobile-text-muted: #9a9aa0;
         --mobile-accent: #ff9f0a;
         --mobile-accent-soft: rgba(255, 159, 10, 0.15);
         --mobile-green: #30d158;
@@ -1713,6 +1725,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
     }
 
     .mobile-section-title {
@@ -1721,6 +1734,24 @@
       color: var(--mobile-text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .mobile-section-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--mobile-blue);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .mobile-section-link:active {
+      opacity: 0.6;
+    }
+
+    #mobile-ptf-source {
+      display: none;
     }
 
     /* Sort Controls */
@@ -2628,7 +2659,8 @@
 
     <!-- Path to Final -->
     <div class="mobile-section-header">
-      <span class="mobile-section-title">Path to Final</span>
+      <span class="mobile-section-title" id="mobile-ptf-title">Path to Final</span>
+      <a class="mobile-section-link" id="mobile-ptf-source" href="#" target="_blank" rel="noopener noreferrer">Official draw</a>
     </div>
     <div class="mobile-path-section">
       <div class="mobile-path-card" id="mobile-path-to-final"></div>
@@ -3779,6 +3811,49 @@
       return null;
     }
 
+    function ptfReadActualMeta() {
+      const scriptTag = document.getElementById('actual-draw-json');
+      if (scriptTag && scriptTag.textContent.trim()) {
+        try {
+          return JSON.parse(scriptTag.textContent.trim());
+        } catch {}
+      }
+
+      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
+      if (!raw) return null;
+      try {
+        return JSON.parse(raw);
+      } catch {}
+      return null;
+    }
+
+    function ptfGetOverviewUrl() {
+      const a = document.querySelector('.desktop-view .tournament-info a');
+      if (a && a.href) return a.href;
+      const b = document.querySelector('a.mobile-tournament-link');
+      if (b && b.href) return b.href;
+      return '';
+    }
+
+    function ptfResolveDrawUrl(meta) {
+      const m = meta && typeof meta === 'object' ? meta : null;
+      const direct = m?.drawUrl;
+      if (typeof direct === 'string' && /^https?:\\/\\//.test(direct)) return direct;
+
+      const org = m?.orgSegment;
+      const tournamentId = m?.tournamentId;
+      const eventId = m?.eventId;
+      if (org && tournamentId) {
+        const base = `https://playtennis.usta.com/Competitions/${encodeURIComponent(org)}/Tournaments/draws/${encodeURIComponent(tournamentId)}`;
+        return eventId ? `${base}/${encodeURIComponent(eventId)}` : base;
+      }
+
+      const overviewUrl = ptfGetOverviewUrl();
+      const match = (overviewUrl || '').match(/\\/Competitions\\/([^/]+)\\/Tournaments\\/Overview\\/([A-F0-9-]+)/i);
+      if (!match) return null;
+      return `https://playtennis.usta.com/Competitions/${encodeURIComponent(match[1])}/Tournaments/draws/${encodeURIComponent(match[2])}`;
+    }
+
     function ptfBuildActual(players, drawSize, positions) {
       const byName = new Map(players.map(p => [ptfNormalizeName(p.fullName), p]));
       const bracket = new Array(drawSize).fill(null);
@@ -3870,9 +3945,24 @@
       `;
     }
 
-    function ptfRenderResultsHtml(matches) {
-      const list = Array.isArray(matches) ? matches : [];
+    function ptfRenderResultsHtml(matches, labelName) {
+      const list = Array.isArray(matches)
+        ? matches.filter(m => m && (m.round || m.roundName || m.opponent || m.score || m.result || m.status))
+        : [];
       if (!list.length) return '';
+
+      const anyCompleted = list.some(m => {
+        const status = (m.status || '').toString().toUpperCase();
+        if (status === 'COMPLETED') return true;
+        if ((m.score || '').toString().trim()) return true;
+        if ((m.result || '').toString().trim()) return true;
+        return false;
+      });
+      const titleSuffix = anyCompleted ? 'Results' : 'Matches';
+      const titleText = (labelName || '').toString().trim()
+        ? `${(labelName || '').toString().trim()} ${titleSuffix}`
+        : titleSuffix;
+
       const items = list
         .map(m => {
           const round = (m.round || m.roundName || '').toString() || 'Match';
@@ -3895,7 +3985,7 @@
         .join('');
       return `
         <div class="ptf-results">
-          <div class="ptf-results-title">Alexis Results</div>
+          <div class="ptf-results-title">${titleText}</div>
           <ul class="ptf-results-list">${items}</ul>
         </div>
       `;
@@ -3949,9 +4039,29 @@
       const subtitleEl = document.getElementById('ptf-subtitle');
       const titleEl = document.getElementById('ptf-title');
       const sourceEl = document.getElementById('ptf-source');
+      const mobileTitleEl = document.getElementById('mobile-ptf-title');
+      const mobileSourceEl = document.getElementById('mobile-ptf-source');
       if (!desktopBody || !mobileBody || !subtitleEl || !titleEl) return;
 
-      titleEl.textContent = alexis ? `Path to Final: ${alexis.fullName}` : 'Path to Final';
+      const titleText = alexis ? `Path to Final: ${alexis.fullName}` : 'Path to Final';
+      titleEl.textContent = titleText;
+      if (mobileTitleEl) mobileTitleEl.textContent = titleText;
+
+      const meta = ptfReadActualMeta();
+      const drawUrl = ptfResolveDrawUrl(meta);
+      for (const el of [sourceEl, mobileSourceEl]) {
+        if (!el) continue;
+        if (drawUrl) {
+          el.href = drawUrl;
+          el.textContent = 'Official draw';
+          el.title = 'Open official draw on USTA PlayTennis';
+          el.style.display = '';
+        } else {
+          el.textContent = '';
+          el.removeAttribute('href');
+          el.style.display = 'none';
+        }
+      }
 
       const applyBtn = document.getElementById('ptf-apply');
       const jsonTextarea = document.getElementById('ptf-json');
@@ -3989,16 +4099,8 @@
       }
 
       if (!alexis) {
-        if (sourceEl) sourceEl.textContent = '';
         showEmpty('Primary player not found in entry list.');
         return;
-      }
-
-      const drawUrl = 'https://playtennis.usta.com/Competitions/hrtacademiadetenis/Tournaments/Overview/8EA9DB88-B9C3-4C1A-8723-1F34CB0F6AC9';
-      if (sourceEl) {
-        sourceEl.href = drawUrl;
-        sourceEl.textContent = 'Tournament page';
-        sourceEl.title = 'Open tournament page on USTA PlayTennis';
       }
 
       const payload = ptfReadActualPayload(drawSize);
@@ -4018,8 +4120,8 @@
       subtitleEl.textContent = 'Likely opponents = top 1–2 by UTR in each round’s opponent pool.';
       const path = ptfComputeLikelyOpponents(bracket, targetPos, drawSize);
       const matches = Array.isArray(payload?.matches) ? payload.matches : [];
-      desktopBody.innerHTML = ptfRenderHtml(path) + ptfRenderResultsHtml(matches);
-      mobileBody.innerHTML = ptfRenderMobileHtml(path) + ptfRenderResultsHtml(matches);
+      desktopBody.innerHTML = ptfRenderHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
+      mobileBody.innerHTML = ptfRenderMobileHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
     }
 
     if (document.readyState === 'loading') {
