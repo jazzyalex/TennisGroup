@@ -2030,7 +2030,9 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 	        const byMask = new Map();
 	        const leftovers = [];
 	        group.forEach((row) => {
-	          const mask = (isTrue(row['G12']) ? 1 : 0) | (isTrue(row['G14']) ? 2 : 0);
+	          const has12 = isTrue(row['G12']) || isTrue(row['B12']);
+	          const has14 = isTrue(row['G14']) || isTrue(row['B14']);
+	          const mask = (has12 ? 1 : 0) | (has14 ? 2 : 0);
 	          if (!byMask.has(mask)) byMask.set(mask, []);
 	          byMask.get(mask).push(row);
 	        });
