@@ -847,19 +847,23 @@
       border-top: 1px solid var(--border-subtle);
     }
 
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
+	    .meta-item {
+	      display: flex;
+	      align-items: center;
+	      gap: 6px;
+	      font-size: 0.8rem;
+	      color: var(--text-muted);
+	    }
 
-    .meta-icon {
-      width: 16px;
-      height: 16px;
-      opacity: 0.7;
-    }
+	    .meta-item.meta-updated {
+	      opacity: 0.95;
+	    }
+
+	    .meta-icon {
+	      width: 16px;
+	      height: 16px;
+	      opacity: 0.7;
+	    }
 
     /* Coming Soon Section */
     .coming-soon {
@@ -1579,7 +1583,61 @@
               Level 5
             </span>
           </div>
-        </a>
+	        </a>
+
+	        <!-- Open Level 5 Championship (Rollingwood YMCA - Fair Oaks) -->
+	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship">
+	          <div class="card-header">
+	            <span class="card-type report">
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+	                <polyline points="14 2 14 8 20 8"/>
+	                <line x1="16" y1="13" x2="8" y2="13"/>
+	                <line x1="16" y1="17" x2="8" y2="17"/>
+	              </svg>
+	              Report
+		            </span>
+		            <div class="card-actions">
+		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		                </svg>
+		              </span>
+		              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/players/832420EF-F6CC-48A4-AC06-1C54E9C8533D">USTA</span>
+		              <div class="card-arrow">
+		                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Open Level 5 Championship — Fair Oaks (G12 Singles)</h3>
+	          <p class="card-description">Roster snapshot from the USTA players list (Girls' 12 &amp; under Singles) for the Feb 14-16, 2026 Level 5 championship at Rollingwood YMCA in Fair Oaks.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Feb 14-16, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Fair Oaks, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 5
+	            </span>
+	          </div>
+	        </a>
 
 	        <!-- L4 Excellence Tournament Report -->
 	        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past">
@@ -1666,11 +1724,178 @@
     </div>
   </footer>
 
-	  <script>
-	    function setupUstaLinkDelegation() {
-	      const openUsta = (target, event) => {
-	        event.preventDefault();
-	        event.stopPropagation();
+		  <script>
+		    const CARD_UPDATED_CACHE_KEY = 'tennis_tracker_card_updated_cache_v1';
+
+		    const MONTHS = {
+		      jan: 0, january: 0,
+		      feb: 1, february: 1,
+		      mar: 2, march: 2,
+		      apr: 3, april: 3,
+		      may: 4,
+		      jun: 5, june: 5,
+		      jul: 6, july: 6,
+		      aug: 7, august: 7,
+		      sep: 8, sept: 8, september: 8,
+		      oct: 9, october: 9,
+		      nov: 10, november: 10,
+		      dec: 11, december: 11
+		    };
+
+		    function formatUpdatedIso(iso) {
+		      if (!iso) return '';
+		      const d = new Date(iso);
+		      if (Number.isNaN(d.getTime())) return '';
+		      const fmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+		      return `Updated ${fmt.format(d)}`;
+		    }
+
+		    function parseEndDateFromText(text) {
+		      const raw = (text || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
+		      if (!raw) return null;
+		      const yearMatch = raw.match(/\b(20\d{2})\b/);
+		      const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
+
+		      const parseMonth = (m) => MONTHS[(m || '').toLowerCase()] ?? null;
+
+		      let m = raw.match(/\b([A-Za-z]+)\s*(\d{1,2})\s*-\s*([A-Za-z]+)\s*(\d{1,2})\b/);
+		      if (m) {
+		        const endMonth = parseMonth(m[3]);
+		        const endDay = parseInt(m[4], 10);
+		        if (endMonth === null || !Number.isFinite(endDay)) return null;
+		        return new Date(year, endMonth, endDay);
+		      }
+
+		      m = raw.match(/\b([A-Za-z]+)\s*(\d{1,2})\s*-\s*(\d{1,2})\b/);
+		      if (m) {
+		        const endMonth = parseMonth(m[1]);
+		        const endDay = parseInt(m[3], 10);
+		        if (endMonth === null || !Number.isFinite(endDay)) return null;
+		        return new Date(year, endMonth, endDay);
+		      }
+
+		      m = raw.match(/\b([A-Za-z]+)\s*(\d{1,2})\b/);
+		      if (m) {
+		        const endMonth = parseMonth(m[1]);
+		        const endDay = parseInt(m[2], 10);
+		        if (endMonth === null || !Number.isFinite(endDay)) return null;
+		        return new Date(year, endMonth, endDay);
+		      }
+
+		      return null;
+		    }
+
+		    function ensureUpdatedMeta(card) {
+		      const meta = card.querySelector('.card-meta');
+		      if (!meta) return null;
+		      let node = meta.querySelector('[data-card-updated]');
+		      if (node) return node;
+
+		      const span = document.createElement('span');
+		      span.className = 'meta-item meta-updated';
+		      span.setAttribute('data-card-updated', '1');
+		      span.innerHTML = `
+		        <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+		          <circle cx="12" cy="12" r="10"/>
+		          <path d="M12 6v6l4 2"/>
+		        </svg>
+		        <span data-card-updated-text>Updated —</span>
+		      `;
+		      meta.appendChild(span);
+		      return span;
+		    }
+
+		    function setCardUpdatedText(card, iso) {
+		      const label = formatUpdatedIso(iso) || 'Updated —';
+		      const node = ensureUpdatedMeta(card);
+		      if (!node) return;
+		      const textEl = node.querySelector('[data-card-updated-text]') || node;
+		      textEl.textContent = label;
+		      if (iso) card.setAttribute('data-card-updated-iso', iso);
+		    }
+
+		    function updateCardPastStatus(card) {
+		      if (!card || card.classList.contains('calendar-card')) return;
+		      const dateText = card.querySelector('.card-meta .meta-item')?.textContent || '';
+		      const end = parseEndDateFromText(dateText);
+		      if (!end) return;
+		      const today = new Date();
+		      today.setHours(0, 0, 0, 0);
+		      end.setHours(0, 0, 0, 0);
+		      const isPast = end < today;
+		      card.classList.toggle('is-past', isPast);
+		      card.classList.toggle('is-upcoming', !isPast);
+		    }
+
+		    function updateAllCardPastStatuses() {
+		      document.querySelectorAll('a.tournament-card').forEach(updateCardPastStatus);
+		    }
+
+		    function loadUpdatedCache() {
+		      try {
+		        const raw = window.localStorage.getItem(CARD_UPDATED_CACHE_KEY);
+		        const parsed = raw ? JSON.parse(raw) : {};
+		        return parsed && typeof parsed === 'object' ? parsed : {};
+		      } catch {
+		        return {};
+		      }
+		    }
+
+		    function saveUpdatedCache(cache) {
+		      try {
+		        window.localStorage.setItem(CARD_UPDATED_CACHE_KEY, JSON.stringify(cache || {}));
+		      } catch {
+		        // ignore
+		      }
+		    }
+
+		    async function populateReportCardUpdatedLabels() {
+		      const cache = loadUpdatedCache();
+		      const reportCards = Array.from(document.querySelectorAll('a.tournament-card')).filter((card) => {
+		        if (card.classList.contains('calendar-card')) return false;
+		        return !!card.querySelector('.card-type.report');
+		      });
+
+		      for (const card of reportCards) {
+		        ensureUpdatedMeta(card);
+
+		        const directIso = card.getAttribute('data-card-updated-iso') || '';
+		        if (directIso) {
+		          setCardUpdatedText(card, directIso);
+		          continue;
+		        }
+
+		        const href = (card.getAttribute('href') || '').trim();
+		        if (!href || href.startsWith('http')) continue;
+
+		        const cachedIso = cache[href];
+		        if (cachedIso) {
+		          setCardUpdatedText(card, cachedIso);
+		          continue;
+		        }
+
+		        try {
+		          const resp = await fetch(href, { cache: 'no-cache' });
+		          if (!resp.ok) continue;
+		          const html = await resp.text();
+		          const m = html.match(/data-updated-iso=\"([^\"]+)\"/i);
+		          const iso = (m?.[1] || '').trim();
+		          if (iso) {
+		            cache[href] = iso;
+		            setCardUpdatedText(card, iso);
+		          }
+		        } catch {
+		          // ignore
+		        }
+		      }
+
+		      saveUpdatedCache(cache);
+		    }
+
+		    function setupUstaLinkDelegation() {
+		      const openUsta = (target, event) => {
+		        event.preventDefault();
+		        event.stopPropagation();
 	        const url = target.getAttribute('data-usta-url');
 	        if (!url) return;
 	        window.open(url, '_blank', 'noopener');
@@ -1842,7 +2067,7 @@
 	      };
 	    }
 	
-	    async function addStarredCalendarEventCards(favoritesApi) {
+		    async function addStarredCalendarEventCards(favoritesApi) {
 	      const cardsRoot = favoritesApi?.cardsRoot;
 	      const starred = favoritesApi?.starred;
 	      if (!cardsRoot || !starred) return;
@@ -1941,7 +2166,7 @@
 	        return '';
 	      }
 	
-	      function getFormat(row) {
+		      function getFormat(row) {
 	        const notes = (row['Notes'] || '').toLowerCase();
 	        const doublesOnly = row['Doubles Only'] === 'TRUE' || notes.includes('doubles only') || notes.includes('mixed doubles');
 	        const singlesDraw = (row['Singles Draw'] || '').trim();
@@ -1961,7 +2186,7 @@
 	        return obj;
 	      });
 	
-	      // Merge by stable tournament id (OR division flags, keep best link/name).
+		      // Merge by stable tournament id (OR division flags, keep best link/name).
 	      const merged = new Map();
 	      dicts.forEach((row) => {
 	        const id = getTournamentId(row);
@@ -1979,12 +2204,19 @@
 	        if (!(existing['Tournament Name'] || '').trim() && (row['Tournament Name'] || '').trim()) existing['Tournament Name'] = row['Tournament Name'];
 	      });
 	
-	      const rows = Array.from(merged.values()).filter((row) => starred.has(getTournamentId(row)));
-	      if (!rows.length) return;
-	
-	      const fragment = document.createDocumentFragment();
-	      rows.forEach((row) => {
-	        const id = getTournamentId(row);
+		      const rows = Array.from(merged.values()).filter((row) => starred.has(getTournamentId(row)));
+		      if (!rows.length) return;
+
+		      const computeEndDate = (row) => {
+		        const month = (row['Month'] || '').trim();
+		        const dates = (row['Date(s)'] || '').trim();
+		        const text = `${month} ${dates}`;
+		        return parseEndDateFromText(text);
+		      };
+
+		      const fragment = document.createDocumentFragment();
+		      rows.forEach((row) => {
+		        const id = getTournamentId(row);
 	        const title = getTournamentTitle(row).trim() || 'Tournament';
 	        const format = getFormat(row);
 	        const age = getAgeLabel(row);
@@ -1996,12 +2228,19 @@
 	          ? `<span class=\"card-usta-link\" role=\"button\" tabindex=\"0\" data-usta-url=\"${ustaUrl}\">USTA</span>`
 	          : '';
 	
-	        const card = document.createElement('a');
-	        card.href = calendarHref;
-	        card.className = 'tournament-card is-upcoming';
-	        card.setAttribute('data-tournament-id', id);
-	        card.setAttribute('data-starred-calendar-event-card', 'true');
-	        card.innerHTML = `
+		        const lastUpdated = (row['Last Updated'] || '').trim();
+		        const endDate = computeEndDate(row);
+		        const today = new Date();
+		        today.setHours(0, 0, 0, 0);
+		        const isPast = endDate ? (new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) < today) : false;
+
+		        const card = document.createElement('a');
+		        card.href = calendarHref;
+		        card.className = `tournament-card ${isPast ? 'is-past' : 'is-upcoming'}`;
+		        card.setAttribute('data-tournament-id', id);
+		        card.setAttribute('data-starred-calendar-event-card', 'true');
+		        if (lastUpdated) card.setAttribute('data-card-updated-iso', lastUpdated);
+		        card.innerHTML = `
 	          <div class=\"card-header\">
 	            <span class=\"card-type calendar\">
 	              <svg class=\"card-type-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
@@ -2049,17 +2288,25 @@
 	              <svg class=\"meta-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
 	                <polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/>
 	              </svg>
-	              ${level}
-	            </span>
-	          </div>
-	        `;
-	        fragment.appendChild(card);
-	      });
+		              ${level}
+		            </span>
+		            <span class="meta-item meta-updated" data-card-updated="1">
+		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+		                <circle cx="12" cy="12" r="10"/>
+		                <path d="M12 6v6l4 2"/>
+		              </svg>
+		              <span data-card-updated-text>${formatUpdatedIso(lastUpdated) || 'Updated —'}</span>
+		            </span>
+		          </div>
+		        `;
+		        fragment.appendChild(card);
+		      });
 	
 	      // Insert starred event cards at the top of the grid.
-	      cardsRoot.insertBefore(fragment, cardsRoot.firstChild);
-	      favoritesApi.refresh();
-	    }
+		      cardsRoot.insertBefore(fragment, cardsRoot.firstChild);
+		      favoritesApi.refresh();
+		      updateAllCardPastStatuses();
+		    }
 	
 	    // Player expiration alert data (injected by Python script)
 	    window.PLAYER_ALERT_DATA = {"show_alert": true, "critical_points": 75, "min_days_remaining": 18};
@@ -2076,12 +2323,14 @@
 	      }
 	    }
 	
-	    function init() {
-	      setupUstaLinkDelegation();
-	      const favoritesApi = initTournamentFavorites();
-	      addStarredCalendarEventCards(favoritesApi);
-	      updateExpirationAlert();
-	    }
+		    function init() {
+		      setupUstaLinkDelegation();
+		      const favoritesApi = initTournamentFavorites();
+		      addStarredCalendarEventCards(favoritesApi);
+		      updateExpirationAlert();
+		      updateAllCardPastStatuses();
+		      populateReportCardUpdatedLabels();
+		    }
 	
 	    if (document.readyState === 'loading') {
 	      document.addEventListener('DOMContentLoaded', init);
