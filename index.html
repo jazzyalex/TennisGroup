@@ -661,6 +661,7 @@
 		      display: flex;
 		      align-items: center;
 		      gap: 8px;
+		      margin-left: auto;
 		    }
 
         .card-favorite-toggle {
@@ -798,6 +799,16 @@
     .card-type.report {
       background: rgba(245, 158, 11, 0.12);
       color: var(--accent-amber);
+    }
+
+    .card-type.report.is-closing-soon {
+      background: rgba(239, 68, 68, 0.16);
+      color: #ef4444;
+    }
+
+    .card-type.report.is-closed {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--text-muted);
     }
 
     .card-type-icon {
@@ -1372,14 +1383,12 @@
         <!-- Level 3 Mixed Doubles Sectionals (HRT) -->
         <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming">
           <div class="card-header">
-            <span class="card-type report">
-              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
+            <span class="card-type report" data-registration-pill>
+              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
               </svg>
-              Report
+              <span data-registration-pill-text>Closes —</span>
 	            </span>
 	            <div class="card-actions">
 	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
@@ -1422,73 +1431,16 @@
             </span>
           </div>
         </a>
-
-        <!-- Level 2: Claremont, CA -->
-        <a href="level-2-claremont-ca-feb7-9-2026.html" class="tournament-card is-upcoming">
-          <div class="card-header">
-            <span class="card-type report">
-              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-              Report
-	            </span>
-	            <div class="card-actions">
-	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
-	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-	                </svg>
-	              </span>
-	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/theclaremontclub/Tournaments/overview/3C4952C5-18F6-4E77-8273-3F941EF00198">USTA</span>
-	              <div class="card-arrow">
-	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-	                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <h3 class="card-title">Level 2: Claremont, CA</h3>
-          <p class="card-description">Roster snapshot from the USTA players list for the Feb 7-9, 2026 national Level 2 in Claremont.</p>
-          <div class="card-meta">
-            <span class="meta-item">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              Feb 7-9, 2026
-            </span>
-            <span class="meta-item">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              Claremont, CA
-            </span>
-            <span class="meta-item">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-              Level 2
-            </span>
-          </div>
-        </a>
-
         <!-- Open Level 5 Championship Singles -->
 	        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming">
 	          <div class="card-header">
-	            <span class="card-type report">
-              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-	              Report
-		            </span>
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closes —</span>
+	            </span>
 		            <div class="card-actions">
 		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
 		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1531,18 +1483,16 @@
           </div>
         </a>
 
-        <!-- Open Level 5 Championship Singles (Larkspur) -->
+	        <!-- Open Level 5 Championship Singles (Larkspur) -->
 	        <a href="open-level5-championship-singles-larkspur-jan31-2026.html" class="tournament-card is-upcoming">
 	          <div class="card-header">
-	            <span class="card-type report">
-              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-	              Report
-		            </span>
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closes —</span>
+	            </span>
 		            <div class="card-actions">
 		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
 		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1588,15 +1538,13 @@
 	        <!-- Open Level 5 Championship (Rollingwood YMCA - Fair Oaks) -->
 	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship">
 	          <div class="card-header">
-	            <span class="card-type report">
-	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-	                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-	                <polyline points="14 2 14 8 20 8"/>
-	                <line x1="16" y1="13" x2="8" y2="13"/>
-	                <line x1="16" y1="17" x2="8" y2="17"/>
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
 	              </svg>
-	              Report
-		            </span>
+	              <span data-registration-pill-text>Closes —</span>
+	            </span>
 		            <div class="card-actions">
 		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
 		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1611,8 +1559,8 @@
 	              </div>
 	            </div>
 	          </div>
-	          <h3 class="card-title">Open Level 5 Championship — Fair Oaks (G12 Singles)</h3>
-	          <p class="card-description">Roster snapshot from the USTA players list (Girls' 12 &amp; under Singles) for the Feb 14-16, 2026 Level 5 championship at Rollingwood YMCA in Fair Oaks.</p>
+	          <h3 class="card-title">Open Level 5 Championship — Fair Oaks (G12/G14 Singles)</h3>
+	          <p class="card-description">Roster snapshot from the USTA players list (Girls' 12 &amp; under Singles + Girls' 14 &amp; under Singles) for the Feb 14-16, 2026 Level 5 championship at Rollingwood YMCA in Fair Oaks.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1642,15 +1590,13 @@
 	        <!-- L4 Excellence Tournament Report -->
 	        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past">
 	          <div class="card-header">
-	            <span class="card-type report">
-              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-	              Report
-		            </span>
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closes —</span>
+	            </span>
 		            <div class="card-actions">
 		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
 		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1884,7 +1830,157 @@
 		      }
 		    }
 
+		    function normalizeCachedMeta(entry) {
+		      if (!entry) return {};
+		      if (typeof entry === 'string') return { updatedIso: entry };
+		      if (entry && typeof entry === 'object') return entry;
+		      return {};
+		    }
+
+		    function extractCloseTextFromReportDoc(doc) {
+		      if (!doc) return '';
+
+		      const stats = Array.from(doc.querySelectorAll('.key-stat'));
+		      for (const stat of stats) {
+		        const label = (stat.querySelector('.key-label')?.textContent || '').trim().toLowerCase();
+		        if (label !== 'closes') continue;
+		        return (stat.querySelector('.key-value')?.textContent || '').trim();
+		      }
+
+		      const rows = Array.from(doc.querySelectorAll('.detail-row'));
+		      for (const row of rows) {
+		        const label = (row.querySelector('.detail-label')?.textContent || '').trim().toLowerCase();
+		        if (!label.startsWith('registration closes')) continue;
+		        return (row.querySelector('.detail-value')?.textContent || '').trim();
+		      }
+
+		      return '';
+		    }
+
+		    function parseCloseDate(closeText) {
+		      const text = (closeText || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
+		      if (!text) return null;
+		      if (/registration closed/i.test(text)) return { status: 'closed', date: null };
+		      if (/see usta/i.test(text)) return { status: 'unknown', date: null };
+
+		      const m = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*(AM|PM)\s*([A-Z]{2,4})?/i);
+		      if (!m) return { status: 'unknown', date: null };
+
+		      const MONTHS = {
+		        january: 0,
+		        february: 1,
+		        march: 2,
+		        april: 3,
+		        may: 4,
+		        june: 5,
+		        july: 6,
+		        august: 7,
+		        september: 8,
+		        october: 9,
+		        november: 10,
+		        december: 11,
+		      };
+
+		      const month = MONTHS[(m[1] || '').toLowerCase()];
+		      const day = parseInt(m[2], 10);
+		      const year = parseInt(m[3], 10);
+		      let hour = parseInt(m[4], 10);
+		      const minute = parseInt(m[5], 10);
+		      const ampm = (m[6] || '').toUpperCase();
+		      const tz = (m[7] || '').toUpperCase();
+
+		      if (![month, day, year, hour, minute].every((x) => Number.isFinite(x))) return { status: 'unknown', date: null };
+		      if (ampm === 'PM' && hour !== 12) hour += 12;
+		      if (ampm === 'AM' && hour === 12) hour = 0;
+
+		      const tzOffsets = { PST: -480, PDT: -420 };
+		      const offsetMin = tzOffsets[tz];
+		      if (Number.isFinite(offsetMin)) {
+		        const utcMs = Date.UTC(year, month, day, hour, minute) - offsetMin * 60 * 1000;
+		        return { status: 'ok', date: new Date(utcMs) };
+		      }
+
+		      return { status: 'ok', date: new Date(year, month, day, hour, minute) };
+		    }
+
+		    function formatCloseCountdown(msRemaining) {
+		      const totalMinutes = Math.max(0, Math.ceil(msRemaining / 60000));
+		      const minutes = totalMinutes % 60;
+		      const totalHours = Math.floor(totalMinutes / 60);
+		      const hours = totalHours % 24;
+		      const days = Math.floor(totalHours / 24);
+		      if (days >= 2) return `${days}d`;
+		      if (days === 1) return `1d ${hours}h`;
+		      if (totalHours >= 1) return minutes ? `${totalHours}h ${minutes}m` : `${totalHours}h`;
+		      return `${Math.max(1, totalMinutes)}m`;
+		    }
+
+		    function applyRegistrationPill(card, closeText) {
+		      const pill = card.querySelector('[data-registration-pill]');
+		      if (!pill) return;
+
+		      pill.classList.remove('is-closed', 'is-closing-soon');
+		      pill.removeAttribute('data-close-ms');
+		      pill.removeAttribute('data-close-status');
+
+		      const parsed = parseCloseDate(closeText);
+		      const status = parsed?.status || 'unknown';
+		      const dt = parsed?.date || null;
+		      const textEl = pill.querySelector('[data-registration-pill-text]') || pill;
+
+		      if (status === 'unknown') {
+		        textEl.textContent = 'Closes —';
+		        return;
+		      }
+
+		      if (status === 'closed') {
+		        pill.classList.add('is-closed');
+		        pill.setAttribute('data-close-status', 'closed');
+		        textEl.textContent = 'Closed';
+		        return;
+		      }
+
+		      if (!(dt instanceof Date) || !Number.isFinite(dt.getTime())) {
+		        textEl.textContent = 'Closes —';
+		        return;
+		      }
+
+		      pill.setAttribute('data-close-ms', String(dt.getTime()));
+		      updateRegistrationPillCountdown(pill);
+		    }
+
+		    function updateRegistrationPillCountdown(pill) {
+		      if (!pill) return;
+		      const status = pill.getAttribute('data-close-status') || '';
+		      if (status === 'closed') return;
+
+		      const msRaw = pill.getAttribute('data-close-ms') || '';
+		      const closeMs = parseInt(msRaw, 10);
+		      if (!Number.isFinite(closeMs)) return;
+
+		      const remaining = closeMs - Date.now();
+		      const textEl = pill.querySelector('[data-registration-pill-text]') || pill;
+
+		      if (remaining <= 0) {
+		        pill.classList.remove('is-closing-soon');
+		        pill.classList.add('is-closed');
+		        pill.setAttribute('data-close-status', 'closed');
+		        textEl.textContent = 'Closed';
+		        return;
+		      }
+
+		      pill.classList.toggle('is-closing-soon', remaining < 24 * 60 * 60 * 1000);
+		      textEl.textContent = `Closes in ${formatCloseCountdown(remaining)}`;
+		    }
+
+		    function updateAllRegistrationPills() {
+		      document.querySelectorAll('[data-registration-pill][data-close-ms]').forEach((pill) => {
+		        updateRegistrationPillCountdown(pill);
+		      });
+		    }
+
 		    async function populateReportCardUpdatedLabels() {
+		      const CACHE_MAX_AGE_MS = 6 * 60 * 60 * 1000;
 		      const cache = loadUpdatedCache();
 		      const reportCards = Array.from(document.querySelectorAll('a.tournament-card')).filter((card) => {
 		        if (card.classList.contains('calendar-card')) return false;
@@ -1897,28 +1993,41 @@
 		        const directIso = card.getAttribute('data-card-updated-iso') || '';
 		        if (directIso) {
 		          setCardUpdatedText(card, directIso);
-		          continue;
+		          // Still allow registration pill population (if cached) without fetching.
 		        }
 
 		        const href = (card.getAttribute('href') || '').trim();
 		        if (!href || href.startsWith('http')) continue;
 
-		        const cachedIso = cache[href];
-		        if (cachedIso) {
-		          setCardUpdatedText(card, cachedIso);
-		          continue;
-		        }
+		        const meta = normalizeCachedMeta(cache[href]);
+		        const cachedIso = (meta.updatedIso || '').trim();
+		        const cachedClose = (meta.closeText || '').trim();
+		        const cachedAt = Number(meta.cachedAt || 0);
+
+		        if (!directIso && cachedIso) setCardUpdatedText(card, cachedIso);
+		        if (cachedClose) applyRegistrationPill(card, cachedClose);
+
+		        const freshEnough = cachedAt && (Date.now() - cachedAt) < CACHE_MAX_AGE_MS;
+		        const hasEnough = (!!directIso || !!cachedIso) && (!!cachedClose || meta.closeText === '');
+		        if (freshEnough && hasEnough) continue;
 
 		        try {
 		          const resp = await fetch(href, { cache: 'no-cache' });
 		          if (!resp.ok) continue;
 		          const html = await resp.text();
-		          const m = html.match(/data-updated-iso=\"([^\"]+)\"/i);
-		          const iso = (m?.[1] || '').trim();
-		          if (iso) {
-		            cache[href] = iso;
-		            setCardUpdatedText(card, iso);
-		          }
+		          const doc = new DOMParser().parseFromString(html, 'text/html');
+
+		          const iso = (doc.querySelector('#report-updated-badge')?.getAttribute('data-updated-iso') || '').trim();
+		          const closeText = extractCloseTextFromReportDoc(doc);
+
+		          cache[href] = {
+		            updatedIso: iso,
+		            closeText,
+		            cachedAt: Date.now(),
+		          };
+
+		          if (!directIso && iso) setCardUpdatedText(card, iso);
+		          applyRegistrationPill(card, closeText);
 		        } catch {
 		          // ignore
 		        }
@@ -2439,6 +2548,8 @@
 		      updateAllCardPastStatuses();
 		      sortTournamentCardsByDate();
 		      populateReportCardUpdatedLabels();
+		      updateAllRegistrationPills();
+		      setInterval(updateAllRegistrationPills, 60 * 1000);
 		    }
 	
 	    if (document.readyState === 'loading') {
