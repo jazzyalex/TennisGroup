@@ -16,20 +16,13 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, tennisgroup]
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Ensure gtar
-        run: |
-          if [ -d "/opt/homebrew/bin" ]; then
-            echo "/opt/homebrew/bin" >> "$GITHUB_PATH"
-          fi
-          command -v gtar >/dev/null 2>&1
 
       - name: Prepare site artifact
         run: |

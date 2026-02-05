@@ -237,11 +237,57 @@
       margin-bottom: 16px;
     }
 
+    .section-header--with-toggle {
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--text-primary);
+    }
+
+    .list-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      flex-shrink: 0;
+    }
+
+    .list-toggle__btn {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-secondary);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .list-toggle__btn.is-active {
+      background: var(--bg-secondary);
+      color: var(--player-green);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .list-toggle__btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .list-toggle__btn:focus-visible {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 2px;
     }
 
     .section-badge {
@@ -403,6 +449,11 @@
       gap: 8px;
       font-size: 0.75rem;
       color: var(--text-secondary);
+    }
+
+    .event-bonus {
+      font-weight: 600;
+      color: var(--text-muted);
     }
 
     .event-badge {
@@ -782,7 +833,7 @@
         </a>
         <div class="header-title">
           <h1 class="player-name" data-player-name>Alexis Malakhova</h1>
-          <span class="player-subtitle">Girls' 12 National Standings List</span>
+          <span class="player-subtitle" data-list-subtitle>Girls' 12 National Standings List</span>
         </div>
       </div>
       <span class="header-updated" data-updated>Updated Feb 4, 2026</span>
@@ -826,15 +877,19 @@
         <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
           <div class="stat-label">Total Points</div>
           <div class="stat-value" data-stat="total-points">713</div>
-          <div class="stat-sub">697 S / 5 D</div>
+          <div class="stat-sub" data-total-breakdown>697 S / 5 D</div>
         </a>
       </div>
     </section>
 
     <!-- Points Expiration Overview -->
     <section class="section">
-      <div class="section-header">
+      <div class="section-header section-header--with-toggle">
         <h2 class="section-title">Points Expiration Overview</h2>
+        <div class="list-toggle" role="tablist" aria-label="Ranking list">
+          <button type="button" class="list-toggle__btn is-active" data-list-toggle="g12" role="tab" aria-selected="true">U12</button>
+          <button type="button" class="list-toggle__btn" data-list-toggle="g14" role="tab" aria-selected="false">U14</button>
+        </div>
       </div>
 
       <!-- Expiration Alert -->
@@ -918,266 +973,558 @@
       "name": "Alexis Malakhova",
       "uaid": "2018710796",
       "lastUpdated": "2026-02-04",
-      "totals": {
-        "singles": 697,
-        "doubles": 5,
-        "doublesRaw": 32,
-        "total": 713
-      },
-      "alert": {
-        "show": false,
-        "points": 0,
-        "days": 0
-      },
-      "events": {
-        "singles": [
-          {
-            "name": "FDT Level 5 Junior Singles Championship",
-            "level": "L5",
-            "division": "Girls' 12 & under singles",
-            "points": 150,
-            "startDate": "2026-01-31",
-            "endDate": "2026-02-01",
-            "expiresDate": "2027-01-31",
-            "daysRemaining": 361,
-            "urgency": "safe",
-            "matches": [
+      "defaultList": "g12",
+      "lists": {
+        "g12": {
+          "totals": {
+            "singles": 697,
+            "doubles": 5,
+            "doublesRaw": 32,
+            "bonus": 11,
+            "total": 713
+          },
+          "alert": {
+            "show": false,
+            "points": 0,
+            "days": 0
+          },
+          "events": {
+            "singles": [
               {
-                "round": "BONUS",
-                "opponent": "P-F / Annabel HU",
-                "outcome": "L",
-                "score": "6-7(4) 1-6"
+                "name": "FDT Level 5 Junior Singles Championship",
+                "level": "L5",
+                "division": "Girls' 12 & under singles",
+                "points": 150,
+                "bonusPoints": 11,
+                "startDate": "2026-01-31",
+                "endDate": "2026-02-01",
+                "expiresDate": "2027-01-31",
+                "daysRemaining": 361,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "P-F",
+                    "opponent": "Annabel HU",
+                    "outcome": "L",
+                    "score": "6-7(4) 1-6"
+                  },
+                  {
+                    "round": "SF",
+                    "opponent": "Margaret DORAN",
+                    "outcome": "L",
+                    "score": "2-6 2-6"
+                  },
+                  {
+                    "round": "QF",
+                    "opponent": "Megan LAI",
+                    "outcome": "W",
+                    "score": "6-1 0-6 [11-9]"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Kendra WU",
+                    "outcome": "W",
+                    "score": "6-4 6-3"
+                  }
+                ]
               },
               {
-                "round": "N/A",
-                "opponent": "SF / Margaret DORAN",
-                "outcome": "L",
-                "score": "2-6 2-6"
+                "name": "FDT Level 4 Junior 12s & 14s Singles Excellence",
+                "level": "L4",
+                "division": "Girls' 12 & under singles",
+                "points": 173,
+                "bonusPoints": 0,
+                "startDate": "2026-01-10",
+                "endDate": "2026-01-18",
+                "expiresDate": "2027-01-17",
+                "daysRemaining": 347,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "P-F",
+                    "opponent": "Margaret DORAN",
+                    "outcome": "L",
+                    "score": "0-4 2-4"
+                  },
+                  {
+                    "round": "P-SF",
+                    "opponent": "Camille KUNKEL",
+                    "outcome": "W",
+                    "score": "Wd [inj]"
+                  },
+                  {
+                    "round": "QF",
+                    "opponent": "Ziva GADGIL",
+                    "outcome": "L",
+                    "score": "0-6 0-6"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Elise WATT",
+                    "outcome": "W",
+                    "score": "6-3 7-5"
+                  },
+                  {
+                    "round": "R32",
+                    "opponent": "Summer STIRITZ",
+                    "outcome": "W",
+                    "score": "Wo [ill]"
+                  }
+                ]
               },
               {
-                "round": "N/A",
-                "opponent": "QF / Megan LAI",
-                "outcome": "W",
-                "score": "6-1 0-6 [11-9]"
+                "name": "FDT Level 5 Junior 12s, 16s & 18s Singles Championship",
+                "level": "L5",
+                "division": "Girls' 12 & under singles",
+                "points": 105,
+                "bonusPoints": 0,
+                "startDate": "2025-11-15",
+                "endDate": "2025-11-16",
+                "expiresDate": "2026-11-15",
+                "daysRemaining": 284,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "QF",
+                    "opponent": "Valentina KUKEEVA",
+                    "outcome": "L",
+                    "score": "2-4 1-4"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Ellie WANG",
+                    "outcome": "W",
+                    "score": "4-0 4-1"
+                  },
+                  {
+                    "round": "R32",
+                    "opponent": "Angela LIU",
+                    "outcome": "W",
+                    "score": "5-3 4-1"
+                  }
+                ]
               },
               {
-                "round": "N/A",
-                "opponent": "R16 / Kendra WU",
-                "outcome": "W",
-                "score": "6-4 6-3"
+                "name": "L5 BG14 Super Series at Solano Community College",
+                "level": "L5",
+                "division": "Girls' 14 & under singles",
+                "points": 98,
+                "bonusPoints": 0,
+                "startDate": "2025-07-05",
+                "endDate": "2025-07-06",
+                "expiresDate": "2026-07-05",
+                "daysRemaining": 151,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "PL-F",
+                    "opponent": "Leila LYONS",
+                    "outcome": "L",
+                    "score": "1-6 6-1 3-6"
+                  },
+                  {
+                    "round": "E-SF",
+                    "opponent": "Anna YANG",
+                    "outcome": "L",
+                    "score": "3-6 4-6"
+                  },
+                  {
+                    "round": "E-QF",
+                    "opponent": "Jennifer CHEN",
+                    "outcome": "W",
+                    "score": "3-6 7-6(2) 7-5"
+                  }
+                ]
+              },
+              {
+                "name": "Santa Cruz Level 4 Juniors 12s Excellence @ La Madrona Athletic Club - Singles & Doubles",
+                "level": "L4",
+                "division": "Girls' 12 & under singles",
+                "points": 76,
+                "bonusPoints": 0,
+                "startDate": "2025-05-24",
+                "endDate": "2025-05-26",
+                "expiresDate": "2026-05-25",
+                "daysRemaining": 110,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "C-R16",
+                    "opponent": "Emma LAI",
+                    "outcome": "L",
+                    "score": "2-6 3-6"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Alexi LABRECQUE",
+                    "outcome": "L",
+                    "score": "3-6 4-6"
+                  },
+                  {
+                    "round": "R32",
+                    "opponent": "Elina YAMAMOTO",
+                    "outcome": "W",
+                    "score": "6-4 6-2"
+                  }
+                ]
+              },
+              {
+                "name": "NPT Level 6 Junior Open",
+                "level": "L6",
+                "division": "Girls' 14 & under singles",
+                "points": 95,
+                "bonusPoints": 0,
+                "startDate": "2025-04-26",
+                "endDate": "2025-04-27",
+                "expiresDate": "2026-04-26",
+                "daysRemaining": 81,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "F",
+                    "opponent": "Dana YEHIA",
+                    "outcome": "W",
+                    "score": "2-6 6-2 [10-3]"
+                  },
+                  {
+                    "round": "SF",
+                    "opponent": "Ashna SAXENA",
+                    "outcome": "W",
+                    "score": "7-5 6-2"
+                  },
+                  {
+                    "round": "QF",
+                    "opponent": "Sadie COHEN",
+                    "outcome": "W",
+                    "score": "6-1 6-0"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Gayathri KOTIKALAPUDI",
+                    "outcome": "W",
+                    "score": "6-0 6-1"
+                  }
+                ]
+              }
+            ],
+            "doubles": [
+              {
+                "name": "MTA Manteca Level 3 Junior Boys and Girls 12 & 14s Doubles Sectionals",
+                "level": "L3",
+                "division": "Girls' 12 & under doubles",
+                "points": 4,
+                "bonusPoints": 0,
+                "startDate": "2025-09-20",
+                "endDate": "2025-09-21",
+                "expiresDate": "2026-09-20",
+                "daysRemaining": 228,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "W-F",
+                    "opponent": "Bella WU / MAY SUN",
+                    "outcome": "W",
+                    "score": "5-4(3) 4-2",
+                    "partner": "Zaira GADGIL"
+                  },
+                  {
+                    "round": "W-SF",
+                    "opponent": "",
+                    "outcome": "W",
+                    "score": "N/A",
+                    "partner": "Zaira GADGIL"
+                  },
+                  {
+                    "round": "E-QF",
+                    "opponent": "Zhiyan DUAN / Camille KUNKEL",
+                    "outcome": "L",
+                    "score": "0-4 1-4",
+                    "partner": "Zaira GADGIL"
+                  }
+                ]
               }
             ]
           },
-          {
-            "name": "FDT Level 4 Junior 12s & 14s Singles Excellence",
-            "level": "L4",
-            "division": "Girls' 12 & under singles",
-            "points": 173,
-            "startDate": "2026-01-10",
-            "endDate": "2026-01-18",
-            "expiresDate": "2027-01-17",
-            "daysRemaining": 347,
-            "urgency": "safe",
-            "matches": [
-              {
-                "round": "P-F",
-                "opponent": "Margaret DORAN",
-                "outcome": "L",
-                "score": "0-4 2-4"
-              },
-              {
-                "round": "P-SF",
-                "opponent": "Camille KUNKEL",
-                "outcome": "W",
-                "score": "Wd [inj]"
-              },
-              {
-                "round": "QF",
-                "opponent": "Ziva GADGIL",
-                "outcome": "L",
-                "score": "0-6 0-6"
-              },
-              {
-                "round": "R16",
-                "opponent": "Elise WATT",
-                "outcome": "W",
-                "score": "6-3 7-5"
-              },
-              {
-                "round": "R32",
-                "opponent": "Summer STIRITZ",
-                "outcome": "W",
-                "score": "Wo [ill]"
-              }
-            ]
-          },
-          {
-            "name": "FDT Level 5 Junior 12s, 16s & 18s Singles Championship",
-            "level": "L5",
-            "division": "Girls' 12 & under singles",
-            "points": 105,
-            "startDate": "2025-11-15",
-            "endDate": "2025-11-16",
-            "expiresDate": "2026-11-15",
-            "daysRemaining": 284,
-            "urgency": "safe",
-            "matches": [
-              {
-                "round": "QF",
-                "opponent": "Valentina KUKEEVA",
-                "outcome": "L",
-                "score": "2-4 1-4"
-              },
-              {
-                "round": "R16",
-                "opponent": "Ellie WANG",
-                "outcome": "W",
-                "score": "4-0 4-1"
-              },
-              {
-                "round": "R32",
-                "opponent": "Angela LIU",
-                "outcome": "W",
-                "score": "5-3 4-1"
-              }
-            ]
-          },
-          {
-            "name": "L5 BG14 Super Series at Solano Community College",
-            "level": "L5",
-            "division": "Girls' 14 & under singles",
-            "points": 98,
-            "startDate": "2025-07-05",
-            "endDate": "2025-07-06",
-            "expiresDate": "2026-07-05",
-            "daysRemaining": 151,
-            "urgency": "safe",
-            "matches": [
-              {
-                "round": "PL-F",
-                "opponent": "Leila LYONS",
-                "outcome": "L",
-                "score": "1-6 6-1 3-6"
-              },
-              {
-                "round": "E-SF",
-                "opponent": "Anna YANG",
-                "outcome": "L",
-                "score": "3-6 4-6"
-              },
-              {
-                "round": "E-QF",
-                "opponent": "Jennifer CHEN",
-                "outcome": "W",
-                "score": "3-6 7-6(2) 7-5"
-              }
-            ]
-          },
-          {
-            "name": "Santa Cruz Level 4 Juniors 12s Excellence @ La Madrona Athletic Club - Singles & Doubles",
-            "level": "L4",
-            "division": "Girls' 12 & under singles",
-            "points": 76,
-            "startDate": "2025-05-24",
-            "endDate": "2025-05-26",
-            "expiresDate": "2026-05-25",
-            "daysRemaining": 110,
-            "urgency": "safe",
-            "matches": [
-              {
-                "round": "C-R16",
-                "opponent": "Emma LAI",
-                "outcome": "L",
-                "score": "2-6 3-6"
-              },
-              {
-                "round": "R16",
-                "opponent": "Alexi LABRECQUE",
-                "outcome": "L",
-                "score": "3-6 4-6"
-              },
-              {
-                "round": "R32",
-                "opponent": "Elina YAMAMOTO",
-                "outcome": "W",
-                "score": "6-4 6-2"
-              }
-            ]
-          },
-          {
-            "name": "NPT Level 6 Junior Open",
-            "level": "L6",
-            "division": "Girls' 14 & under singles",
-            "points": 95,
-            "startDate": "2025-04-26",
-            "endDate": "2025-04-27",
-            "expiresDate": "2026-04-26",
-            "daysRemaining": 81,
-            "urgency": "safe",
-            "matches": [
-              {
-                "round": "F",
-                "opponent": "Dana YEHIA",
-                "outcome": "W",
-                "score": "2-6 6-2 [10-3]"
-              },
-              {
-                "round": "SF",
-                "opponent": "Ashna SAXENA",
-                "outcome": "W",
-                "score": "7-5 6-2"
-              },
-              {
-                "round": "QF",
-                "opponent": "Sadie COHEN",
-                "outcome": "W",
-                "score": "6-1 6-0"
-              },
-              {
-                "round": "R16",
-                "opponent": "Gayathri KOTIKALAPUDI",
-                "outcome": "W",
-                "score": "6-0 6-1"
-              }
-            ]
+          "ranks": {
+            "national": "589",
+            "section": "34"
           }
-        ],
-        "doubles": [
-          {
-            "name": "MTA Manteca Level 3 Junior Boys and Girls 12 & 14s Doubles Sectionals",
-            "level": "L3",
-            "division": "Girls' 12 & under doubles",
-            "points": 4,
-            "startDate": "2025-09-20",
-            "endDate": "2025-09-21",
-            "expiresDate": "2026-09-20",
-            "daysRemaining": 228,
-            "urgency": "safe",
-            "matches": [
+        },
+        "g14": {
+          "totals": {
+            "singles": 294,
+            "doubles": 1,
+            "doublesRaw": 6,
+            "bonus": 2,
+            "total": 297
+          },
+          "alert": {
+            "show": false,
+            "points": 0,
+            "days": 0
+          },
+          "events": {
+            "singles": [
               {
-                "round": "W-F",
-                "opponent": "Bella WU / MAY SUN",
-                "outcome": "W",
-                "score": "5-4(3) 4-2",
-                "partner": "Zaira GADGIL"
+                "name": "FDT Level 5 Junior Singles Championship",
+                "level": "L5",
+                "division": "Girls' 12 & under singles",
+                "points": 30,
+                "bonusPoints": 2,
+                "startDate": "2026-01-31",
+                "endDate": "2026-02-01",
+                "expiresDate": "2027-01-31",
+                "daysRemaining": 361,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "P-F",
+                    "opponent": "Annabel HU",
+                    "outcome": "L",
+                    "score": "6-7(4) 1-6"
+                  },
+                  {
+                    "round": "SF",
+                    "opponent": "Margaret DORAN",
+                    "outcome": "L",
+                    "score": "2-6 2-6"
+                  },
+                  {
+                    "round": "QF",
+                    "opponent": "Megan LAI",
+                    "outcome": "W",
+                    "score": "6-1 0-6 [11-9]"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Kendra WU",
+                    "outcome": "W",
+                    "score": "6-4 6-3"
+                  }
+                ]
               },
               {
-                "round": "W-SF",
-                "opponent": "",
-                "outcome": "W",
-                "score": "N/A",
-                "partner": "Zaira GADGIL"
+                "name": "FDT Level 4 Junior 12s & 14s Singles Excellence",
+                "level": "L4",
+                "division": "Girls' 12 & under singles",
+                "points": 35,
+                "bonusPoints": 0,
+                "startDate": "2026-01-10",
+                "endDate": "2026-01-18",
+                "expiresDate": "2027-01-17",
+                "daysRemaining": 347,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "P-F",
+                    "opponent": "Margaret DORAN",
+                    "outcome": "L",
+                    "score": "0-4 2-4"
+                  },
+                  {
+                    "round": "P-SF",
+                    "opponent": "Camille KUNKEL",
+                    "outcome": "W",
+                    "score": "Wd [inj]"
+                  },
+                  {
+                    "round": "QF",
+                    "opponent": "Ziva GADGIL",
+                    "outcome": "L",
+                    "score": "0-6 0-6"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Elise WATT",
+                    "outcome": "W",
+                    "score": "6-3 7-5"
+                  },
+                  {
+                    "round": "R32",
+                    "opponent": "Summer STIRITZ",
+                    "outcome": "W",
+                    "score": "Wo [ill]"
+                  }
+                ]
               },
               {
-                "round": "E-QF",
-                "opponent": "Zhiyan DUAN / Camille KUNKEL",
-                "outcome": "L",
-                "score": "0-4 1-4",
-                "partner": "Zaira GADGIL"
+                "name": "FDT Level 5 Junior 12s, 16s & 18s Singles Championship",
+                "level": "L5",
+                "division": "Girls' 12 & under singles",
+                "points": 21,
+                "bonusPoints": 0,
+                "startDate": "2025-11-15",
+                "endDate": "2025-11-16",
+                "expiresDate": "2026-11-15",
+                "daysRemaining": 284,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "QF",
+                    "opponent": "Valentina KUKEEVA",
+                    "outcome": "L",
+                    "score": "2-4 1-4"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Ellie WANG",
+                    "outcome": "W",
+                    "score": "4-0 4-1"
+                  },
+                  {
+                    "round": "R32",
+                    "opponent": "Angela LIU",
+                    "outcome": "W",
+                    "score": "5-3 4-1"
+                  }
+                ]
+              },
+              {
+                "name": "L5 BG14 Super Series at Solano Community College",
+                "level": "L5",
+                "division": "Girls' 14 & under singles",
+                "points": 98,
+                "bonusPoints": 0,
+                "startDate": "2025-07-05",
+                "endDate": "2025-07-06",
+                "expiresDate": "2026-07-05",
+                "daysRemaining": 151,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "PL-F",
+                    "opponent": "Leila LYONS",
+                    "outcome": "L",
+                    "score": "1-6 6-1 3-6"
+                  },
+                  {
+                    "round": "E-SF",
+                    "opponent": "Anna YANG",
+                    "outcome": "L",
+                    "score": "3-6 4-6"
+                  },
+                  {
+                    "round": "E-QF",
+                    "opponent": "Jennifer CHEN",
+                    "outcome": "W",
+                    "score": "3-6 7-6(2) 7-5"
+                  }
+                ]
+              },
+              {
+                "name": "Santa Cruz Level 4 Juniors 12s Excellence @ La Madrona Athletic Club - Singles & Doubles",
+                "level": "L4",
+                "division": "Girls' 12 & under singles",
+                "points": 15,
+                "bonusPoints": 0,
+                "startDate": "2025-05-24",
+                "endDate": "2025-05-26",
+                "expiresDate": "2026-05-25",
+                "daysRemaining": 110,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "C-R16",
+                    "opponent": "Emma LAI",
+                    "outcome": "L",
+                    "score": "2-6 3-6"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Alexi LABRECQUE",
+                    "outcome": "L",
+                    "score": "3-6 4-6"
+                  },
+                  {
+                    "round": "R32",
+                    "opponent": "Elina YAMAMOTO",
+                    "outcome": "W",
+                    "score": "6-4 6-2"
+                  }
+                ]
+              },
+              {
+                "name": "NPT Level 6 Junior Open",
+                "level": "L6",
+                "division": "Girls' 14 & under singles",
+                "points": 95,
+                "bonusPoints": 0,
+                "startDate": "2025-04-26",
+                "endDate": "2025-04-27",
+                "expiresDate": "2026-04-26",
+                "daysRemaining": 81,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "F",
+                    "opponent": "Dana YEHIA",
+                    "outcome": "W",
+                    "score": "2-6 6-2 [10-3]"
+                  },
+                  {
+                    "round": "SF",
+                    "opponent": "Ashna SAXENA",
+                    "outcome": "W",
+                    "score": "7-5 6-2"
+                  },
+                  {
+                    "round": "QF",
+                    "opponent": "Sadie COHEN",
+                    "outcome": "W",
+                    "score": "6-1 6-0"
+                  },
+                  {
+                    "round": "R16",
+                    "opponent": "Gayathri KOTIKALAPUDI",
+                    "outcome": "W",
+                    "score": "6-0 6-1"
+                  }
+                ]
+              }
+            ],
+            "doubles": [
+              {
+                "name": "MTA Manteca Level 3 Junior Boys and Girls 12 & 14s Doubles Sectionals",
+                "level": "L3",
+                "division": "Girls' 12 & under doubles",
+                "points": 0,
+                "bonusPoints": 0,
+                "startDate": "2025-09-20",
+                "endDate": "2025-09-21",
+                "expiresDate": "2026-09-20",
+                "daysRemaining": 228,
+                "urgency": "safe",
+                "matches": [
+                  {
+                    "round": "W-F",
+                    "opponent": "Bella WU / MAY SUN",
+                    "outcome": "W",
+                    "score": "5-4(3) 4-2",
+                    "partner": "Zaira GADGIL"
+                  },
+                  {
+                    "round": "W-SF",
+                    "opponent": "",
+                    "outcome": "W",
+                    "score": "N/A",
+                    "partner": "Zaira GADGIL"
+                  },
+                  {
+                    "round": "E-QF",
+                    "opponent": "Zhiyan DUAN / Camille KUNKEL",
+                    "outcome": "L",
+                    "score": "0-4 1-4",
+                    "partner": "Zaira GADGIL"
+                  }
+                ]
               }
             ]
+          },
+          "ranks": {
+            "national": "2088",
+            "section": "111"
           }
-        ]
+        }
       }
     };
 
@@ -1231,12 +1578,13 @@
       return parts.map(renderPlayerNameWithLinks).join(' / ');
     }
 
-    function renderTimeline() {
+    function renderTimeline(listData) {
       const container = document.querySelector('[data-timeline]');
       if (!container) return;
 
       // Combine all events and sort by days remaining
-      const allEvents = [...PLAYER_DATA.events.singles, ...PLAYER_DATA.events.doubles]
+      const events = (listData && listData.events) ? listData.events : { singles: [], doubles: [] };
+      const allEvents = [...(events.singles || []), ...(events.doubles || [])]
         .sort((a, b) => a.daysRemaining - b.daysRemaining);
 
       const html = allEvents.map(event => `
@@ -1267,6 +1615,10 @@
         const criticalClass = event.urgency === 'critical' ? 'event-card--critical' : '';
         const levelClass = `event-badge--${event.level.toLowerCase()}`;
 
+        const bonusValue = Number.isFinite(event.bonusPoints) && event.bonusPoints > 0
+          ? `Bonus: +${event.bonusPoints}`
+          : 'Bonus: none';
+
         const matchesHtml = event.matches && event.matches.length > 0 ? `
             <div class="event-matches">
               <div class="event-matches-title">Match Results</div>
@@ -1290,6 +1642,7 @@
                   <span class="event-badge ${levelClass}">${event.level}</span>
                   <span>${event.division}</span>
                   <span>${formatDate(event.startDate)} - ${formatDate(event.endDate)}</span>
+                  <span class="event-bonus">${bonusValue}</span>
                 </div>
               </div>
               <div class="event-points">
@@ -1309,31 +1662,94 @@
       container.innerHTML = html;
     }
 
-    function updateAlert() {
+    function updateAlert(listData) {
       const alert = document.querySelector('[data-alert]');
-      if (alert && PLAYER_DATA.alert.show) {
-        alert.textContent = `${PLAYER_DATA.alert.points} points expiring soon (${PLAYER_DATA.alert.days} days)`;
+      const data = listData && listData.alert ? listData.alert : null;
+      if (alert && data && data.show) {
+        alert.textContent = `${data.points} points expiring soon (${data.days} days)`;
         alert.style.display = 'block';
       } else if (alert) {
         alert.style.display = 'none';
       }
     }
 
-    function updateTotals() {
+    function updateTotals(listData) {
       const singlesTotal = document.querySelector('[data-singles-total]');
       const doublesTotal = document.querySelector('[data-doubles-total]');
+      const totalPoints = document.querySelector('[data-stat="total-points"]');
+      const breakdown = document.querySelector('[data-total-breakdown]');
+      const totals = (listData && listData.totals) ? listData.totals : {};
 
-      if (singlesTotal) singlesTotal.textContent = `${PLAYER_DATA.totals.singles} pts`;
-      if (doublesTotal) doublesTotal.textContent = `${PLAYER_DATA.totals.doubles} pts`;
+      if (singlesTotal) singlesTotal.textContent = `${totals.singles || 0} pts`;
+      if (doublesTotal) doublesTotal.textContent = `${totals.doubles || 0} pts`;
+      if (totalPoints) totalPoints.textContent = `${totals.total || 0}`;
+      if (breakdown) breakdown.textContent = `${totals.singles || 0} S / ${totals.doubles || 0} D`;
+    }
+
+    function updateRanks(listData) {
+      const national = document.querySelector('[data-stat="rank-national"]');
+      const section = document.querySelector('[data-stat="rank-section"]');
+      const ranks = (listData && listData.ranks) ? listData.ranks : {};
+
+      if (national) national.textContent = ranks.national ? `#${ranks.national}` : '—';
+      if (section) section.textContent = ranks.section ? `#${ranks.section}` : '—';
+    }
+
+    function getListData(listKey) {
+      const lists = PLAYER_DATA && PLAYER_DATA.lists ? PLAYER_DATA.lists : {};
+      return lists[listKey] || null;
+    }
+
+    function setActiveToggle(listKey) {
+      document.querySelectorAll('[data-list-toggle]').forEach((btn) => {
+        const isActive = btn.dataset.listToggle === listKey;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    function setListDisabled(listKey, disabled) {
+      const btn = document.querySelector(`[data-list-toggle="${listKey}"]`);
+      if (!btn) return;
+      btn.disabled = !!disabled;
+      btn.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+    }
+
+    function applyList(listKey) {
+      const listData = getListData(listKey);
+      if (!listData) return;
+      setActiveToggle(listKey);
+      updateAlert(listData);
+      updateTotals(listData);
+      updateRanks(listData);
+      renderTimeline(listData);
+      renderEvents(listData.events.singles, '[data-singles-events]');
+      renderEvents(listData.events.doubles, '[data-doubles-events]', true);
     }
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
-      updateAlert();
-      updateTotals();
-      renderTimeline();
-      renderEvents(PLAYER_DATA.events.singles, '[data-singles-events]');
-      renderEvents(PLAYER_DATA.events.doubles, '[data-doubles-events]', true);
+      const lists = PLAYER_DATA && PLAYER_DATA.lists ? PLAYER_DATA.lists : {};
+      const listKeys = Object.keys(lists);
+      const defaultList = PLAYER_DATA.defaultList && lists[PLAYER_DATA.defaultList]
+        ? PLAYER_DATA.defaultList
+        : (listKeys[0] || 'g12');
+
+      ['g12', 'g14'].forEach((key) => {
+        const data = lists[key];
+        const hasEvents = data && data.events && ((data.events.singles || []).length + (data.events.doubles || []).length > 0);
+        const hasTotals = data && data.totals && (data.totals.total || 0) > 0;
+        setListDisabled(key, !(data && (hasEvents || hasTotals)));
+      });
+
+      applyList(defaultList);
+
+      document.querySelectorAll('[data-list-toggle]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled) return;
+          applyList(btn.dataset.listToggle);
+        });
+      });
     });
   </script>
 </body>

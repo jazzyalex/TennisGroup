@@ -1831,10 +1831,10 @@
 		      document.querySelectorAll('a.tournament-card').forEach(updateCardPastStatus);
 		    }
 
-		    function sortTournamentCardsByDate() {
-		      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
-		      const cardsRoot = tournamentSection?.querySelector('.cards-grid');
-		      if (!cardsRoot) return;
+			    function sortTournamentCardsByDate() {
+			      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
+			      const cardsRoot = tournamentSection?.querySelector('.cards-grid');
+			      if (!cardsRoot) return;
 
 		      const cards = Array.from(cardsRoot.querySelectorAll(':scope > a.tournament-card'));
 		      if (cards.length <= 1) return;
@@ -1852,11 +1852,14 @@
 		        return { card, idx, endMs, isPast };
 		      });
 
-		      keyed.sort((a, b) => {
-		        if (a.isPast !== b.isPast) return a.isPast ? 1 : -1;
-		        if (a.endMs !== b.endMs) return b.endMs - a.endMs;
-		        return a.idx - b.idx;
-		      });
+			      keyed.sort((a, b) => {
+			        if (a.isPast !== b.isPast) return a.isPast ? 1 : -1;
+			        if (a.endMs !== b.endMs) {
+			          // Upcoming: soonest first. Past: most recent first.
+			          return a.isPast ? (b.endMs - a.endMs) : (a.endMs - b.endMs);
+			        }
+			        return a.idx - b.idx;
+			      });
 
 		      const fragment = document.createDocumentFragment();
 		      keyed.forEach(({ card }) => fragment.appendChild(card));
