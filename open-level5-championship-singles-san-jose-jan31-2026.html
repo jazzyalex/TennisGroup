@@ -432,12 +432,7 @@
       }
 
       .ptf-table th {
-        background: rgba(68, 114, 196, 0.86);
-        color: rgba(255, 255, 255, 0.96);
-      }
-
-      .ptf-table tbody tr:nth-child(even) td {
-        background: rgba(255, 255, 255, 0.04);
+        color: rgba(255, 255, 255, 0.72);
       }
 
       .ptf-table td {
@@ -2318,7 +2313,7 @@
         <div class="path-to-final-subtitle" id="ptf-subtitle"></div>
       </div>
 	      <div class="ptf-controls">
-	        <a id="ptf-source" href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1/EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC" target="_blank" rel="noopener noreferrer" title="Open official draw on USTA PlayTennis">Official Draw</a>
+	        <a id="ptf-source" href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1/EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC" target="_blank" rel="noopener noreferrer" title="Open official draw on USTA PlayTennis">Official draw</a>
 	      </div>
     </div>
     <div id="ptf-body"></div>
@@ -4064,7 +4059,7 @@
       const sourceEl = document.getElementById('ptf-source');
       const mobileTitleEl = document.getElementById('mobile-ptf-title');
       const mobileSourceEl = document.getElementById('mobile-ptf-source');
-      if (!desktopBody || !mobileBody || !subtitleEl || !titleEl) return;
+      if (!desktopBody || !subtitleEl || !titleEl) return;
 
       const titleText = alexis ? `Path to Final: ${alexis.fullName}` : 'Path to Final';
       titleEl.textContent = titleText;
@@ -4093,7 +4088,7 @@
       function showEmpty(message) {
         subtitleEl.textContent = message;
         desktopBody.innerHTML = `<div class="ptf-muted">${message}</div>`;
-        mobileBody.innerHTML = `<div class="mobile-ptf-meta">${message}</div>`;
+        if (mobileBody) mobileBody.innerHTML = `<div class="mobile-ptf-meta">${message}</div>`;
       }
 
       if (applyBtn && jsonTextarea) {
@@ -4144,7 +4139,9 @@
       const path = ptfComputeLikelyOpponents(bracket, targetPos, drawSize);
       const matches = Array.isArray(payload?.matches) ? payload.matches : [];
       desktopBody.innerHTML = ptfRenderHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
-      mobileBody.innerHTML = ptfRenderMobileHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
+      if (mobileBody) {
+        mobileBody.innerHTML = ptfRenderMobileHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
+      }
     }
 
     if (document.readyState === 'loading') {

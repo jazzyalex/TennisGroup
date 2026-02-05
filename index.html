@@ -2045,14 +2045,21 @@
 	        updateCount();
 	      };
 	
-	      const toggleFavorite = (card) => {
-	        const id = getTournamentId(card);
-	        if (starred.has(id)) starred.delete(id);
-	        else starred.add(id);
-	        saveStarred(starred);
-	        updateCardUi(card);
-	        applyFilter();
-	      };
+		      const toggleFavorite = (card) => {
+		        const id = getTournamentId(card);
+		        const wasFavorited = starred.has(id);
+		        if (wasFavorited) starred.delete(id);
+		        else starred.add(id);
+		        saveStarred(starred);
+		        // Calendar event cards are injected only because they are starred.
+		        // If a user unstars one from the home page, remove it immediately.
+		        if (wasFavorited && card.getAttribute('data-calendar-event-card') === 'true') {
+		          card.remove();
+		        } else {
+		          updateCardUi(card);
+		        }
+		        applyFilter();
+		      };
 	
 	      // Event delegation so dynamically injected cards work too.
 	      cardsRoot.addEventListener('click', (event) => {
@@ -2102,13 +2109,17 @@
 	      };
 	    }
 	
-		    async function addStarredCalendarEventCards(favoritesApi) {
-	      const cardsRoot = favoritesApi?.cardsRoot;
-	      const starred = favoritesApi?.starred;
-	      if (!cardsRoot || !starred) return;
-	
-	      // Avoid duplicates if the script runs more than once.
-	      cardsRoot.querySelectorAll('[data-starred-calendar-event-card="true"]').forEach((el) => el.remove());
+			    async function addStarredCalendarEventCards(favoritesApi) {
+		      const cardsRoot = favoritesApi?.cardsRoot;
+		      const starred = favoritesApi?.starred;
+		      if (!cardsRoot || !starred) return;
+		
+		      const STAR_STORAGE_KEY = 'tennis_tracker_starred_tournaments_v1';
+		
+		      // Avoid duplicates if the script runs more than once.
+		      cardsRoot
+		        .querySelectorAll('[data-calendar-event-card="true"], [data-starred-calendar-event-card="true"]')
+		        .forEach((el) => el.remove());
 	
 	      const calendarHref = '2025-usta-norcal-national.html';
 	      let html = '';
@@ -2236,10 +2247,70 @@
 	        const eHome = (existing['Home Page'] || '').trim();
 	        const rHome = (row['Home Page'] || '').trim();
 		        if (!/^https?:\/\//i.test(eHome) && /^https?:\/\//i.test(rHome)) existing['Home Page'] = rHome;
-	        if (!(existing['Tournament Name'] || '').trim() && (row['Tournament Name'] || '').trim()) existing['Tournament Name'] = row['Tournament Name'];
-	      });
-	
-		      const rows = Array.from(merged.values()).filter((row) => starred.has(getTournamentId(row)));
+		        if (!(existing['Tournament Name'] || '').trim() && (row['Tournament Name'] || '').trim()) existing['Tournament Name'] = row['Tournament Name'];
+		      });
+
+		      const normalizeUrl = (url) => {
+		        return (url || '')
+		          .toString()
+		          .trim()
+		          .toLowerCase()
+		          .replace(/[#?].*$/, '')
+		          .replace(/\/+$/, '');
+		      };
+
+		      const mergedRows = Array.from(merged.values());
+
+		      // Map PlayTennis "Home Page" URLs to stable ids so report cards can share stars with the calendar.
+		      const homePageToId = new Map();
+		      mergedRows.forEach((row) => {
+		        const url = (row['Home Page'] || '').trim();
+		        if (!/^https?:\/\//i.test(url)) return;
+		        homePageToId.set(normalizeUrl(url), getTournamentId(row));
+		      });
+
+		      // Assign stable ids to report cards (if missing) and migrate any existing stars to the stable id.
+		      let migrated = false;
+		      const reportCards = Array.from(cardsRoot.querySelectorAll(':scope > a.tournament-card')).filter((card) => {
+		        return !!card.querySelector('.card-type.report');
+		      });
+		      reportCards.forEach((card) => {
+		        if (card.getAttribute('data-tournament-id')) return;
+		        const ustaUrl = card.querySelector('.card-usta-link')?.getAttribute('data-usta-url') || '';
+		        if (!ustaUrl) return;
+		        const stableId = homePageToId.get(normalizeUrl(ustaUrl));
+		        if (!stableId) return;
+
+		        const legacyId =
+		          (card.getAttribute('href') || '').trim() ||
+		          (card.querySelector('.card-title')?.textContent || '').trim();
+
+		        card.setAttribute('data-tournament-id', stableId);
+		        if (legacyId && starred.has(legacyId) && !starred.has(stableId)) {
+		          starred.delete(legacyId);
+		          starred.add(stableId);
+		          migrated = true;
+		        }
+		      });
+
+		      if (migrated) {
+		        try {
+		          window.localStorage.setItem(STAR_STORAGE_KEY, JSON.stringify(Array.from(starred)));
+		        } catch {
+		          // ignore
+		        }
+		      }
+
+		      favoritesApi.refresh();
+
+		      const reportIds = new Set(
+		        reportCards.map((card) => card.getAttribute('data-tournament-id')).filter((id) => typeof id === 'string' && id.trim())
+		      );
+
+		      const rows = mergedRows.filter((row) => {
+		        const id = getTournamentId(row);
+		        return starred.has(id) && !reportIds.has(id);
+		      });
 		      if (!rows.length) return;
 
 		      const computeEndDate = (row) => {
@@ -2248,6 +2319,9 @@
 		        const text = `${month} ${dates}`;
 		        return parseEndDateFromText(text);
 		      };
+
+		      const today = new Date();
+		      today.setHours(0, 0, 0, 0);
 
 		      const fragment = document.createDocumentFragment();
 		      rows.forEach((row) => {
@@ -2264,18 +2338,16 @@
 		          : '';
 	
 		        const lastUpdated = (row['Last Updated'] || '').trim();
-		        const endDate = computeEndDate(row);
-		        const today = new Date();
-		        today.setHours(0, 0, 0, 0);
-		        const isPast = endDate ? (new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) < today) : false;
+			        const endDate = computeEndDate(row);
+			        const isPast = endDate ? (new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) < today) : false;
 
 		        const card = document.createElement('a');
-		        card.href = calendarHref;
-		        card.className = `tournament-card ${isPast ? 'is-past' : 'is-upcoming'}`;
-		        card.setAttribute('data-tournament-id', id);
-		        card.setAttribute('data-starred-calendar-event-card', 'true');
-		        if (lastUpdated) card.setAttribute('data-card-updated-iso', lastUpdated);
-		        card.innerHTML = `
+			        card.href = calendarHref;
+			        card.className = `tournament-card ${isPast ? 'is-past' : 'is-upcoming'}`;
+			        card.setAttribute('data-tournament-id', id);
+			        card.setAttribute('data-calendar-event-card', 'true');
+			        if (lastUpdated) card.setAttribute('data-card-updated-iso', lastUpdated);
+			        card.innerHTML = `
 	          <div class=\"card-header\">
 	            <span class=\"card-type calendar\">
 	              <svg class=\"card-type-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
@@ -2337,11 +2409,12 @@
 		        fragment.appendChild(card);
 		      });
 	
-	      // Insert starred event cards at the top of the grid.
-		      cardsRoot.insertBefore(fragment, cardsRoot.firstChild);
-		      favoritesApi.refresh();
-		      updateAllCardPastStatuses();
-		    }
+		      // Insert starred event cards at the top of the grid.
+			      cardsRoot.insertBefore(fragment, cardsRoot.firstChild);
+			      favoritesApi.refresh();
+			      updateAllCardPastStatuses();
+			      sortTournamentCardsByDate();
+			    }
 	
 	    // Player expiration alert data (injected by Python script)
 	    window.PLAYER_ALERT_DATA = {"show_alert": false, "critical_points": 0, "min_days_remaining": 0};
