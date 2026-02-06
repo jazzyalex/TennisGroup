@@ -1225,6 +1225,12 @@
       text-align: center;
     }
 
+    .mobile-header-meta a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
     .mobile-deadline-badge {
       margin-top: 6px;
       display: inline-flex;
@@ -1301,6 +1307,14 @@
       font-size: 24px;
       font-weight: 700;
       letter-spacing: -0.5px;
+    }
+
+    /* "Closes" can be text (e.g., 'Registration closed') so allow wrapping. */
+    #mobile-seed {
+      font-size: 14px;
+      line-height: 1.15;
+      white-space: normal;
+      word-break: break-word;
     }
 
     .mobile-stat-card.highlight .mobile-stat-value {
@@ -2191,15 +2205,15 @@
     <h3>Tournament Contact</h3>
     <div class="detail-row">
       <span class="detail-label">Tournament Director:</span>
-      <span class="detail-value">N/A</span>
+      <span class="detail-value">Hugo Colpart</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Email:</span>
-      <span class="detail-value">N/A</span>
+      <span class="detail-value"><a href="mailto:hrttournaments@gmail.com" style="color: #4472C4; text-decoration: none;">hrttournaments@gmail.com</a></span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Phone:</span>
-      <span class="detail-value">N/A</span>
+      <span class="detail-value"><a href="tel:7079715074" style="color: #4472C4; text-decoration: none;">707-971-5074</a></span>
     </div>
 
     <div class="important-note">
@@ -2234,7 +2248,7 @@
     <!-- Hero Stats -->
     <div class="mobile-hero-stats">
       <!-- Tournament Name Link (inside card) -->
-      <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
+      <a href="https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/B725D590-9D1A-4061-BAD6-DD7BD89100E0" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
         Level 3 Closed: HRT Level 3 Junior 12s & 14s Mixed Doubles Sectionals
       </a>
 
@@ -2357,36 +2371,63 @@
       const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
         (th.textContent || '').trim().toLowerCase()
       );
+
+      const col = (name, fallback) => {
+        const idx = headers.findIndex((h) => h === name);
+        return idx !== -1 ? idx : fallback;
+      };
+
+      // Column indices (fallbacks match the single-table report layout).
+      const colRank = 0;
+      const colFirst = col('first name', 1);
+      const colLast = col('last name', 2);
+      const colWtn = col('wtn', 3);
+      const colUtr = col('utr', 4);
+      const colNat = col('nat rank', 5);
+      const colLocation = col('location', 6);
+
       const partnerColIdx = headers.findIndex((h) => h === 'partner');
       const hasPartner = partnerColIdx !== -1;
       const sectionColIdx = headers.findIndex((h) => h === 'section rank');
+      const combinedColIdx = (() => {
+        const teamIdx = headers.findIndex((h) => h === 'team nst');
+        if (teamIdx !== -1) return teamIdx;
+        return headers.findIndex((h) => h === 'combined nst');
+      })();
+
+      const requiredCols = [colRank, colFirst, colLast, colWtn, colUtr, colNat, colLocation].filter((idx) => idx !== -1);
+      const minCells = requiredCols.length ? Math.max(...requiredCols) + 1 : 7;
 
       const rows = table.querySelectorAll('tbody tr');
       rows.forEach((row) => {
         const cells = row.querySelectorAll('td');
-        if (cells.length < 7) return;
+        if (cells.length < minCells) return;
 
-        const rank = parseInt((cells[0].textContent || '').trim(), 10);
-        const firstName = (cells[1].textContent || '').trim();
-        const lastName = (cells[2].textContent || '').trim();
+        const rank = parseInt((cells[colRank].textContent || '').trim(), 10);
+        const firstName = (cells[colFirst].textContent || '').trim();
+        const lastName = (cells[colLast].textContent || '').trim();
         const fullName = `${firstName} ${lastName}`.trim();
 
-        const wtnCell = cells[3];
+        const wtnCell = cells[colWtn];
         const wtn = (wtnCell.textContent || '').trim();
         const ustaLink = wtnCell ? wtnCell.querySelector('a') : null;
         const ustaUrl = ustaLink ? ustaLink.href : null;
 
-        const utrCell = cells[4];
+        const utrCell = cells[colUtr];
         const utrLink = utrCell ? utrCell.querySelector('a') : null;
         const utrText = (utrLink ? utrLink.textContent : utrCell.textContent) || '';
-        const utr = parseFloat(utrText.trim());
+        const utrVal = parseFloat(utrText.trim());
+        const utr = Number.isFinite(utrVal) ? utrVal : NaN;
         const utrUrl = utrLink ? utrLink.href : null;
 
-        const natCell = cells[5];
-        const natRank = parseInt((natCell.textContent || '').trim(), 10);
+        const natCell = cells[colNat];
+        const natVal = parseInt((natCell.textContent || '').trim(), 10);
+        const natRank = Number.isFinite(natVal) ? natVal : NaN;
 
-        const location = (cells[6].textContent || '').trim();
+        const location = (cells[colLocation].textContent || '').trim();
         const isTarget = row.classList.contains('highlight-player');
+        const teamNst =
+          combinedColIdx !== -1 && cells[combinedColIdx] ? (cells[combinedColIdx].textContent || '').trim() : '';
 
         let partner = '';
         let partnerKey = '';
@@ -2434,6 +2475,7 @@
           natRank,
           sectionRank,
           uaid,
+          teamNst,
           location,
           isTarget
         });
@@ -2488,9 +2530,11 @@
     function parseKeyStats() {
       const stats = {
         drawSize: 32,
-        seed: 20,
-        registered: 39,
-        percentAbove: 31
+        closes: '',
+        registered: 0,
+        // Legacy/optional (Alexis-focused reports).
+        seed: null,
+        percentAbove: null
       };
       
       const keyStats = document.querySelectorAll('.desktop-view .key-stat');
@@ -2503,15 +2547,24 @@
         const valueText = value.textContent.trim();
         
         if (labelText === 'Draw') {
-          stats.drawSize = parseInt(valueText);
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.drawSize = parsed;
+        } else if (labelText === 'Closes') {
+          stats.closes = valueText;
+        } else if (labelText === 'Registered') {
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.registered = parsed;
         } else if (labelText === 'Alexis Seed') {
           const parts = valueText.split('/');
           if (parts.length === 2) {
-            stats.seed = parseInt(parts[0].trim());
-            stats.registered = parseInt(parts[1].trim());
+            const seedParsed = parseInt(parts[0].trim(), 10);
+            const regParsed = parseInt(parts[1].trim(), 10);
+            if (Number.isFinite(seedParsed)) stats.seed = seedParsed;
+            if (Number.isFinite(regParsed)) stats.registered = regParsed;
           }
         } else if (labelText === '% Above Alexis (UTR)') {
-          stats.percentAbove = parseInt(valueText);
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.percentAbove = parsed;
         }
       });
       
@@ -2616,11 +2669,11 @@
             <div class="mobile-alexis-stat-label">WTN</div>
           </div>
           <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${player.utr}</div>
+            <div class="mobile-alexis-stat-value">${formatUtrValue(player.utr)}</div>
             <div class="mobile-alexis-stat-label">UTR</div>
           </div>
           <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${player.natRank}</div>
+            <div class="mobile-alexis-stat-value">${formatNatRankValue(player.natRank)}</div>
             <div class="mobile-alexis-stat-label">Nat Rank</div>
           </div>
           <div class="mobile-alexis-stat">
@@ -2716,15 +2769,40 @@
       `;
     }
 
+    function formatUtrValue(value) {
+      if (Number.isFinite(value)) return value.toFixed(2);
+      return 'N/A';
+    }
+
+    function formatNatRankValue(value) {
+      if (Number.isFinite(value)) return String(value);
+      return 'N/A';
+    }
+
+    function isProbablyEmail(value) {
+      const email = (value || '').trim();
+      if (!email) return false;
+      if (email.toUpperCase() === 'N/A') return false;
+      return /.+@.+\..+/.test(email);
+    }
+
     function sortPlayers(players, sortBy) {
       const sorted = [...players];
       
       if (sortBy === 'rank') {
         sorted.sort((a, b) => a.rank - b.rank);
       } else if (sortBy === 'utr') {
-        sorted.sort((a, b) => b.utr - a.utr); // Descending (higher is better)
+        sorted.sort((a, b) => {
+          const aVal = Number.isFinite(a.utr) ? a.utr : -1e9;
+          const bVal = Number.isFinite(b.utr) ? b.utr : -1e9;
+          return bVal - aVal; // Descending (higher is better)
+        });
       } else if (sortBy === 'natRank') {
-        sorted.sort((a, b) => a.natRank - b.natRank); // Ascending (lower is better)
+        sorted.sort((a, b) => {
+          const aVal = Number.isFinite(a.natRank) ? a.natRank : 1e9;
+          const bVal = Number.isFinite(b.natRank) ? b.natRank : 1e9;
+          return aVal - bVal; // Ascending (lower is better)
+        });
       } else if (sortBy === 'wtn') {
         sorted.sort((a, b) => {
           const aWtn = parseFloat(a.wtn) || 999;
@@ -2767,23 +2845,23 @@
             <div class="mobile-player-ratings">
               ${player.utrUrl ? `
                 <a href="${player.utrUrl}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
-                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
                   <div class="mobile-rating-label">UTR</div>
                 </a>
               ` : `
                 <div class="mobile-rating-badge utr">
-                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
                   <div class="mobile-rating-label">UTR</div>
                 </div>
               `}
               ${player.uaid ? `
                 <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
-                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
                   <div class="mobile-rating-label">Nat</div>
                 </a>
               ` : `
                 <div class="mobile-rating-badge nat">
-                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
                   <div class="mobile-rating-label">Nat</div>
                 </div>
               `}
@@ -2866,7 +2944,7 @@
             <div class="mobile-info-row">
               <span class="mobile-info-label">Site ${i + 1}</span>
               <span class="mobile-info-value">
-                ${venue.url ? `<a href="${venue.url}" target="_blank">${venue.name} →</a>` : venue.name}
+                ${venue.url ? `<a href="${venue.url}" target="_blank" rel="noopener noreferrer">${venue.name} →</a>` : venue.name}
               </span>
             </div>
           `;
@@ -2890,7 +2968,9 @@
             ${info.contact.email ? `
             <div class="mobile-info-row">
               <span class="mobile-info-label">Email</span>
-              <span class="mobile-info-value"><a href="mailto:${info.contact.email}">${info.contact.email}</a></span>
+              <span class="mobile-info-value">
+                ${isProbablyEmail(info.contact.email) ? `<a href="mailto:${info.contact.email}">${info.contact.email}</a>` : info.contact.email}
+              </span>
             </div>` : ''}
             ${info.contact.phone ? `
             <div class="mobile-info-row">
@@ -2920,6 +3000,15 @@
       targetPlayer = allPlayers.find(p => p.isTarget);
       const stats = parseKeyStats();
       const info = parseTournamentInfo();
+
+      // Keep the mobile tournament link aligned with the desktop header.
+      const desktopTournamentLink = document.querySelector('.desktop-view .tournament-info a');
+      const mobileTournamentLink = document.querySelector('a.mobile-tournament-link');
+      if (desktopTournamentLink && mobileTournamentLink) {
+        if (desktopTournamentLink.href) mobileTournamentLink.href = desktopTournamentLink.href;
+        const title = (desktopTournamentLink.textContent || '').trim();
+        if (title) mobileTournamentLink.textContent = title;
+      }
       
       // Render header
       // Use title as-is (already contains "Open Level 5 Championship Singles - Girls' 12 Singles")
@@ -2927,12 +3016,32 @@
       document.getElementById('mobile-title').textContent = titleText;
       
       // Format: "Jan 10-18, 2026 • San Jose, CA"
-      document.getElementById('mobile-meta').textContent = `${info.dates} • ${info.location}`;
+      const metaEl = document.getElementById('mobile-meta');
+      if (metaEl) {
+        const datesText = (info.dates || '').trim();
+        const locText = (info.location || '').trim();
+        const sep = datesText && locText ? ' • ' : '';
+        const mapUrl = info?.venues?.[0]?.url || '';
+
+        metaEl.textContent = '';
+        metaEl.append(document.createTextNode(datesText + sep));
+        if (mapUrl && locText) {
+          const a = document.createElement('a');
+          a.href = mapUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = locText;
+          metaEl.append(a);
+        } else {
+          metaEl.append(document.createTextNode(locText));
+        }
+      }
       
       // Render hero stats
-      document.getElementById('mobile-draw-size').textContent = stats.drawSize;
-      document.getElementById('mobile-seed').textContent = stats.seed;
-      document.getElementById('mobile-registered').textContent = stats.registered;
+      document.getElementById('mobile-draw-size').textContent = Number.isFinite(stats.drawSize) ? stats.drawSize : '';
+      document.getElementById('mobile-seed').textContent =
+        (stats.closes || '').trim() || (Number.isFinite(stats.seed) ? String(stats.seed) : '');
+      document.getElementById('mobile-registered').textContent = Number.isFinite(stats.registered) ? stats.registered : '';
       
       // Render Alexis card
       if (targetPlayer) {
