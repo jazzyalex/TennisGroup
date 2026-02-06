@@ -469,6 +469,20 @@
       border-bottom-color: #0891b2;
     }
 
+    .cell-city a,
+    .cell-venue a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted var(--text-muted);
+      transition: border-color 0.2s;
+    }
+
+    .cell-city a:hover,
+    .cell-venue a:hover {
+      border-bottom-style: solid;
+      border-bottom-color: #0891b2;
+    }
+
     .cell-divisions {
       font-size: 12px;
       color: var(--text-secondary);
@@ -865,6 +879,17 @@
       overflow: hidden;
     }
 
+    .m-card-name a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .m-card-name a:hover,
+    .m-card-name a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
     .m-card-meta {
       display: flex;
       align-items: center;
@@ -936,6 +961,11 @@
       color: var(--m-text);
     }
 
+    .m-detail-link {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
     .m-distance-badge {
       display: flex;
       align-items: center;
@@ -979,6 +1009,16 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .m-venue-text {
+      text-decoration: none;
+    }
+
+    a.m-venue-text:hover,
+    a.m-venue-text:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     .m-expand-btn {
@@ -2256,6 +2296,10 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
       return (val || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
     }
 
+    function escapeHtml(val) {
+      return (val || '').toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
     function getDrawCell(row) {
       const singlesRaw = (row['Singles Draw'] || '').trim();
       const doublesRaw = (row['Doubles Draw'] || '').trim();
@@ -2463,9 +2507,18 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 	            const draw = getDrawCell(row);
 	            const cityState = formatCityWithState(row['City']);
 	            const fallbackSearchUrl = `https://playtennis.usta.com/tournaments?location=${encodeURIComponent(cityState)}`;
-	            const tournamentHtml = isValidUrl
-	              ? `<a href="${homePage}" target="_blank" rel="noopener">${tournamentName}</a>`
-	              : `<a href="${fallbackSearchUrl}" target="_blank" rel="noopener" title="Search PlayTennis tournaments near ${escapeAttr(cityState)}">${tournamentName}</a>`;
+	            const tournamentUrl = isValidUrl ? homePage : fallbackSearchUrl;
+	            const tournamentTitleAttr = !isValidUrl
+	              ? ` title="Search PlayTennis tournaments near ${escapeAttr(cityState)}"`
+	              : '';
+	            const tournamentHtml = `<a href="${tournamentUrl}" target="_blank" rel="noopener noreferrer"${tournamentTitleAttr}>${escapeHtml(tournamentName)}</a>`;
+
+	            const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
+	            const venueName = (row['Primary Site'] || '').trim();
+	            const venueQuery = [venueName, cityState].filter(Boolean).join(' ');
+	            const venueMapUrl = venueQuery
+	              ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueQuery)}`
+	              : cityMapUrl;
 
             const tableRow = document.createElement('div');
             tableRow.className = `table-row ${rowNumber % 2 === 0 ? 'even-row' : ''}`;
@@ -2476,8 +2529,8 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
               <span class="cell-tournament">${tournamentHtml}</span>
               <span class="cell-format">${format}</span>
               <span class="cell-age">${age.label}</span>
-	              <span class="cell-city">${cityState}</span>
-              <span class="cell-venue">${row['Primary Site']}</span>
+	              <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
+              <span class="cell-venue">${venueName ? `<a href="${venueMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(venueName)}</a>` : ''}</span>
               <span class="cell-draw"${draw.tooltip ? ` title="${escapeAttr(draw.tooltip)}"` : ''}>${draw.display}</span>
               <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
               <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
@@ -2508,9 +2561,18 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 	          const draw = getDrawCell(row);
 	          const cityState = formatCityWithState(row['City']);
 	          const fallbackSearchUrl = `https://playtennis.usta.com/tournaments?location=${encodeURIComponent(cityState)}`;
-	          const tournamentHtml = isValidUrl
-	            ? `<a href="${homePage}" target="_blank" rel="noopener">${tournamentName}</a>`
-	            : `<a href="${fallbackSearchUrl}" target="_blank" rel="noopener" title="Search PlayTennis tournaments near ${escapeAttr(cityState)}">${tournamentName}</a>`;
+	          const tournamentUrl = isValidUrl ? homePage : fallbackSearchUrl;
+	          const tournamentTitleAttr = !isValidUrl
+	            ? ` title="Search PlayTennis tournaments near ${escapeAttr(cityState)}"`
+	            : '';
+	          const tournamentHtml = `<a href="${tournamentUrl}" target="_blank" rel="noopener noreferrer"${tournamentTitleAttr}>${escapeHtml(tournamentName)}</a>`;
+
+	          const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
+	          const venueName = (row['Primary Site'] || '').trim();
+	          const venueQuery = [venueName, cityState].filter(Boolean).join(' ');
+	          const venueMapUrl = venueQuery
+	            ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueQuery)}`
+	            : cityMapUrl;
 
           const tableRow = document.createElement('div');
           tableRow.className = `table-row ${(index + 1) % 2 === 0 ? 'even-row' : ''}`;
@@ -2521,8 +2583,8 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
             <span class="cell-tournament">${tournamentHtml}</span>
             <span class="cell-format">${format}</span>
             <span class="cell-age">${age.label}</span>
-	            <span class="cell-city">${cityState}</span>
-            <span class="cell-venue">${row['Primary Site']}</span>
+	            <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
+            <span class="cell-venue">${venueName ? `<a href="${venueMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(venueName)}</a>` : ''}</span>
             <span class="cell-draw"${draw.tooltip ? ` title="${escapeAttr(draw.tooltip)}"` : ''}>${draw.display}</span>
             <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
             <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
@@ -2978,18 +3040,25 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
           const director = (row['Tournament Director'] || '').trim();
           const notes = (row['Notes'] || '').trim();
 
-          function escapeHtml(text) {
-            return (text || '')
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;');
-          }
-
           const extraLines = [];
           if (divisions) extraLines.push(`<div class="m-extra-line"><span class="m-extra-label">Divisions</span>${escapeHtml(divisions)}</div>`);
           if (director) extraLines.push(`<div class="m-extra-line"><span class="m-extra-label">Director</span>${escapeHtml(director)}</div>`);
           if (notes) extraLines.push(`<div class="m-extra-line"><span class="m-extra-label">Notes</span>${escapeHtml(notes)}</div>`);
           const hasExtra = extraLines.length > 0;
+
+          const cityState = formatCityWithState(row['City']);
+          const fallbackSearchUrl = `https://playtennis.usta.com/tournaments?location=${encodeURIComponent(cityState)}`;
+          const tournamentUrl = isValidUrl ? homePage : fallbackSearchUrl;
+          const tournamentTitleAttr = !isValidUrl
+            ? ` title="${escapeAttr(`Search PlayTennis tournaments near ${cityState}`)}"`
+            : '';
+
+          const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
+          const venueName = (row['Primary Site'] || '').trim();
+          const venueQuery = [venueName, cityState].filter(Boolean).join(' ');
+          const venueMapUrl = venueQuery
+            ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueQuery)}`
+            : cityMapUrl;
 
           const card = document.createElement('div');
           card.className = 'm-tournament-card';
@@ -2997,7 +3066,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
             <div class="m-card-header">
               <div class="m-card-top">
                 <div class="m-card-title">
-                  <div class="m-card-name">${isValidUrl ? `<a href="${homePage}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${tournamentName}</a>` : tournamentName}</div>
+                  <div class="m-card-name"><a href="${tournamentUrl}" target="_blank" rel="noopener noreferrer"${tournamentTitleAttr}>${escapeHtml(tournamentName)}</a></div>
                   <div class="m-card-meta">
                     <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NATIONAL' : 'SECTIONAL'}</span>
                     <span class="m-format-badge">• ${formatLabel}</span>
@@ -3025,7 +3094,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span class="m-detail-text">${formatCityWithState(row['City'])}</span>
+                <a class="m-detail-text m-detail-link" href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a>
               </div>
               <div class="m-detail-item">
                 <svg class="m-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -3042,7 +3111,7 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
               </div>
             </div>
             <div class="m-card-footer">
-              <div class="m-venue-text">📍 ${row['Primary Site']}</div>
+              ${venueName ? `<a class="m-venue-text" href="${venueMapUrl}" target="_blank" rel="noopener noreferrer">📍 ${escapeHtml(venueName)}</a>` : `<div class="m-venue-text">📍 —</div>`}
               ${hasExtra ? `<button class="m-expand-btn" type="button" aria-expanded="false">Details <span class="m-expand-chevron">▾</span></button>` : ''}
             </div>
             ${hasExtra ? `<div class="m-card-extra">${extraLines.join('')}</div>` : ''}
