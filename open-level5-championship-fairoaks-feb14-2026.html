@@ -3617,16 +3617,6 @@
 	        return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
 	      }
 
-	      function splitDrawForChart(totalDraw, chartCount, chartIndex) {
-	        if (!Number.isFinite(totalDraw) || totalDraw <= 0) return null;
-	        if (!Number.isFinite(chartCount) || chartCount <= 1) return null;
-	        if (!Number.isFinite(chartIndex) || chartIndex < 0) return null;
-	        const base = Math.floor(totalDraw / chartCount);
-	        const remainder = totalDraw % chartCount;
-	        if (base <= 0) return null;
-	        return base + (chartIndex < remainder ? 1 : 0);
-	      }
-
 	      const charts = Array.from(document.querySelectorAll('.desktop-view .utr-histogram-chart'));
 	      if (!charts.length) return;
 
@@ -3648,8 +3638,7 @@
 	          drawPlayers = selectMixedDrawPlayers(playersByTable, drawSize);
 	        } else {
 	          const explicitDraw = chartDrawOverride(container);
-	          const splitDraw = splitDrawForChart(drawSize, charts.length, chartIndex);
-	          const drawLimit = explicitDraw || splitDraw || drawSize;
+	          const drawLimit = explicitDraw || drawSize;
 	          drawPlayers = allPlayers
 	            .slice()
 	            .sort((a, b) => a.natRank - b.natRank)
