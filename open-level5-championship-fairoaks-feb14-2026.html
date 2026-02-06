@@ -3531,11 +3531,28 @@
 	        const a = cell.querySelector && cell.querySelector('a');
 	        return (a ? a.textContent : cell.textContent || '').trim();
 	      }
+
+	      function chartDrawOverride(chartEl) {
+	        if (!chartEl) return null;
+	        const raw = (chartEl.getAttribute('data-utr-draw') || '').trim();
+	        const parsed = parseInt(raw, 10);
+	        return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+	      }
+
+	      function splitDrawForChart(totalDraw, chartCount, chartIndex) {
+	        if (!Number.isFinite(totalDraw) || totalDraw <= 0) return null;
+	        if (!Number.isFinite(chartCount) || chartCount <= 1) return null;
+	        if (!Number.isFinite(chartIndex) || chartIndex < 0) return null;
+	        const base = Math.floor(totalDraw / chartCount);
+	        const remainder = totalDraw % chartCount;
+	        if (base <= 0) return null;
+	        return base + (chartIndex < remainder ? 1 : 0);
+	      }
 	
 	      const charts = Array.from(document.querySelectorAll('.desktop-view .utr-histogram-chart'));
 	      if (!charts.length) return;
 	
-	      charts.forEach((container) => {
+	      charts.forEach((container, chartIndex) => {
 	        if (!container) return;
 	        const table = findTableForChart(container);
 	        if (!table) return;
@@ -3572,7 +3589,10 @@
 	
 	        players.sort((a, b) => a.natRank - b.natRank);
 	        const drawSize = getDrawSizeFromKeyStats() || players.length;
-	        const drawPlayers = players.slice(0, drawSize);
+	        const explicitDraw = chartDrawOverride(container);
+	        const splitDraw = splitDrawForChart(drawSize, charts.length, chartIndex);
+	        const drawLimit = explicitDraw || splitDraw || drawSize;
+	        const drawPlayers = players.slice(0, drawLimit);
 	        const values = drawPlayers.map((p) => p.utr).filter((v) => Number.isFinite(v));
 	
 	        container.innerHTML = '';
