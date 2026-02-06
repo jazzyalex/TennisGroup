@@ -3438,25 +3438,23 @@
     }
 
 	    function buildUtrHistogram() {
+	      function isMixedEventPage() {
+	        try {
+	          return typeof detectMixedEvent === 'function' && detectMixedEvent();
+	        } catch (err) {
+	          return false;
+	        }
+	      }
+
 	      function findTableForChart(chartEl) {
 	        if (!chartEl) return null;
-	
+
 	        const tableSelector = (chartEl.getAttribute('data-utr-table') || '').trim();
 	        if (tableSelector) {
 	          const explicit = document.querySelector(tableSelector);
 	          if (explicit && explicit.tagName === 'TABLE') return explicit;
 	        }
-	
-	        // Special-case mixed doubles: default to the primary table (Girls) unless explicitly wired.
-	        try {
-	          if (typeof detectMixedEvent === 'function' && detectMixedEvent()) {
-	            const primary = document.querySelector('.desktop-view .primary-table');
-	            if (primary) return primary;
-	          }
-	        } catch {
-	          // ignore
-	        }
-	
+
 	        // Walk up the DOM tree looking for a previous sibling table.
 	        let el = chartEl;
 	        while (el && el !== document.body) {
@@ -3469,14 +3467,32 @@
 	          }
 	          el = el.parentElement;
 	        }
-	
+
 	        return (
 	          document.querySelector('.desktop-view .primary-table') ||
 	          document.querySelector('.desktop-view table') ||
 	          null
 	        );
 	      }
-	
+
+	      function findTablesForChart(chartEl) {
+	        const tableSelector = (chartEl?.getAttribute('data-utr-table') || '').trim();
+	        if (tableSelector) {
+	          const explicit = document.querySelector(tableSelector);
+	          return explicit && explicit.tagName === 'TABLE' ? [explicit] : [];
+	        }
+
+	        if (isMixedEventPage()) {
+	          const tables = Array.from(document.querySelectorAll('.desktop-view table')).filter(
+	            (table) => table.querySelectorAll('tbody tr').length > 0
+	          );
+	          if (tables.length) return tables;
+	        }
+
+	        const single = findTableForChart(chartEl);
+	        return single ? [single] : [];
+	      }
+
 	      function headerIndex(table, want) {
 	        if (!table) return -1;
 	        const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
@@ -3486,21 +3502,15 @@
 	        if (!wantNorm) return -1;
 	        return headers.findIndex((h) => h === wantNorm);
 	      }
-	
+
 	      function cellText(cell) {
 	        if (!cell) return '';
 	        const a = cell.querySelector && cell.querySelector('a');
 	        return (a ? a.textContent : cell.textContent || '').trim();
 	      }
-	
-	      const charts = Array.from(document.querySelectorAll('.desktop-view .utr-histogram-chart'));
-	      if (!charts.length) return;
-	
-	      charts.forEach((container) => {
-	        if (!container) return;
-	        const table = findTableForChart(container);
-	        if (!table) return;
-	
+
+	      function playersFromTable(table) {
+	        if (!table) return [];
 	        const utrIdx = (() => {
 	          const idx = headerIndex(table, 'utr');
 	          return idx !== -1 ? idx : 4;
@@ -3509,11 +3519,8 @@
 	          const idx = headerIndex(table, 'nat rank');
 	          return idx !== -1 ? idx : 5;
 	        })();
-	
-	        const rows = Array.from(table.querySelectorAll('tbody tr'));
-	        if (!rows.length) return;
-	
-	        const players = rows
+
+	        return Array.from(table.querySelectorAll('tbody tr'))
 	          .map((row) => {
 	            const cells = row.querySelectorAll('td');
 	            const maxIdx = Math.max(utrIdx, natIdx);
@@ -3528,30 +3535,84 @@
 	            };
 	          })
 	          .filter(Boolean);
-	
-	        if (!players.length) return;
-	
-	        players.sort((a, b) => a.natRank - b.natRank);
-	        const drawSize = getDrawSizeFromKeyStats() || players.length;
-	        const drawPlayers = players.slice(0, drawSize);
+	      }
+
+	      function selectMixedDrawPlayers(playersByTable, drawSize) {
+	        const sortedByTable = playersByTable.map((group) =>
+	          group.slice().sort((a, b) => a.natRank - b.natRank)
+	        );
+	        const allPlayers = sortedByTable.flat();
+	        if (!allPlayers.length) return [];
+
+	        if (!Number.isFinite(drawSize) || drawSize <= 0 || drawSize >= allPlayers.length) {
+	          return allPlayers;
+	        }
+
+	        const tableCount = sortedByTable.length;
+	        const baseSlots = Math.floor(drawSize / tableCount);
+	        let remainder = drawSize % tableCount;
+	        const selected = [];
+
+	        sortedByTable.forEach((group) => {
+	          const slots = baseSlots + (remainder > 0 ? 1 : 0);
+	          if (remainder > 0) remainder -= 1;
+	          if (slots > 0) selected.push(...group.slice(0, slots));
+	        });
+
+	        if (selected.length < drawSize) {
+	          const leftovers = sortedByTable
+	            .flat()
+	            .filter((player) => !selected.includes(player))
+	            .sort((a, b) => a.natRank - b.natRank);
+	          selected.push(...leftovers.slice(0, drawSize - selected.length));
+	        }
+
+	        return selected.slice(0, drawSize);
+	      }
+
+	      const charts = Array.from(document.querySelectorAll('.desktop-view .utr-histogram-chart'));
+	      if (!charts.length) return;
+
+	      charts.forEach((container) => {
+	        if (!container) return;
+	        const tables = findTablesForChart(container);
+	        if (!tables.length) return;
+
+	        const playersByTable = tables.map(playersFromTable).filter((group) => group.length > 0);
+	        if (!playersByTable.length) return;
+
+	        const allPlayers = playersByTable.flat();
+	        if (!allPlayers.length) return;
+
+	        const drawSize = getDrawSizeFromKeyStats() || allPlayers.length;
+	        const mixedPage = isMixedEventPage() && playersByTable.length > 1;
+	        let drawPlayers;
+	        if (mixedPage) {
+	          drawPlayers = selectMixedDrawPlayers(playersByTable, drawSize);
+	        } else {
+	          drawPlayers = allPlayers
+	            .slice()
+	            .sort((a, b) => a.natRank - b.natRank)
+	            .slice(0, drawSize);
+	        }
+
 	        const values = drawPlayers.map((p) => p.utr).filter((v) => Number.isFinite(v));
-	
 	        container.innerHTML = '';
-	
+
 	        const captionEl =
 	          container.closest('.utr-histogram')?.querySelector('.utr-histogram-caption') ||
 	          document.getElementById('utr-histogram-caption');
-	
+
 	        if (!values.length) {
 	          if (captionEl) {
 	            captionEl.textContent = 'No UTR ratings found for this table.';
 	          }
 	          return;
 	        }
-	
+
 	        const highlightPlayer = drawPlayers.find((p) => p.highlight && Number.isFinite(p.utr));
 	        const highlightUtr = highlightPlayer ? highlightPlayer.utr : null;
-	
+
 	        const binSize = 0.5;
 	        const min = Math.min(...values);
 	        const max = Math.max(...values);
@@ -3559,49 +3620,48 @@
 	        const endBin = Math.floor(max / binSize) * binSize;
 	        const binCount = Math.round((endBin - startBin) / binSize) + 1;
 	        const bins = new Array(binCount).fill(0);
-	
+
 	        values.forEach((value) => {
 	          const idx = Math.floor((value - startBin) / binSize);
 	          if (idx >= 0 && idx < bins.length) bins[idx] += 1;
 	        });
-	
+
 	        const maxCount = Math.max(...bins, 1);
 	        const highlightIndex =
 	          highlightUtr !== null ? Math.floor((highlightUtr - startBin) / binSize) : null;
-	
+
 	        bins.forEach((count, index) => {
 	          if (count === 0) return;
 	          const start = startBin + index * binSize;
 	          const row = document.createElement('div');
 	          row.className = 'utr-bin';
-	
+
 	          if (highlightIndex !== null && highlightIndex === index) {
 	            row.classList.add('is-highlight');
 	          }
-	
+
 	          const label = document.createElement('div');
 	          label.className = 'utr-bin-label';
 	          label.textContent = formatUtrRangeLabel(start, binSize);
-	
+
 	          const barWrap = document.createElement('div');
 	          barWrap.className = 'utr-bin-bar-wrap';
-	
+
 	          const bar = document.createElement('div');
 	          bar.className = 'utr-bin-bar';
 	          bar.style.width = `${(count / maxCount) * 100}%`;
 	          barWrap.appendChild(bar);
-	
+
 	          const countEl = document.createElement('div');
 	          countEl.className = 'utr-bin-count';
 	          countEl.textContent = String(count);
-	
+
 	          row.appendChild(label);
 	          row.appendChild(barWrap);
 	          row.appendChild(countEl);
-	
 	          container.appendChild(row);
 	        });
-	
+
 	        if (captionEl) {
 	          let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
 	          if (highlightUtr !== null) caption += ' Alexis bin highlighted.';
