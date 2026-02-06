@@ -427,7 +427,8 @@
       flex-direction: column;
     }
 
-    .utr-histogram h2 {
+    .utr-histogram h2,
+    .utr-histogram h3 {
       color: #2c3e50;
       margin-top: 0;
       border-bottom: 2px solid #4472C4;
@@ -477,25 +478,6 @@
 
     .utr-bin.is-highlight .utr-bin-bar {
       background-color: #f5c542;
-    }
-
-    .utr-bin.is-highlight .utr-bin-bar-wrap {
-      box-shadow: 0 0 0 2px rgba(245, 197, 66, 0.55);
-    }
-
-    .utr-highlight-chip {
-      display: inline-flex;
-      align-items: center;
-      margin-left: 8px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(245, 197, 66, 0.18);
-      border: 1px solid rgba(245, 197, 66, 0.65);
-      color: #7a5b10;
-      font-weight: 700;
-      font-size: 10px;
-      line-height: 1.1;
-      white-space: nowrap;
     }
 
     .utr-bin-count {
@@ -690,7 +672,7 @@
         color: #e0e0e0;
       }
 
-      .stats-section h2, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h2 {
+      .stats-section h2, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h2, .utr-histogram h3 {
         color: #ffffff;
         border-bottom-color: #3a5a8a;
       }
@@ -2016,8 +1998,8 @@
   </style>
 </head>
 <body>
-  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-06T13:24:21-08:00" title="2026-02-06T13:24:21-08:00">
-    <span class="report-updated-badge__pill">Updated Feb 6, 2026 1:24 PM PST</span>
+  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-06T14:41:19-08:00" title="2026-02-06T14:41:19-08:00">
+    <span class="report-updated-badge__pill">Updated Feb 6, 2026 2:41 PM PST</span>
   </div>
   <div class="desktop-view">
   <div class="report-header">
@@ -3573,14 +3555,6 @@
 	          const idx = headerIndex(table, 'utr');
 	          return idx !== -1 ? idx : 4;
 	        })();
-	        const firstIdx = (() => {
-	          const idx = headerIndex(table, 'first name');
-	          return idx !== -1 ? idx : 1;
-	        })();
-	        const lastIdx = (() => {
-	          const idx = headerIndex(table, 'last name');
-	          return idx !== -1 ? idx : 2;
-	        })();
 	        const natIdx = (() => {
 	          const idx = headerIndex(table, 'nat rank');
 	          return idx !== -1 ? idx : 5;
@@ -3589,18 +3563,14 @@
 	        return Array.from(table.querySelectorAll('tbody tr'))
 	          .map((row) => {
 	            const cells = row.querySelectorAll('td');
-	            const maxIdx = Math.max(utrIdx, natIdx, firstIdx, lastIdx);
+	            const maxIdx = Math.max(utrIdx, natIdx);
 	            if (!cells || cells.length <= maxIdx) return null;
 	            const utr = parseFloat(cellText(cells[utrIdx]));
 	            const natRaw = cellText(cells[natIdx]);
 	            const natRank = parseInt(natRaw, 10);
-	            const firstName = cellText(cells[firstIdx]);
-	            const lastName = cellText(cells[lastIdx]);
 	            return {
 	              utr: Number.isFinite(utr) ? utr : null,
 	              natRank: Number.isFinite(natRank) ? natRank : Number.POSITIVE_INFINITY,
-	              firstName,
-	              lastName,
 	              highlight: row.classList.contains('highlight-player'),
 	            };
 	          })
@@ -3702,7 +3672,6 @@
 
 	        const highlightPlayer = drawPlayers.find((p) => p.highlight && Number.isFinite(p.utr));
 	        const highlightUtr = highlightPlayer ? highlightPlayer.utr : null;
-	        const highlightName = highlightPlayer ? (highlightPlayer.firstName || 'Primary') : null;
 
 	        const binSize = 0.5;
 	        const min = Math.min(...values);
@@ -3727,20 +3696,13 @@
 	          const row = document.createElement('div');
 	          row.className = 'utr-bin';
 
-	          const isHighlight = highlightIndex !== null && highlightIndex === index;
-	          if (isHighlight) {
+	          if (highlightIndex !== null && highlightIndex === index) {
 	            row.classList.add('is-highlight');
 	          }
 
 	          const label = document.createElement('div');
 	          label.className = 'utr-bin-label';
 	          label.textContent = formatUtrRangeLabel(start, binSize);
-	          if (isHighlight && highlightName) {
-	            const chip = document.createElement('span');
-	            chip.className = 'utr-highlight-chip';
-	            chip.textContent = highlightName;
-	            label.appendChild(chip);
-	          }
 
 	          const barWrap = document.createElement('div');
 	          barWrap.className = 'utr-bin-bar-wrap';
@@ -3762,10 +3724,7 @@
 
 	        if (captionEl) {
 	          let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
-	          if (highlightUtr !== null) {
-	            const who = highlightName || 'Primary';
-	            caption += ` Highlight: ${who} (UTR ${highlightUtr.toFixed(2)}).`;
-	          }
+	          if (highlightUtr !== null) caption += ' Alexis bin highlighted.';
 	          captionEl.textContent = caption;
 	        }
 	      });
