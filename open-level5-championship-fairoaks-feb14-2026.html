@@ -521,7 +521,7 @@
 
     .detail-row {
       display: grid;
-      grid-template-columns: 180px minmax(0, 1fr);
+      grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
       column-gap: 12px;
       align-items: start;
       padding: 10px 0;
@@ -537,6 +537,7 @@
     .detail-value {
       color: #2c3e50;
       min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .important-note {
@@ -1859,6 +1860,11 @@
       border-bottom: 1px solid var(--mobile-border);
     }
 
+    .mobile-info-row.is-stacked {
+      flex-direction: column;
+      gap: 6px;
+    }
+
     .mobile-info-row:last-child {
       border-bottom: none;
     }
@@ -1873,6 +1879,13 @@
       font-size: 13px;
       text-align: right;
       color: var(--mobile-text-primary);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .mobile-info-row.is-stacked .mobile-info-value {
+      width: 100%;
+      text-align: left;
     }
 
     .mobile-info-value a {
@@ -2005,8 +2018,8 @@
   </style>
 </head>
 <body>
-  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-08T00:16:14-08:00" title="2026-02-08T00:16:14-08:00">
-    <span class="report-updated-badge__pill">Updated Feb 8, 2026 12:16 AM PST</span>
+  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-08T12:15:50-08:00" title="2026-02-08T12:15:50-08:00">
+    <span class="report-updated-badge__pill">Updated Feb 8, 2026 12:15 PM PST</span>
   </div>
   <div class="desktop-view">
   <div class="report-header">
@@ -2200,109 +2213,7 @@
       </div>
     </div>
   </div>
-<!-- ALEXIS_ROSTER_H2H_START -->
-<style id="alexis-roster-h2h-style">
-  .h2h-block { margin: 28px 0; padding: 18px 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); }
-  .h2h-block h2 { margin: 0 0 10px 0; font-size: 20px; }
-  .h2h-block .h2h-note { margin: 0 0 14px 0; opacity: 0.85; }
-  .h2h-summary { margin: 0 0 14px 0; padding: 0; list-style: none; }
-  .h2h-summary li { margin: 6px 0; }
-  .h2h-jump { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
-  .h2h-player { margin-top: 18px; }
-  .h2h-player h3 { margin: 0 0 8px 0; font-size: 16px; }
-  .h2h-player .h2h-meta { opacity: 0.8; font-weight: 400; font-size: 13px; margin-left: 8px; }
 
-  .h2h-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .h2h-table { width: 100%; min-width: 760px; margin: 0; max-width: none; border-collapse: collapse; font-size: 13px; box-shadow: none; background: transparent; }
-  .h2h-table th, .h2h-table td { padding: 7px 8px; border-bottom: 1px solid rgba(0,0,0,0.08); vertical-align: top; }
-  .h2h-table th { text-align: left; opacity: 0.9; font-weight: 700; font-size: 12px; letter-spacing: 0.2px; white-space: nowrap; }
-  .h2h-table td { white-space: nowrap; }
-  .h2h-table td:nth-child(2) { white-space: normal; min-width: 280px; }
-  .h2h-event-main { font-weight: 700; }
-  .h2h-event-sub { font-size: 12px; opacity: 0.8; margin-top: 1px; }
-  tr[data-h2h="1"] td:nth-child(3)::after { content: " *"; color: #C58A00; font-weight: 800; }
-
-  @media (prefers-color-scheme: dark) {
-    .h2h-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
-    .h2h-block h2, .h2h-block h3 { color: #ffffff; }
-    .h2h-block .h2h-note { color: rgba(255,255,255,0.86); }
-    .h2h-table th, .h2h-table td { border-bottom-color: rgba(255,255,255,0.12); }
-    .h2h-event-sub { opacity: 0.78; }
-  }
-
-  @media (max-width: 640px) {
-    .h2h-block { padding: 14px 12px; }
-    .h2h-table { min-width: 680px; }
-  }
-</style>
-<section class="h2h-block" id="alexis-roster-h2h">
-  <h2>Alexis Malakhova vs This Roster</h2>
-  <p class="h2h-note">Mini report: Alexis Malakhova match history vs players on this roster. Data comes from the internal DB (UTR/USTA). Generated Feb 8, 2026 12:16 AM PST.</p>
-  <div class="selection-callout">Asterisk (*) in the roster table means Alexis Malakhova has prior match history with that player.</div>
-  <ul class="h2h-summary"><li><a class="h2h-jump" href="#h2h-1ab6762f7d608b629d84">Camille Kunkel</a> <span class="h2h-meta">Fremont CA</span> — 2 matches (latest 2026-03-08)</li><li><a class="h2h-jump" href="#h2h-9e074e2db92730b1f7ad">Ellinor Choi</a> <span class="h2h-meta">San Francisco CA</span> — 1 match (latest 2025-05-17)</li><li><a class="h2h-jump" href="#h2h-7ff3e6df8174744f2eb7">Nell Inkabi</a> <span class="h2h-meta">Santa Rosa CA</span> — 1 match (latest 2025-05-03)</li><li><a class="h2h-jump" href="#h2h-1afe3ed3c436d45a9251">Ashna Saxena</a> <span class="h2h-meta">Foster City CA</span> — 1 match (latest 2025-04-26)</li></ul>
-  <div class="h2h-player" id="h2h-1ab6762f7d608b629d84" data-h2h-player-id="player:1ab6762f7d608b629d84">
-    <h3>Camille Kunkel <span class="h2h-meta">Fremont CA</span></h3>
-    <div class="selection-callout">Record (vs: 1-1). Click the player name in the roster table to jump here.</div>
-    <div class="h2h-table-wrap">
-      <table class="h2h-table">
-        <thead>
-          <tr>
-            <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>2026-03-08</td><td><div class="h2h-event-main">Johnson Ranch Level 5 Junior 18s, 14s and 12s Super Series MAR 8 - 9</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>L</td><td>2-6 3-6</td><td>E-QF</td><td>utr</td></tr><tr><td>2026-01-10</td><td><div class="h2h-event-main">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>W</td><td>Score unavailable</td><td>—</td><td>utr</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div><div class="h2h-player" id="h2h-9e074e2db92730b1f7ad" data-h2h-player-id="player:9e074e2db92730b1f7ad">
-    <h3>Ellinor Choi <span class="h2h-meta">San Francisco CA</span></h3>
-    <div class="selection-callout">Record (vs: 1-0). Click the player name in the roster table to jump here.</div>
-    <div class="h2h-table-wrap">
-      <table class="h2h-table">
-        <thead>
-          <tr>
-            <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>2025-05-17</td><td><div class="h2h-event-main">Santa Cruz Level 5 Junior 14s &amp; 12s Championships @ La Madrona Athletic Club MAY 17 - 18</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>W</td><td>6-2 6-0</td><td>Round of 16</td><td>utr</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div><div class="h2h-player" id="h2h-7ff3e6df8174744f2eb7" data-h2h-player-id="player:7ff3e6df8174744f2eb7">
-    <h3>Nell Inkabi <span class="h2h-meta">Santa Rosa CA</span></h3>
-    <div class="selection-callout">Record (vs: 1-0). Click the player name in the roster table to jump here.</div>
-    <div class="h2h-table-wrap">
-      <table class="h2h-table">
-        <thead>
-          <tr>
-            <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>2025-05-03</td><td><div class="h2h-event-main">Rio Del Oro Level 5 Junior 14s and 12s Super Series MAY 3 - 4</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>W</td><td>6-2 6-0</td><td>—</td><td>utr</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div><div class="h2h-player" id="h2h-1afe3ed3c436d45a9251" data-h2h-player-id="player:1afe3ed3c436d45a9251">
-    <h3>Ashna Saxena <span class="h2h-meta">Foster City CA</span></h3>
-    <div class="selection-callout">Record (vs: 1-0). Click the player name in the roster table to jump here.</div>
-    <div class="h2h-table-wrap">
-      <table class="h2h-table">
-        <thead>
-          <tr>
-            <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>2025-04-26</td><td><div class="h2h-event-main">NPT Level 6 Junior Open APR 26 - 27</div><div class="h2h-event-sub">Girls&#x27; 14 &amp; under singles</div></td><td>—</td><td>vs</td><td>W</td><td>7-5 6-2</td><td>Semifinals</td><td>utr</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-<!-- ALEXIS_ROSTER_H2H_END -->
 <div class="tournament-details-page">
     <h2>Tournament Information & Details</h2>
 
@@ -2365,12 +2276,15 @@
       <span class="detail-value">916-995-7126</span>
     </div>
 
-  </div>
+	  </div>
 
-  <div class="desktop-view-toggle">
-    <a href="#" id="desktop-toggle-mobile">View Mobile Version</a>
-  </div>
-  </div><!-- end desktop-view -->
+    <!-- Alexis vs roster match-history (desktop slot) -->
+    <div id="alexis-h2h-slot-desktop"></div>
+
+	  <div class="desktop-view-toggle">
+	    <a href="#" id="desktop-toggle-mobile">View Mobile Version</a>
+	  </div>
+	  </div><!-- end desktop-view -->
 
   <!-- Mobile View Container -->
   <div class="mobile-view">
@@ -2444,16 +2358,197 @@
     <!-- Tournament Details -->
     <div class="mobile-section-header">
       <span class="mobile-section-title">Tournament Details</span>
-    </div>
-    <div class="mobile-info-section" id="mobile-info-section"></div>
+	    </div>
+	    <div class="mobile-info-section" id="mobile-info-section"></div>
 
-    <!-- View Toggle -->
-    <div class="mobile-view-toggle">
-      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
-    </div>
+	    <!-- Alexis vs roster match-history (mobile slot) -->
+	    <div id="alexis-h2h-slot-mobile"></div>
+
+	    <!-- View Toggle -->
+	    <div class="mobile-view-toggle">
+	      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
+	    </div>
   </div><!-- end mobile-view -->
+<!-- ALEXIS_ROSTER_H2H_START -->
+<div id="alexis-roster-h2h-wrapper">
+<style id="alexis-roster-h2h-style">
+  .h2h-block { max-width: 1000px; margin: 28px auto; padding: 18px 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); color: inherit; }
+  .h2h-block h2 { margin: 0 0 10px 0; font-size: 20px; }
+  .h2h-block .h2h-note { margin: 0 0 14px 0; opacity: 0.85; }
+  .h2h-summary { margin: 0 0 14px 0; padding: 0; list-style: none; }
+  .h2h-summary li { margin: 6px 0; }
+  .h2h-jump { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
+  .h2h-player { margin-top: 18px; }
+  .h2h-player h3 { margin: 0 0 8px 0; font-size: 16px; }
+  .h2h-player .h2h-meta { opacity: 0.8; font-weight: 400; font-size: 13px; margin-left: 8px; }
+  .h2h-mini { margin: 6px 0 0 0; padding: 10px 12px; border-radius: 12px; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.06); }
+  .h2h-mini-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 8px; }
+  .h2h-mini-head .h2h-record { font-weight: 800; }
+  .h2h-mini-head .h2h-record span { font-weight: 700; opacity: 0.8; }
+  .h2h-mini-head .h2h-updated { font-size: 12px; opacity: 0.75; }
+  .h2h-mini-list { margin: 0; padding-left: 18px; }
+  .h2h-mini-list li { margin: 6px 0; }
+  .h2h-mini-line { display: inline; }
+  .h2h-mini-date { font-weight: 700; }
+  .h2h-mini-res { display: inline-block; min-width: 18px; text-align: center; font-weight: 800; }
+  .h2h-mini-score { font-variant-numeric: tabular-nums; }
+  .h2h-mini-event { opacity: 0.88; }
+  .h2h-mini-loc { opacity: 0.75; }
+  .h2h-mini a { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
 
-  <!-- Mobile View JavaScript -->
+  details.h2h-more { margin-top: 10px; }
+  details.h2h-more summary { cursor: pointer; font-weight: 700; opacity: 0.9; }
+
+  .h2h-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .h2h-table { width: 100%; min-width: 760px; margin: 0; max-width: none; border-collapse: collapse; font-size: 13px; box-shadow: none; background: transparent; }
+  .h2h-table th, .h2h-table td { padding: 7px 8px; border-bottom: 1px solid rgba(0,0,0,0.08); vertical-align: top; }
+  /* Override global table styles in the report template (zebra stripes + header fill). */
+  .h2h-table th { text-align: left; opacity: 0.9; font-weight: 700; font-size: 12px; letter-spacing: 0.2px; white-space: nowrap; background: rgba(0,0,0,0.04) !important; }
+  .h2h-table td { white-space: nowrap; }
+  .h2h-table td:nth-child(2) { white-space: normal; min-width: 280px; }
+  .h2h-table tbody tr:nth-child(odd) { background: rgba(0,0,0,0.018) !important; }
+  .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
+  .h2h-table tbody tr:hover { background: rgba(68,114,196,0.10) !important; }
+  .h2h-event-main { font-weight: 700; }
+  .h2h-event-sub { font-size: 12px; opacity: 0.8; margin-top: 1px; }
+  tr[data-h2h="1"] td:nth-child(3)::after { content: " *"; color: #C58A00; font-weight: 800; }
+
+  @media (prefers-color-scheme: dark) {
+    .h2h-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
+    .h2h-block h2, .h2h-block h3 { color: #ffffff; }
+    .h2h-block .h2h-note { color: rgba(255,255,255,0.86); }
+    .h2h-mini { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+    .h2h-table th, .h2h-table td { border-bottom-color: rgba(255,255,255,0.12); }
+    .h2h-table th { background: rgba(255,255,255,0.08) !important; }
+    .h2h-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.03) !important; }
+    .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
+    .h2h-table tbody tr:hover { background: rgba(107,155,209,0.16) !important; }
+    .h2h-event-sub { opacity: 0.78; }
+  }
+
+  @media (max-width: 640px) {
+    .h2h-block { padding: 14px 12px; }
+    .h2h-table { min-width: 680px; }
+  }
+</style>
+<section class="h2h-block" id="alexis-roster-h2h">
+  <h2>Alexis Malakhova vs This Roster</h2>
+  <p class="h2h-note">Mini report: Alexis Malakhova match history vs players on this roster. Data comes from the internal DB (UTR/USTA). Generated Feb 8, 2026 1:29 PM PST.</p>
+  <div class="selection-callout">Asterisk (*) in the roster table means Alexis Malakhova has prior match history with that player.</div>
+  <ul class="h2h-summary"><li><a class="h2h-jump" href="#h2h-1ab6762f7d608b629d84">Camille Kunkel</a> <span class="h2h-meta">Fremont CA</span> — H2H 1-1 <span class="h2h-meta">(latest Jan 10th, 2026)</span></li><li><a class="h2h-jump" href="#h2h-9e074e2db92730b1f7ad">Ellinor Choi</a> <span class="h2h-meta">San Francisco CA</span> — H2H 1-0 <span class="h2h-meta">(latest May 17th, 2025)</span></li><li><a class="h2h-jump" href="#h2h-7ff3e6df8174744f2eb7">Nell Inkabi</a> <span class="h2h-meta">Santa Rosa CA</span> — H2H 1-0 <span class="h2h-meta">(latest May 3rd, 2025)</span></li><li><a class="h2h-jump" href="#h2h-1afe3ed3c436d45a9251">Ashna Saxena</a> <span class="h2h-meta">Foster City CA</span> — H2H 1-0 <span class="h2h-meta">(latest Apr 26th, 2025)</span></li></ul>
+  <div class="h2h-player" id="h2h-1ab6762f7d608b629d84" data-h2h-player-id="player:1ab6762f7d608b629d84">
+    <h3>Camille Kunkel <span class="h2h-meta">Fremont CA</span></h3>
+    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
+    <div class="h2h-mini">
+      <div class="h2h-mini-head">
+        <div class="h2h-record"><span>Record:</span> H2H 1-1</div>
+        <div class="h2h-updated">Latest Jan 10th, 2026</div>
+      </div>
+      <ol class="h2h-mini-list">
+        <li><span class="h2h-mini-line"><span class="h2h-mini-date">Jan 10th, 2026</span> <span class="h2h-mini-res">W</span> <span class="h2h-mini-score">Score unavailable</span> <span class="h2h-mini-event">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(— • vs)</span></span></li><li><span class="h2h-mini-line"><span class="h2h-mini-date">Mar 8th, 2025</span> <span class="h2h-mini-res">L</span> <span class="h2h-mini-score">2-6 3-6</span> <span class="h2h-mini-event">Johnson Ranch Level 5 Junior 18s, 14s and 12s Super Series MAR 8 - 9</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(Johnson Ranch • vs)</span></span></li>
+      </ol>
+      <details class="h2h-more">
+        <summary>Show all matches (2)</summary>
+        <div class="h2h-table-wrap">
+          <table class="h2h-table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Jan 10th, 2026</td><td><div class="h2h-event-main">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>W</td><td>Score unavailable</td><td>—</td><td>utr</td></tr><tr><td>Mar 8th, 2025</td><td><div class="h2h-event-main">Johnson Ranch Level 5 Junior 18s, 14s and 12s Super Series MAR 8 - 9</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>Johnson Ranch</td><td>vs</td><td>L</td><td>2-6 3-6</td><td>E-QF</td><td>utr</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div><div class="h2h-player" id="h2h-9e074e2db92730b1f7ad" data-h2h-player-id="player:9e074e2db92730b1f7ad">
+    <h3>Ellinor Choi <span class="h2h-meta">San Francisco CA</span></h3>
+    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
+    <div class="h2h-mini">
+      <div class="h2h-mini-head">
+        <div class="h2h-record"><span>Record:</span> H2H 1-0</div>
+        <div class="h2h-updated">Latest May 17th, 2025</div>
+      </div>
+      <ol class="h2h-mini-list">
+        <li><span class="h2h-mini-line"><span class="h2h-mini-date">May 17th, 2025</span> <span class="h2h-mini-res">W</span> <span class="h2h-mini-score">6-2 6-0</span> <span class="h2h-mini-event">Santa Cruz Level 5 Junior 14s &amp; 12s Championships @ La Madrona Athletic Club MAY 17 - 18</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(Santa Cruz • vs)</span></span></li>
+      </ol>
+      <details class="h2h-more">
+        <summary>Show all matches (1)</summary>
+        <div class="h2h-table-wrap">
+          <table class="h2h-table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>May 17th, 2025</td><td><div class="h2h-event-main">Santa Cruz Level 5 Junior 14s &amp; 12s Championships @ La Madrona Athletic Club MAY 17 - 18</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>Santa Cruz</td><td>vs</td><td>W</td><td>6-2 6-0</td><td>Round of 16</td><td>utr</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div><div class="h2h-player" id="h2h-7ff3e6df8174744f2eb7" data-h2h-player-id="player:7ff3e6df8174744f2eb7">
+    <h3>Nell Inkabi <span class="h2h-meta">Santa Rosa CA</span></h3>
+    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
+    <div class="h2h-mini">
+      <div class="h2h-mini-head">
+        <div class="h2h-record"><span>Record:</span> H2H 1-0</div>
+        <div class="h2h-updated">Latest May 3rd, 2025</div>
+      </div>
+      <ol class="h2h-mini-list">
+        <li><span class="h2h-mini-line"><span class="h2h-mini-date">May 3rd, 2025</span> <span class="h2h-mini-res">W</span> <span class="h2h-mini-score">6-2 6-0</span> <span class="h2h-mini-event">Rio Del Oro Level 5 Junior 14s and 12s Super Series MAY 3 - 4</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(Rio Del Oro • vs)</span></span></li>
+      </ol>
+      <details class="h2h-more">
+        <summary>Show all matches (1)</summary>
+        <div class="h2h-table-wrap">
+          <table class="h2h-table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>May 3rd, 2025</td><td><div class="h2h-event-main">Rio Del Oro Level 5 Junior 14s and 12s Super Series MAY 3 - 4</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>Rio Del Oro</td><td>vs</td><td>W</td><td>6-2 6-0</td><td>—</td><td>utr</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div><div class="h2h-player" id="h2h-1afe3ed3c436d45a9251" data-h2h-player-id="player:1afe3ed3c436d45a9251">
+    <h3>Ashna Saxena <span class="h2h-meta">Foster City CA</span></h3>
+    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
+    <div class="h2h-mini">
+      <div class="h2h-mini-head">
+        <div class="h2h-record"><span>Record:</span> H2H 1-0</div>
+        <div class="h2h-updated">Latest Apr 26th, 2025</div>
+      </div>
+      <ol class="h2h-mini-list">
+        <li><span class="h2h-mini-line"><span class="h2h-mini-date">Apr 26th, 2025</span> <span class="h2h-mini-res">W</span> <span class="h2h-mini-score">7-5 6-2</span> <span class="h2h-mini-event">NPT Level 6 Junior Open APR 26 - 27</span> <span class="h2h-event-sub">Girls&#x27; 14 &amp; under singles</span> <span class="h2h-mini-loc">(— • vs)</span></span></li>
+      </ol>
+      <details class="h2h-more">
+        <summary>Show all matches (1)</summary>
+        <div class="h2h-table-wrap">
+          <table class="h2h-table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Apr 26th, 2025</td><td><div class="h2h-event-main">NPT Level 6 Junior Open APR 26 - 27</div><div class="h2h-event-sub">Girls&#x27; 14 &amp; under singles</div></td><td>—</td><td>vs</td><td>W</td><td>7-5 6-2</td><td>Semifinals</td><td>utr</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ALEXIS_ROSTER_H2H_END -->
+<!-- Mobile View JavaScript -->
   <script>
     // ========================================
     // MOBILE VIEW IMPLEMENTATION
@@ -2762,6 +2857,7 @@
           
           // Format & Scoring
           if (labelText === 'Match Format') info.format.matchFormat = valueText;
+          if (labelText === 'Tiebreaks') info.format.tiebreaks = valueText;
           if (labelText === 'Set Tiebreak') info.format.setTiebreak = valueText;
           if (labelText === 'Match Tiebreak') info.format.matchTiebreak = valueText;
           
@@ -3049,30 +3145,33 @@
 
     function buildInfoCards(info) {
       let html = '';
+
+      const cleanText = (value) => (value || '').replace(/\s+/g, ' ').trim();
+      const isLongValue = (value) => cleanText(value).length > 80;
+      const renderRow = (label, value) => {
+        const v = cleanText(value);
+        if (!v) return '';
+        const rowClass = isLongValue(v) ? 'mobile-info-row is-stacked' : 'mobile-info-row';
+        return `
+          <div class="${rowClass}">
+            <span class="mobile-info-label">${label}</span>
+            <span class="mobile-info-value">${v}</span>
+          </div>
+        `;
+      };
       
       // Format & Scoring Card
-      if (info.format.matchFormat) {
+      if (info.format.matchFormat || info.format.tiebreaks || info.format.setTiebreak || info.format.matchTiebreak) {
         html += `
           <div class="mobile-info-card">
             <div class="mobile-info-card-header">
               <span class="icon">🎾</span>
               Format & Scoring
             </div>
-            ${info.format.matchFormat ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Match Format</span>
-              <span class="mobile-info-value">${info.format.matchFormat}</span>
-            </div>` : ''}
-            ${info.format.setTiebreak ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Set Tiebreak</span>
-              <span class="mobile-info-value">${info.format.setTiebreak}</span>
-            </div>` : ''}
-            ${info.format.matchTiebreak ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">3rd Set</span>
-              <span class="mobile-info-value">${info.format.matchTiebreak}</span>
-            </div>` : ''}
+            ${renderRow('Match Format', info.format.matchFormat)}
+            ${renderRow('Tiebreaks', info.format.tiebreaks)}
+            ${renderRow('Set Tiebreak', info.format.setTiebreak)}
+            ${renderRow('3rd Set', info.format.matchTiebreak)}
           </div>
         `;
       }
@@ -3308,6 +3407,23 @@
       return window.innerWidth <= 600;
     }
 
+    function isMobileViewActive() {
+      if (document.body.classList.contains('force-mobile')) return true;
+      if (document.body.classList.contains('force-desktop')) return false;
+      return detectMobileDevice();
+    }
+
+    function placeH2HBlock() {
+      const wrapper = document.getElementById('alexis-roster-h2h-wrapper');
+      if (!wrapper) return;
+      const target = isMobileViewActive()
+        ? document.getElementById('alexis-h2h-slot-mobile')
+        : document.getElementById('alexis-h2h-slot-desktop');
+      if (!target) return;
+      if (wrapper.parentElement === target) return;
+      target.appendChild(wrapper);
+    }
+
     function toggleView(targetView) {
       setUserViewPreference(targetView);
       
@@ -3318,6 +3434,7 @@
         document.body.classList.add('force-desktop');
         document.body.classList.remove('force-mobile');
       }
+      placeH2HBlock();
     }
 
     function applyViewPreference() {
@@ -3327,6 +3444,7 @@
       // On desktop (>600px), always show desktop regardless of preference
       if (!isMobile) {
         document.body.classList.remove('force-mobile', 'force-desktop');
+        placeH2HBlock();
         return;
       }
       
@@ -3339,6 +3457,7 @@
         document.body.classList.remove('force-desktop');
       }
       // If no preference, let CSS media query handle it
+      placeH2HBlock();
     }
 
     // ========================================
