@@ -1381,14 +1381,14 @@
 
       <div class="cards-grid">
         <!-- Level 3 Mixed Doubles Sectionals (HRT) -->
-        <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming">
+        <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-08T12:21:02-08:00" data-card-close-text="February 11, 2026 at 2:59 PM PST">
           <div class="card-header">
             <span class="card-type report" data-registration-pill>
               <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 6v6l4 2"/>
               </svg>
-              <span data-registration-pill-text>Closes —</span>
+              <span data-registration-pill-text>Closes Feb 11</span>
 	            </span>
 	            <div class="card-actions">
 	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
@@ -1429,7 +1429,15 @@
               </svg>
               Level 3
             </span>
-          </div>
+          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              <span data-card-updated-text>Updated Feb 8, 2026 12:21 PM PST</span>
+            </span>
+</div>
         </a>
         <!-- Open Level 5 Championship Singles -->
 	        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming">
@@ -1536,14 +1544,14 @@
 	        </a>
 
 	        <!-- Open Level 5 Championship (Rollingwood YMCA - Fair Oaks) -->
-	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship">
+	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship" data-card-updated-iso="2026-02-08T12:15:50-08:00" data-card-close-text="Registration closed">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
 	                <circle cx="12" cy="12" r="10"/>
 	                <path d="M12 6v6l4 2"/>
 	              </svg>
-	              <span data-registration-pill-text>Closes —</span>
+	              <span data-registration-pill-text>Closed</span>
 	            </span>
 		            <div class="card-actions">
 		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
@@ -1584,7 +1592,15 @@
 	              </svg>
 	              Level 5
 	            </span>
-	          </div>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              <span data-card-updated-text>Updated Feb 8, 2026 12:15 PM PST</span>
+            </span>
+</div>
 	        </a>
 
 	        <!-- L4 Excellence Tournament Report -->
@@ -2015,35 +2031,44 @@
 		        if (card.classList.contains('calendar-card')) return false;
 		        return !!card.querySelector('.card-type.report');
 		      });
-
+	
 		      for (const card of reportCards) {
 		        ensureUpdatedMeta(card);
-
+	
 		        const directIso = card.getAttribute('data-card-updated-iso') || '';
 		        if (directIso) {
 		          setCardUpdatedText(card, directIso);
 		          // Still allow registration pill population (if cached) without fetching.
 		        }
-
+		
+		        const directClose = (card.getAttribute('data-card-close-text') || '').trim();
+		        if (directClose) {
+		          applyRegistrationPill(card, directClose);
+		        }
+	
 		        const href = (card.getAttribute('href') || '').trim();
 		        if (!href || href.startsWith('http')) continue;
-
+	
 		        const meta = normalizeCachedMeta(cache[href]);
 		        const cachedIso = (meta.updatedIso || '').trim();
 		        const cachedClose = (meta.closeText || '').trim();
 		        const cachedAt = Number(meta.cachedAt || 0);
 
 		        if (!directIso && cachedIso) setCardUpdatedText(card, cachedIso);
-		        if (cachedClose) applyRegistrationPill(card, cachedClose);
-
+		        if (!directClose && cachedClose) applyRegistrationPill(card, cachedClose);
+	
 		        const freshEnough = cachedAt && (Date.now() - cachedAt) < CACHE_MAX_AGE_MS;
 		        const directIsoOk = !!formatUpdatedIso(directIso);
 		        const cachedIsoOk = !!formatUpdatedIso(cachedIso);
+		        const directCloseOk = (() => {
+		          const p = parseCloseDate(directClose);
+		          return p && p.status !== 'unknown';
+		        })();
 		        const cachedCloseOk = (() => {
 		          const p = parseCloseDate(cachedClose);
 		          return p && p.status !== 'unknown';
 		        })();
-		        const hasEnough = (directIsoOk || cachedIsoOk) && (cachedCloseOk || meta.closeText === '');
+		        const hasEnough = (directIsoOk || cachedIsoOk) && (directCloseOk || cachedCloseOk || meta.closeText === '');
 		        if (freshEnough && hasEnough) continue;
 
 		        try {
