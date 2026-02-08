@@ -1692,7 +1692,14 @@
 		      if (!iso) return '';
 		      const d = new Date(iso);
 		      if (Number.isNaN(d.getTime())) return '';
-		      const fmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+		      const fmt = new Intl.DateTimeFormat('en-US', {
+		        month: 'short',
+		        day: 'numeric',
+		        year: 'numeric',
+		        hour: 'numeric',
+		        minute: '2-digit',
+		        timeZoneName: 'short',
+		      });
 		      return `Updated ${fmt.format(d)}`;
 		    }
 
@@ -1915,6 +1922,17 @@
 		      return `${Math.max(1, totalMinutes)}m`;
 		    }
 
+		    function formatCloseDateShort(dt) {
+		      try {
+		        const d = dt instanceof Date ? dt : new Date(dt);
+		        if (!Number.isFinite(d.getTime())) return '';
+		        const fmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+		        return fmt.format(d);
+		      } catch {
+		        return '';
+		      }
+		    }
+
 		    function applyRegistrationPill(card, closeText) {
 		      const pill = card.querySelector('[data-registration-pill]');
 		      if (!pill) return;
@@ -1922,6 +1940,7 @@
 		      pill.classList.remove('is-closed', 'is-closing-soon');
 		      pill.removeAttribute('data-close-ms');
 		      pill.removeAttribute('data-close-status');
+		      pill.removeAttribute('title');
 
 		      const parsed = parseCloseDate(closeText);
 		      const status = parsed?.status || 'unknown';
@@ -1936,6 +1955,7 @@
 		      if (status === 'closed') {
 		        pill.classList.add('is-closed');
 		        pill.setAttribute('data-close-status', 'closed');
+		        if (closeText) pill.setAttribute('title', closeText);
 		        textEl.textContent = 'Closed';
 		        return;
 		      }
@@ -1945,6 +1965,7 @@
 		        return;
 		      }
 
+		      if (closeText) pill.setAttribute('title', closeText);
 		      pill.setAttribute('data-close-ms', String(dt.getTime()));
 		      updateRegistrationPillCountdown(pill);
 		    }
@@ -1966,6 +1987,14 @@
 		        pill.classList.add('is-closed');
 		        pill.setAttribute('data-close-status', 'closed');
 		        textEl.textContent = 'Closed';
+		        return;
+		      }
+
+		      const closeDt = new Date(closeMs);
+		      const closeLabel = formatCloseDateShort(closeDt);
+		      if (remaining > 24 * 60 * 60 * 1000 && closeLabel) {
+		        pill.classList.remove('is-closing-soon');
+		        textEl.textContent = `Closes ${closeLabel}`;
 		        return;
 		      }
 
@@ -2008,7 +2037,13 @@
 		        if (cachedClose) applyRegistrationPill(card, cachedClose);
 
 		        const freshEnough = cachedAt && (Date.now() - cachedAt) < CACHE_MAX_AGE_MS;
-		        const hasEnough = (!!directIso || !!cachedIso) && (!!cachedClose || meta.closeText === '');
+		        const directIsoOk = !!formatUpdatedIso(directIso);
+		        const cachedIsoOk = !!formatUpdatedIso(cachedIso);
+		        const cachedCloseOk = (() => {
+		          const p = parseCloseDate(cachedClose);
+		          return p && p.status !== 'unknown';
+		        })();
+		        const hasEnough = (directIsoOk || cachedIsoOk) && (cachedCloseOk || meta.closeText === '');
 		        if (freshEnough && hasEnough) continue;
 
 		        try {
