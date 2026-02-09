@@ -1871,15 +1871,30 @@
       });
     }
 
-    function normalizePlayerKey(name) {
-      const cleaned = (name || '').toString().trim().toUpperCase().replace(/[’']/g, '');
-      return cleaned.replace(/[^A-Z0-9 .-]/g, '').replace(/\s+/g, ' ').trim();
-    }
+	    function normalizePlayerKey(name) {
+	      const cleaned = (name || '').toString().trim().toUpperCase().replace(/[’']/g, '');
+	      return cleaned.replace(/[^A-Z0-9 .-]/g, '').replace(/\s+/g, ' ').trim();
+	    }
 
-    function buildUtrSearchUrl(name) {
-      const q = encodeURIComponent((name || '').trim());
-      return `https://app.utrsports.net/search?query=${q}`;
-    }
+	    function divisionAgeKey(text) {
+	      const s = (text || '').toString().toLowerCase();
+	      const m = s.match(/\b(12|14)\b/);
+	      if (m) return `g${m[1]}`;
+	      const m2 = s.match(/\bu(12|14)\b/);
+	      if (m2) return `g${m2[1]}`;
+	      return '';
+	    }
+
+	    function listKeyLabel(listKey) {
+	      if (listKey === 'g12') return 'U12';
+	      if (listKey === 'g14') return 'U14';
+	      return (listKey || '').toString().toUpperCase();
+	    }
+
+	    function buildUtrSearchUrl(name) {
+	      const q = encodeURIComponent((name || '').trim());
+	      return `https://app.utrsports.net/search?query=${q}`;
+	    }
 
     function buildUstaSearchUrl(name) {
       const q = encodeURIComponent((name || '').trim());
@@ -1913,7 +1928,7 @@
 		      const ustaNational = primaryUstaNational || altUstaNational || '';
 		      const ustaLabel = ustaNational ? `USTA #${escapeHtml(ustaNational)}` : 'USTA N/A';
 		      const ustaTitle = ustaNational
-		        ? `USTA National rank (${escapeHtml(primaryUstaNational ? listKey.toUpperCase() : altListKey.toUpperCase())})`
+		        ? `USTA National rank (${escapeHtml(listKeyLabel(primaryUstaNational ? listKey : altListKey))})`
 		        : 'USTA National rank not available';
 
       const utrLink = utrUrl
@@ -1974,9 +1989,9 @@
       container.innerHTML = html;
     }
 
-    function renderEvents(events, selector, isDoubles = false, listKey = 'g12') {
-      const container = document.querySelector(selector);
-      if (!container) return;
+	    function renderEvents(events, selector, isDoubles = false, listKey = 'g12') {
+	      const container = document.querySelector(selector);
+	      if (!container) return;
 
       if (!events || events.length === 0) {
         container.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 16px;">No events</p>';
@@ -1986,27 +2001,28 @@
       // Sort by days remaining (soonest first)
       const sorted = [...events].sort((a, b) => a.daysRemaining - b.daysRemaining);
 
-      const html = sorted.map(event => {
-        const criticalClass = event.urgency === 'critical' ? 'event-card--critical' : '';
-        const levelClass = `event-badge--${event.level.toLowerCase()}`;
+	      const html = sorted.map(event => {
+	        const criticalClass = event.urgency === 'critical' ? 'event-card--critical' : '';
+	        const levelClass = `event-badge--${event.level.toLowerCase()}`;
+	        const eventListKey = divisionAgeKey(event.division) || listKey;
 
         const bonusValue = Number.isFinite(event.bonusPoints) && event.bonusPoints > 0
           ? `Bonus: +${event.bonusPoints}`
           : 'Bonus: none';
 
-        const matchesHtml = event.matches && event.matches.length > 0 ? `
-            <div class="event-matches">
-              <div class="event-matches-title">Match Results</div>
-            ${event.matches.map(match => `
-              <div class="match">
-                <span class="match-round">${match.round}</span>
-                <span class="match-outcome match-outcome--${match.outcome}">${match.outcome}</span>
-                <span class="match-opponent">${renderNameListWithLinks(match.opponent, listKey)}${match.partner ? ` <span class="match-partner">(w/ ${renderNameListWithLinks(match.partner, listKey)})</span>` : ''}</span>
-                <span class="match-score">${match.score}</span>
-              </div>
-            `).join('')}
-          </div>
-        ` : '';
+	        const matchesHtml = event.matches && event.matches.length > 0 ? `
+	            <div class="event-matches">
+	              <div class="event-matches-title">Match Results</div>
+	            ${event.matches.map(match => `
+	              <div class="match">
+	                <span class="match-round">${match.round}</span>
+	                <span class="match-outcome match-outcome--${match.outcome}">${match.outcome}</span>
+	                <span class="match-opponent">${renderNameListWithLinks(match.opponent, eventListKey)}${match.partner ? ` <span class="match-partner">(w/ ${renderNameListWithLinks(match.partner, eventListKey)})</span>` : ''}</span>
+	                <span class="match-score">${match.score}</span>
+	              </div>
+	            `).join('')}
+	          </div>
+	        ` : '';
 
 	        return `
 	          <div class="event-card ${criticalClass}">
