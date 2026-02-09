@@ -1576,9 +1576,12 @@
           "displayName": "Anna YANG",
           "utrUrl": "https://app.utrsports.net/profiles/4131659",
           "utrSingles": "5.21",
-          "ustaUaid": "",
-          "ustaUrl": "",
-          "ustaNational": {}
+          "ustaUaid": "2018664388",
+          "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018664388",
+          "ustaNational": {
+            "g12": "",
+            "g14": ""
+          }
         },
         "ANNABEL HU": {
           "displayName": "Annabel HU",
@@ -1628,9 +1631,12 @@
           "displayName": "Dana YEHIA",
           "utrUrl": "https://app.utrsports.net/profiles/3530977",
           "utrSingles": "3.34",
-          "ustaUaid": "",
-          "ustaUrl": "",
-          "ustaNational": {}
+          "ustaUaid": "2018970128",
+          "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018970128",
+          "ustaNational": {
+            "g12": "",
+            "g14": ""
+          }
         },
         "ELINA YAMAMOTO": {
           "displayName": "Elina Yamamoto",
@@ -1677,9 +1683,12 @@
           "displayName": "Gayathri KOTIKALAPUDI",
           "utrUrl": "https://app.utrsports.net/profiles/4454723",
           "utrSingles": "2.12",
-          "ustaUaid": "",
-          "ustaUrl": "",
-          "ustaNational": {}
+          "ustaUaid": "2019739067",
+          "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019739067",
+          "ustaNational": {
+            "g12": "",
+            "g14": ""
+          }
         },
         "JENNIFER CHEN": {
           "displayName": "Jennifer CHEN",
@@ -1704,9 +1713,12 @@
           "displayName": "Leila LYONS",
           "utrUrl": "https://app.utrsports.net/profiles/3872592",
           "utrSingles": "4.19",
-          "ustaUaid": "",
-          "ustaUrl": "",
-          "ustaNational": {}
+          "ustaUaid": "2019124239",
+          "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019124239",
+          "ustaNational": {
+            "g12": "",
+            "g14": ""
+          }
         },
         "MAY SUN": {
           "displayName": "MAY SUN",
@@ -1745,9 +1757,12 @@
           "displayName": "Sadie COHEN",
           "utrUrl": "https://app.utrsports.net/profiles/3682965",
           "utrSingles": "3.56",
-          "ustaUaid": "",
-          "ustaUrl": "",
-          "ustaNational": {}
+          "ustaUaid": "2018990008",
+          "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018990008",
+          "ustaNational": {
+            "g12": "",
+            "g14": ""
+          }
         },
         "SUMMER STIRITZ": {
           "displayName": "Summer Stiritz",
@@ -1854,7 +1869,8 @@
 	      const utrSingles = (ref.utrSingles || '').trim();
 	      const utrLabel = utrSingles ? `UTR ${escapeHtml(utrSingles)}` : 'UTR N/A';
 
-	      const ustaUrl = (ref.ustaUrl || '').trim();
+	      const ustaUaid = (ref.ustaUaid || '').toString().trim();
+	      const ustaUrl = (ref.ustaUrl || '').trim() || (ustaUaid ? `https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${encodeURIComponent(ustaUaid)}` : '');
 	      const ustaNational = (ref.ustaNational && ref.ustaNational[listKey]) ? String(ref.ustaNational[listKey] || '').trim() : '';
 	      const ustaLabel = ustaNational ? `USTA #${escapeHtml(ustaNational)}` : 'USTA N/A';
 
@@ -2008,8 +2024,8 @@
       const section = document.querySelector('[data-stat="rank-section"]');
       const ranks = (listData && listData.ranks) ? listData.ranks : {};
 
-      if (national) national.textContent = ranks.national ? `#${ranks.national}` : '—';
-      if (section) section.textContent = ranks.section ? `#${ranks.section}` : '—';
+      if (national) national.textContent = ranks.national ? `#${ranks.national}` : 'N/A';
+      if (section) section.textContent = ranks.section ? `#${ranks.section}` : 'N/A';
     }
 
     function getListData(listKey) {
