@@ -1558,7 +1558,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018998280",
           "ustaNational": {
             "g12": "239",
-            "g14": ""
+            "g14": "573"
           }
         },
         "ANGELA LIU": {
@@ -1569,7 +1569,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018981779",
           "ustaNational": {
             "g12": "524",
-            "g14": ""
+            "g14": "3458"
           }
         },
         "ANNA YANG": {
@@ -1588,7 +1588,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637000",
           "ustaNational": {
             "g12": "464",
-            "g14": ""
+            "g14": "2369"
           }
         },
         "ASHNA SAXENA": {
@@ -1598,7 +1598,7 @@
           "ustaUaid": "2018597670",
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018597670",
           "ustaNational": {
-            "g12": "",
+            "g12": "1717",
             "g14": "2479"
           }
         },
@@ -1610,7 +1610,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018791290",
           "ustaNational": {
             "g12": "675",
-            "g14": ""
+            "g14": "3560"
           }
         },
         "CAMILLE KUNKEL": {
@@ -1640,7 +1640,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017332570",
           "ustaNational": {
             "g12": "249",
-            "g14": ""
+            "g14": "1765"
           }
         },
         "ELISE WATT": {
@@ -1651,7 +1651,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019258117",
           "ustaNational": {
             "g12": "751",
-            "g14": ""
+            "g14": "2833"
           }
         },
         "ELLIE WANG": {
@@ -1661,8 +1661,8 @@
           "ustaUaid": "2019241036",
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019241036",
           "ustaNational": {
-            "g12": "",
-            "g14": ""
+            "g12": "992",
+            "g14": "4610"
           }
         },
         "EMMA LAI": {
@@ -1697,7 +1697,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018931899",
           "ustaNational": {
             "g12": "382",
-            "g14": "839"
+            "g14": "842"
           }
         },
         "LEILA LYONS": {
@@ -1715,8 +1715,8 @@
           "ustaUaid": "2018905027",
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027",
           "ustaNational": {
-            "g12": "",
-            "g14": ""
+            "g12": "1046",
+            "g14": "5328"
           }
         },
         "MARGARET DORAN": {
@@ -1727,7 +1727,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019941530",
           "ustaNational": {
             "g12": "486",
-            "g14": ""
+            "g14": "3222"
           }
         },
         "MEGAN LAI": {
@@ -1738,7 +1738,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678",
           "ustaNational": {
             "g12": "761",
-            "g14": ""
+            "g14": "3765"
           }
         },
         "SADIE COHEN": {
@@ -1757,7 +1757,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018746621",
           "ustaNational": {
             "g12": "335",
-            "g14": ""
+            "g14": "2270"
           }
         },
         "VALENTINA KUKEEVA": {
@@ -1768,7 +1768,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502",
           "ustaNational": {
             "g12": "301",
-            "g14": ""
+            "g14": "1370"
           }
         },
         "ZAIRA GADGIL": {
@@ -1779,7 +1779,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018667343",
           "ustaNational": {
             "g12": "605",
-            "g14": ""
+            "g14": "3792"
           }
         },
         "ZHIYAN DUAN": {
@@ -1790,7 +1790,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019107218",
           "ustaNational": {
             "g12": "209",
-            "g14": ""
+            "g14": "1314"
           }
         },
         "ZIVA GADGIL": {
@@ -1801,7 +1801,7 @@
           "ustaUrl": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018658341",
           "ustaNational": {
             "g12": "73",
-            "g14": ""
+            "g14": "577"
           }
         }
       }
@@ -1842,21 +1842,21 @@
       return (idx && key && idx[key]) ? idx[key] : null;
     }
 
-    function renderPlayerNameWithLinks(name, listKey = 'g12') {
-      const cleaned = (name || '').trim();
-      if (!cleaned) return '';
-      if (cleaned.toUpperCase() === 'BYE') return escapeHtml(cleaned);
+	    function renderPlayerNameWithLinks(name, listKey = 'g12') {
+	      const cleaned = (name || '').trim();
+	      if (!cleaned) return '';
+	      if (cleaned.toUpperCase() === 'BYE') return escapeHtml(cleaned);
 
-      const ref = resolvePlayerRef(cleaned) || {};
-      const displayName = (ref.displayName || cleaned).trim();
+	      const ref = resolvePlayerRef(cleaned) || {};
+	      const displayName = (ref.displayName || cleaned).trim();
 
-      const utrUrl = (ref.utrUrl || '').trim();
-      const utrSingles = (ref.utrSingles || '').trim();
-      const utrLabel = utrSingles ? `UTR ${escapeHtml(utrSingles)}` : 'UTR';
+	      const utrUrl = (ref.utrUrl || '').trim();
+	      const utrSingles = (ref.utrSingles || '').trim();
+	      const utrLabel = utrSingles ? `UTR ${escapeHtml(utrSingles)}` : 'UTR N/A';
 
-      const ustaUrl = (ref.ustaUrl || '').trim();
-      const ustaNational = (ref.ustaNational && ref.ustaNational[listKey]) ? String(ref.ustaNational[listKey] || '').trim() : '';
-      const ustaLabel = ustaNational ? `USTA #${escapeHtml(ustaNational)}` : 'USTA';
+	      const ustaUrl = (ref.ustaUrl || '').trim();
+	      const ustaNational = (ref.ustaNational && ref.ustaNational[listKey]) ? String(ref.ustaNational[listKey] || '').trim() : '';
+	      const ustaLabel = ustaNational ? `USTA #${escapeHtml(ustaNational)}` : 'USTA N/A';
 
       const utrLink = utrUrl
         ? `<a class="player-ref__link" href="${utrUrl}" target="_blank" rel="noopener">${utrLabel}</a>`
@@ -1877,13 +1877,23 @@
       `.trim();
     }
 
-    function renderNameListWithLinks(raw, listKey = 'g12') {
-      const text = (raw || '').trim();
-      if (!text) return '';
-      const parts = text.split('/').map((p) => p.trim()).filter(Boolean);
-      if (parts.length <= 1) return renderPlayerNameWithLinks(text, listKey);
-      return parts.map((p) => renderPlayerNameWithLinks(p, listKey)).join(' / ');
-    }
+	    function renderNameListWithLinks(raw, listKey = 'g12') {
+	      const text = (raw || '').trim();
+	      if (!text) {
+	        return `
+	          <span class="player-ref">
+	            <span class="player-ref__name">N/A</span>
+	            <span class="player-ref__links">
+	              <span class="player-ref__link player-ref__link--disabled" title="UTR profile not available">UTR N/A</span>
+	              <span class="player-ref__link player-ref__link--disabled" title="USTA profile not available">USTA N/A</span>
+	            </span>
+	          </span>
+	        `.trim();
+	      }
+	      const parts = text.split('/').map((p) => p.trim()).filter(Boolean);
+	      if (parts.length <= 1) return renderPlayerNameWithLinks(text, listKey);
+	      return parts.map((p) => renderPlayerNameWithLinks(p, listKey)).join(' / ');
+	    }
 
     function renderTimeline(listData) {
       const container = document.querySelector('[data-timeline]');
