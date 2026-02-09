@@ -1923,12 +1923,10 @@
 		      const ustaUrl = (ref.ustaUrl || '').trim() || (ustaUaid ? `https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${encodeURIComponent(ustaUaid)}` : '');
 		      const ustaNationalByList = (ref.ustaNational && typeof ref.ustaNational === 'object') ? ref.ustaNational : {};
 		      const primaryUstaNational = ustaNationalByList[listKey] ? String(ustaNationalByList[listKey] || '').trim() : '';
-		      const altListKey = (listKey === 'g12') ? 'g14' : 'g12';
-		      const altUstaNational = ustaNationalByList[altListKey] ? String(ustaNationalByList[altListKey] || '').trim() : '';
-		      const ustaNational = primaryUstaNational || altUstaNational || '';
+		      const ustaNational = primaryUstaNational || '';
 		      const ustaLabel = ustaNational ? `USTA #${escapeHtml(ustaNational)}` : 'USTA N/A';
 		      const ustaTitle = ustaNational
-		        ? `USTA National rank (${escapeHtml(listKeyLabel(primaryUstaNational ? listKey : altListKey))})`
+		        ? `USTA National rank (${escapeHtml(listKeyLabel(listKey))})`
 		        : 'USTA National rank not available';
 
       const utrLink = utrUrl
