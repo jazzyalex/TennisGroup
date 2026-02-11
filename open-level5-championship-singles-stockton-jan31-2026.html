@@ -2226,8 +2226,60 @@
       display: block !important;
     }
   </style>
+  <style id="report-updated-badge-style">
+    .report-updated-badge {
+      position: static;
+      max-width: 1000px;
+      margin: 0 auto 6px;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      user-select: none;
+      pointer-events: none;
+      text-align: right;
+    }
+
+    .report-updated-badge__pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 11px;
+      line-height: 1.2;
+      color: #5f6c7b;
+    }
+
+    @media (max-width: 600px) {
+      .report-updated-badge {
+        max-width: none;
+        margin: 10px 16px 6px;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .report-updated-badge__pill {
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(28, 28, 30, 0.72);
+        color: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    @media print {
+      .report-updated-badge {
+        display: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-10T21:49:36-08:00" title="2026-02-10T21:49:36-08:00">
+    <span class="report-updated-badge__pill">Updated Feb 10, 2026 9:49 PM PST</span>
+  </div>
   <div class="desktop-view">
   <div class="report-header">
     <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
@@ -2246,15 +2298,15 @@
       </div>
       <div class="tournament-info">
         <a href="https://playtennis.usta.com/Competitions/sanjoaquinvalleytennisacademyfuturestars200/Tournaments/Overview/EA3204F8-086A-4AA0-A82A-3290F67BE8FF" target="_blank" rel="noopener noreferrer" title="Open tournament page">Open Level 5 Championship Singles</a><br>
-        Bear Creek High School, Stockton, CA • 0 Players
+        Bear Creek High School, Stockton, CA • 2 Players
       </div>
     </div>
   </div>
     <div class="table-meta">
     <div class="key-stats">
       <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">16</span></div>
-      <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">January 21, 2026 at 2:59 PM PST</span></div>
-      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">0</span></div>
+      <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">Registration closed</span></div>
+      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">2</span></div>
     </div>
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
@@ -2294,7 +2346,26 @@
       </tr>
     </thead>
     <tbody>
-
+      <tr data-h2h="1" data-h2h-anchor="h2h-14b5582313c3c42fdae7" data-h2h-matches="1" data-section-rank="12">
+        <td class="col-rank">1</td>
+        <td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Valentina</a></td>
+        <td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">KUKEEVA</a></td>
+        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">31.18</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3395363" target="_blank" rel="noopener noreferrer">5.35</a></td>
+        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">301</a></td>
+        <td>Campbell CA</td>
+        <td style="display: none;">12</td>
+      </tr>
+      <tr data-section-rank="57">
+        <td class="col-rank">2</td>
+        <td>Misha</td>
+        <td>KATARIA</td>
+        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">33.30</a></td>
+        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4426031" target="_blank" rel="noopener noreferrer">4.33</a></td>
+        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">955</a></td>
+        <td>Fremont CA</td>
+        <td style="display: none;">57</td>
+      </tr>
     </tbody>
   </table>
 
@@ -2304,24 +2375,24 @@
     <div class="utr-histogram-caption" id="utr-histogram-caption">Based on UTR values from the player list.</div>
   </div>
 
-                  <div class="stats-section">
+                    <div class="stats-section">
     <h2>Tournament Statistics</h2>
     <div class="stats-grid">
       <div class="stat-box">
         <div class="stat-label">Total Players</div>
-        <div class="stat-value">0</div>
+        <div class="stat-value">2</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">WTN Range</div>
-        <div class="stat-value">—</div>
+        <div class="stat-value">31.18 - 33.30</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg WTN</div>
-        <div class="stat-value">—</div>
+        <div class="stat-value">32.24</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
-        <div class="stat-value">—</div>
+        <div class="stat-value">4.84</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Draw Size</div>
@@ -2329,19 +2400,19 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Registered</div>
-        <div class="stat-value">0</div>
+        <div class="stat-value">2</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Registration Closes</div>
-        <div class="stat-value">January 21, 2026 at 2:59 PM PST</div>
+        <div class="stat-value">Registration closed</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Best Nat Rank</div>
-        <div class="stat-value">—</div>
+        <div class="stat-value">301</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
-        <div class="stat-value">—</div>
+        <div class="stat-value">5.35</div>
       </div>
     </div>
   </div>
@@ -2356,25 +2427,25 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Registered:</span>
-      <span class="detail-value">0</span>
+      <span class="detail-value">2</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Registration Closes:</span>
-      <span class="detail-value">January 21, 2026 at 2:59 PM PST</span>
+      <span class="detail-value">Registration closed</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Selection / Seeding:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Players are selected and seeded by the most recently published National Standings List of the division.</span>
     </div>
 
     <h3>Format & Scoring</h3>
     <div class="detail-row">
       <span class="detail-label">Match Format:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Best of 3 Tiebreak sets (6-game sets) with a 10-point Match Tiebreak played in lieu of a 3rd set. If the score in a set reaches 6-games all, a 7-point Set Tiebreak will be played.</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Tiebreaks:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Main Draw Singles and 3rd Place Playoff: Best of 3 Tiebreak sets (6-game sets) with a 10-point Match Tiebreak played in lieu of a 3rd set. If the score in a set reaches 6-games all, a 7-point Set Tiebreak will be played. Consolation Singles: Best of 3 Short sets with a 7-point Match Tiebreak in Lieu of a 3rd set.</span>
     </div>
 
     <h3>Venue Information</h3>
@@ -2396,15 +2467,15 @@
     <h3>Tournament Contact</h3>
     <div class="detail-row">
       <span class="detail-label">Tournament Director:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Edward Melfort</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Email:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">emelfort@yahoo.com</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Phone:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">209-423-8295</span>
     </div>
 
     <div class="important-note">
@@ -2506,8 +2577,105 @@
       <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
     </div>
   </div><!-- end mobile-view -->
+<!-- ALEXIS_ROSTER_H2H_START -->
+<div id="alexis-roster-h2h-wrapper">
+<style id="alexis-roster-h2h-style">
+  .h2h-block { max-width: 1000px; margin: 28px auto; padding: 18px 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); color: inherit; }
+  .h2h-block h2 { margin: 0 0 10px 0; font-size: 20px; }
+  .h2h-block .h2h-note { margin: 0 0 14px 0; opacity: 0.85; }
+  .h2h-summary { margin: 0 0 14px 0; padding: 0; list-style: none; }
+  .h2h-summary li { margin: 6px 0; }
+  .h2h-jump { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
+  .h2h-player { margin-top: 18px; }
+  .h2h-player h3 { margin: 0 0 8px 0; font-size: 16px; }
+  .h2h-player .h2h-meta { opacity: 0.8; font-weight: 400; font-size: 13px; margin-left: 8px; }
+  .h2h-mini { margin: 6px 0 0 0; padding: 10px 12px; border-radius: 12px; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.06); }
+  .h2h-mini-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 8px; }
+  .h2h-mini-head .h2h-record { font-weight: 800; }
+  .h2h-mini-head .h2h-record span { font-weight: 700; opacity: 0.8; }
+  .h2h-mini-head .h2h-updated { font-size: 12px; opacity: 0.75; }
+  .h2h-mini-list { margin: 0; padding-left: 18px; }
+  .h2h-mini-list li { margin: 6px 0; }
+  .h2h-mini-line { display: inline; }
+  .h2h-mini-date { font-weight: 700; }
+  .h2h-mini-res { display: inline-block; min-width: 18px; text-align: center; font-weight: 800; }
+  .h2h-mini-score { font-variant-numeric: tabular-nums; }
+  .h2h-mini-event { opacity: 0.88; }
+  .h2h-mini-loc { opacity: 0.75; }
+  .h2h-mini a { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
 
-  <!-- Mobile View JavaScript -->
+  details.h2h-more { margin-top: 10px; }
+  details.h2h-more summary { cursor: pointer; font-weight: 700; opacity: 0.9; }
+
+  .h2h-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .h2h-table { width: 100%; min-width: 760px; margin: 0; max-width: none; border-collapse: collapse; font-size: 13px; box-shadow: none; background: transparent; }
+  .h2h-table th, .h2h-table td { padding: 7px 8px; border-bottom: 1px solid rgba(0,0,0,0.08); vertical-align: top; }
+  /* Override global table styles in the report template (zebra stripes + header fill). */
+  .h2h-table th { text-align: left; opacity: 0.9; font-weight: 700; font-size: 12px; letter-spacing: 0.2px; white-space: nowrap; background: rgba(0,0,0,0.04) !important; }
+  .h2h-table td { white-space: nowrap; }
+  .h2h-table td:nth-child(2) { white-space: normal; min-width: 280px; }
+  .h2h-table tbody tr:nth-child(odd) { background: rgba(0,0,0,0.018) !important; }
+  .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
+  .h2h-table tbody tr:hover { background: rgba(68,114,196,0.10) !important; }
+  .h2h-event-main { font-weight: 700; }
+  .h2h-event-sub { font-size: 12px; opacity: 0.8; margin-top: 1px; }
+  tr[data-h2h="1"] td:nth-child(3)::after { content: " *"; color: #C58A00; font-weight: 800; }
+
+  @media (prefers-color-scheme: dark) {
+    .h2h-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
+    .h2h-block h2, .h2h-block h3 { color: #ffffff; }
+    .h2h-block .h2h-note { color: rgba(255,255,255,0.86); }
+    .h2h-mini { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+    .h2h-table th, .h2h-table td { border-bottom-color: rgba(255,255,255,0.12); }
+    .h2h-table th { background: rgba(255,255,255,0.08) !important; }
+    .h2h-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.03) !important; }
+    .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
+    .h2h-table tbody tr:hover { background: rgba(107,155,209,0.16) !important; }
+    .h2h-event-sub { opacity: 0.78; }
+  }
+
+  @media (max-width: 640px) {
+    .h2h-block { padding: 14px 12px; }
+    .h2h-table { min-width: 680px; }
+  }
+</style>
+<section class="h2h-block" id="alexis-roster-h2h">
+  <h2>Alexis Malakhova vs This Roster</h2>
+  <p class="h2h-note">Mini report: Alexis Malakhova match history vs players on this roster. Data comes from the internal DB (UTR/USTA). Generated Feb 10, 2026 9:49 PM PST.</p>
+  <div class="selection-callout">Asterisk (*) in the roster table means Alexis Malakhova has prior match history with that player.</div>
+  <ul class="h2h-summary"><li><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Valentina Kukeeva</a> <span class="h2h-meta">Campbell CA</span> — H2H 0-1 <span class="h2h-meta">(latest Nov 15th, 2025)</span></li></ul>
+  <div class="h2h-player" id="h2h-14b5582313c3c42fdae7" data-h2h-player-id="player:14b5582313c3c42fdae7">
+    <h3>Valentina Kukeeva <span class="h2h-meta">Campbell CA</span></h3>
+    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
+    <div class="h2h-mini">
+      <div class="h2h-mini-head">
+        <div class="h2h-record"><span>Record:</span> H2H 0-1</div>
+        <div class="h2h-updated">Latest Nov 15th, 2025</div>
+      </div>
+      <ol class="h2h-mini-list">
+        <li><span class="h2h-mini-line"><span class="h2h-mini-date">Nov 15th, 2025</span> <span class="h2h-mini-res">L</span> <span class="h2h-mini-score">2-4 1-4</span> <span class="h2h-mini-event">FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(— • vs)</span></span></li>
+      </ol>
+      <details class="h2h-more">
+        <summary>Show all matches (1)</summary>
+        <div class="h2h-table-wrap">
+          <table class="h2h-table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Nov 15th, 2025</td><td><div class="h2h-event-main">FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>L</td><td>2-4 1-4</td><td>Quarterfinals</td><td>utr</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ALEXIS_ROSTER_H2H_END -->
+<!-- Mobile View JavaScript -->
   <script>
     // ========================================
     // MOBILE VIEW IMPLEMENTATION
@@ -3252,7 +3420,8 @@
     // Player profile links keyed by "FIRST|LAST" (uppercase)
     // Made global so mobile view can access it
     window.playerProfileUrlByName = {
-
+      "MISHA|KATARIA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835",
+      "VALENTINA|KUKEEVA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502",
     };
 
     function decorateMetricCellWithProfileLink(cell, url) {
