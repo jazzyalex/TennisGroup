@@ -1812,15 +1812,58 @@
       display: none !important;
     }
 
-    body.force-desktop .desktop-view {
-      display: block !important;
-    }
-  </style>
-</head>
-<body>
-  <div class="desktop-view">
-  <div class="report-header">
-    <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
+	    body.force-desktop .desktop-view {
+	      display: block !important;
+	    }
+	  </style>
+	  <style id="report-updated-badge-style">
+	    .report-updated-badge {
+	      position: static;
+	      max-width: 1000px;
+	      margin: 0 auto 6px;
+	      padding: 0;
+	      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+	      user-select: none;
+	      pointer-events: none;
+	      text-align: right;
+	    }
+
+	    .report-updated-badge__pill {
+	      display: inline-flex;
+	      align-items: center;
+	      padding: 6px 10px;
+	      border-radius: 999px;
+	      border: 1px solid rgba(0, 0, 0, 0.10);
+	      background: rgba(255, 255, 255, 0.92);
+	      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+	      backdrop-filter: blur(8px);
+	      -webkit-backdrop-filter: blur(8px);
+	      font-size: 11px;
+	      line-height: 1.2;
+	      color: #5f6c7b;
+	    }
+
+	    @media (max-width: 600px) {
+	      .report-updated-badge {
+	        max-width: none;
+	        margin: 10px 16px 6px;
+	      }
+	    }
+
+	    @media print {
+	      .report-updated-badge {
+	        display: none !important;
+	      }
+	    }
+	  </style>
+	</head>
+	<body>
+	  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-05T12:08:23-08:00" title="2026-02-05T12:08:23-08:00">
+	    <span class="report-updated-badge__pill">Updated Feb 5, 2026 12:08 PM PST</span>
+	  </div>
+	  <div class="desktop-view">
+	  <div class="report-header">
+	    <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
       <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
     </a>
     <div class="report-header-text">
@@ -1834,12 +1877,13 @@
       </div>
     </div>
   </div>
-  <div class="table-meta">
-    <div class="key-stats">
-      <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
-      <div class="key-stat"><span class="key-label">Alexis Seed</span><span class="key-value">20 / 39</span></div>
-      <div class="key-stat"><span class="key-label">% Above Alexis (UTR)</span><span class="key-value">31%</span></div>
-    </div>
+	  <div class="table-meta">
+	    <div class="key-stats">
+	      <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
+	      <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">Registration closed</span></div>
+	      <div class="key-stat"><span class="key-label">Alexis Seed</span><span class="key-value">20 / 39</span></div>
+	      <div class="key-stat"><span class="key-label">% Above Alexis (UTR)</span><span class="key-value">31%</span></div>
+	    </div>
     <div class="link-legend">Click on WTN for USTA profile • on UTR for UTR profile</div>
   </div>
 
