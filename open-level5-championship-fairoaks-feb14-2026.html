@@ -4026,8 +4026,10 @@
     }
 
     function parseCloseDate(text) {
-      if (!text) return null;
-      const match = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)\s+([A-Z]{2,4})/);
+      const normalized = (text || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
+      if (!normalized || /registration closed/i.test(normalized)) return null;
+
+      const match = normalized.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)(?:\s+([A-Z]{2,4}))?/i);
       if (!match) return null;
 
       const monthName = match[1];
@@ -4035,8 +4037,8 @@
       const year = parseInt(match[3], 10);
       let hour = parseInt(match[4], 10);
       const minute = parseInt(match[5], 10);
-      const ampm = match[6];
-      const tz = match[7];
+      const ampm = (match[6] || '').toUpperCase();
+      const tz = (match[7] || '').toUpperCase();
 
       const months = {
         January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
@@ -4048,15 +4050,74 @@
       hour = hour % 12 + (ampm === 'PM' ? 12 : 0);
 
       const offsets = {
-        PST: -8, PDT: -7, PT: -8,
-        MST: -7, MDT: -6,
-        CST: -6, CDT: -5,
-        EST: -5, EDT: -4
+        PT: -480, PST: -480, PDT: -420,
+        MT: -420, MST: -420, MDT: -360,
+        CT: -360, CST: -360, CDT: -300,
+        ET: -300, EST: -300, EDT: -240,
+        AKT: -540, AKST: -540, AKDT: -480,
+        HST: -600, UTC: 0, GMT: 0
       };
-      const offset = offsets[tz] ?? 0;
-      const utcHour = hour - offset;
-      const utcMs = Date.UTC(year, month, day, utcHour, minute, 0);
-      return new Date(utcMs);
+      const offsetMinutes = offsets[tz];
+      if (Number.isFinite(offsetMinutes)) {
+        const utcMs = Date.UTC(year, month, day, hour, minute, 0) - offsetMinutes * 60 * 1000;
+        return new Date(utcMs);
+      }
+
+      return new Date(year, month, day, hour, minute, 0);
+    }
+
+    function formatLocalCloseDateText(closeDate) {
+      try {
+        const datePart = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(closeDate);
+        const timePart = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZoneName: 'short' }).format(closeDate);
+        return `${datePart} at ${timePart}`;
+      } catch {
+        return '';
+      }
+    }
+
+    function updateRegistrationCloseDisplays(sourceCloseText, localizedCloseText) {
+      if (!sourceCloseText || !localizedCloseText || /registration closed/i.test(sourceCloseText)) return;
+
+      const sourceNorm = sourceCloseText.replace(/\s+/g, ' ').trim().toLowerCase();
+      const localizedNorm = localizedCloseText.replace(/\s+/g, ' ').trim().toLowerCase();
+      const values = [];
+
+      document.querySelectorAll('.key-stat').forEach((stat) => {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase() === 'closes') values.push(value);
+      });
+
+      document.querySelectorAll('.stat-group').forEach((group) => {
+        const label = group.querySelector('.stat-label');
+        const value = group.querySelector('.stat-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase().startsWith('registration closes')) values.push(value);
+      });
+
+      document.querySelectorAll('.detail-row').forEach((row) => {
+        const label = row.querySelector('.detail-label');
+        const value = row.querySelector('.detail-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase().startsWith('registration closes')) values.push(value);
+      });
+
+      document.querySelectorAll('.mobile-stat').forEach((stat) => {
+        const label = stat.querySelector('.mobile-stat-label');
+        const value = stat.querySelector('.mobile-stat-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase() === 'closes') values.push(value);
+      });
+
+      values.forEach((valueEl) => {
+        const currentNorm = (valueEl.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        if (!currentNorm || /registration closed/i.test(currentNorm)) return;
+        if (currentNorm !== sourceNorm && currentNorm !== localizedNorm) return;
+        valueEl.textContent = localizedCloseText;
+        valueEl.setAttribute('title', sourceCloseText);
+      });
     }
 
     function updateRegistrationCountdown() {
@@ -4067,7 +4128,11 @@
       const mobileCountdown = document.getElementById('mobile-registration-countdown');
       const mobileDate = document.getElementById('mobile-registration-date');
 
-      const closeText = getRegistrationCloseText();
+      const discoveredCloseText = getRegistrationCloseText();
+      if (!window.__registrationCloseSourceText && discoveredCloseText) {
+        window.__registrationCloseSourceText = discoveredCloseText;
+      }
+      const closeText = window.__registrationCloseSourceText || discoveredCloseText;
       if (!closeText) {
         if (badge) badge.style.display = 'none';
         if (mobileBadge) mobileBadge.style.display = 'none';
@@ -4081,6 +4146,9 @@
         return;
       }
 
+      const localizedCloseText = formatLocalCloseDateText(closeDate) || closeText;
+      updateRegistrationCloseDisplays(closeText, localizedCloseText);
+
       const diffMs = closeDate.getTime() - Date.now();
       const timeText =
         diffMs <= 0
@@ -4093,12 +4161,14 @@
 
       if (badge && countdownEl && dateEl) {
         countdownEl.textContent = timeText;
-        dateEl.textContent = closeText;
+        dateEl.textContent = localizedCloseText;
+        dateEl.setAttribute('title', closeText);
       }
 
       if (mobileBadge && mobileCountdown && mobileDate) {
         mobileCountdown.textContent = timeText;
-        mobileDate.textContent = closeText;
+        mobileDate.textContent = localizedCloseText;
+        mobileDate.setAttribute('title', closeText);
       }
     }
 
