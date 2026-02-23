@@ -199,6 +199,51 @@
       color: var(--player-green);
     }
 
+    .stat-split {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .stat-split-row {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .stat-split-key {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      min-width: 10px;
+      text-align: right;
+    }
+
+    .stat-tr-grid {
+      display: grid;
+      gap: 3px;
+      justify-items: center;
+    }
+
+    .stat-tr-row {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .stat-tr-row .stat-tr-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      min-width: 20px;
+      text-align: right;
+    }
+
     .stat-sub {
       font-size: 0.7rem;
       color: var(--text-muted);
@@ -866,14 +911,17 @@
     <section class="hero-stats" aria-label="Key statistics">
       <div class="stat-card">
         <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
-          <div class="stat-label">UTR Singles</div>
-          <div class="stat-value" data-stat="utr-singles">4.17<span class="stat-trend stat-trend--up">↑</span></div>
-        </a>
-      </div>
-      <div class="stat-card">
-        <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
-          <div class="stat-label">UTR Doubles</div>
-          <div class="stat-value-small" data-stat="utr-doubles">4.12</div>
+          <div class="stat-label">UTR</div>
+          <div class="stat-split">
+            <div class="stat-split-row">
+              <span class="stat-split-key">S</span>
+              <div class="stat-value" data-stat="utr-singles">4.17<span class="stat-trend stat-trend--up">↑</span></div>
+            </div>
+            <div class="stat-split-row">
+              <span class="stat-split-key">D</span>
+              <div class="stat-value-small" data-stat="utr-doubles">4.12</div>
+            </div>
+          </div>
         </a>
       </div>
       <div class="stat-card">
@@ -892,6 +940,21 @@
         <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
           <div class="stat-label">NorCal Rank</div>
           <div class="stat-value" data-stat="rank-section">#26</div>
+        </a>
+      </div>
+      <div class="stat-card">
+        <a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">
+          <div class="stat-label">TR</div>
+          <div class="stat-tr-grid">
+            <div class="stat-tr-row">
+              <span class="stat-tr-label">Nat</span>
+              <div class="stat-value-small" data-stat="tr-national">5</div>
+            </div>
+            <div class="stat-tr-row">
+              <span class="stat-tr-label">CA</span>
+              <div class="stat-value-small" data-stat="tr-california">3</div>
+            </div>
+          </div>
         </a>
       </div>
       <div class="stat-card">
