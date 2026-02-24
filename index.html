@@ -632,28 +632,36 @@
       display: block;
     }
 
-    .card-primary-badge {
-      position: absolute;
-      top: 14px;
-      left: -42px;
-      width: 132px;
-      height: 10px;
-      display: none;
-      background: linear-gradient(90deg, rgba(61, 122, 55, 0.58), rgba(77, 145, 71, 0.42));
-      transform: rotate(-45deg);
-      border-radius: 999px;
-      box-shadow: 0 2px 7px rgba(45, 90, 39, 0.26);
-      pointer-events: none;
-      z-index: 2;
-      user-select: none;
-    }
+	    .card-primary-badge {
+	      position: absolute;
+	      top: 8px;
+	      left: -21px;
+	      width: 66px;
+	      height: 5px;
+	      display: none;
+	      background: rgb(253, 243, 209);
+	      transform: rotate(-45deg);
+	      border-radius: 999px;
+	      box-shadow: 0 2px 6px rgba(120, 90, 0, 0.18);
+	      pointer-events: none;
+	      z-index: 2;
+	      user-select: none;
+	    }
 
-    @media (prefers-color-scheme: dark) {
-      .card-primary-badge {
-        background: linear-gradient(90deg, rgba(77, 145, 71, 0.55), rgba(90, 163, 84, 0.42));
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
-      }
-    }
+	    .tournament-card.is-past .card-primary-badge {
+	      background: linear-gradient(90deg, rgba(61, 122, 55, 0.58), rgba(77, 145, 71, 0.42));
+	      box-shadow: 0 2px 7px rgba(45, 90, 39, 0.26);
+	    }
+
+	    @media (prefers-color-scheme: dark) {
+	      .card-primary-badge {
+	        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
+	      }
+
+	      .tournament-card.is-past .card-primary-badge {
+	        background: linear-gradient(90deg, rgba(77, 145, 71, 0.55), rgba(90, 163, 84, 0.42));
+	      }
+	    }
 
     .tournament-card::before {
       content: '';
