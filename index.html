@@ -2419,6 +2419,7 @@
 		        if (card.classList.contains('calendar-card')) return false;
 		        return !!card.querySelector('.card-type.report');
 		      });
+		      const defaultPrimary = normalizePrimaryName(document.querySelector('[data-player-name]')?.textContent || '');
 	
 		      for (const card of reportCards) {
 		        ensureUpdatedMeta(card);
@@ -2437,6 +2438,8 @@
 		        const directPrimary = normalizePrimaryName(card.getAttribute('data-card-primary-name') || '');
 		        if (directPrimary) {
 		          setCardPrimaryBadge(card, directPrimary);
+		        } else if (defaultPrimary) {
+		          setCardPrimaryBadge(card, defaultPrimary);
 		        }
 	
 		        const href = (card.getAttribute('href') || '').trim();
@@ -2453,6 +2456,8 @@
 		        if (!directClose && cachedClose) applyRegistrationPill(card, cachedClose);
 		        if (!directPrimary && cachedPrimary) {
 		          setCardPrimaryBadge(card, cachedPrimary);
+		        } else if (!directPrimary && !cachedPrimary && defaultPrimary) {
+		          setCardPrimaryBadge(card, defaultPrimary);
 		        } else if (!directPrimary && !cachedPrimary && cachedPrimaryChecked) {
 		          clearCardPrimaryBadge(card);
 		        }
@@ -2468,7 +2473,7 @@
 		          const p = parseCloseDate(cachedClose);
 		          return p && p.status !== 'unknown';
 		        })();
-		        const hasPrimaryKnown = !!directPrimary || !!cachedPrimary || cachedPrimaryChecked;
+		        const hasPrimaryKnown = !!directPrimary || !!cachedPrimary || !!defaultPrimary || cachedPrimaryChecked;
 		        const hasEnough = (directIsoOk || cachedIsoOk) && (directCloseOk || cachedCloseOk || meta.closeText === '') && hasPrimaryKnown;
 		        if (freshEnough && hasEnough) continue;
 
@@ -2493,6 +2498,7 @@
 		          if (!directIso && iso) setCardUpdatedText(card, iso);
 		          applyRegistrationPill(card, closeText);
 		          if (primaryName) setCardPrimaryBadge(card, primaryName);
+		          else if (defaultPrimary) setCardPrimaryBadge(card, defaultPrimary);
 		          else clearCardPrimaryBadge(card);
 		        } catch {
 		          // ignore
