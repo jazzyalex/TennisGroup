@@ -629,26 +629,20 @@
     }
 
     .tournament-card.has-primary-badge .card-primary-badge {
-      display: inline-flex;
+      display: block;
     }
 
     .card-primary-badge {
       position: absolute;
-      top: 16px;
-      left: -46px;
-      width: 162px;
-      height: 24px;
+      top: 14px;
+      left: -42px;
+      width: 132px;
+      height: 10px;
       display: none;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(90deg, #dc2626, #f59e0b);
-      color: #fff;
-      font-size: 0.6rem;
-      font-weight: 800;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
+      background: linear-gradient(90deg, rgba(61, 122, 55, 0.58), rgba(77, 145, 71, 0.42));
       transform: rotate(-45deg);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+      border-radius: 999px;
+      box-shadow: 0 2px 7px rgba(45, 90, 39, 0.26);
       pointer-events: none;
       z-index: 2;
       user-select: none;
@@ -656,8 +650,8 @@
 
     @media (prefers-color-scheme: dark) {
       .card-primary-badge {
-        background: linear-gradient(90deg, #b91c1c, #d97706);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32);
+        background: linear-gradient(90deg, rgba(77, 145, 71, 0.55), rgba(90, 163, 84, 0.42));
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
       }
     }
 
@@ -2114,8 +2108,7 @@
 		        badge.setAttribute('aria-hidden', 'true');
 		        card.appendChild(badge);
 		      }
-		      badge.textContent = 'Primary';
-		      badge.setAttribute('title', `Primary player: ${name}`);
+		      badge.textContent = '';
 		    }
 
 		    function ensureUpdatedMeta(card) {
@@ -2419,7 +2412,6 @@
 		        if (card.classList.contains('calendar-card')) return false;
 		        return !!card.querySelector('.card-type.report');
 		      });
-		      const defaultPrimary = normalizePrimaryName(document.querySelector('[data-player-name]')?.textContent || '');
 	
 		      for (const card of reportCards) {
 		        ensureUpdatedMeta(card);
@@ -2438,8 +2430,8 @@
 		        const directPrimary = normalizePrimaryName(card.getAttribute('data-card-primary-name') || '');
 		        if (directPrimary) {
 		          setCardPrimaryBadge(card, directPrimary);
-		        } else if (defaultPrimary) {
-		          setCardPrimaryBadge(card, defaultPrimary);
+		        } else {
+		          clearCardPrimaryBadge(card);
 		        }
 	
 		        const href = (card.getAttribute('href') || '').trim();
@@ -2456,8 +2448,6 @@
 		        if (!directClose && cachedClose) applyRegistrationPill(card, cachedClose);
 		        if (!directPrimary && cachedPrimary) {
 		          setCardPrimaryBadge(card, cachedPrimary);
-		        } else if (!directPrimary && !cachedPrimary && defaultPrimary) {
-		          setCardPrimaryBadge(card, defaultPrimary);
 		        } else if (!directPrimary && !cachedPrimary && cachedPrimaryChecked) {
 		          clearCardPrimaryBadge(card);
 		        }
@@ -2473,7 +2463,7 @@
 		          const p = parseCloseDate(cachedClose);
 		          return p && p.status !== 'unknown';
 		        })();
-		        const hasPrimaryKnown = !!directPrimary || !!cachedPrimary || !!defaultPrimary || cachedPrimaryChecked;
+		        const hasPrimaryKnown = !!directPrimary || !!cachedPrimary || cachedPrimaryChecked;
 		        const hasEnough = (directIsoOk || cachedIsoOk) && (directCloseOk || cachedCloseOk || meta.closeText === '') && hasPrimaryKnown;
 		        if (freshEnough && hasEnough) continue;
 
@@ -2498,7 +2488,6 @@
 		          if (!directIso && iso) setCardUpdatedText(card, iso);
 		          applyRegistrationPill(card, closeText);
 		          if (primaryName) setCardPrimaryBadge(card, primaryName);
-		          else if (defaultPrimary) setCardPrimaryBadge(card, defaultPrimary);
 		          else clearCardPrimaryBadge(card);
 		        } catch {
 		          // ignore
