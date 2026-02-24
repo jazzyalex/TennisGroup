@@ -628,6 +628,39 @@
       overflow: hidden;
     }
 
+    .tournament-card.has-primary-badge .card-primary-badge {
+      display: inline-flex;
+    }
+
+    .card-primary-badge {
+      position: absolute;
+      top: 16px;
+      left: -46px;
+      width: 162px;
+      height: 24px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(90deg, #dc2626, #f59e0b);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      transform: rotate(-45deg);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+      pointer-events: none;
+      z-index: 2;
+      user-select: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card-primary-badge {
+        background: linear-gradient(90deg, #b91c1c, #d97706);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32);
+      }
+    }
+
     .tournament-card::before {
       content: '';
       position: absolute;
@@ -1383,7 +1416,7 @@
 
 	      <div class="cards-grid">
 	        <!-- Level 3 Mixed Doubles Sectionals (HRT) -->
-		        <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-18T10:06:57-08:00" data-card-close-text="Registration closed">
+		        <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-18T17:13:20-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova">
 		          <div class="card-header">
 		            <span class="card-type report" data-registration-pill>
 		              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1437,13 +1470,13 @@
 		                <circle cx="12" cy="12" r="10"/>
 		                <path d="M12 6v6l4 2"/>
 		              </svg>
-		              <span data-card-updated-text>Updated Feb 18, 2026 10:06 AM PST</span>
+		              <span data-card-updated-text>Updated Feb 18, 2026 5:13 PM PST</span>
 		            </span>
 		          </div>
 		        </a>
 
 	        <!-- Open Level 5 Championship Singles -->
-		        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-06T13:15:47-08:00" data-card-close-text="January 21, 2026 at 2:59 PM PST">
+		        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-06T13:15:47-08:00" data-card-close-text="January 21, 2026 at 2:59 PM PST" data-card-primary-name="Alexis MALAKHOVA">
 		          <div class="card-header">
 		            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1563,7 +1596,7 @@
 	        </a>
 
 	        <!-- Open Level 5 Championship (Rollingwood YMCA - Fair Oaks) -->
-	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship" data-card-updated-iso="2026-02-08T12:15:50-08:00" data-card-close-text="Registration closed">
+	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship" data-card-updated-iso="2026-02-11T11:20:57-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1617,13 +1650,13 @@
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 6v6l4 2"/>
               </svg>
-              <span data-card-updated-text>Updated Feb 8, 2026 12:15 PM PST</span>
+              <span data-card-updated-text>Updated Feb 11, 2026 11:20 AM PST</span>
             </span>
 </div>
 	        </a>
 
 		        <!-- Johnson Ranch Level 5 Super Series (Girls U12/U14) -->
-		        <a href="johnson-ranch-level5-girls-u12-u14-mar7-8-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-19T17:46:33-08:00" data-card-close-text="February 25, 2026 at 2:59 PM PST">
+		        <a href="johnson-ranch-level5-girls-u12-u14-mar7-8-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-23T11:59:13-08:00" data-card-close-text="February 25, 2026 at 2:59 PM PST" data-card-primary-name="Alexis Malakhova">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1676,20 +1709,20 @@
 	                <circle cx="12" cy="12" r="10"/>
 	                <path d="M12 6v6l4 2"/>
 	              </svg>
-	              <span data-card-updated-text>Updated Feb 19, 2026 5:46 PM PST</span>
+	              <span data-card-updated-text>Updated Feb 23, 2026 11:59 AM PST</span>
 	            </span>
 		          </div>
 		        </a>
 
 		        <!-- Closed Level 4 Excellence Doubles (FDT) -->
-		        <a href="closed-level4-excellence-doubles-san-jose-mar14-15-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-24T09:00:00-08:00" data-card-close-text="Registration closed">
+		        <a href="closed-level4-excellence-doubles-san-jose-mar14-15-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-24T09:13:02-08:00" data-card-close-text="March 8, 2026 at 2:59 PM PDT" data-card-primary-name="Alexis Malakhova">
 		          <div class="card-header">
 		            <span class="card-type report" data-registration-pill>
 		              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
 		                <circle cx="12" cy="12" r="10"/>
 		                <path d="M12 6v6l4 2"/>
 		              </svg>
-		              <span data-registration-pill-text>Closed</span>
+		              <span data-registration-pill-text>Closes Mar 8</span>
 		            </span>
 		            <div class="card-actions">
 		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
@@ -1735,13 +1768,13 @@
 		                <circle cx="12" cy="12" r="10"/>
 		                <path d="M12 6v6l4 2"/>
 		              </svg>
-		              <span data-card-updated-text>Updated Feb 24, 2026 9:00 AM PST</span>
+		              <span data-card-updated-text>Updated Feb 24, 2026 9:13 AM PST</span>
 		            </span>
 		          </div>
 		        </a>
 
 		        <!-- L4 Excellence Tournament Report -->
-		        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past" data-card-updated-iso="2026-02-05T12:08:23-08:00" data-card-close-text="Registration closed">
+		        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past" data-card-updated-iso="2026-02-05T12:08:23-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis MALAKHOVA">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1804,7 +1837,7 @@
 	        </a>
 
 	        <!-- Level 3 Open Las Vegas Tournament Report -->
-	        <a href="level3-open-las-vegas-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-20T20:33:09-08:00" data-card-close-text="Registration closed">
+	        <a href="level3-open-las-vegas-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-20T21:00:57-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1857,13 +1890,13 @@
 	                <circle cx="12" cy="12" r="10"/>
 	                <path d="M12 6v6l4 2"/>
 	              </svg>
-	              <span data-card-updated-text>Updated Feb 20, 2026 8:33 PM PST</span>
+	              <span data-card-updated-text>Updated Feb 20, 2026 9:00 PM PST</span>
 	            </span>
 	          </div>
 	        </a>
 
 	        <!-- Level 3 Open Tempe Tournament Report -->
-	        <a href="level3-open-tempe-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-23T12:34:26-08:00" data-card-close-text="Registration closed">
+	        <a href="level3-open-tempe-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-23T12:34:26-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -2015,6 +2048,74 @@
 		      }
 
 		      return null;
+		    }
+
+		    function normalizePrimaryName(value) {
+		      const text = (value || '').replace(/\s+/g, ' ').trim();
+		      if (!text) return '';
+		      if (/^primary player$/i.test(text)) return '';
+		      return text;
+		    }
+
+		    function extractPrimaryNameFromReportDoc(doc) {
+		      if (!doc) return '';
+
+		      const h2 = doc.querySelector('#alexis-roster-h2h h2');
+		      if (h2) {
+		        const txt = normalizePrimaryName(h2.textContent || '');
+		        const m = txt.match(/^(.*?)\s+vs\s+this\s+roster\b/i);
+		        const primary = normalizePrimaryName(m ? m[1] : txt);
+		        if (primary) return primary;
+		      }
+
+		      const note = doc.querySelector('#alexis-roster-h2h .h2h-note');
+		      if (note) {
+		        const raw = normalizePrimaryName(note.textContent || '');
+		        const m = raw.match(/Mini report:\s*(.*?)\s+match history/i);
+		        const primary = normalizePrimaryName(m ? m[1] : '');
+		        if (primary) return primary;
+		      }
+
+		      const row = doc.querySelector('tr.highlight-player');
+		      if (row) {
+		        const cells = Array.from(row.querySelectorAll('td'));
+		        if (cells.length >= 3) {
+		          const first = normalizePrimaryName(cells[1]?.textContent || '');
+		          const last = normalizePrimaryName(cells[2]?.textContent || '');
+		          const name = normalizePrimaryName(`${first} ${last}`);
+		          if (name) return name;
+		        }
+		      }
+
+		      return '';
+		    }
+
+		    function clearCardPrimaryBadge(card) {
+		      if (!card) return;
+		      card.classList.remove('has-primary-badge');
+		      card.removeAttribute('data-card-primary-name');
+		      const badge = card.querySelector('.card-primary-badge');
+		      if (badge) badge.remove();
+		    }
+
+		    function setCardPrimaryBadge(card, primaryName) {
+		      if (!card) return;
+		      const name = normalizePrimaryName(primaryName);
+		      if (!name) {
+		        clearCardPrimaryBadge(card);
+		        return;
+		      }
+		      card.classList.add('has-primary-badge');
+		      card.setAttribute('data-card-primary-name', name);
+		      let badge = card.querySelector('.card-primary-badge');
+		      if (!badge) {
+		        badge = document.createElement('span');
+		        badge.className = 'card-primary-badge';
+		        badge.setAttribute('aria-hidden', 'true');
+		        card.appendChild(badge);
+		      }
+		      badge.textContent = 'Primary';
+		      badge.setAttribute('title', `Primary player: ${name}`);
 		    }
 
 		    function ensureUpdatedMeta(card) {
@@ -2332,6 +2433,11 @@
 		        if (directClose) {
 		          applyRegistrationPill(card, directClose);
 		        }
+
+		        const directPrimary = normalizePrimaryName(card.getAttribute('data-card-primary-name') || '');
+		        if (directPrimary) {
+		          setCardPrimaryBadge(card, directPrimary);
+		        }
 	
 		        const href = (card.getAttribute('href') || '').trim();
 		        if (!href || href.startsWith('http')) continue;
@@ -2339,10 +2445,17 @@
 		        const meta = normalizeCachedMeta(cache[href]);
 		        const cachedIso = (meta.updatedIso || '').trim();
 		        const cachedClose = (meta.closeText || '').trim();
+		        const cachedPrimary = normalizePrimaryName(meta.primaryName || '');
+		        const cachedPrimaryChecked = meta.primaryChecked === true;
 		        const cachedAt = Number(meta.cachedAt || 0);
 
 		        if (!directIso && cachedIso) setCardUpdatedText(card, cachedIso);
 		        if (!directClose && cachedClose) applyRegistrationPill(card, cachedClose);
+		        if (!directPrimary && cachedPrimary) {
+		          setCardPrimaryBadge(card, cachedPrimary);
+		        } else if (!directPrimary && !cachedPrimary && cachedPrimaryChecked) {
+		          clearCardPrimaryBadge(card);
+		        }
 	
 		        const freshEnough = cachedAt && (Date.now() - cachedAt) < CACHE_MAX_AGE_MS;
 		        const directIsoOk = !!formatUpdatedIso(directIso);
@@ -2355,7 +2468,8 @@
 		          const p = parseCloseDate(cachedClose);
 		          return p && p.status !== 'unknown';
 		        })();
-		        const hasEnough = (directIsoOk || cachedIsoOk) && (directCloseOk || cachedCloseOk || meta.closeText === '');
+		        const hasPrimaryKnown = !!directPrimary || !!cachedPrimary || cachedPrimaryChecked;
+		        const hasEnough = (directIsoOk || cachedIsoOk) && (directCloseOk || cachedCloseOk || meta.closeText === '') && hasPrimaryKnown;
 		        if (freshEnough && hasEnough) continue;
 
 		        try {
@@ -2366,15 +2480,20 @@
 
 		          const iso = (doc.querySelector('#report-updated-badge')?.getAttribute('data-updated-iso') || '').trim();
 		          const closeText = extractCloseTextFromReportDoc(doc);
+		          const primaryName = extractPrimaryNameFromReportDoc(doc);
 
 		          cache[href] = {
 		            updatedIso: iso,
 		            closeText,
+		            primaryName,
+		            primaryChecked: true,
 		            cachedAt: Date.now(),
 		          };
 
 		          if (!directIso && iso) setCardUpdatedText(card, iso);
 		          applyRegistrationPill(card, closeText);
+		          if (primaryName) setCardPrimaryBadge(card, primaryName);
+		          else clearCardPrimaryBadge(card);
 		        } catch {
 		          // ignore
 		        }
