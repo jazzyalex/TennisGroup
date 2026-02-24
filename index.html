@@ -1709,7 +1709,7 @@
 		        </a>
 
 		        <!-- Closed Level 4 Excellence Doubles (FDT) -->
-		        <a href="closed-level4-excellence-doubles-san-jose-mar14-15-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-24T09:13:02-08:00" data-card-close-text="March 8, 2026 at 2:59 PM PDT" data-card-primary-name="Alexis Malakhova">
+		        <a href="closed-level4-excellence-doubles-san-jose-mar14-15-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-24T09:13:02-08:00" data-card-close-text="March 8, 2026 at 2:59 PM PDT">
 		          <div class="card-header">
 		            <span class="card-type report" data-registration-pill>
 		              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1831,7 +1831,7 @@
 	        </a>
 
 	        <!-- Level 3 Open Las Vegas Tournament Report -->
-	        <a href="level3-open-las-vegas-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-20T21:00:57-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova">
+	        <a href="level3-open-las-vegas-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-20T21:00:57-08:00" data-card-close-text="Registration closed">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1890,7 +1890,7 @@
 	        </a>
 
 	        <!-- Level 3 Open Tempe Tournament Report -->
-	        <a href="level3-open-tempe-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-23T12:34:26-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova">
+	        <a href="level3-open-tempe-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-23T12:34:26-08:00" data-card-close-text="Registration closed">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -2053,22 +2053,6 @@
 
 		    function extractPrimaryNameFromReportDoc(doc) {
 		      if (!doc) return '';
-
-		      const h2 = doc.querySelector('#alexis-roster-h2h h2');
-		      if (h2) {
-		        const txt = normalizePrimaryName(h2.textContent || '');
-		        const m = txt.match(/^(.*?)\s+vs\s+this\s+roster\b/i);
-		        const primary = normalizePrimaryName(m ? m[1] : txt);
-		        if (primary) return primary;
-		      }
-
-		      const note = doc.querySelector('#alexis-roster-h2h .h2h-note');
-		      if (note) {
-		        const raw = normalizePrimaryName(note.textContent || '');
-		        const m = raw.match(/Mini report:\s*(.*?)\s+match history/i);
-		        const primary = normalizePrimaryName(m ? m[1] : '');
-		        if (primary) return primary;
-		      }
 
 		      const row = doc.querySelector('tr.highlight-player');
 		      if (row) {
