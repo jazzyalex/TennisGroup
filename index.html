@@ -526,6 +526,40 @@
       fill: currentColor;
     }
 
+    .signed-up-filter-toggle {
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s, border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .signed-up-filter-toggle:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .signed-up-filter-toggle:focus-visible {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 3px;
+    }
+
+    .signed-up-filter-toggle.is-active {
+      color: var(--accent-emerald);
+      border-color: rgba(16, 185, 129, 0.55);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
     /* Tournament Cards Grid */
     .cards-grid {
       display: grid;
@@ -746,6 +780,10 @@
           display: none;
         }
 
+        .tournament-card.is-hidden-by-signed-up-filter {
+          display: none;
+        }
+
         .calendar-card .card-favorite-toggle {
           background: rgba(255, 255, 255, 0.16);
           border-color: rgba(255, 255, 255, 0.22);
@@ -910,35 +948,6 @@
 	      height: 16px;
 	      opacity: 0.7;
 	    }
-
-    /* Coming Soon Section */
-    .coming-soon {
-      background: var(--bg-tertiary);
-      border: 1px dashed var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .coming-soon-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 16px;
-      color: var(--text-muted);
-      opacity: 0.5;
-    }
-
-    .coming-soon h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .coming-soon p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
 
     /* Footer */
     .footer {
@@ -1355,9 +1364,12 @@
 	    <section data-tournament-section="reports">
 	      <div class="section-header">
 	        <div class="section-bar"></div>
-	        <h2 class="section-title">Tournament Reports</h2>
+	        <h2 class="section-title">Tournaments</h2>
 	        <div class="section-actions">
 			          <span class="section-badge" data-tournament-count>9 Tournaments</span>
+		          <button class="signed-up-filter-toggle" type="button" aria-label="Show signed up tournaments only" title="Show signed up tournaments only" aria-pressed="false" data-signed-up-filter-toggle>
+		            Signed up
+		          </button>
 		          <button class="favorites-filter-toggle" type="button" aria-label="Show starred tournaments only" title="Show starred tournaments only" aria-pressed="false" data-favorites-filter-toggle>
 		            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 		              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
@@ -1958,22 +1970,6 @@
 	      </div>
 	    </section>
 
-    <!-- Coming Soon Section -->
-    <section>
-      <div class="section-header">
-        <div class="section-bar"></div>
-        <h2 class="section-title">Coming Soon</h2>
-      </div>
-
-      <div class="coming-soon">
-        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 6v6l4 2"/>
-        </svg>
-        <h3>More Reports on the Way</h3>
-        <p>Additional tournament reports and analysis tools will be added throughout the 2026 season.</p>
-      </div>
-    </section>
   </main>
 
   <!-- Footer -->
@@ -2397,7 +2393,7 @@
 		      });
 		    }
 
-		    async function populateReportCardUpdatedLabels() {
+		    async function populateReportCardUpdatedLabels(favoritesApi) {
 		      const CACHE_MAX_AGE_MS = 6 * 60 * 60 * 1000;
 		      const cache = loadUpdatedCache();
 		      const reportCards = Array.from(document.querySelectorAll('a.tournament-card')).filter((card) => {
@@ -2487,6 +2483,7 @@
 		      }
 
 		      saveUpdatedCache(cache);
+		      favoritesApi?.refresh?.();
 		    }
 
 		    function setupUstaLinkDelegation() {
@@ -2515,12 +2512,14 @@
 	    function initTournamentFavorites() {
 	      const STORAGE_KEY = 'tennis_tracker_starred_tournaments_v1';
 	      const FILTER_KEY = 'tennis_tracker_starred_filter_v1';
+	      const SIGNED_UP_FILTER_KEY = 'tennis_tracker_signed_up_filter_v1';
 	
 	      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
 	      if (!tournamentSection) return null;
 	
 	      const countEl = tournamentSection.querySelector('[data-tournament-count]');
 	      const filterToggle = tournamentSection.querySelector('[data-favorites-filter-toggle]');
+	      const signedUpFilterToggle = tournamentSection.querySelector('[data-signed-up-filter-toggle]');
 	      const cardsRoot = tournamentSection.querySelector('.cards-grid') || tournamentSection;
 	
 	      const getCards = () => Array.from(cardsRoot.querySelectorAll('a.tournament-card'));
@@ -2569,6 +2568,22 @@
 	          // ignore
 	        }
 	      };
+
+	      const readSignedUpFilterEnabled = () => {
+	        try {
+	          return window.localStorage.getItem(SIGNED_UP_FILTER_KEY) === '1';
+	        } catch {
+	          return false;
+	        }
+	      };
+
+	      const writeSignedUpFilterEnabled = (enabled) => {
+	        try {
+	          window.localStorage.setItem(SIGNED_UP_FILTER_KEY, enabled ? '1' : '0');
+	        } catch {
+	          // ignore
+	        }
+	      };
 	
 	      const starred = loadStarred();
 	
@@ -2588,21 +2603,22 @@
 	        if (!countEl) return;
 	        const cards = getCards();
 	        const total = cards.length;
-	        const visible = cards.filter((card) => !card.classList.contains('is-hidden-by-favorite-filter')).length;
-	        const filterOn = filterToggle?.classList.contains('is-active');
-	        const shown = filterOn ? visible : total;
+	        const visible = cards.filter((card) => {
+	          return !card.classList.contains('is-hidden-by-favorite-filter') && !card.classList.contains('is-hidden-by-signed-up-filter');
+	        }).length;
+	        const anyFilterOn = filterToggle?.classList.contains('is-active') || signedUpFilterToggle?.classList.contains('is-active');
+	        const shown = anyFilterOn ? visible : total;
 	        countEl.textContent = `${shown} Tournaments`;
 	      };
-	
+
 	      const applyFilter = () => {
 	        const filterOn = filterToggle?.classList.contains('is-active');
+	        const signedUpFilterOn = signedUpFilterToggle?.classList.contains('is-active');
 	        getCards().forEach((card) => {
-	          if (!filterOn) {
-	            card.classList.remove('is-hidden-by-favorite-filter');
-	            return;
-	          }
 	          const id = getTournamentId(card);
-	          card.classList.toggle('is-hidden-by-favorite-filter', !starred.has(id));
+	          const primaryName = normalizePrimaryName(card.getAttribute('data-card-primary-name') || '');
+	          card.classList.toggle('is-hidden-by-favorite-filter', filterOn && !starred.has(id));
+	          card.classList.toggle('is-hidden-by-signed-up-filter', signedUpFilterOn && !primaryName);
 	        });
 	        updateCount();
 	      };
@@ -2654,6 +2670,19 @@
 	          filterToggle.classList.toggle('is-active', enabled);
 	          filterToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
 	          writeFilterEnabled(enabled);
+	          applyFilter();
+	        });
+	      }
+
+	      if (signedUpFilterToggle) {
+	        const filterEnabled = readSignedUpFilterEnabled();
+	        signedUpFilterToggle.classList.toggle('is-active', filterEnabled);
+	        signedUpFilterToggle.setAttribute('aria-pressed', filterEnabled ? 'true' : 'false');
+	        signedUpFilterToggle.addEventListener('click', () => {
+	          const enabled = !signedUpFilterToggle.classList.contains('is-active');
+	          signedUpFilterToggle.classList.toggle('is-active', enabled);
+	          signedUpFilterToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+	          writeSignedUpFilterEnabled(enabled);
 	          applyFilter();
 	        });
 	      }
@@ -3000,7 +3029,7 @@
 		      updateExpirationAlert();
 		      updateAllCardPastStatuses();
 		      sortTournamentCardsByDate();
-		      populateReportCardUpdatedLabels();
+		      populateReportCardUpdatedLabels(favoritesApi);
 		      updateAllRegistrationPills();
 		      setInterval(updateAllRegistrationPills, 60 * 1000);
 		    }
