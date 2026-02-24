@@ -1046,6 +1046,13 @@
       box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.2);
     }
 
+    .sim-field-help {
+      margin-top: 6px;
+      font-size: 0.67rem;
+      line-height: 1.35;
+      color: var(--text-muted);
+    }
+
     .sim-result-rank {
       display: flex;
       gap: 8px;
@@ -1501,6 +1508,7 @@
             <div class="sim-scenario-field">
               <label class="sim-control-label" for="sim-format-select">Format</label>
               <select id="sim-format-select" data-sim-format-select></select>
+              <div class="sim-field-help">Format means draw structure (single elimination, feed-in, round robin). Round options update to valid choices.</div>
             </div>
             <div class="sim-scenario-field">
               <label class="sim-control-label" for="sim-round-select">Round</label>
@@ -48978,6 +48986,8 @@
         if (selects.level) selects.level.innerHTML = '';
         if (selects.format) selects.format.innerHTML = '';
         if (selects.round) selects.round.innerHTML = '';
+        if (selects.eventType) selects.eventType.innerHTML = '';
+        if (selects.outcome) selects.outcome.innerHTML = '';
         return;
       }
 
@@ -48998,18 +49008,19 @@
 
       const uniq = (items) => [...new Set(items)];
       const levels = uniq(scenarios.map((item) => coerceText(item.level)).filter(Boolean)).sort();
-      const formats = uniq(
-        scenarios
-          .map((item) => `${coerceText(item.canonicalFormat)}|${coerceText(item.displayFormat || item.canonicalFormat)}`.trim())
-          .filter((item) => item !== '|'),
-      ).sort();
-      const rounds = uniq(scenarios.map((item) => coerceText(item.resultRound)).filter(Boolean)).sort();
-      const eventTypes = uniq(scenarios.map((item) => coerceText(item.eventType)).filter(Boolean)).sort();
 
       fillSelect(
         selects.level,
         levels.map((value) => ({ value, label: value })),
       );
+      const selectedLevel = coerceText(selects.level && selects.level.value);
+      const scenariosByLevel = scenarios.filter((item) => !selectedLevel || coerceText(item.level) === selectedLevel);
+
+      const formats = uniq(
+        scenariosByLevel
+          .map((item) => `${coerceText(item.canonicalFormat)}|${coerceText(item.displayFormat || item.canonicalFormat)}`.trim())
+          .filter((item) => item !== '|'),
+      ).sort();
       fillSelect(
         selects.format,
         formats.map((value) => {
@@ -49017,10 +49028,11 @@
           return { value: canonical, label: display || canonical };
         }),
       );
-      fillSelect(
-        selects.round,
-        rounds.map((value) => ({ value, label: normalizeRoundLabel(value) })),
-      );
+
+      const selectedFormat = coerceText(selects.format && selects.format.value);
+      const scenariosByFormat = scenariosByLevel.filter((item) => !selectedFormat || coerceText(item.canonicalFormat) === selectedFormat);
+
+      const eventTypes = uniq(scenariosByFormat.map((item) => coerceText(item.eventType)).filter(Boolean)).sort();
       fillSelect(
         selects.eventType,
         eventTypes.map((value) => ({
@@ -49028,12 +49040,29 @@
           label: `${value.charAt(0).toUpperCase()}${value.slice(1).toLowerCase()}`,
         })),
       );
+
+      const selectedEventType = coerceText(selects.eventType && selects.eventType.value);
+      const scenariosByEventType = scenariosByFormat.filter((item) => !selectedEventType || coerceText(item.eventType) === selectedEventType);
+
+      const rounds = uniq(scenariosByEventType.map((item) => coerceText(item.resultRound)).filter(Boolean)).sort();
+      fillSelect(
+        selects.round,
+        rounds.map((value) => ({ value, label: normalizeRoundLabel(value) })),
+      );
+
+      const selectedRound = coerceText(selects.round && selects.round.value);
+      const scenariosByRound = scenariosByEventType.filter((item) => !selectedRound || coerceText(item.resultRound) === selectedRound);
+
+      const outcomeValues = uniq(
+        scenariosByRound.map((item) => (item.isEventWinner ? 'win' : 'loss')),
+      ).filter(Boolean);
+      const orderedOutcomes = ['win', 'loss'].filter((value) => outcomeValues.includes(value));
       fillSelect(
         selects.outcome,
-        [
-          { value: 'win', label: 'Win' },
-          { value: 'loss', label: 'Loss' },
-        ],
+        (orderedOutcomes.length ? orderedOutcomes : ['win', 'loss']).map((value) => ({
+          value,
+          label: value === 'win' ? 'Win' : 'Loss',
+        })),
       );
 
       if (!selects.level.value && selects.level.options.length) selects.level.value = selects.level.options[0].value;
@@ -49201,6 +49230,7 @@
           if (!select) return;
           select.addEventListener('change', () => {
             if (SIM_STATE.mode === 'scenario') {
+              renderScenarioControls(SIM_STATE.simulation);
               renderScenarioSimulation();
             }
           });
