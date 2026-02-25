@@ -701,11 +701,17 @@
       pointer-events: none;
     }
 
+    .sim-subtitle {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
     .sim-tabs {
       display: inline-flex;
       align-items: center;
       gap: 2px;
-      padding: 2px;
+      padding: 3px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--bg-tertiary);
@@ -717,21 +723,21 @@
       appearance: none;
       border: 0;
       border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.75rem;
+      padding: 6px 14px;
+      font-size: 0.76rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
       color: var(--text-secondary);
       background: transparent;
       cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
+      transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
       white-space: nowrap;
     }
 
     .sim-tab.is-active {
       background: var(--bg-secondary);
       color: var(--player-green);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
     }
 
     .sim-tab:disabled {
@@ -739,171 +745,35 @@
       cursor: not-allowed;
     }
 
-    .sim-shell {
-      display: grid;
-      gap: 14px;
-      margin-bottom: 2px;
-    }
-
-    .sim-scope-toggle, .sim-mode-controls, .sim-scenario-grid {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .sim-mode-controls label, .sim-scenario-grid label {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      margin-right: 4px;
-      width: 100%;
-    }
-
-    .sim-control-label {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      margin-bottom: 2px;
-    }
-
-    .sim-scope-toggle .list-toggle__btn,
-    .sim-scenario-option {
-      font-size: 0.76rem;
-      padding: 5px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      appearance: none;
-      font-weight: 700;
-    }
-
-    .sim-scope-toggle .is-active,
-    .sim-scenario-option.is-active {
-      border-color: var(--player-green);
-      color: var(--player-green);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-    }
-
-    .sim-scope-toggle .list-toggle__btn:disabled,
-    .sim-scenario-option:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .sim-target-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 2px 0 6px;
-      flex-wrap: wrap;
-    }
-
-    .sim-target-readout {
-      display: inline-flex;
-      gap: 10px;
-      align-items: center;
-      padding: 6px 10px;
-      border-radius: 10px;
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border);
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      white-space: nowrap;
-    }
-
-    .sim-target-readout span {
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .sim-slider {
-      width: 100%;
-      accent-color: var(--player-green);
-    }
-
-    .sim-slider-marks {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .sim-slider-mark {
-      border: 0;
-      appearance: none;
-      background: var(--bg-tertiary);
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 6px 5px;
-      font-size: 0.67rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .sim-slider-mark.is-active {
-      border-color: var(--player-green);
-      color: var(--player-green);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.12);
-    }
-
-    .sim-stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .sim-stat {
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px;
-      font-size: 0.78rem;
-      text-align: center;
-    }
-
-    .sim-stat-label {
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      font-size: 0.64rem;
-    }
-
-    .sim-stat-value {
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-    }
-
     .sim-assumptions {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
+      margin-bottom: 12px;
     }
 
     .sim-chip {
-      padding: 4px 8px;
-      font-size: 0.62rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      font-size: 0.64rem;
       border-radius: 999px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-secondary);
       border: 1px solid var(--border);
       background: var(--bg-secondary);
       white-space: nowrap;
+      text-transform: capitalize;
+    }
+
+    .sim-chip::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
     }
 
     .sim-chip--warn {
@@ -912,10 +782,8 @@
       background: rgba(245, 158, 11, 0.12);
     }
 
-    .sim-chip--ok {
-      color: #065f46;
-      border-color: rgba(16, 185, 129, 0.35);
-      background: rgba(16, 185, 129, 0.12);
+    .sim-chip--warn::before {
+      background: #f59e0b;
     }
 
     .sim-modes {
@@ -937,137 +805,856 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .sim-results {
+    .sim-shell {
       display: grid;
-      gap: 10px;
-      margin-top: 2px;
+      gap: 12px;
     }
 
-    .sim-result-card {
-      border: 1px solid var(--border);
-      background: var(--bg-tertiary);
-      border-radius: 10px;
-      padding: 10px;
+    .sim-row-label {
+      font-size: 0.64rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
-    .sim-result-title {
-      font-weight: 700;
-      color: var(--text-primary);
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-    }
-
-    .sim-result-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.72rem;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .sim-meta-badge {
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 3px 8px;
-      background: var(--bg-secondary);
-      font-weight: 600;
-    }
-
-    .sim-result-events {
-      list-style: none;
-      display: grid;
-      gap: 6px;
-      margin: 0;
-    }
-
-    .sim-result-events li {
+    .sim-scope-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      font-size: 0.77rem;
-      padding: 5px 6px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-secondary);
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .sim-result-events li .muted {
-      color: var(--text-muted);
+    .sim-scope-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-scope-btn {
+      appearance: none;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 13px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    }
+
+    .sim-scope-btn.is-active {
+      border-color: var(--player-green);
+      color: var(--player-green);
+      background: var(--player-light);
+    }
+
+    .sim-scope-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .sim-rank-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .sim-rank-btn {
+      appearance: none;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 5px 13px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    }
+
+    .sim-rank-btn:hover {
+      border-color: #cbd5e1;
+    }
+
+    .sim-rank-btn.is-active {
+      border-color: var(--player-green);
+      color: #ffffff;
+      background: var(--player-green);
+    }
+
+    .sim-rank-btn.is-current {
+      border-color: #f59e0b;
+      color: #92400e;
+      background: #fffbeb;
+      font-style: italic;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .sim-progress-card {
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      background: #f0fdf4;
+      padding: 12px 14px;
+    }
+
+    .sim-progress-headline {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .sim-progress-headline .sim-progress-need {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      color: var(--player-green);
+      margin: 0 4px;
+    }
+
+    .sim-progress-track {
+      height: 8px;
+      border-radius: 999px;
+      background: #bbf7d0;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .sim-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--player-green), #22c55e);
+      width: 0;
+      transition: width 0.35s ease;
+    }
+
+    .sim-progress-labels {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
       font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .sim-progress-goal {
+      color: var(--player-green);
+    }
+
+    .sim-plan-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sim-buffer-note {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .sim-view-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+    }
+
+    .sim-view-btn {
+      appearance: none;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .sim-view-btn.is-active {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    .sim-results {
+      display: grid;
+      gap: 10px;
     }
 
     .sim-result-empty {
       border: 1px dashed var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 12px;
       color: var(--text-muted);
       font-size: 0.84rem;
       text-align: center;
+      background: var(--bg-secondary);
     }
 
-    .sim-scenario-grid {
-      display: grid;
+    .sim-plan-card {
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+
+    .sim-plan-card.is-best {
+      border-color: var(--player-green);
+    }
+
+    .sim-plan-header {
+      display: flex;
+      align-items: flex-start;
       gap: 10px;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      padding: 12px;
+      cursor: pointer;
     }
 
-    .sim-scenario-field {
-      border: 1px solid var(--border);
-      background: var(--bg-tertiary);
+    .sim-rank-badge {
+      min-width: 74px;
       border-radius: 10px;
-      padding: 8px;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      text-align: center;
+      padding: 8px 6px;
+      flex-shrink: 0;
+    }
+
+    .sim-plan-card.is-grind .sim-rank-badge {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+    }
+
+    .sim-rank-badge-arrow {
+      font-size: 0.75rem;
+      color: var(--player-green);
+      line-height: 1;
+    }
+
+    .sim-plan-card.is-grind .sim-rank-badge-arrow,
+    .sim-plan-card.is-grind .sim-rank-badge-value {
+      color: #0284c7;
+    }
+
+    .sim-rank-badge-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--player-green);
+    }
+
+    .sim-rank-badge-scope {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .sim-plan-main {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .sim-plan-best-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: var(--player-green);
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-bottom: 5px;
+    }
+
+    .sim-plan-title {
+      font-size: 0.87rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+
+    .sim-level-tag {
+      display: inline-block;
+      border-radius: 4px;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 1px 6px;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-right: 6px;
+    }
+
+    .sim-level-tag.l4 {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .sim-level-tag.l5 {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .sim-plan-desc {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+
+    .sim-plan-chips {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .sim-pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 3px 8px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .sim-pill.buf-miss {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #991b1b;
+    }
+
+    .sim-pill.buf-fragile {
+      background: #fffbeb;
+      border-color: #fcd34d;
+      color: #b45309;
+    }
+
+    .sim-pill.buf-solid {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #166534;
+    }
+
+    .sim-pill.buf-overshoot {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #64748b;
+    }
+
+    .sim-calendar-note {
+      margin-top: 7px;
+      font-size: 0.69rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .sim-plan-points {
+      text-align: right;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .sim-plan-points-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--player-green);
+      white-space: nowrap;
+    }
+
+    .sim-plan-card.is-grind .sim-plan-points-value {
+      color: #0284c7;
+    }
+
+    .sim-plan-points-label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .sim-plan-chevron {
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .sim-plan-card.is-open .sim-plan-chevron {
+      transform: rotate(180deg);
+    }
+
+    .sim-plan-steps {
+      display: none;
+      border-top: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      padding: 10px 12px;
+      gap: 7px;
+    }
+
+    .sim-plan-card.is-grind .sim-plan-steps {
+      display: grid;
+    }
+
+    .sim-step-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.75rem;
+    }
+
+    .sim-step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 0.63rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sim-step-content {
+      flex: 1;
       min-width: 0;
     }
 
-    .sim-scenario-field label {
-      display: block;
-      margin-bottom: 6px;
-      width: 100%;
-    }
-
-    .sim-scenario-field select,
-    .sim-scenario-field input {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-secondary);
+    .sim-step-name {
+      font-weight: 700;
       color: var(--text-primary);
-      padding: 6px 8px;
-      font: inherit;
-      outline: none;
-      appearance: none;
     }
 
-    .sim-scenario-field select:focus,
-    .sim-scenario-field input:focus {
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.2);
-    }
-
-    .sim-field-help {
-      margin-top: 6px;
-      font-size: 0.67rem;
-      line-height: 1.35;
-      color: var(--text-muted);
-    }
-
-    .sim-result-rank {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed var(--border);
-      font-size: 0.75rem;
+    .sim-step-detail {
+      font-size: 0.7rem;
       color: var(--text-secondary);
     }
 
-    .sim-result-rank strong {
+    .sim-step-points {
+      margin-left: auto;
+      text-align: right;
+      flex-shrink: 0;
+      font-weight: 700;
+      color: #0284c7;
+    }
+
+    .sim-step-points-sub {
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .sim-plan-detail {
+      display: none;
+      border-top: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      padding: 11px 12px;
+    }
+
+    .sim-plan-card.is-open .sim-plan-detail {
+      display: block;
+    }
+
+    .sim-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 14px;
+      margin-bottom: 8px;
+    }
+
+    .sim-detail-label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 1px;
+    }
+
+    .sim-detail-value {
+      font-size: 0.8rem;
+      font-weight: 700;
       color: var(--text-primary);
-      font-size: 0.82rem;
+    }
+
+    .sim-replaced-note {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+
+    .sim-footnote {
+      font-size: 0.69rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .sim-tip-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .sim-tip-label {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .sim-tip-chip {
+      position: relative;
+      border: 1px dashed #cbd5e1;
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      cursor: help;
+    }
+
+    .sim-tip-chip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text-primary);
+      color: #ffffff;
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 0.66rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      z-index: 10;
+    }
+
+    .sim-tip-chip:hover::after {
+      opacity: 1;
+    }
+
+    .sim-wizard {
+      display: grid;
+      gap: 12px;
+    }
+
+    .sim-step-block {
+      display: grid;
+      gap: 6px;
+    }
+
+    .sim-step-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sim-step-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--player-green);
+      color: #ffffff;
+      font-size: 0.69rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sim-step-title {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sim-step-sub {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .sim-step-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-left: 30px;
+    }
+
+    .sim-opt {
+      appearance: none;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sim-opt:hover {
+      border-color: #cbd5e1;
+    }
+
+    .sim-opt.is-active {
+      border-color: var(--player-green);
+      color: var(--player-green);
+      background: var(--player-light);
+    }
+
+    .sim-opt-sub {
+      font-size: 0.64rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .sim-hidden-selects {
+      display: none;
+    }
+
+    .sim-result-card {
+      border: 1.5px solid #86efac;
+      border-radius: 14px;
+      background: #f0fdf4;
+      padding: 14px;
+    }
+
+    .sim-result-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 11px;
+    }
+
+    .sim-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+
+    .sim-rank-transform {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sim-rank-box {
+      text-align: center;
+    }
+
+    .sim-rank-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text-primary);
+    }
+
+    .sim-rank-number.is-after {
+      color: var(--player-green);
+    }
+
+    .sim-rank-caption {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .sim-rank-arrow {
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      color: var(--player-green);
+    }
+
+    .sim-rank-arrow-main {
+      font-size: 1.3rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .sim-rank-jump {
+      border-radius: 999px;
+      background: var(--player-green);
+      color: #ffffff;
+      font-size: 0.62rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+
+    .sim-result-points {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .sim-result-points-main {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--player-green);
+    }
+
+    .sim-result-points-detail {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .sim-result-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 9px;
+    }
+
+    .sim-section-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      margin-bottom: 9px;
+      color: var(--text-secondary);
+      flex-wrap: wrap;
+    }
+
+    .sim-section-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .sim-section-after {
+      color: var(--player-green);
+      font-weight: 800;
+    }
+
+    .sim-expiry-warning {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      background: #fffbeb;
+      color: #b45309;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+    }
+
+    .sim-tech {
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding-top: 8px;
+    }
+
+    .sim-tech summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-tech summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .sim-tech summary::after {
+      content: '▼';
+      font-size: 0.6rem;
+      transition: transform 0.2s ease;
+    }
+
+    .sim-tech[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .sim-tech-body {
+      margin-top: 8px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-secondary);
+      padding: 10px;
+    }
+
+    .sim-tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 14px;
+    }
+
+    .sim-tech-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .sim-tech-value {
+      font-size: 0.79rem;
+      font-weight: 700;
+      color: var(--text-primary);
     }
 
     .match-partner {
@@ -1249,34 +1836,41 @@
         text-align: center;
       }
 
-      .sim-scope-toggle,
-      .sim-mode-controls {
-        width: 100%;
+      .sim-scope-row {
+        align-items: flex-start;
       }
 
-      .sim-target-row,
-      .sim-stat-grid {
+      .sim-rank-picker {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+      }
+
+      .sim-progress-labels {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .sim-plan-header {
+        flex-wrap: wrap;
+      }
+
+      .sim-plan-points {
+        margin-left: 0;
+        text-align: left;
+      }
+
+      .sim-step-options {
+        padding-left: 0;
+      }
+
+      .sim-detail-grid,
+      .sim-tech-grid {
         grid-template-columns: 1fr;
       }
 
-      .sim-target-readout {
-        width: 100%;
-      }
-
-      .sim-slider-marks {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
-      .sim-assumptions {
-        margin-bottom: 8px;
-      }
-
-      .sim-scenario-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .sim-modes .sim-mode-panel {
-        margin-top: 2px;
+      .sim-rank-transform {
+        gap: 8px;
       }
     }
 
@@ -1297,13 +1891,13 @@
         gap: 8px;
       }
 
-      .sim-slider-marks {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
       .sim-tab {
         padding: 5px 8px;
         font-size: 0.7rem;
+      }
+
+      .sim-rank-number {
+        font-size: 1.75rem;
       }
     }
   </style>
@@ -1435,7 +2029,7 @@
     </section>
 
     <!-- Ranking Simulator -->
-    <section class="section">
+    <section class="section" id="simulator">
       <div class="section-header section-header--with-toggle">
         <div>
           <h2 class="section-title">Ranking Simulator</h2>
@@ -1446,86 +2040,103 @@
           <button type="button" class="sim-tab" data-sim-mode="scenario" role="tab" aria-selected="false">Scenario Builder</button>
         </div>
       </div>
+
       <div class="sim-assumptions" data-sim-assumptions></div>
+
       <div class="sim-modes">
         <div class="sim-mode-panel is-active" data-sim-mode-panel="planner">
           <div class="sim-shell">
-            <div class="sim-scope-toggle">
-              <span class="sim-control-label">Ranking Scope</span>
-              <button type="button" class="list-toggle__btn is-active" data-sim-scope="national">National</button>
-              <button type="button" class="list-toggle__btn" data-sim-scope="section">Section</button>
-            </div>
-            <div class="sim-mode-controls">
-              <label class="sim-control-label" for="sim-target-rank-range">Target Rank</label>
-              <input
-                class="sim-slider"
-                id="sim-target-rank-range"
-                type="range"
-                value="1"
-                min="1"
-                max="400"
-              />
-              <div class="sim-slider-marks" data-sim-planner-marks></div>
-            </div>
-            <div class="sim-target-row">
-              <div class="sim-target-readout">
-                <span>Current:</span>
-                <strong data-sim-current-rank>N/A</strong>
-              </div>
-              <div class="sim-target-readout">
-                <span>Target:</span>
-                <strong data-sim-target-rank>N/A</strong>
-              </div>
-              <div class="sim-target-readout">
-                <span>Need:</span>
-                <strong data-sim-needed-points>0 pts</strong>
+            <div class="sim-scope-row">
+              <span class="sim-row-label">View by</span>
+              <div class="sim-scope-toggle" role="group" aria-label="Ranking scope">
+                <button type="button" class="sim-scope-btn is-active" data-sim-scope="national">National</button>
+                <button type="button" class="sim-scope-btn" data-sim-scope="section">Section</button>
               </div>
             </div>
-            <div class="sim-stat-grid">
-              <div class="sim-stat">
-                <div class="sim-stat-label">Current Rank</div>
-                <div class="sim-stat-value" data-sim-current-rank-stat>N/A</div>
+
+            <div>
+              <div class="sim-row-label">What rank are you aiming for?</div>
+              <div class="sim-rank-picker" data-sim-planner-marks></div>
+            </div>
+
+            <div class="sim-progress-card">
+              <div class="sim-progress-headline">
+                Need <span class="sim-progress-need" data-sim-needed-points>0 pts</span> more to reach <span data-sim-target-rank>#0</span> <span data-sim-scope-label>Nationally</span>
               </div>
-              <div class="sim-stat">
-                <div class="sim-stat-label">Current Points</div>
-                <div class="sim-stat-value" data-sim-current-points>N/A</div>
+              <div class="sim-progress-track">
+                <div class="sim-progress-fill" data-sim-progress-fill></div>
               </div>
-              <div class="sim-stat">
-                <div class="sim-stat-label">Target Points</div>
-                <div class="sim-stat-value" data-sim-target-points>N/A</div>
+              <div class="sim-progress-labels">
+                <span data-sim-current-summary>Now: N/A</span>
+                <span class="sim-progress-goal" data-sim-goal-summary>Goal: N/A</span>
               </div>
             </div>
+
+            <div class="sim-plan-controls">
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <span class="sim-row-label" style="margin:0;">Ways to get there</span>
+                <span class="sim-buffer-note">Buffer = points above today's rank threshold.</span>
+              </div>
+              <div class="sim-view-toggle" role="group" aria-label="Planner view mode">
+                <button type="button" class="sim-view-btn is-active" data-sim-view="bigwin">Big win</button>
+                <button type="button" class="sim-view-btn" data-sim-view="grind">Local grind</button>
+              </div>
+            </div>
+
             <div class="sim-results" data-sim-planner-results></div>
+            <div class="sim-footnote">Rankings can shift as other players improve. More buffer gives more protection.</div>
+            <div class="sim-tip-row">
+              <span class="sim-tip-label">Glossary:</span>
+              <span class="sim-tip-chip" data-tip="Buffer is how many points above the rank threshold this plan finishes.">Buffer</span>
+              <span class="sim-tip-chip" data-tip="NST means National Standing Total: singles plus doubles at 15% weighting plus bonus.">NST</span>
+              <span class="sim-tip-chip" data-tip="A bucket is one of your counting results that can be replaced by a better result.">Bucket</span>
+            </div>
           </div>
         </div>
 
         <div class="sim-mode-panel" data-sim-mode-panel="scenario">
-          <div class="sim-scenario-grid">
-            <div class="sim-scenario-field">
-              <label class="sim-control-label" for="sim-level-select">Level</label>
+          <div class="sim-wizard">
+            <div class="sim-step-block">
+              <div class="sim-step-head">
+                <span class="sim-step-badge">1</span>
+                <div class="sim-step-title">Tournament level</div>
+              </div>
+              <div class="sim-step-options" data-sim-level-options></div>
+            </div>
+
+            <div class="sim-step-block">
+              <div class="sim-step-head">
+                <span class="sim-step-badge">2</span>
+                <div class="sim-step-title">Draw format <span class="sim-step-sub">(how the bracket works)</span></div>
+              </div>
+              <div class="sim-step-options" data-sim-format-options></div>
+            </div>
+
+            <div class="sim-step-block">
+              <div class="sim-step-head">
+                <span class="sim-step-badge">3</span>
+                <div class="sim-step-title">Result</div>
+              </div>
+              <div class="sim-step-options" data-sim-round-options></div>
+            </div>
+
+            <div class="sim-step-block">
+              <div class="sim-step-head">
+                <span class="sim-step-badge">4</span>
+                <div class="sim-step-title">Event type</div>
+              </div>
+              <div class="sim-step-options" data-sim-event-type-options></div>
+            </div>
+
+            <div class="sim-hidden-selects" aria-hidden="true">
               <select id="sim-level-select" data-sim-level-select></select>
-            </div>
-            <div class="sim-scenario-field">
-              <label class="sim-control-label" for="sim-format-select">Format</label>
               <select id="sim-format-select" data-sim-format-select></select>
-              <div class="sim-field-help">Format means draw structure (single elimination, feed-in, round robin). Round options update to valid choices.</div>
-            </div>
-            <div class="sim-scenario-field">
-              <label class="sim-control-label" for="sim-round-select">Round</label>
               <select id="sim-round-select" data-sim-round-select></select>
-            </div>
-            <div class="sim-scenario-field">
-              <label class="sim-control-label" for="sim-event-type-select">Event Type</label>
               <select id="sim-event-type-select" data-sim-event-type-select></select>
-            </div>
-            <div class="sim-scenario-field">
-              <label class="sim-control-label" for="sim-outcome-select">Outcome</label>
-              <select id="sim-outcome-select" data-sim-outcome-select>
-                <option value="win">Win</option>
-                <option value="loss">Loss</option>
-              </select>
+              <select id="sim-outcome-select" data-sim-outcome-select></select>
             </div>
           </div>
+
           <div class="sim-results" data-sim-scenario-results></div>
         </div>
       </div>
@@ -48605,12 +49216,41 @@
       listKey: '',
       mode: 'planner',
       scope: 'national',
+      plannerView: 'bigwin',
       targetRank: null,
       simulation: null,
       initialized: false,
+      visible: false,
+      pendingListKey: '',
     };
 
-    const SIM_DEFAULT_TARGET_MARKS = [1, 25, 50, 100, 150, 200, 300, 400];
+    const SIM_DEFAULT_TARGET_MARKS = [10, 50, 100, 200, 300, 500];
+
+    const FORMAT_META = {
+      curtis_consolation: { official: 'Curtis Consolation', type: 'Double chance' },
+      single_elim_like: { official: 'Single Elimination', type: 'Single elim' },
+      fic_through_qf: { official: 'Feed-In Championship thru Quarterfinal', type: 'Cascade draw' },
+      fic_through_r16_qf_playoff: { official: 'Feed-In Championship thru Round of 16', type: 'Cascade draw' },
+      round_robin: { official: 'Round Robin', type: 'Group play' },
+      round_robin_first_match_playoff: { official: 'Round Robin with Playoff', type: 'Group play' },
+      flighted_l4: { official: 'Flighted Level 4', type: 'Flighted' },
+      flighted_l5: { official: 'Flighted Level 5', type: 'Flighted' },
+      team_tournament: { official: 'Team Tournament', type: 'Team' },
+    };
+
+    const ROUND_LABELS = {
+      F_WIN: 'Final win',
+      F_LOSS: 'Final loss',
+      FINALIST: 'Finalist',
+      CHAMPION: 'Champion',
+      SF: 'Semifinal',
+      QF: 'Quarterfinal',
+      R16: 'Round of 16',
+      R32: 'Round of 32',
+      R64: 'Round of 64',
+      THIRD_PLACE_MATCH: 'Third-place match',
+      CONSOLATION_POINTS_PER_WIN: 'Consolation points per win',
+    };
 
     function toPositiveInt(raw, fallback = 0) {
       const value = Number.parseInt((raw ?? '').toString().trim(), 10);
@@ -48626,20 +49266,52 @@
     }
 
     function formatNumber(raw) {
-      return (toPositiveInt(raw, 0)).toLocaleString('en-US');
+      return numOrZero(raw).toLocaleString('en-US');
     }
 
     function formatDelta(raw) {
-      const value = toPositiveInt(raw, 0);
-      if (raw < 0) {
-        return `-${Math.abs(raw)} pts`;
+      const value = numOrZero(raw);
+      if (value < 0) {
+        return `-${formatNumber(Math.abs(value))} pts`;
       }
-      return `+${value} pts`;
+      return `+${formatNumber(value)} pts`;
     }
 
     function formatRankDisplay(value) {
       const rank = toPositiveInt(value, 0);
       return rank ? `#${rank}` : 'N/A';
+    }
+
+    function normalizeRoundLabel(round) {
+      const clean = coerceText(round).toUpperCase();
+      if (!clean) return 'N/A';
+      return ROUND_LABELS[clean] || clean.replace(/_/g, ' ').toLowerCase().replace(/^\w/, (ch) => ch.toUpperCase());
+    }
+
+    function getFormatMeta(formatRaw) {
+      const key = coerceText(formatRaw).toLowerCase();
+      return FORMAT_META[key] || {
+        official: key.replace(/_/g, ' ').replace(/^\w/, (ch) => ch.toUpperCase()),
+        type: 'Format',
+      };
+    }
+
+    function getEventTypeLabel(eventTypeRaw) {
+      return coerceText(eventTypeRaw).toLowerCase() === 'doubles' ? 'Doubles' : 'Singles';
+    }
+
+    function getBufferMeta(bufferRaw) {
+      const buffer = Math.round(numOrZero(bufferRaw));
+      if (buffer < 0) {
+        return { className: 'buf-miss', label: "Won't reach", detail: `${formatDelta(buffer)} below threshold` };
+      }
+      if (buffer < 50) {
+        return { className: 'buf-fragile', label: `${formatDelta(buffer)} buffer`, detail: 'Fragile buffer' };
+      }
+      if (buffer < 200) {
+        return { className: 'buf-solid', label: `${formatDelta(buffer)} buffer`, detail: 'Solid buffer' };
+      }
+      return { className: 'buf-overshoot', label: `${formatDelta(buffer)} buffer`, detail: 'Large overshoot' };
     }
 
     function getSimPayload(listData) {
@@ -48709,32 +49381,16 @@
       };
     }
 
-    function renderReplacedEventHtml(details) {
-      if (!details) return '';
+    function renderReplacedEventLine(details) {
+      if (!details) return '<span>Replaces: bucket update calculated automatically</span>';
       const name = coerceText(details.eventName || details.eventId || 'N/A');
       const nameHtml = details.eventUrl
         ? `<a href="${details.eventUrl}" target="_blank" rel="noopener noreferrer">${name}</a>`
         : name;
       const dateLabel = details.endDate
-        ? `Ended ${formatDate(details.endDate)}`
-        : (details.startDate ? `Started ${formatDate(details.startDate)}` : 'Date N/A');
-      const expiryLabel = details.expiresDate
-        ? `Expires ${formatDate(details.expiresDate)}${details.daysRemaining != null ? ` (${details.daysRemaining} days)` : ''}`
-        : 'Expiry N/A';
-      return `
-        <div class="sim-result-rank">
-          <strong>Replaced:</strong>
-          <span>${nameHtml} (${formatNumber(details.points)} pts)</span>
-        </div>
-        <div class="sim-result-rank">
-          <strong>Date:</strong>
-          <span>${dateLabel}</span>
-        </div>
-        <div class="sim-result-rank">
-          <strong>Expiry:</strong>
-          <span>${expiryLabel}</span>
-        </div>
-      `;
+        ? `ended ${formatDate(details.endDate)}`
+        : (details.startDate ? `started ${formatDate(details.startDate)}` : 'date N/A');
+      return `<span><strong>Replaces:</strong> ${nameHtml} (${formatNumber(details.points)} pts · ${dateLabel})</span>`;
     }
 
     function sortByRank(a, b) {
@@ -48752,40 +49408,21 @@
     function findNearestPlannerTarget(targets, requestedRank) {
       if (!targets.length) return null;
       const request = toPositiveInt(requestedRank, 1);
-
       const exact = targets.find((entry) => toPositiveInt(entry.targetRank, 0) === request);
       if (exact) return exact;
-
       return targets.reduce((best, entry) => {
         const currentDiff = Math.abs(toPositiveInt(entry.targetRank, request) - request);
         const bestDiff = Math.abs(toPositiveInt(best.targetRank, request) - request);
-        if (currentDiff < bestDiff) return entry;
-        return best;
+        return currentDiff < bestDiff ? entry : best;
       }, targets[0]);
-    }
-
-    function normalizeRoundLabel(round) {
-      const value = coerceText(round);
-      return value ? value.replace(/_/g, ' ') : 'N/A';
-    }
-
-    function formatSimulationConfidence(confidence) {
-      const clean = coerceText(confidence || 'low').toLowerCase();
-      if (clean === 'high') return 'sim-chip--ok';
-      if (clean === 'medium') return 'sim-chip--warn';
-      return 'sim-chip--warn';
     }
 
     function getSimStateRangedTarget(simulation, scope, selectedRank) {
       const targets = getPlannerTargets(simulation, scope);
       if (!targets.length) return null;
-      if (selectedRank) {
-        return findNearestPlannerTarget(targets, selectedRank);
-      }
+      if (selectedRank) return findNearestPlannerTarget(targets, selectedRank);
       const currentRank = getCurrentRankFromSimulation(simulation, scope);
-      if (currentRank) {
-        return findNearestPlannerTarget(targets, currentRank);
-      }
+      if (currentRank) return findNearestPlannerTarget(targets, currentRank);
       return targets[0];
     }
 
@@ -48793,9 +49430,7 @@
       const targets = getPlannerTargets(simulation, scope);
       const available = targets.map((item) => toPositiveInt(item.targetRank, 0)).filter(Boolean);
       const set = new Set(SIM_DEFAULT_TARGET_MARKS.concat(available));
-      if (currentRank) {
-        set.add(currentRank);
-      }
+      if (currentRank) set.add(currentRank);
       return [...set].sort((a, b) => a - b);
     }
 
@@ -48811,166 +49446,267 @@
         return;
       }
       list.forEach((entry) => {
+        const label = coerceText(entry).replace(/_/g, ' ');
         const chip = document.createElement('span');
         chip.className = 'sim-chip';
-        const isWarn = coerceText(entry).includes('failed') || coerceText(entry).includes('block');
-        if (isWarn) chip.classList.add('sim-chip--warn');
-        chip.textContent = coerceText(entry).replace(/_/g, ' ');
+        if (label.includes('failed') || label.includes('block')) {
+          chip.classList.add('sim-chip--warn');
+        }
+        chip.textContent = label;
         container.appendChild(chip);
       });
     }
 
-    function renderPlannerMarkButtons(listKey, slider, marksContainer, currentRank) {
-      const simulation = SIM_STATE.simulation;
+    function renderPlannerMarkButtons(listKey, marksContainer, marks, currentRank, activeRank) {
       if (!marksContainer) return;
-      const scope = SIM_STATE.scope;
-      const marks = buildPlannerRankMarks(simulation, scope, currentRank);
       marksContainer.innerHTML = '';
-
-      if (!marks.length) {
-        slider.disabled = true;
-        return;
-      }
-
-      slider.disabled = false;
-      slider.min = '1';
-      slider.max = String(Math.max(...marks));
-      const defaultTarget = toPositiveInt(slider.value || currentRank || marks[0], marks[0]);
-      slider.value = String(defaultTarget > Math.max(...marks) ? marks[0] : Math.min(defaultTarget, Math.max(...marks)));
-      SIM_STATE.targetRank = toPositiveInt(slider.value, marks[0]);
-
+      const active = toPositiveInt(activeRank, 0);
       marks.forEach((mark) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = 'sim-slider-mark';
-        button.dataset.simPlannerMark = `${listKey}-${mark}`;
+        button.className = 'sim-rank-btn';
+        if (mark === active) button.classList.add('is-active');
         button.textContent = `#${mark}`;
         button.addEventListener('click', () => {
-          slider.value = String(mark);
           SIM_STATE.targetRank = mark;
           renderPlannerSimulation(listKey);
         });
         marksContainer.appendChild(button);
       });
-      setActivePlannerMark(marksContainer, SIM_STATE.targetRank);
-      return marks;
+
+      if (currentRank) {
+        const nowButton = document.createElement('button');
+        nowButton.type = 'button';
+        nowButton.className = 'sim-rank-btn is-current';
+        nowButton.textContent = `#${currentRank} now`;
+        marksContainer.appendChild(nowButton);
+      }
     }
 
-    function setActivePlannerMark(marksContainer, activeRank) {
-      if (!marksContainer) return;
-      const active = toPositiveInt(activeRank, 0);
-      marksContainer.querySelectorAll('.sim-slider-mark').forEach((button) => {
-        const match = button.dataset.simPlannerMark ? toPositiveInt(button.dataset.simPlannerMark.split('-').pop(), 0) : 0;
-        button.classList.toggle('is-active', match === active);
-      });
+    function filterPlannerCandidatesForView(candidates) {
+      const list = Array.isArray(candidates) ? candidates : [];
+      if (SIM_STATE.plannerView === 'grind') {
+        return list.filter((candidate) => toPositiveInt(candidate.eventCount, 0) >= 2);
+      }
+      return list.filter((candidate) => toPositiveInt(candidate.eventCount, 0) <= 1);
+    }
+
+    function describePlannerCandidate(candidate) {
+      const events = Array.isArray(candidate && candidate.events) ? candidate.events : [];
+      if (!events.length) return 'No event details available for this plan.';
+      if (events.length > 1) return `${events.length} tournaments combined to reach the selected rank target.`;
+      const event = events[0];
+      const format = getFormatMeta(event.format || event.canonicalFormat || event.drawFormat).official;
+      const result = normalizeRoundLabel(event.resultRound);
+      const level = coerceText(event.level || 'L?');
+      const eventType = getEventTypeLabel(event.eventType).toLowerCase();
+      return `${result} in a ${level} ${format} ${eventType} draw.`;
+    }
+
+    function findCalendarMatches(simulation, candidate) {
+      const calendar = Array.isArray(simulation && simulation.calendar) ? simulation.calendar : [];
+      const events = Array.isArray(candidate && candidate.events) ? candidate.events : [];
+      if (!calendar.length || !events.length) return [];
+      return calendar.filter((cal) => events.some((event) => (
+        coerceText(cal.level).toLowerCase() === coerceText(event.level).toLowerCase()
+        && coerceText(cal.canonicalFormat || cal.format).toLowerCase() === coerceText(event.format || event.canonicalFormat).toLowerCase()
+      )));
+    }
+
+    function renderPlannerEventSteps(events) {
+      if (!events.length) return '';
+      return `
+        <div class="sim-plan-steps">
+          ${events.map((event, index) => {
+            const format = getFormatMeta(event.format || event.canonicalFormat || event.drawFormat);
+            const result = normalizeRoundLabel(event.resultRound);
+            const bucketPoints = numOrZero(event.bucketPoints);
+            const pointsRaw = numOrZero(event.pointsRaw);
+            const isDoubles = coerceText(event.eventType).toLowerCase() === 'doubles';
+            const pointsSub = isDoubles && pointsRaw && bucketPoints !== pointsRaw
+              ? `<div class="sim-step-points-sub">15% of ${formatNumber(pointsRaw)} raw</div>`
+              : '';
+            return `
+              <div class="sim-step-row">
+                <span class="sim-step-num">${index + 1}</span>
+                <div class="sim-step-content">
+                  <div class="sim-step-name">${escapeHtml(coerceText(event.level || 'L?'))} ${escapeHtml(format.official)}</div>
+                  <div class="sim-step-detail">${escapeHtml(getEventTypeLabel(event.eventType))} · ${escapeHtml(result)}</div>
+                </div>
+                <div class="sim-step-points">
+                  <div>${formatDelta(bucketPoints)}</div>
+                  ${pointsSub}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function renderPlannerCandidateCard(candidate, scope, targetRank, index, simulation) {
+      const events = Array.isArray(candidate.events) ? candidate.events : [];
+      const primary = events[0] || {};
+      const isGrind = events.length >= 2;
+      const format = getFormatMeta(primary.format || primary.canonicalFormat || primary.drawFormat);
+      const level = coerceText(primary.level || 'L?');
+      const result = normalizeRoundLabel(primary.resultRound);
+      const projectedRank = scope === 'section'
+        ? formatRankDisplay(candidate.rankSectionAfter)
+        : formatRankDisplay(candidate.rankNationalAfter);
+      const buffer = getBufferMeta(candidate.overshoot);
+      const calendarMatches = findCalendarMatches(simulation, candidate);
+      const calendarLine = calendarMatches.length
+        ? `📅 ${calendarMatches.length} matching event${calendarMatches.length === 1 ? '' : 's'} on calendar`
+        : `📅 No matching ${level} events in your calendar in the next 3 months`;
+      const title = isGrind
+        ? `${events.length} event local path`
+        : `<span class="sim-level-tag ${escapeHtml(level.toLowerCase())}">${escapeHtml(level)}</span>${escapeHtml(format.official)} · ${escapeHtml(result)}`;
+      const detailFormat = isGrind
+        ? 'See event steps'
+        : format.official;
+      const detailResult = isGrind
+        ? 'See event steps'
+        : result;
+      return `
+        <article class="sim-plan-card ${index === 0 ? 'is-best' : ''} ${isGrind ? 'is-grind' : ''}" data-sim-plan-card="${index}">
+          <div class="sim-plan-header" data-sim-plan-toggle="${index}">
+            <div class="sim-rank-badge">
+              <div class="sim-rank-badge-arrow">↑</div>
+              <div class="sim-rank-badge-value">${escapeHtml(projectedRank)}</div>
+              <div class="sim-rank-badge-scope">${scope === 'section' ? 'Section' : 'National'}</div>
+            </div>
+            <div class="sim-plan-main">
+              ${index === 0 ? '<span class="sim-plan-best-tag">Closest match</span>' : ''}
+              <div class="sim-plan-title">${title}</div>
+              <div class="sim-plan-desc">${escapeHtml(describePlannerCandidate(candidate))}</div>
+              <div class="sim-plan-chips">
+                <span class="sim-pill ${buffer.className}">${escapeHtml(buffer.label)}</span>
+                <span class="sim-pill">${escapeHtml(isGrind ? 'Multi-event' : format.type)}</span>
+              </div>
+              <div class="sim-calendar-note">${escapeHtml(calendarLine)}</div>
+            </div>
+            <div class="sim-plan-points">
+              <div class="sim-plan-points-value">${formatDelta(candidate.gainPoints)}</div>
+              <div class="sim-plan-points-label">pts to NST</div>
+            </div>
+            <span class="sim-plan-chevron">▼</span>
+          </div>
+          ${renderPlannerEventSteps(events)}
+          <div class="sim-plan-detail">
+            <div class="sim-detail-grid">
+              <div>
+                <div class="sim-detail-label">Before to after</div>
+                <div class="sim-detail-value">${formatNumber(candidate.beforeTotal)} → ${formatNumber(candidate.afterTotal)} pts</div>
+              </div>
+              <div>
+                <div class="sim-detail-label">Buffer above #${targetRank}</div>
+                <div class="sim-detail-value">${escapeHtml(buffer.detail)}</div>
+              </div>
+              <div>
+                <div class="sim-detail-label">Format (official)</div>
+                <div class="sim-detail-value">${escapeHtml(detailFormat)}</div>
+              </div>
+              <div>
+                <div class="sim-detail-label">Result needed</div>
+                <div class="sim-detail-value">${escapeHtml(detailResult)}</div>
+              </div>
+            </div>
+            <div class="sim-replaced-note">Bucket replacement is calculated automatically from your best counting results.</div>
+          </div>
+        </article>
+      `;
     }
 
     function renderPlannerSimulation(listKey) {
       const simulation = SIM_STATE.simulation;
-      const slider = document.querySelector('#sim-target-rank-range');
       const marksContainer = document.querySelector('[data-sim-planner-marks]');
       const plannerPanel = document.querySelector('[data-sim-mode-panel="planner"]');
       const resultsContainer = document.querySelector('[data-sim-planner-results]');
-      const currentRankEl = document.querySelector('[data-sim-current-rank]');
       const targetRankEl = document.querySelector('[data-sim-target-rank]');
       const neededPointsEl = document.querySelector('[data-sim-needed-points]');
-      const currentRankStat = document.querySelector('[data-sim-current-rank-stat]');
-      const currentPointsStat = document.querySelector('[data-sim-current-points]');
-      const targetPointsStat = document.querySelector('[data-sim-target-points]');
+      const progressFillEl = document.querySelector('[data-sim-progress-fill]');
+      const currentSummaryEl = document.querySelector('[data-sim-current-summary]');
+      const goalSummaryEl = document.querySelector('[data-sim-goal-summary]');
+      const scopeLabelEl = document.querySelector('[data-sim-scope-label]');
 
       if (!plannerPanel || !resultsContainer) return;
+
       if (!simulation || !simulation.enabled) {
-        if (currentRankEl) currentRankEl.textContent = 'N/A';
-        if (targetRankEl) targetRankEl.textContent = 'N/A';
+        if (targetRankEl) targetRankEl.textContent = '#0';
         if (neededPointsEl) neededPointsEl.textContent = '0 pts';
-        if (currentRankStat) currentRankStat.textContent = 'N/A';
-        if (currentPointsStat) currentPointsStat.textContent = 'N/A';
-        if (targetPointsStat) targetPointsStat.textContent = 'N/A';
-        resultsContainer.innerHTML = `
-          <div class="sim-result-empty">
-            Ranking simulator is not available for this list yet.
-          </div>
-        `;
-        if (slider) slider.disabled = true;
+        if (progressFillEl) progressFillEl.style.width = '0%';
+        if (currentSummaryEl) currentSummaryEl.textContent = 'Now: N/A';
+        if (goalSummaryEl) goalSummaryEl.textContent = 'Goal: N/A';
+        resultsContainer.innerHTML = '<div class="sim-result-empty">Ranking simulator is not available for this list yet.</div>';
+        if (marksContainer) marksContainer.innerHTML = '';
         return;
       }
 
       const scope = SIM_STATE.scope;
       const currentRank = getCurrentRankFromSimulation(simulation, scope);
       const currentTotal = getCurrentTotalFromSimulation(simulation);
-      const marks = renderPlannerMarkButtons(listKey, slider, marksContainer, currentRank);
-      const selected = SIM_STATE.targetRank || (marks && marks[0]) || currentRank || 1;
+      const marks = buildPlannerRankMarks(simulation, scope, currentRank);
+      const selected = SIM_STATE.targetRank || currentRank || marks[0] || 1;
       const target = getSimStateRangedTarget(simulation, scope, selected);
-      const sliderValue = toPositiveInt(slider && slider.value ? slider.value : selected, 1);
-      SIM_STATE.targetRank = sliderValue;
-      if (target && slider) {
-        slider.value = String(toPositiveInt(target.targetRank, sliderValue));
-      }
+      const targetRankValue = target ? toPositiveInt(target.targetRank, selected) : selected;
+      const targetPoints = target ? numOrZero(target.targetPoints) : 0;
+      const requiredGain = target
+        ? numOrZero(target.requiredGain != null ? target.requiredGain : Math.max(targetPoints - currentTotal, 0))
+        : 0;
+      SIM_STATE.targetRank = targetRankValue;
 
-      const currentScopeRank = currentRank || 'N/A';
-      const targetRankValue = target && target.targetRank ? target.targetRank : sliderValue;
-      const targetPoints = target && target.targetPoints != null ? toPositiveInt(target.targetPoints, 0) : 0;
-      const requiredGain = target && target.requiredGain != null ? toPositiveInt(target.requiredGain, Math.max(targetPoints - currentTotal, 0)) : Math.max(targetPoints - currentTotal, 0);
-      const candidates = target && Array.isArray(target.candidates) ? target.candidates : [];
+      renderPlannerMarkButtons(listKey, marksContainer, marks, currentRank, targetRankValue);
 
-      if (currentRankEl) currentRankEl.textContent = typeof currentScopeRank === 'number' ? `#${currentScopeRank}` : currentScopeRank;
+      if (scopeLabelEl) scopeLabelEl.textContent = scope === 'section' ? 'in section' : 'nationally';
       if (targetRankEl) targetRankEl.textContent = `#${targetRankValue}`;
       if (neededPointsEl) neededPointsEl.textContent = `${formatNumber(requiredGain)} pts`;
-      if (currentRankStat) currentRankStat.textContent = currentScopeRank ? `#${currentScopeRank}` : 'N/A';
-      if (currentPointsStat) currentPointsStat.textContent = `${formatNumber(currentTotal)} pts`;
-      if (targetPointsStat) targetPointsStat.textContent = `${formatNumber(targetPoints)} pts`;
+      if (currentSummaryEl) currentSummaryEl.textContent = `Now: ${formatNumber(currentTotal)} pts · ${formatRankDisplay(currentRank)}`;
+      if (goalSummaryEl) goalSummaryEl.textContent = `Goal: ${formatNumber(targetPoints)} pts · #${targetRankValue}`;
 
-      setActivePlannerMark(marksContainer, toPositiveInt(slider.value, targetRankValue));
+      const progressPct = targetPoints > 0 ? Math.max(0, Math.min(100, Math.round((currentTotal / targetPoints) * 100))) : 0;
+      if (progressFillEl) progressFillEl.style.width = `${progressPct}%`;
 
-      if (!candidates.length) {
-        const scopeMessage = target ? `for rank #${target.targetRank}` : 'for selected target';
-        resultsContainer.innerHTML = `
-          <div class="sim-result-empty">
-            No reliable path candidates found ${scopeMessage}.
-          </div>
-        `;
+      const candidates = target && Array.isArray(target.candidates) ? target.candidates : [];
+      const filteredCandidates = filterPlannerCandidatesForView(candidates);
+      if (!filteredCandidates.length) {
+        const viewLabel = SIM_STATE.plannerView === 'grind' ? 'local grind' : 'big win';
+        resultsContainer.innerHTML = `<div class="sim-result-empty">No ${viewLabel} plans found for #${targetRankValue}.</div>`;
         return;
       }
 
-      resultsContainer.innerHTML = candidates.map((candidate) => {
-        const events = Array.isArray(candidate.events) ? candidate.events : [];
-        const eventListHtml = events.map((event) => {
-          const eventType = coerceText(event.eventType || (event.eventType === 'singles' ? 'Singles' : event.eventType));
-          const eventTypeLabel = eventType ? ` ${eventType}` : '';
-          const format = coerceText(event.format || event.canonicalFormat || event.drawFormat);
-          const level = coerceText(event.level);
-          const stage = normalizeRoundLabel(event.resultRound);
-          const result = event.isEventWinner ? 'Win' : 'Loss';
-          const points = toPositiveInt(event.pointsRaw, 0);
-          const bucketPoints = toPositiveInt(event.bucketPoints, points);
-          return `<li><span>${coerceText(event.label) || `${level}${eventTypeLabel} ${format} ${stage} ${result}`}</span><span class="muted">${format} • ${level} • ${stage} • ${result} • ${formatDelta(bucketPoints)}</span></li>`;
-        }).join('');
-        const beforeNational = candidate.rankNationalBefore || 'N/A';
-        const afterNational = candidate.rankNationalAfter || 'N/A';
-        const beforeSection = candidate.rankSectionBefore || 'N/A';
-        const afterSection = candidate.rankSectionAfter || 'N/A';
-        const confidenceClass = formatSimulationConfidence(candidate.confidence);
-        const rankLine = scope === 'section'
-          ? `Section: ${formatRankDisplay(beforeSection)} → ${formatRankDisplay(afterSection)}`
-          : `National: ${formatRankDisplay(beforeNational)} → ${formatRankDisplay(afterNational)}`;
-        return `
-          <article class="sim-result-card">
-            <div class="sim-result-title">${toPositiveInt(candidate.eventCount, 0)} Event${toPositiveInt(candidate.eventCount, 0) === 1 ? '' : 's'} Plan</div>
-            <div class="sim-result-meta">
-              <span class="sim-meta-badge">Gain: ${formatNumber(candidate.gainPoints)} pts</span>
-              <span class="sim-meta-badge">Overshoot: ${formatNumber(candidate.overshoot)} pts</span>
-              <span class="sim-meta-badge">Score: ${toPositiveInt(candidate.score, 0)}</span>
-              <span class="sim-meta-badge ${confidenceClass}">Confidence: ${coerceText(candidate.confidence || 'low')}</span>
-              <span class="sim-meta-badge">${rankLine}</span>
-            </div>
-            <ul class="sim-result-events">${eventListHtml}</ul>
-            <div class="sim-result-rank">
-              <strong>Before/After total:</strong>
-              <span>${formatNumber(candidate.beforeTotal)} → ${formatNumber(candidate.afterTotal)} pts</span>
-            </div>
-          </article>
+      resultsContainer.innerHTML = filteredCandidates
+        .map((candidate, index) => renderPlannerCandidateCard(candidate, scope, targetRankValue, index, simulation))
+        .join('');
+
+      resultsContainer.querySelectorAll('[data-sim-plan-toggle]').forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          const card = toggle.closest('.sim-plan-card');
+          if (card) card.classList.toggle('is-open');
+        });
+      });
+    }
+
+    function renderScenarioOptionButtons(container, options, activeValue, select) {
+      if (!container || !select) return;
+      container.innerHTML = '';
+      options.forEach((option) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'sim-opt';
+        if (option.value === activeValue) button.classList.add('is-active');
+        button.dataset.simValue = option.value;
+        button.innerHTML = `
+          <span>${escapeHtml(option.label)}</span>
+          ${option.sub ? `<span class="sim-opt-sub">${escapeHtml(option.sub)}</span>` : ''}
         `;
-      }).join('');
+        button.addEventListener('click', () => {
+          if (select.value === option.value) return;
+          select.value = option.value;
+          select.dispatchEvent(new Event('change'));
+        });
+        container.appendChild(button);
+      });
     }
 
     function renderScenarioControls(simulation) {
@@ -48981,13 +49717,21 @@
         eventType: document.querySelector('[data-sim-event-type-select]'),
         outcome: document.querySelector('[data-sim-outcome-select]'),
       };
+      const optionContainers = {
+        level: document.querySelector('[data-sim-level-options]'),
+        format: document.querySelector('[data-sim-format-options]'),
+        round: document.querySelector('[data-sim-round-options]'),
+        eventType: document.querySelector('[data-sim-event-type-options]'),
+      };
       const scenarios = Array.isArray(simulation && simulation.scenarios) ? simulation.scenarios : [];
+
       if (!scenarios.length) {
-        if (selects.level) selects.level.innerHTML = '';
-        if (selects.format) selects.format.innerHTML = '';
-        if (selects.round) selects.round.innerHTML = '';
-        if (selects.eventType) selects.eventType.innerHTML = '';
-        if (selects.outcome) selects.outcome.innerHTML = '';
+        Object.values(selects).forEach((select) => {
+          if (select) select.innerHTML = '';
+        });
+        Object.values(optionContainers).forEach((container) => {
+          if (container) container.innerHTML = '';
+        });
         return;
       }
 
@@ -49007,26 +49751,17 @@
       };
 
       const uniq = (items) => [...new Set(items)];
-      const levels = uniq(scenarios.map((item) => coerceText(item.level)).filter(Boolean)).sort();
+      const levels = uniq(scenarios.map((item) => coerceText(item.level)).filter(Boolean))
+        .sort((a, b) => toPositiveInt(a.replace(/\D/g, ''), 0) - toPositiveInt(b.replace(/\D/g, ''), 0));
 
-      fillSelect(
-        selects.level,
-        levels.map((value) => ({ value, label: value })),
-      );
+      fillSelect(selects.level, levels.map((value) => ({ value, label: value })));
       const selectedLevel = coerceText(selects.level && selects.level.value);
       const scenariosByLevel = scenarios.filter((item) => !selectedLevel || coerceText(item.level) === selectedLevel);
 
-      const formats = uniq(
-        scenariosByLevel
-          .map((item) => `${coerceText(item.canonicalFormat)}|${coerceText(item.displayFormat || item.canonicalFormat)}`.trim())
-          .filter((item) => item !== '|'),
-      ).sort();
+      const formats = uniq(scenariosByLevel.map((item) => coerceText(item.canonicalFormat)).filter(Boolean)).sort();
       fillSelect(
         selects.format,
-        formats.map((value) => {
-          const [canonical, display] = value.split('|');
-          return { value: canonical, label: display || canonical };
-        }),
+        formats.map((value) => ({ value, label: getFormatMeta(value).official })),
       );
 
       const selectedFormat = coerceText(selects.format && selects.format.value);
@@ -49037,7 +49772,7 @@
         selects.eventType,
         eventTypes.map((value) => ({
           value,
-          label: `${value.charAt(0).toUpperCase()}${value.slice(1).toLowerCase()}`,
+          label: getEventTypeLabel(value),
         })),
       );
 
@@ -49053,9 +49788,7 @@
       const selectedRound = coerceText(selects.round && selects.round.value);
       const scenariosByRound = scenariosByEventType.filter((item) => !selectedRound || coerceText(item.resultRound) === selectedRound);
 
-      const outcomeValues = uniq(
-        scenariosByRound.map((item) => (item.isEventWinner ? 'win' : 'loss')),
-      ).filter(Boolean);
+      const outcomeValues = uniq(scenariosByRound.map((item) => (item.isEventWinner ? 'win' : 'loss'))).filter(Boolean);
       const orderedOutcomes = ['win', 'loss'].filter((value) => outcomeValues.includes(value));
       fillSelect(
         selects.outcome,
@@ -49070,6 +49803,38 @@
       if (!selects.round.value && selects.round.options.length) selects.round.value = selects.round.options[0].value;
       if (!selects.eventType.value && selects.eventType.options.length) selects.eventType.value = selects.eventType.options[0].value;
       if (!selects.outcome.value && selects.outcome.options.length) selects.outcome.value = selects.outcome.options[0].value;
+
+      renderScenarioOptionButtons(
+        optionContainers.level,
+        levels.map((value) => ({ value, label: value })),
+        selects.level.value,
+        selects.level,
+      );
+      renderScenarioOptionButtons(
+        optionContainers.format,
+        formats.map((value) => {
+          const meta = getFormatMeta(value);
+          return { value, label: meta.official, sub: meta.type };
+        }),
+        selects.format.value,
+        selects.format,
+      );
+      renderScenarioOptionButtons(
+        optionContainers.round,
+        rounds.map((value) => ({ value, label: normalizeRoundLabel(value) })),
+        selects.round.value,
+        selects.round,
+      );
+      renderScenarioOptionButtons(
+        optionContainers.eventType,
+        eventTypes.map((value) => ({
+          value,
+          label: getEventTypeLabel(value),
+          sub: value === 'doubles' ? 'Points x 15% to NST' : 'Full points to NST',
+        })),
+        selects.eventType.value,
+        selects.eventType,
+      );
     }
 
     function getSelectedScenario(simulation) {
@@ -49080,12 +49845,11 @@
       const outcome = coerceText(document.querySelector('[data-sim-outcome-select]')?.value).toLowerCase();
       const scenarios = Array.isArray(simulation && simulation.scenarios) ? simulation.scenarios : [];
       if (!scenarios.length) return null;
-
       return scenarios.find((item) => coerceText(item.level) === level
         && coerceText(item.canonicalFormat) === format
         && coerceText(item.resultRound) === round
         && coerceText(item.eventType) === eventType
-        && ((coerceText(item.isEventWinner).toLowerCase() === 'true') ? 'win' : 'loss') === outcome);
+        && ((item.isEventWinner ? 'win' : 'loss') === outcome));
     }
 
     function buildRankProjectionText(rankProjection, phase, fallbackLabel) {
@@ -49098,6 +49862,25 @@
       return `#${rank}`;
     }
 
+    function findThresholdPointsForRank(simulation, scope, rank) {
+      const targetRank = toPositiveInt(rank, 0);
+      if (!targetRank) return null;
+      const target = getSimStateRangedTarget(simulation, scope, targetRank);
+      if (!target) return null;
+      return numOrZero(target.targetPoints);
+    }
+
+    function getNearestExpiryDays(simulation, eventType) {
+      const current = simulation && simulation.current ? simulation.current : {};
+      const key = coerceText(eventType).toLowerCase() === 'doubles' ? 'doublesBucket' : 'singlesBucket';
+      const bucket = Array.isArray(current[key]) ? current[key] : [];
+      const days = bucket
+        .map((item) => Number.parseInt(String(item.daysRemaining), 10))
+        .filter((value) => Number.isFinite(value) && value >= 0);
+      if (!days.length) return null;
+      return Math.min(...days);
+    }
+
     function renderScenarioSimulation() {
       const simulation = SIM_STATE.simulation;
       const resultsContainer = document.querySelector('[data-sim-scenario-results]');
@@ -49105,81 +49888,123 @@
 
       if (!resultsContainer) return;
       if (!simulation || !simulation.enabled) {
-        resultsContainer.innerHTML = `
-          <div class="sim-result-empty">
-            Ranking simulator is not available for this list yet.
-          </div>
-        `;
+        resultsContainer.innerHTML = '<div class="sim-result-empty">Ranking simulator is not available for this list yet.</div>';
         return;
       }
       if (!scenario) {
-        resultsContainer.innerHTML = `
-          <div class="sim-result-empty">
-            No matching scenario found for current filters.
-          </div>
-        `;
+        resultsContainer.innerHTML = '<div class="sim-result-empty">No matching scenario found for current selections.</div>';
         return;
       }
 
       const sim = scenario.simulation || {};
       const blocked = !!sim.blocked;
-      const metricPoints = toPositiveInt(sim.metricPoints, 0);
-      const totalDelta = toPositiveInt(sim.totalDelta, 0);
-      const bucketDelta = toPositiveInt(sim.bucketDelta, 0);
-      const bonusDelta = toPositiveInt(sim.bonusDelta, 0);
-      const oldTotal = toPositiveInt(sim.oldTotal, 0);
-      const newTotal = toPositiveInt(sim.newTotal, 0);
+      const metricPoints = numOrZero(sim.metricPoints);
+      const totalDelta = numOrZero(sim.totalDelta);
+      const bucketDelta = numOrZero(sim.bucketDelta);
+      const bonusDelta = numOrZero(sim.bonusDelta);
+      const oldTotal = numOrZero(sim.oldTotal);
+      const newTotal = numOrZero(sim.newTotal);
       const eventType = coerceText(scenario.eventType);
-      const format = coerceText(scenario.displayFormat || scenario.canonicalFormat);
-      const round = normalizeRoundLabel(scenario.resultRound);
-      const outcome = scenario.isEventWinner ? 'Win' : 'Loss';
+      const eventTypeLabel = getEventTypeLabel(eventType);
+      const formatMeta = getFormatMeta(scenario.canonicalFormat);
+      const roundLabel = normalizeRoundLabel(scenario.resultRound);
       const rankNationalBefore = sim.rankNational ? buildRankProjectionText(sim.rankNational, 'before', 'N/A') : 'N/A';
       const rankNationalAfter = sim.rankNational ? buildRankProjectionText(sim.rankNational, 'after', 'N/A') : 'N/A';
       const rankSectionBefore = sim.rankSection ? buildRankProjectionText(sim.rankSection, 'before', 'N/A') : 'N/A';
       const rankSectionAfter = sim.rankSection ? buildRankProjectionText(sim.rankSection, 'after', 'N/A') : 'N/A';
       const replaced = resolveReplacedEventDetails(simulation, eventType, sim.replacedEvent);
+      const beforeRankValue = toPositiveInt(rankNationalBefore.replace('#', ''), 0);
+      const afterRankValue = toPositiveInt(rankNationalAfter.replace('#', ''), 0);
+      const jump = beforeRankValue && afterRankValue ? Math.max(beforeRankValue - afterRankValue, 0) : 0;
 
-      const rankInfo = [
-        `<span class="sim-meta-badge">National: ${rankNationalBefore} → ${rankNationalAfter}</span>`,
-      ];
-      if (rankSectionBefore !== 'N/A' || rankSectionAfter !== 'N/A') {
-        rankInfo.push(`<span class="sim-meta-badge">Section: ${rankSectionBefore} → ${rankSectionAfter}</span>`);
-      }
+      const thresholdPoints = findThresholdPointsForRank(simulation, 'national', afterRankValue);
+      const buffer = thresholdPoints != null ? (newTotal - thresholdPoints) : null;
+      const bufferMeta = buffer != null ? getBufferMeta(buffer) : null;
+      const isDoubles = eventType.toLowerCase() === 'doubles';
+      const doublesLine = isDoubles
+        ? ` · 15% of ${formatNumber(metricPoints)} raw`
+        : '';
+
+      const expiryDays = replaced && replaced.daysRemaining != null
+        ? replaced.daysRemaining
+        : getNearestExpiryDays(simulation, eventType);
+      const expiryLine = expiryDays != null
+        ? `<div class="sim-expiry-warning">Points in this bucket expire in ${formatNumber(expiryDays)} days. Plan the next event before that drop.</div>`
+        : '';
 
       resultsContainer.innerHTML = `
         <article class="sim-result-card">
-          <div class="sim-result-title">${scenario.level} ${format} ${eventType} ${round} (${outcome})</div>
-          <div class="sim-result-meta">
-            <span class="sim-meta-badge">Metric: ${coerceText(sim.metricId || scenario.metricId || 'N/A')}</span>
-            <span class="sim-meta-badge">Points: ${formatNumber(metricPoints)} pts</span>
-            <span class="sim-meta-badge">Bucket delta: ${formatNumber(bucketDelta)} pts</span>
-            <span class="sim-meta-badge">Bonus delta: ${formatNumber(bonusDelta)} pts</span>
-            <span class="sim-meta-badge">Total delta: ${formatNumber(totalDelta)} pts</span>
-            <span class="sim-meta-badge">Total: ${formatNumber(oldTotal)} → ${formatNumber(newTotal)} pts</span>
-            ${blocked ? '<span class="sim-meta-badge sim-chip--warn">Blocked</span>' : '<span class="sim-chip--ok sim-meta-badge">Calculated</span>'}
+          <div class="sim-result-status">
+            <span class="sim-status-dot" style="${blocked ? 'background:#f59e0b;' : ''}"></span>
+            ${escapeHtml(scenario.level)} · ${escapeHtml(formatMeta.official)} · ${escapeHtml(roundLabel)} · ${escapeHtml(eventTypeLabel)}${blocked ? ' (blocked)' : ' (calculated)'}
           </div>
-          <ul class="sim-result-events">
-            <li><span>${blocked ? 'Blocked reason' : 'Result'}</span><span class="muted">${coerceText(sim.reason || 'N/A')}</span></li>
-            ${rankInfo.map((item) => `<li>${item}</li>`).join('')}
-          </ul>
-          ${renderReplacedEventHtml(replaced)}
+
+          <div class="sim-rank-transform">
+            <div class="sim-rank-box">
+              <div class="sim-rank-number">${escapeHtml(rankNationalBefore)}</div>
+              <div class="sim-rank-caption">Before</div>
+            </div>
+            <div class="sim-rank-arrow">
+              <div class="sim-rank-arrow-main">→</div>
+              <div class="sim-rank-jump">${jump ? `+${formatNumber(jump)} places` : 'No rank change'}</div>
+            </div>
+            <div class="sim-rank-box">
+              <div class="sim-rank-number is-after">${escapeHtml(rankNationalAfter)}</div>
+              <div class="sim-rank-caption">After</div>
+            </div>
+          </div>
+
+          <div class="sim-result-points">
+            <span class="sim-result-points-main">${formatDelta(totalDelta)} to NST</span>
+            <span class="sim-result-points-detail">${formatNumber(oldTotal)} → ${formatNumber(newTotal)} total${doublesLine}</span>
+          </div>
+
+          <div class="sim-result-chips">
+            ${bufferMeta ? `<span class="sim-pill ${bufferMeta.className}">${escapeHtml(bufferMeta.label)}</span>` : '<span class="sim-pill">Buffer unavailable</span>'}
+          </div>
+
+          <div class="sim-section-row">
+            <span class="sim-section-label">Section rank</span>
+            <span>${escapeHtml(rankSectionBefore)}</span>
+            <span>→</span>
+            <span class="sim-section-after">${escapeHtml(rankSectionAfter)}</span>
+          </div>
+
+          ${expiryLine}
+
+          <details class="sim-tech">
+            <summary>Technical details</summary>
+            <div class="sim-tech-body">
+              <div class="sim-tech-grid">
+                <div>
+                  <div class="sim-tech-label">Raw points</div>
+                  <div class="sim-tech-value">${formatNumber(metricPoints)}</div>
+                </div>
+                <div>
+                  <div class="sim-tech-label">Bucket delta</div>
+                  <div class="sim-tech-value">${formatDelta(bucketDelta)}</div>
+                </div>
+                <div>
+                  <div class="sim-tech-label">Bonus delta</div>
+                  <div class="sim-tech-value">${formatDelta(bonusDelta)}</div>
+                </div>
+                <div>
+                  <div class="sim-tech-label">Metric</div>
+                  <div class="sim-tech-value">${escapeHtml(coerceText(sim.metricId || scenario.metricId || 'N/A'))}</div>
+                </div>
+              </div>
+              <div class="sim-replaced-note">${renderReplacedEventLine(replaced)}</div>
+              ${blocked ? `<div class="sim-replaced-note" style="border-top:none;padding-top:6px;"><strong>Blocked reason:</strong> ${escapeHtml(coerceText(sim.reason || 'N/A'))}</div>` : ''}
+            </div>
+          </details>
         </article>
       `;
     }
 
-    function applyScenarioAndScopeDefaults(simulation) {
-      if (!simulation || !Array.isArray(simulation.scenarios)) return;
-      renderScenarioControls(simulation);
-      const panel = document.querySelector('[data-sim-mode-panel="scenario"]');
-      if (panel) {
-        renderScenarioSimulation();
-      }
-    }
-
-    function initializeSimulationControls(listKey, listData) {
+    function initializeSimulationControls(listKey) {
       const simModeButtons = document.querySelectorAll('[data-sim-mode]');
       const simScopeButtons = document.querySelectorAll('[data-sim-scope]');
-      const slider = document.querySelector('#sim-target-rank-range');
+      const simViewButtons = document.querySelectorAll('[data-sim-view]');
       const scenarioSelects = [
         document.querySelector('[data-sim-level-select]'),
         document.querySelector('[data-sim-format-select]'),
@@ -49194,15 +50019,7 @@
             const mode = coerceText(button.dataset.simMode);
             if (!mode) return;
             SIM_STATE.mode = mode;
-            document.querySelectorAll('[data-sim-mode-panel]').forEach((panel) => {
-              const isActive = panel.dataset.simModePanel === mode;
-              panel.classList.toggle('is-active', isActive);
-            });
-            simModeButtons.forEach((item) => {
-              item.classList.toggle('is-active', item.dataset.simMode === mode);
-              item.setAttribute('aria-selected', item.dataset.simMode === mode ? 'true' : 'false');
-            });
-            renderSimMode(listKey, listData);
+            renderSimMode(listKey);
           });
         });
 
@@ -49210,21 +50027,21 @@
           button.addEventListener('click', () => {
             const scope = coerceText(button.dataset.simScope) === 'section' ? 'section' : 'national';
             SIM_STATE.scope = scope;
-            simScopeButtons.forEach((item) => {
-              item.classList.toggle('is-active', item.dataset.simScope === scope);
-            });
-            renderSimMode(listKey, listData);
+            SIM_STATE.targetRank = null;
+            renderSimMode(listKey);
           });
         });
 
-        if (slider) {
-          slider.addEventListener('input', () => {
-            SIM_STATE.targetRank = toPositiveInt(slider.value, 1);
+        simViewButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const view = coerceText(button.dataset.simView) === 'grind' ? 'grind' : 'bigwin';
+            SIM_STATE.plannerView = view;
             if (SIM_STATE.mode === 'planner') {
               renderPlannerSimulation(listKey);
+              simViewButtons.forEach((item) => item.classList.toggle('is-active', item.dataset.simView === view));
             }
           });
-        }
+        });
 
         scenarioSelects.forEach((select) => {
           if (!select) return;
@@ -49240,48 +50057,49 @@
       }
     }
 
-    function renderSimMode(listKey, listData) {
+    function renderSimMode(listKey) {
       const simulation = SIM_STATE.simulation;
       const assumptionsContainer = document.querySelector('[data-sim-assumptions]');
-      const plannerPanel = document.querySelector('[data-sim-mode-panel="planner"]');
-      const scenarioPanel = document.querySelector('[data-sim-mode-panel="scenario"]');
       const simScopeButtons = document.querySelectorAll('[data-sim-scope]');
+      const modeButtons = document.querySelectorAll('[data-sim-mode]');
+      const viewButtons = document.querySelectorAll('[data-sim-view]');
 
       if (!simulation) {
         renderSimChips(assumptionsContainer, ['simulator_context_not_loaded']);
       } else {
         renderSimChips(assumptionsContainer, Array.isArray(simulation.assumptions) ? simulation.assumptions : []);
       }
-      if (scenarioPanel) scenarioPanel.style.display = SIM_STATE.mode === 'scenario' ? '' : '';
-      if (plannerPanel) plannerPanel.style.display = SIM_STATE.mode === 'planner' ? '' : '';
 
-      if (SIM_STATE.mode === 'scenario') {
-        if (simulation && simulation.enabled) {
-          if (simulation.current && simulation.current.section) {
-            simScopeButtons.forEach((button) => button.disabled = false);
-          }
-          applyScenarioAndScopeDefaults(simulation);
-          renderScenarioSimulation();
-        } else {
-          renderScenarioSimulation();
-        }
-        return;
-      }
+      modeButtons.forEach((button) => {
+        const mode = coerceText(button.dataset.simMode);
+        const isActive = mode === SIM_STATE.mode;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
 
-      if (!simulation || !simulation.enabled) {
-        renderPlannerSimulation(listKey);
-        return;
-      }
+      document.querySelectorAll('[data-sim-mode-panel]').forEach((panel) => {
+        panel.classList.toggle('is-active', panel.dataset.simModePanel === SIM_STATE.mode);
+      });
 
       simScopeButtons.forEach((button) => {
         const scope = coerceText(button.dataset.simScope);
-        if (scope === 'section' && simulation && !simulation.current.section) {
-          button.disabled = true;
-          if (SIM_STATE.scope === 'section') SIM_STATE.scope = 'national';
-        } else {
-          button.disabled = false;
-        }
+        const disableSection = scope === 'section' && simulation && !(simulation.current && simulation.current.section);
+        if (disableSection && SIM_STATE.scope === 'section') SIM_STATE.scope = 'national';
+        button.disabled = !!disableSection;
+        button.classList.toggle('is-active', scope === SIM_STATE.scope);
       });
+
+      viewButtons.forEach((button) => {
+        const view = coerceText(button.dataset.simView);
+        button.classList.toggle('is-active', view === SIM_STATE.plannerView);
+      });
+
+      if (SIM_STATE.mode === 'scenario') {
+        renderScenarioControls(simulation);
+        renderScenarioSimulation();
+        return;
+      }
+
       renderPlannerSimulation(listKey);
     }
 
@@ -49292,35 +50110,40 @@
       SIM_STATE.simulation = simulation || null;
       SIM_STATE.targetRank = null;
 
-      const assumptionsContainer = document.querySelector('[data-sim-assumptions]');
-      if (assumptionsContainer) {
-        if (simulation && Array.isArray(simulation.assumptions) && simulation.assumptions.length) {
-          renderSimChips(assumptionsContainer, simulation.assumptions);
-        } else if (simulation && simulation.enabled) {
-          renderSimChips(assumptionsContainer, ['snapshot_loaded']);
-        } else {
-          renderSimChips(assumptionsContainer, ['simulator_context_not_loaded']);
-        }
+      initializeSimulationControls(listKey);
+      renderSimMode(listKey);
+    }
+
+    function queueSimulatorUpdate(listKey) {
+      SIM_STATE.pendingListKey = listKey || '';
+      if (SIM_STATE.visible) {
+        updateRankingSimulator(listKey);
+      }
+    }
+
+    function initializeSimulatorObserver(defaultList) {
+      const simulatorSection = document.querySelector('#simulator');
+      if (!simulatorSection) {
+        SIM_STATE.visible = true;
+        updateRankingSimulator(defaultList);
+        return;
+      }
+      if (!('IntersectionObserver' in window)) {
+        SIM_STATE.visible = true;
+        updateRankingSimulator(defaultList);
+        return;
       }
 
-      initializeSimulationControls(listKey, listData);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          SIM_STATE.visible = true;
+          updateRankingSimulator(SIM_STATE.pendingListKey || defaultList);
+          observer.disconnect();
+        });
+      }, { rootMargin: '120px 0px' });
 
-      const simScopeButtons = document.querySelectorAll('[data-sim-scope]');
-      const modeButtons = document.querySelectorAll('[data-sim-mode]');
-      modeButtons.forEach((button) => {
-        const mode = coerceText(button.dataset.simMode);
-        button.classList.toggle('is-active', mode === SIM_STATE.mode);
-        button.setAttribute('aria-selected', mode === SIM_STATE.mode ? 'true' : 'false');
-      });
-      document.querySelectorAll('[data-sim-mode-panel]').forEach((panel) => {
-        panel.classList.toggle('is-active', panel.dataset.simModePanel === SIM_STATE.mode);
-      });
-      simScopeButtons.forEach((button) => {
-        const scope = coerceText(button.dataset.simScope);
-        button.classList.toggle('is-active', scope === SIM_STATE.scope);
-      });
-
-      renderSimMode(listKey, listData);
+      observer.observe(simulatorSection);
     }
 
     function applyList(listKey) {
@@ -49333,7 +50156,7 @@
       renderTimeline(listData);
       renderEvents(listData.events.singles, '[data-singles-events]', false, listKey);
       renderEvents(listData.events.doubles, '[data-doubles-events]', true, listKey);
-      updateRankingSimulator(listKey);
+      queueSimulatorUpdate(listKey);
     }
 
     // Initialize
@@ -49352,6 +50175,7 @@
       });
 
       applyList(defaultList);
+      initializeSimulatorObserver(defaultList);
 
       document.querySelectorAll('[data-list-toggle]').forEach((btn) => {
         btn.addEventListener('click', () => {
