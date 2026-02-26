@@ -184,6 +184,14 @@
     .player-view #simulator { display: none; }
     .simulator-view .main > section:not(#simulator) { display: none; }
     .simulator-view .page-footer { display: none; }
+    .simulator-view #simulator .section-title {
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+    .simulator-view #simulator .sim-subtitle {
+      font-size: 0.86rem;
+      margin-top: 4px;
+    }
 
     /* Main Content */
     .main {
@@ -2001,6 +2009,12 @@
         font-size: 0.65rem;
       }
 
+      .simulator-view .header-updated {
+        position: static;
+        margin-top: 2px;
+        align-self: flex-start;
+      }
+
       .main {
         padding: 16px;
       }
@@ -2119,6 +2133,18 @@
       .sim-rank-transform {
         gap: 8px;
       }
+
+      .simulator-view #simulator .section-title {
+        font-size: 1.2rem;
+      }
+
+      .simulator-view #simulator .sim-subtitle {
+        font-size: 0.78rem;
+      }
+
+      .simulator-view .sim-neighbor-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* Very small screens */
@@ -2145,6 +2171,37 @@
 
       .sim-rank-number {
         font-size: 1.75rem;
+      }
+
+      .simulator-view .main {
+        padding: 12px;
+      }
+
+      .simulator-view #simulator {
+        padding: 14px;
+      }
+
+      .simulator-view .sim-tabs {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+        border-radius: 12px;
+      }
+
+      .simulator-view .sim-tab {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.78rem;
+      }
+
+      .simulator-view .sim-calc-input {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .simulator-view .sim-calc-chip {
+        padding: 7px 10px;
+        font-size: 0.74rem;
       }
     }
   </style>
