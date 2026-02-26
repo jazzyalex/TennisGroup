@@ -14,12 +14,6 @@
   <meta property="og:title" content="Alexis Malakhova - Player Profile">
   <meta property="og:description" content="USTA points breakdown, rankings, and tournament results for junior tennis player">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
-  <script>
-    (function () {
-      const isSimulatorView = new URLSearchParams(window.location.search).get('view') === 'simulator';
-      document.documentElement.classList.add(isSimulatorView ? 'simulator-view' : 'player-view');
-    })();
-  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -176,21 +170,6 @@
     .header-quick-link:hover {
       background: rgba(255, 255, 255, 0.22);
       border-color: rgba(255, 255, 255, 0.55);
-    }
-
-    .player-view .header-quick-link--profile { display: none; }
-    .simulator-view .header-quick-link--simulator { display: none; }
-
-    .player-view #simulator { display: none; }
-    .simulator-view .main > section:not(#simulator) { display: none; }
-    .simulator-view .page-footer { display: none; }
-    .simulator-view #simulator .section-title {
-      font-size: 1.5rem;
-      line-height: 1.2;
-    }
-    .simulator-view #simulator .sim-subtitle {
-      font-size: 0.86rem;
-      margin-top: 4px;
     }
 
     /* Main Content */
@@ -2009,12 +1988,6 @@
         font-size: 0.65rem;
       }
 
-      .simulator-view .header-updated {
-        position: static;
-        margin-top: 2px;
-        align-self: flex-start;
-      }
-
       .main {
         padding: 16px;
       }
@@ -2134,17 +2107,6 @@
         gap: 8px;
       }
 
-      .simulator-view #simulator .section-title {
-        font-size: 1.2rem;
-      }
-
-      .simulator-view #simulator .sim-subtitle {
-        font-size: 0.78rem;
-      }
-
-      .simulator-view .sim-neighbor-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* Very small screens */
@@ -2173,36 +2135,6 @@
         font-size: 1.75rem;
       }
 
-      .simulator-view .main {
-        padding: 12px;
-      }
-
-      .simulator-view #simulator {
-        padding: 14px;
-      }
-
-      .simulator-view .sim-tabs {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 6px;
-        border-radius: 12px;
-      }
-
-      .simulator-view .sim-tab {
-        width: 100%;
-        padding: 8px 10px;
-        font-size: 0.78rem;
-      }
-
-      .simulator-view .sim-calc-input {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .simulator-view .sim-calc-chip {
-        padding: 7px 10px;
-        font-size: 0.74rem;
-      }
     }
   </style>
 </head>
@@ -2223,7 +2155,6 @@
           <span class="player-subtitle" data-list-subtitle>Girls' 12 National Standings List</span>
           <div class="header-quick-links">
             <a href="ranking-simulator.html" class="header-quick-link header-quick-link--simulator">Open Ranking Simulator</a>
-            <a href="player.html" class="header-quick-link header-quick-link--profile">Back to Player Profile</a>
           </div>
         </div>
       </div>
@@ -2333,168 +2264,6 @@
       </div>
       <div class="events-list" data-doubles-events>
         <!-- Events populated by JS -->
-      </div>
-    </section>
-
-    <!-- Ranking Simulator -->
-    <section class="section" id="simulator">
-      <div class="section-header section-header--with-toggle">
-        <div>
-          <h2 class="section-title">Ranking Simulator</h2>
-          <div class="sim-subtitle">Plan paths and simulate one tournament result</div>
-          <div class="list-toggle" role="tablist" aria-label="Ranking simulator list" style="margin-top:8px;">
-            <button type="button" class="list-toggle__btn is-active" data-sim-list-toggle="g12" role="tab" aria-selected="true">U12</button>
-            <button type="button" class="list-toggle__btn" data-sim-list-toggle="g14" role="tab" aria-selected="false">U14</button>
-          </div>
-        </div>
-        <div class="sim-tabs" role="tablist" aria-label="Ranking simulator mode">
-          <button type="button" class="sim-tab is-active" data-sim-mode="planner" role="tab" aria-selected="true">Path Planner</button>
-          <button type="button" class="sim-tab" data-sim-mode="scenario" role="tab" aria-selected="false">Scenario Builder</button>
-          <button type="button" class="sim-tab" data-sim-mode="calculator" role="tab" aria-selected="false">Points Calculator</button>
-        </div>
-      </div>
-
-      <div class="sim-assumptions" data-sim-assumptions></div>
-
-      <div class="sim-modes">
-        <div class="sim-mode-panel is-active" data-sim-mode-panel="planner">
-          <div class="sim-shell">
-            <div class="sim-scope-row">
-              <span class="sim-row-label">View by</span>
-              <div class="sim-scope-toggle" role="group" aria-label="Ranking scope">
-                <button type="button" class="sim-scope-btn is-active" data-sim-scope="national">National</button>
-                <button type="button" class="sim-scope-btn" data-sim-scope="section">Section</button>
-              </div>
-            </div>
-
-            <div>
-              <div class="sim-row-label">What rank are you aiming for?</div>
-              <div class="sim-rank-picker" data-sim-planner-marks></div>
-            </div>
-
-            <div class="sim-progress-card">
-              <div class="sim-progress-headline">
-                Need <span class="sim-progress-need" data-sim-needed-points>0 pts</span> more to reach <span data-sim-target-rank>#0</span> <span data-sim-scope-label>Nationally</span>
-              </div>
-              <div class="sim-progress-track">
-                <div class="sim-progress-fill" data-sim-progress-fill></div>
-              </div>
-              <div class="sim-progress-labels">
-                <span data-sim-current-summary>Now: N/A</span>
-                <span class="sim-progress-goal" data-sim-goal-summary>Goal: N/A</span>
-              </div>
-            </div>
-
-            <div class="sim-plan-controls">
-              <div style="display:flex;flex-direction:column;gap:4px;">
-                <span class="sim-row-label" style="margin:0;">Ways to get there</span>
-                <span class="sim-buffer-note">Buffer = points above today's rank threshold.</span>
-              </div>
-              <div class="sim-view-toggle" role="group" aria-label="Planner view mode">
-                <button type="button" class="sim-view-btn is-active" data-sim-view="bigwin">Big win</button>
-                <button type="button" class="sim-view-btn" data-sim-view="grind">Local grind</button>
-              </div>
-            </div>
-
-            <div class="sim-results" data-sim-planner-results></div>
-            <div class="sim-footnote">Rankings can shift as other players improve. More buffer gives more protection.</div>
-            <div class="sim-tip-row">
-              <span class="sim-tip-label">Glossary:</span>
-              <span class="sim-tip-chip" data-tip="Buffer is how many points above the rank threshold this plan finishes.">Buffer</span>
-              <span class="sim-tip-chip" data-tip="NST means National Standing Total: singles plus doubles at 15% weighting plus bonus.">NST</span>
-              <span class="sim-tip-chip" data-tip="A bucket is one of your counting results that can be replaced by a better result.">Bucket</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="sim-mode-panel" data-sim-mode-panel="scenario">
-          <div class="sim-scope-row" style="margin-bottom:10px;">
-            <span class="sim-row-label">View by</span>
-            <div class="sim-scope-toggle" role="group" aria-label="Scenario ranking scope">
-              <button type="button" class="sim-scope-btn is-active" data-sim-scope="national">National</button>
-              <button type="button" class="sim-scope-btn" data-sim-scope="section">Section</button>
-            </div>
-          </div>
-
-          <div class="sim-wizard">
-            <div class="sim-step-block">
-              <div class="sim-step-head">
-                <span class="sim-step-badge">1</span>
-                <div class="sim-step-title">Tournament level</div>
-              </div>
-              <div class="sim-step-options" data-sim-level-options></div>
-            </div>
-
-            <div class="sim-step-block">
-              <div class="sim-step-head">
-                <span class="sim-step-badge">2</span>
-                <div class="sim-step-title">Draw format <span class="sim-step-sub">(how the bracket works)</span></div>
-              </div>
-              <div class="sim-step-options" data-sim-format-options></div>
-            </div>
-
-            <div class="sim-step-block">
-              <div class="sim-step-head">
-                <span class="sim-step-badge">3</span>
-                <div class="sim-step-title">Result</div>
-              </div>
-              <div class="sim-step-options" data-sim-round-options></div>
-            </div>
-
-            <div class="sim-step-block">
-              <div class="sim-step-head">
-                <span class="sim-step-badge">4</span>
-                <div class="sim-step-title">Event type</div>
-              </div>
-              <div class="sim-step-options" data-sim-event-type-options></div>
-            </div>
-
-            <div class="sim-hidden-selects" aria-hidden="true">
-              <select id="sim-level-select" data-sim-level-select></select>
-              <select id="sim-format-select" data-sim-format-select></select>
-              <select id="sim-round-select" data-sim-round-select></select>
-              <select id="sim-event-type-select" data-sim-event-type-select></select>
-              <select id="sim-outcome-select" data-sim-outcome-select></select>
-            </div>
-          </div>
-
-          <div class="sim-results" data-sim-scenario-results></div>
-        </div>
-
-        <div class="sim-mode-panel" data-sim-mode-panel="calculator">
-          <div class="sim-shell">
-            <div class="sim-scope-row">
-              <span class="sim-row-label">View by</span>
-              <div class="sim-scope-toggle" role="group" aria-label="Calculator ranking scope">
-                <button type="button" class="sim-scope-btn is-active" data-sim-scope="national">National</button>
-                <button type="button" class="sim-scope-btn" data-sim-scope="section">Section</button>
-              </div>
-            </div>
-
-            <div class="sim-calc-shell">
-              <div class="sim-row-label">Enter raw points</div>
-              <div class="sim-calc-input-row">
-                <input type="number" class="sim-calc-input" data-sim-calc-input value="0" step="1" inputmode="numeric" />
-                <button type="button" class="sim-calc-chip" data-sim-calc-reset title="Reset input">⌫</button>
-                <button type="button" class="sim-calc-chip" data-sim-calc-chip="+50">+50</button>
-                <button type="button" class="sim-calc-chip" data-sim-calc-chip="+95">+95</button>
-                <button type="button" class="sim-calc-chip" data-sim-calc-chip="+300">+300</button>
-                <button type="button" class="sim-calc-chip" data-sim-calc-chip="+1000">+1000</button>
-              </div>
-              <div class="sim-calc-input-row" role="group" aria-label="Replacement count">
-                <button type="button" class="sim-calc-chip is-active" data-sim-calc-replace="1">Replace 1 event</button>
-                <button type="button" class="sim-calc-chip" data-sim-calc-replace="2">Replace 2 events</button>
-              </div>
-              <div class="sim-calc-input-row" role="group" aria-label="Expiry scenarios">
-                <button type="button" class="sim-calc-chip" data-sim-calc-expire="1">Expire 1 event</button>
-                <button type="button" class="sim-calc-chip" data-sim-calc-expire="2">Expire 2 events</button>
-              </div>
-              <div class="sim-calc-note">Positive points replace selected weakest singles result count only when higher. Expiry pills model weak results dropping with no replacement.</div>
-            </div>
-
-            <div class="sim-results" data-sim-calculator-results></div>
-          </div>
-        </div>
       </div>
     </section>
 
