@@ -1963,17 +1963,17 @@
     /* Mobile Styles */
     @media (max-width: 768px) {
       .page-header {
-        padding: 12px 16px;
+        padding: 10px 14px;
       }
 
       .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
+        align-items: center;
+        gap: 10px;
       }
 
       .header-left {
-        width: 100%;
+        flex: 1;
+        min-width: 0;
       }
 
       .logo-link svg {
@@ -1982,7 +1982,7 @@
       }
 
       .player-name {
-        font-size: 1.2rem;
+        font-size: 1.05rem;
       }
 
       .player-subtitle {
@@ -1992,7 +1992,14 @@
       .header-quick-links {
         margin-top: 4px;
         gap: 6px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2px;
       }
+
+      .header-quick-links::-webkit-scrollbar { display: none; }
 
       .header-quick-link {
         padding: 3px 8px;
@@ -2000,10 +2007,9 @@
       }
 
       .header-updated {
-        position: absolute;
-        top: 12px;
-        right: 16px;
         font-size: 0.65rem;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
 
       .simulator-view .header-updated {
@@ -2087,11 +2093,26 @@
 
       .sim-tabs {
         width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+        border-radius: 10px;
+        gap: 6px;
+        padding: 3px;
       }
 
+      .sim-tabs::-webkit-scrollbar { display: none; }
+
       .sim-tab {
-        flex: 1;
-        text-align: center;
+        flex: unset;
+        flex-shrink: 0;
+        border-radius: 8px;
+      }
+
+      .sim-tab.is-active {
+        background: var(--player-green);
+        color: #ffffff;
+        box-shadow: none;
       }
 
       .sim-scope-row {
@@ -2099,9 +2120,30 @@
       }
 
       .sim-rank-picker {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 4px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        overflow-x: visible;
+        flex-wrap: unset;
+        padding-bottom: 0;
+      }
+
+      .sim-rank-btn {
+        min-height: 44px;
+        border-radius: 10px;
+        padding: 8px 4px;
+        white-space: normal;
+      }
+
+      .sim-scope-toggle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .sim-scope-btn {
+        min-height: 44px;
+        border-radius: 10px;
+        text-align: center;
       }
 
       .sim-progress-labels {
@@ -2110,12 +2152,15 @@
       }
 
       .sim-plan-header {
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        flex-wrap: unset;
+        align-items: start;
       }
 
       .sim-plan-points {
         margin-left: 0;
-        text-align: left;
+        text-align: right;
       }
 
       .sim-step-options {
@@ -2179,16 +2224,18 @@
       }
 
       .simulator-view .sim-tabs {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
         gap: 6px;
-        border-radius: 12px;
+        border-radius: 10px;
       }
 
       .simulator-view .sim-tab {
-        width: 100%;
-        padding: 8px 10px;
-        font-size: 0.78rem;
+        flex: unset;
+        flex-shrink: 0;
+        padding: 7px 14px;
+        font-size: 0.75rem;
       }
 
       .simulator-view .sim-calc-input {
