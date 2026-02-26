@@ -1909,6 +1909,12 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 	      ].join('|');
 	    }
 
+	    function getTournamentRowAnchorId(row) {
+	      const rawId = getTournamentId(row);
+	      const slug = rawId.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+	      return slug ? `event-${slug}` : '';
+	    }
+
 	    function getLegacyTournamentId(row) {
 	      // Back-compat with the older id format used in this page.
 	      return `${row['Month']}:${row['Date(s)']}:${getTournamentTitle(row)}:${row['City']}`;
@@ -2536,6 +2542,8 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 
             const tableRow = document.createElement('div');
             tableRow.className = `table-row ${rowNumber % 2 === 0 ? 'even-row' : ''}`;
+            const rowAnchorId = getTournamentRowAnchorId(row);
+            if (rowAnchorId) tableRow.id = rowAnchorId;
             tableRow.innerHTML = `
               <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
               <span class="cell-number">${rowNumber}</span>
@@ -2588,6 +2596,8 @@ Level 5 Team Tournament",FALSE,FALSE,BG 16-14,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,T
 
           const tableRow = document.createElement('div');
           tableRow.className = `table-row ${(index + 1) % 2 === 0 ? 'even-row' : ''}`;
+          const rowAnchorId = getTournamentRowAnchorId(row);
+          if (rowAnchorId) tableRow.id = rowAnchorId;
           tableRow.innerHTML = `
             <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
             <span class="cell-number">${index + 1}</span>
