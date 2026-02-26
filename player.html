@@ -1180,6 +1180,31 @@
       gap: 4px;
     }
 
+    .sim-calendar-groups {
+      margin-top: 7px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .sim-calendar-group {
+      border-top: 1px dashed var(--border);
+      padding-top: 6px;
+    }
+
+    .sim-calendar-group-title {
+      font-size: 0.71rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+    }
+
+    .sim-calendar-empty {
+      margin-top: 4px;
+      font-size: 0.67rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
     .sim-calendar-list li {
       display: flex;
       flex-wrap: wrap;
@@ -94158,6 +94183,52 @@
       )));
     }
 
+    function plannerEventType(event) {
+      const explicit = coerceText(event && event.eventType).toLowerCase();
+      if (explicit === 'singles' || explicit === 'doubles') return explicit;
+      const formatMeta = getFormatMeta(event && (event.format || event.canonicalFormat || event.drawFormat));
+      const normalizedType = coerceText(formatMeta.type).toLowerCase();
+      return normalizedType.includes('double') ? 'doubles' : 'singles';
+    }
+
+    function calendarSupportsPlannerEvent(cal, event) {
+      const eventType = plannerEventType(event);
+      const hasSinglesFlag = Object.prototype.hasOwnProperty.call(cal || {}, 'supportsSingles');
+      const hasDoublesFlag = Object.prototype.hasOwnProperty.call(cal || {}, 'supportsDoubles');
+      const supportsSingles = hasSinglesFlag ? Boolean(cal.supportsSingles) : true;
+      const supportsDoubles = hasDoublesFlag ? Boolean(cal.supportsDoubles) : false;
+      if (eventType === 'doubles') return supportsDoubles;
+      return supportsSingles;
+    }
+
+    function findCalendarMatchesForEvent(simulation, event) {
+      const calendar = Array.isArray(simulation && simulation.calendar) ? simulation.calendar : [];
+      if (!calendar.length || !event) return [];
+      const levelKey = coerceText(event.level).toLowerCase();
+      const matches = calendar.filter((cal) => (
+        coerceText(cal.level).toLowerCase() === levelKey
+        && calendarSupportsPlannerEvent(cal, event)
+      ));
+      const seen = new Set();
+      return matches.filter((cal) => {
+        const id = coerceText(cal && cal.id);
+        if (!id || seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      });
+    }
+
+    function plannerEventRequirementLabel(event) {
+      const level = coerceText(event && event.level).toUpperCase() || 'L?';
+      const raw = coerceText(event && event.resultRound).toUpperCase();
+      if (Boolean(event && event.isEventWinner)) return `${level} Winner`;
+      if (['F', 'F_LOSS', 'FINAL', 'FINALIST'].includes(raw)) return `${level} Final`;
+      if (raw === 'SF' || raw.includes('SEMI')) return `${level} SF`;
+      if (raw === 'QF' || raw.includes('QUARTER')) return `${level} QF`;
+      const round = normalizeRoundLabel(raw);
+      return `${level} ${round}`;
+    }
+
     function formatPlannerCalendarDateRange(item) {
       const start = coerceText(item && item.startDate);
       const end = coerceText(item && item.endDate);
@@ -94179,26 +94250,41 @@
       if (!hasCalendarData) {
         return '<div class="sim-calendar-note">Calendar recommendations unavailable: Big Calendar feed is not loaded.</div>';
       }
-      const calendarMatches = findCalendarMatches(simulation, candidate);
-      if (!calendarMatches.length) {
+      const events = Array.isArray(candidate && candidate.events) ? candidate.events : [];
+      if (!events.length) {
         return `<div class="sim-calendar-note">No matching ${escapeHtml(levelLabel)} events on Big Calendar (next 90 days).</div>`;
       }
-      const listItems = calendarMatches.slice(0, 8).map((cal) => {
-        const name = coerceText(cal.name || 'Tournament');
-        const level = coerceText(cal.level || '');
-        const dateLabel = formatPlannerCalendarDateRange(cal);
-        const rowUrl = plannerCalendarRowUrl(cal);
+      const blocks = events.map((event) => {
+        const heading = plannerEventRequirementLabel(event);
+        const matches = findCalendarMatchesForEvent(simulation, event);
+        if (!matches.length) {
+          return `
+            <div class="sim-calendar-group">
+              <div class="sim-calendar-group-title">${escapeHtml(heading)}</div>
+              <div class="sim-calendar-empty">No matching tournaments on Big Calendar (next 90 days).</div>
+            </div>
+          `;
+        }
+        const listItems = matches.slice(0, 6).map((cal) => {
+          const name = coerceText(cal.name || 'Tournament');
+          const level = coerceText(cal.level || '');
+          const dateLabel = formatPlannerCalendarDateRange(cal);
+          const rowUrl = plannerCalendarRowUrl(cal);
+          return `
+            <li>
+              <a href="${escapeHtml(rowUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(name)}</a>
+              <span>${escapeHtml(level)} · ${escapeHtml(dateLabel)}</span>
+            </li>
+          `;
+        }).join('');
         return `
-          <li>
-            <a href="${escapeHtml(rowUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(name)}</a>
-            <span>${escapeHtml(level)} · ${escapeHtml(dateLabel)}</span>
-          </li>
+          <div class="sim-calendar-group">
+            <div class="sim-calendar-group-title">${escapeHtml(heading)}</div>
+            <ul class="sim-calendar-list">${listItems}</ul>
+          </div>
         `;
       }).join('');
-      return `
-        <div class="sim-calendar-note">Big Calendar matches (next 90 days):</div>
-        <ul class="sim-calendar-list">${listItems}</ul>
-      `;
+      return `<div class="sim-calendar-groups">${blocks}</div>`;
     }
 
     function describePlannerReplacement(candidate) {
