@@ -14,6 +14,12 @@
   <meta property="og:title" content="Alexis Malakhova - Player Profile">
   <meta property="og:description" content="USTA points breakdown, rankings, and tournament results for junior tennis player">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
+  <script>
+    (function () {
+      const isSimulatorView = new URLSearchParams(window.location.search).get('view') === 'simulator';
+      document.documentElement.classList.add(isSimulatorView ? 'simulator-view' : 'player-view');
+    })();
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -141,6 +147,43 @@
       color: rgba(255,255,255,0.7);
       text-align: right;
     }
+
+    .header-quick-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .header-quick-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      text-decoration: none;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .header-quick-link:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.55);
+    }
+
+    .player-view .header-quick-link--profile { display: none; }
+    .simulator-view .header-quick-link--simulator { display: none; }
+
+    .player-view #simulator { display: none; }
+    .simulator-view .main > section:not(#simulator) { display: none; }
+    .simulator-view .page-footer { display: none; }
 
     /* Main Content */
     .main {
@@ -1941,6 +1984,16 @@
         font-size: 0.7rem;
       }
 
+      .header-quick-links {
+        margin-top: 4px;
+        gap: 6px;
+      }
+
+      .header-quick-link {
+        padding: 3px 8px;
+        font-size: 0.62rem;
+      }
+
       .header-updated {
         position: absolute;
         top: 12px;
@@ -2111,6 +2164,10 @@
         <div class="header-title">
           <h1 class="player-name" data-player-name>Alexis Malakhova</h1>
           <span class="player-subtitle" data-list-subtitle>Girls' 12 National Standings List</span>
+          <div class="header-quick-links">
+            <a href="ranking-simulator.html" class="header-quick-link header-quick-link--simulator">Open Ranking Simulator</a>
+            <a href="player.html" class="header-quick-link header-quick-link--profile">Back to Player Profile</a>
+          </div>
         </div>
       </div>
       <span class="header-updated" data-updated>Updated Feb 25, 2026</span>
@@ -99964,6 +100021,7 @@
     }
 
     function queueSimulatorUpdate(listKeyHint) {
+      if (!document.documentElement.classList.contains('simulator-view')) return;
       const hinted = coerceText(listKeyHint);
       if (!SIM_STATE.simListKey && hinted) {
         SIM_STATE.simListKey = hinted;
@@ -100014,11 +100072,18 @@
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
+      const simulatorView = document.documentElement.classList.contains('simulator-view');
       const lists = PLAYER_DATA && PLAYER_DATA.lists ? PLAYER_DATA.lists : {};
       const listKeys = Object.keys(lists);
       const defaultList = PLAYER_DATA.defaultList && lists[PLAYER_DATA.defaultList]
         ? PLAYER_DATA.defaultList
         : (listKeys[0] || 'g12');
+
+      if (simulatorView) {
+        const subtitle = document.querySelector('[data-list-subtitle]');
+        if (subtitle) subtitle.textContent = 'Ranking Simulator';
+        document.title = 'Ranking Simulator | Tennis Tracker';
+      }
 
       ['g12', 'g14'].forEach((key) => {
         const data = lists[key];
@@ -100026,17 +100091,19 @@
         const hasTotals = data && data.totals && (data.totals.total || 0) > 0;
         const hasSimulation = !!getSimPayload(data);
         setListDisabled(key, !(data && (hasEvents || hasTotals)));
-        setSimListDisabled(key, !(data && hasSimulation));
+        if (simulatorView) setSimListDisabled(key, !(data && hasSimulation));
       });
 
-      const defaultSimList = getSimPayload(lists[defaultList])
-        ? defaultList
-        : (listKeys.find((key) => !!getSimPayload(lists[key])) || defaultList);
-      SIM_STATE.simListKey = defaultSimList;
-      setActiveSimListToggle(defaultSimList);
+      if (simulatorView) {
+        const defaultSimList = getSimPayload(lists[defaultList])
+          ? defaultList
+          : (listKeys.find((key) => !!getSimPayload(lists[key])) || defaultList);
+        SIM_STATE.simListKey = defaultSimList;
+        setActiveSimListToggle(defaultSimList);
+      }
 
       applyList(defaultList);
-      initializeSimulatorObserver(defaultList);
+      if (simulatorView) initializeSimulatorObserver(defaultList);
 
       document.querySelectorAll('[data-list-toggle]').forEach((btn) => {
         btn.addEventListener('click', () => {
