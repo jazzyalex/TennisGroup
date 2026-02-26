@@ -2557,9 +2557,7 @@
             "enabled": true,
             "rankProjectionAvailable": true,
             "listName": "Girls' 12 National Standings List (combined)",
-            "assumptions": [
-              "scorepoint_context_loaded"
-            ],
+            "assumptions": [],
             "dataFreshness": {
               "rankSnapshotCollectedAt": "2026-02-25T17:37:35Z",
               "rankSnapshotPublishDate": "2026-02-25T09:33:01.242Z",
@@ -80708,12 +80706,10 @@
     function renderSimChips(container, values) {
       if (!container) return;
       container.innerHTML = '';
-      const list = Array.isArray(values) ? values : [];
+      const list = (Array.isArray(values) ? values : [])
+        .map((entry) => coerceText(entry).toLowerCase())
+        .filter((entry) => entry && entry !== 'scorepoint_context_loaded');
       if (!list.length) {
-        const chip = document.createElement('span');
-        chip.className = 'sim-chip';
-        chip.textContent = 'No simulator assumptions';
-        container.appendChild(chip);
         return;
       }
       list.forEach((entry) => {
