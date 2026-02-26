@@ -2361,12 +2361,17 @@
                 <button type="button" class="sim-calc-chip" data-sim-calc-chip="+95">+95</button>
                 <button type="button" class="sim-calc-chip" data-sim-calc-chip="+300">+300</button>
                 <button type="button" class="sim-calc-chip" data-sim-calc-chip="+1000">+1000</button>
+                <button type="button" class="sim-calc-chip" data-sim-calc-reset title="Reset input">⌫</button>
+              </div>
+              <div class="sim-calc-input-row" role="group" aria-label="Replacement count">
+                <button type="button" class="sim-calc-chip is-active" data-sim-calc-replace="1">Replace 1 event</button>
+                <button type="button" class="sim-calc-chip" data-sim-calc-replace="2">Replace 2 events</button>
               </div>
               <div class="sim-calc-input-row" role="group" aria-label="Expiry scenarios">
                 <button type="button" class="sim-calc-chip" data-sim-calc-expire="1">Expire 1 event</button>
                 <button type="button" class="sim-calc-chip" data-sim-calc-expire="2">Expire 2 events</button>
               </div>
-              <div class="sim-calc-note">Positive points replace the weakest singles counting result only when higher. Expiry pills model weak results dropping with no replacement.</div>
+              <div class="sim-calc-note">Positive points replace selected weakest singles result count only when higher. Expiry pills model weak results dropping with no replacement.</div>
             </div>
 
             <div class="sim-results" data-sim-calculator-results></div>
@@ -98263,6 +98268,7 @@
       plannerView: 'bigwin',
       targetRank: null,
       calculatorInput: 0,
+      calculatorReplaceCount: 1,
       calculatorExpireCount: 0,
       simulation: null,
       initialized: false,
@@ -99379,6 +99385,13 @@
         .slice(0, requested);
     }
 
+    function sumSinglesBucketPoints(events) {
+      return (Array.isArray(events) ? events : []).reduce(
+        (sum, item) => sum + numOrZero(item.bucketPoints),
+        0,
+      );
+    }
+
     function calculatorDeltaFromInput(simulation, inputPoints, options) {
       const policy = getCalculatorPolicy(simulation);
       const current = simulation && simulation.current ? simulation.current : {};
@@ -99386,17 +99399,17 @@
       const singlesBucket = Array.isArray(current.singlesBucket) ? current.singlesBucket : [];
       const weakestSingles = findWeakestSinglesCountingEvent(simulation);
       const expireCount = toPositiveInt(options && options.expireCount, 0);
+      const replaceCount = Math.max(1, toPositiveInt(options && options.replaceCount, 1));
 
       if (expireCount > 0) {
         const expiringEvents = findWeakestSinglesEvents(simulation, expireCount);
-        const pointsLost = expiringEvents.reduce(
-          (sum, item) => sum + numOrZero(item.bucketPoints),
-          0,
-        );
+        const pointsLost = sumSinglesBucketPoints(expiringEvents);
         return {
           netDelta: -pointsLost,
           grossPoints: inputPoints,
+          replacementCount: replaceCount,
           replacedEvent: null,
+          replacedEvents: [],
           expiringEvents,
           reason: expiringEvents.length ? 'expiring_weakest' : 'no_expiring_events',
           policy,
@@ -99407,7 +99420,9 @@
         return {
           netDelta: inputPoints,
           grossPoints: inputPoints,
+          replacementCount: replaceCount,
           replacedEvent: null,
+          replacedEvents: [],
           expiringEvents: [],
           reason: 'direct_loss',
           policy,
@@ -99418,7 +99433,9 @@
         return {
           netDelta: inputPoints,
           grossPoints: inputPoints,
+          replacementCount: replaceCount,
           replacedEvent: null,
+          replacedEvents: [],
           expiringEvents: [],
           reason: 'bucket_not_full',
           policy,
@@ -99429,19 +99446,24 @@
         return {
           netDelta: inputPoints,
           grossPoints: inputPoints,
+          replacementCount: replaceCount,
           replacedEvent: null,
+          replacedEvents: [],
           expiringEvents: [],
           reason: 'no_weakest_event',
           policy,
         };
       }
 
-      const weakestPoints = numOrZero(weakestSingles.bucketPoints);
-      if (inputPoints <= weakestPoints) {
+      const replacedEvents = replaceCount > 1 ? findWeakestSinglesEvents(simulation, replaceCount) : [weakestSingles];
+      const replacedPoints = sumSinglesBucketPoints(replacedEvents);
+      if (inputPoints <= replacedPoints) {
         return {
           netDelta: 0,
           grossPoints: inputPoints,
+          replacementCount: replaceCount,
           replacedEvent: weakestSingles,
+          replacedEvents,
           expiringEvents: [],
           reason: 'below_weakest',
           policy,
@@ -99449,9 +99471,11 @@
       }
 
       return {
-        netDelta: inputPoints - weakestPoints,
+        netDelta: inputPoints - replacedPoints,
         grossPoints: inputPoints,
+        replacementCount: replaceCount,
         replacedEvent: weakestSingles,
+        replacedEvents,
         expiringEvents: [],
         reason: 'replaced_weakest',
         policy,
@@ -99479,16 +99503,21 @@
       if (calc.reason === 'no_expiring_events') return 'No expiring singles results available in counting bucket.';
       if (calc.reason === 'direct_loss') return 'Negative input is applied as direct NST reduction.';
       if (calc.reason === 'bucket_not_full') return 'Singles counting bucket is not full; entered points are added directly.';
-      const event = calc.replacedEvent;
-      if (!event) return 'No replacement event details available.';
-      const weakestPoints = formatNumber(numOrZero(event.bucketPoints));
-      const eventLevel = coerceText(event.level);
-      const eventDate = coerceText(event.startDate || event.endDate || event.expiresDate);
-      const dateLabel = eventDate ? formatDate(eventDate) : 'date N/A';
+      const events = Array.isArray(calc.replacedEvents) && calc.replacedEvents.length
+        ? calc.replacedEvents
+        : (calc.replacedEvent ? [calc.replacedEvent] : []);
+      if (!events.length) return 'No replacement event details available.';
+      const eventText = events.map((event) => formatCalculatorSinglesEventText(event)).join(' + ');
       if (calc.reason === 'below_weakest') {
-        return `No NST change: entered points are not higher than weakest counting singles result (${weakestPoints} pts, ${eventLevel} ${dateLabel}).`;
+        if (events.length === 1) {
+          return `No NST change: entered points are not higher than weakest counting singles result (${eventText}).`;
+        }
+        return `No NST change: entered points are not higher than weakest ${formatNumber(events.length)} counting singles results combined (${eventText}).`;
       }
-      return `Entered points replace weakest singles result (${weakestPoints} pts, ${eventLevel} ${dateLabel}).`;
+      if (events.length === 1) {
+        return `Entered points replace weakest singles result (${eventText}).`;
+      }
+      return `Entered points replace weakest ${formatNumber(events.length)} singles results (${eventText}).`;
     }
 
     function renderCalculatorNeighborBlock(title, rows, playerUaid, rankShift) {
@@ -99523,12 +99552,12 @@
       `;
     }
 
-    function computeCalculatorSimulation(simulation, scope, inputPoints, expireCount) {
+    function computeCalculatorSimulation(simulation, scope, inputPoints, expireCount, replaceCount) {
       const current = simulation && simulation.current ? simulation.current : {};
       const playerUaid = coerceText(current.uaid);
       const playerName = coerceText(current.playerName);
       const oldTotal = getCurrentTotalFromSimulation(simulation);
-      const calc = calculatorDeltaFromInput(simulation, inputPoints, { expireCount });
+      const calc = calculatorDeltaFromInput(simulation, inputPoints, { expireCount, replaceCount });
       const newTotal = Math.max(0, oldTotal + numOrZero(calc.netDelta));
       const rankRows = getCalculatorRankRows(simulation, scope);
       const policy = getCalculatorPolicy(simulation);
@@ -99551,6 +99580,7 @@
         newTotal,
         netDelta: numOrZero(calc.netDelta),
         expireCount: toPositiveInt(expireCount, 0),
+        replaceCount: Math.max(1, toPositiveInt(replaceCount, 1)),
         calc,
         beforeRank,
         afterRank,
@@ -99570,6 +99600,7 @@
       const simulation = SIM_STATE.simulation;
       const resultsContainer = document.querySelector('[data-sim-calculator-results]');
       const calcInput = document.querySelector('[data-sim-calc-input]');
+      const calcReplaceChips = document.querySelectorAll('[data-sim-calc-replace]');
       const calcExpireChips = document.querySelectorAll('[data-sim-calc-expire]');
       if (!resultsContainer) return;
       if (!simulation || !simulation.enabled) {
@@ -99577,7 +99608,15 @@
         return;
       }
 
+      if (toPositiveInt(SIM_STATE.calculatorExpireCount, 0) > 0) {
+        const expiringEvents = findWeakestSinglesEvents(simulation, SIM_STATE.calculatorExpireCount);
+        SIM_STATE.calculatorInput = -sumSinglesBucketPoints(expiringEvents);
+      }
       if (calcInput) calcInput.value = String(parseCalculatorInput(SIM_STATE.calculatorInput));
+      calcReplaceChips.forEach((chip) => {
+        const count = Math.max(1, toPositiveInt(chip.dataset.simCalcReplace, 1));
+        chip.classList.toggle('is-active', count === Math.max(1, toPositiveInt(SIM_STATE.calculatorReplaceCount, 1)));
+      });
       calcExpireChips.forEach((chip) => {
         const count = toPositiveInt(chip.dataset.simCalcExpire, 0);
         chip.classList.toggle('is-active', count > 0 && count === toPositiveInt(SIM_STATE.calculatorExpireCount, 0));
@@ -99589,7 +99628,13 @@
       }
 
       const inputPoints = parseCalculatorInput(SIM_STATE.calculatorInput);
-      const computed = computeCalculatorSimulation(simulation, SIM_STATE.scope, inputPoints, SIM_STATE.calculatorExpireCount);
+      const computed = computeCalculatorSimulation(
+        simulation,
+        SIM_STATE.scope,
+        inputPoints,
+        SIM_STATE.calculatorExpireCount,
+        SIM_STATE.calculatorReplaceCount,
+      );
       const projectionAvailable = hasRankProjection(simulation);
       const rankBeforeLabel = computed.beforeRank ? `#${formatNumber(computed.beforeRank)}` : '—';
       const rankAfterLabel = computed.afterRank ? `#${formatNumber(computed.afterRank)}` : '—';
@@ -99606,7 +99651,7 @@
         : `Entered points: <strong>${formatNumber(computed.inputPoints)}</strong>`;
       const summaryRule = expireModeActive
         ? 'Replacement rule: no replacement on expiry'
-        : 'Replacement rule: weakest singles top-6';
+        : `Replacement rule: weakest ${formatNumber(computed.replaceCount)} singles ${computed.replaceCount === 1 ? 'result' : 'results'}`;
 
       const neighborHtml = `
         <div class="sim-neighbor-grid">
@@ -99688,6 +99733,8 @@
       const simViewButtons = document.querySelectorAll('[data-sim-view]');
       const calcInput = document.querySelector('[data-sim-calc-input]');
       const calcChips = document.querySelectorAll('[data-sim-calc-chip]');
+      const calcResetButton = document.querySelector('[data-sim-calc-reset]');
+      const calcReplaceChips = document.querySelectorAll('[data-sim-calc-replace]');
       const calcExpireChips = document.querySelectorAll('[data-sim-calc-expire]');
       const scenarioSelects = [
         document.querySelector('[data-sim-level-select]'),
@@ -99758,11 +99805,39 @@
           });
         });
 
+        if (calcResetButton) {
+          calcResetButton.addEventListener('click', () => {
+            SIM_STATE.calculatorInput = 0;
+            SIM_STATE.calculatorReplaceCount = 1;
+            SIM_STATE.calculatorExpireCount = 0;
+            if (calcInput) calcInput.value = '0';
+            if (SIM_STATE.mode === 'calculator') renderCalculatorSimulation();
+          });
+        }
+
+        calcReplaceChips.forEach((chip) => {
+          chip.addEventListener('click', () => {
+            const count = Math.max(1, toPositiveInt(chip.dataset.simCalcReplace, 1));
+            SIM_STATE.calculatorReplaceCount = count;
+            SIM_STATE.calculatorExpireCount = 0;
+            if (SIM_STATE.calculatorInput < 0) SIM_STATE.calculatorInput = 0;
+            if (SIM_STATE.mode === 'calculator') renderCalculatorSimulation();
+          });
+        });
+
         calcExpireChips.forEach((chip) => {
           chip.addEventListener('click', () => {
             const count = toPositiveInt(chip.dataset.simCalcExpire, 0);
             if (count <= 0) return;
-            SIM_STATE.calculatorExpireCount = SIM_STATE.calculatorExpireCount === count ? 0 : count;
+            const isTogglingOff = SIM_STATE.calculatorExpireCount === count;
+            SIM_STATE.calculatorExpireCount = isTogglingOff ? 0 : count;
+            if (SIM_STATE.calculatorExpireCount > 0) {
+              const expiringEvents = findWeakestSinglesEvents(SIM_STATE.simulation, SIM_STATE.calculatorExpireCount);
+              SIM_STATE.calculatorInput = -sumSinglesBucketPoints(expiringEvents);
+            } else if (SIM_STATE.calculatorInput < 0) {
+              SIM_STATE.calculatorInput = 0;
+            }
+            if (calcInput) calcInput.value = String(parseCalculatorInput(SIM_STATE.calculatorInput));
             if (SIM_STATE.mode === 'calculator') renderCalculatorSimulation();
           });
         });
@@ -99829,6 +99904,7 @@
       SIM_STATE.simulation = simulation || null;
       SIM_STATE.targetRank = null;
       SIM_STATE.calculatorInput = 0;
+      SIM_STATE.calculatorReplaceCount = 1;
       SIM_STATE.calculatorExpireCount = 0;
 
       initializeSimulationControls(listKey);
