@@ -2308,6 +2308,14 @@
         </div>
 
         <div class="sim-mode-panel" data-sim-mode-panel="scenario">
+          <div class="sim-scope-row" style="margin-bottom:10px;">
+            <span class="sim-row-label">View by</span>
+            <div class="sim-scope-toggle" role="group" aria-label="Scenario ranking scope">
+              <button type="button" class="sim-scope-btn is-active" data-sim-scope="national">National</button>
+              <button type="button" class="sim-scope-btn" data-sim-scope="section">Section</button>
+            </div>
+          </div>
+
           <div class="sim-wizard">
             <div class="sim-step-block">
               <div class="sim-step-head">
@@ -99151,25 +99159,33 @@
       const eventTypeLabel = getEventTypeLabel(eventType);
       const formatMeta = getFormatMeta(scenario.canonicalFormat);
       const roundLabel = normalizeRoundLabel(scenario.resultRound);
-      const rankNationalBefore = projectionAvailable && sim.rankNational
-        ? buildRankProjectionText(sim.rankNational, 'before', '—')
+      const activeScope = SIM_STATE.scope === 'section' ? 'section' : 'national';
+      const activeScopeLabel = activeScope === 'section' ? 'Section' : 'National';
+      const primaryProjection = activeScope === 'section' ? sim.rankSection : sim.rankNational;
+      const secondaryProjection = activeScope === 'section' ? sim.rankNational : sim.rankSection;
+      const primaryBefore = projectionAvailable && primaryProjection
+        ? buildRankProjectionText(primaryProjection, 'before', '—')
         : '—';
-      const rankNationalAfter = projectionAvailable && sim.rankNational
-        ? buildRankProjectionText(sim.rankNational, 'after', '—')
+      const primaryAfter = projectionAvailable && primaryProjection
+        ? buildRankProjectionText(primaryProjection, 'after', '—')
         : '—';
-      const rankSectionBefore = projectionAvailable && sim.rankSection
-        ? buildRankProjectionText(sim.rankSection, 'before', '—')
+      const secondaryBefore = projectionAvailable && secondaryProjection
+        ? buildRankProjectionText(secondaryProjection, 'before', '—')
         : '—';
-      const rankSectionAfter = projectionAvailable && sim.rankSection
-        ? buildRankProjectionText(sim.rankSection, 'after', '—')
+      const secondaryAfter = projectionAvailable && secondaryProjection
+        ? buildRankProjectionText(secondaryProjection, 'after', '—')
         : '—';
+      const secondaryLabel = activeScope === 'section' ? 'National rank' : 'Section rank';
       const replaced = resolveReplacedEventDetails(simulation, eventType, sim.replacedEvent);
-      const beforeRankValue = toPositiveInt(rankNationalBefore.replace('#', ''), 0);
-      const afterRankValue = toPositiveInt(rankNationalAfter.replace('#', ''), 0);
-      const jump = beforeRankValue && afterRankValue ? Math.max(beforeRankValue - afterRankValue, 0) : 0;
+      const beforeRankValue = toPositiveInt(primaryBefore.replace('#', ''), 0);
+      const afterRankValue = toPositiveInt(primaryAfter.replace('#', ''), 0);
+      const jump = beforeRankValue && afterRankValue ? (beforeRankValue - afterRankValue) : 0;
+      const jumpLabel = !projectionAvailable
+        ? 'Projection unavailable'
+        : (jump > 0 ? `+${formatNumber(jump)} places` : (jump < 0 ? `-${formatNumber(Math.abs(jump))} places` : 'No rank change'));
 
       const thresholdPoints = projectionAvailable
-        ? findThresholdPointsForRank(simulation, 'national', afterRankValue)
+        ? findThresholdPointsForRank(simulation, activeScope, afterRankValue)
         : null;
       const buffer = thresholdPoints != null ? (newTotal - thresholdPoints) : null;
       const bufferMeta = buffer != null ? getBufferMeta(buffer) : null;
@@ -99192,20 +99208,20 @@
         <article class="sim-result-card">
           <div class="sim-result-status">
             <span class="sim-status-dot" style="${blocked ? 'background:#f59e0b;' : ''}"></span>
-            ${escapeHtml(scenario.level)} · ${escapeHtml(formatMeta.official)} · ${escapeHtml(roundLabel)} · ${escapeHtml(eventTypeLabel)}${blocked ? ' (blocked)' : ' (calculated)'}
+            ${escapeHtml(scenario.level)} · ${escapeHtml(formatMeta.official)} · ${escapeHtml(roundLabel)} · ${escapeHtml(eventTypeLabel)} · ${escapeHtml(activeScopeLabel)}${blocked ? ' (blocked)' : ' (calculated)'}
           </div>
 
           <div class="sim-rank-transform">
             <div class="sim-rank-box">
-              <div class="sim-rank-number">${escapeHtml(rankNationalBefore)}</div>
+              <div class="sim-rank-number">${escapeHtml(primaryBefore)}</div>
               <div class="sim-rank-caption">Before</div>
             </div>
             <div class="sim-rank-arrow">
               <div class="sim-rank-arrow-main">→</div>
-              <div class="sim-rank-jump">${projectionAvailable ? (jump ? `+${formatNumber(jump)} places` : 'No rank change') : 'Projection unavailable'}</div>
+              <div class="sim-rank-jump">${jumpLabel}</div>
             </div>
             <div class="sim-rank-box">
-              <div class="sim-rank-number is-after">${escapeHtml(rankNationalAfter)}</div>
+              <div class="sim-rank-number is-after">${escapeHtml(primaryAfter)}</div>
               <div class="sim-rank-caption">After</div>
             </div>
           </div>
@@ -99220,10 +99236,10 @@
           </div>
 
           <div class="sim-section-row">
-            <span class="sim-section-label">Section rank</span>
-            <span>${escapeHtml(rankSectionBefore)}</span>
+            <span class="sim-section-label">${escapeHtml(secondaryLabel)}</span>
+            <span>${escapeHtml(secondaryBefore)}</span>
             <span>→</span>
-            <span class="sim-section-after">${escapeHtml(rankSectionAfter)}</span>
+            <span class="sim-section-after">${escapeHtml(secondaryAfter)}</span>
           </div>
 
           ${projectionLine}
