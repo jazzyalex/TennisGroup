@@ -433,6 +433,17 @@
       transform: translateY(-1px);
     }
 
+    .player-card__profile-link--secondary {
+      background: transparent;
+      border: 1px solid rgba(45, 90, 39, 0.45);
+      color: var(--player-green);
+    }
+
+    .player-card__profile-link--secondary:hover {
+      background: rgba(45, 90, 39, 0.08);
+      border-color: var(--player-green);
+    }
+
     .player-card__profile-link svg {
       width: 16px;
       height: 16px;
@@ -1348,7 +1359,13 @@
         </div>
         <!-- View Full Profile Link -->
         <a href="player.html" class="player-card__profile-link">
-          View Full Profile
+          View Player Profile
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="ranking-simulator.html" class="player-card__profile-link player-card__profile-link--secondary">
+          Open Ranking Simulator
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
