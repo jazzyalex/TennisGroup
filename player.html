@@ -994,6 +994,145 @@
       gap: 10px;
     }
 
+    .sim-calc-shell {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      padding: 10px 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .sim-calc-input-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .sim-calc-input {
+      width: 130px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      outline: none;
+    }
+
+    .sim-calc-input:focus {
+      border-color: var(--player-green);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+    }
+
+    .sim-calc-chip {
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 6px 11px;
+      cursor: pointer;
+    }
+
+    .sim-calc-chip:hover {
+      border-color: #cbd5e1;
+      color: var(--text-primary);
+    }
+
+    .sim-calc-chip.is-clear {
+      color: #991b1b;
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .sim-calc-note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .sim-calc-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .sim-calc-summary-item {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+
+    .sim-neighbor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .sim-neighbor-block {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+
+    .sim-neighbor-title {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 800;
+      color: var(--text-muted);
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-tertiary);
+    }
+
+    .sim-neighbor-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .sim-neighbor-table th,
+    .sim-neighbor-table td {
+      font-size: 0.72rem;
+      padding: 6px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sim-neighbor-table th {
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 800;
+      background: var(--bg-tertiary);
+    }
+
+    .sim-neighbor-table tr.is-player {
+      background: #ecfdf5;
+      font-weight: 800;
+    }
+
+    .sim-neighbor-move {
+      margin-left: 4px;
+      font-size: 0.64rem;
+      font-weight: 800;
+      color: var(--player-green);
+    }
+
+    .sim-neighbor-move.down {
+      color: #b45309;
+    }
+
     .sim-result-empty {
       border: 1px dashed var(--border);
       border-radius: 12px;
@@ -2093,6 +2232,7 @@
         <div class="sim-tabs" role="tablist" aria-label="Ranking simulator mode">
           <button type="button" class="sim-tab is-active" data-sim-mode="planner" role="tab" aria-selected="true">Path Planner</button>
           <button type="button" class="sim-tab" data-sim-mode="scenario" role="tab" aria-selected="false">Scenario Builder</button>
+          <button type="button" class="sim-tab" data-sim-mode="calculator" role="tab" aria-selected="false">Points Calculator</button>
         </div>
       </div>
 
@@ -2193,6 +2333,32 @@
           </div>
 
           <div class="sim-results" data-sim-scenario-results></div>
+        </div>
+
+        <div class="sim-mode-panel" data-sim-mode-panel="calculator">
+          <div class="sim-shell">
+            <div class="sim-scope-row">
+              <span class="sim-row-label">View by</span>
+              <div class="sim-scope-toggle" role="group" aria-label="Calculator ranking scope">
+                <button type="button" class="sim-scope-btn is-active" data-sim-scope="national">National</button>
+                <button type="button" class="sim-scope-btn" data-sim-scope="section">Section</button>
+              </div>
+            </div>
+
+            <div class="sim-calc-shell">
+              <div class="sim-row-label">Enter raw points</div>
+              <div class="sim-calc-input-row">
+                <input type="number" class="sim-calc-input" data-sim-calc-input value="0" step="1" inputmode="numeric" />
+                <button type="button" class="sim-calc-chip" data-sim-calc-chip="+50">+50</button>
+                <button type="button" class="sim-calc-chip" data-sim-calc-chip="+100">+100</button>
+                <button type="button" class="sim-calc-chip" data-sim-calc-chip="+200">+200</button>
+                <button type="button" class="sim-calc-chip is-clear" data-sim-calc-reset>Reset</button>
+              </div>
+              <div class="sim-calc-note">Positive points replace the weakest singles counting result only when higher. Negative points model direct NST loss.</div>
+            </div>
+
+            <div class="sim-results" data-sim-calculator-results></div>
+          </div>
         </div>
       </div>
     </section>
@@ -2301,7 +2467,7 @@
                 "startDate": "2026-02-14",
                 "endDate": "2026-02-16",
                 "expiresDate": "2027-02-15",
-                "daysRemaining": 355,
+                "daysRemaining": 354,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -2334,7 +2500,7 @@
                 "startDate": "2026-01-31",
                 "endDate": "2026-02-01",
                 "expiresDate": "2027-01-31",
-                "daysRemaining": 340,
+                "daysRemaining": 339,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -2373,7 +2539,7 @@
                 "startDate": "2026-01-10",
                 "endDate": "2026-01-18",
                 "expiresDate": "2027-01-17",
-                "daysRemaining": 326,
+                "daysRemaining": 325,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -2418,7 +2584,7 @@
                 "startDate": "2025-11-15",
                 "endDate": "2025-11-16",
                 "expiresDate": "2026-11-15",
-                "daysRemaining": 263,
+                "daysRemaining": 262,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -2451,7 +2617,7 @@
                 "startDate": "2025-07-05",
                 "endDate": "2025-07-06",
                 "expiresDate": "2026-07-05",
-                "daysRemaining": 130,
+                "daysRemaining": 129,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -2484,8 +2650,8 @@
                 "startDate": "2025-04-26",
                 "endDate": "2025-04-27",
                 "expiresDate": "2026-04-26",
-                "daysRemaining": 60,
-                "urgency": "safe",
+                "daysRemaining": 59,
+                "urgency": "warning",
                 "matches": [
                   {
                     "round": "F",
@@ -2525,7 +2691,7 @@
                 "startDate": "2026-02-21",
                 "endDate": "2026-02-22",
                 "expiresDate": "2027-02-21",
-                "daysRemaining": 361,
+                "daysRemaining": 360,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -2575,7 +2741,7 @@
                 "startDate": "2025-09-20",
                 "endDate": "2025-09-21",
                 "expiresDate": "2026-09-20",
-                "daysRemaining": 207,
+                "daysRemaining": 206,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -2649,7 +2815,7 @@
                   "startDate": "2026-02-14",
                   "endDate": "2026-02-16",
                   "expiresDate": "2027-02-15",
-                  "daysRemaining": 355,
+                  "daysRemaining": 354,
                   "pointsRaw": 300,
                   "bucketPoints": 300,
                   "bonusPoints": 0
@@ -2664,7 +2830,7 @@
                   "startDate": "2026-01-10",
                   "endDate": "2026-01-18",
                   "expiresDate": "2027-01-17",
-                  "daysRemaining": 326,
+                  "daysRemaining": 325,
                   "pointsRaw": 173,
                   "bucketPoints": 173,
                   "bonusPoints": 0
@@ -2679,7 +2845,7 @@
                   "startDate": "2026-01-31",
                   "endDate": "2026-02-01",
                   "expiresDate": "2027-01-31",
-                  "daysRemaining": 340,
+                  "daysRemaining": 339,
                   "pointsRaw": 150,
                   "bucketPoints": 150,
                   "bonusPoints": 11
@@ -2694,7 +2860,7 @@
                   "startDate": "2025-11-15",
                   "endDate": "2025-11-16",
                   "expiresDate": "2026-11-15",
-                  "daysRemaining": 263,
+                  "daysRemaining": 262,
                   "pointsRaw": 105,
                   "bucketPoints": 105,
                   "bonusPoints": 0
@@ -2709,7 +2875,7 @@
                   "startDate": "2025-07-05",
                   "endDate": "2025-07-06",
                   "expiresDate": "2026-07-05",
-                  "daysRemaining": 130,
+                  "daysRemaining": 129,
                   "pointsRaw": 98,
                   "bucketPoints": 98,
                   "bonusPoints": 0
@@ -2724,7 +2890,7 @@
                   "startDate": "2025-04-26",
                   "endDate": "2025-04-27",
                   "expiresDate": "2026-04-26",
-                  "daysRemaining": 60,
+                  "daysRemaining": 59,
                   "pointsRaw": 95,
                   "bucketPoints": 95,
                   "bonusPoints": 0
@@ -2741,7 +2907,7 @@
                   "startDate": "2026-02-21",
                   "endDate": "2026-02-22",
                   "expiresDate": "2027-02-21",
-                  "daysRemaining": 361,
+                  "daysRemaining": 360,
                   "pointsRaw": 4,
                   "bucketPoints": 1,
                   "bonusPoints": 0
@@ -2756,7 +2922,7 @@
                   "startDate": "2025-09-20",
                   "endDate": "2025-09-21",
                   "expiresDate": "2026-09-20",
-                  "daysRemaining": 207,
+                  "daysRemaining": 206,
                   "pointsRaw": 4,
                   "bucketPoints": 1,
                   "bonusPoints": 0
@@ -17475,7 +17641,7 @@
                 "startDate": "2025-04-26",
                 "endDate": "2025-04-27",
                 "expiresDate": "2026-04-26",
-                "daysRemaining": 60,
+                "daysRemaining": 59,
                 "bucketPointsLost": 95,
                 "bonusPointsLost": 0,
                 "pointsLost": 95,
@@ -17496,7 +17662,7 @@
                 "startDate": "2025-07-05",
                 "endDate": "2025-07-06",
                 "expiresDate": "2026-07-05",
-                "daysRemaining": 130,
+                "daysRemaining": 129,
                 "bucketPointsLost": 98,
                 "bonusPointsLost": 0,
                 "pointsLost": 98,
@@ -17517,7 +17683,7 @@
                 "startDate": "2025-09-20",
                 "endDate": "2025-09-21",
                 "expiresDate": "2026-09-20",
-                "daysRemaining": 207,
+                "daysRemaining": 206,
                 "bucketPointsLost": 1,
                 "bonusPointsLost": 0,
                 "pointsLost": 1,
@@ -17538,7 +17704,7 @@
                 "startDate": "2025-11-15",
                 "endDate": "2025-11-16",
                 "expiresDate": "2026-11-15",
-                "daysRemaining": 263,
+                "daysRemaining": 262,
                 "bucketPointsLost": 105,
                 "bonusPointsLost": 0,
                 "pointsLost": 105,
@@ -17559,7 +17725,7 @@
                 "startDate": "2026-01-10",
                 "endDate": "2026-01-18",
                 "expiresDate": "2027-01-17",
-                "daysRemaining": 326,
+                "daysRemaining": 325,
                 "bucketPointsLost": 173,
                 "bonusPointsLost": 0,
                 "pointsLost": 173,
@@ -17580,7 +17746,7 @@
                 "startDate": "2026-01-31",
                 "endDate": "2026-02-01",
                 "expiresDate": "2027-01-31",
-                "daysRemaining": 340,
+                "daysRemaining": 339,
                 "bucketPointsLost": 150,
                 "bonusPointsLost": 11,
                 "pointsLost": 161,
@@ -17601,7 +17767,7 @@
                 "startDate": "2026-02-14",
                 "endDate": "2026-02-16",
                 "expiresDate": "2027-02-15",
-                "daysRemaining": 355,
+                "daysRemaining": 354,
                 "bucketPointsLost": 300,
                 "bonusPointsLost": 0,
                 "pointsLost": 300,
@@ -17622,7 +17788,7 @@
                 "startDate": "2026-02-21",
                 "endDate": "2026-02-22",
                 "expiresDate": "2027-02-21",
-                "daysRemaining": 361,
+                "daysRemaining": 360,
                 "bucketPointsLost": 1,
                 "bonusPointsLost": 0,
                 "pointsLost": 1,
@@ -60976,6 +61142,4250 @@
               "29": 918,
               "30": 899
             },
+            "rankRowsNational": [
+              {
+                "rank": 1,
+                "name": "Anna Victoria Sandru",
+                "uaid": "2018390685",
+                "totalPoints": 18288,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 2,
+                "name": "Mary Podkhyneychenko",
+                "uaid": "2018596613",
+                "totalPoints": 15399,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 3,
+                "name": "Summer Yang",
+                "uaid": "2018343122",
+                "totalPoints": 12247,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 4,
+                "name": "Chloe Anthony",
+                "uaid": "2018525158",
+                "totalPoints": 11840,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 5,
+                "name": "Valentina Singh Carvajal",
+                "uaid": "2018471033",
+                "totalPoints": 11353,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 6,
+                "name": "Noa Boar",
+                "uaid": "2018762194",
+                "totalPoints": 11344,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 7,
+                "name": "Lucy Dupere",
+                "uaid": "2018155310",
+                "totalPoints": 11196,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 8,
+                "name": "Danielle Han",
+                "uaid": "2018475032",
+                "totalPoints": 10850,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 9,
+                "name": "Cataleya Brown",
+                "uaid": "2018478866",
+                "totalPoints": 10332,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 10,
+                "name": "Maya Laddin",
+                "uaid": "2018480357",
+                "totalPoints": 10253,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 11,
+                "name": "Lucy Jiang",
+                "uaid": "2018930549",
+                "totalPoints": 9923,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 12,
+                "name": "Lindy Zhou",
+                "uaid": "2018826225",
+                "totalPoints": 9509,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 13,
+                "name": "Lola Looney",
+                "uaid": "2018906801",
+                "totalPoints": 9229,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 14,
+                "name": "Mikayla Noel",
+                "uaid": "2017331395",
+                "totalPoints": 8832,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 15,
+                "name": "Emma Li",
+                "uaid": "2018556043",
+                "totalPoints": 8498,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 16,
+                "name": "Violetta Li",
+                "uaid": "2018118686",
+                "totalPoints": 8439,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 17,
+                "name": "Vihana Thasen",
+                "uaid": "2018420242",
+                "totalPoints": 8345,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 18,
+                "name": "Alara Buyukuncu",
+                "uaid": "2018853771",
+                "totalPoints": 8147,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 19,
+                "name": "Ranvi Reddy",
+                "uaid": "2018464642",
+                "totalPoints": 8115,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 20,
+                "name": "Lailah Cowgill",
+                "uaid": "2019049578",
+                "totalPoints": 8088,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 21,
+                "name": "Reya Mahadoo",
+                "uaid": "2018967013",
+                "totalPoints": 7995,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 22,
+                "name": "Annabelle Huang",
+                "uaid": "2018982013",
+                "totalPoints": 7964,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 23,
+                "name": "Cathryn Chartrand",
+                "uaid": "2018511673",
+                "totalPoints": 7840,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 24,
+                "name": "Tinna Leekumjorn",
+                "uaid": "2018598076",
+                "totalPoints": 7731,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 25,
+                "name": "Evita Barjolo",
+                "uaid": "2018790929",
+                "totalPoints": 7609,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 26,
+                "name": "Ayenxavia Calugay",
+                "uaid": "2018160421",
+                "totalPoints": 7556,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 27,
+                "name": "Grace Malhotra",
+                "uaid": "2018932936",
+                "totalPoints": 7381,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 28,
+                "name": "Miyue Tao",
+                "uaid": "2018719433",
+                "totalPoints": 7123,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 29,
+                "name": "Catherine Chan",
+                "uaid": "2018581199",
+                "totalPoints": 6965,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 30,
+                "name": "Cordelia Skye",
+                "uaid": "2018572905",
+                "totalPoints": 6935,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 31,
+                "name": "Audrey Yang",
+                "uaid": "2018553594",
+                "totalPoints": 6771,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 32,
+                "name": "Laila McGregor-Green",
+                "uaid": "2018918524",
+                "totalPoints": 6514,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 33,
+                "name": "Delaney Guider",
+                "uaid": "2018662578",
+                "totalPoints": 6266,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 34,
+                "name": "Mandy Wei",
+                "uaid": "2018929071",
+                "totalPoints": 6076,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 35,
+                "name": "Gabriela Blanco",
+                "uaid": "2018236691",
+                "totalPoints": 6043,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 36,
+                "name": "Lolita Paley",
+                "uaid": "2019022875",
+                "totalPoints": 6008,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 37,
+                "name": "Tabitha Wasserman",
+                "uaid": "2018457144",
+                "totalPoints": 5934,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 38,
+                "name": "Lerong Yao",
+                "uaid": "2019055888",
+                "totalPoints": 5908,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 39,
+                "name": "Sidney Nagel",
+                "uaid": "2018460945",
+                "totalPoints": 5823,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 40,
+                "name": "Clarion Davis",
+                "uaid": "2018388712",
+                "totalPoints": 5745,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 41,
+                "name": "Lyla Qian",
+                "uaid": "2018489564",
+                "totalPoints": 5743,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 42,
+                "name": "Anna Rico",
+                "uaid": "2018422244",
+                "totalPoints": 5503,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 43,
+                "name": "Diya Godavarthi",
+                "uaid": "2018598773",
+                "totalPoints": 5422,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 44,
+                "name": "Eloise Forrest",
+                "uaid": "2018694201",
+                "totalPoints": 5346,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 45,
+                "name": "Rhiya Chiang",
+                "uaid": "2018703156",
+                "totalPoints": 5330,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 46,
+                "name": "Audrina Goodman",
+                "uaid": "2018475973",
+                "totalPoints": 5266,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 47,
+                "name": "Neeli Buchireddy",
+                "uaid": "2019006186",
+                "totalPoints": 5219,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 48,
+                "name": "Emanuela Trenet",
+                "uaid": "2018628227",
+                "totalPoints": 5166,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 49,
+                "name": "Elianah Shalgau",
+                "uaid": "2019217132",
+                "totalPoints": 5112,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 50,
+                "name": "Elizabeth Higgins",
+                "uaid": "2018117279",
+                "totalPoints": 5106,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 51,
+                "name": "Dorthy Chen",
+                "uaid": "2018620630",
+                "totalPoints": 5090,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 52,
+                "name": "Casey Davis",
+                "uaid": "2018389707",
+                "totalPoints": 5052,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 53,
+                "name": "Aya Iwata",
+                "uaid": "2018486147",
+                "totalPoints": 4901,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 54,
+                "name": "Nandika Singamala",
+                "uaid": "2018544532",
+                "totalPoints": 4878,
+                "trend": "up",
+                "section": "Northern California"
+              },
+              {
+                "rank": 55,
+                "name": "Kate Zhang",
+                "uaid": "2018577391",
+                "totalPoints": 4804,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 56,
+                "name": "Vasiana Christopoulos",
+                "uaid": "2018567474",
+                "totalPoints": 4778,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 57,
+                "name": "Nanami Gilbert",
+                "uaid": "2019099068",
+                "totalPoints": 4647,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 58,
+                "name": "Ryan Wilson",
+                "uaid": "2018511269",
+                "totalPoints": 4620,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 59,
+                "name": "Ziva Gadgil",
+                "uaid": "2018658341",
+                "totalPoints": 4538,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 60,
+                "name": "Caroline Creevey",
+                "uaid": "2018452051",
+                "totalPoints": 4524,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 61,
+                "name": "Ghillian Harper",
+                "uaid": "2018543876",
+                "totalPoints": 4519,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 62,
+                "name": "Sunny Read",
+                "uaid": "2018540554",
+                "totalPoints": 4495,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 63,
+                "name": "Ainsley Alhadeff",
+                "uaid": "2018955567",
+                "totalPoints": 4429,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 64,
+                "name": "Sophia Ikwueme",
+                "uaid": "2018501601",
+                "totalPoints": 4250,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 65,
+                "name": "Nahla Harris",
+                "uaid": "2018759614",
+                "totalPoints": 4219,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 66,
+                "name": "Lyana Yu",
+                "uaid": "2018362401",
+                "totalPoints": 4174,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 67,
+                "name": "Lauren Chang",
+                "uaid": "2018372580",
+                "totalPoints": 4157,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 68,
+                "name": "Ingrid Sagstrom",
+                "uaid": "2018495869",
+                "totalPoints": 4140,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 69,
+                "name": "Nadia Vora",
+                "uaid": "2018251500",
+                "totalPoints": 4122,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 70,
+                "name": "Aanya Vanamu",
+                "uaid": "2018630963",
+                "totalPoints": 4082,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 71,
+                "name": "Emma Werth",
+                "uaid": "2019218399",
+                "totalPoints": 4077,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 72,
+                "name": "Hana Nilsson",
+                "uaid": "2018455013",
+                "totalPoints": 3990,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 73,
+                "name": "Fangqiao Zou",
+                "uaid": "2019632927",
+                "totalPoints": 3975,
+                "trend": "no change",
+                "section": "International"
+              },
+              {
+                "rank": 74,
+                "name": "Grace Goode",
+                "uaid": "2018161213",
+                "totalPoints": 3969,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 75,
+                "name": "Annie Fang",
+                "uaid": "2018614841",
+                "totalPoints": 3948,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 76,
+                "name": "Elaina Jia",
+                "uaid": "2018556245",
+                "totalPoints": 3771,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 77,
+                "name": "Nicole Zhang",
+                "uaid": "2018502897",
+                "totalPoints": 3701,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 78,
+                "name": "Inie Toli",
+                "uaid": "2018421041",
+                "totalPoints": 3696,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 79,
+                "name": "Juliette Prince",
+                "uaid": "2018560588",
+                "totalPoints": 3676,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 80,
+                "name": "Keira Ouvarova",
+                "uaid": "2018514542",
+                "totalPoints": 3639,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 81,
+                "name": "Sadye Bruce",
+                "uaid": "2010755604",
+                "totalPoints": 3635,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 82,
+                "name": "Lauryn Bryant",
+                "uaid": "2018622595",
+                "totalPoints": 3631,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 83,
+                "name": "Meela Gupta",
+                "uaid": "2018782280",
+                "totalPoints": 3631,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 84,
+                "name": "Genoa Sinno",
+                "uaid": "2018487264",
+                "totalPoints": 3603,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 85,
+                "name": "Charlotte Snyder",
+                "uaid": "2018250390",
+                "totalPoints": 3592,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 86,
+                "name": "Suzanne Kang",
+                "uaid": "2018537487",
+                "totalPoints": 3553,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 87,
+                "name": "McKaeda Smith",
+                "uaid": "2018428308",
+                "totalPoints": 3535,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 88,
+                "name": "Caitlin Taweponsomkiat",
+                "uaid": "2018707306",
+                "totalPoints": 3488,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 89,
+                "name": "Hannah Luo",
+                "uaid": "2018402696",
+                "totalPoints": 3482,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 90,
+                "name": "Everly Cogdell",
+                "uaid": "2018364652",
+                "totalPoints": 3458,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 91,
+                "name": "Brooke Sangster",
+                "uaid": "2018296236",
+                "totalPoints": 3377,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 92,
+                "name": "Constanza Fernandez",
+                "uaid": "2018641295",
+                "totalPoints": 3375,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 93,
+                "name": "Elizabeth Jikuri",
+                "uaid": "2018908006",
+                "totalPoints": 3306,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 94,
+                "name": "Milana Babanova",
+                "uaid": "2018954330",
+                "totalPoints": 3302,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 95,
+                "name": "Lucia Zhang",
+                "uaid": "2019134564",
+                "totalPoints": 3297,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 96,
+                "name": "Tiffany Cai",
+                "uaid": "2018950973",
+                "totalPoints": 3275,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 97,
+                "name": "Kanchan Thomas",
+                "uaid": "2018481337",
+                "totalPoints": 3242,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 98,
+                "name": "Nela Klescova",
+                "uaid": "2019055423",
+                "totalPoints": 3233,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 99,
+                "name": "Annie Jiang",
+                "uaid": "2018596850",
+                "totalPoints": 3221,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 100,
+                "name": "Chenglin Ji",
+                "uaid": "2018790367",
+                "totalPoints": 3208,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 101,
+                "name": "Mia Prifti",
+                "uaid": "2018950449",
+                "totalPoints": 3192,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 102,
+                "name": "Coraline Albrecht",
+                "uaid": "2018464471",
+                "totalPoints": 3192,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 103,
+                "name": "Caroline Yang",
+                "uaid": "2018774274",
+                "totalPoints": 3186,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 104,
+                "name": "Rhea Talari",
+                "uaid": "2018789148",
+                "totalPoints": 3182,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 105,
+                "name": "Ella Morris",
+                "uaid": "2018530238",
+                "totalPoints": 3165,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 106,
+                "name": "Dargan Alexander",
+                "uaid": "2018158035",
+                "totalPoints": 3159,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 107,
+                "name": "Jordyn Cheung",
+                "uaid": "2018812128",
+                "totalPoints": 3158,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 108,
+                "name": "Eva Yang",
+                "uaid": "2018671404",
+                "totalPoints": 3140,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 109,
+                "name": "Kinsley Houser",
+                "uaid": "2018761426",
+                "totalPoints": 3112,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 110,
+                "name": "Isabella Du",
+                "uaid": "2018433276",
+                "totalPoints": 3109,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 111,
+                "name": "Vlada Hranchar",
+                "uaid": "2018907893",
+                "totalPoints": 3100,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 112,
+                "name": "Isabel Correa",
+                "uaid": "2019052765",
+                "totalPoints": 3091,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 113,
+                "name": "Ava Coy",
+                "uaid": "2017290273",
+                "totalPoints": 3075,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 114,
+                "name": "Kira Elliott",
+                "uaid": "2018579279",
+                "totalPoints": 3065,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 115,
+                "name": "Izilda Vicente",
+                "uaid": "2018830516",
+                "totalPoints": 3059,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 116,
+                "name": "Chloe Chang",
+                "uaid": "2018862815",
+                "totalPoints": 3036,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 117,
+                "name": "Mia Lurigio",
+                "uaid": "2018597693",
+                "totalPoints": 3019,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 118,
+                "name": "Amina DOUMBIA",
+                "uaid": "2019156291",
+                "totalPoints": 2986,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 119,
+                "name": "Ariana Sitkovetsky",
+                "uaid": "2019047404",
+                "totalPoints": 2977,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 120,
+                "name": "Evelyn Xu",
+                "uaid": "2018648918",
+                "totalPoints": 2966,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 121,
+                "name": "Xiaoke Li",
+                "uaid": "2020190531",
+                "totalPoints": 2942,
+                "trend": "no change",
+                "section": "International"
+              },
+              {
+                "rank": 122,
+                "name": "Addisyn Zhang",
+                "uaid": "2018770904",
+                "totalPoints": 2922,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 123,
+                "name": "Evie Yi",
+                "uaid": "2018975264",
+                "totalPoints": 2922,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 124,
+                "name": "Melody Li",
+                "uaid": "2019085296",
+                "totalPoints": 2905,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 125,
+                "name": "Reagan Choi",
+                "uaid": "2018769138",
+                "totalPoints": 2903,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 126,
+                "name": "Sofia Pizarro",
+                "uaid": "2018570961",
+                "totalPoints": 2895,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 127,
+                "name": "Jia Byun",
+                "uaid": "2018526973",
+                "totalPoints": 2891,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 128,
+                "name": "Gabriella Autry",
+                "uaid": "2018214624",
+                "totalPoints": 2858,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 129,
+                "name": "ADIVA ROSENBERG",
+                "uaid": "2018418314",
+                "totalPoints": 2857,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 130,
+                "name": "April Huang",
+                "uaid": "2018465301",
+                "totalPoints": 2840,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 131,
+                "name": "Taft Overstrom",
+                "uaid": "2018613029",
+                "totalPoints": 2793,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 132,
+                "name": "Harper Wang",
+                "uaid": "2018622907",
+                "totalPoints": 2765,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 133,
+                "name": "Isabella Ball",
+                "uaid": "2018370615",
+                "totalPoints": 2756,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 134,
+                "name": "Alaina Wilkie",
+                "uaid": "2019179392",
+                "totalPoints": 2750,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 135,
+                "name": "Meja Michener",
+                "uaid": "2018707628",
+                "totalPoints": 2732,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 136,
+                "name": "Kelly Zheng",
+                "uaid": "2018586882",
+                "totalPoints": 2729,
+                "trend": "up",
+                "section": "Southern California"
+              },
+              {
+                "rank": 137,
+                "name": "Emi Ceria",
+                "uaid": "2018946457",
+                "totalPoints": 2726,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 138,
+                "name": "Aleksandra Abaunza-Shen",
+                "uaid": "2018654417",
+                "totalPoints": 2721,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 139,
+                "name": "Giselle Snowden",
+                "uaid": "2018143579",
+                "totalPoints": 2709,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 140,
+                "name": "Emersyn Crocker",
+                "uaid": "2018473483",
+                "totalPoints": 2687,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 141,
+                "name": "Sarah Wu",
+                "uaid": "2019217268",
+                "totalPoints": 2677,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 142,
+                "name": "Ivy Bergeson",
+                "uaid": "2018505287",
+                "totalPoints": 2676,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 143,
+                "name": "Holly Lynch",
+                "uaid": "2018454440",
+                "totalPoints": 2673,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 144,
+                "name": "Makenzie Foreman",
+                "uaid": "2018509527",
+                "totalPoints": 2654,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 145,
+                "name": "Lily Sheehy",
+                "uaid": "2018547971",
+                "totalPoints": 2637,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 146,
+                "name": "Sophia Bostrom",
+                "uaid": "2018954012",
+                "totalPoints": 2632,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 147,
+                "name": "Aubrey Calaunan",
+                "uaid": "2019347367",
+                "totalPoints": 2626,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 148,
+                "name": "Ariella Ponzani",
+                "uaid": "2019223482",
+                "totalPoints": 2621,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 149,
+                "name": "Valentina Andrea Gomez Nunez",
+                "uaid": "2018658931",
+                "totalPoints": 2616,
+                "trend": "down",
+                "section": "Caribbean"
+              },
+              {
+                "rank": 150,
+                "name": "Raquel Delarosa",
+                "uaid": "2018540650",
+                "totalPoints": 2609,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 151,
+                "name": "Myranda Benson",
+                "uaid": "2019016239",
+                "totalPoints": 2589,
+                "trend": "up",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 152,
+                "name": "Maria Cristina Edjoo",
+                "uaid": "2018142419",
+                "totalPoints": 2585,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 153,
+                "name": "Alexandra Shih",
+                "uaid": "2018490894",
+                "totalPoints": 2560,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 154,
+                "name": "Malee Coupal",
+                "uaid": "2018542379",
+                "totalPoints": 2549,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 155,
+                "name": "Zeal Reynolds",
+                "uaid": "2018768063",
+                "totalPoints": 2545,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 156,
+                "name": "Kirra Murphy",
+                "uaid": "2018693939",
+                "totalPoints": 2543,
+                "trend": "down",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 157,
+                "name": "Katherine Jiao",
+                "uaid": "2018537169",
+                "totalPoints": 2520,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 158,
+                "name": "Marcellina Harp",
+                "uaid": "2019186854",
+                "totalPoints": 2500,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 159,
+                "name": "Olivia Levinson",
+                "uaid": "2018889053",
+                "totalPoints": 2498,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 160,
+                "name": "Keerthi Sundar",
+                "uaid": "2018694026",
+                "totalPoints": 2492,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 161,
+                "name": "Aria Johannesen",
+                "uaid": "2018456181",
+                "totalPoints": 2487,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 162,
+                "name": "Alivia Liu",
+                "uaid": "2018788310",
+                "totalPoints": 2478,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 163,
+                "name": "Sanha Chegu",
+                "uaid": "2019312153",
+                "totalPoints": 2445,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 164,
+                "name": "Emma Dubon Blanco",
+                "uaid": "2018724162",
+                "totalPoints": 2433,
+                "trend": "no change",
+                "section": "Caribbean"
+              },
+              {
+                "rank": 165,
+                "name": "Caroline McLean",
+                "uaid": "2018578454",
+                "totalPoints": 2417,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 166,
+                "name": "Brynlee Ingraham",
+                "uaid": "2018578966",
+                "totalPoints": 2408,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 167,
+                "name": "Shradda Chala",
+                "uaid": "2018989449",
+                "totalPoints": 2408,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 168,
+                "name": "Yifan Wen",
+                "uaid": "2018605392",
+                "totalPoints": 2400,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 169,
+                "name": "Sana Meher Jain",
+                "uaid": "2018396450",
+                "totalPoints": 2392,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 170,
+                "name": "Mila Barnes",
+                "uaid": "2018703205",
+                "totalPoints": 2367,
+                "trend": "down",
+                "section": "Southern"
+              },
+              {
+                "rank": 171,
+                "name": "Melodie Geffrard",
+                "uaid": "2018999895",
+                "totalPoints": 2357,
+                "trend": "up",
+                "section": "Eastern"
+              },
+              {
+                "rank": 172,
+                "name": "Isla Merrifield",
+                "uaid": "2018550329",
+                "totalPoints": 2350,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 173,
+                "name": "Natalia Hernandez",
+                "uaid": "2018593975",
+                "totalPoints": 2338,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 174,
+                "name": "Yoonseol Choi",
+                "uaid": "2020188469",
+                "totalPoints": 2328,
+                "trend": "no change",
+                "section": "International"
+              },
+              {
+                "rank": 175,
+                "name": "Abby Qiu",
+                "uaid": "2019107538",
+                "totalPoints": 2316,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 176,
+                "name": "Adalie Smith",
+                "uaid": "2018573137",
+                "totalPoints": 2315,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 177,
+                "name": "Stephanie Zhang",
+                "uaid": "2019010099",
+                "totalPoints": 2307,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 178,
+                "name": "Jessy Wolfe",
+                "uaid": "2018294306",
+                "totalPoints": 2298,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 179,
+                "name": "Angela Meng",
+                "uaid": "2019254313",
+                "totalPoints": 2298,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 180,
+                "name": "Catherine Zhou",
+                "uaid": "2019084884",
+                "totalPoints": 2280,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 181,
+                "name": "Hannah Josephs",
+                "uaid": "2018777343",
+                "totalPoints": 2265,
+                "trend": "no change",
+                "section": "Caribbean"
+              },
+              {
+                "rank": 182,
+                "name": "BERNADETTE WAPPLER",
+                "uaid": "2019006781",
+                "totalPoints": 2252,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 183,
+                "name": "Ana Meyer",
+                "uaid": "2018837515",
+                "totalPoints": 2244,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 184,
+                "name": "Angelica Miyoshi",
+                "uaid": "2018369383",
+                "totalPoints": 2242,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 185,
+                "name": "Katherine YAO",
+                "uaid": "2018993518",
+                "totalPoints": 2237,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 186,
+                "name": "Alexandra Li",
+                "uaid": "2018540478",
+                "totalPoints": 2234,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 187,
+                "name": "Seungyeon Seo",
+                "uaid": "2020213913",
+                "totalPoints": 2208,
+                "trend": "no change",
+                "section": "International"
+              },
+              {
+                "rank": 188,
+                "name": "Nyla Featherstone",
+                "uaid": "2018410198",
+                "totalPoints": 2184,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 189,
+                "name": "Briana Rybak",
+                "uaid": "2019033872",
+                "totalPoints": 2175,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 190,
+                "name": "Lexi McKenzie",
+                "uaid": "2018559140",
+                "totalPoints": 2170,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 191,
+                "name": "Angela Hong",
+                "uaid": "2018812379",
+                "totalPoints": 2142,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 192,
+                "name": "Mia Amen",
+                "uaid": "2018464234",
+                "totalPoints": 2135,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 193,
+                "name": "Genevieve Phillips",
+                "uaid": "2018419054",
+                "totalPoints": 2125,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 194,
+                "name": "Savina Somrock",
+                "uaid": "2018701928",
+                "totalPoints": 2111,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 195,
+                "name": "Michelle Babanova",
+                "uaid": "2018954333",
+                "totalPoints": 2103,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 196,
+                "name": "Phoebe Lee",
+                "uaid": "2018938127",
+                "totalPoints": 2101,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 197,
+                "name": "Mausia Toli",
+                "uaid": "2018421042",
+                "totalPoints": 2092,
+                "trend": "up",
+                "section": "Florida"
+              },
+              {
+                "rank": 198,
+                "name": "Sloane Pablo",
+                "uaid": "2019223487",
+                "totalPoints": 2092,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 199,
+                "name": "Lia Leon",
+                "uaid": "2018616326",
+                "totalPoints": 2074,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 200,
+                "name": "Gianna Stoica",
+                "uaid": "2017160836",
+                "totalPoints": 2056,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 201,
+                "name": "Siyi Li",
+                "uaid": "2018419600",
+                "totalPoints": 2052,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 202,
+                "name": "Clelia Maxima Courmes-Karacadag",
+                "uaid": "2018468512",
+                "totalPoints": 2049,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 203,
+                "name": "Taliya Temraz",
+                "uaid": "2018891255",
+                "totalPoints": 2044,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 204,
+                "name": "Charlotte Ross",
+                "uaid": "2019158149",
+                "totalPoints": 2041,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 205,
+                "name": "Elle Chang",
+                "uaid": "2019115772",
+                "totalPoints": 2034,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 206,
+                "name": "Susanna Beaujean",
+                "uaid": "2018149212",
+                "totalPoints": 2013,
+                "trend": "up",
+                "section": "Texas"
+              },
+              {
+                "rank": 207,
+                "name": "Vivian Santos",
+                "uaid": "2018720632",
+                "totalPoints": 2007,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 208,
+                "name": "Zoya Bogomolova",
+                "uaid": "2018804295",
+                "totalPoints": 2001,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 209,
+                "name": "Mia Watanabe",
+                "uaid": "2018546777",
+                "totalPoints": 1991,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 210,
+                "name": "Ziyue Mu",
+                "uaid": "2019264122",
+                "totalPoints": 1987,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 211,
+                "name": "Evelyn Cordish",
+                "uaid": "2018883284",
+                "totalPoints": 1985,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 212,
+                "name": "Aleksandra Burnquist",
+                "uaid": "2017343318",
+                "totalPoints": 1972,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 213,
+                "name": "Kaitlyn Zhuo",
+                "uaid": "2019050053",
+                "totalPoints": 1968,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 214,
+                "name": "Yuna Guo",
+                "uaid": "2018978115",
+                "totalPoints": 1962,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 215,
+                "name": "Genesis Komoto",
+                "uaid": "2019105840",
+                "totalPoints": 1958,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 216,
+                "name": "Zhiyan Duan",
+                "uaid": "2019107218",
+                "totalPoints": 1956,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 217,
+                "name": "Riesling Santandreu Sweeney",
+                "uaid": "2018970450",
+                "totalPoints": 1955,
+                "trend": "down",
+                "section": "Caribbean"
+              },
+              {
+                "rank": 218,
+                "name": "Caitlin Waldron",
+                "uaid": "2019001289",
+                "totalPoints": 1947,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 219,
+                "name": "Zoe Anabella Vasquez",
+                "uaid": "2019117922",
+                "totalPoints": 1926,
+                "trend": "down",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 220,
+                "name": "Lillian Nyalala",
+                "uaid": "2018820336",
+                "totalPoints": 1926,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 221,
+                "name": "Savannah Billings",
+                "uaid": "2019252023",
+                "totalPoints": 1916,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 222,
+                "name": "Bree Asato",
+                "uaid": "2018979712",
+                "totalPoints": 1899,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 223,
+                "name": "Mila Kostel",
+                "uaid": "2019014714",
+                "totalPoints": 1899,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 224,
+                "name": "Emma Ziyu Ling",
+                "uaid": "2018730328",
+                "totalPoints": 1894,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 225,
+                "name": "Michelle Dou",
+                "uaid": "2018781223",
+                "totalPoints": 1892,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 226,
+                "name": "Olivia Milewski",
+                "uaid": "2018417258",
+                "totalPoints": 1888,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 227,
+                "name": "Selene Yang",
+                "uaid": "2018471823",
+                "totalPoints": 1880,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 228,
+                "name": "Vanna Turner",
+                "uaid": "2018693961",
+                "totalPoints": 1876,
+                "trend": "up",
+                "section": "Florida"
+              },
+              {
+                "rank": 229,
+                "name": "Sofia Gomez",
+                "uaid": "2018514308",
+                "totalPoints": 1869,
+                "trend": "up",
+                "section": "Florida"
+              },
+              {
+                "rank": 230,
+                "name": "Maisy Morales",
+                "uaid": "2018614433",
+                "totalPoints": 1865,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 231,
+                "name": "Aurora Villavicencio",
+                "uaid": "2018646294",
+                "totalPoints": 1864,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 232,
+                "name": "Vanessa Romeo",
+                "uaid": "2018717901",
+                "totalPoints": 1864,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 233,
+                "name": "Penelope Lang",
+                "uaid": "2019246230",
+                "totalPoints": 1862,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 234,
+                "name": "Olivia Pan",
+                "uaid": "2018430445",
+                "totalPoints": 1853,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 235,
+                "name": "Jiru Yang",
+                "uaid": "2019713476",
+                "totalPoints": 1846,
+                "trend": "no change",
+                "section": "International"
+              },
+              {
+                "rank": 236,
+                "name": "Mithra Nandarapu",
+                "uaid": "2018612944",
+                "totalPoints": 1843,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 237,
+                "name": "Madelyn Lai",
+                "uaid": "2018456829",
+                "totalPoints": 1840,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 238,
+                "name": "Nora Warner",
+                "uaid": "2018746356",
+                "totalPoints": 1835,
+                "trend": "up",
+                "section": "Southern"
+              },
+              {
+                "rank": 239,
+                "name": "Constanza Perdomo",
+                "uaid": "2018559361",
+                "totalPoints": 1834,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 240,
+                "name": "Brita Sviggum",
+                "uaid": "2018473264",
+                "totalPoints": 1830,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 241,
+                "name": "Maya Rajpal",
+                "uaid": "2018355602",
+                "totalPoints": 1830,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 242,
+                "name": "Stella Hossain",
+                "uaid": "2018853329",
+                "totalPoints": 1824,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 243,
+                "name": "Miera Dunham",
+                "uaid": "2019033804",
+                "totalPoints": 1824,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 244,
+                "name": "Charlize Rearte",
+                "uaid": "2019408776",
+                "totalPoints": 1823,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 245,
+                "name": "Joyce Deng",
+                "uaid": "2018630633",
+                "totalPoints": 1817,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 246,
+                "name": "Zoe Toledano",
+                "uaid": "2018815728",
+                "totalPoints": 1810,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 247,
+                "name": "Skylar Coleman",
+                "uaid": "2018367257",
+                "totalPoints": 1809,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 248,
+                "name": "Matilda Wang",
+                "uaid": "2018532053",
+                "totalPoints": 1798,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 249,
+                "name": "Alexandra Barshay",
+                "uaid": "2019083621",
+                "totalPoints": 1798,
+                "trend": "down",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 250,
+                "name": "Ilisha Ahlawat",
+                "uaid": "2019375280",
+                "totalPoints": 1792,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 251,
+                "name": "Angeline Bone",
+                "uaid": "2018961675",
+                "totalPoints": 1785,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 252,
+                "name": "Nikhita Barath",
+                "uaid": "2018641201",
+                "totalPoints": 1784,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 253,
+                "name": "Alexi Labrecque",
+                "uaid": "2018998280",
+                "totalPoints": 1767,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 254,
+                "name": "Anya Leckerling",
+                "uaid": "2019001979",
+                "totalPoints": 1760,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 255,
+                "name": "Sarah Lee",
+                "uaid": "2019286455",
+                "totalPoints": 1759,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 256,
+                "name": "Tamara Korneeva",
+                "uaid": "2018932009",
+                "totalPoints": 1758,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 257,
+                "name": "Joella Ioane",
+                "uaid": "2019557548",
+                "totalPoints": 1757,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 258,
+                "name": "Khiara Emoff",
+                "uaid": "2018618414",
+                "totalPoints": 1756,
+                "trend": "up",
+                "section": "Midwest"
+              },
+              {
+                "rank": 259,
+                "name": "Maya Brush",
+                "uaid": "2018862289",
+                "totalPoints": 1737,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 260,
+                "name": "Olivia Kaindin",
+                "uaid": "2018788283",
+                "totalPoints": 1722,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 261,
+                "name": "Lucia Smith",
+                "uaid": "2018741013",
+                "totalPoints": 1713,
+                "trend": "down",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 262,
+                "name": "Sofia Kososki",
+                "uaid": "2019018890",
+                "totalPoints": 1710,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 263,
+                "name": "Myra Yadav",
+                "uaid": "2018411503",
+                "totalPoints": 1700,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 264,
+                "name": "Elina Yamamoto",
+                "uaid": "2017332570",
+                "totalPoints": 1696,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 265,
+                "name": "Madison Evans",
+                "uaid": "2018674187",
+                "totalPoints": 1688,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 266,
+                "name": "Allison Kang",
+                "uaid": "2018841132",
+                "totalPoints": 1676,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 267,
+                "name": "Holly Kim",
+                "uaid": "2018717201",
+                "totalPoints": 1675,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 268,
+                "name": "Priya Prasad",
+                "uaid": "2018746167",
+                "totalPoints": 1671,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 269,
+                "name": "Valentina Kukeeva",
+                "uaid": "2018899502",
+                "totalPoints": 1670,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 270,
+                "name": "Valeriya Bezlyudova",
+                "uaid": "2018749271",
+                "totalPoints": 1655,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 271,
+                "name": "Alyssa Chan",
+                "uaid": "2018993559",
+                "totalPoints": 1652,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 272,
+                "name": "Ivory Shiozawa",
+                "uaid": "2010787105",
+                "totalPoints": 1652,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 273,
+                "name": "Chelsea Ie",
+                "uaid": "2018543789",
+                "totalPoints": 1644,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 274,
+                "name": "Evelyn Burton",
+                "uaid": "2018908517",
+                "totalPoints": 1640,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 275,
+                "name": "Abigail Neus",
+                "uaid": "2018597095",
+                "totalPoints": 1633,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 276,
+                "name": "Allison Daniels",
+                "uaid": "2017204043",
+                "totalPoints": 1625,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 277,
+                "name": "Ava Claire Dailey",
+                "uaid": "2018655625",
+                "totalPoints": 1624,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 278,
+                "name": "Parisa Abdulloeva",
+                "uaid": "2018523130",
+                "totalPoints": 1621,
+                "trend": "up",
+                "section": "Florida"
+              },
+              {
+                "rank": 279,
+                "name": "Lily Bullaro",
+                "uaid": "2018748853",
+                "totalPoints": 1604,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 280,
+                "name": "Anastasiia Davydenko",
+                "uaid": "2019321068",
+                "totalPoints": 1603,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 281,
+                "name": "Taryn Lutz",
+                "uaid": "2017322680",
+                "totalPoints": 1600,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 282,
+                "name": "Payton Kopf",
+                "uaid": "2018761402",
+                "totalPoints": 1598,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 283,
+                "name": "Aria Martinez",
+                "uaid": "2018519039",
+                "totalPoints": 1598,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 284,
+                "name": "Masha Sky",
+                "uaid": "2018938786",
+                "totalPoints": 1597,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 285,
+                "name": "Olivia Li",
+                "uaid": "2018636218",
+                "totalPoints": 1583,
+                "trend": "up",
+                "section": "Northern California"
+              },
+              {
+                "rank": 286,
+                "name": "Camille Kunkel",
+                "uaid": "2018867069",
+                "totalPoints": 1550,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 287,
+                "name": "Nylah Randolph",
+                "uaid": "2018979104",
+                "totalPoints": 1549,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 288,
+                "name": "Arielle Lee",
+                "uaid": "2018412291",
+                "totalPoints": 1537,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 289,
+                "name": "Karena Le",
+                "uaid": "2018775890",
+                "totalPoints": 1523,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 290,
+                "name": "Azah Gbugu",
+                "uaid": "2018848166",
+                "totalPoints": 1519,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 291,
+                "name": "Mingni Chai",
+                "uaid": "2018822086",
+                "totalPoints": 1516,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 292,
+                "name": "Joyous McNealy",
+                "uaid": "2018137808",
+                "totalPoints": 1514,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 293,
+                "name": "Kimi Yunuo Liu",
+                "uaid": "2019120459",
+                "totalPoints": 1502,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 294,
+                "name": "Pauline Gransater",
+                "uaid": "2018225689",
+                "totalPoints": 1501,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 295,
+                "name": "Serena Ran",
+                "uaid": "2018585439",
+                "totalPoints": 1499,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 296,
+                "name": "Sarah Shalgau",
+                "uaid": "2019217133",
+                "totalPoints": 1489,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 297,
+                "name": "Emily Leviton",
+                "uaid": "2019325171",
+                "totalPoints": 1485,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 298,
+                "name": "Parker Deppa",
+                "uaid": "2018857376",
+                "totalPoints": 1472,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 299,
+                "name": "Lara Fawzy",
+                "uaid": "2019208193",
+                "totalPoints": 1468,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 300,
+                "name": "Vanessa Vankova",
+                "uaid": "2019950498",
+                "totalPoints": 1462,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 301,
+                "name": "Violet Gomez",
+                "uaid": "2018605769",
+                "totalPoints": 1454,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 302,
+                "name": "Lana Lee",
+                "uaid": "2019143045",
+                "totalPoints": 1452,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 303,
+                "name": "Sophia Prezenchuk",
+                "uaid": "2018543441",
+                "totalPoints": 1451,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 304,
+                "name": "Amelia de la Cruz",
+                "uaid": "2019295335",
+                "totalPoints": 1449,
+                "trend": "down",
+                "section": "Caribbean"
+              },
+              {
+                "rank": 305,
+                "name": "Xiyu Wu",
+                "uaid": "2018843815",
+                "totalPoints": 1447,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 306,
+                "name": "Ivy Alexis",
+                "uaid": "2019025482",
+                "totalPoints": 1433,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 307,
+                "name": "Laura Jedlinska",
+                "uaid": "2018296175",
+                "totalPoints": 1426,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 308,
+                "name": "Evelyn Croll",
+                "uaid": "2018459959",
+                "totalPoints": 1416,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 309,
+                "name": "Kate Li",
+                "uaid": "2019485326",
+                "totalPoints": 1402,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 310,
+                "name": "Areli Ama",
+                "uaid": "2018541174",
+                "totalPoints": 1389,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 311,
+                "name": "Paisley Hobbs",
+                "uaid": "2018678218",
+                "totalPoints": 1387,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 312,
+                "name": "Katelyn DuRant",
+                "uaid": "2019040791",
+                "totalPoints": 1387,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 313,
+                "name": "Serena Chen",
+                "uaid": "2018526484",
+                "totalPoints": 1385,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 314,
+                "name": "Sofia Petruta",
+                "uaid": "2018667947",
+                "totalPoints": 1381,
+                "trend": "up",
+                "section": "Florida"
+              },
+              {
+                "rank": 315,
+                "name": "Meryem Pinar",
+                "uaid": "2018925473",
+                "totalPoints": 1374,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 316,
+                "name": "Carlota Tarazaga Diaz",
+                "uaid": "2019040216",
+                "totalPoints": 1365,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 317,
+                "name": "Leah Davis",
+                "uaid": "2019001993",
+                "totalPoints": 1364,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 318,
+                "name": "Adelyn Mannari",
+                "uaid": "2018546387",
+                "totalPoints": 1363,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 319,
+                "name": "Elise Tancredi",
+                "uaid": "2017302081",
+                "totalPoints": 1363,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 320,
+                "name": "Ziruo Zhu",
+                "uaid": "2018724253",
+                "totalPoints": 1353,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 321,
+                "name": "Aubrey Yu",
+                "uaid": "2018540817",
+                "totalPoints": 1345,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 322,
+                "name": "Ann Claire Mcculloh",
+                "uaid": "2018837598",
+                "totalPoints": 1344,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 323,
+                "name": "Jennifer Chen",
+                "uaid": "2018885463",
+                "totalPoints": 1342,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 324,
+                "name": "Layla Reed",
+                "uaid": "2019046974",
+                "totalPoints": 1341,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 325,
+                "name": "Lana Bode",
+                "uaid": "2018807029",
+                "totalPoints": 1339,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 326,
+                "name": "Kate Brenner",
+                "uaid": "2018885294",
+                "totalPoints": 1332,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 327,
+                "name": "Trinite Howard",
+                "uaid": "2018821927",
+                "totalPoints": 1328,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 328,
+                "name": "Avery Milewski",
+                "uaid": "2018417257",
+                "totalPoints": 1327,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 329,
+                "name": "Kenna Sungurov",
+                "uaid": "2018812238",
+                "totalPoints": 1327,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 330,
+                "name": "Summer Stiritz",
+                "uaid": "2018746621",
+                "totalPoints": 1308,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 331,
+                "name": "Layla Maddan",
+                "uaid": "2018940657",
+                "totalPoints": 1303,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 332,
+                "name": "Nicole Dratch",
+                "uaid": "2018495699",
+                "totalPoints": 1300,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 333,
+                "name": "Venice Johnson",
+                "uaid": "2019007693",
+                "totalPoints": 1295,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 334,
+                "name": "Zana Peric",
+                "uaid": "2019291721",
+                "totalPoints": 1292,
+                "trend": "no change",
+                "section": "International"
+              },
+              {
+                "rank": 335,
+                "name": "Chloe Pham",
+                "uaid": "2019037295",
+                "totalPoints": 1290,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 336,
+                "name": "Emily Zheng",
+                "uaid": "2019327760",
+                "totalPoints": 1287,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 337,
+                "name": "Kailee Blouin",
+                "uaid": "2018974667",
+                "totalPoints": 1287,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 338,
+                "name": "Sofia Hubbart",
+                "uaid": "2018436943",
+                "totalPoints": 1281,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 339,
+                "name": "Briella Clary",
+                "uaid": "2018975172",
+                "totalPoints": 1278,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 340,
+                "name": "Zoey Dam",
+                "uaid": "2018925994",
+                "totalPoints": 1273,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 341,
+                "name": "Vera Pantovic",
+                "uaid": "2018774179",
+                "totalPoints": 1272,
+                "trend": "down",
+                "section": "Southern"
+              },
+              {
+                "rank": 342,
+                "name": "Vivien Khokhryakova",
+                "uaid": "2018767564",
+                "totalPoints": 1269,
+                "trend": "up",
+                "section": "Florida"
+              },
+              {
+                "rank": 343,
+                "name": "Juliana Janiak",
+                "uaid": "2018909054",
+                "totalPoints": 1269,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 344,
+                "name": "Ava Griffin",
+                "uaid": "2018559240",
+                "totalPoints": 1268,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 345,
+                "name": "Annika Kumar",
+                "uaid": "2018296219",
+                "totalPoints": 1262,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 346,
+                "name": "Franny Chonka",
+                "uaid": "2018900144",
+                "totalPoints": 1262,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 347,
+                "name": "Vivian McIver",
+                "uaid": "2019279455",
+                "totalPoints": 1257,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 348,
+                "name": "Prathiti Agileswar",
+                "uaid": "2019509413",
+                "totalPoints": 1256,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 349,
+                "name": "Carolina Gualtier",
+                "uaid": "2018760191",
+                "totalPoints": 1254,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 350,
+                "name": "Londyn Atkin",
+                "uaid": "2019158197",
+                "totalPoints": 1247,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 351,
+                "name": "Navyaana Nanda",
+                "uaid": "2019052388",
+                "totalPoints": 1246,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 352,
+                "name": "Aanya Sujay",
+                "uaid": "2019007153",
+                "totalPoints": 1245,
+                "trend": "up",
+                "section": "Southern"
+              },
+              {
+                "rank": 353,
+                "name": "Madelyn Mika",
+                "uaid": "2018472844",
+                "totalPoints": 1244,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 354,
+                "name": "Olivia Mullin",
+                "uaid": "2019138046",
+                "totalPoints": 1244,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 355,
+                "name": "Elena Perez",
+                "uaid": "2018654364",
+                "totalPoints": 1239,
+                "trend": "no change",
+                "section": "Caribbean"
+              },
+              {
+                "rank": 356,
+                "name": "EMMA MOORE",
+                "uaid": "2018843619",
+                "totalPoints": 1239,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 357,
+                "name": "Ayuni Kottachchi",
+                "uaid": "2019161969",
+                "totalPoints": 1234,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 358,
+                "name": "Huining Zhang",
+                "uaid": "2019037203",
+                "totalPoints": 1225,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 359,
+                "name": "Madeline Bigler",
+                "uaid": "2018418559",
+                "totalPoints": 1220,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 360,
+                "name": "Kidist Pittman",
+                "uaid": "2018621206",
+                "totalPoints": 1218,
+                "trend": "down",
+                "section": "Southern"
+              },
+              {
+                "rank": 361,
+                "name": "Sophie Jaeger",
+                "uaid": "2019304852",
+                "totalPoints": 1215,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 362,
+                "name": "Jenna Yu",
+                "uaid": "2018832337",
+                "totalPoints": 1209,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 363,
+                "name": "Elena Bugaj",
+                "uaid": "2018473385",
+                "totalPoints": 1203,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 364,
+                "name": "Britton Dantin",
+                "uaid": "2018660800",
+                "totalPoints": 1194,
+                "trend": "up",
+                "section": "Southern"
+              },
+              {
+                "rank": 365,
+                "name": "Kotone Tiner",
+                "uaid": "2018496304",
+                "totalPoints": 1192,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 366,
+                "name": "Alekhya Doddapaneni",
+                "uaid": "2019039396",
+                "totalPoints": 1192,
+                "trend": "down",
+                "section": "Middle States"
+              },
+              {
+                "rank": 367,
+                "name": "Chloe Leung",
+                "uaid": "2018725746",
+                "totalPoints": 1188,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 368,
+                "name": "GraceAnn Xu",
+                "uaid": "2018595293",
+                "totalPoints": 1187,
+                "trend": "down",
+                "section": "Southern"
+              },
+              {
+                "rank": 369,
+                "name": "Noor Desai",
+                "uaid": "2018653862",
+                "totalPoints": 1184,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 370,
+                "name": "Aleisa Beaujean",
+                "uaid": "2018149213",
+                "totalPoints": 1181,
+                "trend": "up",
+                "section": "Texas"
+              },
+              {
+                "rank": 371,
+                "name": "Lavi Nguyen",
+                "uaid": "2018399095",
+                "totalPoints": 1176,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 372,
+                "name": "Diana Grinchak",
+                "uaid": "2018538920",
+                "totalPoints": 1171,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 373,
+                "name": "Madison Rivera",
+                "uaid": "2019227065",
+                "totalPoints": 1165,
+                "trend": "no change",
+                "section": "Caribbean"
+              },
+              {
+                "rank": 374,
+                "name": "Angela Ling",
+                "uaid": "2018538252",
+                "totalPoints": 1165,
+                "trend": "up",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 375,
+                "name": "Vivi Cordish",
+                "uaid": "2018886619",
+                "totalPoints": 1163,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 376,
+                "name": "Marina Martirosyan",
+                "uaid": "2018585269",
+                "totalPoints": 1162,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 377,
+                "name": "Mihaela Tertiuc",
+                "uaid": "2018978095",
+                "totalPoints": 1155,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 378,
+                "name": "Simone Swisher",
+                "uaid": "2018792184",
+                "totalPoints": 1154,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 379,
+                "name": "Lillie Zacher",
+                "uaid": "2019267300",
+                "totalPoints": 1149,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 380,
+                "name": "Sasha Zhukova",
+                "uaid": "2019137117",
+                "totalPoints": 1141,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 381,
+                "name": "Margaux Roger",
+                "uaid": "2018550599",
+                "totalPoints": 1137,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 382,
+                "name": "Uma Karabegovic",
+                "uaid": "2018991593",
+                "totalPoints": 1136,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 383,
+                "name": "AnaBarron Lupton",
+                "uaid": "2018899903",
+                "totalPoints": 1134,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 384,
+                "name": "Sienna Torre",
+                "uaid": "2018483247",
+                "totalPoints": 1128,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 385,
+                "name": "Emmeline MacDonald",
+                "uaid": "2019006881",
+                "totalPoints": 1128,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 386,
+                "name": "Violet la Moure",
+                "uaid": "2019602092",
+                "totalPoints": 1123,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 387,
+                "name": "Grace Lee",
+                "uaid": "2019137309",
+                "totalPoints": 1116,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 388,
+                "name": "Katherine Chang",
+                "uaid": "2018511141",
+                "totalPoints": 1114,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 389,
+                "name": "Zoya Ilic",
+                "uaid": "2018456297",
+                "totalPoints": 1111,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 390,
+                "name": "Valeria Chavarria",
+                "uaid": "2018874708",
+                "totalPoints": 1104,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 391,
+                "name": "Kendra Wu",
+                "uaid": "2018931899",
+                "totalPoints": 1103,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 392,
+                "name": "Hannah McLaurin",
+                "uaid": "2018501918",
+                "totalPoints": 1099,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 393,
+                "name": "Yanjia Yang",
+                "uaid": "2019386540",
+                "totalPoints": 1097,
+                "trend": "down",
+                "section": "Midwest"
+              },
+              {
+                "rank": 394,
+                "name": "Agnes Zheng",
+                "uaid": "2019393178",
+                "totalPoints": 1096,
+                "trend": "down",
+                "section": "Middle States"
+              },
+              {
+                "rank": 395,
+                "name": "Anaya Pany",
+                "uaid": "2018547569",
+                "totalPoints": 1091,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 396,
+                "name": "Emma Zhang",
+                "uaid": "2019620830",
+                "totalPoints": 1089,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 397,
+                "name": "Nadia Fuduric",
+                "uaid": "2018479213",
+                "totalPoints": 1087,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 398,
+                "name": "Mikayla David",
+                "uaid": "2018706366",
+                "totalPoints": 1083,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 399,
+                "name": "Aroosha Baanu Rooholamini",
+                "uaid": "2019039051",
+                "totalPoints": 1081,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 400,
+                "name": "Frances San Luis",
+                "uaid": "2018950247",
+                "totalPoints": 1079,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 401,
+                "name": "Adura Akiwumi",
+                "uaid": "2018631489",
+                "totalPoints": 1079,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 402,
+                "name": "Emily Wenqi Tan",
+                "uaid": "2019644213",
+                "totalPoints": 1078,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 403,
+                "name": "Mamie Marsh",
+                "uaid": "2018830149",
+                "totalPoints": 1078,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 404,
+                "name": "Selena Erkavun",
+                "uaid": "2018859896",
+                "totalPoints": 1076,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 405,
+                "name": "Chloe Chen",
+                "uaid": "2019325777",
+                "totalPoints": 1075,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 406,
+                "name": "Hazelin Luu",
+                "uaid": "2018733266",
+                "totalPoints": 1072,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 407,
+                "name": "Hayden Richardson",
+                "uaid": "2018965764",
+                "totalPoints": 1068,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 408,
+                "name": "Aoife Causey",
+                "uaid": "2018273090",
+                "totalPoints": 1068,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 409,
+                "name": "Nelly Pineda",
+                "uaid": "2018544848",
+                "totalPoints": 1066,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 410,
+                "name": "Enetti Kioa",
+                "uaid": "2019076927",
+                "totalPoints": 1066,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 411,
+                "name": "Aanya Chilla",
+                "uaid": "2018745000",
+                "totalPoints": 1063,
+                "trend": "down",
+                "section": "Southern"
+              },
+              {
+                "rank": 412,
+                "name": "Ashley Sung",
+                "uaid": "2018972909",
+                "totalPoints": 1060,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 413,
+                "name": "Mary Smith",
+                "uaid": "2019174247",
+                "totalPoints": 1060,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 414,
+                "name": "Juliette Golda",
+                "uaid": "2019039465",
+                "totalPoints": 1060,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 415,
+                "name": "Zlatoslava Los",
+                "uaid": "2018711520",
+                "totalPoints": 1058,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 416,
+                "name": "Ronya Jiang",
+                "uaid": "2018762256",
+                "totalPoints": 1056,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 417,
+                "name": "Mei Krost",
+                "uaid": "2018804827",
+                "totalPoints": 1053,
+                "trend": "down",
+                "section": "Southern"
+              },
+              {
+                "rank": 418,
+                "name": "Kelly Yin",
+                "uaid": "2019470356",
+                "totalPoints": 1052,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 419,
+                "name": "Aeris Cheng",
+                "uaid": "2018998836",
+                "totalPoints": 1051,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 420,
+                "name": "Sophia Smith",
+                "uaid": "2018701494",
+                "totalPoints": 1051,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 421,
+                "name": "Viktoria Hermann",
+                "uaid": "2018676636",
+                "totalPoints": 1050,
+                "trend": "down",
+                "section": "Midwest"
+              },
+              {
+                "rank": 422,
+                "name": "Mishka Das",
+                "uaid": "2019325903",
+                "totalPoints": 1050,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 423,
+                "name": "Claire Cai",
+                "uaid": "2018669188",
+                "totalPoints": 1049,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 424,
+                "name": "Melody Shu",
+                "uaid": "2019040789",
+                "totalPoints": 1047,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 425,
+                "name": "Elyse Brown",
+                "uaid": "2018748941",
+                "totalPoints": 1046,
+                "trend": "up",
+                "section": "Midwest"
+              },
+              {
+                "rank": 426,
+                "name": "Emem Pleasant",
+                "uaid": "2019255024",
+                "totalPoints": 1044,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 427,
+                "name": "Mia Verlinich",
+                "uaid": "2018556455",
+                "totalPoints": 1043,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 428,
+                "name": "Elizabeth Cecelia Morrison",
+                "uaid": "2018432555",
+                "totalPoints": 1043,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 429,
+                "name": "Anvita Anoop",
+                "uaid": "2019279206",
+                "totalPoints": 1042,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 430,
+                "name": "Milana Yarashuk",
+                "uaid": "2018547519",
+                "totalPoints": 1039,
+                "trend": "no change",
+                "section": "Eastern"
+              },
+              {
+                "rank": 431,
+                "name": "Leighton Wisniewski",
+                "uaid": "2018922372",
+                "totalPoints": 1036,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 432,
+                "name": "Emma Hoskins",
+                "uaid": "2019094846",
+                "totalPoints": 1036,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 433,
+                "name": "Amisha Olimani",
+                "uaid": "2018944540",
+                "totalPoints": 1034,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 434,
+                "name": "Talyn Lipomi",
+                "uaid": "2018134835",
+                "totalPoints": 1026,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 435,
+                "name": "Heliene Li",
+                "uaid": "2019519380",
+                "totalPoints": 1026,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 436,
+                "name": "Payton Fleming",
+                "uaid": "2018651522",
+                "totalPoints": 1025,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 437,
+                "name": "Alexa Conway",
+                "uaid": "2018670407",
+                "totalPoints": 1025,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 438,
+                "name": "Mia Benitez",
+                "uaid": "2019509807",
+                "totalPoints": 1024,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 439,
+                "name": "Jeeva Sivakumar",
+                "uaid": "2018640955",
+                "totalPoints": 1022,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 440,
+                "name": "Ellinor Choi",
+                "uaid": "2019003273",
+                "totalPoints": 1020,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 441,
+                "name": "Veronika Poslova",
+                "uaid": "2019036776",
+                "totalPoints": 1017,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 442,
+                "name": "Alice Bregardis",
+                "uaid": "2019404908",
+                "totalPoints": 1017,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 443,
+                "name": "Alexa Gagnon",
+                "uaid": "2018414514",
+                "totalPoints": 1014,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 444,
+                "name": "Anastasia Denisova",
+                "uaid": "2018481731",
+                "totalPoints": 1012,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 445,
+                "name": "Stella Bai",
+                "uaid": "2019425441",
+                "totalPoints": 1009,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 446,
+                "name": "Catherine Yang",
+                "uaid": "2019025768",
+                "totalPoints": 1007,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 447,
+                "name": "Milana Plotnikova",
+                "uaid": "2018888386",
+                "totalPoints": 1004,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 448,
+                "name": "Penelope Peterson",
+                "uaid": "2019095765",
+                "totalPoints": 1004,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 449,
+                "name": "Rin Edwards",
+                "uaid": "2018484257",
+                "totalPoints": 992,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 450,
+                "name": "Ariktha Reddy Lambu",
+                "uaid": "2019409349",
+                "totalPoints": 990,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 451,
+                "name": "Amelia Bina",
+                "uaid": "2018695075",
+                "totalPoints": 987,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 452,
+                "name": "Kelly Yin",
+                "uaid": "2018729764",
+                "totalPoints": 981,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 453,
+                "name": "Reeve McDonald",
+                "uaid": "2018422155",
+                "totalPoints": 981,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 454,
+                "name": "Isha Mehta",
+                "uaid": "2018482619",
+                "totalPoints": 978,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 455,
+                "name": "Shruti Srinivasan",
+                "uaid": "2018765988",
+                "totalPoints": 971,
+                "trend": "no change",
+                "section": "Midwest"
+              },
+              {
+                "rank": 456,
+                "name": "Juliette Mittel",
+                "uaid": "2019313729",
+                "totalPoints": 969,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 457,
+                "name": "Anna Luo",
+                "uaid": "2018582140",
+                "totalPoints": 967,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 458,
+                "name": "Lillian Nuckols",
+                "uaid": "2018769372",
+                "totalPoints": 965,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 459,
+                "name": "Damayanthi Arunkumar",
+                "uaid": "2018637289",
+                "totalPoints": 964,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 460,
+                "name": "Annmarie Reddic",
+                "uaid": "2019002718",
+                "totalPoints": 964,
+                "trend": "down",
+                "section": "Southern"
+              },
+              {
+                "rank": 461,
+                "name": "Angela Wang",
+                "uaid": "2018970611",
+                "totalPoints": 964,
+                "trend": "no change",
+                "section": "Mid-Atlantic"
+              },
+              {
+                "rank": 462,
+                "name": "Abby Chantalat",
+                "uaid": "2018994584",
+                "totalPoints": 959,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 463,
+                "name": "Hai Song",
+                "uaid": "2018509939",
+                "totalPoints": 954,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 464,
+                "name": "Madison Madany",
+                "uaid": "2019114827",
+                "totalPoints": 954,
+                "trend": "up",
+                "section": "Midwest"
+              },
+              {
+                "rank": 465,
+                "name": "Ellie Reed",
+                "uaid": "2018487857",
+                "totalPoints": 949,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 466,
+                "name": "Nila Gopez",
+                "uaid": "2018158329",
+                "totalPoints": 948,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 467,
+                "name": "Julia Russell",
+                "uaid": "2018208915",
+                "totalPoints": 948,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 468,
+                "name": "Grace Pohl",
+                "uaid": "2018180807",
+                "totalPoints": 947,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 469,
+                "name": "Margaret Doran",
+                "uaid": "2019941530",
+                "totalPoints": 946,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 470,
+                "name": "Camille Burke",
+                "uaid": "2018871807",
+                "totalPoints": 945,
+                "trend": "no change",
+                "section": "Pacific NW"
+              },
+              {
+                "rank": 471,
+                "name": "Arya Sharma",
+                "uaid": "2019401172",
+                "totalPoints": 943,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 472,
+                "name": "Xinyan Zhang",
+                "uaid": "2019258537",
+                "totalPoints": 942,
+                "trend": "no change",
+                "section": "Southwest"
+              },
+              {
+                "rank": 473,
+                "name": "Alexis Malakhova",
+                "uaid": "2018710796",
+                "totalPoints": 942,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 474,
+                "name": "Alixandrie Crouch",
+                "uaid": "2019307076",
+                "totalPoints": 938,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 475,
+                "name": "Esther Chen",
+                "uaid": "2019400256",
+                "totalPoints": 937,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 476,
+                "name": "Katherine Ma",
+                "uaid": "2018929372",
+                "totalPoints": 936,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 477,
+                "name": "Aanya Sharma",
+                "uaid": "2019401168",
+                "totalPoints": 936,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 478,
+                "name": "Sarah Wray Campbell",
+                "uaid": "2019048017",
+                "totalPoints": 935,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 479,
+                "name": "Ria Salvi",
+                "uaid": "2018673013",
+                "totalPoints": 935,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 480,
+                "name": "Amelia Tompkins",
+                "uaid": "2019198021",
+                "totalPoints": 933,
+                "trend": "up",
+                "section": "Southern"
+              },
+              {
+                "rank": 481,
+                "name": "Alice Ortiz Tergolina",
+                "uaid": "2019031251",
+                "totalPoints": 933,
+                "trend": "down",
+                "section": "Florida"
+              },
+              {
+                "rank": 482,
+                "name": "Naomi Jordan",
+                "uaid": "2018611976",
+                "totalPoints": 932,
+                "trend": "no change",
+                "section": "Intermountain"
+              },
+              {
+                "rank": 483,
+                "name": "Carmela Nguyen",
+                "uaid": "2018647597",
+                "totalPoints": 930,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 484,
+                "name": "Kendall Clarke",
+                "uaid": "2018904606",
+                "totalPoints": 929,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 485,
+                "name": "Carolyn Liao",
+                "uaid": "2018568985",
+                "totalPoints": 928,
+                "trend": "down",
+                "section": "Southern California"
+              },
+              {
+                "rank": 486,
+                "name": "Kelly Wu",
+                "uaid": "2019261203",
+                "totalPoints": 922,
+                "trend": "no change",
+                "section": "Middle States"
+              },
+              {
+                "rank": 487,
+                "name": "Annabel Hu",
+                "uaid": "2018637000",
+                "totalPoints": 920,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 488,
+                "name": "Isabella Yi",
+                "uaid": "2019298468",
+                "totalPoints": 918,
+                "trend": "up",
+                "section": "Northern California"
+              },
+              {
+                "rank": 489,
+                "name": "Bryce Pennell",
+                "uaid": "2018467955",
+                "totalPoints": 915,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 490,
+                "name": "Ellie Williams",
+                "uaid": "2018859763",
+                "totalPoints": 913,
+                "trend": "no change",
+                "section": "Northern"
+              },
+              {
+                "rank": 491,
+                "name": "Elizabeth Sergeeva",
+                "uaid": "2019006625",
+                "totalPoints": 913,
+                "trend": "no change",
+                "section": "Florida"
+              },
+              {
+                "rank": 492,
+                "name": "Quinn Murray",
+                "uaid": "2018466169",
+                "totalPoints": 908,
+                "trend": "down",
+                "section": "New England"
+              },
+              {
+                "rank": 493,
+                "name": "Molly Payton",
+                "uaid": "2018276755",
+                "totalPoints": 907,
+                "trend": "no change",
+                "section": "Missouri Valley"
+              },
+              {
+                "rank": 494,
+                "name": "Olivia Haynes",
+                "uaid": "2019384222",
+                "totalPoints": 907,
+                "trend": "no change",
+                "section": "Southern"
+              },
+              {
+                "rank": 495,
+                "name": "Elena Terzich",
+                "uaid": "2018987814",
+                "totalPoints": 906,
+                "trend": "no change",
+                "section": "Texas"
+              },
+              {
+                "rank": 496,
+                "name": "Amaya Bolder",
+                "uaid": "2018287433",
+                "totalPoints": 905,
+                "trend": "no change",
+                "section": "Southern California"
+              },
+              {
+                "rank": 497,
+                "name": "Claire Simon",
+                "uaid": "2018979431",
+                "totalPoints": 903,
+                "trend": "no change",
+                "section": "New England"
+              },
+              {
+                "rank": 498,
+                "name": "Eileen Li",
+                "uaid": "2018605732",
+                "totalPoints": 899,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 499,
+                "name": "Kaitlyn Masutani",
+                "uaid": "2019227090",
+                "totalPoints": 896,
+                "trend": "no change",
+                "section": "Hawaii Pacific"
+              },
+              {
+                "rank": 500,
+                "name": "Serah Sharan",
+                "uaid": "2018746384",
+                "totalPoints": 895,
+                "trend": "no change",
+                "section": "Southern"
+              }
+            ],
+            "rankRowsSection": [
+              {
+                "rank": 1,
+                "name": "Nandika Singamala",
+                "uaid": "2018544532",
+                "totalPoints": 4878,
+                "trend": "up",
+                "section": "Northern California"
+              },
+              {
+                "rank": 2,
+                "name": "Ziva Gadgil",
+                "uaid": "2018658341",
+                "totalPoints": 4538,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 3,
+                "name": "Harper Wang",
+                "uaid": "2018622907",
+                "totalPoints": 2765,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 4,
+                "name": "Yifan Wen",
+                "uaid": "2018605392",
+                "totalPoints": 2400,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 5,
+                "name": "Mia Watanabe",
+                "uaid": "2018546777",
+                "totalPoints": 1991,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 6,
+                "name": "Zhiyan Duan",
+                "uaid": "2019107218",
+                "totalPoints": 1956,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 7,
+                "name": "Stella Hossain",
+                "uaid": "2018853329",
+                "totalPoints": 1824,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 8,
+                "name": "Alexi Labrecque",
+                "uaid": "2018998280",
+                "totalPoints": 1767,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 9,
+                "name": "Elina Yamamoto",
+                "uaid": "2017332570",
+                "totalPoints": 1696,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 10,
+                "name": "Valentina Kukeeva",
+                "uaid": "2018899502",
+                "totalPoints": 1670,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 11,
+                "name": "Olivia Li",
+                "uaid": "2018636218",
+                "totalPoints": 1583,
+                "trend": "up",
+                "section": "Northern California"
+              },
+              {
+                "rank": 12,
+                "name": "Camille Kunkel",
+                "uaid": "2018867069",
+                "totalPoints": 1550,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 13,
+                "name": "Areli Ama",
+                "uaid": "2018541174",
+                "totalPoints": 1389,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 14,
+                "name": "Serena Chen",
+                "uaid": "2018526484",
+                "totalPoints": 1385,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 15,
+                "name": "Jennifer Chen",
+                "uaid": "2018885463",
+                "totalPoints": 1342,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 16,
+                "name": "Summer Stiritz",
+                "uaid": "2018746621",
+                "totalPoints": 1308,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 17,
+                "name": "Zoey Dam",
+                "uaid": "2018925994",
+                "totalPoints": 1273,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 18,
+                "name": "Jenna Yu",
+                "uaid": "2018832337",
+                "totalPoints": 1209,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 19,
+                "name": "Noor Desai",
+                "uaid": "2018653862",
+                "totalPoints": 1184,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 20,
+                "name": "Lavi Nguyen",
+                "uaid": "2018399095",
+                "totalPoints": 1176,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 21,
+                "name": "Kendra Wu",
+                "uaid": "2018931899",
+                "totalPoints": 1103,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 22,
+                "name": "Enetti Kioa",
+                "uaid": "2019076927",
+                "totalPoints": 1066,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 23,
+                "name": "Emma Hoskins",
+                "uaid": "2019094846",
+                "totalPoints": 1036,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 24,
+                "name": "Ellinor Choi",
+                "uaid": "2019003273",
+                "totalPoints": 1020,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 25,
+                "name": "Damayanthi Arunkumar",
+                "uaid": "2018637289",
+                "totalPoints": 964,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 26,
+                "name": "Margaret Doran",
+                "uaid": "2019941530",
+                "totalPoints": 946,
+                "trend": "down",
+                "section": "Northern California"
+              },
+              {
+                "rank": 27,
+                "name": "Alexis Malakhova",
+                "uaid": "2018710796",
+                "totalPoints": 942,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 28,
+                "name": "Annabel Hu",
+                "uaid": "2018637000",
+                "totalPoints": 920,
+                "trend": "no change",
+                "section": "Northern California"
+              },
+              {
+                "rank": 29,
+                "name": "Isabella Yi",
+                "uaid": "2019298468",
+                "totalPoints": 918,
+                "trend": "up",
+                "section": "Northern California"
+              },
+              {
+                "rank": 30,
+                "name": "Eileen Li",
+                "uaid": "2018605732",
+                "totalPoints": 899,
+                "trend": "no change",
+                "section": "Northern California"
+              }
+            ],
             "rankSnapshotDepth": {
               "national": 500,
               "section": 30
@@ -60995,6 +65405,12 @@
             "bonusAssumptions": {
               "futureEventBonusDefault": 0,
               "countingBucketBonusIncluded": true
+            },
+            "calculatorPolicy": {
+              "replacementBucket": "singles_top6",
+              "inputUnit": "raw_points",
+              "allowNegativeInput": true,
+              "neighborWindow": 5
             },
             "ui": {
               "defaultPlannerTargets": [
@@ -61043,7 +65459,7 @@
                 "startDate": "2026-02-14",
                 "endDate": "2026-02-16",
                 "expiresDate": "2027-02-15",
-                "daysRemaining": 355,
+                "daysRemaining": 354,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -61079,7 +65495,7 @@
                 "startDate": "2026-01-31",
                 "endDate": "2026-02-01",
                 "expiresDate": "2027-01-31",
-                "daysRemaining": 340,
+                "daysRemaining": 339,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -61121,7 +65537,7 @@
                 "startDate": "2026-01-10",
                 "endDate": "2026-01-18",
                 "expiresDate": "2027-01-17",
-                "daysRemaining": 326,
+                "daysRemaining": 325,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -61169,7 +65585,7 @@
                 "startDate": "2025-11-15",
                 "endDate": "2025-11-16",
                 "expiresDate": "2026-11-15",
-                "daysRemaining": 263,
+                "daysRemaining": 262,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -61205,7 +65621,7 @@
                 "startDate": "2025-07-05",
                 "endDate": "2025-07-06",
                 "expiresDate": "2026-07-05",
-                "daysRemaining": 130,
+                "daysRemaining": 129,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -61238,8 +65654,8 @@
                 "startDate": "2025-04-26",
                 "endDate": "2025-04-27",
                 "expiresDate": "2026-04-26",
-                "daysRemaining": 60,
-                "urgency": "safe",
+                "daysRemaining": 59,
+                "urgency": "warning",
                 "matches": [
                   {
                     "round": "F",
@@ -61279,7 +65695,7 @@
                 "startDate": "2026-02-21",
                 "endDate": "2026-02-22",
                 "expiresDate": "2027-02-21",
-                "daysRemaining": 361,
+                "daysRemaining": 360,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -61332,7 +65748,7 @@
                 "startDate": "2025-09-20",
                 "endDate": "2025-09-21",
                 "expiresDate": "2026-09-20",
-                "daysRemaining": 207,
+                "daysRemaining": 206,
                 "urgency": "safe",
                 "matches": [
                   {
@@ -61413,7 +65829,7 @@
                   "startDate": "2026-02-14",
                   "endDate": "2026-02-16",
                   "expiresDate": "2027-02-15",
-                  "daysRemaining": 355,
+                  "daysRemaining": 354,
                   "pointsRaw": 300,
                   "bucketPoints": 300,
                   "bonusPoints": 0
@@ -61428,7 +65844,7 @@
                   "startDate": "2026-01-10",
                   "endDate": "2026-01-18",
                   "expiresDate": "2027-01-17",
-                  "daysRemaining": 326,
+                  "daysRemaining": 325,
                   "pointsRaw": 173,
                   "bucketPoints": 173,
                   "bonusPoints": 0
@@ -61443,7 +65859,7 @@
                   "startDate": "2026-01-31",
                   "endDate": "2026-02-01",
                   "expiresDate": "2027-01-31",
-                  "daysRemaining": 340,
+                  "daysRemaining": 339,
                   "pointsRaw": 150,
                   "bucketPoints": 150,
                   "bonusPoints": 11
@@ -61458,7 +65874,7 @@
                   "startDate": "2025-11-15",
                   "endDate": "2025-11-16",
                   "expiresDate": "2026-11-15",
-                  "daysRemaining": 263,
+                  "daysRemaining": 262,
                   "pointsRaw": 105,
                   "bucketPoints": 105,
                   "bonusPoints": 0
@@ -61473,7 +65889,7 @@
                   "startDate": "2025-07-05",
                   "endDate": "2025-07-06",
                   "expiresDate": "2026-07-05",
-                  "daysRemaining": 130,
+                  "daysRemaining": 129,
                   "pointsRaw": 98,
                   "bucketPoints": 98,
                   "bonusPoints": 0
@@ -61488,7 +65904,7 @@
                   "startDate": "2025-04-26",
                   "endDate": "2025-04-27",
                   "expiresDate": "2026-04-26",
-                  "daysRemaining": 60,
+                  "daysRemaining": 59,
                   "pointsRaw": 95,
                   "bucketPoints": 95,
                   "bonusPoints": 0
@@ -61505,7 +65921,7 @@
                   "startDate": "2026-02-21",
                   "endDate": "2026-02-22",
                   "expiresDate": "2027-02-21",
-                  "daysRemaining": 361,
+                  "daysRemaining": 360,
                   "pointsRaw": 4,
                   "bucketPoints": 1,
                   "bonusPoints": 0
@@ -61520,7 +65936,7 @@
                   "startDate": "2025-09-20",
                   "endDate": "2025-09-21",
                   "expiresDate": "2026-09-20",
-                  "daysRemaining": 207,
+                  "daysRemaining": 206,
                   "pointsRaw": 4,
                   "bucketPoints": 1,
                   "bonusPoints": 0
@@ -93193,6 +97609,8 @@
             ],
             "rankThresholdsNational": {},
             "rankThresholdsSection": {},
+            "rankRowsNational": [],
+            "rankRowsSection": [],
             "rankSnapshotDepth": {
               "national": 0,
               "section": 0
@@ -93212,6 +97630,12 @@
             "bonusAssumptions": {
               "futureEventBonusDefault": 0,
               "countingBucketBonusIncluded": true
+            },
+            "calculatorPolicy": {
+              "replacementBucket": "singles_top6",
+              "inputUnit": "raw_points",
+              "allowNegativeInput": true,
+              "neighborWindow": 5
             },
             "ui": {
               "defaultPlannerTargets": [
@@ -93826,6 +98250,7 @@
       scope: 'national',
       plannerView: 'bigwin',
       targetRank: null,
+      calculatorInput: 0,
       simulation: null,
       initialized: false,
       visible: false,
@@ -94815,10 +99240,361 @@
       `;
     }
 
+    function getCalculatorPolicy(simulation) {
+      const policy = simulation && typeof simulation.calculatorPolicy === 'object'
+        ? simulation.calculatorPolicy
+        : {};
+      return {
+        replacementBucket: coerceText(policy.replacementBucket) || 'singles_top6',
+        inputUnit: coerceText(policy.inputUnit) || 'raw_points',
+        allowNegativeInput: policy.allowNegativeInput !== false,
+        neighborWindow: toPositiveInt(policy.neighborWindow, 5),
+      };
+    }
+
+    function parseCalculatorInput(raw) {
+      const value = Number.parseInt(coerceText(raw), 10);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function trendPriority(rawTrend) {
+      const trend = coerceText(rawTrend).toLowerCase();
+      if (trend === 'up') return 0;
+      if (!trend || trend === 'flat') return 1;
+      if (trend === 'down') return 2;
+      return 3;
+    }
+
+    function calculatorRankComparator(a, b) {
+      const pointsDiff = numOrZero(b.totalPoints) - numOrZero(a.totalPoints);
+      if (pointsDiff !== 0) return pointsDiff;
+      const trendDiff = trendPriority(a.trend) - trendPriority(b.trend);
+      if (trendDiff !== 0) return trendDiff;
+      const nameDiff = coerceText(a.name).localeCompare(coerceText(b.name));
+      if (nameDiff !== 0) return nameDiff;
+      return coerceText(a.uaid).localeCompare(coerceText(b.uaid));
+    }
+
+    function getCalculatorRankRows(simulation, scope) {
+      const key = scope === 'section' ? 'rankRowsSection' : 'rankRowsNational';
+      const rows = Array.isArray(simulation && simulation[key]) ? simulation[key] : [];
+      return rows
+        .filter((row) => row && typeof row === 'object')
+        .map((row, index) => ({
+          rank: toPositiveInt(row.rank, index + 1),
+          name: coerceText(row.name),
+          uaid: coerceText(row.uaid),
+          totalPoints: numOrZero(row.totalPoints),
+          trend: coerceText(row.trend),
+          section: coerceText(row.section),
+        }));
+    }
+
+    function replacePlayerTotalInRows(rows, playerUaid, playerName, totalPoints) {
+      const normalized = rows.map((row) => ({ ...row }));
+      const uaid = coerceText(playerUaid);
+      let found = false;
+      if (uaid) {
+        normalized.forEach((row) => {
+          if (coerceText(row.uaid) === uaid) {
+            row.totalPoints = numOrZero(totalPoints);
+            found = true;
+          }
+        });
+      }
+      if (!found && uaid) {
+        normalized.push({
+          rank: 0,
+          name: coerceText(playerName) || 'Player',
+          uaid,
+          totalPoints: numOrZero(totalPoints),
+          trend: '',
+          section: '',
+        });
+      }
+      normalized.sort(calculatorRankComparator);
+      normalized.forEach((row, index) => {
+        row.rank = index + 1;
+      });
+      const playerIndex = normalized.findIndex((row) => coerceText(row.uaid) === uaid);
+      return { rows: normalized, playerIndex };
+    }
+
+    function extractNeighborWindow(rows, playerIndex, windowSize) {
+      if (!Array.isArray(rows) || playerIndex < 0 || !rows.length) return [];
+      const start = Math.max(0, playerIndex - windowSize);
+      const end = Math.min(rows.length, playerIndex + windowSize + 1);
+      return rows.slice(start, end);
+    }
+
+    function findWeakestSinglesCountingEvent(simulation) {
+      const current = simulation && simulation.current ? simulation.current : {};
+      const bucket = Array.isArray(current.singlesBucket) ? current.singlesBucket : [];
+      if (!bucket.length) return null;
+      return [...bucket]
+        .sort((a, b) => {
+          const pointsDiff = numOrZero(a.bucketPoints) - numOrZero(b.bucketPoints);
+          if (pointsDiff !== 0) return pointsDiff;
+          return coerceText(a.eventId).localeCompare(coerceText(b.eventId));
+        })[0] || null;
+    }
+
+    function calculatorDeltaFromInput(simulation, inputPoints) {
+      const policy = getCalculatorPolicy(simulation);
+      const current = simulation && simulation.current ? simulation.current : {};
+      const bucketCap = toPositiveInt(current.bucketCap, 6);
+      const singlesBucket = Array.isArray(current.singlesBucket) ? current.singlesBucket : [];
+      const weakestSingles = findWeakestSinglesCountingEvent(simulation);
+
+      if (inputPoints < 0) {
+        return {
+          netDelta: inputPoints,
+          grossPoints: inputPoints,
+          replacedEvent: null,
+          reason: 'direct_loss',
+          policy,
+        };
+      }
+
+      if (singlesBucket.length < bucketCap) {
+        return {
+          netDelta: inputPoints,
+          grossPoints: inputPoints,
+          replacedEvent: null,
+          reason: 'bucket_not_full',
+          policy,
+        };
+      }
+
+      if (!weakestSingles) {
+        return {
+          netDelta: inputPoints,
+          grossPoints: inputPoints,
+          replacedEvent: null,
+          reason: 'no_weakest_event',
+          policy,
+        };
+      }
+
+      const weakestPoints = numOrZero(weakestSingles.bucketPoints);
+      if (inputPoints <= weakestPoints) {
+        return {
+          netDelta: 0,
+          grossPoints: inputPoints,
+          replacedEvent: weakestSingles,
+          reason: 'below_weakest',
+          policy,
+        };
+      }
+
+      return {
+        netDelta: inputPoints - weakestPoints,
+        grossPoints: inputPoints,
+        replacedEvent: weakestSingles,
+        reason: 'replaced_weakest',
+        policy,
+      };
+    }
+
+    function describeCalculatorReplacement(calc) {
+      if (!calc) return 'No calculation available.';
+      if (calc.reason === 'direct_loss') return 'Negative input is applied as direct NST reduction.';
+      if (calc.reason === 'bucket_not_full') return 'Singles counting bucket is not full; entered points are added directly.';
+      const event = calc.replacedEvent;
+      if (!event) return 'No replacement event details available.';
+      const weakestPoints = formatNumber(numOrZero(event.bucketPoints));
+      const eventLevel = coerceText(event.level);
+      const eventDate = coerceText(event.startDate || event.endDate || event.expiresDate);
+      const dateLabel = eventDate ? formatDate(eventDate) : 'date N/A';
+      if (calc.reason === 'below_weakest') {
+        return `No NST change: entered points are not higher than weakest counting singles result (${weakestPoints} pts, ${eventLevel} ${dateLabel}).`;
+      }
+      return `Entered points replace weakest singles result (${weakestPoints} pts, ${eventLevel} ${dateLabel}).`;
+    }
+
+    function renderCalculatorNeighborBlock(title, rows, playerUaid, rankShift) {
+      const body = rows.map((row) => {
+        const isPlayer = coerceText(row.uaid) === coerceText(playerUaid);
+        const moveClass = rankShift > 0 ? 'sim-neighbor-move' : (rankShift < 0 ? 'sim-neighbor-move down' : '');
+        const moveLabel = isPlayer && rankShift !== 0
+          ? `<span class="${moveClass}">${rankShift > 0 ? `▲${formatNumber(rankShift)}` : `▼${formatNumber(Math.abs(rankShift))}`}</span>`
+          : '';
+        return `
+          <tr class="${isPlayer ? 'is-player' : ''}">
+            <td>#${formatNumber(row.rank)}${moveLabel}</td>
+            <td>${escapeHtml(coerceText(row.name) || coerceText(row.uaid) || 'Player')}</td>
+            <td>${formatNumber(row.totalPoints)}</td>
+          </tr>
+        `;
+      }).join('');
+      return `
+        <div class="sim-neighbor-block">
+          <div class="sim-neighbor-title">${escapeHtml(title)}</div>
+          <table class="sim-neighbor-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>${body}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function computeCalculatorSimulation(simulation, scope, inputPoints) {
+      const current = simulation && simulation.current ? simulation.current : {};
+      const playerUaid = coerceText(current.uaid);
+      const playerName = coerceText(current.playerName);
+      const oldTotal = getCurrentTotalFromSimulation(simulation);
+      const calc = calculatorDeltaFromInput(simulation, inputPoints);
+      const newTotal = Math.max(0, oldTotal + numOrZero(calc.netDelta));
+      const rankRows = getCalculatorRankRows(simulation, scope);
+      const policy = getCalculatorPolicy(simulation);
+
+      const baseline = replacePlayerTotalInRows(rankRows, playerUaid, playerName, oldTotal);
+      const projected = replacePlayerTotalInRows(rankRows, playerUaid, playerName, newTotal);
+      const beforeRank = baseline.playerIndex >= 0 ? toPositiveInt(baseline.rows[baseline.playerIndex].rank, 0) : 0;
+      const afterRank = projected.playerIndex >= 0 ? toPositiveInt(projected.rows[projected.playerIndex].rank, 0) : 0;
+      const rankShift = beforeRank && afterRank ? (beforeRank - afterRank) : 0;
+
+      const beforeWindow = extractNeighborWindow(baseline.rows, baseline.playerIndex, policy.neighborWindow);
+      const afterWindow = extractNeighborWindow(projected.rows, projected.playerIndex, policy.neighborWindow);
+      const thresholdPoints = afterRank ? findThresholdPointsForRank(simulation, scope, afterRank) : null;
+      const buffer = thresholdPoints != null ? (newTotal - thresholdPoints) : null;
+      const bufferMeta = buffer != null ? getBufferMeta(buffer) : null;
+
+      return {
+        inputPoints,
+        oldTotal,
+        newTotal,
+        netDelta: numOrZero(calc.netDelta),
+        calc,
+        beforeRank,
+        afterRank,
+        rankShift,
+        beforeWindow,
+        afterWindow,
+        thresholdPoints,
+        buffer,
+        bufferMeta,
+        playerUaid,
+      };
+    }
+
+    function renderCalculatorSimulation() {
+      const simulation = SIM_STATE.simulation;
+      const resultsContainer = document.querySelector('[data-sim-calculator-results]');
+      const calcInput = document.querySelector('[data-sim-calc-input]');
+      if (!resultsContainer) return;
+      if (!simulation || !simulation.enabled) {
+        resultsContainer.innerHTML = '<div class="sim-result-empty">Ranking simulator is not available for this list yet.</div>';
+        return;
+      }
+
+      if (calcInput) calcInput.value = String(parseCalculatorInput(SIM_STATE.calculatorInput));
+      const scopedRows = getCalculatorRankRows(simulation, SIM_STATE.scope);
+      if (!scopedRows.length) {
+        resultsContainer.innerHTML = '<div class="sim-result-empty">Rank snapshot rows are unavailable for this scope. Points calculator cannot project neighbor movement.</div>';
+        return;
+      }
+
+      const inputPoints = parseCalculatorInput(SIM_STATE.calculatorInput);
+      const computed = computeCalculatorSimulation(simulation, SIM_STATE.scope, inputPoints);
+      const projectionAvailable = hasRankProjection(simulation);
+      const rankBeforeLabel = computed.beforeRank ? `#${formatNumber(computed.beforeRank)}` : '—';
+      const rankAfterLabel = computed.afterRank ? `#${formatNumber(computed.afterRank)}` : '—';
+      const scopeLabel = SIM_STATE.scope === 'section' ? 'Section' : 'National';
+      const projectionLine = !projectionAvailable
+        ? '<div class="sim-result-empty" style="margin-top:10px;">Rank projection unavailable for this list. Points math is still exact.</div>'
+        : '';
+      const rankJumpLabel = computed.rankShift > 0
+        ? `+${formatNumber(computed.rankShift)} places`
+        : (computed.rankShift < 0 ? `-${formatNumber(Math.abs(computed.rankShift))} places` : 'No rank change');
+
+      const neighborHtml = `
+        <div class="sim-neighbor-grid">
+          ${renderCalculatorNeighborBlock('Before', computed.beforeWindow, computed.playerUaid, 0)}
+          ${renderCalculatorNeighborBlock('After', computed.afterWindow, computed.playerUaid, computed.rankShift)}
+        </div>
+      `;
+
+      resultsContainer.innerHTML = `
+        <article class="sim-result-card">
+          <div class="sim-result-status">
+            <span class="sim-status-dot"></span>
+            Points Calculator · ${escapeHtml(scopeLabel)} scope
+          </div>
+
+          <div class="sim-rank-transform">
+            <div class="sim-rank-box">
+              <div class="sim-rank-number">${escapeHtml(rankBeforeLabel)}</div>
+              <div class="sim-rank-caption">Before</div>
+            </div>
+            <div class="sim-rank-arrow">
+              <div class="sim-rank-arrow-main">→</div>
+              <div class="sim-rank-jump">${escapeHtml(rankJumpLabel)}</div>
+            </div>
+            <div class="sim-rank-box">
+              <div class="sim-rank-number is-after">${escapeHtml(rankAfterLabel)}</div>
+              <div class="sim-rank-caption">After</div>
+            </div>
+          </div>
+
+          <div class="sim-result-points">
+            <span class="sim-result-points-main">${formatDelta(computed.netDelta)} to NST</span>
+            <span class="sim-result-points-detail">${formatNumber(computed.oldTotal)} → ${formatNumber(computed.newTotal)} total</span>
+          </div>
+
+          <div class="sim-result-chips">
+            ${computed.bufferMeta ? `<span class="sim-pill ${computed.bufferMeta.className}">${escapeHtml(computed.bufferMeta.label)}</span>` : '<span class="sim-pill">Buffer unavailable</span>'}
+          </div>
+
+          <div class="sim-calc-summary">
+            <span class="sim-calc-summary-item">Entered points: <strong>${formatNumber(computed.inputPoints)}</strong></span>
+            <span class="sim-calc-summary-item">Replacement rule: weakest singles top-6</span>
+          </div>
+          <div class="sim-replaced-note">${escapeHtml(describeCalculatorReplacement(computed.calc))}</div>
+
+          ${projectionLine}
+          ${neighborHtml}
+
+          <details class="sim-tech">
+            <summary>Technical details</summary>
+            <div class="sim-tech-body">
+              <div class="sim-tech-grid">
+                <div>
+                  <div class="sim-tech-label">Input points</div>
+                  <div class="sim-tech-value">${formatNumber(computed.inputPoints)}</div>
+                </div>
+                <div>
+                  <div class="sim-tech-label">Net delta</div>
+                  <div class="sim-tech-value">${formatDelta(computed.netDelta)}</div>
+                </div>
+                <div>
+                  <div class="sim-tech-label">Before rank</div>
+                  <div class="sim-tech-value">${escapeHtml(rankBeforeLabel)}</div>
+                </div>
+                <div>
+                  <div class="sim-tech-label">After rank</div>
+                  <div class="sim-tech-value">${escapeHtml(rankAfterLabel)}</div>
+                </div>
+              </div>
+            </div>
+          </details>
+        </article>
+      `;
+    }
+
     function initializeSimulationControls(listKey) {
       const simModeButtons = document.querySelectorAll('[data-sim-mode]');
       const simScopeButtons = document.querySelectorAll('[data-sim-scope]');
       const simViewButtons = document.querySelectorAll('[data-sim-view]');
+      const calcInput = document.querySelector('[data-sim-calc-input]');
+      const calcChips = document.querySelectorAll('[data-sim-calc-chip]');
+      const calcReset = document.querySelector('[data-sim-calc-reset]');
       const scenarioSelects = [
         document.querySelector('[data-sim-level-select]'),
         document.querySelector('[data-sim-format-select]'),
@@ -94867,6 +99643,33 @@
           });
         });
 
+        if (calcInput) {
+          calcInput.addEventListener('input', () => {
+            SIM_STATE.calculatorInput = parseCalculatorInput(calcInput.value);
+            if (SIM_STATE.mode === 'calculator') renderCalculatorSimulation();
+          });
+        }
+
+        calcChips.forEach((chip) => {
+          chip.addEventListener('click', () => {
+            const text = coerceText(chip.dataset.simCalcChip);
+            if (!text) return;
+            const delta = parseCalculatorInput(text);
+            const nextValue = parseCalculatorInput(SIM_STATE.calculatorInput) + delta;
+            SIM_STATE.calculatorInput = nextValue;
+            if (calcInput) calcInput.value = String(nextValue);
+            if (SIM_STATE.mode === 'calculator') renderCalculatorSimulation();
+          });
+        });
+
+        if (calcReset) {
+          calcReset.addEventListener('click', () => {
+            SIM_STATE.calculatorInput = 0;
+            if (calcInput) calcInput.value = '0';
+            if (SIM_STATE.mode === 'calculator') renderCalculatorSimulation();
+          });
+        }
+
         SIM_STATE.initialized = true;
       }
     }
@@ -94908,6 +99711,11 @@
         button.classList.toggle('is-active', view === SIM_STATE.plannerView);
       });
 
+      if (SIM_STATE.mode === 'calculator') {
+        renderCalculatorSimulation();
+        return;
+      }
+
       if (SIM_STATE.mode === 'scenario') {
         renderScenarioControls(simulation);
         renderScenarioSimulation();
@@ -94923,6 +99731,7 @@
       SIM_STATE.listKey = listKey || '';
       SIM_STATE.simulation = simulation || null;
       SIM_STATE.targetRank = null;
+      SIM_STATE.calculatorInput = 0;
 
       initializeSimulationControls(listKey);
       renderSimMode(listKey);
