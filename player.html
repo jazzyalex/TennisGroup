@@ -87271,9 +87271,12 @@
         : formatRankDisplay(candidate.rankNationalAfter);
       const buffer = getBufferMeta(candidate.overshoot);
       const calendarMatches = findCalendarMatches(simulation, candidate);
-      const calendarLine = calendarMatches.length
-        ? `📅 ${calendarMatches.length} matching event${calendarMatches.length === 1 ? '' : 's'} on calendar`
-        : `📅 No matching ${level} events in your calendar in the next 3 months`;
+      const hasCalendarData = Array.isArray(simulation && simulation.calendar) && simulation.calendar.length > 0;
+      const calendarLine = !hasCalendarData
+        ? 'Calendar recommendations unavailable: planner is not connected to the tournament calendar feed yet.'
+        : (calendarMatches.length
+          ? `📅 ${calendarMatches.length} matching event${calendarMatches.length === 1 ? '' : 's'} in your saved calendar`
+          : `📅 No matching ${level} events in your saved calendar window`);
       const title = isGrind
         ? `${events.length}-event local grind`
         : `<span class="sim-level-tag ${escapeHtml(level.toLowerCase())}">${escapeHtml(level)}</span>${escapeHtml(format.official)} · ${escapeHtml(result)}`;
@@ -87327,7 +87330,11 @@
                 <div class="sim-detail-value">${escapeHtml(detailResult)}</div>
               </div>
             </div>
-            <div class="sim-replaced-note">Bucket replacement is calculated automatically from your best counting results.</div>
+            <div class="sim-replaced-note">
+              ${isGrind
+                ? 'Net points shown already include rolling best-6 replacement across all selected events.'
+                : 'Net points shown already include best-6 replacement against your current counting results.'}
+            </div>
           </div>
         </article>
       `;
