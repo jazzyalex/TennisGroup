@@ -2228,6 +2228,10 @@
         <div>
           <h2 class="section-title">Ranking Simulator</h2>
           <div class="sim-subtitle">Plan paths and simulate one tournament result</div>
+          <div class="list-toggle" role="tablist" aria-label="Ranking simulator list" style="margin-top:8px;">
+            <button type="button" class="list-toggle__btn is-active" data-sim-list-toggle="g12" role="tab" aria-selected="true">U12</button>
+            <button type="button" class="list-toggle__btn" data-sim-list-toggle="g14" role="tab" aria-selected="false">U14</button>
+          </div>
         </div>
         <div class="sim-tabs" role="tablist" aria-label="Ranking simulator mode">
           <button type="button" class="sim-tab is-active" data-sim-mode="planner" role="tab" aria-selected="true">Path Planner</button>
@@ -98261,8 +98265,24 @@
       btn.setAttribute('aria-disabled', disabled ? 'true' : 'false');
     }
 
+    function setActiveSimListToggle(listKey) {
+      document.querySelectorAll('[data-sim-list-toggle]').forEach((btn) => {
+        const isActive = btn.dataset.simListToggle === listKey;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    function setSimListDisabled(listKey, disabled) {
+      const btn = document.querySelector(`[data-sim-list-toggle="${listKey}"]`);
+      if (!btn) return;
+      btn.disabled = !!disabled;
+      btn.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+    }
+
     const SIM_STATE = {
       listKey: '',
+      simListKey: '',
       mode: 'planner',
       scope: 'national',
       plannerView: 'bigwin',
@@ -98545,7 +98565,7 @@
       });
     }
 
-    function renderPlannerMarkButtons(listKey, marksContainer, marks, currentRank, activeRank) {
+    function renderPlannerMarkButtons(marksContainer, marks, currentRank, activeRank) {
       if (!marksContainer) return;
       marksContainer.innerHTML = '';
       const active = toPositiveInt(activeRank, 0);
@@ -98557,7 +98577,7 @@
         button.textContent = `#${mark}`;
         button.addEventListener('click', () => {
           SIM_STATE.targetRank = mark;
-          renderPlannerSimulation(listKey);
+          renderPlannerSimulation();
         });
         marksContainer.appendChild(button);
       });
@@ -98831,7 +98851,7 @@
       `;
     }
 
-    function renderPlannerSimulation(listKey) {
+    function renderPlannerSimulation() {
       const simulation = SIM_STATE.simulation;
       const marksContainer = document.querySelector('[data-sim-planner-marks]');
       const plannerPanel = document.querySelector('[data-sim-mode-panel="planner"]');
@@ -98882,7 +98902,7 @@
         : 0;
       SIM_STATE.targetRank = targetRankValue;
 
-      renderPlannerMarkButtons(listKey, marksContainer, marks, currentRank, targetRankValue);
+      renderPlannerMarkButtons(marksContainer, marks, currentRank, targetRankValue);
 
       if (scopeLabelEl) scopeLabelEl.textContent = scope === 'section' ? 'in section' : 'nationally';
       if (targetRankEl) targetRankEl.textContent = `#${targetRankValue}`;
@@ -99727,7 +99747,8 @@
       `;
     }
 
-    function initializeSimulationControls(listKey) {
+    function initializeSimulationControls() {
+      const simListButtons = document.querySelectorAll('[data-sim-list-toggle]');
       const simModeButtons = document.querySelectorAll('[data-sim-mode]');
       const simScopeButtons = document.querySelectorAll('[data-sim-scope]');
       const simViewButtons = document.querySelectorAll('[data-sim-view]');
@@ -99745,12 +99766,27 @@
       ];
 
       if (!SIM_STATE.initialized) {
+        simListButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            if (button.disabled) return;
+            const listKey = coerceText(button.dataset.simListToggle);
+            if (!listKey || listKey === SIM_STATE.simListKey) return;
+            SIM_STATE.simListKey = listKey;
+            SIM_STATE.targetRank = null;
+            if (SIM_STATE.visible) {
+              updateRankingSimulator(listKey);
+            } else {
+              SIM_STATE.pendingListKey = listKey;
+            }
+          });
+        });
+
         simModeButtons.forEach((button) => {
           button.addEventListener('click', () => {
             const mode = coerceText(button.dataset.simMode);
             if (!mode) return;
             SIM_STATE.mode = mode;
-            renderSimMode(listKey);
+            renderSimMode();
           });
         });
 
@@ -99759,7 +99795,7 @@
             const scope = coerceText(button.dataset.simScope) === 'section' ? 'section' : 'national';
             SIM_STATE.scope = scope;
             SIM_STATE.targetRank = null;
-            renderSimMode(listKey);
+            renderSimMode();
           });
         });
 
@@ -99768,7 +99804,7 @@
             const view = coerceText(button.dataset.simView) === 'grind' ? 'grind' : 'bigwin';
             SIM_STATE.plannerView = view;
             if (SIM_STATE.mode === 'planner') {
-              renderPlannerSimulation(listKey);
+              renderPlannerSimulation();
               simViewButtons.forEach((item) => item.classList.toggle('is-active', item.dataset.simView === view));
             }
           });
@@ -99846,7 +99882,7 @@
       }
     }
 
-    function renderSimMode(listKey) {
+    function renderSimMode() {
       const simulation = SIM_STATE.simulation;
       const assumptionsContainer = document.querySelector('[data-sim-assumptions]');
       const simScopeButtons = document.querySelectorAll('[data-sim-scope]');
@@ -99894,27 +99930,47 @@
         return;
       }
 
-      renderPlannerSimulation(listKey);
+      renderPlannerSimulation();
     }
 
-    function updateRankingSimulator(listKey) {
-      const listData = getListData(listKey);
+    function resolveDefaultListKey() {
+      const lists = PLAYER_DATA && PLAYER_DATA.lists ? PLAYER_DATA.lists : {};
+      const keys = Object.keys(lists);
+      return PLAYER_DATA.defaultList && lists[PLAYER_DATA.defaultList]
+        ? PLAYER_DATA.defaultList
+        : (keys[0] || 'g12');
+    }
+
+    function updateRankingSimulator(listKeyHint) {
+      const preferred = coerceText(SIM_STATE.simListKey);
+      const hinted = coerceText(listKeyHint);
+      const fallback = resolveDefaultListKey();
+      const nextListKey = getListData(preferred)
+        ? preferred
+        : (getListData(hinted) ? hinted : fallback);
+      const listData = getListData(nextListKey);
       const simulation = getSimPayload(listData);
-      SIM_STATE.listKey = listKey || '';
+      SIM_STATE.listKey = nextListKey;
+      SIM_STATE.simListKey = nextListKey;
+      setActiveSimListToggle(nextListKey);
       SIM_STATE.simulation = simulation || null;
       SIM_STATE.targetRank = null;
       SIM_STATE.calculatorInput = 0;
       SIM_STATE.calculatorReplaceCount = 1;
       SIM_STATE.calculatorExpireCount = 0;
 
-      initializeSimulationControls(listKey);
-      renderSimMode(listKey);
+      initializeSimulationControls();
+      renderSimMode();
     }
 
-    function queueSimulatorUpdate(listKey) {
-      SIM_STATE.pendingListKey = listKey || '';
+    function queueSimulatorUpdate(listKeyHint) {
+      const hinted = coerceText(listKeyHint);
+      if (!SIM_STATE.simListKey && hinted) {
+        SIM_STATE.simListKey = hinted;
+      }
+      SIM_STATE.pendingListKey = SIM_STATE.simListKey || hinted || resolveDefaultListKey();
       if (SIM_STATE.visible) {
-        updateRankingSimulator(listKey);
+        updateRankingSimulator(SIM_STATE.pendingListKey);
       }
     }
 
@@ -99922,12 +99978,12 @@
       const simulatorSection = document.querySelector('#simulator');
       if (!simulatorSection) {
         SIM_STATE.visible = true;
-        updateRankingSimulator(defaultList);
+        updateRankingSimulator(SIM_STATE.pendingListKey || SIM_STATE.simListKey || defaultList);
         return;
       }
       if (!('IntersectionObserver' in window)) {
         SIM_STATE.visible = true;
-        updateRankingSimulator(defaultList);
+        updateRankingSimulator(SIM_STATE.pendingListKey || SIM_STATE.simListKey || defaultList);
         return;
       }
 
@@ -99935,7 +99991,7 @@
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           SIM_STATE.visible = true;
-          updateRankingSimulator(SIM_STATE.pendingListKey || defaultList);
+          updateRankingSimulator(SIM_STATE.pendingListKey || SIM_STATE.simListKey || defaultList);
           observer.disconnect();
         });
       }, { rootMargin: '120px 0px' });
@@ -99968,8 +100024,16 @@
         const data = lists[key];
         const hasEvents = data && data.events && ((data.events.singles || []).length + (data.events.doubles || []).length > 0);
         const hasTotals = data && data.totals && (data.totals.total || 0) > 0;
+        const hasSimulation = !!getSimPayload(data);
         setListDisabled(key, !(data && (hasEvents || hasTotals)));
+        setSimListDisabled(key, !(data && hasSimulation));
       });
+
+      const defaultSimList = getSimPayload(lists[defaultList])
+        ? defaultList
+        : (listKeys.find((key) => !!getSimPayload(lists[key])) || defaultList);
+      SIM_STATE.simListKey = defaultSimList;
+      setActiveSimListToggle(defaultSimList);
 
       applyList(defaultList);
       initializeSimulatorObserver(defaultList);
