@@ -1399,6 +1399,7 @@
             <button class="m-sheet-option active" data-filter="level" data-value="4">L4</button>
             <button class="m-sheet-option active" data-filter="level" data-value="5">L5</button>
             <button class="m-sheet-option" data-filter="level" data-value="6">L6</button>
+            <button class="m-sheet-option" data-filter="level" data-value="7">L7</button>
           </div>
         </div>
 
@@ -1434,7 +1435,7 @@
         <h1>USTA Girls U12/U14 Tournaments</h1>
         <span class="year-badge">2026</span>
       </div>
-      <p class="subtitle">NorCal (Levels 2-6) + National (Levels 1-4) • Distances from Los Altos, CA</p>
+      <p class="subtitle">NorCal (Levels 2-7) + National (Levels 1-4) • Distances from Los Altos, CA</p>
     </div>
 
     <!-- Stats Row -->
@@ -1484,12 +1485,11 @@
             <span class="chip-dot" style="background: #94a3b8"></span>
             Past
           </div>
+          <div class="filter-chip star-only" id="chip-starred" title="Starred" aria-label="Starred">★</div>
         </div>
       </div>
 
       <div class="filter-chips">
-        <div class="filter-chip star-only" id="chip-starred" title="Starred" aria-label="Starred">★</div>
-        <div class="divider"></div>
         <div class="filter-chip active" id="chip-sectional">
           <span class="chip-dot" style="background: #64748b"></span>
           Sectional
@@ -1522,6 +1522,10 @@
         <div class="filter-chip" id="chip-level-6">
           <span class="chip-dot" style="background: #94a3b8"></span>
           L6
+        </div>
+        <div class="filter-chip" id="chip-level-7">
+          <span class="chip-dot" style="background: #64748b"></span>
+          L7
         </div>
         <div class="divider"></div>
         <div class="filter-chip active" id="chip-age-u12">
@@ -2266,6 +2270,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
         level4: filters.level4,
         level5: filters.level5,
         level6: filters.level6,
+        level7: filters.level7,
         u12: filters.u12,
         u14: filters.u14,
         local: filters.local,
@@ -2293,6 +2298,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
       setActive('chip-level-4', filters.level4);
       setActive('chip-level-5', filters.level5);
       setActive('chip-level-6', filters.level6);
+      setActive('chip-level-7', filters.level7);
       setActive('chip-age-u12', filters.u12);
       setActive('chip-age-u14', filters.u14);
       setActive('chip-local', filters.local);
@@ -2778,6 +2784,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
       level4: true,
       level5: true,
       level6: false,
+      level7: false,
       u12: true,
       u14: true,
       local: true,
@@ -2851,7 +2858,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
           if (!starredTournaments.has(id)) return false;
         }
 
-        // Level filter (L2-L6); allow non-matching/unknown levels through.
+        // Level filter (L1-L7); allow non-matching/unknown levels through.
         const lvl = getLevelNum(row);
         if (lvl === 1 && !filters.level1) return false;
         if (lvl === 2 && !filters.level2) return false;
@@ -2859,6 +2866,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
         if (lvl === 4 && !filters.level4) return false;
         if (lvl === 5 && !filters.level5) return false;
         if (lvl === 6 && !filters.level6) return false;
+        if (lvl === 7 && !filters.level7) return false;
 
         // Age filter (Girls U12 / U14)
         const age = getAgeInfo(row);
@@ -3119,6 +3127,13 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
       render();
     });
 
+    document.getElementById('chip-level-7').addEventListener('click', () => {
+      filters.level7 = !filters.level7;
+      document.getElementById('chip-level-7').classList.toggle('active');
+      saveFilters();
+      render();
+    });
+
     document.getElementById('chip-age-u12').addEventListener('click', () => {
       filters.u12 = !filters.u12;
       document.getElementById('chip-age-u12').classList.toggle('active');
@@ -3247,6 +3262,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
       level4: true,
       level5: true,
       level6: false,
+      level7: false,
       u12: true,
       u14: true,
       showPast: false
@@ -3304,6 +3320,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
       mobileFilters.level4 = filters.level4;
       mobileFilters.level5 = filters.level5;
       mobileFilters.level6 = filters.level6;
+      mobileFilters.level7 = filters.level7;
       mobileFilters.u12 = filters.u12;
       mobileFilters.u14 = filters.u14;
       mobileFilters.showPast = filters.showPast;
@@ -3337,6 +3354,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
       filters.level4 = mobileFilters.level4;
       filters.level5 = mobileFilters.level5;
       filters.level6 = mobileFilters.level6;
+      filters.level7 = mobileFilters.level7;
       filters.u12 = mobileFilters.u12;
       filters.u14 = mobileFilters.u14;
       filters.showPast = mobileFilters.showPast;
@@ -3364,6 +3382,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
         if (lvl === 4 && !mobileFilters.level4) return false;
         if (lvl === 5 && !mobileFilters.level5) return false;
         if (lvl === 6 && !mobileFilters.level6) return false;
+        if (lvl === 7 && !mobileFilters.level7) return false;
 
         const age = getAgeInfo(row);
         if (!age.isU12 && !age.isU14) return false;
@@ -3426,7 +3445,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
         !mobileFilters.local || !mobileFilters.road || !mobileFilters.flight ||
         !mobileFilters.formatS || !mobileFilters.formatSD || !mobileFilters.formatD ||
         !mobileFilters.level1 || !mobileFilters.level2 || !mobileFilters.level3 || !mobileFilters.level4 || !mobileFilters.level5 ||
-        !mobileFilters.u12 || !mobileFilters.u14 || mobileFilters.showPast || mobileFilters.level6;
+        !mobileFilters.u12 || !mobileFilters.u14 || mobileFilters.showPast || mobileFilters.level6 || mobileFilters.level7;
       document.getElementById('m-filter-dot').style.display = hasActiveFilters ? 'inline-block' : 'none';
 
       document.querySelectorAll('.m-month-pill').forEach(pill => {
@@ -3668,6 +3687,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
               mobileFilters.level4 = true;
               mobileFilters.level5 = true;
               mobileFilters.level6 = false;
+              mobileFilters.level7 = false;
             } else {
               mobileFilters['level' + value] = !mobileFilters['level' + value];
             }
@@ -3701,6 +3721,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
         mobileFilters.level4 = true;
         mobileFilters.level5 = true;
         mobileFilters.level6 = false;
+        mobileFilters.level7 = false;
         mobileFilters.u12 = true;
         mobileFilters.u14 = true;
         mobileFilters.showPast = false;
@@ -3750,7 +3771,7 @@ Lafayette Tennis Club L7 one day NTRP Tournament,March,28-29,2,https://playtenni
           else if (value === 'SD') isActive = mobileFilters.formatSD;
           else if (value === 'D') isActive = mobileFilters.formatD;
         } else if (filter === 'level') {
-          if (value === 'all') isActive = mobileFilters.level1 && mobileFilters.level2 && mobileFilters.level3 && mobileFilters.level4 && mobileFilters.level5 && !mobileFilters.level6;
+          if (value === 'all') isActive = mobileFilters.level1 && mobileFilters.level2 && mobileFilters.level3 && mobileFilters.level4 && mobileFilters.level5 && !mobileFilters.level6 && !mobileFilters.level7;
           else isActive = mobileFilters['level' + value];
         } else if (filter === 'age') {
           if (value === 'all') isActive = mobileFilters.u12 && mobileFilters.u14;
