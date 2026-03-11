@@ -527,6 +527,30 @@
       color: var(--text-muted);
     }
 
+    .our-page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-decoration: none;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .our-page-badge:hover,
+    .our-page-badge:focus-visible {
+      background: rgba(16, 185, 129, 0.2);
+      text-decoration: none;
+    }
+
     .proximity-indicator {
       display: inline-flex;
       align-items: center;
@@ -910,6 +934,21 @@
     .m-format-badge {
       font-size: 11px;
       color: var(--m-text-muted);
+    }
+
+    .m-our-page-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      color: #047857;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-decoration: none;
     }
 
     .m-star-btn {
@@ -2346,6 +2385,23 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	      ].join('|');
 	    }
 
+	    const LOCAL_EVENT_PAGE_BY_TOURNAMENT_ID = {
+	      'february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship': 'open-level5-championship-fairoaks-feb14-2026.html',
+	      'january|31-1|four directions tennis|willow glen high school & middle school|san jose|open level 5 championship singles': 'open-level5-championship-singles-san-jose-jan31-2026.html',
+	      'january|31-1|san joaquin valley tennis academy future stars 200|bear creek high school|stockton|open level 5 championship singles': 'open-level5-championship-singles-stockton-jan31-2026.html',
+	      'january|31-1|hrt academia de tenis|redwood high school|larkspur|open level 5 championship singles': 'open-level5-championship-singles-larkspur-jan31-2026.html',
+	      'february|21-22|hrt academia de tenis|redwood high school|larkspur|closed level 3 mixed sectionals': 'hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html',
+	      'april|4-5|cello international tennis academy|solano community college|fairfield|open level 4 super series': 'open-level4-super-series-fairfield-g14-apr4-2026.html',
+	      'april|4-5|rollingwood ymca|rollingwood ymca|fair oaks|open level 4 super series': 'open-level4-super-series-fair-oaks-g12-apr4-2026.html',
+	      'april|4-5|hrt academia de tenis|redwood high school|larkspur|open level 5 super series': 'open-level5-super-series-larkspur-g12-apr4-2026.html',
+	      'april|11-13|el dorado park tennis center|el dorado park tennis center|long beach ca|level 3': 'level3-long-beach-g14-apr11-13-2026.html',
+	      'april|11-13|racquet club of irvine|racquet club of irvine|irvine ca|level 3': 'level3-irvine-g12-apr11-13-2026.html'
+	    };
+
+	    function getLocalEventPageHref(row) {
+	      return LOCAL_EVENT_PAGE_BY_TOURNAMENT_ID[getTournamentId(row)] || '';
+	    }
+
 	    function getTournamentRowAnchorId(row) {
 	      const rawId = getTournamentId(row);
 	      const slug = rawId.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
@@ -2964,13 +3020,18 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            const normalizedHomePage = normalizePlayTennisUrl(homePage);
 	            const isValidUrl = isPlayTennisTournamentOverviewUrl(normalizedHomePage);
 	            const tournamentName = getTournamentTitle(row);
+	            const localPageHref = getLocalEventPageHref(row);
 	            const format = getFormat(row);
 	            const age = getAgeInfo(row);
 	            const draw = getDrawCell(row);
 	            const cityState = formatCityWithState(row['City']);
-	            const tournamentHtml = isValidUrl
+	            const tournamentLinkHtml = isValidUrl
 	              ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
 	              : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
+	            const localPageBadgeHtml = localPageHref
+	              ? `<a class="our-page-badge" href="${escapeAttr(localPageHref)}">Report</a>`
+	              : '';
+	            const tournamentHtml = `${tournamentLinkHtml}${localPageBadgeHtml}`;
 
 	            const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
 	            const venueName = (row['Primary Site'] || '').trim();
@@ -3018,13 +3079,18 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	          const normalizedHomePage = normalizePlayTennisUrl(homePage);
 	          const isValidUrl = isPlayTennisTournamentOverviewUrl(normalizedHomePage);
 	          const tournamentName = getTournamentTitle(row);
+	          const localPageHref = getLocalEventPageHref(row);
 	          const format = getFormat(row);
 	          const age = getAgeInfo(row);
 	          const draw = getDrawCell(row);
 	          const cityState = formatCityWithState(row['City']);
-	          const tournamentHtml = isValidUrl
+	          const tournamentLinkHtml = isValidUrl
 	            ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
 	            : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
+	          const localPageBadgeHtml = localPageHref
+	            ? `<a class="our-page-badge" href="${escapeAttr(localPageHref)}">Report</a>`
+	            : '';
+	          const tournamentHtml = `${tournamentLinkHtml}${localPageBadgeHtml}`;
 
 	          const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
 	          const venueName = (row['Primary Site'] || '').trim();
@@ -3509,6 +3575,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
           const homePage = row['Home Page'] || '';
           const normalizedHomePage = normalizePlayTennisUrl(homePage);
           const isValidUrl = isPlayTennisTournamentOverviewUrl(normalizedHomePage);
+          const localPageHref = getLocalEventPageHref(row);
           const divisions = (row['Divisions'] || '').trim();
           const director = (row['Tournament Director'] || '').trim();
           const notes = (row['Notes'] || '').trim();
@@ -3523,6 +3590,9 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
           const tournamentNameHtml = isValidUrl
             ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
             : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
+          const localPageBadgeHtml = localPageHref
+            ? `<a class="m-our-page-badge" href="${escapeAttr(localPageHref)}">Report</a>`
+            : '';
 
           const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
           const venueName = (row['Primary Site'] || '').trim();
@@ -3537,7 +3607,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
             <div class="m-card-header">
               <div class="m-card-top">
                 <div class="m-card-title">
-                  <div class="m-card-name">${tournamentNameHtml}</div>
+                  <div class="m-card-name">${tournamentNameHtml}${localPageBadgeHtml}</div>
                   <div class="m-card-meta">
                     <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NATIONAL' : 'SECTIONAL'}</span>
                     <span class="m-format-badge">• ${formatLabel}</span>
