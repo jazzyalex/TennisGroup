@@ -312,7 +312,8 @@
 
     .table-header {
       display: grid;
-      grid-template-columns: 40px 50px 140px 1fr 80px 90px 140px 1fr 90px 100px 110px;
+      grid-template-columns: 40px 50px 156px 1fr 80px 90px 140px 1fr 90px 100px 110px;
+      column-gap: 12px;
       padding: 12px 24px;
       background: var(--bg-tertiary);
       border-bottom: 1px solid var(--border);
@@ -381,7 +382,8 @@
 
     .table-row {
       display: grid;
-      grid-template-columns: 40px 50px 140px 1fr 80px 90px 140px 1fr 90px 100px 110px;
+      grid-template-columns: 40px 50px 156px 1fr 80px 90px 140px 1fr 90px 100px 110px;
+      column-gap: 12px;
       align-items: center;
       padding: 20px 24px;
       border-bottom: 1px solid var(--border-subtle);
@@ -449,6 +451,7 @@
     .cell-dates {
       color: var(--text-secondary);
       font-size: 13px;
+      padding-right: 6px;
     }
 
     .cell-tournament {
@@ -530,13 +533,13 @@
     .cell-dates.has-local-page a {
       color: #047857;
       font-weight: 700;
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     .cell-dates.has-local-page a:hover,
     .cell-dates.has-local-page a:focus-visible {
-      text-decoration: underline;
-      text-underline-offset: 2px;
+      text-decoration-thickness: 2px;
     }
 
     .proximity-indicator {
@@ -574,7 +577,8 @@
     @media (max-width: 1200px) {
       .table-header,
       .table-row {
-        grid-template-columns: 35px 45px 120px 1fr 70px 80px 120px 1fr 80px 90px 100px;
+        grid-template-columns: 35px 45px 132px 1fr 70px 80px 120px 1fr 80px 90px 100px;
+        column-gap: 10px;
       }
     }
 
