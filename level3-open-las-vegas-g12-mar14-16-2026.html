@@ -23,13 +23,70 @@
   <meta name="twitter:image:alt" content="Tournament report preview">
   <title>Level 3 Open: Las Vegas, NV — G12/G14 Singles, March 14 - 16, 2026, Darling Memorial Tennis Center, Las Vegas, NV</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      /* ── Backgrounds ── */
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+
+      /* ── Text ── */
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+
+      /* ── Borders ── */
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+
+      /* ── Brand ── */
+      --court-green: #2d5a27;
+      --court-green-light: #3d7a37;
+
+      /* ── Accent: report ── */
+      --accent-report: #4472C4;
+      --accent-report-light: #D9E2F3;
+
+      /* ── Accent: semantic ── */
+      --accent-cyan: #0891b2;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+
+      /* ── Status ── */
+      --status-critical: #ef4444;
+      --status-critical-bg: #fef2f2;
+      --status-warning: #f59e0b;
+      --status-warning-bg: #fffbeb;
+      --status-safe: #10b981;
+      --status-safe-bg: #ecfdf5;
+
+      /* ── Highlight ── */
+      --highlight-player: #f5c542;
+      --highlight-player-bg: #fff3cd;
+
+      /* ── Elevation ── */
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+      /* ── Radius ── */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 14px;
+
+      /* ── Typography ── */
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       margin: 0;
       padding: 20px;
       padding-top: 24px;
-      background-color: #f5f5f5;
-      border-top: 4px solid #4472C4;
+      background-color: var(--bg-primary);
+      border-top: 4px solid var(--accent-report);
     }
 
     .report-header {
@@ -57,7 +114,7 @@
     }
 
     .report-header-logo-link:focus-visible {
-      outline: 2px solid #4472C4;
+      outline: 2px solid var(--accent-report);
       outline-offset: 4px;
     }
 
@@ -74,11 +131,13 @@
     }
 
     h1 {
-      color: #2c3e50;
+      color: var(--text-primary);
       text-align: center;
       margin: 0;
       font-size: 2.2em;
       font-weight: bold;
+      font-family: var(--font-heading);
+      letter-spacing: -0.02em;
     }
 
     .tournament-dates-row {
@@ -92,9 +151,10 @@
 
     .tournament-dates {
       text-align: center;
-      color: #2c3e50;
+      color: var(--text-primary);
       font-size: 1.3em;
       font-weight: 600;
+      font-family: var(--font-heading);
     }
 
     .deadline-badge {
@@ -103,12 +163,12 @@
       align-items: flex-start;
       gap: 2px;
       padding: 6px 12px;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       border: 1px solid #c9d6f5;
       background: #f3f6ff;
       font-size: 12px;
       line-height: 1.2;
-      color: #2c3e50;
+      color: var(--text-primary);
       white-space: nowrap;
     }
 
@@ -119,12 +179,12 @@
 
     .deadline-date {
       font-size: 11px;
-      color: #5f6c7b;
+      color: var(--text-secondary);
     }
 
     .tournament-info {
       text-align: center;
-      color: #7f8c8d;
+      color: var(--text-secondary);
       margin: 0 0 10px;
       font-size: 14px;
       line-height: 1.6;
@@ -142,7 +202,7 @@
     }
 
     tr.partner-highlight td {
-      background: #fff2cc !important;
+      background: var(--highlight-player-bg) !important;
     }
 
     tr.seeded-team td:first-child {
@@ -165,10 +225,11 @@
       width: 100%;
       margin: 26px auto 12px;
       padding: 0;
-      color: #2c3e50;
+      color: var(--text-primary);
       font-size: 1.45em;
       font-weight: 700;
       text-align: left;
+      font-family: var(--font-heading);
     }
 
     .key-stats {
@@ -177,7 +238,7 @@
       gap: 10px;
       justify-content: flex-start;
       font-size: 12px;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .key-stat {
@@ -204,7 +265,7 @@
     .link-legend {
       text-align: right;
       font-size: 11px;
-      color: #666;
+      color: var(--text-secondary);
       white-space: nowrap;
     }
 
@@ -212,10 +273,10 @@
       margin: 8px 0 12px;
       padding: 8px 10px;
       font-size: 12px;
-      color: #2c3e50;
+      color: var(--text-primary);
       background-color: #f3f6fb;
-      border-left: 3px solid #4472C4;
-      border-radius: 4px;
+      border-left: 3px solid var(--accent-report);
+      border-radius: var(--radius-sm);
     }
 
     table {
@@ -223,12 +284,12 @@
       max-width: 1000px;
       margin: 0 auto;
       border-collapse: collapse;
-      background-color: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      box-shadow: var(--card-shadow);
     }
 
     th {
-      background-color: #4472C4;
+      background-color: var(--accent-report);
       color: white;
       padding: 12px 10px;
       text-align: left;
@@ -270,16 +331,16 @@
     td {
       padding: 8px 10px;
       font-size: 13px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
     }
 
     /* Alternating row colors - exactly like the sample */
     tbody tr:nth-child(odd) {
-      background-color: white;
+      background-color: var(--bg-secondary);
     }
 
     tbody tr:nth-child(even) {
-      background-color: #D9E2F3;
+      background-color: var(--accent-report-light);
     }
 
     /* Hover effect */
@@ -290,11 +351,11 @@
 
     /* Highlighted player (Alexis) */
     tr.highlight-player {
-      background-color: white !important;
+      background-color: var(--bg-secondary) !important;
     }
 
     tr.highlight-player:hover {
-      background-color: white !important;
+      background-color: var(--bg-secondary) !important;
     }
 
     tr.highlight-player td {
@@ -307,23 +368,23 @@
     }
 
     tr.highlight-player td:nth-child(1) {
-      border-left: 4px solid #f5c542;
+      border-left: 4px solid var(--highlight-player);
     }
 
     tr.highlight-player td:nth-child(2) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     tr.highlight-player td:nth-child(3) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     tr.highlight-player:hover td:nth-child(2) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     tr.highlight-player:hover td:nth-child(3) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     /* Column alignment */
@@ -331,7 +392,7 @@
       text-align: center;
       width: 50px;
       font-weight: 600;
-      color: #666;
+      color: var(--text-secondary);
     }
 
     .col-wtn {
@@ -377,16 +438,17 @@
       max-width: 1000px;
       margin: 30px auto;
       padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
     }
 
     .stats-section h2 {
-      color: #2c3e50;
+      color: var(--text-primary);
       margin-top: 0;
-      border-bottom: 2px solid #4472C4;
+      border-bottom: 2px solid var(--accent-report);
       padding-bottom: 10px;
+      font-family: var(--font-heading);
     }
 
     .stats-grid {
@@ -398,14 +460,14 @@
 
     .stat-box {
       padding: 15px;
-      background-color: #f8f9fa;
-      border-left: 4px solid #4472C4;
-      border-radius: 4px;
+      background-color: var(--bg-tertiary);
+      border-left: 4px solid var(--accent-report);
+      border-radius: var(--radius-sm);
     }
 
     .stat-label {
       font-size: 11px;
-      color: #666;
+      color: var(--text-secondary);
       text-transform: uppercase;
       margin-bottom: 5px;
     }
@@ -413,32 +475,33 @@
     .stat-value {
       font-size: 20px;
       font-weight: bold;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .utr-histogram {
       max-width: 1000px;
       margin: 20px auto;
       padding: 16px 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
       display: flex;
       flex-direction: column;
     }
 
     .utr-histogram h2,
     .utr-histogram h3 {
-      color: #2c3e50;
+      color: var(--text-primary);
       margin-top: 0;
-      border-bottom: 2px solid #4472C4;
+      border-bottom: 2px solid var(--accent-report);
       padding-bottom: 8px;
+      font-family: var(--font-heading);
     }
 
     .utr-subtitle {
       font-weight: normal;
       font-size: 12px;
-      color: #5a6b7d;
+      color: var(--text-muted);
     }
 
     .utr-histogram-chart {
@@ -453,13 +516,13 @@
       align-items: center;
       gap: 10px;
       font-size: 11px;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .utr-bin-label {
       width: 90px;
       text-align: right;
-      color: #5a6b7d;
+      color: var(--text-muted);
     }
 
     .utr-bin-bar-wrap {
@@ -472,24 +535,24 @@
 
     .utr-bin-bar {
       height: 100%;
-      background-color: #4472C4;
+      background-color: var(--accent-report);
       border-radius: 999px;
     }
 
     .utr-bin.is-highlight .utr-bin-bar {
-      background-color: #f5c542;
+      background-color: var(--highlight-player);
     }
 
     .utr-bin-count {
       width: 28px;
       text-align: right;
       font-weight: 600;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .utr-histogram-caption {
       font-size: 11px;
-      color: #666;
+      color: var(--text-secondary);
       margin-top: 12px;
       padding-bottom: 4px;
       text-align: center;
@@ -500,23 +563,25 @@
       max-width: 1000px;
       margin: 30px auto;
       padding: 30px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
       page-break-before: always;
     }
 
     .tournament-details-page h2 {
-      color: #2c3e50;
-      border-bottom: 3px solid #4472C4;
+      color: var(--text-primary);
+      border-bottom: 3px solid var(--accent-report);
       padding-bottom: 10px;
       margin-top: 0;
+      font-family: var(--font-heading);
     }
 
     .tournament-details-page h3 {
-      color: #4472C4;
+      color: var(--accent-report);
       margin-top: 25px;
       margin-bottom: 10px;
+      font-family: var(--font-heading);
     }
 
     .detail-row {
@@ -525,17 +590,17 @@
       column-gap: 12px;
       align-items: start;
       padding: 10px 0;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .detail-label {
       font-weight: bold;
-      color: #555;
+      color: var(--text-secondary);
       display: block;
     }
 
     .detail-value {
-      color: #2c3e50;
+      color: var(--text-primary);
       min-width: 0;
       overflow-wrap: anywhere;
     }
@@ -545,7 +610,7 @@
       border-left: 4px solid #ffc107;
       padding: 15px;
       margin-top: 20px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     /* Share button */
@@ -553,7 +618,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #4472C4;
+      background-color: var(--accent-report);
       color: white;
       border: none;
       border-radius: 50%;
@@ -587,7 +652,7 @@
 
     /* Click-to-call phone link */
     a[href^="tel"] {
-      color: #4472C4;
+      color: var(--accent-report);
       text-decoration: none;
       font-weight: 600;
     }
@@ -598,46 +663,26 @@
 
     /* Dark Mode Support */
     @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #1a1a1a;
-        color: #e0e0e0;
-      }
-
-      h1 {
-        color: #ffffff;
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --border: rgba(255,255,255,0.08);
+        --border-subtle: rgba(255,255,255,0.04);
+        --accent-report-light: #2a3a52;
+        --highlight-player-bg: #3b2f1a;
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
       }
 
       .report-header-logo {
         filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
       }
 
-      .tournament-dates {
-        color: #ffffff;
-      }
-
-      .tournament-info {
-        color: #b0b0b0;
-      }
-
-      .link-legend {
-        color: #b0b0b0;
-      }
-
-      table {
-        background-color: #2a2a2a;
-        color: #e0e0e0;
-      }
-
       th {
         background-color: #3a5a8a;
-      }
-
-      tbody tr:nth-child(odd) {
-        background-color: #2a2a2a;
-      }
-
-      tbody tr:nth-child(even) {
-        background-color: #333333;
       }
 
       tbody tr:hover {
@@ -645,62 +690,27 @@
       }
 
       tr.highlight-player {
-        background-color: #2a2a2a !important;
+        background-color: var(--bg-secondary) !important;
       }
 
       tr.highlight-player:hover {
-        background-color: #2a2a2a !important;
+        background-color: var(--bg-secondary) !important;
       }
 
       tr.highlight-player td {
         color: #ffd700;
       }
 
-      tr.highlight-player td:nth-child(2) {
-        background-color: #3b2f1a;
-      }
-
-      tr.highlight-player td:nth-child(3) {
-        background-color: #3b2f1a;
-      }
-
       tr.highlight-player td:nth-child(1) {
         border-left-color: #d4a700;
       }
 
-      td {
-        border-bottom: 1px solid #404040;
-      }
-
-      .stats-section, .tournament-details-page, .utr-histogram {
-        background-color: #2a2a2a;
-        color: #e0e0e0;
-      }
-
       .stats-section h2, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h2, .utr-histogram h3 {
-        color: #ffffff;
         border-bottom-color: #3a5a8a;
       }
 
       .stat-box {
-        background-color: #333333;
         border-left-color: #3a5a8a;
-      }
-
-      .stat-value, .stat-label {
-        color: #e0e0e0;
-      }
-
-      .utr-subtitle {
-        color: #9aa9c0;
-      }
-
-      .utr-bin {
-        color: #e0e0e0;
-      }
-
-      .utr-bin-label {
-        color: #9aa9c0;
       }
 
       .utr-bin-bar-wrap {
@@ -712,31 +722,10 @@
       }
 
       .utr-bin.is-highlight .utr-bin-bar {
-        background-color: #f5c542;
-      }
-
-      .utr-bin-count {
-        color: #e0e0e0;
-      }
-
-      .utr-histogram-caption {
-        color: #b0b0b0;
-      }
-
-      .detail-row {
-        border-bottom: 1px solid #404040;
-      }
-
-      .detail-label {
-        color: #b0b0b0;
-      }
-
-      .detail-value {
-        color: #e0e0e0;
+        background-color: var(--highlight-player);
       }
 
       .key-stat {
-        color: #e0e0e0;
         background-color: transparent;
         border: none;
       }
@@ -750,7 +739,6 @@
       }
 
       .selection-callout {
-        color: #e0e0e0;
         background-color: #2f3644;
         border-left-color: #6b9bd1;
       }
@@ -758,7 +746,6 @@
       .important-note {
         background-color: #3a3a1a;
         border-left-color: #d4a700;
-        color: #e0e0e0;
       }
 
       a {
@@ -1152,7 +1139,7 @@
 
     /* Mobile Layout Styles */
     .mobile-view {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      font-family: var(--font-body);
       background: var(--mobile-bg);
       color: var(--mobile-text-primary);
       line-height: 1.5;
@@ -2026,8 +2013,8 @@
   </style>
 </head>
 <body>
-  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-04T16:01:40-08:00" title="2026-03-04T16:01:40-08:00">
-    <span class="report-updated-badge__pill">Updated Mar 4, 2026 4:01 PM PST</span>
+  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-12T13:45:09-07:00" title="2026-03-12T13:45:09-07:00">
+    <span class="report-updated-badge__pill">Updated Mar 12, 2026 1:45 PM PDT</span>
   </div>
   <div class="desktop-view">
   <div class="report-header">
@@ -2047,7 +2034,7 @@
       </div>
             <div class="tournament-info">
         <a href="https://playtennis.usta.com/competitions/darlingmemorialtenniscenter/Tournaments/overview/68DE1C49-3DE7-4F4A-AD83-842BEDEF1833" target="_blank" rel="noopener noreferrer" title="Open tournament page">Level 3 Open: Las Vegas, NV — G12/G14 Singles</a><br>
-        Darling Memorial Tennis Center, Las Vegas, NV • 91 Players
+        Darling Memorial Tennis Center, Las Vegas, NV • 84 Players
       </div>
     </div>
   </div>
@@ -2055,7 +2042,7 @@
     <div class="key-stats">
       <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
       <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">Registration closed</span></div>
-      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">91</span></div>
+      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">84</span></div>
     </div>
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
@@ -2077,47 +2064,46 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="entry-list-player" data-player-key="WEI|MANDY" data-entry-status="entry" data-section-rank="7"><td class="col-rank">1</td><td>Mandy</td><td>Wei</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018929071" target="_blank" rel="noopener noreferrer">29.27</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3676544" target="_blank" rel="noopener noreferrer">6.82</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018929071" target="_blank" rel="noopener noreferrer">34</a></td><td>Katy TX</td><td><a href="#" class="partner-jump" data-partner-key="GADGIL|ZIVA">Gadgil, Ziva</a></td><td style="display: none;">7</td></tr>
-      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-12cb67403aeec1f4dce5" data-h2h-matches="1" data-player-key="GADGIL|ZIVA" data-entry-status="entry" data-section-rank="2"><td class="col-rank">2</td><td><a class="h2h-jump" href="#h2h-12cb67403aeec1f4dce5">Ziva</a></td><td><a class="h2h-jump" href="#h2h-12cb67403aeec1f4dce5">Gadgil</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018658341" target="_blank" rel="noopener noreferrer">30.59</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3415960" target="_blank" rel="noopener noreferrer">6.35</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018658341" target="_blank" rel="noopener noreferrer">57</a></td><td>San Mateo CA</td><td><a href="#" class="partner-jump" data-partner-key="WEI|MANDY">Wei, Mandy</a></td><td style="display: none;">2</td></tr>
-      <tr class="entry-list-player" data-player-key="SAGSTROM|INGRID" data-entry-status="entry" data-section-rank="4"><td class="col-rank">3</td><td>Ingrid</td><td>Sagstrom</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018495869" target="_blank" rel="noopener noreferrer">30.14</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3293662" target="_blank" rel="noopener noreferrer">5.93</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018495869" target="_blank" rel="noopener noreferrer">52</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="MILEWSKI|OLIVIA">Milewski, Olivia</a></td><td style="display: none;">4</td></tr>
-      <tr class="entry-list-player" data-player-key="WERTH|EMMA" data-entry-status="entry" data-section-rank="3"><td class="col-rank">4</td><td>Emma</td><td>Werth</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019218399" target="_blank" rel="noopener noreferrer">30.52</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5248117" target="_blank" rel="noopener noreferrer">6.18</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019218399" target="_blank" rel="noopener noreferrer">48</a></td><td>Boise ID</td><td><a href="#" class="partner-jump" data-partner-key="BERGESON|IVY">Bergeson, Ivy</a></td><td style="display: none;">3</td></tr>
-      <tr class="entry-list-player" data-player-key="BYUN|JIA" data-entry-status="entry" data-section-rank="7"><td class="col-rank">5</td><td>Jia</td><td>Byun</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526973" target="_blank" rel="noopener noreferrer">30.81</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2769159" target="_blank" rel="noopener noreferrer">5.92</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526973" target="_blank" rel="noopener noreferrer">114</a></td><td>Salt Lake City UT</td><td>N/A</td><td style="display: none;">7</td></tr>
-      <tr class="entry-list-player" data-player-key="BERGESON|IVY" data-entry-status="entry" data-section-rank="8"><td class="col-rank">6</td><td>Ivy</td><td>Bergeson</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018505287" target="_blank" rel="noopener noreferrer">31.21</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2806442" target="_blank" rel="noopener noreferrer">5.63</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018505287" target="_blank" rel="noopener noreferrer">125</a></td><td>Bountiful UT</td><td><a href="#" class="partner-jump" data-partner-key="WERTH|EMMA">Werth, Emma</a></td><td style="display: none;">8</td></tr>
-      <tr class="entry-list-player" data-player-key="KOMOTO|GENESIS" data-entry-status="entry" data-section-rank="13"><td class="col-rank">7</td><td>Genesis</td><td>Komoto</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019105840" target="_blank" rel="noopener noreferrer">32.02</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3806160" target="_blank" rel="noopener noreferrer">4.89</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019105840" target="_blank" rel="noopener noreferrer">192</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">13</td></tr>
-      <tr class="entry-list-player" data-player-key="TEMRAZ|TALIYA" data-entry-status="entry" data-section-rank="23"><td class="col-rank">8</td><td>Taliya</td><td>Temraz</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018891255" target="_blank" rel="noopener noreferrer">31.07</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3666774" target="_blank" rel="noopener noreferrer">5.82</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018891255" target="_blank" rel="noopener noreferrer">182</a></td><td>Irvine CA</td><td><a href="#" class="partner-jump" data-partner-key="BIGLER|MADELINE">Bigler, Madeline</a></td><td style="display: none;">23</td></tr>
-      <tr class="entry-list-player" data-player-key="MILEWSKI|OLIVIA" data-entry-status="entry" data-section-rank="14"><td class="col-rank">9</td><td>Olivia</td><td>Milewski</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417258" target="_blank" rel="noopener noreferrer">32.90</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2853369" target="_blank" rel="noopener noreferrer">4.70</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417258" target="_blank" rel="noopener noreferrer">206</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="SAGSTROM|INGRID">Sagstrom, Ingrid</a></td><td style="display: none;">14</td></tr>
-      <tr class="entry-list-player" data-player-key="GUO|YUNA" data-entry-status="entry" data-section-rank="25"><td class="col-rank">10</td><td>Yuna</td><td>Guo</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018978115" target="_blank" rel="noopener noreferrer">30.78</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4532818" target="_blank" rel="noopener noreferrer">5.98</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018978115" target="_blank" rel="noopener noreferrer">198</a></td><td>Rancho Santa fe CA</td><td><a href="#" class="partner-jump" data-partner-key="TARAZAGA DIAZ|CARLOTA">Tarazaga Diaz, Carlota</a></td><td style="display: none;">25</td></tr>
-      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-0ee6ac64f22da4f8fa28" data-h2h-matches="2" data-player-key="YAMAMOTO|ELINA" data-entry-status="entry" data-section-rank="10"><td class="col-rank">11</td><td><a class="h2h-jump" href="#h2h-0ee6ac64f22da4f8fa28">Elina</a></td><td><a class="h2h-jump" href="#h2h-0ee6ac64f22da4f8fa28">Yamamoto</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017332570" target="_blank" rel="noopener noreferrer">32.00</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4594642" target="_blank" rel="noopener noreferrer">5.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017332570" target="_blank" rel="noopener noreferrer">240</a></td><td>San Jose CA</td><td>N/A</td><td style="display: none;">10</td></tr>
-      <tr class="entry-list-player" data-player-key="SHIOZAWA|IVORY" data-entry-status="entry" data-section-rank="15"><td class="col-rank">12</td><td>Ivory</td><td>Shiozawa</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010787105" target="_blank" rel="noopener noreferrer">32.82</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5400754" target="_blank" rel="noopener noreferrer">4.44</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010787105" target="_blank" rel="noopener noreferrer">248</a></td><td>Saint George UT</td><td><a href="#" class="partner-jump" data-partner-key="MILEWSKI|AVERY">Milewski, Avery</a></td><td style="display: none;">15</td></tr>
-      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-14b5582313c3c42fdae7" data-h2h-matches="1" data-player-key="KUKEEVA|VALENTINA" data-entry-status="entry" data-section-rank="9"><td class="col-rank">13</td><td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Valentina</a></td><td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Kukeeva</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">31.32</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3395363" target="_blank" rel="noopener noreferrer">5.39</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">239</a></td><td>Campbell CA</td><td>N/A</td><td style="display: none;">9</td></tr>
-      <tr class="entry-list-player" data-player-key="AMA|ARELI" data-entry-status="entry" data-section-rank="13"><td class="col-rank">14</td><td>Areli</td><td>Ama</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018541174" target="_blank" rel="noopener noreferrer">32.44</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2710884" target="_blank" rel="noopener noreferrer">5.46</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018541174" target="_blank" rel="noopener noreferrer">288</a></td><td>Fairfield CA</td><td><a href="#" class="partner-jump" data-partner-key="MATELJAN|ELENA">Mateljan, Elena</a></td><td style="display: none;">13</td></tr>
-      <tr class="entry-list-player" data-player-key="CHEN|SERENA" data-entry-status="entry" data-section-rank="14"><td class="col-rank">15</td><td>Serena</td><td>Chen</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526484" target="_blank" rel="noopener noreferrer">32.12</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3672239" target="_blank" rel="noopener noreferrer">5.15</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526484" target="_blank" rel="noopener noreferrer">289</a></td><td>Santa Clara CA</td><td>N/A</td><td style="display: none;">14</td></tr>
-      <tr class="entry-list-player" data-player-key="TARAZAGA DIAZ|CARLOTA" data-entry-status="entry" data-section-rank="29"><td class="col-rank">16</td><td>Carlota</td><td>Tarazaga Diaz</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019040216" target="_blank" rel="noopener noreferrer">32.42</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3593858" target="_blank" rel="noopener noreferrer">5.26</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019040216" target="_blank" rel="noopener noreferrer">291</a></td><td>Irvine CA</td><td><a href="#" class="partner-jump" data-partner-key="GUO|YUNA">Guo, Yuna</a></td><td style="display: none;">29</td></tr>
-      <tr class="entry-list-player" data-player-key="MILEWSKI|AVERY" data-entry-status="entry" data-section-rank="17"><td class="col-rank">17</td><td>Avery</td><td>Milewski</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417257" target="_blank" rel="noopener noreferrer">33.61</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2853366" target="_blank" rel="noopener noreferrer">3.95</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417257" target="_blank" rel="noopener noreferrer">301</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="SHIOZAWA|IVORY">Shiozawa, Ivory</a></td><td style="display: none;">17</td></tr>
-      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-52ecfbcbe001393f2d84" data-h2h-matches="2" data-player-key="STIRITZ|SUMMER" data-entry-status="entry" data-section-rank="16"><td class="col-rank">18</td><td><a class="h2h-jump" href="#h2h-52ecfbcbe001393f2d84">Summer</a></td><td><a class="h2h-jump" href="#h2h-52ecfbcbe001393f2d84">Stiritz</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018746621" target="_blank" rel="noopener noreferrer">33.82</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3151147" target="_blank" rel="noopener noreferrer">4.80</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018746621" target="_blank" rel="noopener noreferrer">304</a></td><td>Ross CA</td><td>N/A</td><td style="display: none;">16</td></tr>
-      <tr class="entry-list-player" data-player-key="LING|ANGELA" data-entry-status="entry" data-section-rank="19"><td class="col-rank">19</td><td>Angela</td><td>Ling</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538252" target="_blank" rel="noopener noreferrer">34.56</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3697346" target="_blank" rel="noopener noreferrer">4.45</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538252" target="_blank" rel="noopener noreferrer">345</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">19</td></tr>
-      <tr class="entry-list-player" data-player-key="BREGARDIS|ALICE" data-entry-status="entry" data-section-rank="20"><td class="col-rank">20</td><td>Alice</td><td>Bregardis</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019404908" target="_blank" rel="noopener noreferrer">33.59</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5425987" target="_blank" rel="noopener noreferrer">3.92</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019404908" target="_blank" rel="noopener noreferrer">411</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">20</td></tr>
-      <tr class="entry-list-player" data-player-key="POHL|GRACE" data-entry-status="entry" data-section-rank="21"><td class="col-rank">21</td><td>Grace</td><td>Pohl</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018180807" target="_blank" rel="noopener noreferrer">33.74</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3505541" target="_blank" rel="noopener noreferrer">4.30</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018180807" target="_blank" rel="noopener noreferrer">437</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">21</td></tr>
-      <tr class="entry-list-player" data-player-key="BIGLER|MADELINE" data-entry-status="entry" data-section-rank="31"><td class="col-rank">22</td><td>Madeline</td><td>Bigler</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018418559" target="_blank" rel="noopener noreferrer">31.55</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2781066" target="_blank" rel="noopener noreferrer">5.33</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018418559" target="_blank" rel="noopener noreferrer">330</a></td><td>San Diego CA</td><td><a href="#" class="partner-jump" data-partner-key="TEMRAZ|TALIYA">Temraz, Taliya</a></td><td style="display: none;">31</td></tr>
-      <tr class="entry-list-player" data-player-key="HOUSEMAN|NINA" data-entry-status="entry" data-section-rank="17"><td class="col-rank">23</td><td>Nina</td><td>Houseman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430902" target="_blank" rel="noopener noreferrer">35.68</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3353535" target="_blank" rel="noopener noreferrer">3.37</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430902" target="_blank" rel="noopener noreferrer">486</a></td><td>Kirkland WA</td><td>N/A</td><td style="display: none;">17</td></tr>
-      <tr class="entry-list-player" data-player-key="DA PRON|MONROE" data-entry-status="entry" data-section-rank="53"><td class="col-rank">24</td><td>Monroe</td><td>Da Pron</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019018805" target="_blank" rel="noopener noreferrer">34.79</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3629980" target="_blank" rel="noopener noreferrer">3.58</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019018805" target="_blank" rel="noopener noreferrer">517</a></td><td>Trabuco Canyon CA</td><td><a href="#" class="partner-jump" data-partner-key="DASARI|RUTHVIKA">Dasari, Ruthvika</a></td><td style="display: none;">53</td></tr>
-      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-4ec7fd865ccc8a29d06b" data-h2h-matches="2" data-player-key="WU|BELLA" data-entry-status="entry" data-section-rank="32"><td class="col-rank">25</td><td><a class="h2h-jump" href="#h2h-4ec7fd865ccc8a29d06b">Bella</a></td><td><a class="h2h-jump" href="#h2h-4ec7fd865ccc8a29d06b">Wu</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018791290" target="_blank" rel="noopener noreferrer">34.44</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3504317" target="_blank" rel="noopener noreferrer">3.84</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018791290" target="_blank" rel="noopener noreferrer">542</a></td><td>Los Gatos CA</td><td><a href="#" class="partner-jump" data-partner-key="GADGIL|ZAIRA">Gadgil, Zaira</a></td><td style="display: none;">32</td></tr>
-      <tr class="entry-list-player" data-player-key="NAIR|ELAHN" data-entry-status="entry" data-section-rank="25"><td class="col-rank">26</td><td>Elahn</td><td>Nair</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018980395" target="_blank" rel="noopener noreferrer">32.09</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3639710" target="_blank" rel="noopener noreferrer">5.39</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018980395" target="_blank" rel="noopener noreferrer">572</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">25</td></tr>
-      <tr class="entry-list-player" data-player-key="KELLY|BROOKE" data-entry-status="entry" data-section-rank="26"><td class="col-rank">27</td><td>Brooke</td><td>Kelly</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018784104" target="_blank" rel="noopener noreferrer">35.19</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5551749" target="_blank" rel="noopener noreferrer">3.45</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018784104" target="_blank" rel="noopener noreferrer">576</a></td><td>Sandy UT</td><td>N/A</td><td style="display: none;">26</td></tr>
-      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-bbad2991f4f85a519ba0" data-h2h-matches="4" data-player-key="GADGIL|ZAIRA" data-entry-status="entry" data-section-rank="38"><td class="col-rank">28</td><td><a class="h2h-jump" href="#h2h-bbad2991f4f85a519ba0">Zaira</a></td><td><a class="h2h-jump" href="#h2h-bbad2991f4f85a519ba0">Gadgil</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018667343" target="_blank" rel="noopener noreferrer">35.13</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3729362" target="_blank" rel="noopener noreferrer">3.61</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018667343" target="_blank" rel="noopener noreferrer">593</a></td><td>San Mateo CA</td><td><a href="#" class="partner-jump" data-partner-key="WU|BELLA">Wu, Bella</a></td><td style="display: none;">38</td></tr>
-      <tr class="entry-list-player" data-player-key="MATELJAN|ELENA" data-entry-status="entry" data-section-rank="55"><td class="col-rank">29</td><td>Elena</td><td>Mateljan</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018548456" target="_blank" rel="noopener noreferrer">33.63</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2706428" target="_blank" rel="noopener noreferrer">4.45</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018548456" target="_blank" rel="noopener noreferrer">553</a></td><td>Oceanside CA</td><td><a href="#" class="partner-jump" data-partner-key="AMA|ARELI">Ama, Areli</a></td><td style="display: none;">55</td></tr>
-      <tr class="entry-list-player" data-player-key="DASARI|RUTHVIKA" data-entry-status="entry" data-section-rank="46"><td class="col-rank">30</td><td>Ruthvika</td><td>Dasari</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018692019" target="_blank" rel="noopener noreferrer">34.85</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3023523" target="_blank" rel="noopener noreferrer">3.78</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018692019" target="_blank" rel="noopener noreferrer">736</a></td><td>Pleasanton CA</td><td><a href="#" class="partner-jump" data-partner-key="DA PRON|MONROE">Da Pron, Monroe</a></td><td style="display: none;">46</td></tr>
-      <tr class="entry-list-player" data-player-key="WANG|TINA" data-entry-status="entry" data-section-rank="29"><td class="col-rank">31</td><td>Tina</td><td>Wang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019111090" target="_blank" rel="noopener noreferrer">33.95</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3813671" target="_blank" rel="noopener noreferrer">3.93</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019111090" target="_blank" rel="noopener noreferrer">745</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">29</td></tr>
-      <tr class="entry-list-player" data-player-key="COREY|VICTORIA" data-entry-status="entry" data-section-rank="30"><td class="col-rank">32</td><td>Victoria</td><td>Corey</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018470228" target="_blank" rel="noopener noreferrer">35.73</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3269647" target="_blank" rel="noopener noreferrer">2.96</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018470228" target="_blank" rel="noopener noreferrer">764</a></td><td>Salt Lake City UT</td><td>N/A</td><td style="display: none;">30</td></tr>
-      <tr class="alternate-player" data-player-key="CARROLL|LAILAH" data-entry-status="alternate" data-section-rank="17"><td class="col-rank">33</td><td>Lailah</td><td>Carroll</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019244117" target="_blank" rel="noopener noreferrer">34.55</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3964427" target="_blank" rel="noopener noreferrer">3.06</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019244117" target="_blank" rel="noopener noreferrer">863</a></td><td>Scottsdale AZ</td><td>N/A</td><td style="display: none;">17</td></tr>
-      <tr class="alternate-player" data-player-key="KIM|MADELYN" data-entry-status="alternate" data-section-rank="36"><td class="col-rank">34</td><td>Madelyn</td><td>Kim</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019036710" target="_blank" rel="noopener noreferrer">31.82</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5148855" target="_blank" rel="noopener noreferrer">4.87</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019036710" target="_blank" rel="noopener noreferrer">959</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">36</td></tr>
-      <tr class="alternate-player" data-player-key="SAVANAPRIDI|KATANA MALEE" data-entry-status="alternate" data-section-rank="40"><td class="col-rank">35</td><td>Katana Malee</td><td>Savanapridi</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018625102" target="_blank" rel="noopener noreferrer">36.76</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3529846" target="_blank" rel="noopener noreferrer">2.24</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018625102" target="_blank" rel="noopener noreferrer">1089</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">40</td></tr>
-      <tr class="alternate-player" data-player-key="BRALY|DYLAN" data-entry-status="alternate" data-section-rank="42"><td class="col-rank">36</td><td>Dylan</td><td>Braly</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019356346" target="_blank" rel="noopener noreferrer">36.27</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4220510" target="_blank" rel="noopener noreferrer">2.10</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019356346" target="_blank" rel="noopener noreferrer">1176</a></td><td>Farmington UT</td><td>N/A</td><td style="display: none;">42</td></tr>
-      <tr class="alternate-player" data-player-key="ALLEN|AUBREY" data-entry-status="alternate" data-section-rank="45"><td class="col-rank">37</td><td>Aubrey</td><td>Allen</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018634974" target="_blank" rel="noopener noreferrer">35.10</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3588785" target="_blank" rel="noopener noreferrer">2.90</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018634974" target="_blank" rel="noopener noreferrer">1224</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">45</td></tr>
-      <tr class="alternate-player" data-player-key="IZKHAKOV|KAREN" data-entry-status="alternate" data-section-rank="55"><td class="col-rank">38</td><td>Karen</td><td>Izkhakov</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018537381" target="_blank" rel="noopener noreferrer">34.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3383511" target="_blank" rel="noopener noreferrer">3.20</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018537381" target="_blank" rel="noopener noreferrer">1638</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">55</td></tr>
-      <tr class="alternate-player" data-player-key="RIVERA|SOPHIA" data-entry-status="alternate" data-section-rank="67"><td class="col-rank">39</td><td>Sophia</td><td>Rivera</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018970468" target="_blank" rel="noopener noreferrer">36.69</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3588787" target="_blank" rel="noopener noreferrer">2.18</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018970468" target="_blank" rel="noopener noreferrer">2105</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">67</td></tr>
-      <tr class="alternate-player" data-player-key="NEU|LORELAI" data-entry-status="alternate" data-section-rank="88"><td class="col-rank">40</td><td>Lorelai</td><td>Neu</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019410000" target="_blank" rel="noopener noreferrer">35.68</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3842146" target="_blank" rel="noopener noreferrer">2.38</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019410000" target="_blank" rel="noopener noreferrer">2883</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">88</td></tr>
-      <tr class="alternate-player" data-player-key="VIRGEN SANDOVAL|PIA VALENTINA" data-entry-status="alternate" data-section-rank=""><td class="col-rank">41</td><td>Pia Valentina</td><td>Virgen Sandoval</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019983352" target="_blank" rel="noopener noreferrer">39.91</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5684407" target="_blank" rel="noopener noreferrer">1.00</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019983352" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;"></td></tr>
+      <tr class="entry-list-player" data-player-key="WEI|MANDY" data-entry-status="entry" data-section-rank="7"><td class="col-rank">1</td><td>Mandy</td><td>Wei</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018929071" target="_blank" rel="noopener noreferrer">29.27</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3676544" target="_blank" rel="noopener noreferrer">6.80</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018929071" target="_blank" rel="noopener noreferrer">34</a></td><td>Katy TX</td><td><a href="#" class="partner-jump" data-partner-key="GADGIL|ZIVA">Gadgil, Ziva</a></td><td style="display: none;">7</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-12cb67403aeec1f4dce5" data-h2h-matches="1" data-player-key="GADGIL|ZIVA" data-entry-status="entry" data-section-rank="2"><td class="col-rank">2</td><td><a class="h2h-jump" href="#h2h-12cb67403aeec1f4dce5">Ziva</a></td><td><a class="h2h-jump" href="#h2h-12cb67403aeec1f4dce5">Gadgil</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018658341" target="_blank" rel="noopener noreferrer">30.59</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3415960" target="_blank" rel="noopener noreferrer">6.28</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018658341" target="_blank" rel="noopener noreferrer">57</a></td><td>San Mateo CA</td><td><a href="#" class="partner-jump" data-partner-key="WEI|MANDY">Wei, Mandy</a></td><td style="display: none;">2</td></tr>
+      <tr class="entry-list-player" data-player-key="SAGSTROM|INGRID" data-entry-status="entry" data-section-rank="4"><td class="col-rank">3</td><td>Ingrid</td><td>Sagstrom</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018495869" target="_blank" rel="noopener noreferrer">30.14</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3293662" target="_blank" rel="noopener noreferrer">6.03</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018495869" target="_blank" rel="noopener noreferrer">52</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="MILEWSKI|OLIVIA">Milewski, Olivia</a></td><td style="display: none;">4</td></tr>
+      <tr class="entry-list-player" data-player-key="WERTH|EMMA" data-entry-status="entry" data-section-rank="3"><td class="col-rank">4</td><td>Emma</td><td>Werth</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019218399" target="_blank" rel="noopener noreferrer">30.00</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5248117" target="_blank" rel="noopener noreferrer">6.24</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019218399" target="_blank" rel="noopener noreferrer">48</a></td><td>Boise ID</td><td><a href="#" class="partner-jump" data-partner-key="BERGESON|IVY">Bergeson, Ivy</a></td><td style="display: none;">3</td></tr>
+      <tr class="entry-list-player" data-player-key="BYUN|JIA" data-entry-status="entry" data-section-rank="7"><td class="col-rank">5</td><td>Jia</td><td>Byun</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526973" target="_blank" rel="noopener noreferrer">30.81</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2769159" target="_blank" rel="noopener noreferrer">5.95</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526973" target="_blank" rel="noopener noreferrer">114</a></td><td>Salt Lake City UT</td><td>N/A</td><td style="display: none;">7</td></tr>
+      <tr class="entry-list-player" data-player-key="BERGESON|IVY" data-entry-status="entry" data-section-rank="8"><td class="col-rank">6</td><td>Ivy</td><td>Bergeson</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018505287" target="_blank" rel="noopener noreferrer">31.21</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2806442" target="_blank" rel="noopener noreferrer">5.66</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018505287" target="_blank" rel="noopener noreferrer">125</a></td><td>Bountiful UT</td><td><a href="#" class="partner-jump" data-partner-key="WERTH|EMMA">Werth, Emma</a></td><td style="display: none;">8</td></tr>
+      <tr class="entry-list-player" data-player-key="KOMOTO|GENESIS" data-entry-status="entry" data-section-rank="13"><td class="col-rank">7</td><td>Genesis</td><td>Komoto</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019105840" target="_blank" rel="noopener noreferrer">32.02</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3806160" target="_blank" rel="noopener noreferrer">4.93</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019105840" target="_blank" rel="noopener noreferrer">198</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="STIRITZ|SUMMER">Stiritz, Summer</a></td><td style="display: none;">13</td></tr>
+      <tr class="entry-list-player" data-player-key="TEMRAZ|TALIYA" data-entry-status="entry" data-section-rank="23"><td class="col-rank">8</td><td>Taliya</td><td>Temraz</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018891255" target="_blank" rel="noopener noreferrer">31.07</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3666774" target="_blank" rel="noopener noreferrer">5.86</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018891255" target="_blank" rel="noopener noreferrer">186</a></td><td>Irvine CA</td><td><a href="#" class="partner-jump" data-partner-key="BIGLER|MADELINE">Bigler, Madeline</a></td><td style="display: none;">23</td></tr>
+      <tr class="entry-list-player" data-player-key="MILEWSKI|OLIVIA" data-entry-status="entry" data-section-rank="14"><td class="col-rank">9</td><td>Olivia</td><td>Milewski</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417258" target="_blank" rel="noopener noreferrer">32.90</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2853369" target="_blank" rel="noopener noreferrer">4.74</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417258" target="_blank" rel="noopener noreferrer">211</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="SAGSTROM|INGRID">Sagstrom, Ingrid</a></td><td style="display: none;">14</td></tr>
+      <tr class="entry-list-player" data-player-key="GUO|YUNA" data-entry-status="entry" data-section-rank="25"><td class="col-rank">10</td><td>Yuna</td><td>Guo</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018978115" target="_blank" rel="noopener noreferrer">30.78</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4532818" target="_blank" rel="noopener noreferrer">6.00</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018978115" target="_blank" rel="noopener noreferrer">205</a></td><td>Rancho Santa fe CA</td><td><a href="#" class="partner-jump" data-partner-key="TARAZAGA DIAZ|CARLOTA">Tarazaga Diaz, Carlota</a></td><td style="display: none;">25</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-0ee6ac64f22da4f8fa28" data-h2h-matches="2" data-player-key="YAMAMOTO|ELINA" data-entry-status="entry" data-section-rank="10"><td class="col-rank">11</td><td><a class="h2h-jump" href="#h2h-0ee6ac64f22da4f8fa28">Elina</a></td><td><a class="h2h-jump" href="#h2h-0ee6ac64f22da4f8fa28">Yamamoto</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017332570" target="_blank" rel="noopener noreferrer">32.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4594642" target="_blank" rel="noopener noreferrer">5.24</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017332570" target="_blank" rel="noopener noreferrer">244</a></td><td>San Jose CA</td><td><a href="#" class="partner-jump" data-partner-key="KUKEEVA|VALENTINA">Kukeeva, Valentina</a></td><td style="display: none;">10</td></tr>
+      <tr class="entry-list-player" data-player-key="SHIOZAWA|IVORY" data-entry-status="entry" data-section-rank="15"><td class="col-rank">12</td><td>Ivory</td><td>Shiozawa</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010787105" target="_blank" rel="noopener noreferrer">32.82</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5400754" target="_blank" rel="noopener noreferrer">4.47</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010787105" target="_blank" rel="noopener noreferrer">252</a></td><td>Saint George UT</td><td><a href="#" class="partner-jump" data-partner-key="MILEWSKI|AVERY">Milewski, Avery</a></td><td style="display: none;">15</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-14b5582313c3c42fdae7" data-h2h-matches="1" data-player-key="KUKEEVA|VALENTINA" data-entry-status="entry" data-section-rank="9"><td class="col-rank">13</td><td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Valentina</a></td><td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Kukeeva</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">31.58</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3395363" target="_blank" rel="noopener noreferrer">5.37</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">242</a></td><td>Campbell CA</td><td><a href="#" class="partner-jump" data-partner-key="YAMAMOTO|ELINA">Yamamoto, Elina</a></td><td style="display: none;">9</td></tr>
+      <tr class="entry-list-player" data-player-key="AMA|ARELI" data-entry-status="entry" data-section-rank="12"><td class="col-rank">14</td><td>Areli</td><td>Ama</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018541174" target="_blank" rel="noopener noreferrer">32.44</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2710884" target="_blank" rel="noopener noreferrer">5.49</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018541174" target="_blank" rel="noopener noreferrer">287</a></td><td>Fairfield CA</td><td><a href="#" class="partner-jump" data-partner-key="MATELJAN|ELENA">Mateljan, Elena</a></td><td style="display: none;">12</td></tr>
+      <tr class="entry-list-player" data-player-key="CHEN|SERENA" data-entry-status="entry" data-section-rank="13"><td class="col-rank">15</td><td>Serena</td><td>Chen</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526484" target="_blank" rel="noopener noreferrer">32.12</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3672239" target="_blank" rel="noopener noreferrer">5.17</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018526484" target="_blank" rel="noopener noreferrer">289</a></td><td>Santa Clara CA</td><td>N/A</td><td style="display: none;">13</td></tr>
+      <tr class="entry-list-player" data-player-key="TARAZAGA DIAZ|CARLOTA" data-entry-status="entry" data-section-rank="29"><td class="col-rank">16</td><td>Carlota</td><td>Tarazaga Diaz</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019040216" target="_blank" rel="noopener noreferrer">32.42</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3593858" target="_blank" rel="noopener noreferrer">5.30</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019040216" target="_blank" rel="noopener noreferrer">290</a></td><td>Irvine CA</td><td><a href="#" class="partner-jump" data-partner-key="GUO|YUNA">Guo, Yuna</a></td><td style="display: none;">29</td></tr>
+      <tr class="entry-list-player" data-player-key="MILEWSKI|AVERY" data-entry-status="entry" data-section-rank="17"><td class="col-rank">17</td><td>Avery</td><td>Milewski</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417257" target="_blank" rel="noopener noreferrer">33.61</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2853366" target="_blank" rel="noopener noreferrer">3.97</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018417257" target="_blank" rel="noopener noreferrer">300</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="SHIOZAWA|IVORY">Shiozawa, Ivory</a></td><td style="display: none;">17</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-52ecfbcbe001393f2d84" data-h2h-matches="2" data-player-key="STIRITZ|SUMMER" data-entry-status="entry" data-section-rank="15"><td class="col-rank">18</td><td><a class="h2h-jump" href="#h2h-52ecfbcbe001393f2d84">Summer</a></td><td><a class="h2h-jump" href="#h2h-52ecfbcbe001393f2d84">Stiritz</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018746621" target="_blank" rel="noopener noreferrer">33.82</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3151147" target="_blank" rel="noopener noreferrer">4.81</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018746621" target="_blank" rel="noopener noreferrer">305</a></td><td>Ross CA</td><td><a href="#" class="partner-jump" data-partner-key="KOMOTO|GENESIS">Komoto, Genesis</a></td><td style="display: none;">15</td></tr>
+      <tr class="entry-list-player" data-player-key="LING|ANGELA" data-entry-status="entry" data-section-rank="19"><td class="col-rank">19</td><td>Angela</td><td>Ling</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538252" target="_blank" rel="noopener noreferrer">34.56</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3697346" target="_blank" rel="noopener noreferrer">4.45</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538252" target="_blank" rel="noopener noreferrer">348</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="WANG|TINA">Wang, Tina</a></td><td style="display: none;">19</td></tr>
+      <tr class="entry-list-player" data-player-key="BREGARDIS|ALICE" data-entry-status="entry" data-section-rank="20"><td class="col-rank">20</td><td>Alice</td><td>Bregardis</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019404908" target="_blank" rel="noopener noreferrer">33.59</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5425987" target="_blank" rel="noopener noreferrer">3.93</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019404908" target="_blank" rel="noopener noreferrer">417</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">20</td></tr>
+      <tr class="entry-list-player" data-player-key="POHL|GRACE" data-entry-status="entry" data-section-rank="21"><td class="col-rank">21</td><td>Grace</td><td>Pohl</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018180807" target="_blank" rel="noopener noreferrer">33.74</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3505541" target="_blank" rel="noopener noreferrer">4.35</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018180807" target="_blank" rel="noopener noreferrer">441</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="COREY|VICTORIA">Corey, Victoria</a></td><td style="display: none;">21</td></tr>
+      <tr class="entry-list-player" data-player-key="BIGLER|MADELINE" data-entry-status="entry" data-section-rank="31"><td class="col-rank">22</td><td>Madeline</td><td>Bigler</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018418559" target="_blank" rel="noopener noreferrer">31.55</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2781066" target="_blank" rel="noopener noreferrer">5.35</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018418559" target="_blank" rel="noopener noreferrer">335</a></td><td>San Diego CA</td><td><a href="#" class="partner-jump" data-partner-key="TEMRAZ|TALIYA">Temraz, Taliya</a></td><td style="display: none;">31</td></tr>
+      <tr class="entry-list-player" data-player-key="HOUSEMAN|NINA" data-entry-status="entry" data-section-rank="17"><td class="col-rank">23</td><td>Nina</td><td>Houseman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430902" target="_blank" rel="noopener noreferrer">35.52</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3353535" target="_blank" rel="noopener noreferrer">3.40</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430902" target="_blank" rel="noopener noreferrer">494</a></td><td>Kirkland WA</td><td><a href="#" class="partner-jump" data-partner-key="KELLY|BROOKE">Kelly, Brooke</a></td><td style="display: none;">17</td></tr>
+      <tr class="entry-list-player" data-player-key="DA PRON|MONROE" data-entry-status="entry" data-section-rank="54"><td class="col-rank">24</td><td>Monroe</td><td>Da Pron</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019018805" target="_blank" rel="noopener noreferrer">34.79</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3629980" target="_blank" rel="noopener noreferrer">3.59</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019018805" target="_blank" rel="noopener noreferrer">522</a></td><td>Trabuco Canyon CA</td><td><a href="#" class="partner-jump" data-partner-key="DASARI|RUTHVIKA">Dasari, Ruthvika</a></td><td style="display: none;">54</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-4ec7fd865ccc8a29d06b" data-h2h-matches="2" data-player-key="WU|BELLA" data-entry-status="entry" data-section-rank="32"><td class="col-rank">25</td><td><a class="h2h-jump" href="#h2h-4ec7fd865ccc8a29d06b">Bella</a></td><td><a class="h2h-jump" href="#h2h-4ec7fd865ccc8a29d06b">Wu</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018791290" target="_blank" rel="noopener noreferrer">34.46</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3504317" target="_blank" rel="noopener noreferrer">3.87</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018791290" target="_blank" rel="noopener noreferrer">551</a></td><td>Los Gatos CA</td><td><a href="#" class="partner-jump" data-partner-key="GADGIL|ZAIRA">Gadgil, Zaira</a></td><td style="display: none;">32</td></tr>
+      <tr class="entry-list-player" data-player-key="NAIR|ELAHN" data-entry-status="entry" data-section-rank="25"><td class="col-rank">26</td><td>Elahn</td><td>Nair</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018980395" target="_blank" rel="noopener noreferrer">32.29</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3639710" target="_blank" rel="noopener noreferrer">5.26</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018980395" target="_blank" rel="noopener noreferrer">576</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">25</td></tr>
+      <tr class="entry-list-player" data-player-key="KELLY|BROOKE" data-entry-status="entry" data-section-rank="26"><td class="col-rank">27</td><td>Brooke</td><td>Kelly</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018784104" target="_blank" rel="noopener noreferrer">35.19</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5551749" target="_blank" rel="noopener noreferrer">3.46</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018784104" target="_blank" rel="noopener noreferrer">580</a></td><td>Sandy UT</td><td><a href="#" class="partner-jump" data-partner-key="HOUSEMAN|NINA">Houseman, Nina</a></td><td style="display: none;">26</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-bbad2991f4f85a519ba0" data-h2h-matches="4" data-player-key="GADGIL|ZAIRA" data-entry-status="entry" data-section-rank="30"><td class="col-rank">28</td><td><a class="h2h-jump" href="#h2h-bbad2991f4f85a519ba0">Zaira</a></td><td><a class="h2h-jump" href="#h2h-bbad2991f4f85a519ba0">Gadgil</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018667343" target="_blank" rel="noopener noreferrer">34.62</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3729362" target="_blank" rel="noopener noreferrer">3.76</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018667343" target="_blank" rel="noopener noreferrer">492</a></td><td>San Mateo CA</td><td><a href="#" class="partner-jump" data-partner-key="WU|BELLA">Wu, Bella</a></td><td style="display: none;">30</td></tr>
+      <tr class="entry-list-player" data-player-key="MATELJAN|ELENA" data-entry-status="entry" data-section-rank="57"><td class="col-rank">29</td><td>Elena</td><td>Mateljan</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018548456" target="_blank" rel="noopener noreferrer">33.63</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2706428" target="_blank" rel="noopener noreferrer">4.50</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018548456" target="_blank" rel="noopener noreferrer">558</a></td><td>Oceanside CA</td><td><a href="#" class="partner-jump" data-partner-key="AMA|ARELI">Ama, Areli</a></td><td style="display: none;">57</td></tr>
+      <tr class="entry-list-player" data-player-key="DASARI|RUTHVIKA" data-entry-status="entry" data-section-rank="47"><td class="col-rank">30</td><td>Ruthvika</td><td>Dasari</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018692019" target="_blank" rel="noopener noreferrer">34.23</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3023523" target="_blank" rel="noopener noreferrer">3.86</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018692019" target="_blank" rel="noopener noreferrer">747</a></td><td>Pleasanton CA</td><td><a href="#" class="partner-jump" data-partner-key="DA PRON|MONROE">Da Pron, Monroe</a></td><td style="display: none;">47</td></tr>
+      <tr class="entry-list-player" data-player-key="WANG|TINA" data-entry-status="entry" data-section-rank="29"><td class="col-rank">31</td><td>Tina</td><td>Wang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019111090" target="_blank" rel="noopener noreferrer">33.95</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3813671" target="_blank" rel="noopener noreferrer">3.91</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019111090" target="_blank" rel="noopener noreferrer">756</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="LING|ANGELA">Ling, Angela</a></td><td style="display: none;">29</td></tr>
+      <tr class="entry-list-player" data-player-key="COREY|VICTORIA" data-entry-status="entry" data-section-rank="30"><td class="col-rank">32</td><td>Victoria</td><td>Corey</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018470228" target="_blank" rel="noopener noreferrer">35.73</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3269647" target="_blank" rel="noopener noreferrer">2.96</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018470228" target="_blank" rel="noopener noreferrer">774</a></td><td>Salt Lake City UT</td><td><a href="#" class="partner-jump" data-partner-key="POHL|GRACE">Pohl, Grace</a></td><td style="display: none;">30</td></tr>
+      <tr class="alternate-player" data-player-key="CARROLL|LAILAH" data-entry-status="alternate" data-section-rank="17"><td class="col-rank">33</td><td>Lailah</td><td>Carroll</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019244117" target="_blank" rel="noopener noreferrer">34.59</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3964427" target="_blank" rel="noopener noreferrer">3.06</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019244117" target="_blank" rel="noopener noreferrer">871</a></td><td>Scottsdale AZ</td><td>N/A</td><td style="display: none;">17</td></tr>
+      <tr class="alternate-player" data-player-key="SAVANAPRIDI|KATANA MALEE" data-entry-status="alternate" data-section-rank="41"><td class="col-rank">34</td><td>Katana Malee</td><td>Savanapridi</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018625102" target="_blank" rel="noopener noreferrer">36.76</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3529846" target="_blank" rel="noopener noreferrer">2.25</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018625102" target="_blank" rel="noopener noreferrer">1101</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">41</td></tr>
+      <tr class="alternate-player" data-player-key="BRALY|DYLAN" data-entry-status="alternate" data-section-rank="40"><td class="col-rank">35</td><td>Dylan</td><td>Braly</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019356346" target="_blank" rel="noopener noreferrer">35.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4220510" target="_blank" rel="noopener noreferrer">2.12</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019356346" target="_blank" rel="noopener noreferrer">1078</a></td><td>Farmington UT</td><td>N/A</td><td style="display: none;">40</td></tr>
+      <tr class="alternate-player" data-player-key="ALLEN|AUBREY" data-entry-status="alternate" data-section-rank="45"><td class="col-rank">36</td><td>Aubrey</td><td>Allen</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018634974" target="_blank" rel="noopener noreferrer">35.10</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3588785" target="_blank" rel="noopener noreferrer">2.91</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018634974" target="_blank" rel="noopener noreferrer">1233</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">45</td></tr>
+      <tr class="alternate-player" data-player-key="IZKHAKOV|KAREN" data-entry-status="alternate" data-section-rank="55"><td class="col-rank">37</td><td>Karen</td><td>Izkhakov</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018537381" target="_blank" rel="noopener noreferrer">34.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3383511" target="_blank" rel="noopener noreferrer">3.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018537381" target="_blank" rel="noopener noreferrer">1652</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">55</td></tr>
+      <tr class="alternate-player" data-player-key="RIVERA|SOPHIA" data-entry-status="alternate" data-section-rank="67"><td class="col-rank">38</td><td>Sophia</td><td>Rivera</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018970468" target="_blank" rel="noopener noreferrer">36.69</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3588787" target="_blank" rel="noopener noreferrer">2.18</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018970468" target="_blank" rel="noopener noreferrer">2124</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">67</td></tr>
+      <tr class="alternate-player" data-player-key="NEU|LORELAI" data-entry-status="alternate" data-section-rank="89"><td class="col-rank">39</td><td>Lorelai</td><td>Neu</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019410000" target="_blank" rel="noopener noreferrer">35.68</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3842146" target="_blank" rel="noopener noreferrer">2.38</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019410000" target="_blank" rel="noopener noreferrer">2904</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">89</td></tr>
+      <tr class="alternate-player" data-player-key="VIRGEN SANDOVAL|PIA VALENTINA" data-entry-status="alternate" data-section-rank=""><td class="col-rank">40</td><td>Pia Valentina</td><td>Virgen Sandoval</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019983352" target="_blank" rel="noopener noreferrer">39.91</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5684407" target="_blank" rel="noopener noreferrer">1.04</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019983352" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;"></td></tr>
     </tbody>
   </table>
 
@@ -2132,7 +2118,7 @@
     <div class="stats-grid">
       <div class="stat-box">
         <div class="stat-label">Total Players</div>
-        <div class="stat-value">41</div>
+        <div class="stat-value">40</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">WTN Range</div>
@@ -2140,7 +2126,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg WTN</div>
-        <div class="stat-value">33.41</div>
+        <div class="stat-value">33.40</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
@@ -2152,7 +2138,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Registered</div>
-        <div class="stat-value">41</div>
+        <div class="stat-value">40</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Registration Closes</div>
@@ -2164,7 +2150,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
-        <div class="stat-value">6.82</div>
+        <div class="stat-value">6.80</div>
       </div>
     </div>
   </div>
@@ -2186,56 +2172,50 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="entry-list-player" data-player-key="WANG|CHLOE" data-entry-status="entry" data-section-rank="11"><td class="col-rank">1</td><td>Chloe</td><td>Wang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018140840" target="_blank" rel="noopener noreferrer">27.18</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1625656" target="_blank" rel="noopener noreferrer">7.61</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018140840" target="_blank" rel="noopener noreferrer">77</a></td><td>Glen Head NY</td><td>N/A</td><td style="display: none;">11</td></tr>
-      <tr class="entry-list-player" data-player-key="CALUGAY|AYENXAVIA" data-entry-status="entry" data-section-rank="5"><td class="col-rank">2</td><td>Ayenxavia</td><td>Calugay</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018160421" target="_blank" rel="noopener noreferrer">27.44</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1390320" target="_blank" rel="noopener noreferrer">7.63</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018160421" target="_blank" rel="noopener noreferrer">89</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="MALHOTRA|GRACE">Malhotra, Grace</a></td><td style="display: none;">5</td></tr>
-      <tr class="entry-list-player" data-player-key="NAGEL|SIDNEY" data-entry-status="entry" data-section-rank="10"><td class="col-rank">3</td><td>Sidney</td><td>Nagel</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018460945" target="_blank" rel="noopener noreferrer">27.24</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2530985" target="_blank" rel="noopener noreferrer">7.67</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018460945" target="_blank" rel="noopener noreferrer">135</a></td><td>San Angelo TX</td><td><a href="#" class="partner-jump" data-partner-key="KARNIK|SARA">Karnik, Sara</a></td><td style="display: none;">10</td></tr>
-      <tr class="entry-list-player" data-player-key="HWANG|SAVANNAH" data-entry-status="entry" data-section-rank="7"><td class="col-rank">4</td><td>Savannah</td><td>Hwang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018467930" target="_blank" rel="noopener noreferrer">27.47</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2691553" target="_blank" rel="noopener noreferrer">7.70</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018467930" target="_blank" rel="noopener noreferrer">133</a></td><td>Los Altos Hills CA</td><td><a href="#" class="partner-jump" data-partner-key="LI|LILLIAN">Li, Lillian</a></td><td style="display: none;">7</td></tr>
-      <tr class="entry-list-player" data-player-key="KARNIK|SARA" data-entry-status="entry" data-section-rank="8"><td class="col-rank">5</td><td>Sara</td><td>Karnik</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017207278" target="_blank" rel="noopener noreferrer">29.18</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1533208" target="_blank" rel="noopener noreferrer">7.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017207278" target="_blank" rel="noopener noreferrer">152</a></td><td>Santa Clara CA</td><td><a href="#" class="partner-jump" data-partner-key="NAGEL|SIDNEY">Nagel, Sidney</a></td><td style="display: none;">8</td></tr>
-      <tr class="entry-list-player" data-player-key="CHHIV|LILLIAN" data-entry-status="entry" data-section-rank="21"><td class="col-rank">6</td><td>Lillian</td><td>Chhiv</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017368627" target="_blank" rel="noopener noreferrer">28.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1585831" target="_blank" rel="noopener noreferrer">7.31</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017368627" target="_blank" rel="noopener noreferrer">160</a></td><td>Irvine CA</td><td><a href="#" class="partner-jump" data-partner-key="DINICOLA|ADDISON">Dinicola, Addison</a></td><td style="display: none;">21</td></tr>
-      <tr class="entry-list-player" data-player-key="REIMAN|ARIA" data-entry-status="entry" data-section-rank="6"><td class="col-rank">7</td><td>Aria</td><td>Reiman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017119142" target="_blank" rel="noopener noreferrer">29.50</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1363000" target="_blank" rel="noopener noreferrer">6.30</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017119142" target="_blank" rel="noopener noreferrer">184</a></td><td>Las Cruces NM</td><td><a href="#" class="partner-jump" data-partner-key="ROPER|ISABELLA">Roper, Isabella</a></td><td style="display: none;">6</td></tr>
-      <tr class="entry-list-player" data-player-key="LOODU|JAANVI" data-entry-status="entry" data-section-rank="8"><td class="col-rank">8</td><td>Jaanvi</td><td>Loodu</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018463929" target="_blank" rel="noopener noreferrer">28.98</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2939476" target="_blank" rel="noopener noreferrer">6.99</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018463929" target="_blank" rel="noopener noreferrer">228</a></td><td>Bothell WA</td><td><a href="#" class="partner-jump" data-partner-key="HOUSEMAN|LUCY">Houseman, Lucy</a></td><td style="display: none;">8</td></tr>
-      <tr class="entry-list-player" data-player-key="ROPER|ISABELLA" data-entry-status="entry" data-section-rank="15"><td class="col-rank">9</td><td>Isabella</td><td>Roper</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018185290" target="_blank" rel="noopener noreferrer">29.32</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2887544" target="_blank" rel="noopener noreferrer">6.50</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018185290" target="_blank" rel="noopener noreferrer">261</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="REIMAN|ARIA">Reiman, Aria</a></td><td style="display: none;">15</td></tr>
-      <tr class="entry-list-player" data-player-key="MITTAL|SAHANA" data-entry-status="entry" data-section-rank="13"><td class="col-rank">10</td><td>Sahana</td><td>Mittal</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538359" target="_blank" rel="noopener noreferrer">29.38</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2629626" target="_blank" rel="noopener noreferrer">6.81</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538359" target="_blank" rel="noopener noreferrer">259</a></td><td>Dublin CA</td><td>N/A</td><td style="display: none;">13</td></tr>
-      <tr class="entry-list-player" data-player-key="SMOLIKOVA|MILA" data-entry-status="entry" data-section-rank="17"><td class="col-rank">11</td><td>Mila</td><td>Smolikova</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017349497" target="_blank" rel="noopener noreferrer">28.25</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1933199" target="_blank" rel="noopener noreferrer">6.92</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017349497" target="_blank" rel="noopener noreferrer">270</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="IWATA|AYA">Iwata, Aya</a></td><td style="display: none;">17</td></tr>
-      <tr class="entry-list-player" data-player-key="LI|LILLIAN" data-entry-status="entry" data-section-rank="14"><td class="col-rank">12</td><td>Lillian</td><td>Li</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018152062" target="_blank" rel="noopener noreferrer">30.24</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3339821" target="_blank" rel="noopener noreferrer">6.51</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018152062" target="_blank" rel="noopener noreferrer">307</a></td><td>Cupertino CA</td><td><a href="#" class="partner-jump" data-partner-key="HWANG|SAVANNAH">Hwang, Savannah</a></td><td style="display: none;">14</td></tr>
-      <tr class="entry-list-player" data-player-key="IWATA|AYA" data-entry-status="entry" data-section-rank="35"><td class="col-rank">13</td><td>Aya</td><td>Iwata</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018486147" target="_blank" rel="noopener noreferrer">29.41</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2846440" target="_blank" rel="noopener noreferrer">6.94</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018486147" target="_blank" rel="noopener noreferrer">356</a></td><td>Port Washington NY</td><td><a href="#" class="partner-jump" data-partner-key="SMOLIKOVA|MILA">Smolikova, Mila</a></td><td style="display: none;">35</td></tr>
-      <tr class="entry-list-player" data-player-key="MALHOTRA|GRACE" data-entry-status="entry" data-section-rank="34"><td class="col-rank">14</td><td>Grace</td><td>Malhotra</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018932936" target="_blank" rel="noopener noreferrer">28.34</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3886930" target="_blank" rel="noopener noreferrer">7.36</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018932936" target="_blank" rel="noopener noreferrer">311</a></td><td>Rolling Hills Estates CA</td><td><a href="#" class="partner-jump" data-partner-key="CALUGAY|AYENXAVIA">Calugay, Ayenxavia</a></td><td style="display: none;">34</td></tr>
-      <tr class="entry-list-player" data-player-key="MENDELYAN|SILVIE" data-entry-status="entry" data-section-rank="40"><td class="col-rank">15</td><td>Silvie</td><td>Mendelyan</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018235888" target="_blank" rel="noopener noreferrer">29.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3386750" target="_blank" rel="noopener noreferrer">6.76</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018235888" target="_blank" rel="noopener noreferrer">335</a></td><td>Van Nuys CA</td><td>N/A</td><td style="display: none;">40</td></tr>
-      <tr class="entry-list-player" data-player-key="DINICOLA|ADDISON" data-entry-status="entry" data-section-rank="43"><td class="col-rank">16</td><td>Addison</td><td>Dinicola</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018555291" target="_blank" rel="noopener noreferrer">29.04</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2844048" target="_blank" rel="noopener noreferrer">6.75</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018555291" target="_blank" rel="noopener noreferrer">385</a></td><td>Tustin CA</td><td><a href="#" class="partner-jump" data-partner-key="CHHIV|LILLIAN">Chhiv, Lillian</a></td><td style="display: none;">43</td></tr>
-      <tr class="entry-list-player" data-player-key="FINLEY|HELENA" data-entry-status="entry" data-section-rank="65"><td class="col-rank">17</td><td>Helena</td><td>Finley</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199392" target="_blank" rel="noopener noreferrer">29.37</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3167442" target="_blank" rel="noopener noreferrer">6.35</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199392" target="_blank" rel="noopener noreferrer">417</a></td><td>Daniel Island SC</td><td><a href="#" class="partner-jump" data-partner-key="FINLEY|ELLE">Finley, Elle</a></td><td style="display: none;">65</td></tr>
-      <tr class="entry-list-player" data-player-key="FINLEY|ELLE" data-entry-status="entry" data-section-rank="66"><td class="col-rank">18</td><td>Elle</td><td>Finley</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199393" target="_blank" rel="noopener noreferrer">30.46</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3095389" target="_blank" rel="noopener noreferrer">5.91</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199393" target="_blank" rel="noopener noreferrer">419</a></td><td>Daniel Island SC</td><td><a href="#" class="partner-jump" data-partner-key="FINLEY|HELENA">Finley, Helena</a></td><td style="display: none;">66</td></tr>
-      <tr class="entry-list-player" data-player-key="SALOMON|CHERIE" data-entry-status="entry" data-section-rank="21"><td class="col-rank">19</td><td>Cherie</td><td>Salomon</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018598386" target="_blank" rel="noopener noreferrer">30.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2799302" target="_blank" rel="noopener noreferrer">6.12</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018598386" target="_blank" rel="noopener noreferrer">440</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">21</td></tr>
-      <tr class="entry-list-player" data-player-key="PARK|GIANNA" data-entry-status="entry" data-section-rank="45"><td class="col-rank">20</td><td>Gianna</td><td>Park</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661577" target="_blank" rel="noopener noreferrer">29.81</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2919084" target="_blank" rel="noopener noreferrer">6.44</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661577" target="_blank" rel="noopener noreferrer">421</a></td><td>Santa Monica CA</td><td>N/A</td><td style="display: none;">45</td></tr>
-      <tr class="entry-list-player" data-player-key="LEWIS|MIA" data-entry-status="entry" data-section-rank="23"><td class="col-rank">21</td><td>Mia</td><td>Lewis</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018389581" target="_blank" rel="noopener noreferrer">31.57</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3135144" target="_blank" rel="noopener noreferrer">4.68</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018389581" target="_blank" rel="noopener noreferrer">465</a></td><td>Lehi UT</td><td><a href="#" class="partner-jump" data-partner-key="PARENT|ELLE">Parent, Elle</a></td><td style="display: none;">23</td></tr>
-      <tr class="entry-list-player" data-player-key="MAURISCHAT|KIRSTEN" data-entry-status="entry" data-section-rank="44"><td class="col-rank">22</td><td>Kirsten</td><td>Maurischat</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017273446" target="_blank" rel="noopener noreferrer">31.44</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5048785" target="_blank" rel="noopener noreferrer">5.87</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017273446" target="_blank" rel="noopener noreferrer">480</a></td><td>Plandome NY</td><td>N/A</td><td style="display: none;">44</td></tr>
-      <tr class="entry-list-player" data-player-key="OLIVEROS|JEA ROSE" data-entry-status="entry" data-section-rank="47"><td class="col-rank">23</td><td>Jea Rose</td><td>Oliveros</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018862280" target="_blank" rel="noopener noreferrer">30.15</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3435961" target="_blank" rel="noopener noreferrer">6.03</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018862280" target="_blank" rel="noopener noreferrer">504</a></td><td>Simi Valley CA</td><td><a href="#" class="partner-jump" data-partner-key="ANNAMALAI|MAANSI">Annamalai, Maansi</a></td><td style="display: none;">47</td></tr>
-      <tr class="entry-list-player" data-player-key="INGCO|MIA" data-entry-status="entry" data-section-rank="49"><td class="col-rank">24</td><td>Mia</td><td>Ingco</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018386572" target="_blank" rel="noopener noreferrer">28.91</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2578510" target="_blank" rel="noopener noreferrer">6.88</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018386572" target="_blank" rel="noopener noreferrer">442</a></td><td>Miramar FL</td><td>N/A</td><td style="display: none;">49</td></tr>
-      <tr class="entry-list-player" data-player-key="ANNAMALAI|MAANSI" data-entry-status="entry" data-section-rank="48"><td class="col-rank">25</td><td>Maansi</td><td>Annamalai</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018836492" target="_blank" rel="noopener noreferrer">30.75</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3268071" target="_blank" rel="noopener noreferrer">5.96</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018836492" target="_blank" rel="noopener noreferrer">507</a></td><td>Simi Valley CA</td><td><a href="#" class="partner-jump" data-partner-key="OLIVEROS|JEA ROSE">Oliveros, Jea Rose</a></td><td style="display: none;">48</td></tr>
-      <tr class="entry-list-player" data-player-key="PFEIFFER|ELANA" data-entry-status="entry" data-section-rank="19"><td class="col-rank">26</td><td>Elana</td><td>Pfeiffer</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018865125" target="_blank" rel="noopener noreferrer">32.10</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3420510" target="_blank" rel="noopener noreferrer">5.28</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018865125" target="_blank" rel="noopener noreferrer">532</a></td><td>Portland OR</td><td>N/A</td><td style="display: none;">19</td></tr>
-      <tr class="entry-list-player" data-player-key="KANG|SERENA" data-entry-status="entry" data-section-rank="28"><td class="col-rank">27</td><td>Serena</td><td>Kang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018282441" target="_blank" rel="noopener noreferrer">34.11</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4463219" target="_blank" rel="noopener noreferrer">3.98</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018282441" target="_blank" rel="noopener noreferrer">549</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">28</td></tr>
-      <tr class="entry-list-player" data-player-key="REED|HUDSON" data-entry-status="entry" data-section-rank="57"><td class="col-rank">28</td><td>Hudson</td><td>Reed</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018620443" target="_blank" rel="noopener noreferrer">31.63</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5368157" target="_blank" rel="noopener noreferrer">5.53</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018620443" target="_blank" rel="noopener noreferrer">572</a></td><td>Trabuco Canyon CA</td><td>N/A</td><td style="display: none;">57</td></tr>
-      <tr class="entry-list-player" data-player-key="PARENT|ELLE" data-entry-status="entry" data-section-rank="30"><td class="col-rank">29</td><td>Elle</td><td>Parent</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018748581" target="_blank" rel="noopener noreferrer">31.75</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3575641" target="_blank" rel="noopener noreferrer">5.41</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018748581" target="_blank" rel="noopener noreferrer">578</a></td><td>Boise ID</td><td><a href="#" class="partner-jump" data-partner-key="LEWIS|MIA">Lewis, Mia</a></td><td style="display: none;">30</td></tr>
-      <tr class="entry-list-player" data-player-key="COREY|SCARLETT" data-entry-status="entry" data-section-rank="32"><td class="col-rank">30</td><td>Scarlett</td><td>Corey</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017349545" target="_blank" rel="noopener noreferrer">32.76</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2513371" target="_blank" rel="noopener noreferrer">4.74</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017349545" target="_blank" rel="noopener noreferrer">600</a></td><td>Salt Lake City UT</td><td>N/A</td><td style="display: none;">32</td></tr>
-      <tr class="entry-list-player" data-player-key="SAMALA|EESHA" data-entry-status="entry" data-section-rank="56"><td class="col-rank">31</td><td>Eesha</td><td>Samala</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563475" target="_blank" rel="noopener noreferrer">32.29</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2557223" target="_blank" rel="noopener noreferrer">5.99</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563475" target="_blank" rel="noopener noreferrer">615</a></td><td>Hoboken NJ</td><td>N/A</td><td style="display: none;">56</td></tr>
-      <tr class="entry-list-player" data-player-key="AYAPPAGARI|INDU" data-entry-status="entry" data-section-rank="34"><td class="col-rank">32</td><td>Indu</td><td>Ayappagari</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018819651" target="_blank" rel="noopener noreferrer">32.40</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3325709" target="_blank" rel="noopener noreferrer">5.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018819651" target="_blank" rel="noopener noreferrer">611</a></td><td>Folsom CA</td><td>N/A</td><td style="display: none;">34</td></tr>
-      <tr class="alternate-player" data-player-key="CHUNG|AILEEN" data-entry-status="alternate" data-section-rank="61"><td class="col-rank">33</td><td>Aileen</td><td>Chung</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018292004" target="_blank" rel="noopener noreferrer">31.10</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1585863" target="_blank" rel="noopener noreferrer">5.91</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018292004" target="_blank" rel="noopener noreferrer">613</a></td><td>Sherman Oaks CA</td><td>N/A</td><td style="display: none;">61</td></tr>
-      <tr class="alternate-player" data-player-key="HOUSEMAN|LUCY" data-entry-status="alternate" data-section-rank="22"><td class="col-rank">34</td><td>Lucy</td><td>Houseman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430901" target="_blank" rel="noopener noreferrer">33.16</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3024379" target="_blank" rel="noopener noreferrer">4.75</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430901" target="_blank" rel="noopener noreferrer">642</a></td><td>Kirkland WA</td><td><a href="#" class="partner-jump" data-partner-key="LOODU|JAANVI">Loodu, Jaanvi</a></td><td style="display: none;">22</td></tr>
-      <tr class="alternate-player" data-player-key="WILLIAMS|LEILA" data-entry-status="alternate" data-section-rank="25"><td class="col-rank">35</td><td>Leila</td><td>Williams</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018481750" target="_blank" rel="noopener noreferrer">33.39</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2799542" target="_blank" rel="noopener noreferrer">4.25</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018481750" target="_blank" rel="noopener noreferrer">697</a></td><td>Edmond OK</td><td>N/A</td><td style="display: none;">25</td></tr>
-      <tr class="alternate-player" data-player-key="BATTISTONE|GRACE" data-entry-status="alternate" data-section-rank="35"><td class="col-rank">36</td><td>Grace</td><td>Battistone</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018594623" target="_blank" rel="noopener noreferrer">31.54</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2799300" target="_blank" rel="noopener noreferrer">5.17</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018594623" target="_blank" rel="noopener noreferrer">735</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">35</td></tr>
-      <tr class="alternate-player" data-player-key="WHITMORE|LUCY" data-entry-status="alternate" data-section-rank="37"><td class="col-rank">37</td><td>Lucy</td><td>Whitmore</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019394408" target="_blank" rel="noopener noreferrer">32.63</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5716929" target="_blank" rel="noopener noreferrer">4.54</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019394408" target="_blank" rel="noopener noreferrer">800</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">37</td></tr>
-      <tr class="alternate-player" data-player-key="MOLDRE|MARISSA" data-entry-status="alternate" data-section-rank="39"><td class="col-rank">38</td><td>Marissa</td><td>Moldre</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018532263" target="_blank" rel="noopener noreferrer">33.89</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2806440" target="_blank" rel="noopener noreferrer">3.72</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018532263" target="_blank" rel="noopener noreferrer">854</a></td><td>Farmington UT</td><td>N/A</td><td style="display: none;">39</td></tr>
-      <tr class="alternate-player" data-player-key="TARIN|LISSETTE" data-entry-status="alternate" data-section-rank="42"><td class="col-rank">39</td><td>Lissette</td><td>Tarin</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018943076" target="_blank" rel="noopener noreferrer">32.14</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4756046" target="_blank" rel="noopener noreferrer">4.37</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018943076" target="_blank" rel="noopener noreferrer">910</a></td><td>Fort Collins CO</td><td>N/A</td><td style="display: none;">42</td></tr>
-      <tr class="alternate-player" data-player-key="YU|RILEY" data-entry-status="alternate" data-section-rank="98"><td class="col-rank">40</td><td>Riley</td><td>Yu</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018646376" target="_blank" rel="noopener noreferrer">33.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4594773" target="_blank" rel="noopener noreferrer">4.84</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018646376" target="_blank" rel="noopener noreferrer">979</a></td><td>Pasadena CA</td><td>N/A</td><td style="display: none;">98</td></tr>
-      <tr class="alternate-player" data-player-key="PARK|ALLISON" data-entry-status="alternate" data-section-rank="75"><td class="col-rank">41</td><td>Allison</td><td>Park</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019017784" target="_blank" rel="noopener noreferrer">30.33</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3640027" target="_blank" rel="noopener noreferrer">6.01</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019017784" target="_blank" rel="noopener noreferrer">747</a></td><td>San Diego CA</td><td>N/A</td><td style="display: none;">75</td></tr>
-      <tr class="alternate-player" data-player-key="KENNEDY|QUINN" data-entry-status="alternate" data-section-rank="129"><td class="col-rank">42</td><td>Quinn</td><td>Kennedy</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018376207" target="_blank" rel="noopener noreferrer">32.69</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2711501" target="_blank" rel="noopener noreferrer">5.28</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018376207" target="_blank" rel="noopener noreferrer">1111</a></td><td>Miami FL</td><td>N/A</td><td style="display: none;">129</td></tr>
-      <tr class="alternate-player" data-player-key="ZEYSING|LEILA NOELLE" data-entry-status="alternate" data-section-rank="57"><td class="col-rank">43</td><td>Leila Noelle</td><td>Zeysing</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018498164" target="_blank" rel="noopener noreferrer">33.14</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3157680" target="_blank" rel="noopener noreferrer">4.58</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018498164" target="_blank" rel="noopener noreferrer">1133</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">57</td></tr>
-      <tr class="alternate-player" data-player-key="SAGSTROM|CORNELIA" data-entry-status="alternate" data-section-rank="87"><td class="col-rank">44</td><td>Cornelia</td><td>Sagstrom</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018494904" target="_blank" rel="noopener noreferrer">35.80</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3023474" target="_blank" rel="noopener noreferrer">2.88</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018494904" target="_blank" rel="noopener noreferrer">1938</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">87</td></tr>
-      <tr class="alternate-player" data-player-key="SPENCER|PRESLEY" data-entry-status="alternate" data-section-rank="208"><td class="col-rank">45</td><td>Presley</td><td>Spencer</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019032647" target="_blank" rel="noopener noreferrer">34.62</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4313957" target="_blank" rel="noopener noreferrer">3.79</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019032647" target="_blank" rel="noopener noreferrer">2162</a></td><td>Trabuco Canyon CA</td><td>N/A</td><td style="display: none;">208</td></tr>
-      <tr class="alternate-player" data-player-key="RUBENSTEIN|RYLEE" data-entry-status="alternate" data-section-rank="107"><td class="col-rank">46</td><td>Rylee</td><td>Rubenstein</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018497018" target="_blank" rel="noopener noreferrer">35.60</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4336890" target="_blank" rel="noopener noreferrer">3.19</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018497018" target="_blank" rel="noopener noreferrer">2515</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">107</td></tr>
-      <tr class="alternate-player" data-player-key="HELM|REAGAN" data-entry-status="alternate" data-section-rank="56"><td class="col-rank">47</td><td>Reagan</td><td>Helm</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019178002" target="_blank" rel="noopener noreferrer">36.96</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4410011" target="_blank" rel="noopener noreferrer">2.19</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019178002" target="_blank" rel="noopener noreferrer">2841</a></td><td>Phoenix AZ</td><td>N/A</td><td style="display: none;">56</td></tr>
-      <tr class="alternate-player" data-player-key="RIDEOUT|HADLEE" data-entry-status="alternate" data-section-rank="131"><td class="col-rank">48</td><td>Hadlee</td><td>Rideout</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017300179" target="_blank" rel="noopener noreferrer">36.98</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2940639" target="_blank" rel="noopener noreferrer">2.75</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017300179" target="_blank" rel="noopener noreferrer">3117</a></td><td>Draper UT</td><td>N/A</td><td style="display: none;">131</td></tr>
-      <tr class="alternate-player" data-player-key="SMITH|SIENA" data-entry-status="alternate" data-section-rank="191"><td class="col-rank">49</td><td>Siena</td><td>Smith</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010836026" target="_blank" rel="noopener noreferrer">36.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5300353" target="_blank" rel="noopener noreferrer">2.06</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010836026" target="_blank" rel="noopener noreferrer">4664</a></td><td>Park City UT</td><td>N/A</td><td style="display: none;">191</td></tr>
-      <tr class="alternate-player" data-player-key="PITTMAN|CERIAH" data-entry-status="alternate" data-section-rank="24"><td class="col-rank">50</td><td>Ceriah</td><td>Pittman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018159271" target="_blank" rel="noopener noreferrer">32.89</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3588771" target="_blank" rel="noopener noreferrer">N/A</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018159271" target="_blank" rel="noopener noreferrer">981</a></td><td>Gilbert AZ</td><td>N/A</td><td style="display: none;">24</td></tr>
+      <tr class="entry-list-player" data-player-key="WANG|CHLOE" data-entry-status="entry" data-section-rank="11"><td class="col-rank">1</td><td>Chloe</td><td>Wang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018140840" target="_blank" rel="noopener noreferrer">26.72</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1625656" target="_blank" rel="noopener noreferrer">7.65</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018140840" target="_blank" rel="noopener noreferrer">78</a></td><td>Glen Head NY</td><td>N/A</td><td style="display: none;">11</td></tr>
+      <tr class="entry-list-player" data-player-key="CALUGAY|AYENXAVIA" data-entry-status="entry" data-section-rank="5"><td class="col-rank">2</td><td>Ayenxavia</td><td>Calugay</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018160421" target="_blank" rel="noopener noreferrer">27.44</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1390320" target="_blank" rel="noopener noreferrer">7.66</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018160421" target="_blank" rel="noopener noreferrer">89</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="MALHOTRA|GRACE">Malhotra, Grace</a></td><td style="display: none;">5</td></tr>
+      <tr class="entry-list-player" data-player-key="NAGEL|SIDNEY" data-entry-status="entry" data-section-rank="10"><td class="col-rank">3</td><td>Sidney</td><td>Nagel</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018460945" target="_blank" rel="noopener noreferrer">27.24</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2530985" target="_blank" rel="noopener noreferrer">7.71</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018460945" target="_blank" rel="noopener noreferrer">123</a></td><td>San Angelo TX</td><td><a href="#" class="partner-jump" data-partner-key="KARNIK|SARA">Karnik, Sara</a></td><td style="display: none;">10</td></tr>
+      <tr class="entry-list-player" data-player-key="HWANG|SAVANNAH" data-entry-status="entry" data-section-rank="7"><td class="col-rank">4</td><td>Savannah</td><td>Hwang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018467930" target="_blank" rel="noopener noreferrer">27.47</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2691553" target="_blank" rel="noopener noreferrer">7.72</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018467930" target="_blank" rel="noopener noreferrer">134</a></td><td>Los Altos Hills CA</td><td><a href="#" class="partner-jump" data-partner-key="LI|LILLIAN">Li, Lillian</a></td><td style="display: none;">7</td></tr>
+      <tr class="entry-list-player" data-player-key="KARNIK|SARA" data-entry-status="entry" data-section-rank="8"><td class="col-rank">5</td><td>Sara</td><td>Karnik</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017207278" target="_blank" rel="noopener noreferrer">28.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1533208" target="_blank" rel="noopener noreferrer">7.35</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017207278" target="_blank" rel="noopener noreferrer">152</a></td><td>Santa Clara CA</td><td><a href="#" class="partner-jump" data-partner-key="NAGEL|SIDNEY">Nagel, Sidney</a></td><td style="display: none;">8</td></tr>
+      <tr class="entry-list-player" data-player-key="CHHIV|LILLIAN" data-entry-status="entry" data-section-rank="21"><td class="col-rank">6</td><td>Lillian</td><td>Chhiv</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017368627" target="_blank" rel="noopener noreferrer">28.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1585831" target="_blank" rel="noopener noreferrer">7.34</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017368627" target="_blank" rel="noopener noreferrer">160</a></td><td>Irvine CA</td><td><a href="#" class="partner-jump" data-partner-key="DINICOLA|ADDISON">Dinicola, Addison</a></td><td style="display: none;">21</td></tr>
+      <tr class="entry-list-player" data-player-key="REIMAN|ARIA" data-entry-status="entry" data-section-rank="6"><td class="col-rank">7</td><td>Aria</td><td>Reiman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017119142" target="_blank" rel="noopener noreferrer">29.50</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1363000" target="_blank" rel="noopener noreferrer">6.32</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017119142" target="_blank" rel="noopener noreferrer">186</a></td><td>Las Cruces NM</td><td><a href="#" class="partner-jump" data-partner-key="ROPER|ISABELLA">Roper, Isabella</a></td><td style="display: none;">6</td></tr>
+      <tr class="entry-list-player" data-player-key="LOODU|JAANVI" data-entry-status="entry" data-section-rank="8"><td class="col-rank">8</td><td>Jaanvi</td><td>Loodu</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018463929" target="_blank" rel="noopener noreferrer">28.98</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2939476" target="_blank" rel="noopener noreferrer">7.00</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018463929" target="_blank" rel="noopener noreferrer">229</a></td><td>Bothell WA</td><td><a href="#" class="partner-jump" data-partner-key="HOUSEMAN|LUCY">Houseman, Lucy</a></td><td style="display: none;">8</td></tr>
+      <tr class="entry-list-player" data-player-key="ROPER|ISABELLA" data-entry-status="entry" data-section-rank="15"><td class="col-rank">9</td><td>Isabella</td><td>Roper</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018185290" target="_blank" rel="noopener noreferrer">29.33</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2887544" target="_blank" rel="noopener noreferrer">6.62</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018185290" target="_blank" rel="noopener noreferrer">264</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="REIMAN|ARIA">Reiman, Aria</a></td><td style="display: none;">15</td></tr>
+      <tr class="entry-list-player" data-player-key="MITTAL|SAHANA" data-entry-status="entry" data-section-rank="13"><td class="col-rank">10</td><td>Sahana</td><td>Mittal</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538359" target="_blank" rel="noopener noreferrer">29.38</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2629626" target="_blank" rel="noopener noreferrer">6.86</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018538359" target="_blank" rel="noopener noreferrer">261</a></td><td>Dublin CA</td><td>N/A</td><td style="display: none;">13</td></tr>
+      <tr class="entry-list-player" data-player-key="SMOLIKOVA|MILA" data-entry-status="entry" data-section-rank="17"><td class="col-rank">11</td><td>Mila</td><td>Smolikova</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017349497" target="_blank" rel="noopener noreferrer">28.25</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1933199" target="_blank" rel="noopener noreferrer">6.94</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017349497" target="_blank" rel="noopener noreferrer">273</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="IWATA|AYA">Iwata, Aya</a></td><td style="display: none;">17</td></tr>
+      <tr class="entry-list-player" data-player-key="LI|LILLIAN" data-entry-status="entry" data-section-rank="14"><td class="col-rank">12</td><td>Lillian</td><td>Li</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018152062" target="_blank" rel="noopener noreferrer">30.24</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3339821" target="_blank" rel="noopener noreferrer">6.53</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018152062" target="_blank" rel="noopener noreferrer">310</a></td><td>Cupertino CA</td><td><a href="#" class="partner-jump" data-partner-key="HWANG|SAVANNAH">Hwang, Savannah</a></td><td style="display: none;">14</td></tr>
+      <tr class="entry-list-player" data-player-key="IWATA|AYA" data-entry-status="entry" data-section-rank="35"><td class="col-rank">13</td><td>Aya</td><td>Iwata</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018486147" target="_blank" rel="noopener noreferrer">29.41</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2846440" target="_blank" rel="noopener noreferrer">6.78</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018486147" target="_blank" rel="noopener noreferrer">356</a></td><td>Port Washington NY</td><td><a href="#" class="partner-jump" data-partner-key="SMOLIKOVA|MILA">Smolikova, Mila</a></td><td style="display: none;">35</td></tr>
+      <tr class="entry-list-player" data-player-key="MALHOTRA|GRACE" data-entry-status="entry" data-section-rank="34"><td class="col-rank">14</td><td>Grace</td><td>Malhotra</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018932936" target="_blank" rel="noopener noreferrer">28.34</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3886930" target="_blank" rel="noopener noreferrer">7.38</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018932936" target="_blank" rel="noopener noreferrer">315</a></td><td>Rolling Hills Estates CA</td><td><a href="#" class="partner-jump" data-partner-key="CALUGAY|AYENXAVIA">Calugay, Ayenxavia</a></td><td style="display: none;">34</td></tr>
+      <tr class="entry-list-player" data-player-key="MENDELYAN|SILVIE" data-entry-status="entry" data-section-rank="40"><td class="col-rank">15</td><td>Silvie</td><td>Mendelyan</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018235888" target="_blank" rel="noopener noreferrer">29.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3386750" target="_blank" rel="noopener noreferrer">6.77</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018235888" target="_blank" rel="noopener noreferrer">337</a></td><td>Van Nuys CA</td><td><a href="#" class="partner-jump" data-partner-key="CHUNG|AILEEN">Chung, Aileen</a></td><td style="display: none;">40</td></tr>
+      <tr class="entry-list-player" data-player-key="DINICOLA|ADDISON" data-entry-status="entry" data-section-rank="43"><td class="col-rank">16</td><td>Addison</td><td>Dinicola</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018555291" target="_blank" rel="noopener noreferrer">29.04</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2844048" target="_blank" rel="noopener noreferrer">6.78</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018555291" target="_blank" rel="noopener noreferrer">387</a></td><td>Tustin CA</td><td><a href="#" class="partner-jump" data-partner-key="CHHIV|LILLIAN">Chhiv, Lillian</a></td><td style="display: none;">43</td></tr>
+      <tr class="entry-list-player" data-player-key="FINLEY|HELENA" data-entry-status="entry" data-section-rank="67"><td class="col-rank">17</td><td>Helena</td><td>Finley</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199392" target="_blank" rel="noopener noreferrer">29.37</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3167442" target="_blank" rel="noopener noreferrer">6.40</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199392" target="_blank" rel="noopener noreferrer">423</a></td><td>Daniel Island SC</td><td><a href="#" class="partner-jump" data-partner-key="FINLEY|ELLE">Finley, Elle</a></td><td style="display: none;">67</td></tr>
+      <tr class="entry-list-player" data-player-key="FINLEY|ELLE" data-entry-status="entry" data-section-rank="68"><td class="col-rank">18</td><td>Elle</td><td>Finley</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199393" target="_blank" rel="noopener noreferrer">30.46</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3095389" target="_blank" rel="noopener noreferrer">5.91</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018199393" target="_blank" rel="noopener noreferrer">426</a></td><td>Daniel Island SC</td><td><a href="#" class="partner-jump" data-partner-key="FINLEY|HELENA">Finley, Helena</a></td><td style="display: none;">68</td></tr>
+      <tr class="entry-list-player" data-player-key="SALOMON|CHERIE" data-entry-status="entry" data-section-rank="21"><td class="col-rank">19</td><td>Cherie</td><td>Salomon</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018598386" target="_blank" rel="noopener noreferrer">30.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2799302" target="_blank" rel="noopener noreferrer">6.15</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018598386" target="_blank" rel="noopener noreferrer">445</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="INGCO|MIA">Ingco, Mia</a></td><td style="display: none;">21</td></tr>
+      <tr class="entry-list-player" data-player-key="PARK|GIANNA" data-entry-status="entry" data-section-rank="45"><td class="col-rank">20</td><td>Gianna</td><td>Park</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661577" target="_blank" rel="noopener noreferrer">29.88</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2919084" target="_blank" rel="noopener noreferrer">6.51</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661577" target="_blank" rel="noopener noreferrer">411</a></td><td>Santa Monica CA</td><td>N/A</td><td style="display: none;">45</td></tr>
+      <tr class="entry-list-player" data-player-key="LEWIS|MIA" data-entry-status="entry" data-section-rank="23"><td class="col-rank">21</td><td>Mia</td><td>Lewis</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018389581" target="_blank" rel="noopener noreferrer">31.57</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3135144" target="_blank" rel="noopener noreferrer">4.76</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018389581" target="_blank" rel="noopener noreferrer">474</a></td><td>Lehi UT</td><td><a href="#" class="partner-jump" data-partner-key="PARENT|ELLE">Parent, Elle</a></td><td style="display: none;">23</td></tr>
+      <tr class="entry-list-player" data-player-key="MAURISCHAT|KIRSTEN" data-entry-status="entry" data-section-rank="44"><td class="col-rank">22</td><td>Kirsten</td><td>Maurischat</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017273446" target="_blank" rel="noopener noreferrer">31.60</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5048785" target="_blank" rel="noopener noreferrer">5.89</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017273446" target="_blank" rel="noopener noreferrer">486</a></td><td>Plandome NY</td><td><a href="#" class="partner-jump" data-partner-key="REED|HUDSON">Reed, Hudson</a></td><td style="display: none;">44</td></tr>
+      <tr class="entry-list-player" data-player-key="OLIVEROS|JEA ROSE" data-entry-status="entry" data-section-rank="49"><td class="col-rank">23</td><td>Jea Rose</td><td>Oliveros</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018862280" target="_blank" rel="noopener noreferrer">30.41</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3435961" target="_blank" rel="noopener noreferrer">6.03</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018862280" target="_blank" rel="noopener noreferrer">508</a></td><td>Simi Valley CA</td><td><a href="#" class="partner-jump" data-partner-key="ANNAMALAI|MAANSI">Annamalai, Maansi</a></td><td style="display: none;">49</td></tr>
+      <tr class="entry-list-player" data-player-key="INGCO|MIA" data-entry-status="entry" data-section-rank="49"><td class="col-rank">24</td><td>Mia</td><td>Ingco</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018386572" target="_blank" rel="noopener noreferrer">28.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2578510" target="_blank" rel="noopener noreferrer">6.97</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018386572" target="_blank" rel="noopener noreferrer">447</a></td><td>Miramar FL</td><td><a href="#" class="partner-jump" data-partner-key="SALOMON|CHERIE">Salomon, Cherie</a></td><td style="display: none;">49</td></tr>
+      <tr class="entry-list-player" data-player-key="ANNAMALAI|MAANSI" data-entry-status="entry" data-section-rank="48"><td class="col-rank">25</td><td>Maansi</td><td>Annamalai</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018836492" target="_blank" rel="noopener noreferrer">30.48</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3268071" target="_blank" rel="noopener noreferrer">5.96</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018836492" target="_blank" rel="noopener noreferrer">463</a></td><td>Simi Valley CA</td><td><a href="#" class="partner-jump" data-partner-key="OLIVEROS|JEA ROSE">Oliveros, Jea Rose</a></td><td style="display: none;">48</td></tr>
+      <tr class="entry-list-player" data-player-key="PFEIFFER|ELANA" data-entry-status="entry" data-section-rank="19"><td class="col-rank">26</td><td>Elana</td><td>Pfeiffer</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018865125" target="_blank" rel="noopener noreferrer">32.10</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3420510" target="_blank" rel="noopener noreferrer">5.36</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018865125" target="_blank" rel="noopener noreferrer">538</a></td><td>Portland OR</td><td><a href="#" class="partner-jump" data-partner-key="BATTISTONE|GRACE">Battistone, Grace</a></td><td style="display: none;">19</td></tr>
+      <tr class="entry-list-player" data-player-key="KANG|SERENA" data-entry-status="entry" data-section-rank="28"><td class="col-rank">27</td><td>Serena</td><td>Kang</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018282441" target="_blank" rel="noopener noreferrer">34.11</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4463219" target="_blank" rel="noopener noreferrer">4.08</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018282441" target="_blank" rel="noopener noreferrer">558</a></td><td>Las Vegas NV</td><td><a href="#" class="partner-jump" data-partner-key="AYAPPAGARI|INDU">Ayappagari, Indu</a></td><td style="display: none;">28</td></tr>
+      <tr class="entry-list-player" data-player-key="REED|HUDSON" data-entry-status="entry" data-section-rank="58"><td class="col-rank">28</td><td>Hudson</td><td>Reed</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018620443" target="_blank" rel="noopener noreferrer">31.51</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5368157" target="_blank" rel="noopener noreferrer">5.58</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018620443" target="_blank" rel="noopener noreferrer">592</a></td><td>Trabuco Canyon CA</td><td><a href="#" class="partner-jump" data-partner-key="MAURISCHAT|KIRSTEN">Maurischat, Kirsten</a></td><td style="display: none;">58</td></tr>
+      <tr class="entry-list-player" data-player-key="PARENT|ELLE" data-entry-status="entry" data-section-rank="30"><td class="col-rank">29</td><td>Elle</td><td>Parent</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018748581" target="_blank" rel="noopener noreferrer">31.75</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3575641" target="_blank" rel="noopener noreferrer">5.43</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018748581" target="_blank" rel="noopener noreferrer">584</a></td><td>Boise ID</td><td><a href="#" class="partner-jump" data-partner-key="LEWIS|MIA">Lewis, Mia</a></td><td style="display: none;">30</td></tr>
+      <tr class="entry-list-player" data-player-key="AYAPPAGARI|INDU" data-entry-status="entry" data-section-rank="35"><td class="col-rank">30</td><td>Indu</td><td>Ayappagari</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018819651" target="_blank" rel="noopener noreferrer">31.93</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3325709" target="_blank" rel="noopener noreferrer">5.31</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018819651" target="_blank" rel="noopener noreferrer">616</a></td><td>Folsom CA</td><td><a href="#" class="partner-jump" data-partner-key="KANG|SERENA">Kang, Serena</a></td><td style="display: none;">35</td></tr>
+      <tr class="entry-list-player" data-player-key="CHUNG|AILEEN" data-entry-status="entry" data-section-rank="61"><td class="col-rank">31</td><td>Aileen</td><td>Chung</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018292004" target="_blank" rel="noopener noreferrer">31.10</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/1585863" target="_blank" rel="noopener noreferrer">5.91</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018292004" target="_blank" rel="noopener noreferrer">617</a></td><td>Sherman Oaks CA</td><td><a href="#" class="partner-jump" data-partner-key="MENDELYAN|SILVIE">Mendelyan, Silvie</a></td><td style="display: none;">61</td></tr>
+      <tr class="entry-list-player" data-player-key="HOUSEMAN|LUCY" data-entry-status="entry" data-section-rank="22"><td class="col-rank">32</td><td>Lucy</td><td>Houseman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430901" target="_blank" rel="noopener noreferrer">33.16</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3024379" target="_blank" rel="noopener noreferrer">4.78</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430901" target="_blank" rel="noopener noreferrer">648</a></td><td>Kirkland WA</td><td><a href="#" class="partner-jump" data-partner-key="LOODU|JAANVI">Loodu, Jaanvi</a></td><td style="display: none;">22</td></tr>
+      <tr class="alternate-player" data-player-key="BATTISTONE|GRACE" data-entry-status="alternate" data-section-rank="35"><td class="col-rank">33</td><td>Grace</td><td>Battistone</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018594623" target="_blank" rel="noopener noreferrer">31.54</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2799300" target="_blank" rel="noopener noreferrer">5.19</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018594623" target="_blank" rel="noopener noreferrer">741</a></td><td>Henderson NV</td><td><a href="#" class="partner-jump" data-partner-key="PFEIFFER|ELANA">Pfeiffer, Elana</a></td><td style="display: none;">35</td></tr>
+      <tr class="alternate-player" data-player-key="WHITMORE|LUCY" data-entry-status="alternate" data-section-rank="37"><td class="col-rank">34</td><td>Lucy</td><td>Whitmore</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019394408" target="_blank" rel="noopener noreferrer">32.63</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5716929" target="_blank" rel="noopener noreferrer">4.55</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019394408" target="_blank" rel="noopener noreferrer">808</a></td><td>Henderson NV</td><td>N/A</td><td style="display: none;">37</td></tr>
+      <tr class="alternate-player" data-player-key="MOLDRE|MARISSA" data-entry-status="alternate" data-section-rank="39"><td class="col-rank">35</td><td>Marissa</td><td>Moldre</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018532263" target="_blank" rel="noopener noreferrer">33.89</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2806440" target="_blank" rel="noopener noreferrer">3.71</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018532263" target="_blank" rel="noopener noreferrer">857</a></td><td>Farmington UT</td><td>N/A</td><td style="display: none;">39</td></tr>
+      <tr class="alternate-player" data-player-key="KENNEDY|QUINN" data-entry-status="alternate" data-section-rank="129"><td class="col-rank">36</td><td>Quinn</td><td>Kennedy</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018376207" target="_blank" rel="noopener noreferrer">32.75</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2711501" target="_blank" rel="noopener noreferrer">5.30</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018376207" target="_blank" rel="noopener noreferrer">1121</a></td><td>Miami FL</td><td>N/A</td><td style="display: none;">129</td></tr>
+      <tr class="alternate-player" data-player-key="ZEYSING|LEILA NOELLE" data-entry-status="alternate" data-section-rank="58"><td class="col-rank">37</td><td>Leila Noelle</td><td>Zeysing</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018498164" target="_blank" rel="noopener noreferrer">33.14</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3157680" target="_blank" rel="noopener noreferrer">4.65</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018498164" target="_blank" rel="noopener noreferrer">1143</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">58</td></tr>
+      <tr class="alternate-player" data-player-key="SAGSTROM|CORNELIA" data-entry-status="alternate" data-section-rank="87"><td class="col-rank">38</td><td>Cornelia</td><td>Sagstrom</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018494904" target="_blank" rel="noopener noreferrer">35.80</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3023474" target="_blank" rel="noopener noreferrer">2.88</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018494904" target="_blank" rel="noopener noreferrer">1947</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">87</td></tr>
+      <tr class="alternate-player" data-player-key="SPENCER|PRESLEY" data-entry-status="alternate" data-section-rank="211"><td class="col-rank">39</td><td>Presley</td><td>Spencer</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019032647" target="_blank" rel="noopener noreferrer">34.62</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4313957" target="_blank" rel="noopener noreferrer">3.79</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019032647" target="_blank" rel="noopener noreferrer">2169</a></td><td>Trabuco Canyon CA</td><td>N/A</td><td style="display: none;">211</td></tr>
+      <tr class="alternate-player" data-player-key="RUBENSTEIN|RYLEE" data-entry-status="alternate" data-section-rank="107"><td class="col-rank">40</td><td>Rylee</td><td>Rubenstein</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018497018" target="_blank" rel="noopener noreferrer">35.60</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4336890" target="_blank" rel="noopener noreferrer">3.20</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018497018" target="_blank" rel="noopener noreferrer">2540</a></td><td>Las Vegas NV</td><td>N/A</td><td style="display: none;">107</td></tr>
+      <tr class="alternate-player" data-player-key="HELM|REAGAN" data-entry-status="alternate" data-section-rank="53"><td class="col-rank">41</td><td>Reagan</td><td>Helm</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019178002" target="_blank" rel="noopener noreferrer">36.53</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4410011" target="_blank" rel="noopener noreferrer">2.32</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019178002" target="_blank" rel="noopener noreferrer">2529</a></td><td>Phoenix AZ</td><td>N/A</td><td style="display: none;">53</td></tr>
+      <tr class="alternate-player" data-player-key="RIDEOUT|HADLEE" data-entry-status="alternate" data-section-rank="132"><td class="col-rank">42</td><td>Hadlee</td><td>Rideout</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017300179" target="_blank" rel="noopener noreferrer">36.98</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2940639" target="_blank" rel="noopener noreferrer">2.75</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017300179" target="_blank" rel="noopener noreferrer">3135</a></td><td>Draper UT</td><td>N/A</td><td style="display: none;">132</td></tr>
+      <tr class="alternate-player" data-player-key="SMITH|SIENA" data-entry-status="alternate" data-section-rank="191"><td class="col-rank">43</td><td>Siena</td><td>Smith</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010836026" target="_blank" rel="noopener noreferrer">36.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5300353" target="_blank" rel="noopener noreferrer">2.08</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2010836026" target="_blank" rel="noopener noreferrer">4680</a></td><td>Park City UT</td><td>N/A</td><td style="display: none;">191</td></tr>
+      <tr class="alternate-player" data-player-key="PITTMAN|CERIAH" data-entry-status="alternate" data-section-rank="24"><td class="col-rank">44</td><td>Ceriah</td><td>Pittman</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018159271" target="_blank" rel="noopener noreferrer">32.89</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3588771" target="_blank" rel="noopener noreferrer">4.01</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018159271" target="_blank" rel="noopener noreferrer">988</a></td><td>Gilbert AZ</td><td>N/A</td><td style="display: none;">24</td></tr>
     </tbody>
   </table>
 
@@ -2250,19 +2230,19 @@
     <div class="stats-grid">
       <div class="stat-box">
         <div class="stat-label">Total Players</div>
-        <div class="stat-value">50</div>
+        <div class="stat-value">44</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">WTN Range</div>
-        <div class="stat-value">27.18 - 36.98</div>
+        <div class="stat-value">26.72 - 36.98</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg WTN</div>
-        <div class="stat-value">31.30</div>
+        <div class="stat-value">31.10</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
-        <div class="stat-value">5.59</div>
+        <div class="stat-value">5.66</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Draw Size</div>
@@ -2270,7 +2250,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Registered</div>
-        <div class="stat-value">50</div>
+        <div class="stat-value">44</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Registration Closes</div>
@@ -2278,11 +2258,11 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Best Nat Rank</div>
-        <div class="stat-value">77</div>
+        <div class="stat-value">78</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
-        <div class="stat-value">7.70</div>
+        <div class="stat-value">7.72</div>
       </div>
     </div>
   </div>
@@ -2298,7 +2278,7 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Registered:</span>
-      <span class="detail-value">91</span>
+      <span class="detail-value">84</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Registration Closes:</span>
@@ -2342,11 +2322,11 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Email:</span>
-      <span class="detail-value">juniors@ustanevada.com</span>
+      <span class="detail-value">N/A</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Phone:</span>
-      <span class="detail-value">702-228-2287</span>
+      <span class="detail-value">N/A</span>
     </div>
 
 	  </div>
@@ -2506,7 +2486,7 @@
 </style>
 <section class="h2h-block" id="primary-roster-h2h">
   <h2>Alexis Malakhova vs This Roster</h2>
-  <p class="h2h-note">Mini report: Alexis Malakhova match history vs players on this roster. Data comes from the internal DB (UTR/USTA). Generated Mar 4, 2026 4:01 PM PST.</p>
+  <p class="h2h-note">Mini report: Alexis Malakhova match history vs players on this roster. Data comes from the internal DB (UTR/USTA). Generated Mar 12, 2026 1:45 PM PDT.</p>
   <div class="selection-callout">Asterisk (*) in the roster table means Alexis Malakhova has prior match history with that player.</div>
   <ul class="h2h-summary"><li><a class="h2h-jump" href="#h2h-12cb67403aeec1f4dce5">Ziva Gadgil</a> <span class="h2h-meta">San Mateo CA</span> — H2H 0-1 <span class="h2h-meta">(latest Jan 10th, 2026)</span></li><li><a class="h2h-jump" href="#h2h-52ecfbcbe001393f2d84">Summer Stiritz</a> <span class="h2h-meta">Ross CA</span> — H2H 1-1 <span class="h2h-meta">(latest Jan 10th, 2026)</span></li><li><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Valentina Kukeeva</a> <span class="h2h-meta">Campbell CA</span> — H2H 0-1 <span class="h2h-meta">(latest Nov 15th, 2025)</span></li><li><a class="h2h-jump" href="#h2h-0ee6ac64f22da4f8fa28">Elina Yamamoto</a> <span class="h2h-meta">San Jose CA</span> — H2H 1-1 <span class="h2h-meta">(latest May 24th, 2025)</span></li><li><a class="h2h-jump" href="#h2h-bbad2991f4f85a519ba0">Zaira Gadgil</a> <span class="h2h-meta">San Mateo CA</span> — H2H 4-0 <span class="h2h-meta">(latest Nov 9th, 2024)</span></li><li><a class="h2h-jump" href="#h2h-4ec7fd865ccc8a29d06b">Bella Wu</a> <span class="h2h-meta">Los Gatos CA</span> — H2H 2-0 <span class="h2h-meta">(latest Sep 1st, 2024)</span></li></ul>
   <div class="h2h-player" id="h2h-12cb67403aeec1f4dce5" data-h2h-player-id="player:12cb67403aeec1f4dce5">
@@ -3727,7 +3707,6 @@
       "TINA|WANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019111090",
       "VICTORIA|COREY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018470228",
       "LAILAH|CARROLL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019244117",
-      "MADELYN|KIM": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019036710",
       "KATANA MALEE|SAVANAPRIDI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018625102",
       "DYLAN|BRALY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019356346",
       "AUBREY|ALLEN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018634974",
@@ -3764,18 +3743,12 @@
       "SERENA|KANG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018282441",
       "HUDSON|REED": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018620443",
       "ELLE|PARENT": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018748581",
-      "SCARLETT|COREY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017349545",
-      "EESHA|SAMALA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563475",
       "INDU|AYAPPAGARI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018819651",
       "AILEEN|CHUNG": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018292004",
       "LUCY|HOUSEMAN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018430901",
-      "LEILA|WILLIAMS": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018481750",
       "GRACE|BATTISTONE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018594623",
       "LUCY|WHITMORE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019394408",
       "MARISSA|MOLDRE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018532263",
-      "LISSETTE|TARIN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018943076",
-      "RILEY|YU": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018646376",
-      "ALLISON|PARK": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019017784",
       "QUINN|KENNEDY": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018376207",
       "LEILA NOELLE|ZEYSING": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018498164",
       "CORNELIA|SAGSTROM": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018494904",
