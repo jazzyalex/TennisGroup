@@ -527,28 +527,16 @@
       color: var(--text-muted);
     }
 
-    .our-page-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-left: 8px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(16, 185, 129, 0.12);
+    .cell-dates.has-local-page a {
       color: #047857;
-      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
       text-decoration: none;
-      vertical-align: middle;
-      white-space: nowrap;
     }
 
-    .our-page-badge:hover,
-    .our-page-badge:focus-visible {
-      background: rgba(16, 185, 129, 0.2);
-      text-decoration: none;
+    .cell-dates.has-local-page a:hover,
+    .cell-dates.has-local-page a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     .proximity-indicator {
@@ -936,19 +924,16 @@
       color: var(--m-text-muted);
     }
 
-    .m-our-page-badge {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 6px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(16, 185, 129, 0.14);
+    .m-detail-text.m-local-page-link {
       color: #047857;
-      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
       text-decoration: none;
+    }
+
+    .m-detail-text.m-local-page-link:hover,
+    .m-detail-text.m-local-page-link:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     .m-star-btn {
@@ -3028,10 +3013,10 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            const tournamentLinkHtml = isValidUrl
 	              ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
 	              : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
-	            const localPageBadgeHtml = localPageHref
-	              ? `<a class="our-page-badge" href="${escapeAttr(localPageHref)}">Report</a>`
-	              : '';
-	            const tournamentHtml = `${tournamentLinkHtml}${localPageBadgeHtml}`;
+	            const tournamentHtml = tournamentLinkHtml;
+	            const datesHtml = localPageHref
+	              ? `<span class="cell-dates has-local-page"><a href="${escapeAttr(localPageHref)}">${formatDates(row)}</a></span>`
+	              : `<span class="cell-dates">${formatDates(row)}</span>`;
 
 	            const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
 	            const venueName = (row['Primary Site'] || '').trim();
@@ -3047,7 +3032,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
             tableRow.innerHTML = `
               <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
               <span class="cell-number">${rowNumber}</span>
-              <span class="cell-dates">${formatDates(row)}</span>
+              ${datesHtml}
               <span class="cell-tournament">${tournamentHtml}</span>
               <span class="cell-format">${format}</span>
               <span class="cell-age">${age.label}</span>
@@ -3087,10 +3072,10 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	          const tournamentLinkHtml = isValidUrl
 	            ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
 	            : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
-	          const localPageBadgeHtml = localPageHref
-	            ? `<a class="our-page-badge" href="${escapeAttr(localPageHref)}">Report</a>`
-	            : '';
-	          const tournamentHtml = `${tournamentLinkHtml}${localPageBadgeHtml}`;
+	          const tournamentHtml = tournamentLinkHtml;
+	          const datesHtml = localPageHref
+	            ? `<span class="cell-dates has-local-page"><a href="${escapeAttr(localPageHref)}">${formatDates(row)}</a></span>`
+	            : `<span class="cell-dates">${formatDates(row)}</span>`;
 
 	          const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
 	          const venueName = (row['Primary Site'] || '').trim();
@@ -3106,7 +3091,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
           tableRow.innerHTML = `
             <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
             <span class="cell-number">${index + 1}</span>
-            <span class="cell-dates">${formatDates(row)}</span>
+            ${datesHtml}
             <span class="cell-tournament">${tournamentHtml}</span>
             <span class="cell-format">${format}</span>
             <span class="cell-age">${age.label}</span>
@@ -3590,9 +3575,9 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
           const tournamentNameHtml = isValidUrl
             ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
             : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
-          const localPageBadgeHtml = localPageHref
-            ? `<a class="m-our-page-badge" href="${escapeAttr(localPageHref)}">Report</a>`
-            : '';
+          const datesHtml = localPageHref
+            ? `<a class="m-detail-text m-local-page-link" href="${escapeAttr(localPageHref)}">${formatDates(row)}</a>`
+            : `<span class="m-detail-text">${formatDates(row)}</span>`;
 
           const cityMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cityState)}`;
           const venueName = (row['Primary Site'] || '').trim();
@@ -3607,7 +3592,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
             <div class="m-card-header">
               <div class="m-card-top">
                 <div class="m-card-title">
-                  <div class="m-card-name">${tournamentNameHtml}${localPageBadgeHtml}</div>
+                  <div class="m-card-name">${tournamentNameHtml}</div>
                   <div class="m-card-meta">
                     <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NATIONAL' : 'SECTIONAL'}</span>
                     <span class="m-format-badge">• ${formatLabel}</span>
@@ -3628,7 +3613,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
                   <line x1="8" y1="2" x2="8" y2="6"></line>
                   <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
-                <span class="m-detail-text">${formatDates(row)}</span>
+                ${datesHtml}
               </div>
               <div class="m-detail-item">
                 <svg class="m-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
