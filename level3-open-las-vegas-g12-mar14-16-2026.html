@@ -22,14 +22,78 @@
   <meta name="twitter:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
   <meta name="twitter:image:alt" content="Tournament report preview">
   <title>Level 3 Open: Las Vegas, NV — G12/G14 Singles, March 14 - 16, 2026, Darling Memorial Tennis Center, Las Vegas, NV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+
+    :root {
+      /* Backgrounds */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+
+      /* Text */
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #94a3b8;
+      --text-muted: #94a3b8;  /* alias for old --text-muted refs */
+
+      /* Borders */
+      --border-color: #e2e8f0;
+      --border: #e2e8f0;  /* alias for old --border refs */
+      --border-subtle: #f1f5f9;
+
+      /* Brand */
+      --court-green: #2d5a27;
+      --court-green-light: #3d7a37;
+      --green-primary: #16a34a;
+      --green-light: #f0fdf4;
+      --green-border: #16a34a;
+
+      /* Accent */
+      --accent-report: #4472C4;
+      --accent-report-light: #D9E2F3;
+      --accent-cyan: #0891b2;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --amber: #f59e0b;
+      --blue-link: #0284c7;
+
+      /* Status */
+      --status-critical: #ef4444;
+      --status-critical-bg: #fef2f2;
+      --status-warning: #f59e0b;
+      --status-warning-bg: #fffbeb;
+      --status-safe: #10b981;
+      --status-safe-bg: #ecfdf5;
+
+      /* Highlight */
+      --highlight-player: #f5c542;
+      --highlight-player-bg: #fff3cd;
+
+      /* Shadows */
+      --shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.1);
+      --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.07), 0 10px 15px rgba(15, 23, 42, 0.1);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 14px;
+
+      /* Typography */
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       margin: 0;
-      padding: 20px;
-      padding-top: 24px;
-      background-color: #f5f5f5;
-      border-top: 4px solid #4472C4;
+      padding: 16px;
+      padding-top: 16px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
     }
 
     .report-header {
@@ -57,13 +121,13 @@
     }
 
     .report-header-logo-link:focus-visible {
-      outline: 2px solid #4472C4;
+      outline: 2px solid var(--accent-report);
       outline-offset: 4px;
     }
 
     .report-header-logo {
-      width: 108px;
-      height: 108px;
+      width: 64px;
+      height: 64px;
       display: block;
       object-fit: contain;
       flex-shrink: 0;
@@ -74,11 +138,13 @@
     }
 
     h1 {
-      color: #2c3e50;
+      color: var(--text-primary);
       text-align: center;
       margin: 0;
       font-size: 2.2em;
       font-weight: bold;
+      font-family: var(--font-heading);
+      letter-spacing: -0.02em;
     }
 
     .tournament-dates-row {
@@ -92,9 +158,10 @@
 
     .tournament-dates {
       text-align: center;
-      color: #2c3e50;
+      color: var(--text-primary);
       font-size: 1.3em;
       font-weight: 600;
+      font-family: var(--font-heading);
     }
 
     .deadline-badge {
@@ -103,12 +170,12 @@
       align-items: flex-start;
       gap: 2px;
       padding: 6px 12px;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       border: 1px solid #c9d6f5;
       background: #f3f6ff;
       font-size: 12px;
       line-height: 1.2;
-      color: #2c3e50;
+      color: var(--text-primary);
       white-space: nowrap;
     }
 
@@ -119,12 +186,12 @@
 
     .deadline-date {
       font-size: 11px;
-      color: #5f6c7b;
+      color: var(--text-secondary);
     }
 
     .tournament-info {
       text-align: center;
-      color: #7f8c8d;
+      color: var(--text-secondary);
       margin: 0 0 10px;
       font-size: 14px;
       line-height: 1.6;
@@ -142,7 +209,7 @@
     }
 
     tr.partner-highlight td {
-      background: #fff2cc !important;
+      background: var(--highlight-player-bg) !important;
     }
 
     tr.seeded-team td:first-child {
@@ -165,10 +232,11 @@
       width: 100%;
       margin: 26px auto 12px;
       padding: 0;
-      color: #2c3e50;
+      color: var(--text-primary);
       font-size: 1.45em;
       font-weight: 700;
       text-align: left;
+      font-family: var(--font-heading);
     }
 
     .key-stats {
@@ -177,7 +245,7 @@
       gap: 10px;
       justify-content: flex-start;
       font-size: 12px;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .key-stat {
@@ -204,7 +272,7 @@
     .link-legend {
       text-align: right;
       font-size: 11px;
-      color: #666;
+      color: var(--text-secondary);
       white-space: nowrap;
     }
 
@@ -212,10 +280,10 @@
       margin: 8px 0 12px;
       padding: 8px 10px;
       font-size: 12px;
-      color: #2c3e50;
+      color: var(--text-primary);
       background-color: #f3f6fb;
-      border-left: 3px solid #4472C4;
-      border-radius: 4px;
+      border-left: 3px solid var(--accent-report);
+      border-radius: var(--radius-sm);
     }
 
     table {
@@ -223,18 +291,21 @@
       max-width: 1000px;
       margin: 0 auto;
       border-collapse: collapse;
-      background-color: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      box-shadow: var(--card-shadow);
     }
 
     th {
-      background-color: #4472C4;
-      color: white;
-      padding: 12px 10px;
+      background-color: transparent;
+      color: var(--text-secondary);
+      padding: 8px 10px;
       text-align: left;
-      font-weight: bold;
-      font-size: 13px;
-      border-right: 1px solid white;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--border-color);
+      border-right: none;
     }
 
     .players-table th {
@@ -270,16 +341,16 @@
     td {
       padding: 8px 10px;
       font-size: 13px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
     }
 
     /* Alternating row colors - exactly like the sample */
     tbody tr:nth-child(odd) {
-      background-color: white;
+      background-color: var(--bg-secondary);
     }
 
     tbody tr:nth-child(even) {
-      background-color: #D9E2F3;
+      background-color: var(--accent-report-light);
     }
 
     /* Hover effect */
@@ -290,11 +361,11 @@
 
     /* Highlighted player (Alexis) */
     tr.highlight-player {
-      background-color: white !important;
+      background-color: var(--bg-secondary) !important;
     }
 
     tr.highlight-player:hover {
-      background-color: white !important;
+      background-color: var(--bg-secondary) !important;
     }
 
     tr.highlight-player td {
@@ -307,23 +378,23 @@
     }
 
     tr.highlight-player td:nth-child(1) {
-      border-left: 4px solid #f5c542;
+      border-left: 4px solid var(--highlight-player);
     }
 
     tr.highlight-player td:nth-child(2) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     tr.highlight-player td:nth-child(3) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     tr.highlight-player:hover td:nth-child(2) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     tr.highlight-player:hover td:nth-child(3) {
-      background-color: #fff3cd;
+      background-color: var(--highlight-player-bg);
     }
 
     /* Column alignment */
@@ -331,7 +402,7 @@
       text-align: center;
       width: 50px;
       font-weight: 600;
-      color: #666;
+      color: var(--text-secondary);
     }
 
     .col-wtn {
@@ -377,16 +448,17 @@
       max-width: 1000px;
       margin: 30px auto;
       padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
     }
 
     .stats-section h2 {
-      color: #2c3e50;
+      color: var(--text-primary);
       margin-top: 0;
-      border-bottom: 2px solid #4472C4;
+      border-bottom: 2px solid var(--accent-report);
       padding-bottom: 10px;
+      font-family: var(--font-heading);
     }
 
     .stats-grid {
@@ -398,14 +470,14 @@
 
     .stat-box {
       padding: 15px;
-      background-color: #f8f9fa;
-      border-left: 4px solid #4472C4;
-      border-radius: 4px;
+      background-color: var(--bg-tertiary);
+      border-left: 4px solid var(--accent-report);
+      border-radius: var(--radius-sm);
     }
 
     .stat-label {
       font-size: 11px;
-      color: #666;
+      color: var(--text-secondary);
       text-transform: uppercase;
       margin-bottom: 5px;
     }
@@ -413,32 +485,33 @@
     .stat-value {
       font-size: 20px;
       font-weight: bold;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .utr-histogram {
       max-width: 1000px;
       margin: 20px auto;
       padding: 16px 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
       display: flex;
       flex-direction: column;
     }
 
     .utr-histogram h2,
     .utr-histogram h3 {
-      color: #2c3e50;
+      color: var(--text-primary);
       margin-top: 0;
-      border-bottom: 2px solid #4472C4;
+      border-bottom: 2px solid var(--accent-report);
       padding-bottom: 8px;
+      font-family: var(--font-heading);
     }
 
     .utr-subtitle {
       font-weight: normal;
       font-size: 12px;
-      color: #5a6b7d;
+      color: var(--text-muted);
     }
 
     .utr-histogram-chart {
@@ -453,13 +526,13 @@
       align-items: center;
       gap: 10px;
       font-size: 11px;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .utr-bin-label {
       width: 90px;
       text-align: right;
-      color: #5a6b7d;
+      color: var(--text-muted);
     }
 
     .utr-bin-bar-wrap {
@@ -472,24 +545,24 @@
 
     .utr-bin-bar {
       height: 100%;
-      background-color: #4472C4;
+      background-color: var(--accent-report);
       border-radius: 999px;
     }
 
     .utr-bin.is-highlight .utr-bin-bar {
-      background-color: #f5c542;
+      background-color: var(--highlight-player);
     }
 
     .utr-bin-count {
       width: 28px;
       text-align: right;
       font-weight: 600;
-      color: #2c3e50;
+      color: var(--text-primary);
     }
 
     .utr-histogram-caption {
       font-size: 11px;
-      color: #666;
+      color: var(--text-secondary);
       margin-top: 12px;
       padding-bottom: 4px;
       text-align: center;
@@ -500,23 +573,25 @@
       max-width: 1000px;
       margin: 30px auto;
       padding: 30px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
       page-break-before: always;
     }
 
     .tournament-details-page h2 {
-      color: #2c3e50;
-      border-bottom: 3px solid #4472C4;
+      color: var(--text-primary);
+      border-bottom: 3px solid var(--accent-report);
       padding-bottom: 10px;
       margin-top: 0;
+      font-family: var(--font-heading);
     }
 
     .tournament-details-page h3 {
-      color: #4472C4;
+      color: var(--accent-report);
       margin-top: 25px;
       margin-bottom: 10px;
+      font-family: var(--font-heading);
     }
 
     .detail-row {
@@ -525,17 +600,17 @@
       column-gap: 12px;
       align-items: start;
       padding: 10px 0;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .detail-label {
       font-weight: bold;
-      color: #555;
+      color: var(--text-secondary);
       display: block;
     }
 
     .detail-value {
-      color: #2c3e50;
+      color: var(--text-primary);
       min-width: 0;
       overflow-wrap: anywhere;
     }
@@ -545,7 +620,7 @@
       border-left: 4px solid #ffc107;
       padding: 15px;
       margin-top: 20px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     /* Share button */
@@ -553,7 +628,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #4472C4;
+      background-color: var(--accent-report);
       color: white;
       border: none;
       border-radius: 50%;
@@ -580,14 +655,14 @@
     /* Sticky header */
     .sticky-header {
       position: sticky;
-      top: 0;
+      top: 52px;
       z-index: 100;
       box-shadow: 0 1px 6px rgba(0,0,0,0.12);
     }
 
     /* Click-to-call phone link */
     a[href^="tel"] {
-      color: #4472C4;
+      color: var(--accent-report);
       text-decoration: none;
       font-weight: 600;
     }
@@ -597,185 +672,114 @@
     }
 
     /* Dark Mode Support */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #1a1a1a;
-        color: #e0e0e0;
-      }
+    html[data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
+      --border-color: #334155;
+      --border-subtle: rgba(255,255,255,0.04);
+      --accent-report-light: #2a3a52;
+      --highlight-player-bg: #3b2f1a;
+      --green-primary: #4ade80;
+      --green-light: #052e16;
+      --green-border: #4ade80;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+    }
 
-      h1 {
-        color: #ffffff;
-      }
+    html[data-theme="dark"] .report-header-logo {
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+    }
 
-      .report-header-logo {
-        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
-      }
+    html[data-theme="dark"] th {
+      background-color: transparent;
+      color: var(--text-tertiary);
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
 
-      .tournament-dates {
-        color: #ffffff;
-      }
+    html[data-theme="dark"] tbody tr:hover {
+      background-color: #404040 !important;
+    }
 
-      .tournament-info {
-        color: #b0b0b0;
-      }
+    html[data-theme="dark"] tr.highlight-player {
+      background-color: var(--bg-secondary) !important;
+    }
 
-      .link-legend {
-        color: #b0b0b0;
-      }
+    html[data-theme="dark"] tr.highlight-player:hover {
+      background-color: var(--bg-secondary) !important;
+    }
 
-      table {
-        background-color: #2a2a2a;
-        color: #e0e0e0;
-      }
+    html[data-theme="dark"] tr.highlight-player td {
+      color: #ffd700;
+    }
 
-      th {
-        background-color: #3a5a8a;
-      }
+    html[data-theme="dark"] tr.highlight-player td:nth-child(1) {
+      border-left-color: #d4a700;
+    }
 
-      tbody tr:nth-child(odd) {
-        background-color: #2a2a2a;
-      }
+    html[data-theme="dark"] .stats-section h2, html[data-theme="dark"] .tournament-details-page h2,
+    html[data-theme="dark"] .tournament-details-page h3, html[data-theme="dark"] .utr-histogram h2,
+    html[data-theme="dark"] .utr-histogram h3 {
+      border-bottom-color: #3a5a8a;
+    }
 
-      tbody tr:nth-child(even) {
-        background-color: #333333;
-      }
+    html[data-theme="dark"] .stat-box {
+      border-left-color: #3a5a8a;
+    }
 
-      tbody tr:hover {
-        background-color: #404040 !important;
-      }
+    html[data-theme="dark"] .utr-bin-bar-wrap {
+      background-color: #2f3644;
+    }
 
-      tr.highlight-player {
-        background-color: #2a2a2a !important;
-      }
+    html[data-theme="dark"] .utr-bin-bar {
+      background-color: #6b9bd1;
+    }
 
-      tr.highlight-player:hover {
-        background-color: #2a2a2a !important;
-      }
+    html[data-theme="dark"] .utr-bin.is-highlight .utr-bin-bar {
+      background-color: var(--highlight-player);
+    }
 
-      tr.highlight-player td {
-        color: #ffd700;
-      }
+    html[data-theme="dark"] .key-stat {
+      background-color: transparent;
+      border: none;
+    }
 
-      tr.highlight-player td:nth-child(2) {
-        background-color: #3b2f1a;
-      }
+    html[data-theme="dark"] .key-stat .key-value {
+      color: #cfe0ff;
+    }
 
-      tr.highlight-player td:nth-child(3) {
-        background-color: #3b2f1a;
-      }
+    html[data-theme="dark"] td.col-wtn, html[data-theme="dark"] td.col-utr,
+    html[data-theme="dark"] td.col-national {
+      box-shadow: inset 0 0 0 9999px rgba(120, 160, 220, 0.08);
+    }
 
-      tr.highlight-player td:nth-child(1) {
-        border-left-color: #d4a700;
-      }
+    html[data-theme="dark"] .selection-callout {
+      background-color: #2f3644;
+      border-left-color: #6b9bd1;
+    }
 
-      td {
-        border-bottom: 1px solid #404040;
-      }
+    html[data-theme="dark"] .important-note {
+      background-color: #3a3a1a;
+      border-left-color: #d4a700;
+    }
 
-      .stats-section, .tournament-details-page, .utr-histogram {
-        background-color: #2a2a2a;
-        color: #e0e0e0;
-      }
+    html[data-theme="dark"] a {
+      color: #6b9bd1;
+    }
 
-      .stats-section h2, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h2, .utr-histogram h3 {
-        color: #ffffff;
-        border-bottom-color: #3a5a8a;
-      }
+    html[data-theme="dark"] a:hover {
+      color: #8bb3e0;
+    }
 
-      .stat-box {
-        background-color: #333333;
-        border-left-color: #3a5a8a;
-      }
+    html[data-theme="dark"] .share-button {
+      background-color: #3a5a8a;
+    }
 
-      .stat-value, .stat-label {
-        color: #e0e0e0;
-      }
-
-      .utr-subtitle {
-        color: #9aa9c0;
-      }
-
-      .utr-bin {
-        color: #e0e0e0;
-      }
-
-      .utr-bin-label {
-        color: #9aa9c0;
-      }
-
-      .utr-bin-bar-wrap {
-        background-color: #2f3644;
-      }
-
-      .utr-bin-bar {
-        background-color: #6b9bd1;
-      }
-
-      .utr-bin.is-highlight .utr-bin-bar {
-        background-color: #f5c542;
-      }
-
-      .utr-bin-count {
-        color: #e0e0e0;
-      }
-
-      .utr-histogram-caption {
-        color: #b0b0b0;
-      }
-
-      .detail-row {
-        border-bottom: 1px solid #404040;
-      }
-
-      .detail-label {
-        color: #b0b0b0;
-      }
-
-      .detail-value {
-        color: #e0e0e0;
-      }
-
-      .key-stat {
-        color: #e0e0e0;
-        background-color: transparent;
-        border: none;
-      }
-
-      .key-stat .key-value {
-        color: #cfe0ff;
-      }
-
-      td.col-wtn, td.col-utr, td.col-national {
-        box-shadow: inset 0 0 0 9999px rgba(120, 160, 220, 0.08);
-      }
-
-      .selection-callout {
-        color: #e0e0e0;
-        background-color: #2f3644;
-        border-left-color: #6b9bd1;
-      }
-
-      .important-note {
-        background-color: #3a3a1a;
-        border-left-color: #d4a700;
-        color: #e0e0e0;
-      }
-
-      a {
-        color: #6b9bd1;
-      }
-
-      a:hover {
-        color: #8bb3e0;
-      }
-
-      .share-button {
-        background-color: #3a5a8a;
-      }
-
-      .share-button:hover {
-        background-color: #4a6a9a;
-      }
+    html[data-theme="dark"] .share-button:hover {
+      background-color: #4a6a9a;
     }
 
     /* Mobile/Tablet Responsive Styles */
@@ -1118,23 +1122,21 @@
     }
 
     /* Mobile Theme Variables - Dark Mode */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --mobile-bg: #0a0a0f;
-        --mobile-surface: #16161e;
-        --mobile-surface-elevated: #1e1e28;
-        --mobile-border: #2a2a38;
-        --mobile-text-primary: #f5f5f7;
-        --mobile-text-secondary: #c7c7cc;
-        --mobile-text-muted: #9a9aa0;
-        --mobile-accent: #ff9f0a;
-        --mobile-accent-soft: rgba(255, 159, 10, 0.15);
-        --mobile-green: #30d158;
-        --mobile-green-soft: rgba(48, 209, 88, 0.15);
-        --mobile-blue: #0a84ff;
-        --mobile-blue-soft: rgba(10, 132, 255, 0.15);
-        --mobile-purple: #bf5af2;
-      }
+    html[data-theme="dark"] {
+      --mobile-bg: #0a0a0f;
+      --mobile-surface: #16161e;
+      --mobile-surface-elevated: #1e1e28;
+      --mobile-border: #2a2a38;
+      --mobile-text-primary: #f5f5f7;
+      --mobile-text-secondary: #c7c7cc;
+      --mobile-text-muted: #9a9aa0;
+      --mobile-accent: #ff9f0a;
+      --mobile-accent-soft: rgba(255, 159, 10, 0.15);
+      --mobile-green: #30d158;
+      --mobile-green-soft: rgba(48, 209, 88, 0.15);
+      --mobile-blue: #0a84ff;
+      --mobile-blue-soft: rgba(10, 132, 255, 0.15);
+      --mobile-purple: #bf5af2;
     }
 
     /* Default: Hide mobile, show desktop */
@@ -1152,7 +1154,7 @@
 
     /* Mobile Layout Styles */
     .mobile-view {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      font-family: var(--font-body);
       background: var(--mobile-bg);
       color: var(--mobile-text-primary);
       line-height: 1.5;
@@ -1201,8 +1203,8 @@
     }
 
     .mobile-header-logo {
-      width: 56px;
-      height: 56px;
+      width: 40px;
+      height: 40px;
       object-fit: contain;
       flex-shrink: 0;
       display: block;
@@ -1966,14 +1968,136 @@
     body.force-desktop .desktop-view {
       display: block !important;
     }
-  
-    tr.entry-list-player:not(.highlight-player) {
-      background-color: rgba(34, 139, 34, 0.08);
-    }
-    tr.alternate-player:not(.highlight-player) {
-      background-color: rgba(255, 193, 7, 0.10);
+
+    /* Navigation Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      height: 52px;
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+      transition: background-color 0.2s, border-color 0.2s;
     }
 
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .nav-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green-primary);
+    }
+
+    .nav-center {
+      flex: 1;
+      margin: 0 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--green-primary);
+    }
+
+    .nav-link.active {
+      color: var(--green-primary);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--green-primary);
+    }
+
+    html[data-theme="dark"] .nav-link {
+      color: #94a3b8;
+    }
+
+    html[data-theme="dark"] .nav-link:hover {
+      color: #4ade80;
+    }
+
+    html[data-theme="dark"] .nav-link.active {
+      color: #4ade80;
+    }
+
+    html[data-theme="dark"] .nav-link.active::after {
+      background-color: #4ade80;
+    }
+
+    .nav-breadcrumb {
+      display: none;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .toggle-btn:hover {
+      color: var(--green-primary);
+    }
+
+    @media (max-width: 640px) {
+      .nav-brand {
+        display: none;
+      }
+    }
   </style>
   <style id="report-updated-badge-style">
     .report-updated-badge {
@@ -2009,7 +2133,7 @@
       }
     }
 
-    @media (prefers-color-scheme: dark) {
+    html[data-theme="dark"] {
       .report-updated-badge__pill {
         border: 1px solid rgba(255, 255, 255, 0.16);
         background: rgba(28, 28, 30, 0.72);
@@ -2024,8 +2148,38 @@
       }
     }
   </style>
+  <script>
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-left">
+      <div class="nav-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+          <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+          <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+        </svg>
+      </div>
+      <span class="nav-brand">Tennis Tracker</span>
+    </div>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="player.html" class="nav-link">Player</a>
+        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
   <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-04T16:01:40-08:00" title="2026-03-04T16:01:40-08:00">
     <span class="report-updated-badge__pill">Updated Mar 4, 2026 4:01 PM PST</span>
   </div>
@@ -4460,6 +4614,27 @@
     });
 
     document.body.appendChild(shareButton);
+  </script>
+  <script>
+(function() {
+  const toggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const html = document.documentElement;
+  const stored = localStorage.getItem('theme');
+  if (stored) {
+    html.setAttribute('data-theme', stored);
+    if (themeIcon) themeIcon.textContent = stored === 'dark' ? '☀️' : '🌙';
+  }
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      if (themeIcon) themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  }
+})();
   </script>
 </body>
 </html>
