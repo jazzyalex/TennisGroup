@@ -348,22 +348,16 @@
     }
 
     .player-card__points-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    .player-card__points-grid > span {
       display: flex;
-      flex-direction: column;
-    }
-
-    .player-card__points-grid > span:first-child {
-      align-items: flex-start;
-    }
-
-    .player-card__points-grid > span:not(:first-child) {
       align-items: center;
+      justify-content: center;
+    }
+    .player-card__points-total {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
     }
 
     .player-card__points-label {
@@ -414,8 +408,15 @@
     }
 
     /* View Profile Link */
-    .player-card__profile-link {
+    .player-card__links-row {
+      display: flex;
+      gap: 8px;
       margin-top: 10px;
+    }
+
+    .player-card__profile-link {
+      flex: 1;
+      margin-top: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -902,12 +903,35 @@
       margin-bottom: 8px;
       line-height: 1.3;
     }
+    .card-title[data-usta-url] {
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(0,0,0,0.25);
+      transition: text-decoration-color 0.15s;
+    }
+    .card-title[data-usta-url]:hover {
+      text-decoration-color: var(--court-green, #2d5a27);
+    }
 
     .card-description {
       font-size: 0.85rem;
       color: var(--text-secondary);
       margin-bottom: 20px;
       line-height: 1.5;
+    }
+    .tournament-card:not(.calendar-card) .card-description {
+      display: none;
+    }
+    .card-venue {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin: 2px 0 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0.85;
     }
 
     .card-meta {
@@ -1448,18 +1472,7 @@
           <div class="player-card__panel player-card__panel--points">
             <div class="player-card__panel-title">USTA Points</div>
             <a class="player-card__points-grid" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
-              <span>
-                <span class="player-card__points-label">Total</span>
-                <span class="player-card__points-value" data-player-stat="usta_points_total">1083</span>
-              </span>
-              <span>
-                <span class="player-card__points-label">Singles</span>
-                <span class="player-card__points-value" data-player-stat="usta_points_singles">1073</span>
-              </span>
-              <span>
-                <span class="player-card__points-label">Doubles</span>
-                <span class="player-card__points-value" data-player-stat="usta_points_doubles">10</span>
-              </span>
+              <span class="player-card__points-total" data-player-stat="usta_points_total">1083</span>
             </a>
           </div>
           <div class="player-card__panel">
@@ -1481,12 +1494,10 @@
           <span data-expiration-text>75 points expiring soon (23 days)</span>
         </div>
         <!-- View Full Profile Link -->
-        <a href="player.html" class="player-card__profile-link">
-          Player Profile
-        </a>
-        <a href="ranking-simulator.html" class="player-card__profile-link player-card__profile-link--secondary">
-          Ranking Simulator
-        </a>
+        <div class="player-card__links-row">
+          <a href="player.html" class="player-card__profile-link">Player Profile</a>
+          <a href="ranking-simulator.html" class="player-card__profile-link player-card__profile-link--secondary">Ranking Simulator</a>
+        </div>
       </aside>
     </div>
   </section>
@@ -2677,6 +2688,45 @@
 		      return '';
 		    }
 
+		    function extractVenueFromReportDoc(doc) {
+		      if (!doc) return '';
+		      const mapLink = doc.querySelector('a[href*="maps/search"]');
+		      if (mapLink) return (mapLink.textContent || '').trim();
+		      return '';
+		    }
+
+		    function applyCardVenue(card, venue) {
+		      let el = card.querySelector('.card-venue');
+		      if (!venue) { if (el) el.remove(); return; }
+		      if (!el) {
+		        el = document.createElement('p');
+		        el.className = 'card-venue';
+		        const title = card.querySelector('.card-title');
+		        const desc = card.querySelector('.card-description');
+		        const anchor = title || desc;
+		        if (anchor) anchor.after(el); else card.prepend(el);
+		      }
+		      el.textContent = venue;
+		    }
+
+		    function setupCardTitleLinks() {
+		      document.querySelectorAll('a.tournament-card:not(.calendar-card)').forEach(card => {
+		        const ustaEl = card.querySelector('.card-usta-link[data-usta-url]');
+		        const title = card.querySelector('.card-title');
+		        if (ustaEl && title) {
+		          title.setAttribute('data-usta-url', ustaEl.getAttribute('data-usta-url'));
+		        }
+		      });
+		      document.addEventListener('click', (event) => {
+		        const el = event.target?.closest?.('.card-title[data-usta-url]');
+		        if (!el) return;
+		        event.preventDefault();
+		        event.stopPropagation();
+		        const url = el.getAttribute('data-usta-url');
+		        if (url) window.open(url, '_blank', 'noopener');
+		      });
+		    }
+
 		    function extractFillsFromReportDoc(doc) {
 		      if (!doc) return null;
 		      const blocks = Array.from(doc.querySelectorAll('.key-stats'));
@@ -2920,6 +2970,9 @@
 
 		        const directFills = (() => { try { const r = card.getAttribute('data-card-fills'); return r ? JSON.parse(r) : null; } catch { return null; } })();
 		        if (directFills) applyCardFills(card, directFills);
+
+		        const directVenue = (card.getAttribute('data-card-venue') || '').trim();
+		        if (directVenue) applyCardVenue(card, directVenue);
 	
 		        const href = (card.getAttribute('href') || '').trim();
 		        if (!href || href.startsWith('http')) continue;
@@ -2940,6 +2993,8 @@
 		        }
 		        const cachedFills = Array.isArray(meta.fills) ? meta.fills : null;
 		        if (!directFills && cachedFills) applyCardFills(card, cachedFills);
+		        const cachedVenue = (meta.venue || '').trim();
+		        if (!directVenue && cachedVenue) applyCardVenue(card, cachedVenue);
 	
 		        const freshEnough = cachedAt && (Date.now() - cachedAt) < CACHE_MAX_AGE_MS;
 		        const directIsoOk = !!formatUpdatedIso(directIso);
@@ -2966,6 +3021,7 @@
 		          const closeText = extractCloseTextFromReportDoc(doc);
 		          const primaryName = extractPrimaryNameFromReportDoc(doc);
 		          const fetchedFills = extractFillsFromReportDoc(doc);
+		          const fetchedVenue = extractVenueFromReportDoc(doc);
 
 		          cache[href] = {
 		            updatedIso: iso,
@@ -2973,6 +3029,7 @@
 		            primaryName,
 		            primaryChecked: true,
 		            fills: fetchedFills,
+		            venue: fetchedVenue,
 		            cachedAt: Date.now(),
 		          };
 
@@ -2981,6 +3038,7 @@
 		          if (primaryName) setCardPrimaryBadge(card, primaryName);
 		          else clearCardPrimaryBadge(card);
 		          applyCardFills(card, fetchedFills);
+		          applyCardVenue(card, fetchedVenue);
 		        } catch {
 		          // ignore
 		        }
@@ -3524,6 +3582,7 @@
 	
 		    function init() {
 		      setupUstaLinkDelegation();
+		      setupCardTitleLinks();
 		      const favoritesApi = initTournamentFavorites();
 		      addStarredCalendarEventCards(favoritesApi);
 		      updateExpirationAlert();
