@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>USTA Girls U12/U14 Tournaments · Tennis Tracker</title>
+  <title>USTA Girls U12/U14 Tournaments - NorCal and National</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
   <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
@@ -30,7 +30,7 @@
       --accent-national: #0891b2;
     }
 
-    body.dark {
+    html[data-theme="dark"] {
       --bg-primary: #0f172a;
       --bg-secondary: #1e293b;
       --bg-tertiary: #334155;
@@ -77,14 +77,13 @@
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
-      padding: 0;
+      padding: 32px;
       line-height: 1.5;
     }
 
     .container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 24px;
     }
 
     /* Header */
@@ -1287,18 +1286,24 @@
     }
 
     /* Navigation Bar */
-    .navbar {
-      position: sticky; top: 0; z-index: 200;
-      height: 52px; background-color: var(--bg-primary);
+    nav {
+      position: sticky;
+      top: 0;
+      height: 52px;
+      background-color: var(--bg-primary);
       border-bottom: 1px solid var(--border-color);
-      display: flex; align-items: center; padding: 0 24px; gap: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 200;
       transition: background-color 0.2s;
     }
-    .navbar-left { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
-    .navbar-logo-link { display: inline-flex; line-height: 0; }
-    .navbar-logo { width: 24px; height: 24px; flex-shrink: 0; }
-    .navbar-brand { font-size: 1rem; font-weight: 700; color: var(--brand-green); }
-    .navbar-center { flex: 1; display: flex; justify-content: center; align-items: center; }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .nav-logo { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo svg { width: 100%; height: 100%; }
+    .nav-brand { font-size: 1rem; font-weight: 700; color: var(--brand-green); }
+    .nav-center { flex: 1; margin: 0 32px; display: flex; justify-content: center; }
     .nav-links { display: flex; gap: 24px; align-items: center; }
     .nav-link {
       font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);
@@ -1310,52 +1315,69 @@
       content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
       height: 2px; background-color: var(--brand-green);
     }
-    body.dark .nav-link { color: #94a3b8; }
-    body.dark .nav-link:hover { color: #4ade80; }
-    body.dark .nav-link.active { color: #4ade80; }
-    body.dark .nav-link.active::after { background-color: #4ade80; }
-    body.dark .navbar-brand { color: #4ade80; }
-    .navbar-right { display: flex; align-items: center; gap: 16px; flex: 0 0 auto; }
-    .theme-toggle-btn {
-      background: none; border: none; cursor: pointer;
-      width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
-      color: var(--text-secondary); transition: color 0.2s;
+    html[data-theme="dark"] .nav-link { color: #94a3b8; }
+    html[data-theme="dark"] .nav-link:hover { color: #4ade80; }
+    html[data-theme="dark"] .nav-link.active { color: #4ade80; }
+    html[data-theme="dark"] .nav-link.active::after { background-color: #4ade80; }
+    .nav-right { display: flex; align-items: center; }
+    .toggle-btn {
+      background: none; border: none; cursor: pointer; font-size: 1.25rem;
+      color: var(--text-primary); padding: 8px; display: flex; align-items: center; transition: color 0.2s;
     }
-    .theme-toggle-btn:hover { color: var(--text-primary); }
-    .theme-toggle-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    @media (max-width: 640px) { .navbar-brand { display: none; } .navbar-center { display: none; } }
+    .toggle-btn:hover { color: var(--brand-green); }
+    /* Burger menu & mobile nav */
+    .nav-home-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; color: var(--text-primary); padding: 6px; border-radius: 6px; margin-left: 4px; transition: background 0.15s; }
+    .nav-burger:hover { background: var(--bg-tertiary); }
+    @media (max-width: 640px) {
+      .nav-brand { display: block; }
+      .nav-burger { display: flex; align-items: center; justify-content: center; }
+      .nav-center { display: none; position: absolute; top: 52px; left: 0; right: 0; background: var(--bg-primary); border-bottom: 1px solid var(--border-color); z-index: 99; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+      nav.nav-open .nav-center { display: flex; }
+      .nav-links { flex-direction: column; align-items: flex-start; width: 100%; padding: 8px 24px 12px; gap: 0; }
+      .nav-link { display: block; padding: 10px 0; font-size: 0.95rem; width: 100%; border-bottom: 1px solid var(--border-subtle); }
+      .nav-link:last-child { border-bottom: none; }
+    }
   </style>
-</head>
-<body>
   <script>
     (function(){
       var t=localStorage.getItem('theme');
-      if(t==='dark'){document.body.classList.add('dark');document.body.classList.add('mobile-dark');}
+      if(t){
+        document.documentElement.setAttribute('data-theme',t);
+        if(t==='dark') document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('mobile-dark');});
+      }
     })();
   </script>
-  <nav class="navbar">
-    <div class="navbar-left">
-      <a href="index.html" class="navbar-logo-link" aria-label="Home">
-        <svg class="navbar-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+</head>
+<body>
+  <nav id="main-nav">
+    <a href="index.html" class="nav-home-link" aria-label="Go to home page">
+      <div class="nav-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="64" height="64" rx="8" fill="#2d5a27"/>
           <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
           <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
         </svg>
-      </a>
-      <span class="navbar-brand">Tennis Tracker</span>
-    </div>
-    <div class="navbar-center">
+      </div>
+      <span class="nav-brand">Tennis Tracker</span>
+    </a>
+    <div class="nav-center">
       <div class="nav-links">
-        <a href="2025-usta-norcal-national.html" class="nav-link active">Calendar</a>
         <a href="player.html" class="nav-link">Player</a>
-        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
         <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+        <a href="2025-usta-norcal-national.html" class="nav-link active">Calendar</a>
       </div>
     </div>
-    <div class="navbar-right">
-      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="moon-icon" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <button class="nav-burger" id="nav-burger" aria-label="Open navigation menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
       </button>
     </div>
   </nav>
@@ -2354,18 +2376,25 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
   <script>
   (function() {
     const toggle = document.getElementById('theme-toggle');
-    const sunIcon = toggle ? toggle.querySelector('.sun-icon') : null;
-    const moonIcon = toggle ? toggle.querySelector('.moon-icon') : null;
-    const isDark = document.body.classList.contains('dark');
-    if (isDark && sunIcon && moonIcon) { sunIcon.style.display = 'none'; moonIcon.style.display = 'block'; }
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) {
+      html.setAttribute('data-theme', stored);
+      if (themeIcon) themeIcon.textContent = stored === 'dark' ? '☀️' : '🌙';
+      if (stored === 'dark') document.body.classList.add('mobile-dark');
+    }
     if (toggle) {
       toggle.addEventListener('click', () => {
-        const dark = document.body.classList.toggle('dark');
-        document.body.classList.toggle('mobile-dark', dark);
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
-        if (sunIcon && moonIcon) {
-          sunIcon.style.display = dark ? 'none' : 'block';
-          moonIcon.style.display = dark ? 'block' : 'none';
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        if (themeIcon) themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+        if (next === 'dark') {
+          document.body.classList.add('mobile-dark');
+        } else {
+          document.body.classList.remove('mobile-dark');
         }
       });
     }
@@ -3962,6 +3991,30 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
         }
       }, 250);
     });
+  </script>
+  <script>
+  (function() {
+    var burger = document.getElementById('nav-burger');
+    var nav = document.getElementById('main-nav');
+    if (!burger || !nav) return;
+    burger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('nav-open');
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target)) {
+        nav.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    nav.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
   </script>
 </body>
 </html>
