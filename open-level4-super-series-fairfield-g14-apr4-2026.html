@@ -22,38 +22,43 @@
   <meta name="twitter:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
   <meta name="twitter:image:alt" content="Tournament report preview">
   <title>Open Level 4 Super Series — Fairfield (Girls U14 Singles), April 4 - 5, 2026, Solano Community College, Fairfield, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
     :root {
-      /* ── Backgrounds ── */
-      --bg-primary: #f8fafc;
-      --bg-secondary: #ffffff;
+      /* Backgrounds */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
       --bg-tertiary: #f1f5f9;
 
-      /* ── Text ── */
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-      --text-muted: #94a3b8;
+      /* Text */
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #94a3b8;
+      --text-muted: #94a3b8;  /* alias for old --text-muted refs */
 
-      /* ── Borders ── */
-      --border: #e2e8f0;
+      /* Borders */
+      --border-color: #e2e8f0;
+      --border: #e2e8f0;  /* alias for old --border refs */
       --border-subtle: #f1f5f9;
 
-      /* ── Brand ── */
+      /* Brand */
       --court-green: #2d5a27;
       --court-green-light: #3d7a37;
+      --green-primary: #16a34a;
+      --green-light: #f0fdf4;
+      --green-border: #16a34a;
 
-      /* ── Accent: report ── */
+      /* Accent */
       --accent-report: #4472C4;
       --accent-report-light: #D9E2F3;
-
-      /* ── Accent: semantic ── */
       --accent-cyan: #0891b2;
       --accent-amber: #f59e0b;
       --accent-emerald: #10b981;
+      --amber: #f59e0b;
+      --blue-link: #0284c7;
 
-      /* ── Status ── */
+      /* Status */
       --status-critical: #ef4444;
       --status-critical-bg: #fef2f2;
       --status-warning: #f59e0b;
@@ -61,32 +66,34 @@
       --status-safe: #10b981;
       --status-safe-bg: #ecfdf5;
 
-      /* ── Highlight ── */
+      /* Highlight */
       --highlight-player: #f5c542;
       --highlight-player-bg: #fff3cd;
 
-      /* ── Elevation ── */
+      /* Shadows */
+      --shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.1);
+      --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.07), 0 10px 15px rgba(15, 23, 42, 0.1);
       --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
       --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 
-      /* ── Radius ── */
+      /* Radius */
       --radius-sm: 4px;
       --radius-md: 8px;
       --radius-lg: 12px;
       --radius-xl: 14px;
 
-      /* ── Typography ── */
-      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-heading: 'Space Grotesk', sans-serif;
+      /* Typography */
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
       font-family: var(--font-body);
       margin: 0;
-      padding: 20px;
-      padding-top: 24px;
+      padding: 16px;
+      padding-top: 16px;
       background-color: var(--bg-primary);
-      border-top: 4px solid var(--accent-report);
+      color: var(--text-primary);
     }
 
     .report-header {
@@ -95,36 +102,11 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      gap: 74px;
+      gap: 0;
     }
 
-    .report-header-logo-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 18px;
-      padding: 4px;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .report-header-logo-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(31, 45, 68, 0.18);
-    }
-
-    .report-header-logo-link:focus-visible {
-      outline: 2px solid var(--accent-report);
-      outline-offset: 4px;
-    }
-
-    .report-header-logo {
-      width: 108px;
-      height: 108px;
-      display: block;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
+    .report-header-logo-link { display: none; }
+    .report-header-logo { display: none; }
 
     .report-header-text {
       text-align: center;
@@ -158,23 +140,26 @@
     }
 
     .deadline-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-      padding: 6px 12px;
-      border-radius: var(--radius-lg);
-      border: 1px solid #c9d6f5;
-      background: #f3f6ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--status-warning);
+      background: var(--status-warning-bg);
       font-size: 12px;
-      line-height: 1.2;
+      line-height: 1.4;
       color: var(--text-primary);
       white-space: nowrap;
+    }
+    html.dark .deadline-badge {
+      border-color: #d97706;
+      background: rgba(217, 119, 6, 0.12);
     }
 
     .deadline-countdown {
       font-weight: 700;
-      color: #2c5aa0;
+      color: var(--status-warning);
     }
 
     .deadline-date {
@@ -219,17 +204,28 @@
       gap: 12px;
     }
 
-    /* Align section titles (e.g., Mixed Doubles Girls/Boys) with the table left edge */
+    /* Align section titles with the table left edge */
     .table-section-title {
       max-width: 1000px;
       width: 100%;
-      margin: 26px auto 12px;
-      padding: 0;
+      margin: 32px auto 12px;
+      padding-left: 14px;
+      position: relative;
       color: var(--text-primary);
-      font-size: 1.45em;
+      font-size: 1.3em;
       font-weight: 700;
       text-align: left;
       font-family: var(--font-heading);
+    }
+    .table-section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 3px;
+      bottom: 3px;
+      width: 3px;
+      background: var(--green-primary);
+      border-radius: 2px;
     }
 
     .key-stats {
@@ -265,8 +261,9 @@
     .link-legend {
       text-align: right;
       font-size: 11px;
-      color: var(--text-secondary);
+      color: var(--text-tertiary);
       white-space: nowrap;
+      font-style: italic;
     }
 
     .selection-callout {
@@ -274,8 +271,8 @@
       padding: 8px 10px;
       font-size: 12px;
       color: var(--text-primary);
-      background-color: #f3f6fb;
-      border-left: 3px solid var(--accent-report);
+      background-color: var(--green-light);
+      border-left: 3px solid var(--green-primary);
       border-radius: var(--radius-sm);
     }
 
@@ -289,13 +286,16 @@
     }
 
     th {
-      background-color: var(--accent-report);
-      color: white;
-      padding: 12px 10px;
+      background-color: transparent;
+      color: var(--text-secondary);
+      padding: 8px 10px;
       text-align: left;
-      font-weight: bold;
-      font-size: 13px;
-      border-right: 1px solid white;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--border-color);
+      border-right: none;
     }
 
     .players-table th {
@@ -334,32 +334,32 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* Alternating row colors - exactly like the sample */
+    /* Alternating row colors */
     tbody tr:nth-child(odd) {
-      background-color: var(--bg-secondary);
+      background-color: var(--bg-primary);
     }
 
     tbody tr:nth-child(even) {
-      background-color: var(--accent-report-light);
+      background-color: var(--bg-secondary);
     }
 
     /* Hover effect */
     tbody tr:hover {
-      background-color: #EAF2FB !important;
+      background-color: var(--green-light) !important;
       cursor: pointer;
     }
 
-    /* Highlighted player (Alexis) */
+    /* Highlighted player row — green accent */
     tr.highlight-player {
-      background-color: var(--bg-secondary) !important;
+      background-color: var(--green-light) !important;
     }
 
     tr.highlight-player:hover {
-      background-color: var(--bg-secondary) !important;
+      background-color: var(--green-light) !important;
     }
 
     tr.highlight-player td {
-      color: #222;
+      color: var(--text-primary);
       font-weight: 600;
     }
 
@@ -368,23 +368,7 @@
     }
 
     tr.highlight-player td:nth-child(1) {
-      border-left: 4px solid var(--highlight-player);
-    }
-
-    tr.highlight-player td:nth-child(2) {
-      background-color: var(--highlight-player-bg);
-    }
-
-    tr.highlight-player td:nth-child(3) {
-      background-color: var(--highlight-player-bg);
-    }
-
-    tr.highlight-player:hover td:nth-child(2) {
-      background-color: var(--highlight-player-bg);
-    }
-
-    tr.highlight-player:hover td:nth-child(3) {
-      background-color: var(--highlight-player-bg);
+      border-left: 4px solid var(--green-primary);
     }
 
     /* Column alignment */
@@ -446,7 +430,7 @@
     .stats-section h2 {
       color: var(--text-primary);
       margin-top: 0;
-      border-bottom: 2px solid var(--accent-report);
+      border-bottom: 2px solid var(--green-primary);
       padding-bottom: 10px;
       font-family: var(--font-heading);
     }
@@ -460,9 +444,11 @@
 
     .stat-box {
       padding: 15px;
-      background-color: var(--bg-tertiary);
-      border-left: 4px solid var(--accent-report);
-      border-radius: var(--radius-sm);
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--green-primary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
     }
 
     .stat-label {
@@ -493,7 +479,7 @@
     .utr-histogram h3 {
       color: var(--text-primary);
       margin-top: 0;
-      border-bottom: 2px solid var(--accent-report);
+      border-bottom: 2px solid var(--green-primary);
       padding-bottom: 8px;
       font-family: var(--font-heading);
     }
@@ -535,7 +521,7 @@
 
     .utr-bin-bar {
       height: 100%;
-      background-color: var(--accent-report);
+      background-color: var(--green-primary);
       border-radius: 999px;
     }
 
@@ -645,7 +631,7 @@
     /* Sticky header */
     .sticky-header {
       position: sticky;
-      top: 0;
+      top: 52px;
       z-index: 100;
       box-shadow: 0 1px 6px rgba(0,0,0,0.12);
     }
@@ -662,107 +648,114 @@
     }
 
     /* Dark Mode Support */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-primary: #0f172a;
-        --bg-secondary: #1e293b;
-        --bg-tertiary: #334155;
-        --text-primary: #e2e8f0;
-        --text-secondary: #94a3b8;
-        --text-muted: #64748b;
-        --border: rgba(255,255,255,0.08);
-        --border-subtle: rgba(255,255,255,0.04);
-        --accent-report-light: #2a3a52;
-        --highlight-player-bg: #3b2f1a;
-        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
-      }
+    html.dark {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
+      --border-color: #334155;
+      --border-subtle: rgba(255,255,255,0.04);
+      --accent-report-light: #2a3a52;
+      --highlight-player-bg: #3b2f1a;
+      --green-primary: #4ade80;
+      --green-light: #052e16;
+      --green-border: #4ade80;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+    }
 
-      .report-header-logo {
-        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
-      }
+    html.dark .report-header-logo {
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+    }
 
-      th {
-        background-color: #3a5a8a;
-      }
+    html.dark th {
+      background-color: transparent;
+      color: var(--text-tertiary);
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
 
-      tbody tr:hover {
-        background-color: #404040 !important;
-      }
+    html.dark tbody tr:hover {
+      background-color: rgba(74, 222, 128, 0.08) !important;
+    }
 
-      tr.highlight-player {
-        background-color: var(--bg-secondary) !important;
-      }
+    html.dark tr.highlight-player {
+      background-color: var(--green-light) !important;
+    }
 
-      tr.highlight-player:hover {
-        background-color: var(--bg-secondary) !important;
-      }
+    html.dark tr.highlight-player:hover {
+      background-color: var(--green-light) !important;
+    }
 
-      tr.highlight-player td {
-        color: #ffd700;
-      }
+    html.dark tr.highlight-player td {
+      color: var(--text-primary);
+    }
 
-      tr.highlight-player td:nth-child(1) {
-        border-left-color: #d4a700;
-      }
+    html.dark tr.highlight-player td:nth-child(1) {
+      border-left-color: var(--green-primary);
+    }
 
-      .stats-section h2, .tournament-details-page h2, .tournament-details-page h3, .utr-histogram h2, .utr-histogram h3 {
-        border-bottom-color: #3a5a8a;
-      }
+    html.dark .stats-section h2, html.dark .tournament-details-page h2,
+    html.dark .tournament-details-page h3, html.dark .utr-histogram h2,
+    html.dark .utr-histogram h3 {
+      border-bottom-color: var(--green-primary);
+    }
 
-      .stat-box {
-        border-left-color: #3a5a8a;
-      }
+    html.dark .stat-box {
+      border-left-color: var(--green-primary);
+    }
 
-      .utr-bin-bar-wrap {
-        background-color: #2f3644;
-      }
+    html.dark .utr-bin-bar-wrap {
+      background-color: #2f3644;
+    }
 
-      .utr-bin-bar {
-        background-color: #6b9bd1;
-      }
+    html.dark .utr-bin-bar {
+      background-color: var(--green-primary);
+    }
 
-      .utr-bin.is-highlight .utr-bin-bar {
-        background-color: var(--highlight-player);
-      }
+    html.dark .utr-bin.is-highlight .utr-bin-bar {
+      background-color: var(--highlight-player);
+    }
 
-      .key-stat {
-        background-color: transparent;
-        border: none;
-      }
+    html.dark .key-stat {
+      background-color: var(--bg-secondary);
+      border-color: var(--border-color);
+    }
 
-      .key-stat .key-value {
-        color: #cfe0ff;
-      }
+    html.dark .key-stat .key-value {
+      color: var(--text-primary);
+    }
 
-      td.col-wtn, td.col-utr, td.col-national {
-        box-shadow: inset 0 0 0 9999px rgba(120, 160, 220, 0.08);
-      }
+    html.dark td.col-wtn, html.dark td.col-utr,
+    html.dark td.col-national {
+      box-shadow: inset 0 0 0 9999px rgba(120, 160, 220, 0.08);
+    }
 
-      .selection-callout {
-        background-color: #2f3644;
-        border-left-color: #6b9bd1;
-      }
+    html.dark .selection-callout {
+      background-color: var(--green-light);
+      border-left-color: var(--green-primary);
+    }
 
-      .important-note {
-        background-color: #3a3a1a;
-        border-left-color: #d4a700;
-      }
+    html.dark .important-note {
+      background-color: #3a3a1a;
+      border-left-color: #d4a700;
+    }
 
-      a {
-        color: #6b9bd1;
-      }
+    html.dark a {
+      color: #6b9bd1;
+    }
 
-      a:hover {
-        color: #8bb3e0;
-      }
+    html.dark a:hover {
+      color: #8bb3e0;
+    }
 
-      .share-button {
-        background-color: #3a5a8a;
-      }
+    html.dark .share-button {
+      background-color: #3a5a8a;
+    }
 
-      .share-button:hover {
-        background-color: #4a6a9a;
-      }
+    html.dark .share-button:hover {
+      background-color: #4a6a9a;
     }
 
     /* Mobile/Tablet Responsive Styles */
@@ -1105,23 +1098,21 @@
     }
 
     /* Mobile Theme Variables - Dark Mode */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --mobile-bg: #0a0a0f;
-        --mobile-surface: #16161e;
-        --mobile-surface-elevated: #1e1e28;
-        --mobile-border: #2a2a38;
-        --mobile-text-primary: #f5f5f7;
-        --mobile-text-secondary: #c7c7cc;
-        --mobile-text-muted: #9a9aa0;
-        --mobile-accent: #ff9f0a;
-        --mobile-accent-soft: rgba(255, 159, 10, 0.15);
-        --mobile-green: #30d158;
-        --mobile-green-soft: rgba(48, 209, 88, 0.15);
-        --mobile-blue: #0a84ff;
-        --mobile-blue-soft: rgba(10, 132, 255, 0.15);
-        --mobile-purple: #bf5af2;
-      }
+    html.dark {
+      --mobile-bg: #0a0a0f;
+      --mobile-surface: #16161e;
+      --mobile-surface-elevated: #1e1e28;
+      --mobile-border: #2a2a38;
+      --mobile-text-primary: #f5f5f7;
+      --mobile-text-secondary: #c7c7cc;
+      --mobile-text-muted: #9a9aa0;
+      --mobile-accent: #ff9f0a;
+      --mobile-accent-soft: rgba(255, 159, 10, 0.15);
+      --mobile-green: #30d158;
+      --mobile-green-soft: rgba(48, 209, 88, 0.15);
+      --mobile-blue: #0a84ff;
+      --mobile-blue-soft: rgba(10, 132, 255, 0.15);
+      --mobile-purple: #bf5af2;
     }
 
     /* Default: Hide mobile, show desktop */
@@ -1188,8 +1179,8 @@
     }
 
     .mobile-header-logo {
-      width: 56px;
-      height: 56px;
+      width: 40px;
+      height: 40px;
       object-fit: contain;
       flex-shrink: 0;
       display: block;
@@ -1953,66 +1944,201 @@
     body.force-desktop .desktop-view {
       display: block !important;
     }
-  
-    tr.entry-list-player:not(.highlight-player) {
-      background-color: rgba(34, 139, 34, 0.08);
-    }
-    tr.alternate-player:not(.highlight-player) {
-      background-color: rgba(255, 193, 7, 0.10);
+
+    /* Navigation Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      height: 52px;
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+      transition: background-color 0.2s, border-color 0.2s;
     }
 
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo-link { display: inline-flex; line-height: 0; text-decoration: none; }
+    .nav-logo {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .nav-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green-primary);
+    }
+
+    .nav-center {
+      flex: 1;
+      margin: 0 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--green-primary);
+    }
+
+    .nav-link.active {
+      color: var(--green-primary);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--green-primary);
+    }
+
+    html.dark .nav-link {
+      color: #94a3b8;
+    }
+
+    html.dark .nav-link:hover {
+      color: #4ade80;
+    }
+
+    html.dark .nav-link.active {
+      color: #4ade80;
+    }
+
+    html.dark .nav-link.active::after {
+      background-color: #4ade80;
+    }
+
+    .nav-breadcrumb {
+      display: none;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .toggle-btn:hover {
+      color: var(--green-primary);
+    }
+
+    @media (max-width: 640px) {
+      .nav-brand {
+        display: none;
+      }
+    }
   </style>
   <style id="report-updated-badge-style">
     .report-updated-badge {
-      position: static;
       max-width: 1000px;
-      margin: 0 auto 6px;
+      margin: 6px auto 2px;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       user-select: none;
       pointer-events: none;
       text-align: right;
     }
-
     .report-updated-badge__pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      display: inline;
+      padding: 0;
+      border: none;
+      background: none;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
       font-size: 11px;
-      line-height: 1.2;
-      color: #5f6c7b;
+      font-style: italic;
+      color: #94a3b8;
     }
-
-    @media (max-width: 600px) {
-      .report-updated-badge {
-        max-width: none;
-        margin: 10px 16px 6px;
-      }
+    html.dark .report-updated-badge__pill {
+      color: #64748b;
     }
-
-    @media (prefers-color-scheme: dark) {
-      .report-updated-badge__pill {
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        background: rgba(28, 28, 30, 0.72);
-        color: rgba(255, 255, 255, 0.72);
-        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
-      }
-    }
-
     @media print {
-      .report-updated-badge {
-        display: none !important;
-      }
+      .report-updated-badge { display: none !important; }
     }
   </style>
+  <script>
+    (function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');})();
+  </script>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo-link" aria-label="Home">
+        <div class="nav-logo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </div>
+      </a>
+      <span class="nav-brand">Tennis Tracker</span>
+    </div>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+        <a href="player.html" class="nav-link">Player</a>
+        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
   <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-12T13:46:01-07:00" title="2026-03-12T13:46:01-07:00">
     <span class="report-updated-badge__pill">Updated Mar 12, 2026 1:46 PM PDT</span>
   </div>
@@ -2285,152 +2411,76 @@
 <!-- PRIMARY_ROSTER_H2H_START -->
 <div id="alexis-roster-h2h-wrapper" data-h2h-wrapper="primary-roster-h2h-wrapper">
 <style id="alexis-roster-h2h-style">
-  .h2h-block { max-width: 1000px; margin: 28px auto; padding: 18px 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); color: inherit; }
-  .h2h-block h2 { margin: 0 0 10px 0; font-size: 20px; }
-  .h2h-block .h2h-note { margin: 0 0 14px 0; opacity: 0.85; }
-  .h2h-summary { margin: 0 0 14px 0; padding: 0; list-style: none; }
-  .h2h-summary li { margin: 6px 0; }
-  .h2h-jump { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
-  .h2h-player { margin-top: 18px; }
-  .h2h-player h3 { margin: 0 0 8px 0; font-size: 16px; }
-  .h2h-player .h2h-meta { opacity: 0.8; font-weight: 400; font-size: 13px; margin-left: 8px; }
-  .h2h-mini { margin: 6px 0 0 0; padding: 10px 12px; border-radius: 12px; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.06); }
-  .h2h-mini-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 8px; }
-  .h2h-mini-head .h2h-record { font-weight: 800; }
-  .h2h-mini-head .h2h-record span { font-weight: 700; opacity: 0.8; }
-  .h2h-mini-head .h2h-updated { font-size: 12px; opacity: 0.75; }
-  .h2h-mini-list { margin: 0; padding-left: 18px; }
-  .h2h-mini-list li { margin: 6px 0; }
-  .h2h-mini-line { display: inline; }
-  .h2h-mini-date { font-weight: 700; }
-  .h2h-mini-res { display: inline-block; min-width: 18px; text-align: center; font-weight: 800; }
-  .h2h-mini-score { font-variant-numeric: tabular-nums; }
-  .h2h-mini-event { opacity: 0.88; }
-  .h2h-mini-loc { opacity: 0.75; }
-  .h2h-mini a { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
-
-  details.h2h-more { margin-top: 10px; }
-  details.h2h-more summary { cursor: pointer; font-weight: 700; opacity: 0.9; }
-
-  .h2h-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .h2h-table { width: 100%; min-width: 760px; margin: 0; max-width: none; border-collapse: collapse; font-size: 13px; box-shadow: none; background: transparent; }
-  .h2h-table th, .h2h-table td { padding: 7px 8px; border-bottom: 1px solid rgba(0,0,0,0.08); vertical-align: top; }
-  /* Override global table styles in the report template (zebra stripes + header fill). */
-  .h2h-table th { text-align: left; opacity: 0.9; font-weight: 700; font-size: 12px; letter-spacing: 0.2px; white-space: nowrap; background: rgba(0,0,0,0.04) !important; }
-  .h2h-table td { white-space: nowrap; }
-  .h2h-table td:nth-child(2) { white-space: normal; min-width: 280px; }
-  .h2h-table tbody tr:nth-child(odd) { background: rgba(0,0,0,0.018) !important; }
-  .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
-  .h2h-table tbody tr:hover { background: rgba(68,114,196,0.10) !important; }
-  .h2h-event-main { font-weight: 700; }
-  .h2h-event-sub { font-size: 12px; opacity: 0.8; margin-top: 1px; }
-  tr[data-h2h="1"] td:nth-child(3)::after { content: " *"; color: #C58A00; font-weight: 800; }
-
-  @media (prefers-color-scheme: dark) {
-    .h2h-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
-    .h2h-block h2, .h2h-block h3 { color: #ffffff; }
-    .h2h-block .h2h-note { color: rgba(255,255,255,0.86); }
-    .h2h-mini { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
-    .h2h-table th, .h2h-table td { border-bottom-color: rgba(255,255,255,0.12); }
-    .h2h-table th { background: rgba(255,255,255,0.08) !important; }
-    .h2h-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.03) !important; }
-    .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
-    .h2h-table tbody tr:hover { background: rgba(107,155,209,0.16) !important; }
-    .h2h-event-sub { opacity: 0.78; }
-  }
-
+  .h2h-block { max-width: 1000px; margin: 28px auto; font-family: inherit; }
+  .h2h-section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .h2h-section-title { font-size: 18px; font-weight: 700; margin: 0; position: relative; padding-left: 12px; }
+  .h2h-section-title::before { content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 3px; background: var(--green-primary, #16a34a); border-radius: 2px; }
+  .h2h-section-subtitle { font-size: 13px; color: var(--text-muted, #94a3b8); }
+  .h2h-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .h2h-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 20px; border: 1px solid var(--border-color, #e2e8f0); background: var(--bg-secondary, #f8fafc); font-size: 13px; text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s; }
+  .h2h-chip:hover { border-color: var(--green-primary, #16a34a); background: rgba(22,163,74,0.07); }
+  .h2h-chip-name { font-weight: 600; }
+  .h2h-chip-record { font-size: 12px; color: var(--text-muted, #94a3b8); }
+  .h2h-player-card { background: var(--bg-primary, #fff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
+  .h2h-player-card-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--bg-secondary, #f8fafc); border-bottom: 1px solid var(--border-color, #e2e8f0); gap: 12px; flex-wrap: wrap; }
+  .h2h-player-name-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .h2h-player-name { font-size: 15px; font-weight: 700; color: inherit; }
+  .h2h-player-loc { font-size: 12px; color: var(--text-muted, #94a3b8); }
+  .h2h-record-summary { font-size: 13px; font-weight: 700; white-space: nowrap; color: var(--text-secondary, #475569); }
+  .h2h-matches { padding: 4px 0; }
+  .h2h-match { display: grid; grid-template-columns: 76px 30px 1fr auto; gap: 10px; align-items: start; padding: 8px 16px; border-bottom: 1px solid var(--border-color, #e2e8f0); font-size: 13px; }
+  .h2h-match:last-child { border-bottom: none; }
+  .h2h-match-date { font-size: 12px; color: var(--text-muted, #94a3b8); font-weight: 500; white-space: nowrap; padding-top: 2px; }
+  .h2h-pill { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 22px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.3px; flex-shrink: 0; }
+  .h2h-pill-w { background: rgba(22,163,74,0.12); color: #16a34a; }
+  .h2h-pill-l { background: rgba(220,38,38,0.10); color: #dc2626; }
+  .h2h-pill-d { background: rgba(0,0,0,0.07); color: var(--text-muted, #94a3b8); }
+  .h2h-match-event { min-width: 0; }
+  .h2h-match-event-main { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .h2h-match-event-main a { color: inherit; text-decoration: none; }
+  .h2h-match-event-main a:hover { text-decoration: underline; }
+  .h2h-match-event-sub { font-size: 11px; color: var(--text-muted, #94a3b8); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .h2h-match-score { font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 600; color: var(--text-secondary, #475569); white-space: nowrap; text-align: right; padding-top: 2px; }
+  .h2h-rel-badge { display: inline-block; font-size: 10px; background: rgba(99,102,241,0.10); color: #6366f1; border-radius: 4px; padding: 1px 5px; font-weight: 600; vertical-align: middle; margin-left: 4px; }
+  .h2h-match-hidden { display: none; }
+  .h2h-show-more-row { display: flex; justify-content: center; padding: 0 0 2px; }
+  .h2h-show-more { display: inline-flex; align-items: center; gap: 3px; background: none; border: none; padding: 4px 10px; border-radius: 20px; cursor: pointer; color: var(--text-muted, #94a3b8); font-size: 11px; font-weight: 600; letter-spacing: 0.2px; transition: color 0.15s, background 0.15s; }
+  .h2h-show-more:hover { color: var(--green-primary, #16a34a); background: rgba(22,163,74,0.07); }
+  .h2h-smc { display: block; transition: transform 0.22s ease; flex-shrink: 0; }
+  .h2h-show-more[data-open="1"] .h2h-smc { transform: rotate(180deg); }
+  .h2h-smn { transition: opacity 0.15s; }
+  .h2h-show-more[data-open="1"] .h2h-smn { opacity: 0; pointer-events: none; }
+  html.dark .h2h-player-card { background: var(--bg-secondary, #1e293b); border-color: var(--border-color, #334155); }
+  html.dark .h2h-player-card-header { background: rgba(255,255,255,0.04); border-color: var(--border-color, #334155); }
+  html.dark .h2h-match { border-color: var(--border-color, #334155); }
+  html.dark .h2h-chip { background: rgba(255,255,255,0.05); border-color: var(--border-color, #334155); }
+  html.dark .h2h-chip:hover { background: rgba(22,163,74,0.15); border-color: var(--green-primary, #16a34a); }
+  html.dark .h2h-pill-w { background: rgba(22,163,74,0.18); color: #4ade80; }
+  html.dark .h2h-pill-l { background: rgba(239,68,68,0.15); color: #f87171; }
+  html.dark .h2h-pill-d { background: rgba(255,255,255,0.08); }
+  html.dark .h2h-show-more:hover { background: rgba(22,163,74,0.12); }
   @media (max-width: 640px) {
-    .h2h-block { padding: 14px 12px; }
-    .h2h-table { min-width: 680px; }
+    .h2h-match { grid-template-columns: 68px 26px 1fr auto; gap: 6px; padding: 8px 12px; }
+    .h2h-player-card-header { padding: 10px 12px; }
   }
 </style>
+<script>(function(){
+  function h2hToggleMore(btn){
+    var gid=btn.getAttribute('data-gid');
+    var rows=document.querySelectorAll('.h2h-match[data-gid="'+gid+'"]');
+    var open=btn.getAttribute('data-open')==='1';
+    rows.forEach(function(r){r.classList.toggle('h2h-match-hidden',open);});
+    btn.setAttribute('data-open',open?'0':'1');
+  }
+  window.h2hToggleMore=h2hToggleMore;
+})();</script>
 <section class="h2h-block" id="primary-roster-h2h">
-  <h2>Alexis Malakhova vs This Roster</h2>
-  <p class="h2h-note">Mini report: Alexis Malakhova match history vs players on this roster. Data comes from the internal DB (UTR/USTA). Generated Mar 12, 2026 1:46 PM PDT.</p>
-  <div class="selection-callout">Asterisk (*) in the roster table means Alexis Malakhova has prior match history with that player.</div>
-  <ul class="h2h-summary"><li><a class="h2h-jump" href="#h2h-12cb67403aeec1f4dce5">Ziva Gadgil</a> <span class="h2h-meta">San Mateo CA</span> — H2H 0-1 <span class="h2h-meta">(latest Jan 10th, 2026)</span></li><li><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Valentina Kukeeva</a> <span class="h2h-meta">Campbell CA</span> — H2H 0-1 <span class="h2h-meta">(latest Nov 15th, 2025)</span></li><li><a class="h2h-jump" href="#h2h-a4f3474c37cf7968dda6">Leila Lyons</a> <span class="h2h-meta">Sacramento CA</span> — H2H 0-1 <span class="h2h-meta">(latest Jul 5th, 2025)</span></li></ul>
-  <div class="h2h-player" id="h2h-12cb67403aeec1f4dce5" data-h2h-player-id="player:12cb67403aeec1f4dce5">
-    <h3>Ziva Gadgil <span class="h2h-meta">San Mateo CA</span></h3>
-    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
-    <div class="h2h-mini">
-      <div class="h2h-mini-head">
-        <div class="h2h-record"><span>Record:</span> H2H 0-1</div>
-        <div class="h2h-updated">Latest Jan 10th, 2026</div>
-      </div>
-      <ol class="h2h-mini-list">
-        <li><span class="h2h-mini-line"><span class="h2h-mini-date">Jan 10th, 2026</span> <span class="h2h-mini-res">L</span> <span class="h2h-mini-score">0-6 0-6</span> <span class="h2h-mini-event">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(— • vs)</span></span></li>
-      </ol>
-      <details class="h2h-more">
-        <summary>Show all matches (1)</summary>
-        <div class="h2h-table-wrap">
-          <table class="h2h-table">
-            <thead>
-              <tr>
-                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Jan 10th, 2026</td><td><div class="h2h-event-main">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>L</td><td>0-6 0-6</td><td>Quarterfinals</td><td>utr</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </div>
-  </div><div class="h2h-player" id="h2h-14b5582313c3c42fdae7" data-h2h-player-id="player:14b5582313c3c42fdae7">
-    <h3>Valentina Kukeeva <span class="h2h-meta">Campbell CA</span></h3>
-    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
-    <div class="h2h-mini">
-      <div class="h2h-mini-head">
-        <div class="h2h-record"><span>Record:</span> H2H 0-1</div>
-        <div class="h2h-updated">Latest Nov 15th, 2025</div>
-      </div>
-      <ol class="h2h-mini-list">
-        <li><span class="h2h-mini-line"><span class="h2h-mini-date">Nov 15th, 2025</span> <span class="h2h-mini-res">L</span> <span class="h2h-mini-score">2-4 1-4</span> <span class="h2h-mini-event">FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(— • vs)</span></span></li>
-      </ol>
-      <details class="h2h-more">
-        <summary>Show all matches (1)</summary>
-        <div class="h2h-table-wrap">
-          <table class="h2h-table">
-            <thead>
-              <tr>
-                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Nov 15th, 2025</td><td><div class="h2h-event-main">FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>L</td><td>2-4 1-4</td><td>Quarterfinals</td><td>utr</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </div>
-  </div><div class="h2h-player" id="h2h-a4f3474c37cf7968dda6" data-h2h-player-id="player:a4f3474c37cf7968dda6">
-    <h3>Leila Lyons <span class="h2h-meta">Sacramento CA</span></h3>
-    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
-    <div class="h2h-mini">
-      <div class="h2h-mini-head">
-        <div class="h2h-record"><span>Record:</span> H2H 0-1</div>
-        <div class="h2h-updated">Latest Jul 5th, 2025</div>
-      </div>
-      <ol class="h2h-mini-list">
-        <li><span class="h2h-mini-line"><span class="h2h-mini-date">Jul 5th, 2025</span> <span class="h2h-mini-res">L</span> <span class="h2h-mini-score">1-6 6-1 3-6</span> <span class="h2h-mini-event">L5 BG14 Super Series at Solano Community College JUL 5 - 6</span> <span class="h2h-event-sub">Girls&#x27; 14 &amp; under singles</span> <span class="h2h-mini-loc">(— • vs)</span></span></li>
-      </ol>
-      <details class="h2h-more">
-        <summary>Show all matches (1)</summary>
-        <div class="h2h-table-wrap">
-          <table class="h2h-table">
-            <thead>
-              <tr>
-                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Jul 5th, 2025</td><td><div class="h2h-event-main">L5 BG14 Super Series at Solano Community College JUL 5 - 6</div><div class="h2h-event-sub">Girls&#x27; 14 &amp; under singles</div></td><td>—</td><td>vs</td><td>L</td><td>1-6 6-1 3-6</td><td>—</td><td>utr</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </div>
+  <div class="h2h-section-header">
+    <h2 class="h2h-section-title">Alexis Malakhova vs This Roster</h2>
+    <span class="h2h-section-subtitle">3 opponents in this draw</span>
   </div>
+  <div class="h2h-chips"><a class="h2h-chip" href="#h2h-12cb67403aeec1f4dce5"><span class="h2h-chip-name">Ziva Gadgil</span><span class="h2h-chip-record">H2H 0–1</span></a><a class="h2h-chip" href="#h2h-14b5582313c3c42fdae7"><span class="h2h-chip-name">Valentina Kukeeva</span><span class="h2h-chip-record">H2H 0–1</span></a><a class="h2h-chip" href="#h2h-a4f3474c37cf7968dda6"><span class="h2h-chip-name">Leila Lyons</span><span class="h2h-chip-record">H2H 0–1</span></a></div>
+  <div class="h2h-player-card" id="h2h-12cb67403aeec1f4dce5" data-h2h-player-id="player:12cb67403aeec1f4dce5"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Ziva Gadgil</span><span class="h2h-player-loc">San Mateo CA</span></div><div class="h2h-record-summary">H2H 0–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Jan 10th, 2026</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">0-6 0-6</div></div></div></div><div class="h2h-player-card" id="h2h-14b5582313c3c42fdae7" data-h2h-player-id="player:14b5582313c3c42fdae7"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Valentina Kukeeva</span><span class="h2h-player-loc">Campbell CA</span></div><div class="h2h-record-summary">H2H 0–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Nov 15th, 2025</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">2-4 1-4</div></div></div></div><div class="h2h-player-card" id="h2h-a4f3474c37cf7968dda6" data-h2h-player-id="player:a4f3474c37cf7968dda6"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Leila Lyons</span><span class="h2h-player-loc">Sacramento CA</span></div><div class="h2h-record-summary">H2H 0–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Jul 5th, 2025</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">L5 BG14 Super Series at Solano Community College JUL 5 - 6</div><div class="h2h-match-event-sub">Girls&#x27; 14 &amp; under singles</div></div><div class="h2h-match-score">1-6 6-1 3-6</div></div></div></div>
 </section>
 </div>
 <!-- PRIMARY_ROSTER_H2H_END -->
@@ -4144,6 +4194,21 @@
     });
 
     document.body.appendChild(shareButton);
+  </script>
+  <script>
+(function() {
+  const toggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const html = document.documentElement;
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const dark = html.classList.toggle('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      if (themeIcon) themeIcon.textContent = dark ? '☀️' : '🌙';
+    });
+  }
+  if (themeIcon) themeIcon.textContent = html.classList.contains('dark') ? '☀️' : '🌙';
+})();
   </script>
 </body>
 </html>

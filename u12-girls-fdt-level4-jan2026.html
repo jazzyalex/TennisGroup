@@ -28,7 +28,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
-      padding-top: 24px;
+      padding-top: 76px;
       background-color: #f5f5f5;
       border-top: 4px solid #4472C4;
     }
@@ -39,7 +39,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      gap: 74px;
+      gap: 0;
     }
 
     .report-header-logo-link {
@@ -1856,8 +1856,60 @@
 	      }
 	    }
 	  </style>
-	</head>
+	
+  <!-- Navbar styles injected by visual redesign -->
+  <style id="navbar-redesign-css">
+    .tt-navbar {
+      position: sticky; top: 0; height: 52px; z-index: 9999;
+      background: #fff; border-bottom: 1px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    html.dark .tt-navbar { background: #0f172a; border-color: #334155; }
+    .tt-navbar-left { display: flex; align-items: center; gap: 12px; }
+    .tt-navbar-logo-link { display: inline-flex; line-height: 0; text-decoration: none; }
+    .tt-navbar-brand { font-size: 1rem; font-weight: 700; color: #16a34a; text-decoration: none; }
+    html.dark .tt-navbar-brand { color: #4ade80; }
+    .tt-navbar-center { flex: 1; display: flex; justify-content: center; gap: 24px; align-items: center; }
+    .tt-nav-link { font-size: 0.875rem; font-weight: 500; color: #475569; text-decoration: none; transition: color 0.2s; }
+    .tt-nav-link:hover { color: #16a34a; }
+    html.dark .tt-nav-link { color: #94a3b8; }
+    html.dark .tt-nav-link:hover { color: #4ade80; }
+    .tt-navbar-right { display: flex; align-items: center; }
+    .tt-toggle-btn { background: none; border: none; cursor: pointer; font-size: 1.25rem; padding: 8px; display: flex; align-items: center; justify-content: center; color: #0f172a; transition: color 0.2s; }
+    html.dark .tt-toggle-btn { color: #f1f5f9; }
+    .tt-toggle-btn:hover { color: #16a34a; }
+    html.dark .tt-toggle-btn:hover { color: #4ade80; }
+    @media (max-width: 640px) { .tt-navbar-brand { display: none; } .tt-navbar-center { gap: 16px; } .tt-nav-link { font-size: 0.8rem; } }
+  </style>
+  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');})();</script>
+</head>
 	<body>
+<nav class="tt-navbar">
+    <div class="tt-navbar-left">
+      <a href="index.html" class="tt-navbar-logo-link" aria-label="Home">
+        <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+          <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+          <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+        </svg>
+      </a>
+      <a href="index.html" class="tt-navbar-brand">Tennis Tracker</a>
+    </div>
+    <div class="tt-navbar-center">
+      <a href="2025-usta-norcal-national.html" class="tt-nav-link">Calendar</a>
+      <a href="player.html" class="tt-nav-link">Player</a>
+      <a href="ranking-simulator.html" class="tt-nav-link">Simulator</a>
+      <a href="usta-national-rankings.html" class="tt-nav-link">Rankings</a>
+    </div>
+    <div class="tt-navbar-right">
+      <button class="tt-toggle-btn" id="tt-theme-toggle" aria-label="Toggle dark mode">
+        <span id="tt-theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
 	  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-05T12:08:23-08:00" title="2026-02-05T12:08:23-08:00">
 	    <span class="report-updated-badge__pill">Updated Feb 5, 2026 12:08 PM PST</span>
 	  </div>
@@ -3592,6 +3644,21 @@
     });
 
     document.body.appendChild(shareButton);
+  </script>
+  <script>
+(function() {
+  var toggle = document.getElementById('tt-theme-toggle');
+  var icon = document.getElementById('tt-theme-icon');
+  var html = document.documentElement;
+  if (icon) icon.textContent = html.classList.contains('dark') ? '☀️' : '🌙';
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      var dark = html.classList.toggle('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      if (icon) icon.textContent = dark ? '☀️' : '🌙';
+    });
+  }
+})();
   </script>
 </body>
 </html>
