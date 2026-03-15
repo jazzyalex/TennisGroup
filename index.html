@@ -20,41 +20,1241 @@
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
       --text-primary: #0f172a;
       --text-secondary: #475569;
       --text-muted: #94a3b8;
       --border-color: #e2e8f0;
-      --brand-green: #16a34a;
-      --court-green-dark: #2d5a27;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --court-green: #2d5a27;
       --court-green-light: #3d7a37;
+      --brand-green: #16a34a;
+      --green-primary: #16a34a;
       --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
       --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
       --status-orange: #f59e0b;
       --status-gray: #6b7280;
+      --accent-cyan: #0891b2;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      /* Player card vars — preserved for player-card__ components */
+      --player-green: #2d5a2d;
+      --player-green-soft: #3d6f3d;
+      --player-light: #e8f5e9;
+      --player-border: #c8e6c9;
+      --player-text: #1f2937;
+      --player-text-muted: #6b7280;
+      --player-text-light: #9ca3af;
+      --player-trend-up: #10b981;
+      --player-trend-down: #ef4444;
+      --player-card-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+      /* Hero card vars */
+      --hero-card-bg: rgba(255, 255, 255, 0.94);
+      --hero-card-text: #0f172a;
+      --hero-card-muted: #475569;
+      --hero-card-border: rgba(255, 255, 255, 0.6);
+      --hero-card-stat-bg: rgba(15, 23, 42, 0.08);
+      --hero-badge-bg: rgba(16, 185, 129, 0.15);
+      --hero-badge-text: #065f46;
     }
 
-    body.dark-mode {
+    html[data-theme="dark"] {
       --bg-primary: #0f172a;
       --bg-secondary: #1e293b;
-      --text-primary: #f1f5f9;
-      --text-secondary: #cbd5e1;
+      --bg-tertiary: #334155;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
       --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
       --border-color: #334155;
+      --border-subtle: rgba(255,255,255,0.04);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+      --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+      --hero-card-bg: rgba(15, 23, 42, 0.85);
+      --hero-card-text: #e2e8f0;
+      --hero-card-muted: #cbd5f5;
+      --hero-card-border: rgba(148, 163, 184, 0.3);
+      --hero-card-stat-bg: rgba(255, 255, 255, 0.08);
+      --hero-badge-bg: rgba(16, 185, 129, 0.25);
+      --hero-badge-text: #d1fae5;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-      background-color: var(--bg-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
       color: var(--text-primary);
-      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 28px 24px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(380px, 1fr);
+      gap: 24px;
+      align-items: center;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-header {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo svg {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: white;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 600px;
+      margin: 0;
+    }
+
+    .player-card {
+      background: #ffffff;
+      color: var(--player-text);
+      border-radius: 16px;
+      padding: 16px 18px 18px;
+      box-shadow: var(--player-card-shadow);
+      min-width: 0;
+      width: 100%;
+      max-width: 380px;
+      justify-self: end;
+      align-self: center;
+    }
+
+    .player-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .player-card__name {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--player-text);
+    }
+
+    .player-card__updated {
+      font-size: 0.7rem;
+      color: var(--player-text-light);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .player-card__divider {
+      display: none;
+    }
+
+    .player-card__metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .player-card__metric,
+    .player-card__panel {
+      background: #f8f9fa;
+      border: 1px solid #eaeaea;
+      border-radius: 10px;
+      padding: 10px 12px;
+      transition: all 0.15s ease;
+    }
+
+    .player-card__metric:hover,
+    .player-card__metric:focus-within,
+    .player-card__panel:hover,
+    .player-card__panel:focus-within {
+      background-color: #f0f4f0;
+      border-color: #d4e5d4;
+    }
+
+    .player-card__metric-title {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--player-text-muted);
+    }
+
+    .player-card__metric-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--player-green);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__metric-value a,
+    .player-card__panel a,
+    .player-card__utr-values,
+    .player-card__ranking-list {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .player-card__utr-values {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 6px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .player-card__utr-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .player-card__utr-label {
+      font-size: 0.65rem;
+      color: var(--player-text-muted);
+      font-weight: 500;
+      min-width: 10px;
+    }
+
+    .player-card__utr-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__utr-value-small {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__trend {
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .player-card__trend--up {
+      color: var(--player-trend-up);
+    }
+
+    .player-card__trend--down {
+      color: var(--player-trend-down);
+    }
+
+    .player-card__ranking-list {
+      margin-top: 4px;
+      display: grid;
+      gap: 3px;
+      font-weight: 600;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.85rem;
+    }
+
+    .player-card__ranking-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+
+    .player-card__ranking-row span:first-child {
+      font-size: 0.65rem;
+      color: var(--player-text-muted);
+      font-weight: 500;
+    }
+
+    .player-card__bottom {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 8px;
+    }
+
+    .player-card__panel--points {
+      background: #f8f9fa;
+    }
+
+    .player-card__panel-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--player-green);
+      margin-bottom: 8px;
+    }
+
+    .player-card__points-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .player-card__points-grid > span {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .player-card__points-grid > span:first-child {
+      align-items: flex-start;
+    }
+
+    .player-card__points-grid > span:not(:first-child) {
+      align-items: center;
+    }
+
+    .player-card__points-label {
+      font-size: 0.6rem;
+      color: var(--player-text-muted);
+      font-weight: 500;
+    }
+
+    .player-card__points-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--player-green);
+      margin-top: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-card__tr-grid {
+      display: grid;
+      gap: 4px;
+    }
+
+    .player-card__tr-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--player-green);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.85rem;
+    }
+
+    .player-card__tr-row span:first-child {
+      font-size: 0.65rem;
+      color: var(--player-text-muted);
+      font-weight: 500;
+    }
+
+    /* Expiration Alert - Simple banner style */
+    .player-card__alert {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: linear-gradient(90deg, #fef3c7 0%, #fef9c3 100%);
+      border-left: 4px solid #f59e0b;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* View Profile Link */
+    .player-card__profile-link {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 12px;
+      background: var(--player-green);
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .player-card__profile-link:hover {
+      background: var(--player-green-soft);
+      transform: translateY(-1px);
+    }
+
+    .player-card__profile-link--secondary {
+      background: transparent;
+      border: 1px solid rgba(45, 90, 39, 0.45);
+      color: var(--player-green);
+    }
+
+    .player-card__profile-link--secondary:hover {
+      background: rgba(45, 90, 39, 0.08);
+      border-color: var(--player-green);
+    }
+
+
+
+
+    /* Main Content */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .section-bar {
+      width: 6px;
+      height: 28px;
+      background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-emerald) 100%);
+      border-radius: 3px;
+    }
+
+    .section-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .section-badge {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .section-actions {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .favorites-filter-toggle {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+    }
+
+    .favorites-filter-toggle:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .favorites-filter-toggle:focus-visible {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 3px;
+    }
+
+    .favorites-filter-toggle svg {
+      width: 16px;
+      height: 16px;
+      fill: transparent;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .favorites-filter-toggle.is-active {
+      color: var(--accent-amber);
+      border-color: rgba(245, 158, 11, 0.55);
+    }
+
+    .favorites-filter-toggle.is-active svg {
+      fill: currentColor;
+    }
+
+    .signed-up-filter-toggle {
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s, border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .signed-up-filter-toggle:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .signed-up-filter-toggle:focus-visible {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 3px;
+    }
+
+    .signed-up-filter-toggle.is-active {
+      color: var(--accent-emerald);
+      border-color: rgba(16, 185, 129, 0.55);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    /* Tournament Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .calendar-row {
+      margin-bottom: 24px;
+    }
+
+    .calendar-row .tournament-card {
+      width: 100%;
+    }
+
+    .calendar-card {
+      min-height: 110px;
+      padding: 14px 20px;
+    }
+
+    .tournament-card.calendar-card {
+      background: var(--court-green);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .tournament-card.calendar-card::before {
+      background: none;
+    }
+
+    .calendar-card .card-title,
+    .calendar-card .card-description {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .calendar-card .card-description {
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 12px;
+    }
+
+    .calendar-card .card-type.calendar {
+      background: rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .calendar-card .calendar-header-meta .meta-item {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .calendar-card .calendar-header-meta .meta-icon {
+      opacity: 0.9;
+    }
+
+
+
+    .tournament-card.calendar-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+
+
+    .tournament-card.is-upcoming {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(255, 255, 255, 0.9));
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .tournament-card.is-past {
+      background: linear-gradient(135deg, rgba(148, 163, 184, 0.18), rgba(255, 255, 255, 0.85));
+      border-color: rgba(148, 163, 184, 0.45);
+    }
+
+    html[data-theme="dark"] .tournament-card.is-upcoming {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    html[data-theme="dark"] .tournament-card.is-past {
+      background: rgba(148, 163, 184, 0.15);
+      border-color: rgba(148, 163, 184, 0.35);
+    }
+
+    .tournament-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tournament-card.has-primary-badge .card-primary-badge {
+      display: block;
+    }
+
+	    .card-primary-badge {
+	      position: absolute;
+	      top: 8px;
+	      left: -21px;
+	      width: 66px;
+	      height: 5px;
+	      display: none;
+	      background: rgb(253, 243, 209);
+	      transform: rotate(-45deg);
+	      border-radius: 999px;
+	      box-shadow: 0 2px 6px rgba(120, 90, 0, 0.18);
+	      pointer-events: none;
+	      z-index: 2;
+	      user-select: none;
+	    }
+
+	    .tournament-card.is-past .card-primary-badge {
+	      background: linear-gradient(90deg, rgba(61, 122, 55, 0.58), rgba(77, 145, 71, 0.42));
+	      box-shadow: 0 2px 7px rgba(45, 90, 39, 0.26);
+	    }
+
+    html[data-theme="dark"] .card-primary-badge {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
+    }
+
+    html[data-theme="dark"] .tournament-card.is-past .card-primary-badge {
+      background: linear-gradient(90deg, rgba(77, 145, 71, 0.55), rgba(90, 163, 84, 0.42));
+    }
+
+    .tournament-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--court-green) 0%, var(--court-green-light) 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .tournament-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-4px);
+      border-color: var(--court-green);
+    }
+
+    .tournament-card:hover::before {
+      transform: scaleX(1);
+    }
+
+	    .card-header {
+	      display: flex;
+	      align-items: flex-start;
+	      justify-content: space-between;
+	      margin-bottom: 16px;
+	    }
+
+		    .card-actions {
+		      display: flex;
+		      align-items: center;
+		      gap: 8px;
+		      margin-left: auto;
+		    }
+
+        .card-favorite-toggle {
+          width: 30px;
+          height: 30px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: var(--bg-tertiary);
+          color: var(--text-muted);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+          user-select: none;
+          flex-shrink: 0;
+        }
+
+        .card-favorite-toggle:hover {
+          opacity: 0.95;
+          transform: translateY(-1px);
+        }
+
+        .card-favorite-toggle:focus-visible {
+          outline: 2px solid var(--accent-cyan);
+          outline-offset: 3px;
+        }
+
+        .card-favorite-toggle svg {
+          width: 16px;
+          height: 16px;
+          fill: transparent;
+          stroke: currentColor;
+          stroke-width: 2;
+        }
+
+        .tournament-card[data-favorited="true"] .card-favorite-toggle {
+          color: var(--accent-amber);
+          border-color: rgba(245, 158, 11, 0.55);
+        }
+
+        .tournament-card[data-favorited="true"] .card-favorite-toggle svg {
+          fill: currentColor;
+        }
+
+        .tournament-card.is-hidden-by-favorite-filter {
+          display: none;
+        }
+
+        .tournament-card.is-hidden-by-signed-up-filter {
+          display: none;
+        }
+
+        .calendar-card .card-favorite-toggle {
+          background: rgba(255, 255, 255, 0.16);
+          border-color: rgba(255, 255, 255, 0.22);
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .calendar-card[data-favorited="true"] .card-favorite-toggle {
+          color: #fbbf24;
+          border-color: rgba(251, 191, 36, 0.6);
+        }
+
+		    .card-usta-link {
+		      display: inline-flex;
+		      align-items: center;
+		      justify-content: center;
+		      padding: 6px 10px;
+	      border-radius: 999px;
+	      border: 1px solid var(--border);
+	      background: var(--bg-tertiary);
+	      color: var(--text-secondary);
+	      font-size: 0.7rem;
+	      font-weight: 700;
+	      text-transform: uppercase;
+	      letter-spacing: 0.05em;
+	      cursor: pointer;
+	      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+	      user-select: none;
+	    }
+
+	    .card-usta-link:hover {
+	      opacity: 0.9;
+	      transform: translateY(-1px);
+	    }
+
+	    .card-usta-link:focus-visible {
+	      outline: 2px solid var(--accent-cyan);
+	      outline-offset: 3px;
+	    }
+
+    .calendar-header {
+      align-items: center;
+    }
+
+    .calendar-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .calendar-header-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .calendar-header-meta .meta-item {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .calendar-header-meta .meta-icon {
+      width: 14px;
+      height: 14px;
+      opacity: 0.65;
+    }
+
+    .card-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-type.calendar {
+      background: rgba(8, 145, 178, 0.12);
+      color: var(--accent-cyan);
+    }
+
+    .card-type.report {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--accent-amber);
+    }
+
+    .card-type.report.is-closing-soon {
+      background: rgba(239, 68, 68, 0.16);
+      color: #ef4444;
+    }
+
+    .card-type.report.is-closed {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--text-muted);
+    }
+
+    .card-type-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .card-arrow {
+      display: none;
+    }
+
+
+
+    .card-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-description {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+	    .meta-item {
+	      display: flex;
+	      align-items: center;
+	      gap: 6px;
+	      font-size: 0.8rem;
+	      color: var(--text-muted);
+	    }
+
+	    .meta-item.meta-updated {
+	      width: 100%;
+	      margin-top: 6px;
+	      padding-top: 8px;
+	      border-top: 1px solid var(--border-subtle);
+	      font-size: 0.75rem;
+	      color: var(--text-muted);
+	    }
+	    .meta-item.meta-updated[data-freshness="fresh"] {
+	      color: #2a8c3f;
+	    }
+	    .meta-item.meta-fills {
+	      font-weight: 500;
+	      font-variant-numeric: tabular-nums;
+	      color: var(--text-secondary);
+	      letter-spacing: 0.01em;
+	    }
+
+	    .meta-icon {
+	      width: 16px;
+	      height: 16px;
+	      opacity: 0.7;
+	    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--accent-cyan);
+      transition: opacity 0.2s;
+    }
+
+    .footer a:hover {
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .player-card {
+        min-width: 0;
+        max-width: 720px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .player-card__metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      /* Keep Rankings in normal grid flow for tablet */
+      .player-card__bottom {
+        grid-template-columns: 1.5fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      /* Remove single column layout - keep 2 columns from 768px breakpoint */
+
+      .player-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .player-card__updated {
+        font-size: 0.75rem;
+      }
+
+      .player-card__name {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 24px 16px;
+      }
+
+      /* Hide decorative court pattern on mobile */
+      .hero::before {
+        display: none;
+      }
+
+      /* Hide subtitle on mobile */
+      .hero-subtitle {
+        display: none;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: left;
+      }
+
+      .logo svg {
+        width: 48px;
+        height: 48px;
+      }
+
+      /* ========================================
+         MOBILE PLAYER CARD - Premium Design
+         ======================================== */
+      .player-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        border-radius: 14px;
+        border-top: none;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      /* Header with green accent background */
+      .player-card__header {
+        background: linear-gradient(135deg, var(--player-green) 0%, var(--player-green-soft) 100%);
+        padding: 12px 14px;
+        margin-bottom: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .player-card__name {
+        font-size: 1rem;
+        color: #ffffff;
+      }
+
+      .player-card__updated {
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.75);
+        margin-top: 0;
+      }
+
+      /* Metrics container */
+      .player-card__metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: #e8e8e8;
+        margin-bottom: 1px;
+      }
+
+      /* Remove the full-width span for Rankings */
+      .player-card__metric:nth-child(3) {
+        grid-column: auto;
+      }
+
+      /* Individual metric boxes - equal height */
+      .player-card__metric {
+        background: #ffffff;
+        border: none;
+        border-radius: 0;
+        padding: 10px 8px;
+        display: flex;
+        flex-direction: column;
+        min-height: 68px;
+      }
+
+      .player-card__metric-title {
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--player-green);
+        margin-bottom: auto;
+      }
+
+      /* UTR styling */
+      .player-card__utr-values {
+        gap: 1px;
+        margin-top: 6px;
+      }
+
+      .player-card__utr-row {
+        gap: 4px;
+      }
+
+      .player-card__utr-label {
+        font-size: 0.55rem;
+        min-width: 10px;
+        color: #888;
+      }
+
+      .player-card__utr-value {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .player-card__utr-value-small {
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .player-card__trend {
+        font-size: 0.75rem;
+      }
+
+      /* WTN styling */
+      .player-card__metric-value {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-top: 6px;
+      }
+
+      /* Rankings styling */
+      .player-card__ranking-list {
+        margin-top: 6px;
+        gap: 1px;
+      }
+
+      .player-card__ranking-row {
+        font-size: 0.9rem;
+        font-weight: 700;
+        gap: 6px;
+      }
+
+      .player-card__ranking-row span:first-child {
+        font-size: 0.55rem;
+        color: #888;
+        min-width: 32px;
+      }
+
+      /* Bottom section */
+      .player-card__bottom {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: #e8e8e8;
+        margin-top: 0;
+      }
+
+      .player-card__panel {
+        background: #ffffff;
+        border: none;
+        border-radius: 0;
+        padding: 10px 8px;
+        min-height: 64px;
+      }
+
+      .player-card__panel-title {
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--player-green);
+        margin-bottom: 6px;
+      }
+
+      /* USTA Points grid */
+      .player-card__points-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 2px;
+      }
+
+      .player-card__points-grid > span {
+        flex: 1;
+        text-align: center;
+      }
+
+      .player-card__points-grid > span:first-child {
+        text-align: left;
+      }
+
+      .player-card__points-label {
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #888;
+      }
+
+      .player-card__points-value {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-top: 2px;
+      }
+
+      /* TR grid */
+      .player-card__tr-grid {
+        gap: 1px;
+      }
+
+      .player-card__tr-row {
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .player-card__tr-row span:first-child {
+        font-size: 0.55rem;
+        color: #888;
+      }
+
+      .main {
+        padding: 32px 16px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tournament-card {
+        padding: 20px;
+      }
     }
 
     /* Navigation Bar */
-    .navbar {
+    nav {
       position: sticky;
       top: 0;
       height: 52px;
@@ -64,396 +1264,330 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 24px;
-      z-index: 1000;
-      transition: box-shadow 0.3s ease;
-    }
-    .navbar.scrolled { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
-    .navbar-left { display: flex; align-items: center; gap: 12px; }
-    .navbar-logo-link { display: inline-flex; line-height: 0; }
-    .navbar-logo { width: 24px; height: 24px; flex-shrink: 0; }
-    .navbar-title { font-size: 15px; font-weight: 600; color: var(--brand-green); letter-spacing: -0.3px; }
-    .navbar-center { display: flex; align-items: center; flex: 1; justify-content: center; }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-link { font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; position: relative; transition: color 0.2s ease; }
-    .nav-link:hover { color: var(--brand-green); }
-    .nav-link.active { color: var(--brand-green); }
-    .nav-link.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background-color: var(--brand-green); }
-    body.dark-mode .nav-link { color: #94a3b8; }
-    body.dark-mode .nav-link:hover { color: #4ade80; }
-    body.dark-mode .nav-link.active { color: #4ade80; }
-    body.dark-mode .nav-link.active::after { background-color: #4ade80; }
-    .navbar-right { display: flex; align-items: center; gap: 16px; }
-    .theme-toggle { background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); transition: color 0.2s ease; }
-    .theme-toggle:hover { color: var(--brand-green); }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      background: linear-gradient(135deg, var(--court-green-dark) 0%, var(--court-green-light) 100%);
-      overflow: hidden;
-      padding: 28px 24px;
+      z-index: 100;
+      transition: background-color 0.2s, border-color 0.2s;
     }
 
-    .hero-container {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 32px;
-      align-items: center;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .hero-brand {
+    .nav-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
-    .hero-logo { width: 52px; height: 52px; flex-shrink: 0; }
+    .nav-logo {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    .hero-title {
-      font-size: 36px;
+    .nav-logo svg { width: 100%; height: 100%; }
+
+    .nav-brand {
+      font-size: 1rem;
       font-weight: 700;
-      color: #fafafa;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
+      color: var(--brand-green);
     }
 
-    .hero-subtitle {
-      font-size: 15px;
-      color: rgba(250, 250, 250, 0.8);
-      font-weight: 400;
-      max-width: 420px;
-      margin-left: 68px;
+    .nav-center {
+      flex: 1;
+      margin: 0 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Player Card (flat CSS — matches mockup exactly) */
-    .player-card {
-      background-color: var(--bg-primary);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s ease;
-    }
-    body.dark-mode .player-card { background-color: var(--bg-secondary); }
-    .player-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-    .player-name { font-size: 18px; font-weight: 700; color: var(--text-primary); }
-    .player-updated { font-size: 12px; color: var(--text-muted); }
-    .metrics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    .metric { background-color: var(--bg-secondary); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-color); }
-    body.dark-mode .metric { background-color: rgba(51, 65, 85, 0.4); }
-    .metric-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .metric-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
-    .metric-value a { color: inherit; text-decoration: none; }
-    .metric-value a:hover { color: var(--brand-green); }
-    .metric-up { color: var(--brand-green); }
-    .metric-down { color: #ef4444; }
-    .metric-flat { color: var(--text-muted); }
-    .player-buttons { display: flex; gap: 8px; margin-top: 12px; }
-    .btn { padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; border: none; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
-    .btn-primary { background-color: var(--brand-green); color: #ffffff; }
-    .btn-primary:hover { background-color: #15803d; transform: translateY(-2px); }
-    .btn-secondary { background-color: transparent; color: var(--brand-green); border: 1.5px solid var(--brand-green); }
-    .btn-secondary:hover { background-color: rgba(22, 163, 74, 0.05); transform: translateY(-2px); }
-    .player-alert { margin-top: 10px; padding: 10px 14px; background: linear-gradient(90deg, #fef3c7, #fef9c3); border-left: 4px solid #f59e0b; border-radius: 8px; color: #92400e; font-size: 0.75rem; font-weight: 600; }
-
-    /* Tournaments Section */
-    .tournaments { max-width: 1200px; margin: 0 auto; padding: 32px 24px 48px; }
-    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .section-title { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 700; color: var(--text-primary); }
-    .section-title::before { content: ''; width: 3px; height: 24px; background-color: var(--brand-green); border-radius: 2px; }
-    .section-filters { display: flex; gap: 8px; align-items: center; }
-    .filter-pill { padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; border: 1.5px solid var(--border-color); background-color: transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease; }
-    .filter-pill.active, .filter-pill.is-active { border-color: var(--brand-green); color: var(--brand-green); background-color: rgba(22, 163, 74, 0.05); }
-    .filter-pill-star { padding: 6px 10px; border-radius: 20px; font-size: 14px; border: 1.5px solid var(--border-color); background: none; cursor: pointer; transition: all 0.2s ease; color: var(--text-muted); }
-    .filter-pill-star.is-active { border-color: #f59e0b; color: #f59e0b; }
-
-    /* Calendar bar */
-    .calendar-bar { background: linear-gradient(135deg, #1e5f35 0%, #2d7a3a 100%); border-radius: 12px; padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
-    .calendar-label { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background-color: var(--brand-green); color: white; border-radius: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .calendar-filters { display: flex; gap: 8px; flex-wrap: wrap; }
-    .calendar-filter { padding: 6px 12px; background-color: rgba(250, 250, 250, 0.1); color: #fafafa; border: 1px solid rgba(250, 250, 250, 0.2); border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; }
-    .calendar-filter:hover { background-color: rgba(250, 250, 250, 0.15); }
-    .calendar-arrow { color: #fafafa; font-size: 18px; }
-
-    /* Tournament grid */
-    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-
-    /* Tournament card (base) */
-    .tournament-card { background-color: var(--bg-primary); border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); transition: all 0.3s ease; border: 1px solid var(--border-color); display: block; text-decoration: none; position: relative; }
-    body.dark-mode .tournament-card { background-color: var(--bg-secondary); }
-    .tournament-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-4px); }
-    .tournament-card.is-past { opacity: 0.8; }
-    .tournament-card.is-hidden-by-favorite-filter, .tournament-card.is-hidden-by-signed-up-filter { display: none; }
-
-    /* Card header (bridge class → looks like .tournament-header) */
-    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-    .card-actions { display: flex; gap: 8px; align-items: center; }
-    .card-title { font-size: 14px; font-weight: 700; color: var(--text-primary); line-height: 1.35; margin: 12px 16px 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-description { font-size: 12px; color: var(--text-secondary); line-height: 1.4; margin: 0 16px 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-meta { padding: 10px 16px; border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 8px; }
-    .meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
-    .meta-icon { width: 14px; height: 14px; opacity: 0.7; flex-shrink: 0; }
-    .meta-item.meta-updated { opacity: 0.95; }
-
-    /* Card type badges */
-    .card-type { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .card-type.report { background-color: rgba(245, 158, 11, 0.12); color: var(--status-orange); }
-    .card-type.report.is-closed { background-color: rgba(107, 114, 128, 0.12); color: var(--status-gray); }
-    .card-type.report.is-closing-soon { background-color: rgba(239, 68, 68, 0.12); color: #ef4444; }
-    .card-type.calendar { background-color: rgba(8, 145, 178, 0.1); color: #0891b2; }
-    .card-type-icon { width: 12px; height: 12px; flex-shrink: 0; }
-
-    /* Favorite toggle, USTA link, arrow */
-    .card-favorite-toggle { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-muted); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; user-select: none; flex-shrink: 0; }
-    .card-favorite-toggle:hover { opacity: 0.85; }
-    .card-favorite-toggle svg { width: 14px; height: 14px; fill: transparent; stroke: currentColor; stroke-width: 2; }
-    .tournament-card[data-favorited="true"] .card-favorite-toggle { color: #f59e0b; border-color: rgba(245, 158, 11, 0.5); }
-    .tournament-card[data-favorited="true"] .card-favorite-toggle svg { fill: currentColor; }
-    .card-usta-link { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-secondary); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; }
-    .card-usta-link:hover { opacity: 0.85; }
-    .card-arrow { width: 28px; height: 28px; border-radius: 6px; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: all 0.2s ease; flex-shrink: 0; }
-    .tournament-card:hover .card-arrow { background: var(--brand-green); color: white; }
-
-    /* Calendar card (special dark-green header card) */
-    .calendar-row { margin-bottom: 16px; }
-    .calendar-row .tournament-card { width: 100%; }
-    .tournament-card.calendar-card { background: var(--court-green-dark); border-color: rgba(255, 255, 255, 0.22); }
-    body.dark-mode .tournament-card.calendar-card { background: #1a3a16; }
-    .tournament-card.calendar-card .card-header { background: transparent; border-bottom-color: rgba(255,255,255,0.15); }
-    .tournament-card.calendar-card .card-type.calendar { background: rgba(255,255,255,0.15); color: #fff; }
-    .tournament-card.calendar-card .card-type.calendar .card-type-icon { stroke: #fff; }
-    .calendar-header-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .calendar-header-meta .meta-item { color: rgba(255,255,255,0.85); font-size: 12px; }
-    .calendar-header-meta .meta-icon { opacity: 0.8; }
-    .tournament-card.calendar-card .card-title { color: rgba(255,255,255,0.95); }
-    .tournament-card.calendar-card .card-description { color: rgba(255,255,255,0.82); }
-    .tournament-card.calendar-card .card-arrow { background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.95); }
-    .tournament-card.calendar-card:hover { border-color: rgba(255,255,255,0.35); }
-    .tournament-card.calendar-card:hover .card-arrow { background: rgba(255,255,255,0.28); }
-    .tournament-card.calendar-card .card-favorite-toggle { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); }
-    .tournament-card.calendar-card[data-favorited="true"] .card-favorite-toggle { color: #fbbf24; border-color: rgba(251,191,36,0.6); }
-
-    /* Primary badge (JS-injected) */
-    .has-primary-badge::before { content: ''; display: block; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--brand-green); border-radius: 12px 12px 0 0; }
-    .card-primary-badge { display: none; }
-
-    /* Footer */
-    .footer { background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 40px 24px; text-align: center; }
-    .footer p, .footer-text { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; }
-    .footer-content { max-width: 600px; margin: 0 auto; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero-container { grid-template-columns: 1fr; gap: 24px; }
-      .cards-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero { padding: 24px 16px; }
-      .hero-subtitle { margin-left: 0; }
-      .metrics-grid { grid-template-columns: 1fr 1fr; }
-      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .calendar-bar { flex-direction: column; gap: 12px; align-items: flex-start; }
-      .calendar-filters { width: 100%; }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
     }
 
-    @media (max-width: 480px) {
-      .hero-title { font-size: 32px; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .navbar { padding: 0 16px; }
-      .tournaments { padding: 24px 16px 40px; }
-      .player-buttons { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-      .section-title { font-size: 18px; }
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
     }
 
-    /* Inline hidden data holders (for Python script data hooks not shown in UI) */
-    [data-player-stat] { font-variant-numeric: tabular-nums; }
+    .nav-link:hover { color: var(--brand-green); }
 
+    .nav-link.active { color: var(--brand-green); }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--brand-green);
+    }
+
+    html[data-theme="dark"] .nav-link { color: #94a3b8; }
+    html[data-theme="dark"] .nav-link:hover { color: #4ade80; }
+    html[data-theme="dark"] .nav-link.active { color: #4ade80; }
+    html[data-theme="dark"] .nav-link.active::after { background-color: #4ade80; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .toggle-btn:hover { color: var(--brand-green); }
+
+    @media (max-width: 640px) {
+      .nav-brand { display: none; }
+    }
   </style>
+  <script>
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
-  <!-- Dark mode init: runs before first paint to avoid flash -->
-  <script>
-    (function() {
-      var s = localStorage.getItem('theme');
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (s === 'dark' || (s === null && prefersDark)) {
-        document.body.classList.add('dark-mode');
-      }
-    })();
-  </script>
-
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="navbar-left">
-      <a href="index.html" class="navbar-logo-link" aria-label="Home">
-        <svg class="navbar-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" fill="var(--court-green-dark)"/>
+  <nav>
+    <div class="nav-left">
+      <div class="nav-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="8" fill="#2d5a27"/>
           <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
           <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
         </svg>
-      </a>
-      <span class="navbar-title">Tennis Tracker</span>
+      </div>
+      <span class="nav-brand">Tennis Tracker</span>
     </div>
-    <div class="navbar-center">
+    <div class="nav-center">
       <div class="nav-links">
-        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+        <a href="index.html" class="nav-link active">Home</a>
         <a href="player.html" class="nav-link">Player</a>
-        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
         <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
       </div>
     </div>
-    <div class="navbar-right">
-      <button class="theme-toggle" id="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
-        <svg id="sunIcon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="10" cy="10" r="5"/>
-          <line x1="10" y1="1" x2="10" y2="3"/>
-          <line x1="10" y1="17" x2="10" y2="19"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="14.36" y1="14.36" x2="15.78" y2="15.78"/>
-          <line x1="1" y1="10" x2="3" y2="10"/>
-          <line x1="17" y1="10" x2="19" y2="10"/>
-          <line x1="4.22" y1="15.78" x2="5.64" y2="14.36"/>
-          <line x1="14.36" y1="5.64" x2="15.78" y2="4.22"/>
-        </svg>
-        <svg id="moonIcon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
-          <path d="M17.5 12.5A7.5 7.5 0 1 1 7.5 2.5a5.5 5.5 0 0 0 10 10z"/>
-        </svg>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
       </button>
     </div>
   </nav>
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-container">
+    <div class="hero-content">
       <div class="hero-left">
-        <div class="hero-brand">
-          <svg class="hero-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
-            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
-            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
-          </svg>
-          <h1 class="hero-title">Tennis Tracker</h1>
+        <div class="hero-header">
+          <div class="logo">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" fill="#2d5a27"/>
+              <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+              <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+            </svg>
+          </div>
+          <h1>Tennis Tracker</h1>
         </div>
         <p class="hero-subtitle">Tournament calendars, match reports, and player analysis for junior tennis in NorCal and beyond</p>
       </div>
-      <div>
-        <!-- Player card: flat CSS classes, data-player-stat attributes for Python script updates -->
-        <div class="player-card">
-          <div class="player-header">
-            <div>
-              <div class="player-name" data-player-name>Alexis Malakhova</div>
-              <div class="player-updated" data-player-updated>Updated Mar 14, 2026</div>
+      <aside class="player-card" aria-labelledby="player-card-name">
+        <header class="player-card__header">
+          <h2 class="player-card__name" id="player-card-name" data-player-name>Alexis Malakhova</h2>
+          <span class="player-card__updated" data-player-updated>Mar 11, 2026</span>
+        </header>
+        <div class="player-card__divider"></div>
+        <section class="player-card__metrics" aria-label="Player metrics">
+          <div class="player-card__metric">
+            <div class="player-card__metric-title">UTR</div>
+            <a class="player-card__utr-values" href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
+              <span class="player-card__utr-row">
+                <span class="player-card__utr-label">S</span>
+                <span class="player-card__utr-value" data-player-stat="utr">4.22</span>
+                <span class="player-card__trend player-card__trend--up">↑</span>
+              </span>
+              <span class="player-card__utr-row">
+                <span class="player-card__utr-label">D</span>
+                <span class="player-card__utr-value-small" data-player-stat="utr_doubles">4.11</span>
+              </span>
+            </a>
+          </div>
+          <div class="player-card__metric">
+            <div class="player-card__metric-title">WTN</div>
+            <div class="player-card__metric-value">
+              <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.33</a>
+              <span class="player-card__trend player-card__trend--up" aria-label="Trending up">↑</span>
             </div>
           </div>
-          <div class="metrics-grid">
-            <div class="metric">
-              <div class="metric-label">UTR Singles</div>
-              <div class="metric-value">
-                <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" data-player-stat="utr">4.24</a><span class="metric-up">↑</span>
+          <div class="player-card__metric">
+            <div class="player-card__metric-title">Rankings</div>
+            <a class="player-card__ranking-list" href="usta-national-rankings.html">
+              <div class="player-card__ranking-row">
+                <span>Nat</span>
+                <span data-player-stat="usta_national">382</span>
               </div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">UTR Doubles</div>
-              <div class="metric-value">
-                <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" data-player-stat="utr_doubles">4.13</a>
+              <div class="player-card__ranking-row">
+                <span>NorCal</span>
+                <span data-player-stat="usta_section">23</span>
               </div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">WTN Rating</div>
-              <div class="metric-value">
-                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.33</a><span class="metric-up">↑</span>
-              </div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">National Rank</div>
-              <div class="metric-value">
-                #<a href="usta-national-rankings.html" data-player-stat="usta_national">382</a>
-              </div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">NorCal Rank</div>
-              <div class="metric-value">
-                #<a href="usta-national-rankings.html" data-player-stat="usta_section">23</a>
-              </div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">USTA Points</div>
-              <div class="metric-value">
-                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" data-player-stat="usta_points_total">1083</a>
-              </div>
-            </div>
+            </a>
           </div>
-          <!-- Hidden data holders for Python script (not displayed) -->
-          <span style="display:none" data-player-stat="usta_points_singles">1073</span>
-          <span style="display:none" data-player-stat="usta_points_doubles">10</span>
-          <span style="display:none" data-player-stat="tr_national">6</span>
-          <span style="display:none" data-player-stat="tr_california">3</span>
-          <!-- Expiration Alert -->
-          <div class="player-alert" data-expiration-alert style="display: none;">
-            <span data-expiration-text>75 points expiring soon (23 days)</span>
+        </section>
+        <section class="player-card__bottom" aria-label="Ranking summaries">
+          <div class="player-card__panel player-card__panel--points">
+            <div class="player-card__panel-title">USTA Points</div>
+            <a class="player-card__points-grid" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
+              <span>
+                <span class="player-card__points-label">Total</span>
+                <span class="player-card__points-value" data-player-stat="usta_points_total">1083</span>
+              </span>
+              <span>
+                <span class="player-card__points-label">Singles</span>
+                <span class="player-card__points-value" data-player-stat="usta_points_singles">1073</span>
+              </span>
+              <span>
+                <span class="player-card__points-label">Doubles</span>
+                <span class="player-card__points-value" data-player-stat="usta_points_doubles">10</span>
+              </span>
+            </a>
           </div>
-          <div class="player-buttons">
-            <a href="player.html" class="btn btn-primary">View Player Profile →</a>
-            <a href="ranking-simulator.html" class="btn btn-secondary">Open Ranking Simulator →</a>
+          <div class="player-card__panel">
+            <div class="player-card__panel-title">TR</div>
+            <a class="player-card__tr-grid" href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">
+              <div class="player-card__tr-row">
+                <span>Nat</span>
+                <span data-player-stat="tr_national">6</span>
+              </div>
+              <div class="player-card__tr-row">
+                <span>CA</span>
+                <span data-player-stat="tr_california">3</span>
+              </div>
+            </a>
           </div>
+        </section>
+        <!-- Expiration Alert (shown only if points expiring soon) -->
+        <div class="player-card__alert" data-expiration-alert style="display: none;">
+          <span data-expiration-text>75 points expiring soon (23 days)</span>
         </div>
-      </div>
+        <!-- View Full Profile Link -->
+        <a href="player.html" class="player-card__profile-link">
+          Player Profile
+        </a>
+        <a href="ranking-simulator.html" class="player-card__profile-link player-card__profile-link--secondary">
+          Ranking Simulator
+        </a>
+      </aside>
     </div>
   </section>
 
-  <!-- Tournaments Section -->
-  <section class="tournaments" data-tournament-section="reports">
-    <div class="section-header">
-      <h2 class="section-title">Tournaments</h2>
-      <div class="section-filters">
-        <button class="filter-pill active" data-tournament-count aria-label="Total tournaments">10 Tournaments</button>
-        <button class="filter-pill" type="button" aria-label="Show registered tournaments only" aria-pressed="false" data-signed-up-filter-toggle>Registered</button>
-        <button class="filter-pill-star" type="button" aria-label="Show starred tournaments only" aria-pressed="false" data-favorites-filter-toggle>⭐</button>
-      </div>
-    </div>
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Active Reports Section -->
+	    <section data-tournament-section="reports">
+	      <div class="section-header">
+	        <div class="section-bar"></div>
+	        <h2 class="section-title">Tournaments</h2>
+	        <div class="section-actions">
+			          <span class="section-badge" data-tournament-count>10 Tournaments</span>
+		          <button class="signed-up-filter-toggle" type="button" aria-label="Show registered tournaments only" title="Show registered tournaments only" aria-pressed="false" data-signed-up-filter-toggle>
+		            Registered
+		          </button>
+		          <button class="favorites-filter-toggle" type="button" aria-label="Show starred tournaments only" title="Show starred tournaments only" aria-pressed="false" data-favorites-filter-toggle>
+		            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		            </svg>
+		          </button>
+	        </div>
+	      </div>
 
       <div class="calendar-row">
         <!-- USTA NorCal & National Calendar -->
         <a href="2025-usta-norcal-national.html" class="tournament-card calendar-card">
-			  <h3 class="card-title">USTA Girls U12/U14 Tournaments 2026</h3>
-			  <p class="card-description">NorCal + National calendar (U12/U14 + Level filters) with distances from Los Altos, CA.</p>
-			</a>
-      </div><!-- end calendar-row -->
+          <div class="card-header calendar-header">
+            <div class="calendar-header-left">
+              <span class="card-type calendar">
+                <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                Calendar
+              </span>
+              <div class="calendar-header-meta">
+                <span class="meta-item">
+                  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                  Full Year
+                </span>
+                <span class="meta-item">
+                  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                  NorCal + National
+                </span>
+                <span class="meta-item">
+                  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                  Favorites
+                </span>
+              </div>
+            </div>
+	            <div class="card-arrow">
+	              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M5 12h14M12 5l7 7-7 7"/>
+	              </svg>
+	            </div>
+	          </div>
+	          <h3 class="card-title">USTA Girls U12/U14 Tournaments 2026</h3>
+	          <p class="card-description">NorCal + National calendar (U12/U14 + Level filters) with distances from Los Altos, CA.</p>
+	        </a>
 
-      <div class="cards-grid">
-        <!-- Level 3 Mixed Doubles Sectionals (HRT) -->
+	        <!-- (Calendar row intentionally only includes the Calendar card.) -->
+	      </div>
+
+	      <div class="cards-grid">
+	        <!-- Level 3 Mixed Doubles Sectionals (HRT) -->
 		        <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-18T17:13:20-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova">
-			  <div class="card-header">
-			    <span class="card-type report" data-registration-pill>
-			      <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-			        <circle cx="12" cy="12" r="10"/>
-			        <path d="M12 6v6l4 2"/>
-			      </svg>
-			      <span data-registration-pill-text>Closed</span>
-			    </span>
-			    <div class="card-actions">
-			      <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
-			        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-			          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-			        </svg>
-			      </span>
-			      <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/B725D590-9D1A-4061-BAD6-DD7BD89100E0">USTA</span>
-			      <div class="card-arrow">
-			        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-			          <path d="M5 12h14M12 5l7 7-7 7"/>
-			        </svg>
-			      </div>
-			    </div>
-			  </div>
-
+		          <div class="card-header">
+		            <span class="card-type report" data-registration-pill>
+		              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+		                <circle cx="12" cy="12" r="10"/>
+		                <path d="M12 6v6l4 2"/>
+		              </svg>
+		              <span data-registration-pill-text>Closed</span>
+		            </span>
+		            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/B725D590-9D1A-4061-BAD6-DD7BD89100E0">USTA</span>
+		              <div class="card-arrow">
+		                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                  <path d="M5 12h14M12 5l7 7-7 7"/>
+		                </svg>
+		              </div>
+		            </div>
+		          </div>
 		          <h3 class="card-title">Level 3 Closed: HRT Mixed Doubles Sectionals</h3>
+		          <p class="card-description">Roster snapshot from the USTA players list for the Feb 21-22, 2026 mixed doubles sectionals in Larkspur.</p>
 		          <div class="card-meta">
 		            <span class="meta-item">
 		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -479,18 +1613,9 @@
 		            </span>
 		          
 		            <span class="meta-item meta-updated" data-card-updated="1">
-		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-		                <circle cx="12" cy="12" r="10"/>
-		                <path d="M12 6v6l4 2"/>
-		              </svg>
 		              <span data-card-updated-text>Updated Feb 18, 2026 5:13 PM PST</span>
 		            </span>
-		          
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  35 mi from Los Altos
-				</span>
-				</div>
+		          </div>
 		        </a>
 
 	        <!-- Open Level 5 Championship Singles -->
@@ -518,6 +1643,7 @@
 	            </div>
 	          </div>
           <h3 class="card-title">Open Level 5 Championship Singles - G12</h3>
+          <p class="card-description">Daily roster tracking with USTA WTN, national/section rankings, and UTR ratings for the Jan 31 - Feb 1, 2026 Level 5 event in San Jose.</p>
           <div class="card-meta">
             <span class="meta-item">
               <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -543,18 +1669,9 @@
             </span>
           
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Feb 6, 2026 1:15 PM PST</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  12 mi from Los Altos
-				</span>
-				</div>
+</div>
         </a>
 
 	        <!-- Open Level 5 Championship Singles (Larkspur) -->
@@ -582,6 +1699,7 @@
 	            </div>
 	          </div>
           <h3 class="card-title">Open Level 5 Championship Singles - G12</h3>
+          <p class="card-description">Daily roster tracking with USTA WTN, national/section rankings, and UTR ratings for the Jan 31 - Feb 1, 2026 Level 5 event in Larkspur.</p>
           <div class="card-meta">
             <span class="meta-item">
               <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -607,18 +1725,9 @@
             </span>
           
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Feb 6, 2026 1:12 PM PST</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  35 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
 
 	        <!-- Open Level 5 Championship (Rollingwood YMCA - Fair Oaks) -->
@@ -646,6 +1755,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Open Level 5 Championship — Fair Oaks (G12/G14 Singles)</h3>
+	          <p class="card-description">Roster snapshot from the USTA players list (Girls' 12 &amp; under Singles + Girls' 14 &amp; under Singles) for the Feb 14-16, 2026 Level 5 championship at Rollingwood YMCA in Fair Oaks.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -671,18 +1781,9 @@
 	            </span>
 	          
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Feb 11, 2026 11:20 AM PST</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  115 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
 
 		        <!-- Johnson Ranch Level 5 Super Series (Girls U12/U14) -->
@@ -710,6 +1811,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Level 5 Closed: Johnson Ranch — Girls U12/U14 Singles</h3>
+	          <p class="card-description">Roster report with USTA WTN, national/section rankings, and UTR ratings for Girls' 12 &amp; under + Girls' 14 &amp; under singles at Johnson Ranch.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -734,18 +1836,9 @@
 	              Level 5
 	            </span>
 	            <span class="meta-item meta-updated" data-card-updated="1">
-	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-	                <circle cx="12" cy="12" r="10"/>
-	                <path d="M12 6v6l4 2"/>
-	              </svg>
 	              <span data-card-updated-text>Updated Feb 23, 2026 11:59 AM PST</span>
 	            </span>
-		          
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  125 mi from Los Altos
-				</span>
-				</div>
+		          </div>
 		        </a>
 
 		        <!-- Closed Level 4 Excellence Doubles (FDT) -->
@@ -773,6 +1866,7 @@
 		            </div>
 		          </div>
 		          <h3 class="card-title">Closed Level 4 Excellence Doubles — FDT (BG18-12)</h3>
+		          <p class="card-description">Event page for the March 14-15, 2026 Four Directions Tennis Level 4 excellence doubles tournament in San Jose.</p>
 		          <div class="card-meta">
 		            <span class="meta-item">
 		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -797,18 +1891,9 @@
 		              Level 4
 		            </span>
 		            <span class="meta-item meta-updated" data-card-updated="1">
-		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-		                <circle cx="12" cy="12" r="10"/>
-		                <path d="M12 6v6l4 2"/>
-		              </svg>
 		              <span data-card-updated-text>Updated Feb 24, 2026 9:13 AM PST</span>
 		            </span>
-		          
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  12 mi from Los Altos
-				</span>
-				</div>
+		          </div>
 		        </a>
 
 		        <!-- L4 Excellence Tournament Report -->
@@ -836,6 +1921,7 @@
 	            </div>
 	          </div>
           <h3 class="card-title">L4 Closed Excellence - U12 Girls</h3>
+          <p class="card-description">Detailed tournament report with player standings, match history, UTR analysis, and performance metrics for the January 2026 Level 4 tournament in San Jose.</p>
           <div class="card-meta">
             <span class="meta-item">
               <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -864,18 +1950,9 @@
             </span>
           
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Feb 5, 2026 12:08 PM PST</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  12 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
 
 	        <!-- Level 3 Open Las Vegas Tournament Report -->
@@ -903,6 +1980,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Level 3 Open: Las Vegas, NV — G12 Singles</h3>
+	          <p class="card-description">Daily roster tracking with USTA WTN and national/section standings for the Mar 14-16, 2026 Level 3 Open at Darling Memorial Tennis Center.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -927,18 +2005,9 @@
 	              Level 3
 	            </span>
 	            <span class="meta-item meta-updated" data-card-updated="1">
-	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-	                <circle cx="12" cy="12" r="10"/>
-	                <path d="M12 6v6l4 2"/>
-	              </svg>
 	              <span data-card-updated-text>Updated Feb 20, 2026 9:00 PM PST</span>
 	            </span>
-	          
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  570 mi from Los Altos
-				</span>
-				</div>
+	          </div>
 	        </a>
 
 	        <!-- Level 3 Open Tempe Tournament Report -->
@@ -966,6 +2035,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Level 3 Open: Tempe, AZ — G12 Singles</h3>
+	          <p class="card-description">Daily roster tracking with USTA WTN and national/section standings for the Mar 14-16, 2026 Level 3 Open at Kiwanis Tennis Center.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -990,18 +2060,9 @@
 	              Level 3
 	            </span>
 	            <span class="meta-item meta-updated" data-card-updated="1">
-	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-	                <circle cx="12" cy="12" r="10"/>
-	                <path d="M12 6v6l4 2"/>
-	              </svg>
 	              <span data-card-updated-text>Updated Feb 23, 2026 12:34 PM PST</span>
 	            </span>
-	          
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  750 mi from Los Altos
-				</span>
-				</div>
+	          </div>
 	        </a>
 
 	        <!-- Level 1 Easter Bowl Tournament Report -->
@@ -1029,6 +2090,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Level 1 Easter Bowl — Indian Wells (Girls U12/U14 Singles)</h3>
+	          <p class="card-description">Roster report for Girls' 12 &amp; under + Girls' 14 &amp; under singles at the USTA National Spring Championship: Easter Bowl.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1053,18 +2115,9 @@
 	              Level 1
 	            </span>
 	            <span class="meta-item meta-updated" data-card-updated="1">
-	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-	                <circle cx="12" cy="12" r="10"/>
-	                <path d="M12 6v6l4 2"/>
-	              </svg>
 	              <span data-card-updated-text>Updated Mar 2, 2026 10:29 AM PST</span>
 	            </span>
-	          
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  440 mi from Los Altos
-				</span>
-				</div>
+	          </div>
 	        </a>
 	        <!-- Open Level 4 Super Series (Fairfield Girls U14) -->
 	        <a href="open-level4-super-series-fairfield-g14-apr4-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|4-5|cello international tennis academy|solano community college|fairfield|open level 4 super series" data-card-close-text="March 25, 2026 at 2:59 PM PDT" data-card-updated-iso="2026-03-09T22:47:14-07:00">
@@ -1091,6 +2144,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Open Level 4 Super Series — Fairfield (Girls U14 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 14 &amp; under singles at Solano Community College.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1116,18 +2170,9 @@
 	            </span>
 	          
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Mar 9, 2026 10:47 PM PDT</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  55 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
 	        <!-- Open Level 4 Super Series (Fair Oaks Girls U12) -->
 	        <a href="open-level4-super-series-fair-oaks-g12-apr4-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|4-5|rollingwood ymca|rollingwood ymca|fair oaks|open level 4 super series" data-card-close-text="March 25, 2026 at 2:59 PM PDT" data-card-updated-iso="2026-03-10T12:11:43-07:00">
@@ -1154,6 +2199,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Open Level 4 Super Series — Fair Oaks (Girls U12 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles at Rollingwood YMCA.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1179,18 +2225,9 @@
 	            </span>
 	          
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Mar 10, 2026 12:11 PM PDT</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  115 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
 	        <!-- Open Level 5 Super Series (Larkspur Girls U12) -->
 	        <a href="open-level5-super-series-larkspur-g12-apr4-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|4-5|hrt academia de tenis|redwood high school|larkspur|open level 5 super series" data-card-updated-iso="2026-03-11T15:26:35-07:00" data-card-close-text="March 25, 2026 at 2:59 PM PDT">
@@ -1217,6 +2254,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Open Level 5 Super Series — Larkspur (Girls U12 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles at Redwood High School.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1242,18 +2280,9 @@
 	            </span>
 	          
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Mar 11, 2026 3:26 PM PDT</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  35 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
 	        <!-- Level 3 Long Beach (Girls U14) -->
 	        <a href="level3-long-beach-g14-apr11-13-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|11-13|el dorado park tennis center|el dorado park tennis center|long beach ca|level 3" data-card-updated-iso="2026-03-11T16:21:22-07:00" data-card-close-text="March 19, 2026 at 12:00 PM EDT">
@@ -1280,6 +2309,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Level 3 — Long Beach (Girls U14 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 14 &amp; under singles at El Dorado Park Tennis Center.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1305,18 +2335,9 @@
 	            </span>
 	          
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Mar 11, 2026 4:21 PM PDT</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  370 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
 	        <!-- Level 3 Irvine (Girls U12) -->
 	        <a href="level3-irvine-g12-apr11-13-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|11-13|racquet club of irvine|racquet club of irvine|irvine ca|level 3" data-card-updated-iso="2026-03-11T16:21:29-07:00" data-card-close-text="March 19, 2026 at 12:00 PM EDT">
@@ -1343,6 +2364,7 @@
 	            </div>
 	          </div>
 	          <h3 class="card-title">Level 3 — Irvine (Girls U12 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles at Racquet Club of Irvine.</p>
 	          <div class="card-meta">
 	            <span class="meta-item">
 	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1368,22 +2390,14 @@
 	            </span>
 	          
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Mar 11, 2026 4:21 PM PDT</span>
             </span>
-
-				<span class="meta-item meta-distance">
-				  <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-				  365 mi from Los Altos
-				</span>
-				</div>
+</div>
 	        </a>
+	      </div>
+	    </section>
 
-      </div><!-- end cards-grid -->
-    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1415,15 +2429,16 @@
 		      if (!iso) return '';
 		      const d = new Date(iso);
 		      if (Number.isNaN(d.getTime())) return '';
+		      const now = new Date();
+		      const sameYear = d.getFullYear() === now.getFullYear();
 		      const fmt = new Intl.DateTimeFormat('en-US', {
 		        month: 'short',
 		        day: 'numeric',
-		        year: 'numeric',
+		        ...(sameYear ? {} : { year: 'numeric' }),
 		        hour: 'numeric',
 		        minute: '2-digit',
-		        timeZoneName: 'short',
 		      });
-		      return `Updated ${fmt.format(d)}`;
+		      return `↻ ${fmt.format(d)}`;
 		    }
 
 		    function parseEndDateFromText(text) {
@@ -1556,24 +2571,22 @@
 		      const span = document.createElement('span');
 		      span.className = 'meta-item meta-updated';
 		      span.setAttribute('data-card-updated', '1');
-		      span.innerHTML = `
-		        <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-		          <circle cx="12" cy="12" r="10"/>
-		          <path d="M12 6v6l4 2"/>
-		        </svg>
-		        <span data-card-updated-text>Updated —</span>
-		      `;
+		      span.innerHTML = '<span data-card-updated-text>↻ —</span>';
 		      meta.appendChild(span);
 		      return span;
 		    }
 
 		    function setCardUpdatedText(card, iso) {
-		      const label = formatUpdatedIso(iso) || 'Updated —';
+		      const label = formatUpdatedIso(iso) || '↻ —';
 		      const node = ensureUpdatedMeta(card);
 		      if (!node) return;
 		      const textEl = node.querySelector('[data-card-updated-text]') || node;
 		      textEl.textContent = label;
-		      if (iso) card.setAttribute('data-card-updated-iso', iso);
+		      if (iso) {
+		        card.setAttribute('data-card-updated-iso', iso);
+		        const ageMs = Date.now() - new Date(iso).getTime();
+		        node.setAttribute('data-freshness', ageMs <= 86400000 ? 'fresh' : 'stale');
+		      }
 		    }
 
 		    function updateCardPastStatus(card) {
@@ -1662,6 +2675,50 @@
 		      }
 
 		      return '';
+		    }
+
+		    function extractFillsFromReportDoc(doc) {
+		      if (!doc) return null;
+		      const blocks = Array.from(doc.querySelectorAll('.key-stats'));
+		      if (!blocks.length) return null;
+		      const fills = blocks.map(block => {
+		        let registered = null, draw = null;
+		        block.querySelectorAll('.key-stat').forEach(stat => {
+		          const lbl = (stat.querySelector('.key-label')?.textContent || '').trim().toLowerCase();
+		          const val = (stat.querySelector('.key-value')?.textContent || '').trim();
+		          if (lbl === 'registered') registered = val;
+		          else if (lbl === 'draw') draw = val;
+		        });
+		        if (registered === null && draw === null) return null;
+		        let label = '';
+		        if (blocks.length > 1) {
+		          const sec = block.closest('section') || block.parentElement;
+		          label = (sec?.querySelector('h2, h3')?.textContent || '').trim()
+		            .replace(/Girls['’\s]*/gi, 'G').replace(/Boys['’\s]*/gi, 'B')
+		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
+		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '').trim();
+		        }
+		        return { label, registered, draw };
+		      }).filter(Boolean);
+		      return fills.length ? fills : null;
+		    }
+
+		    function applyCardFills(card, fills) {
+		      const ex = card.querySelector('[data-card-fills-display]');
+		      if (ex) ex.remove();
+		      if (!fills || !fills.length) return;
+		      if (card.classList.contains('is-past') || card.classList.contains('calendar-card')) return;
+		      const meta = card.querySelector('.card-meta');
+		      if (!meta) return;
+		      const el = document.createElement('span');
+		      el.className = 'meta-item meta-fills';
+		      el.setAttribute('data-card-fills-display', '1');
+		      el.textContent = fills.map(f => {
+		        const pre = f.label ? f.label + ' ' : '';
+		        return pre + (f.registered || '–') + '/' + (f.draw || '–');
+		      }).join(' · ');
+		      const upd = meta.querySelector('[data-card-updated]');
+		      if (upd) meta.insertBefore(el, upd); else meta.appendChild(el);
 		    }
 
 		    function parseCloseDate(closeText) {
@@ -1860,6 +2917,9 @@
 		        } else {
 		          clearCardPrimaryBadge(card);
 		        }
+
+		        const directFills = (() => { try { const r = card.getAttribute('data-card-fills'); return r ? JSON.parse(r) : null; } catch { return null; } })();
+		        if (directFills) applyCardFills(card, directFills);
 	
 		        const href = (card.getAttribute('href') || '').trim();
 		        if (!href || href.startsWith('http')) continue;
@@ -1878,6 +2938,8 @@
 		        } else if (!directPrimary && !cachedPrimary && cachedPrimaryChecked) {
 		          clearCardPrimaryBadge(card);
 		        }
+		        const cachedFills = Array.isArray(meta.fills) ? meta.fills : null;
+		        if (!directFills && cachedFills) applyCardFills(card, cachedFills);
 	
 		        const freshEnough = cachedAt && (Date.now() - cachedAt) < CACHE_MAX_AGE_MS;
 		        const directIsoOk = !!formatUpdatedIso(directIso);
@@ -1903,12 +2965,14 @@
 		          const iso = (doc.querySelector('#report-updated-badge')?.getAttribute('data-updated-iso') || '').trim();
 		          const closeText = extractCloseTextFromReportDoc(doc);
 		          const primaryName = extractPrimaryNameFromReportDoc(doc);
+		          const fetchedFills = extractFillsFromReportDoc(doc);
 
 		          cache[href] = {
 		            updatedIso: iso,
 		            closeText,
 		            primaryName,
 		            primaryChecked: true,
+		            fills: fetchedFills,
 		            cachedAt: Date.now(),
 		          };
 
@@ -1916,6 +2980,7 @@
 		          applyRegistrationPill(card, closeText);
 		          if (primaryName) setCardPrimaryBadge(card, primaryName);
 		          else clearCardPrimaryBadge(card);
+		          applyCardFills(card, fetchedFills);
 		        } catch {
 		          // ignore
 		        }
@@ -2428,11 +3493,7 @@
 		              ${level}
 		            </span>
 		            <span class="meta-item meta-updated" data-card-updated="1">
-		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-		                <circle cx="12" cy="12" r="10"/>
-		                <path d="M12 6v6l4 2"/>
-		              </svg>
-		              <span data-card-updated-text>${formatUpdatedIso(lastUpdated) || 'Updated —'}</span>
+		              <span data-card-updated-text>${formatUpdatedIso(lastUpdated) || '↻ —'}</span>
 		            </span>
 		          </div>
 		        `;
@@ -2480,21 +3541,24 @@
 	    }
 	  </script>
   <script>
-  function toggleDarkMode() {
-    var isDark = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    var sunIcon = document.getElementById('sunIcon');
-    var moonIcon = document.getElementById('moonIcon');
-    if (sunIcon) sunIcon.style.display = isDark ? 'none' : '';
-    if (moonIcon) moonIcon.style.display = isDark ? '' : 'none';
-  }
-  // Sync icon state on load
   (function() {
-    var isDark = document.body.classList.contains('dark-mode');
-    var sunIcon = document.getElementById('sunIcon');
-    var moonIcon = document.getElementById('moonIcon');
-    if (sunIcon) sunIcon.style.display = isDark ? 'none' : '';
-    if (moonIcon) moonIcon.style.display = isDark ? '' : 'none';
+    const toggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) {
+      html.setAttribute('data-theme', stored);
+      if (themeIcon) themeIcon.textContent = stored === 'dark' ? '☀️' : '🌙';
+    }
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        if (themeIcon) themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+      });
+    }
   })();
   </script>
 </body>
