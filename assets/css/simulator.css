@@ -1,0 +1,522 @@
+/* simulator.css — Ranking simulator styles (layers on top of player.css) */
+
+/* Simulator page header (legacy, used in ranking-simulator.html) */
+.page-header {
+  background: var(--bg-secondary);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+.logo-link svg {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-quick-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.header-quick-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.header-quick-link:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* View-specific visibility: hide profile/simulator links when on that view */
+.player-view .header-quick-link--profile { display: none; }
+.simulator-view .header-quick-link--simulator { display: none; }
+
+.player-view #simulator { display: none; }
+.simulator-view .main > section:not(#simulator) { display: none; }
+.simulator-view .page-footer { display: none; }
+.simulator-view #simulator .section-title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.simulator-view #simulator .sim-subtitle {
+  font-size: 0.86rem;
+  margin-top: 4px;
+}
+
+/* ── Simulator Redesign Override ── */
+
+/* Hide old player page-header in simulator-view */
+.simulator-view .page-header { display: none; }
+
+/* Widen container in simulator-view */
+.simulator-view .main { max-width: 1200px; }
+
+/* Remove the section card wrapper — simulator sits on plain bg */
+.simulator-view #simulator {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* ── Page header card ── */
+.sim-page-header {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  box-shadow: var(--card-shadow);
+}
+.sim-page-header-left { flex: 1; min-width: 0; }
+.sim-page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.sim-page-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.sim-page-header-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+/* ── Tab bar — underline style ── */
+.sim-tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+/* Override existing pill/capsule tab style */
+#simulator .sim-tab {
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  padding: 8px 20px 10px;
+  transition: color 0.2s;
+}
+#simulator .sim-tab:hover { color: var(--text-primary); }
+#simulator .sim-tab.is-active {
+  color: var(--brand-green);
+  background: transparent;
+  box-shadow: none;
+}
+#simulator .sim-tab.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--brand-green);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ── Age toggle (U12 / U14) — green filled active ── */
+.sim-age-toggle {
+  display: flex;
+  background: var(--bg-tertiary);
+  padding: 3px;
+  border-radius: 6px;
+  gap: 2px;
+}
+.sim-age-btn {
+  appearance: none;
+  padding: 5px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: background 0.15s, color 0.15s;
+}
+.sim-age-btn.is-active {
+  background: var(--brand-green);
+  color: #fff;
+}
+
+/* ── Scope toggle (National / Section) — green filled active ── */
+#simulator .sim-scope-toggle {
+  display: flex;
+  background: var(--bg-tertiary);
+  padding: 3px;
+  border-radius: 6px;
+  gap: 2px;
+}
+#simulator .sim-scope-btn {
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  transition: background 0.15s, color 0.15s;
+}
+#simulator .sim-scope-btn.is-active {
+  background: var(--brand-green);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* ── Rank pills — larger rectangle style ── */
+#simulator .sim-rank-picker { gap: 8px; }
+#simulator .sim-rank-btn {
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  transition: all 0.15s;
+}
+#simulator .sim-rank-btn:hover {
+  border-color: var(--brand-green);
+  color: var(--text-primary);
+}
+#simulator .sim-rank-btn.is-current {
+  border-color: var(--brand-green);
+  background: transparent;
+  color: var(--brand-green);
+  font-style: normal;
+  pointer-events: none;
+}
+#simulator .sim-rank-btn.is-active {
+  background: var(--brand-green);
+  color: #fff;
+  border-color: var(--brand-green);
+}
+
+/* ── Progress card — green left border ── */
+#simulator .sim-progress-card {
+  border: none;
+  border-left: 4px solid var(--brand-green);
+  border-radius: 0 8px 8px 0;
+  background: var(--bg-secondary);
+  padding: 18px 20px;
+  box-shadow: var(--card-shadow);
+}
+#simulator .sim-progress-headline {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+#simulator .sim-progress-headline .sim-progress-need {
+  color: var(--brand-green);
+}
+#simulator .sim-progress-track {
+  background: var(--border);
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+#simulator .sim-progress-fill {
+  background: var(--brand-green);
+  border-radius: 4px;
+}
+#simulator .sim-progress-labels {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+#simulator .sim-progress-goal { color: var(--brand-green); }
+
+/* ── View toggle (Big win / Local grind) — green filled active ── */
+#simulator .sim-view-toggle {
+  display: flex;
+  background: var(--bg-tertiary);
+  padding: 3px;
+  border-radius: 6px;
+  border: none;
+  gap: 2px;
+}
+#simulator .sim-view-btn {
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  transition: background 0.15s, color 0.15s;
+}
+#simulator .sim-view-btn.is-active {
+  background: var(--brand-green);
+  color: #fff;
+  box-shadow: none;
+}
+
+/* ── Plan result cards ── */
+#simulator .sim-plan-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+}
+#simulator .sim-plan-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+#simulator .sim-plan-card.is-best { border-color: var(--brand-green); }
+
+/* ── Scenario result card ── */
+#simulator .sim-result-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--brand-green);
+  border-radius: 0 8px 8px 0;
+  background: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+}
+
+/* ── Scope row label ── */
+#simulator .sim-scope-row {
+  align-items: center;
+}
+
+/* ── Responsive overrides for simulator-specific components ── */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 10px 14px;
+  }
+
+  .header-content {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .logo-link svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-quick-links {
+    margin-top: 4px;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .header-quick-links::-webkit-scrollbar { display: none; }
+
+  .header-quick-link {
+    padding: 3px 8px;
+    font-size: 0.62rem;
+  }
+
+  .header-updated {
+    font-size: 0.65rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .simulator-view .header-updated {
+    position: static;
+    margin-top: 2px;
+    align-self: flex-start;
+  }
+
+  .sim-tabs {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    border-radius: 10px;
+    gap: 6px;
+    padding: 3px;
+  }
+
+  .sim-tabs::-webkit-scrollbar { display: none; }
+
+  .sim-tab {
+    flex: unset;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .sim-tab.is-active {
+    background: var(--player-green);
+    color: #ffffff;
+    box-shadow: none;
+  }
+
+  .sim-rank-picker {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow-x: visible;
+    flex-wrap: unset;
+    padding-bottom: 0;
+  }
+
+  .sim-rank-btn {
+    min-height: 44px;
+    border-radius: 10px;
+    padding: 8px 4px;
+    white-space: normal;
+  }
+
+  .sim-scope-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .sim-scope-btn {
+    min-height: 44px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .sim-plan-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    flex-wrap: unset;
+    align-items: start;
+  }
+
+  .sim-plan-points {
+    margin-left: 0;
+    text-align: right;
+  }
+
+  .simulator-view #simulator .section-title {
+    font-size: 1.2rem;
+  }
+
+  .simulator-view #simulator .sim-subtitle {
+    font-size: 0.78rem;
+  }
+
+  .simulator-view .sim-neighbor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sim-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 16px;
+  }
+  .sim-page-header-right {
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .sim-tab-bar { gap: 0; }
+  #simulator .sim-tab { padding: 6px 12px 8px; font-size: 0.8125rem; }
+}
+
+/* Very small screens — simulator-specific */
+@media (max-width: 480px) {
+  .simulator-view .main {
+    padding: 12px;
+  }
+
+  .simulator-view #simulator {
+    padding: 14px;
+  }
+
+  .simulator-view .sim-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 6px;
+    border-radius: 10px;
+  }
+
+  .simulator-view .sim-tab {
+    flex: unset;
+    flex-shrink: 0;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+  }
+
+  .simulator-view .sim-calc-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .simulator-view .sim-calc-chip {
+    padding: 7px 10px;
+    font-size: 0.74rem;
+  }
+}
