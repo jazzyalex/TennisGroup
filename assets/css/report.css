@@ -2042,3 +2042,11 @@ html[data-theme="dark"] .h2h-show-more:hover { background: rgba(22,163,74,0.12);
   .h2h-match { grid-template-columns: 68px 26px 1fr auto; gap: 6px; padding: 8px 12px; }
   .h2h-player-card-header { padding: 10px 12px; }
 }
+
+/* Entry status row colors */
+tr.entry-list-player:not(.highlight-player) {
+  background-color: rgba(34, 139, 34, 0.08);
+}
+tr.alternate-player:not(.highlight-player) {
+  background-color: rgba(255, 193, 7, 0.10);
+}
