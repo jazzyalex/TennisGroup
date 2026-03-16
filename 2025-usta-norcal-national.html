@@ -1325,7 +1325,19 @@
       color: var(--text-primary); padding: 8px; display: flex; align-items: center; transition: color 0.2s;
     }
     .toggle-btn:hover { color: var(--brand-green); }
-    @media (max-width: 640px) { .nav-brand { display: none; } }
+    /* Burger menu & mobile nav */
+    .nav-home-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; color: var(--text-primary); padding: 6px; border-radius: 6px; margin-left: 4px; transition: background 0.15s; }
+    .nav-burger:hover { background: var(--bg-tertiary); }
+    @media (max-width: 640px) {
+      .nav-brand { display: block; }
+      .nav-burger { display: flex; align-items: center; justify-content: center; }
+      .nav-center { display: none; position: absolute; top: 52px; left: 0; right: 0; background: var(--bg-primary); border-bottom: 1px solid var(--border-color); z-index: 99; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+      nav.nav-open .nav-center { display: flex; }
+      .nav-links { flex-direction: column; align-items: flex-start; width: 100%; padding: 8px 24px 12px; gap: 0; }
+      .nav-link { display: block; padding: 10px 0; font-size: 0.95rem; width: 100%; border-bottom: 1px solid var(--border-subtle); }
+      .nav-link:last-child { border-bottom: none; }
+    }
   </style>
   <script>
     (function(){
@@ -1338,8 +1350,8 @@
   </script>
 </head>
 <body>
-  <nav>
-    <div class="nav-left">
+  <nav id="main-nav">
+    <a href="index.html" class="nav-home-link" aria-label="Go to home page">
       <div class="nav-logo">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="64" height="64" rx="8" fill="#2d5a27"/>
@@ -1348,10 +1360,9 @@
         </svg>
       </div>
       <span class="nav-brand">Tennis Tracker</span>
-    </div>
+    </a>
     <div class="nav-center">
       <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
         <a href="player.html" class="nav-link">Player</a>
         <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
         <a href="2025-usta-norcal-national.html" class="nav-link active">Calendar</a>
@@ -1360,6 +1371,13 @@
     <div class="nav-right">
       <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
         <span id="theme-icon">🌙</span>
+      </button>
+      <button class="nav-burger" id="nav-burger" aria-label="Open navigation menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
       </button>
     </div>
   </nav>
@@ -3973,6 +3991,30 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
         }
       }, 250);
     });
+  </script>
+  <script>
+  (function() {
+    var burger = document.getElementById('nav-burger');
+    var nav = document.getElementById('main-nav');
+    if (!burger || !nav) return;
+    burger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('nav-open');
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target)) {
+        nav.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    nav.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
   </script>
 </body>
 </html>
