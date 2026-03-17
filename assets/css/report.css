@@ -207,8 +207,8 @@ table {
 }
 
 th {
-  background-color: transparent;
-  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
   padding: 8px 10px;
   text-align: left;
   font-weight: 600;
@@ -637,8 +637,8 @@ html[data-theme="dark"] .report-header-logo {
 }
 
 html[data-theme="dark"] th {
-  background-color: transparent;
-  color: var(--text-tertiary);
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
   border-bottom-color: rgba(255,255,255,0.1);
 }
 
