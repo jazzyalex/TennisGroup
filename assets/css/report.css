@@ -230,7 +230,7 @@ table {
 }
 
 th {
-  background-color: transparent;
+  background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   padding: 8px 10px;
   text-align: left;
@@ -598,11 +598,11 @@ td.col-wtn a:hover, td.col-utr a:hover, td.col-national a:hover {
 
 /* Opaque background when stuck so rows don't bleed through */
 .sticky-header th {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 html[data-theme="dark"] .sticky-header th {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 /* ============================================================
@@ -669,7 +669,7 @@ html[data-theme="dark"] .report-header-logo {
 }
 
 html[data-theme="dark"] th {
-  background-color: transparent;
+  background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border-bottom-color: rgba(255,255,255,0.1);
 }
