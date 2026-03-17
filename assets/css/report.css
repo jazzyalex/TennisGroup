@@ -2,29 +2,6 @@
 /* Dark mode: html[data-theme="dark"] (standardized from html.dark / @media prefers-color-scheme) */
 
 /* ============================================================
-   REPORT-SCOPED DESIGN TOKENS (not in core.css)
-   ============================================================ */
-
-:root {
-  --accent-report: #16a34a;
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --green-light: #f0fdf4;
-  --highlight-player-bg: #fef9ec;
-  --status-warning: #f59e0b;
-  --status-warning-bg: rgba(245, 158, 11, 0.08);
-  --text-tertiary: #94a3b8;
-}
-
-html[data-theme="dark"] {
-  --accent-report: #4ade80;
-  --green-light: #052e16;
-  --highlight-player-bg: #3b2f1a;
-  --text-tertiary: #64748b;
-}
-
-/* ============================================================
    REPORT HEADER
    ============================================================ */
 
@@ -1970,36 +1947,50 @@ body.force-desktop .desktop-view {
    UPDATED BADGE (from report_updated_badge.py)
    ============================================================ */
 
-/* Updated badge — subtle timestamp below tournament header */
 .report-updated-badge {
+  position: static;
   max-width: 1000px;
-  margin: -8px auto 10px;
-  padding: 0 10px;
-  text-align: right;
+  margin: 0 auto 6px;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   user-select: none;
   pointer-events: none;
+  text-align: right;
 }
 
 .report-updated-badge__pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: #5f6c7b;
 }
 
 @media (max-width: 600px) {
   .report-updated-badge {
     max-width: none;
-    padding: 0 14px;
-    margin-bottom: 8px;
+    margin: 10px 16px 6px;
   }
 }
 
 html[data-theme="dark"] .report-updated-badge__pill {
-  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(28, 28, 30, 0.72);
+  color: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
 }
 
 @media print {
-  .report-updated-badge { display: none !important; }
+  .report-updated-badge {
+    display: none !important;
+  }
 }
 
 /* ============================================================
