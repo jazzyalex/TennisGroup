@@ -50,8 +50,8 @@
       --green-border: #16a34a;
 
       /* Accent */
-      --accent-report: #4472C4;
-      --accent-report-light: #D9E2F3;
+      --accent-report: #16a34a;
+      --accent-report-light: #dcfce7;
       --accent-cyan: #0891b2;
       --accent-amber: #f59e0b;
       --accent-emerald: #10b981;
@@ -2614,7 +2614,7 @@
     <h3>Venue Information</h3>
     <div class="detail-row">
       <span class="detail-label">Site:</span>
-      <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=Indian Wells Tennis Garden Indian Wells CA" target="_blank" style="color: #4472C4; text-decoration: none;">Indian Wells Tennis Garden, 78200 Miles Ave, Indian Wells, CA, 92210-6803</a></span>
+      <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=Indian Wells Tennis Garden Indian Wells CA" target="_blank" style="text-decoration: none;">Indian Wells Tennis Garden, 78200 Miles Ave, Indian Wells, CA, 92210-6803</a></span>
     </div>
 
     <h3>Tournament Location</h3>
@@ -4510,8 +4510,6 @@
         updateRowNumbers();
 
         if (updateHeaderStyle) {
-          headers.forEach(h => (h.style.backgroundColor = '#4472C4'));
-          if (activeHeader) activeHeader.style.backgroundColor = '#2c5aa0';
         }
       }
 
