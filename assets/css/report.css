@@ -230,15 +230,15 @@ table {
 }
 
 th {
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  padding: 8px 10px;
+  background-color: var(--court-green);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 10px 10px;
   text-align: left;
-  font-weight: 600;
-  font-size: 11px;
+  font-weight: 700;
+  font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  border-bottom: 2px solid var(--border-color);
+  letter-spacing: 0.07em;
+  border-bottom: none;
   border-right: none;
 }
 
@@ -253,23 +253,35 @@ th:last-child {
 /* Sortable column indicator */
 th.sortable {
   cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+th.sortable:hover {
+  background-color: var(--court-green-light);
+  color: #fff;
+}
+
+th.sortable[data-sort="asc"],
+th.sortable[data-sort="desc"] {
+  background-color: var(--court-green-light);
+  color: #fff;
 }
 
 th.sortable::after {
-  content: ' ↕';
-  font-size: 0.7em;
-  opacity: 0.6;
-  margin-left: 5px;
+  content: ' ⇅';
+  font-size: 0.65em;
+  opacity: 0.45;
+  margin-left: 4px;
 }
 
 th.sortable[data-sort="asc"]::after {
   content: ' ↑';
-  opacity: 0.9;
+  opacity: 1;
 }
 
 th.sortable[data-sort="desc"]::after {
   content: ' ↓';
-  opacity: 0.9;
+  opacity: 1;
 }
 
 td {
@@ -598,11 +610,11 @@ td.col-wtn a:hover, td.col-utr a:hover, td.col-national a:hover {
 
 /* Opaque background when stuck so rows don't bleed through */
 .sticky-header th {
-  background-color: var(--bg-tertiary);
+  background-color: var(--court-green);
 }
 
 html[data-theme="dark"] .sticky-header th {
-  background-color: var(--bg-tertiary);
+  background-color: var(--court-green);
 }
 
 /* ============================================================
@@ -669,9 +681,9 @@ html[data-theme="dark"] .report-header-logo {
 }
 
 html[data-theme="dark"] th {
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  border-bottom-color: rgba(255,255,255,0.1);
+  background-color: var(--court-green);
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom: none;
 }
 
 html[data-theme="dark"] tbody tr:hover {
