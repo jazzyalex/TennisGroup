@@ -2082,3 +2082,42 @@ tr.entry-list-player:not(.highlight-player) {
 tr.alternate-player:not(.highlight-player) {
   background-color: rgba(255, 193, 7, 0.10);
 }
+
+/* ============================================================
+   H2H INLINE COLUMN (table badge + tooltip)
+   ============================================================ */
+th.col-h2h { width: 52px; text-align: center; font-size: 11px; }
+td.col-h2h { text-align: center; white-space: nowrap; }
+td.col-h2h .h2h-badge { margin-left: 0; }
+.h2h-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: default;
+  white-space: nowrap;
+}
+.h2h-win  { background: rgba(22,163,74,0.15);  color: #16a34a; }
+.h2h-loss { background: rgba(220,38,38,0.15);  color: #dc2626; }
+.h2h-even { background: rgba(220,38,38,0.08);  color: #ef4444; }
+html[data-theme="dark"] .h2h-win  { background: rgba(74,222,128,0.15);  color: #4ade80; }
+html[data-theme="dark"] .h2h-loss { background: rgba(248,113,113,0.15); color: #f87171; }
+html[data-theme="dark"] .h2h-even { background: rgba(248,113,113,0.08); color: #fca5a5; }
+#h2h-tooltip {
+  position: fixed; z-index: 9999; pointer-events: none; display: none;
+  background: var(--bg-primary, #fff); border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  padding: 10px 12px; min-width: 220px; max-width: 320px; font-size: 13px;
+}
+.h2h-tip-header { font-weight: 700; margin-bottom: 6px; font-size: 13px; }
+.h2h-tip-match { display: flex; gap: 8px; align-items: flex-start; padding: 5px 0;
+  border-bottom: 1px solid var(--border-color, #e2e8f0); }
+.h2h-tip-match:last-child { border-bottom: none; }
+.h2h-tip-result { font-weight: 700; font-size: 12px; flex-shrink: 0; padding-top: 1px; }
+.h2h-tip-result.win  { color: #16a34a; }
+.h2h-tip-result.loss { color: #dc2626; }
+html[data-theme="dark"] .h2h-tip-result.win  { color: #4ade80; }
+html[data-theme="dark"] .h2h-tip-result.loss { color: #f87171; }
+.h2h-tip-sets { font-weight: 600; font-size: 12px; flex-shrink: 0; }
+.h2h-tip-meta { font-size: 11px; color: var(--text-secondary, #6b7280); line-height: 1.45; }
