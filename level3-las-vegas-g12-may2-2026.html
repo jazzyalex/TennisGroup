@@ -43,6 +43,7 @@
   </script>
 </head>
 <body>
+  <div id="h2h-tooltip"></div>
   <!-- Navigation Bar -->
   <nav>
     <div class="nav-left">
@@ -97,8 +98,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-21T20:39:26-07:00" title="2026-03-21T20:39:26-07:00">
-    <span class="report-updated-badge__pill">Updated Mar 21, 2026 8:39 PM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-21T20:47:47-07:00" title="2026-03-21T20:47:47-07:00">
+    <span class="report-updated-badge__pill">Updated Mar 21, 2026 8:47 PM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -2090,6 +2091,61 @@
   }
   if (themeIcon) themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
 })();
+  </script>
+  <script>
+  // H2H badge tooltip
+  (function() {
+    const tooltip = document.getElementById('h2h-tooltip');
+    if (!tooltip) return;
+    const HTML_ESC = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+    function esc(v) { return String(v ?? '').replace(/[&<>"']/g, (ch) => HTML_ESC[ch] || ch); }
+    let hideTimer = null;
+    function fmtDate(raw) {
+      if (!raw) return '';
+      const d = new Date(raw + 'T00:00:00Z');
+      if (Number.isNaN(d.getTime())) return raw;
+      return d.toLocaleString(undefined, { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+    }
+    function position(e) {
+      const margin = 14, tw = tooltip.offsetWidth || 300, th = tooltip.offsetHeight || 80;
+      const vw = window.innerWidth, vh = window.innerHeight;
+      let x = e.clientX + margin, y = e.clientY + margin;
+      if (x + tw > vw - margin) x = e.clientX - tw - margin;
+      if (y + th > vh - margin) y = e.clientY - th - margin;
+      tooltip.style.left = Math.max(0, x) + 'px';
+      tooltip.style.top  = Math.max(0, y) + 'px';
+    }
+    document.addEventListener('mouseover', function(e) {
+      const badge = e.target.closest('.h2h-badge');
+      if (!badge) return;
+      if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+      let matches = [];
+      try { matches = JSON.parse(badge.getAttribute('data-h2h') || '[]'); } catch(_) {}
+      const rows = matches.map(function(m) {
+        const wCls = m.w ? 'win' : 'loss', wLbl = m.w ? 'W' : 'L';
+        const sets = (m.s || '').split(/\s+/).filter(Boolean);
+        const setsHtml = sets.length ? sets.map(function(s){return '<span>'+esc(s)+'</span>';}).join('') : '<span>\u2013</span>';
+        const meta = [m.r, m.t, fmtDate(m.d)].filter(Boolean).map(esc).join(' \u00b7 ');
+        return '<div class="h2h-tip-match"><span class="h2h-tip-result '+wCls+'">'+wLbl+'</span>'+
+               '<div class="h2h-tip-sets">'+setsHtml+'</div>'+
+               '<span class="h2h-tip-meta">'+meta+'</span></div>';
+      }).join('');
+      tooltip.innerHTML = '<div class="h2h-tip-header">H2H match history</div>' +
+        (rows || '<div class="h2h-tip-match"><span class="h2h-tip-meta">No details available</span></div>');
+      tooltip.style.display = 'block';
+      position(e);
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (tooltip.style.display !== 'block') return;
+      if (!e.target.closest('.h2h-badge')) return;
+      position(e);
+    });
+    document.addEventListener('mouseout', function(e) {
+      if (!e.target.closest('.h2h-badge')) return;
+      if (tooltip.style.display !== 'block') return;
+      hideTimer = setTimeout(function() { tooltip.style.display = 'none'; }, 80);
+    });
+  })();
   </script>
 </body>
 </html>
