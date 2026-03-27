@@ -180,15 +180,7 @@ html[data-theme="dark"] .player-card {
   box-shadow: 0 18px 32px rgba(0, 0, 0, 0.5);
 }
 
-/* Top accent bar — static thin line */
-.player-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--pc-accent), var(--pc-gold));
-  z-index: 1;
-}
+/* No top accent bar */
 
 /* Header */
 .player-card__header {
