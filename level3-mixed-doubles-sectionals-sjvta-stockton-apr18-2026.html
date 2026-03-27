@@ -1913,8 +1913,21 @@
       const normalized = (text || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
       if (!normalized || /registration closed/i.test(normalized)) return null;
 
+      const months = {
+        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+      };
+
       const match = normalized.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)(?:\s+([A-Z]{2,4}))?/i);
-      if (!match) return null;
+      if (!match) {
+        // Date-only fallback: "April 23, 2026"
+        const dm = normalized.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+        if (!dm) return null;
+        const mName = dm[1].charAt(0).toUpperCase() + dm[1].slice(1).toLowerCase();
+        const month = months[mName];
+        if (month === undefined) return null;
+        return new Date(parseInt(dm[3], 10), month, parseInt(dm[2], 10), 23, 59, 0);
+      }
 
       const monthName = match[1];
       const day = parseInt(match[2], 10);
@@ -1924,10 +1937,6 @@
       const ampm = (match[6] || '').toUpperCase();
       const tz = (match[7] || '').toUpperCase();
 
-      const months = {
-        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
-        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
-      };
       const month = months[monthName];
       if (month === undefined) return null;
 
