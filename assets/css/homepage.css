@@ -174,9 +174,61 @@ html[data-theme="dark"] .player-card__alert {
 }
 
 .player-card__metrics {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.player-card__bar {
+  display: flex;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.player-card__bar-cell {
+  flex: 1;
+  padding: 8px 8px 9px;
+  text-align: center;
+  border-right: 1px solid var(--border-color);
+  transition: background 0.15s ease;
+}
+
+.player-card__bar-cell:last-child {
+  border-right: none;
+}
+
+.player-card__bar-cell:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.player-card__bar-cell a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.player-card__bar-cell--tr {
+  flex: 1.4;
+}
+
+.player-card__tr-inline {
+  display: flex;
   gap: 8px;
+  justify-content: center;
+  margin-top: 5px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.player-card__tr-sub {
+  font-size: 0.5rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-right: 2px;
 }
 
 .player-card__metric,
@@ -208,13 +260,14 @@ html[data-theme="dark"] .player-card__alert {
 }
 
 .player-card__metric-value {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 5px;
-  margin-top: 4px;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 5px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1002,10 +1055,6 @@ html[data-theme="dark"] .tournament-card.is-past .card-primary-badge {
 }
 
 @media (max-width: 900px) {
-  .player-card__metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   /* Keep Rankings in normal grid flow for tablet */
   .player-card__bottom {
     grid-template-columns: 1.5fr 1fr;
@@ -1086,29 +1135,31 @@ html[data-theme="dark"] .tournament-card.is-past .card-primary-badge {
     margin-top: 0;
   }
 
-  /* Metrics container */
+  /* Metrics container — two-tier bars */
   .player-card__metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 1px;
     background: #e8e8e8;
     margin-bottom: 1px;
   }
 
-  /* Remove the full-width span for Rankings */
-  .player-card__metric:nth-child(3) {
-    grid-column: auto;
-  }
-
-  /* Individual metric boxes - equal height */
-  .player-card__metric {
-    background: #ffffff;
+  .player-card__bar {
+    background: #e8e8e8;
     border: none;
     border-radius: 0;
+    gap: 1px;
+  }
+
+  .player-card__bar-cell {
+    background: #ffffff;
+    border-right: none;
+    border-radius: 0;
     padding: 10px 8px;
+    min-height: 62px;
     display: flex;
     flex-direction: column;
-    min-height: 68px;
+    justify-content: center;
   }
 
   .player-card__metric-title {
@@ -1117,7 +1168,6 @@ html[data-theme="dark"] .tournament-card.is-past .card-primary-badge {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-muted);
-    margin-bottom: auto;
   }
 
   /* UTR styling */
