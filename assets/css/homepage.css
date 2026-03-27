@@ -213,22 +213,29 @@ html[data-theme="dark"] .player-card__alert {
   flex: 1.4;
 }
 
-.player-card__tr-inline {
+.player-card__tr-stacked {
   display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 5px;
-  font-size: 0.875rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 4px;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.player-card__tr-row {
+  white-space: nowrap;
 }
 
 .player-card__tr-sub {
-  font-size: 0.5rem;
+  font-size: 0.55rem;
   font-weight: 500;
   color: var(--text-muted);
-  margin-right: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .player-card__metric,
