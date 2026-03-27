@@ -134,6 +134,8 @@ html[data-theme="dark"] {
   --pc-trend-down: #ef4444;
 
   font-family: 'DM Sans', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: var(--pc-bg);
   color: var(--pc-text);
   border-radius: 16px;
@@ -262,7 +264,6 @@ html[data-theme="dark"] .player-card {
   font-size: 2rem;
   line-height: 1;
   color: var(--pc-text);
-  font-variant-numeric: tabular-nums;
 }
 
 .player-card__hero-stat--accent .player-card__hero-value {
@@ -353,7 +354,6 @@ html[data-theme="dark"] .player-card {
   font-size: 1.5rem;
   line-height: 1;
   color: var(--pc-text);
-  font-variant-numeric: tabular-nums;
 }
 
 .player-card__hash {
