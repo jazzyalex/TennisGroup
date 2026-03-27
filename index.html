@@ -1585,9 +1585,6 @@
 		      if (/registration closed/i.test(text)) return { status: 'closed', date: null };
 		      if (/see usta/i.test(text)) return { status: 'unknown', date: null };
 
-		      const m = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*(AM|PM)\s*([A-Z]{2,4})?/i);
-		      if (!m) return { status: 'unknown', date: null };
-
 		      const MONTHS = {
 		        january: 0,
 		        february: 1,
@@ -1602,6 +1599,18 @@
 		        november: 10,
 		        december: 11,
 		      };
+
+		      const m = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*(AM|PM)\s*([A-Z]{2,4})?/i);
+		      if (!m) {
+		        // Date-only fallback: "April 23, 2026"
+		        const dm = text.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+		        if (!dm) return { status: 'unknown', date: null };
+		        const month = MONTHS[(dm[1] || '').toLowerCase()];
+		        const day = parseInt(dm[2], 10);
+		        const year = parseInt(dm[3], 10);
+		        if (![month, day, year].every((x) => Number.isFinite(x))) return { status: 'unknown', date: null };
+		        return { status: 'ok', date: new Date(year, month, day, 23, 59) };
+		      }
 
 		      const month = MONTHS[(m[1] || '').toLowerCase()];
 		      const day = parseInt(m[2], 10);
