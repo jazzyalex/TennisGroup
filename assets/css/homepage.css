@@ -158,8 +158,8 @@ html[data-theme="dark"] {
   --pc-text-muted: #94a3b8;
   --pc-accent: #16a34a;
   --pc-accent-dim: rgba(22, 163, 74, 0.10);
-  --pc-gold: #b8860b;
-  --pc-gold-dim: rgba(184, 134, 11, 0.10);
+  --pc-gold: #c49000;
+  --pc-gold-dim: rgba(196, 144, 0, 0.08);
   --pc-border: rgba(0,0,0,0.08);
   box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
 }
@@ -401,6 +401,7 @@ html[data-theme="dark"] .player-card {
 
 .player-card__tr-badge {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 8px;
   background: var(--pc-gold-dim);
@@ -408,13 +409,14 @@ html[data-theme="dark"] .player-card {
   border-radius: 8px;
   padding: 8px 14px;
   flex: 1;
+  min-width: 0;
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease;
 }
 
 :root .player-card__tr-badge {
-  border-color: rgba(184, 134, 11, 0.2);
+  border-color: rgba(196, 144, 0, 0.2);
 }
 
 html[data-theme="dark"] .player-card__tr-badge {
@@ -428,11 +430,13 @@ html[data-theme="dark"] .player-card__tr-badge {
 .player-card__tr-icon {
   font-size: 14px;
   color: var(--pc-gold);
+  flex-shrink: 0;
 }
 
 .player-card__tr-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .player-card__tr-scope {
