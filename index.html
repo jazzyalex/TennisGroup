@@ -14,7 +14,7 @@
   <meta property="og:title" content="Tennis Tracker">
   <meta property="og:description" content="Tournament calendars, match reports, and player analysis for junior tennis">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css">
   <link rel="stylesheet" href="assets/css/homepage.css">
   <script>
@@ -77,65 +77,72 @@
       <aside class="player-card" aria-labelledby="player-card-name">
         <header class="player-card__header">
           <h2 class="player-card__name" id="player-card-name" data-player-name>Alexis Malakhova</h2>
-          <span class="player-card__updated" data-player-updated>Mar 26, 2026</span>
+          <span class="player-card__date-badge" data-player-updated>Mar 26, 2026</span>
         </header>
-        <div class="player-card__divider"></div>
-        <section class="player-card__metrics" aria-label="Player metrics">
-          <div class="player-card__bar">
-            <div class="player-card__bar-cell">
-              <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
-                <div class="player-card__metric-title">UTR Singles</div>
-                <div class="player-card__metric-value"><span data-player-stat="utr">4.25</span><span class="player-card__trend player-card__trend--up">↑</span></div>
-              </a>
-            </div>
-            <div class="player-card__bar-cell">
-              <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
-                <div class="player-card__metric-title">UTR Doubles</div>
-                <div class="player-card__metric-value"><span data-player-stat="utr_doubles">4.29</span></div>
-              </a>
-            </div>
-            <div class="player-card__bar-cell">
-              <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener">
-                <div class="player-card__metric-title">WTN</div>
-                <div class="player-card__metric-value"><span data-player-stat="wtn">33.34</span><span class="player-card__trend player-card__trend--up" aria-label="Trending up">↑</span></div>
-              </a>
-            </div>
+        <!-- Ratings row: UTR Singles / UTR Doubles / WTN -->
+        <div class="player-card__hero-row">
+          <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" class="player-card__hero-stat player-card__hero-stat--accent">
+            <div class="player-card__hero-label">UTR Singles</div>
+            <div class="player-card__hero-value"><span data-player-stat="utr">4.25</span><span class="player-card__trend-badge player-card__trend-badge--up">&#x25B2;</span></div>
+          </a>
+          <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" class="player-card__hero-stat">
+            <div class="player-card__hero-label">UTR Doubles</div>
+            <div class="player-card__hero-value"><span data-player-stat="utr_doubles">4.29</span></div>
+          </a>
+          <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" class="player-card__hero-stat player-card__hero-stat--gold">
+            <div class="player-card__hero-label">WTN</div>
+            <div class="player-card__hero-value"><span data-player-stat="wtn">33.34</span><span class="player-card__trend-badge player-card__trend-badge--up player-card__trend-badge--gold" aria-label="Trending up">&#x25B2;</span></div>
+          </a>
+        </div>
+        <!-- Rankings section -->
+        <div class="player-card__rankings-section">
+          <div class="player-card__section-label">Rankings</div>
+          <div class="player-card__rankings-grid">
+            <a href="usta-national-rankings.html" class="player-card__rank-cell">
+              <div class="player-card__rank-scope">National</div>
+              <div class="player-card__rank-value"><span class="player-card__hash">#</span><span data-player-stat="usta_national">405</span><span class="player-card__trend" data-player-trend="usta_national"></span></div>
+            </a>
+            <a href="usta-national-rankings.html" class="player-card__rank-cell">
+              <div class="player-card__rank-scope">NorCal</div>
+              <div class="player-card__rank-value"><span class="player-card__hash">#</span><span data-player-stat="usta_section">23</span><span class="player-card__trend" data-player-trend="usta_section"></span></div>
+            </a>
+            <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" class="player-card__rank-cell player-card__rank-cell--wide">
+              <div class="player-card__rank-scope">USTA NST Points</div>
+              <div class="player-card__rank-value"><span data-player-stat="usta_points_total">1083</span></div>
+            </a>
           </div>
-          <div class="player-card__bar">
-            <div class="player-card__bar-cell">
-              <a href="usta-national-rankings.html">
-                <div class="player-card__metric-title">National</div>
-                <div class="player-card__metric-value">#<span data-player-stat="usta_national">405</span><span class="player-card__trend" data-player-trend="usta_national"></span></div>
-              </a>
-            </div>
-            <div class="player-card__bar-cell">
-              <a href="usta-national-rankings.html">
-                <div class="player-card__metric-title">NorCal</div>
-                <div class="player-card__metric-value">#<span data-player-stat="usta_section">23</span><span class="player-card__trend" data-player-trend="usta_section"></span></div>
-              </a>
-            </div>
-            <div class="player-card__bar-cell">
-              <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
-                <div class="player-card__metric-title">USTA NST</div>
-                <div class="player-card__metric-value"><span data-player-stat="usta_points_total">1083</span></div>
-              </a>
-            </div>
-            <div class="player-card__bar-cell player-card__bar-cell--tr">
-              <a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">
-                <div class="player-card__metric-title">TR</div>
-                <div class="player-card__tr-stacked"><div class="player-card__tr-row"><span class="player-card__tr-sub">Nat</span> #<span data-player-stat="tr_national">7</span></div><div class="player-card__tr-row"><span class="player-card__tr-sub">CA</span> #<span data-player-stat="tr_california">3</span></div></div>
-              </a>
-            </div>
-          </div>
-        </section>
-        <!-- Expiration Alert (shown only if points expiring soon) -->
+        </div>
+        <!-- Tennis Recruiting badges -->
+        <div class="player-card__tr-row">
+          <a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener" class="player-card__tr-badge">
+            <span class="player-card__tr-icon">&#x2605;</span>
+            <span class="player-card__tr-text">
+              <span class="player-card__tr-scope">TR National</span>
+              <span class="player-card__tr-rank">#<span data-player-stat="tr_national">7</span></span>
+            </span>
+          </a>
+          <a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener" class="player-card__tr-badge">
+            <span class="player-card__tr-icon">&#x2605;</span>
+            <span class="player-card__tr-text">
+              <span class="player-card__tr-scope">TR California</span>
+              <span class="player-card__tr-rank">#<span data-player-stat="tr_california">3</span></span>
+            </span>
+          </a>
+        </div>
+        <!-- Expiration Alert -->
         <div class="player-card__alert" data-expiration-alert style="display: none;">
           <span data-expiration-text>75 points expiring soon (23 days)</span>
         </div>
-        <!-- View Full Profile Link -->
-        <div class="player-card__links-row">
-          <a href="player.html" class="player-card__profile-link">Player Profile</a>
-          <a href="ranking-simulator.html" class="player-card__profile-link player-card__profile-link--secondary">Ranking Simulator</a>
+        <!-- Action buttons -->
+        <div class="player-card__footer">
+          <a href="player.html" class="player-card__btn player-card__btn--primary">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/></svg>
+            Profile
+          </a>
+          <a href="ranking-simulator.html" class="player-card__btn player-card__btn--secondary">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+            Simulator
+          </a>
         </div>
       </aside>
     </div>

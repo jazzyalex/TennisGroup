@@ -39,23 +39,7 @@ html[data-theme="dark"] {
   --player-card-shadow: 0 18px 32px rgba(0, 0, 0, 0.5);
 }
 
-html[data-theme="dark"] .player-card {
-  background: var(--bg-secondary);
-}
-
-html[data-theme="dark"] .player-card__header {
-  border-bottom-color: var(--border-color);
-}
-
-html[data-theme="dark"] .player-card__panel--points {
-  background: var(--bg-tertiary);
-}
-
-html[data-theme="dark"] .player-card__alert {
-  background: linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.1) 100%);
-  border-left-color: #f59e0b;
-  color: #fcd34d;
-}
+/* (old dark overrides removed — handled by --pc-* vars) */
 
 /* Hero Section */
 .hero {
@@ -131,352 +115,409 @@ html[data-theme="dark"] .player-card__alert {
 }
 
 /* Player Card */
+/* ═══════════════════════════════════════════════
+   Player Card — Dark-themed card with accent colors
+   ═══════════════════════════════════════════════ */
 .player-card {
-  background: #ffffff;
-  color: var(--player-text);
+  --pc-bg: #141418;
+  --pc-surface: #1c1c22;
+  --pc-surface-2: #24242c;
+  --pc-text: #f0f0f2;
+  --pc-text-dim: #8a8a96;
+  --pc-text-muted: #55555f;
+  --pc-accent: #3ddc84;
+  --pc-accent-dim: rgba(61, 220, 132, 0.12);
+  --pc-gold: #f5c842;
+  --pc-gold-dim: rgba(245, 200, 66, 0.12);
+  --pc-border: rgba(255,255,255,0.06);
+  --pc-trend-up: #10b981;
+  --pc-trend-down: #ef4444;
+
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  background: var(--pc-bg);
+  color: var(--pc-text);
   border-radius: 16px;
-  padding: 16px 18px 18px;
-  box-shadow: var(--player-card-shadow);
+  border: 1px solid var(--pc-border);
+  overflow: hidden;
+  position: relative;
   min-width: 0;
   width: 100%;
-  max-width: 460px;
+  max-width: 440px;
   justify-self: end;
   align-self: center;
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.35);
 }
 
+/* Light mode overrides */
+:root .player-card {
+  --pc-bg: #f8fafc;
+  --pc-surface: #eef1f5;
+  --pc-surface-2: #e2e8f0;
+  --pc-text: #0f172a;
+  --pc-text-dim: #64748b;
+  --pc-text-muted: #94a3b8;
+  --pc-accent: #16a34a;
+  --pc-accent-dim: rgba(22, 163, 74, 0.10);
+  --pc-gold: #b8860b;
+  --pc-gold-dim: rgba(184, 134, 11, 0.10);
+  --pc-border: rgba(0,0,0,0.08);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+}
+
+/* Dark mode: use the dark design as-is */
+html[data-theme="dark"] .player-card {
+  --pc-bg: #141418;
+  --pc-surface: #1c1c22;
+  --pc-surface-2: #24242c;
+  --pc-text: #f0f0f2;
+  --pc-text-dim: #8a8a96;
+  --pc-text-muted: #55555f;
+  --pc-accent: #3ddc84;
+  --pc-accent-dim: rgba(61, 220, 132, 0.12);
+  --pc-gold: #f5c842;
+  --pc-gold-dim: rgba(245, 200, 66, 0.12);
+  --pc-border: rgba(255,255,255,0.06);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Top accent bar */
+.player-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pc-accent), var(--pc-gold), var(--pc-accent));
+  background-size: 200% 100%;
+  animation: pc-shimmer 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes pc-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Subtle noise overlay */
+.player-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+/* Header */
 .player-card__header {
+  padding: 24px 24px 0;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .player-card__name {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--player-text);
-}
-
-.player-card__updated {
-  font-size: 0.7rem;
-  color: var(--player-text-light);
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.player-card__divider {
-  display: none;
-}
-
-.player-card__metrics {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.player-card__bar {
-  display: flex;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.player-card__bar-cell {
-  flex: 1;
-  padding: 8px 8px 9px;
-  text-align: center;
-  border-right: 1px solid var(--border-color);
-  transition: background 0.15s ease;
-}
-
-.player-card__bar-cell:last-child {
-  border-right: none;
-}
-
-.player-card__bar-cell:hover {
-  background-color: var(--bg-tertiary);
-}
-
-.player-card__bar-cell a {
-  color: inherit;
-  text-decoration: none;
-  display: block;
-}
-
-.player-card__bar-cell--tr {
-  flex: 1.4;
-}
-
-.player-card__tr-stacked {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  margin-top: 4px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  font-variant-numeric: tabular-nums;
-  line-height: 1.1;
-}
-
-.player-card__tr-row {
-  white-space: nowrap;
-}
-
-.player-card__tr-sub {
-  font-size: 0.55rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.player-card__metric,
-.player-card__panel {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 8px 10px;
-  transition: all 0.15s ease;
-}
-
-.player-card__metric:hover,
-.player-card__metric:focus-within,
-.player-card__panel:hover,
-.player-card__panel:focus-within {
-  background-color: var(--bg-tertiary);
-  border-color: var(--border-color);
-}
-
-.player-card__metric-title {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.player-card__metric-value {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin-top: 5px;
-  font-variant-numeric: tabular-nums;
-}
-
-.player-card__metric-value a,
-.player-card__panel a,
-.player-card__utr-values,
-.player-card__ranking-list {
-  color: inherit;
-  text-decoration: none;
-}
-
-.player-card__utr-values {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 6px;
-  text-decoration: none;
-  color: inherit;
-}
-
-.player-card__utr-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.player-card__utr-label {
-  font-size: 0.65rem;
-  color: var(--player-text-muted);
-  font-weight: 500;
-  min-width: 10px;
-}
-
-.player-card__utr-value {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--player-green);
-  font-variant-numeric: tabular-nums;
-}
-
-.player-card__utr-value-small {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--player-green);
-  font-variant-numeric: tabular-nums;
-}
-
-.player-card__trend {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 1.5px;
   line-height: 1;
+  color: var(--pc-text);
 }
 
-.player-card__trend--up {
-  color: var(--player-trend-up);
-}
-
-.player-card__trend--down {
-  color: var(--player-trend-down);
-}
-
-.player-card__ranking-list {
+.player-card__date-badge {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--pc-text-muted);
+  background: var(--pc-surface);
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
   margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* Hero row: UTR / WTN */
+.player-card__hero-row {
   display: grid;
-  gap: 3px;
-  font-weight: 600;
-  color: var(--player-green);
-  font-variant-numeric: tabular-nums;
-  font-size: 0.85rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 18px 24px 0;
 }
 
-.player-card__ranking-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-}
-
-.player-card__ranking-row span:first-child {
-  font-size: 0.65rem;
-  color: var(--player-text-muted);
-  font-weight: 500;
-}
-
-.player-card__bottom {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 8px;
-}
-
-.player-card__panel--points {
-  background: #f8f9fa;
-}
-
-.player-card__panel-title {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--player-green);
-  margin-bottom: 8px;
-}
-
-.player-card__points-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.player-card__points-total {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--player-green);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-
-.player-card__points-label {
-  font-size: 0.6rem;
-  color: var(--player-text-muted);
-  font-weight: 500;
-}
-
-.player-card__points-value {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--player-green);
-  margin-top: 3px;
-  font-variant-numeric: tabular-nums;
-}
-
-.player-card__tr-grid {
-  display: grid;
-  gap: 4px;
-}
-
-.player-card__tr-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  color: var(--player-green);
-  font-variant-numeric: tabular-nums;
-  font-size: 0.85rem;
-}
-
-.player-card__tr-row span:first-child {
-  font-size: 0.65rem;
-  color: var(--player-text-muted);
-  font-weight: 500;
-}
-
-/* Expiration Alert - Simple banner style */
-.player-card__alert {
-  margin-top: 10px;
-  padding: 10px 14px;
-  background: linear-gradient(90deg, #fef3c7 0%, #fef9c3 100%);
-  border-left: 4px solid #f59e0b;
-  border-radius: 8px;
-  color: #92400e;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-/* View Profile Link */
-.player-card__links-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.player-card__profile-link {
-  flex: 1;
-  margin-top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 12px;
-  background: var(--brand-green);
-  border-radius: 10px;
-  color: #ffffff;
-  font-size: 0.8rem;
-  font-weight: 600;
+.player-card__hero-stat {
+  background: var(--pc-surface);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
   text-decoration: none;
-  transition: all 0.15s ease;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.player-card__profile-link:hover {
-  background: #15803d;
+.player-card__hero-stat:hover {
+  transform: translateY(-2px);
+  background: var(--pc-surface-2);
+}
+
+.player-card__hero-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--pc-text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.player-card__hero-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--pc-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.player-card__hero-stat--accent .player-card__hero-value {
+  color: var(--pc-accent);
+}
+
+.player-card__hero-stat--gold .player-card__hero-value {
+  color: var(--pc-gold);
+}
+
+/* Trend badge (pill with triangle) */
+.player-card__trend-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--pc-accent);
+  background: var(--pc-accent-dim);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+  position: relative;
+  top: -4px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.player-card__trend-badge--gold {
+  color: var(--pc-gold);
+  background: var(--pc-gold-dim);
+}
+
+.player-card__trend-badge--down {
+  color: var(--pc-trend-down);
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* Rankings section */
+.player-card__rankings-section {
+  padding: 14px 24px 0;
+}
+
+.player-card__section-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--pc-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.player-card__rankings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 8px;
+}
+
+.player-card__rank-cell {
+  background: var(--pc-surface);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.player-card__rank-cell:hover {
   transform: translateY(-1px);
 }
 
-.player-card__profile-link--secondary {
-  background: transparent;
-  border: 1.5px solid var(--brand-green);
-  color: var(--brand-green);
+.player-card__rank-cell--wide {
+  /* already spans via grid */
 }
 
-.player-card__profile-link--secondary:hover {
-  background: rgba(22, 163, 74, 0.06);
-  border-color: var(--brand-green);
+.player-card__rank-scope {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: var(--pc-text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.player-card__rank-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--pc-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.player-card__hash {
+  color: var(--pc-text-muted);
+  font-size: 1rem;
+}
+
+/* Ranking trend arrows */
+.player-card__trend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+.player-card__trend--up {
+  color: var(--pc-trend-up);
+}
+
+.player-card__trend--down {
+  color: var(--pc-trend-down);
+}
+
+/* Tennis Recruiting badges */
+.player-card__tr-row {
+  padding: 12px 24px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.player-card__tr-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pc-gold-dim);
+  border: 1px solid rgba(245, 200, 66, 0.15);
+  border-radius: 8px;
+  padding: 8px 14px;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+:root .player-card__tr-badge {
+  border-color: rgba(184, 134, 11, 0.2);
+}
+
+html[data-theme="dark"] .player-card__tr-badge {
+  border-color: rgba(245, 200, 66, 0.15);
+}
+
+.player-card__tr-badge:hover {
+  transform: translateY(-1px);
+}
+
+.player-card__tr-icon {
+  font-size: 14px;
+  color: var(--pc-gold);
+}
+
+.player-card__tr-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-card__tr-scope {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--pc-text-muted);
+  text-transform: uppercase;
+}
+
+.player-card__tr-rank {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--pc-gold);
+}
+
+/* Expiration Alert */
+.player-card__alert {
+  margin: 10px 24px 0;
+  padding: 10px 14px;
+  background: linear-gradient(90deg, rgba(245, 200, 66, 0.15) 0%, rgba(245, 200, 66, 0.08) 100%);
+  border-left: 3px solid var(--pc-gold);
+  border-radius: 6px;
+  color: var(--pc-gold);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+:root .player-card__alert {
+  background: linear-gradient(90deg, #fef3c7 0%, #fef9c3 100%);
+  border-left-color: #f59e0b;
+  color: #92400e;
+}
+
+html[data-theme="dark"] .player-card__alert {
+  background: linear-gradient(90deg, rgba(245, 200, 66, 0.15) 0%, rgba(245, 200, 66, 0.08) 100%);
+  border-left-color: var(--pc-gold);
+  color: var(--pc-gold);
+}
+
+/* Footer action buttons */
+.player-card__footer {
+  padding: 16px 24px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.player-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.player-card__btn--primary {
+  background: var(--pc-accent);
+  color: var(--pc-bg);
+}
+
+.player-card__btn--primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 20px rgba(61, 220, 132, 0.25);
+  transform: translateY(-1px);
+}
+
+.player-card__btn--secondary {
+  background: var(--pc-surface);
+  color: var(--pc-text);
+  border: 1px solid var(--pc-border);
+}
+
+.player-card__btn--secondary:hover {
+  background: var(--pc-surface-2);
+  transform: translateY(-1px);
 }
 
 /* Main Content */
@@ -1110,197 +1151,61 @@ html[data-theme="dark"] .tournament-card.is-past .card-primary-badge {
     height: 48px;
   }
 
-  /* MOBILE PLAYER CARD - Premium Design */
+  /* MOBILE PLAYER CARD */
   .player-card {
     width: 100%;
     max-width: 100%;
-    padding: 0;
     border-radius: 14px;
-    border-top: none;
-    overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   }
 
-  /* Header with green accent background */
   .player-card__header {
-    background: linear-gradient(135deg, var(--player-green) 0%, var(--player-green-soft) 100%);
-    padding: 12px 14px;
-    margin-bottom: 0;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    padding: 18px 18px 0;
   }
 
   .player-card__name {
-    font-size: 1rem;
-    color: #ffffff;
+    font-size: 1.5rem;
   }
 
-  .player-card__updated {
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.75);
-    margin-top: 0;
-  }
-
-  /* Metrics container — two-tier bars */
-  .player-card__metrics {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: #e8e8e8;
-    margin-bottom: 1px;
-  }
-
-  .player-card__bar {
-    background: #e8e8e8;
-    border: none;
-    border-radius: 0;
-    gap: 1px;
-  }
-
-  .player-card__bar-cell {
-    background: #ffffff;
-    border-right: none;
-    border-radius: 0;
-    padding: 10px 8px;
-    min-height: 62px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .player-card__metric-title {
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-  }
-
-  /* UTR styling */
-  .player-card__utr-values {
-    gap: 1px;
-    margin-top: 6px;
-  }
-
-  .player-card__utr-row {
-    gap: 4px;
-  }
-
-  .player-card__utr-label {
-    font-size: 0.55rem;
-    min-width: 10px;
-    color: #888;
-  }
-
-  .player-card__utr-value {
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .player-card__utr-value-small {
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-
-  .player-card__trend {
-    font-size: 0.75rem;
-  }
-
-  /* Metric value */
-  .player-card__metric-value {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-top: 6px;
-    color: var(--text-primary);
-  }
-
-  /* Rankings styling */
-  .player-card__ranking-list {
-    margin-top: 6px;
-    gap: 1px;
-  }
-
-  .player-card__ranking-row {
-    font-size: 0.9rem;
-    font-weight: 700;
+  .player-card__hero-row {
+    padding: 14px 18px 0;
     gap: 6px;
   }
 
-  .player-card__ranking-row span:first-child {
-    font-size: 0.55rem;
-    color: #888;
-    min-width: 32px;
+  .player-card__hero-stat {
+    padding: 12px 8px;
   }
 
-  /* Bottom section */
-  .player-card__bottom {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: #e8e8e8;
-    margin-top: 0;
+  .player-card__hero-value {
+    font-size: 1.6rem;
   }
 
-  .player-card__panel {
-    background: #ffffff;
-    border: none;
-    border-radius: 0;
-    padding: 10px 8px;
-    min-height: 64px;
+  .player-card__rankings-section {
+    padding: 12px 18px 0;
   }
 
-  .player-card__panel-title {
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--player-green);
-    margin-bottom: 6px;
+  .player-card__rankings-grid {
+    gap: 6px;
   }
 
-  /* USTA Points grid */
-  .player-card__points-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 2px;
+  .player-card__rank-cell {
+    padding: 10px 6px;
   }
 
-  .player-card__points-grid > span {
-    flex: 1;
-    text-align: center;
-  }
-
-  .player-card__points-grid > span:first-child {
-    text-align: left;
-  }
-
-  .player-card__points-label {
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: #888;
-  }
-
-  .player-card__points-value {
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-top: 2px;
-  }
-
-  /* TR grid */
-  .player-card__tr-grid {
-    gap: 1px;
+  .player-card__rank-value {
+    font-size: 1.3rem;
   }
 
   .player-card__tr-row {
-    font-size: 0.9rem;
-    font-weight: 700;
+    padding: 10px 18px 0;
+    gap: 6px;
   }
 
-  .player-card__tr-row span:first-child {
-    font-size: 0.55rem;
-    color: #888;
+  .player-card__tr-badge {
+    padding: 8px 10px;
+  }
+
+  .player-card__footer {
+    padding: 14px 18px 18px;
   }
 
   .main {
