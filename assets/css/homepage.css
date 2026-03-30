@@ -693,9 +693,8 @@ html[data-theme="dark"] .player-card__alert {
 }
 
 .tournament-card.is-past {
-  background: var(--bg-primary);
-  border-color: var(--border);
-  opacity: 0.78;
+  background: #f1f5f9;
+  border-color: #d1d5db;
 }
 
 html[data-theme="dark"] .tournament-card.is-upcoming {
@@ -704,9 +703,8 @@ html[data-theme="dark"] .tournament-card.is-upcoming {
 }
 
 html[data-theme="dark"] .tournament-card.is-past {
-  background: var(--bg-secondary);
-  border-color: var(--border);
-  opacity: 0.72;
+  background: var(--bg-primary);
+  border-color: rgba(255,255,255,0.06);
 }
 
 .tournament-card {
