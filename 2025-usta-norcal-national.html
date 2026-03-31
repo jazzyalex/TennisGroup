@@ -27,18 +27,18 @@
       if(t==='dark'){document.body.classList.add('dark');document.body.classList.add('mobile-dark');}
     })();
   </script>
-  <nav class="navbar">
-    <div class="navbar-left">
-      <a href="index.html" class="navbar-logo-link" aria-label="Home">
-        <svg class="navbar-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <nav id="main-nav">
+    <a href="index.html" class="nav-home-link" aria-label="Go to home page">
+      <div class="nav-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="64" height="64" rx="8" fill="#2d5a27"/>
           <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
           <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
         </svg>
-      </a>
-      <span class="navbar-brand">Tennis Tracker</span>
-    </div>
-    <div class="navbar-center">
+      </div>
+      <span class="nav-brand">Tennis Tracker</span>
+    </a>
+    <div class="nav-center">
       <div class="nav-links">
         <a href="2025-usta-norcal-national.html" class="nav-link active">Calendar</a>
         <a href="player.html" class="nav-link">Player</a>
@@ -46,10 +46,14 @@
         <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
       </div>
     </div>
-    <div class="navbar-right">
-      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="moon-icon" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
       </button>
     </div>
   </nav>
@@ -1048,8 +1052,8 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
   <script>
   (function() {
     const toggle = document.getElementById('theme-toggle');
-    const sunIcon = toggle ? toggle.querySelector('.sun-icon') : null;
-    const moonIcon = toggle ? toggle.querySelector('.moon-icon') : null;
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
     const isDark = document.body.classList.contains('dark');
     if (isDark && sunIcon && moonIcon) { sunIcon.style.display = 'none'; moonIcon.style.display = 'block'; }
     if (toggle) {
@@ -1162,20 +1166,34 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	    }
 
 	    const LOCAL_EVENT_PAGE_BY_TOURNAMENT_ID = {
-	      'february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship': 'open-level5-championship-fairoaks-feb14-2026.html',
-	      'january|31-1|four directions tennis|willow glen high school & middle school|san jose|open level 5 championship singles': 'open-level5-championship-singles-san-jose-jan31-2026.html',
-	      'january|31-1|san joaquin valley tennis academy future stars 200|bear creek high school|stockton|open level 5 championship singles': 'open-level5-championship-singles-stockton-jan31-2026.html',
-	      'january|31-1|hrt academia de tenis|redwood high school|larkspur|open level 5 championship singles': 'open-level5-championship-singles-larkspur-jan31-2026.html',
-	      'february|21-22|hrt academia de tenis|redwood high school|larkspur|closed level 3 mixed sectionals': 'hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html',
-	      'april|4-5|cello international tennis academy|solano community college|fairfield|open level 4 super series': 'open-level4-super-series-fairfield-g14-apr4-2026.html',
-	      'april|4-5|rollingwood ymca|rollingwood ymca|fair oaks|open level 4 super series': 'open-level4-super-series-fair-oaks-g12-apr4-2026.html',
-	      'april|4-5|hrt academia de tenis|redwood high school|larkspur|open level 5 super series': 'open-level5-super-series-larkspur-g12-apr4-2026.html',
-	      'april|11-13|el dorado park tennis center|el dorado park tennis center|long beach ca|level 3': 'level3-long-beach-g14-apr11-13-2026.html',
-	      'april|11-13|racquet club of irvine|racquet club of irvine|irvine ca|level 3': 'level3-irvine-g12-apr11-13-2026.html'
-	    };
+      'april|11-13|el dorado park tennis center|el dorado park tennis center|long beach ca|level 3': 'level3-long-beach-g14-apr11-13-2026.html',
+      'april|11-13|racquet club of irvine|racquet club of irvine|irvine ca|level 3': 'level3-irvine-g12-apr11-13-2026.html',
+      'april|18-19|sjvta|bear creek high school|stockton|closed level 3 mixed sectionals': 'level3-mixed-doubles-sectionals-sjvta-stockton-apr18-2026.html',
+      'april|4-5|cello international tennis academy|solano community college|fairfield|open level 4 super series': 'open-level4-super-series-fairfield-g14-apr4-2026.html',
+      'april|4-5|hrt academia de tenis|redwood high school|larkspur|open level 5 super series': 'open-level5-super-series-larkspur-g12-apr4-2026.html',
+      'april|4-5|rollingwood ymca|rollingwood ymca|fair oaks|open level 4 super series': 'open-level4-super-series-fair-oaks-g12-apr4-2026.html',
+      'february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship': 'open-level5-championship-fairoaks-feb14-2026.html',
+      'february|21-22|hrt academia de tenis|redwood high school|larkspur|closed level 3 mixed sectionals': 'hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html',
+      'january|31-1|four directions tennis|willow glen high school & middle school|san jose|open level 5 championship singles': 'open-level5-championship-singles-san-jose-jan31-2026.html',
+      'january|31-1|hrt academia de tenis|redwood high school|larkspur|open level 5 championship singles': 'open-level5-championship-singles-larkspur-jan31-2026.html',
+      'january|31-1|san joaquin valley tennis academy future stars 200|bear creek high school|stockton|open level 5 championship singles': 'open-level5-championship-singles-stockton-jan31-2026.html',
+      'may|16-18|southern california tennis academy|el dorado park tennis center|long beach|level 2': 'level2-long-beach-g12-may16-2026.html',
+      'may|2-4|marty hennessy inspiring children foundation|darling memorial tennis center|las vegas|level 3': 'level3-las-vegas-g12-may2-2026.html',
+    };
+	    const REGISTERED_TOURNAMENT_IDS = new Set([
+      'april|4-5|rollingwood ymca|rollingwood ymca|fair oaks|open level 4 super series',
+      'february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship',
+      'february|21-22|hrt academia de tenis|redwood high school|larkspur|closed level 3 mixed sectionals',
+      'january|31-1|four directions tennis|willow glen high school & middle school|san jose|open level 5 championship singles',
+      'may|2-4|marty hennessy inspiring children foundation|darling memorial tennis center|las vegas|level 3'
+    ]);
 
 	    function getLocalEventPageHref(row) {
 	      return LOCAL_EVENT_PAGE_BY_TOURNAMENT_ID[getTournamentId(row)] || '';
+	    }
+
+	    function isRegisteredTournament(row) {
+	      return REGISTERED_TOURNAMENT_IDS.has(getTournamentId(row));
 	    }
 
 	    function getTournamentRowAnchorId(row) {
@@ -1801,6 +1819,8 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            const age = getAgeInfo(row);
 	            const draw = getDrawCell(row);
 	            const cityState = formatCityWithState(row['City']);
+	            const isRegistered = isRegisteredTournament(row);
+	            const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	            const tournamentLinkHtml = isValidUrl
 	              ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
 	              : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
@@ -1817,14 +1837,14 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	              : cityMapUrl;
 
             const tableRow = document.createElement('div');
-            tableRow.className = `table-row ${rowNumber % 2 === 0 ? 'even-row' : ''}`;
+            tableRow.className = `table-row ${rowNumber % 2 === 0 ? 'even-row' : ''}${isRegistered ? ' registered' : ''}`;
             const rowAnchorId = getTournamentRowAnchorId(row);
             if (rowAnchorId) tableRow.id = rowAnchorId;
             tableRow.innerHTML = `
               <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
               <span class="cell-number">${rowNumber}</span>
               ${datesHtml}
-              <span class="cell-tournament">${tournamentHtml}</span>
+              <span class="cell-tournament">${registeredDot}${tournamentHtml}</span>
               <span class="cell-format">${format}</span>
               <span class="cell-age">${age.label}</span>
 	              <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
@@ -1860,6 +1880,8 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	          const age = getAgeInfo(row);
 	          const draw = getDrawCell(row);
 	          const cityState = formatCityWithState(row['City']);
+	          const isRegistered = isRegisteredTournament(row);
+	          const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	          const tournamentLinkHtml = isValidUrl
 	            ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
 	            : `<span title="No published PlayTennis tournament page">${escapeHtml(tournamentName)}</span>`;
@@ -1876,14 +1898,14 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            : cityMapUrl;
 
           const tableRow = document.createElement('div');
-          tableRow.className = `table-row ${(index + 1) % 2 === 0 ? 'even-row' : ''}`;
+          tableRow.className = `table-row ${(index + 1) % 2 === 0 ? 'even-row' : ''}${isRegistered ? ' registered' : ''}`;
           const rowAnchorId = getTournamentRowAnchorId(row);
           if (rowAnchorId) tableRow.id = rowAnchorId;
           tableRow.innerHTML = `
             <span class="cell-star ${starClass}" data-id="${tournamentId}">${starIcon}</span>
             <span class="cell-number">${index + 1}</span>
             ${datesHtml}
-            <span class="cell-tournament">${tournamentHtml}</span>
+            <span class="cell-tournament">${registeredDot}${tournamentHtml}</span>
             <span class="cell-format">${format}</span>
             <span class="cell-age">${age.label}</span>
 	            <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
@@ -2378,7 +2400,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
             : cityMapUrl;
 
           const card = document.createElement('div');
-          card.className = 'm-tournament-card';
+          card.className = `m-tournament-card${isRegisteredTournament(row) ? ' m-registered' : ''}`;
           card.innerHTML = `
             <div class="m-card-header">
               <div class="m-card-top">
