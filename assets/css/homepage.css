@@ -1029,6 +1029,17 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
   letter-spacing: 0.01em;
 }
 
+.result-expired {
+  color: #dc2626;
+  font-weight: 600;
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+}
+
+html[data-theme="dark"] .result-expired {
+  color: #f87171;
+}
+
 .meta-icon {
   width: 16px;
   height: 16px;
