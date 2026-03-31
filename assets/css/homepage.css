@@ -1029,14 +1029,12 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
   letter-spacing: 0.01em;
 }
 
-.result-expired {
+.result-points-lost {
   color: #dc2626;
   font-weight: 600;
-  text-decoration: line-through;
-  text-decoration-thickness: 1.5px;
 }
 
-html[data-theme="dark"] .result-expired {
+html[data-theme="dark"] .result-points-lost {
   color: #f87171;
 }
 
