@@ -1029,14 +1029,7 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
   letter-spacing: 0.01em;
 }
 
-.result-points-lost {
-  color: #dc2626;
-  font-weight: 600;
-}
 
-html[data-theme="dark"] .result-points-lost {
-  color: #f87171;
-}
 
 .meta-icon {
   width: 16px;
