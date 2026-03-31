@@ -1584,6 +1584,7 @@
 		      if (ex) ex.remove();
 		      const result = (card.getAttribute('data-card-result') || '').trim();
 		      const points = (card.getAttribute('data-card-points') || '').trim();
+		      const bonus = (card.getAttribute('data-card-bonus') || '').trim();
 		      if (!result && !points) return;
 		      const meta = card.querySelector('.card-meta');
 		      if (!meta) return;
@@ -1597,7 +1598,10 @@
 		        text = result;
 		      }
 		      if (points) {
-		        text += (text ? ' · ' : '') + points + ' pts';
+		        text += (text ? ' \u00B7 ' : '') + points + ' pts';
+		      }
+		      if (bonus && bonus !== '0') {
+		        text += ' + ' + bonus + ' bonus';
 		      }
 		      el.textContent = text;
 		      const upd = meta.querySelector('[data-card-updated]');
