@@ -9,7 +9,7 @@
   <link rel="icon" type="image/x-icon" href="assets/tennis-report/favicon-32thin.ico">
   <link rel="shortcut icon" href="assets/tennis-report/favicon-32thin.ico">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Open Level 5 Championship — Fair Oaks (G12/G14 Singles)">
+  <meta property="og:title" content="JMG Academy Presidents' Day Level 5 Junior 12s, 14s & 18s Championships">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
@@ -21,70 +21,115 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
   <meta name="twitter:image:alt" content="Tournament report preview">
-  <title>Open Level 5 Championship — Fair Oaks (G12/G14 Singles), February 14 - 16, 2026, Rollingwood YMCA, Fair Oaks, CA</title>
+  <title>JMG Academy Presidents' Day Level 5 Junior 12s, 14s & 18s Championships, February 14 - 16, 2026, Rollingwood YMCA, Fair Oaks, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css">
   <link rel="stylesheet" href="assets/css/report.css">
-  <style id="report-updated-badge-style">
-    .report-updated-badge {
-      position: static;
-      max-width: 1000px;
-      margin: 0 auto 6px;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      user-select: none;
-      pointer-events: none;
-      text-align: right;
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
     }
-
-    .report-updated-badge__pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      font-size: 11px;
-      line-height: 1.2;
-      color: #5f6c7b;
-    }
-
-    @media (max-width: 600px) {
-      .report-updated-badge {
-        max-width: none;
-        margin: 10px 16px 6px;
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
       }
+    })();
+  </script>
+  <style>
+    /* H2H inline badge */
+    .h2h-badge {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 1px 6px; border-radius: 10px; white-space: nowrap;
+      line-height: 1.6; vertical-align: middle; margin-left: 4px; cursor: default;
     }
-
-    @media (prefers-color-scheme: dark) {
-      .report-updated-badge__pill {
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        background: rgba(28, 28, 30, 0.72);
-        color: rgba(255, 255, 255, 0.72);
-        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
-      }
+    .h2h-win  { background: rgba(22,163,74,0.15);  color: #16a34a; }
+    .h2h-loss { background: rgba(220,38,38,0.15);  color: #dc2626; }
+    .h2h-even { background: rgba(220,38,38,0.08);  color: #ef4444; }
+    html[data-theme="dark"] .h2h-win  { background: rgba(74,222,128,0.15);  color: #4ade80; }
+    html[data-theme="dark"] .h2h-loss { background: rgba(248,113,113,0.15); color: #f87171; }
+    html[data-theme="dark"] .h2h-even { background: rgba(248,113,113,0.08); color: #fca5a5; }
+    /* H2H tooltip */
+    #h2h-tooltip {
+      position: fixed; z-index: 9999; display: none; pointer-events: none;
+      min-width: 220px; max-width: 380px;
+      background: var(--surface, #fff); border: 1px solid var(--border, #e5e7eb);
+      border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      padding: 10px 12px; font-size: 12px; line-height: 1.4;
     }
-
-    @media print {
-      .report-updated-badge {
-        display: none !important;
-      }
+    .h2h-tip-header {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--text-muted, #6b7280);
+      margin-bottom: 7px; padding-bottom: 6px; border-bottom: 1px solid var(--border, #e5e7eb);
     }
+    .h2h-tip-match {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 5px 0; border-bottom: 1px solid var(--border, #e5e7eb);
+      font-variant-numeric: tabular-nums;
+    }
+    .h2h-tip-match:last-child { border-bottom: none; }
+    .h2h-tip-result { font-weight: 700; font-size: 12px; flex-shrink: 0; padding-top: 1px; }
+    .h2h-tip-result.win  { color: #16a34a; }
+    .h2h-tip-result.loss { color: #dc2626; }
+    html[data-theme="dark"] .h2h-tip-result.win  { color: #4ade80; }
+    html[data-theme="dark"] .h2h-tip-result.loss { color: #f87171; }
+    .h2h-tip-sets {
+      display: flex; flex-direction: column; flex-shrink: 0;
+      font-weight: 600; font-size: 12px; color: var(--text-primary, #111); min-width: 34px;
+    }
+    .h2h-tip-meta { font-size: 11px; color: var(--text-secondary, #6b7280); line-height: 1.45; }
+    /* H2H column */
+    th.col-h2h { width: 52px; text-align: center; font-size: 11px; }
+    td.col-h2h { text-align: center; white-space: nowrap; }
+    td.col-h2h .h2h-badge { margin-left: 0; }
   </style>
 </head>
 <body>
-  <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-11T11:20:57-08:00" title="2026-02-11T11:20:57-08:00">
-    <span class="report-updated-badge__pill">Updated Feb 11, 2026 11:20 AM PST</span>
-  </div>
+  <div id="h2h-tooltip"></div>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo-link" aria-label="Home">
+        <div class="nav-logo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </div>
+      </a>
+      <span class="nav-brand">Tennis Tracker</span>
+    </div>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+        <a href="player.html" class="nav-link">Player</a>
+        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
   <div class="desktop-view">
   <div class="report-header">
     <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
-      <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
+      <svg class="report-header-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+        <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+        <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+      </svg>
     </a>
     <div class="report-header-text">
-      <h1>Open Level 5 Championship — Fair Oaks (G12/G14 Singles)</h1>
+      <h1>JMG Academy Presidents' Day Level 5 Junior 12s, 14s & 18s Championships</h1>
       <div class="tournament-dates-row">
         <div class="tournament-dates">
           February 14 - 16, 2026
@@ -95,22 +140,24 @@
         </div>
       </div>
             <div class="tournament-info">
-        <a href="https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/overview/832420EF-F6CC-48A4-AC06-1C54E9C8533D" target="_blank" rel="noopener noreferrer" title="Open tournament page">Open Level 5 Championship — Fair Oaks (G12/G14 Singles)</a><br>
-        Rollingwood YMCA, Fair Oaks, CA • 21 Players
+        <a href="https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/overview/832420EF-F6CC-48A4-AC06-1C54E9C8533D" target="_blank" rel="noopener noreferrer" title="Open tournament page">JMG Academy Presidents' Day Level 5 Junior 12s, 14s & 18s Championships</a><br>
+        Rollingwood YMCA, Fair Oaks, CA • 22 Players
       </div>
     </div>
   </div>
-    <div class="table-meta">
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-31T20:49:21-07:00" title="2026-03-31T20:49:21-07:00">
+    <span class="report-updated-badge__pill">Updated Mar 31, 2026 8:49 PM PDT</span>
+  </div>
+  <div class="table-meta">
     <div class="key-stats">
       <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
       <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">Registration closed</span></div>
-      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">21</span></div>
+      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">22</span></div>
     </div>
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
 
-  
-<div id="player-match-results">
+  <div id="player-match-results">
 <style id="player-match-results-style">
   .pmr-block { max-width: 1000px; margin: 28px auto; padding: 20px 18px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); }
   .pmr-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
@@ -160,22 +207,22 @@
         <th class="col-rank">#</th>
         <th class="sortable">First Name</th>
         <th class="sortable">Last Name</th>
+        <th class="col-h2h sortable">H2H</th>
         <th class="col-wtn sortable">WTN</th>
         <th class="col-utr sortable">UTR</th>
         <th class="col-national sortable">Nat Rank</th>
         <th class="sortable">Location</th>
-        <th>Partner</th>
         <th style="display: none;">Section Rank</th>
       </tr>
     </thead>
     <tbody>
-      <tr data-player-key="HOSKINS|EMMA" data-section-rank="23"><td class="col-rank">1</td><td>Emma</td><td>Hoskins</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019094846" target="_blank" rel="noopener noreferrer">33.41</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4138333" target="_blank" rel="noopener noreferrer">4.54</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019094846" target="_blank" rel="noopener noreferrer">411</a></td><td>El Dorado Hills CA</td><td><a href="#" class="partner-jump" data-partner-key="BURGER|ADISON">Burger, Adison</a></td><td style="display: none;">23</td></tr>
-      <tr data-player-key="WATANABE|SARAH" data-section-rank="178"><td class="col-rank">2</td><td>Sarah</td><td>Watanabe</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019209088" target="_blank" rel="noopener noreferrer">36.23</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4603873" target="_blank" rel="noopener noreferrer">2.01</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019209088" target="_blank" rel="noopener noreferrer">2994</a></td><td>Folsom CA</td><td>N/A</td><td style="display: none;">178</td></tr>
-      <tr data-player-key="DE VALENCIA|SIMONE" data-section-rank="190"><td class="col-rank">3</td><td>Simone</td><td>De Valencia</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2020079645" target="_blank" rel="noopener noreferrer">34.38</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4152562" target="_blank" rel="noopener noreferrer">2.92</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2020079645" target="_blank" rel="noopener noreferrer">3149</a></td><td>Sacramento CA</td><td>N/A</td><td style="display: none;">190</td></tr>
-      <tr data-player-key="SMITH|LEOLA" data-section-rank="841"><td class="col-rank">4</td><td>Leola</td><td>Smith</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661704" target="_blank" rel="noopener noreferrer">38.42</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3947291" target="_blank" rel="noopener noreferrer">1.05</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661704" target="_blank" rel="noopener noreferrer">4674</a></td><td>Folsom CA</td><td>N/A</td><td style="display: none;">841</td></tr>
-      <tr data-player-key="KATARIA|MISHA" data-section-rank="58"><td class="col-rank">5</td><td>Misha</td><td>Kataria</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">33.10</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4426031" target="_blank" rel="noopener noreferrer">4.41</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">966</a></td><td>Fremont CA</td><td>N/A</td><td style="display: none;">58</td></tr>
-      <tr class="highlight-player" data-player-key="MALAKHOVA|ALEXIS" data-section-rank="35"><td class="col-rank">6</td><td>Alexis</td><td>Malakhova</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.81</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.10</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">596</a></td><td>Mountain View CA</td><td>N/A</td><td style="display: none;">35</td></tr>
-      <tr data-player-key="CAI|LIANA" data-section-rank="38"><td class="col-rank">7</td><td>Liana</td><td>Cai</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019456865" target="_blank" rel="noopener noreferrer">35.92</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4513492" target="_blank" rel="noopener noreferrer">2.90</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019456865" target="_blank" rel="noopener noreferrer">613</a></td><td>San Jose CA</td><td>N/A</td><td style="display: none;">38</td></tr>
+      <tr data-h2h="1" data-h2h-anchor="h2h-19f474b0755d3dbc60cc" data-h2h-matches="1" data-player-key="HOSKINS|EMMA" data-entry-status="entry" data-section-rank="20"><td class="col-rank">1</td><td><a class="h2h-jump" href="#h2h-19f474b0755d3dbc60cc">Emma</a></td><td><a class="h2h-jump" href="#h2h-19f474b0755d3dbc60cc">Hoskins</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2026-03-07&quot;, &quot;t&quot;: &quot;Johnson Ranch Level 5 Junior 12s, 14s &amp; 18s Super Series MAR 7 - 8&quot;, &quot;r&quot;: &quot;E-SF&quot;, &quot;s&quot;: &quot;7-5 7-5&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019094846" target="_blank" rel="noopener noreferrer">33.38</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4138333" target="_blank" rel="noopener noreferrer">4.50</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019094846" target="_blank" rel="noopener noreferrer">397</a></td><td>El Dorado Hills CA</td><td style="display: none;">20</td></tr>
+      <tr data-player-key="WATANABE|SARAH" data-entry-status="entry" data-section-rank="172"><td class="col-rank">2</td><td>Sarah</td><td>Watanabe</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019209088" target="_blank" rel="noopener noreferrer">36.79</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4603873" target="_blank" rel="noopener noreferrer">2.06</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019209088" target="_blank" rel="noopener noreferrer">2777</a></td><td>Folsom CA</td><td style="display: none;">172</td></tr>
+      <tr data-player-key="DE VALENCIA|SIMONE" data-entry-status="entry" data-section-rank="81"><td class="col-rank">3</td><td>Simone</td><td>De Valencia</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2020079645" target="_blank" rel="noopener noreferrer">35.42</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4152562" target="_blank" rel="noopener noreferrer">2.93</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2020079645" target="_blank" rel="noopener noreferrer">1386</a></td><td>Sacramento CA</td><td style="display: none;">81</td></tr>
+      <tr data-h2h="1" data-h2h-anchor="h2h-2d05d30695a0642c0e2b" data-h2h-matches="1" data-player-key="SMITH|LEOLA" data-entry-status="entry" data-section-rank="885"><td class="col-rank">4</td><td><a class="h2h-jump" href="#h2h-2d05d30695a0642c0e2b">Leola</a></td><td><a class="h2h-jump" href="#h2h-2d05d30695a0642c0e2b">Smith</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2026-02-14&quot;, &quot;t&quot;: &quot;JMG Academy Presidents' Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16&quot;, &quot;r&quot;: &quot;Quarterfinals&quot;, &quot;s&quot;: &quot;6-1 6-0&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661704" target="_blank" rel="noopener noreferrer">38.81</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3947291" target="_blank" rel="noopener noreferrer">1.11</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661704" target="_blank" rel="noopener noreferrer">4932</a></td><td>Folsom CA</td><td style="display: none;">885</td></tr>
+      <tr data-h2h="1" data-h2h-anchor="h2h-91d717e4e21e60aa6035" data-h2h-matches="1" data-player-key="KATARIA|MISHA" data-entry-status="entry" data-section-rank="45"><td class="col-rank">5</td><td><a class="h2h-jump" href="#h2h-91d717e4e21e60aa6035">Misha</a></td><td><a class="h2h-jump" href="#h2h-91d717e4e21e60aa6035">Kataria</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2026-02-14&quot;, &quot;t&quot;: &quot;JMG Academy Presidents' Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16&quot;, &quot;r&quot;: &quot;Final&quot;, &quot;s&quot;: &quot;6-4 6-4&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">32.90</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4426031" target="_blank" rel="noopener noreferrer">4.58</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">705</a></td><td>Fremont CA</td><td style="display: none;">45</td></tr>
+      <tr class="highlight-player" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="entry" data-section-rank="23"><td class="col-rank">6</td><td>Alexis</td><td>Malakhova</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.34</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.25</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">405</a></td><td>Mountain View CA</td><td style="display: none;">23</td></tr>
+      <tr data-h2h="1" data-h2h-anchor="h2h-dacb4a09925646b532c0" data-h2h-matches="1" data-player-key="CAI|LIANA" data-entry-status="entry" data-section-rank="38"><td class="col-rank">7</td><td><a class="h2h-jump" href="#h2h-dacb4a09925646b532c0">Liana</a></td><td><a class="h2h-jump" href="#h2h-dacb4a09925646b532c0">Cai</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2026-02-14&quot;, &quot;t&quot;: &quot;JMG Academy Presidents' Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16&quot;, &quot;r&quot;: &quot;Semifinals&quot;, &quot;s&quot;: &quot;&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019456865" target="_blank" rel="noopener noreferrer">37.06</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4513492" target="_blank" rel="noopener noreferrer">2.95</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019456865" target="_blank" rel="noopener noreferrer">613</a></td><td>San Jose CA</td><td style="display: none;">38</td></tr>
     </tbody>
   </table>
 
@@ -194,15 +241,15 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">WTN Range</div>
-        <div class="stat-value">33.10 - 38.42</div>
+        <div class="stat-value">32.90 - 38.81</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg WTN</div>
-        <div class="stat-value">35.04</div>
+        <div class="stat-value">35.39</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
-        <div class="stat-value">3.13</div>
+        <div class="stat-value">3.20</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Draw Size</div>
@@ -218,11 +265,11 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Best Nat Rank</div>
-        <div class="stat-value">411</div>
+        <div class="stat-value">397</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
-        <div class="stat-value">4.54</div>
+        <div class="stat-value">4.58</div>
       </div>
     </div>
   </div>
@@ -235,29 +282,30 @@
         <th class="col-rank">#</th>
         <th class="sortable">First Name</th>
         <th class="sortable">Last Name</th>
+        <th class="col-h2h sortable">H2H</th>
         <th class="col-wtn sortable">WTN</th>
         <th class="col-utr sortable">UTR</th>
         <th class="col-national sortable">Nat Rank</th>
         <th class="sortable">Location</th>
-        <th>Partner</th>
         <th style="display: none;">Section Rank</th>
       </tr>
     </thead>
     <tbody>
-      <tr data-player-key="CHEN|ANGELA" data-section-rank="17"><td class="col-rank">1</td><td>Angela</td><td>Chen</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018617048" target="_blank" rel="noopener noreferrer">30.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3404514" target="_blank" rel="noopener noreferrer">6.17</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018617048" target="_blank" rel="noopener noreferrer">341</a></td><td>San Jose CA</td><td>N/A</td><td style="display: none;">17</td></tr>
-      <tr data-player-key="YAN|LUJIA" data-section-rank="19"><td class="col-rank">2</td><td>Lujia</td><td>Yan</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018557493" target="_blank" rel="noopener noreferrer">31.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2718759" target="_blank" rel="noopener noreferrer">5.99</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018557493" target="_blank" rel="noopener noreferrer">368</a></td><td>Davis CA</td><td><a href="#" class="partner-jump" data-partner-key="ANGUS|CIENNA">Angus, Cienna</a></td><td style="display: none;">19</td></tr>
-      <tr data-player-key="COULOMBE|ELOISE" data-section-rank="20"><td class="col-rank">3</td><td>Eloise</td><td>Coulombe</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018790528" target="_blank" rel="noopener noreferrer">30.67</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4807461" target="_blank" rel="noopener noreferrer">5.94</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018790528" target="_blank" rel="noopener noreferrer">414</a></td><td>San Francisco CA</td><td><a href="#" class="partner-jump" data-partner-key="GUO|SERENA">Guo, Serena</a></td><td style="display: none;">20</td></tr>
-      <tr data-player-key="SYME|OLIVIA" data-section-rank="24"><td class="col-rank">4</td><td>Olivia</td><td>Syme</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019085203" target="_blank" rel="noopener noreferrer">30.72</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3936957" target="_blank" rel="noopener noreferrer">5.98</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019085203" target="_blank" rel="noopener noreferrer">435</a></td><td>Sacramento CA</td><td>N/A</td><td style="display: none;">24</td></tr>
-      <tr data-player-key="GUO|SERENA" data-section-rank="36"><td class="col-rank">5</td><td>Serena</td><td>Guo</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019277087" target="_blank" rel="noopener noreferrer">32.96</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3756943" target="_blank" rel="noopener noreferrer">5.49</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019277087" target="_blank" rel="noopener noreferrer">634</a></td><td>Mountain View CA</td><td><a href="#" class="partner-jump" data-partner-key="COULOMBE|ELOISE">Coulombe, Eloise</a></td><td style="display: none;">36</td></tr>
-      <tr data-player-key="ANGUS|CIENNA" data-section-rank="38"><td class="col-rank">6</td><td>Cienna</td><td>Angus</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018649966" target="_blank" rel="noopener noreferrer">31.44</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2093810" target="_blank" rel="noopener noreferrer">5.62</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018649966" target="_blank" rel="noopener noreferrer">647</a></td><td>San Francisco CA</td><td><a href="#" class="partner-jump" data-partner-key="YAN|LUJIA">Yan, Lujia</a></td><td style="display: none;">38</td></tr>
-      <tr data-player-key="TONG|YSABEL" data-section-rank="72"><td class="col-rank">7</td><td>Ysabel</td><td>Tong</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668533" target="_blank" rel="noopener noreferrer">34.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2770522" target="_blank" rel="noopener noreferrer">4.29</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668533" target="_blank" rel="noopener noreferrer">1341</a></td><td>San Francisco CA</td><td><a href="#" class="partner-jump" data-partner-key="CHOI|ELLINOR">Choi, Ellinor</a></td><td style="display: none;">72</td></tr>
-      <tr data-h2h="1" data-h2h-anchor="h2h-9e074e2db92730b1f7ad" data-h2h-matches="1" data-player-key="CHOI|ELLINOR" data-section-rank="77"><td class="col-rank">8</td><td><a class="h2h-jump" href="#h2h-9e074e2db92730b1f7ad">Ellinor</a></td><td><a class="h2h-jump" href="#h2h-9e074e2db92730b1f7ad">Choi</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019003273" target="_blank" rel="noopener noreferrer">33.86</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5414803" target="_blank" rel="noopener noreferrer">4.50</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019003273" target="_blank" rel="noopener noreferrer">1388</a></td><td>San Francisco CA</td><td><a href="#" class="partner-jump" data-partner-key="TONG|YSABEL">Tong, Ysabel</a></td><td style="display: none;">77</td></tr>
-      <tr data-player-key="DIVEKAR|RIYA" data-section-rank="66"><td class="col-rank">9</td><td>Riya</td><td>Divekar</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018612405" target="_blank" rel="noopener noreferrer">34.43</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5639487" target="_blank" rel="noopener noreferrer">4.73</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018612405" target="_blank" rel="noopener noreferrer">1212</a></td><td>Union City CA</td><td>N/A</td><td style="display: none;">66</td></tr>
-      <tr data-player-key="DOUGHERTY|EVIE" data-section-rank="82"><td class="col-rank">10</td><td>Evie</td><td>Dougherty</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019278717" target="_blank" rel="noopener noreferrer">36.79</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5709395" target="_blank" rel="noopener noreferrer">2.96</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019278717" target="_blank" rel="noopener noreferrer">1606</a></td><td>Woodland CA</td><td>N/A</td><td style="display: none;">82</td></tr>
-      <tr data-h2h="1" data-h2h-anchor="h2h-1ab6762f7d608b629d84" data-h2h-matches="2" data-player-key="KUNKEL|CAMILLE" data-section-rank="84"><td class="col-rank">11</td><td><a class="h2h-jump" href="#h2h-1ab6762f7d608b629d84">Camille</a></td><td><a class="h2h-jump" href="#h2h-1ab6762f7d608b629d84">Kunkel</a></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018867069" target="_blank" rel="noopener noreferrer">33.02</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3338600" target="_blank" rel="noopener noreferrer">5.15</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018867069" target="_blank" rel="noopener noreferrer">1621</a></td><td>Fremont CA</td><td>N/A</td><td style="display: none;">84</td></tr>
-      <tr data-player-key="SMITH|GISELE" data-section-rank="1124"><td class="col-rank">12</td><td>Gisele</td><td>Smith</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661703" target="_blank" rel="noopener noreferrer">32.88</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3947292" target="_blank" rel="noopener noreferrer">2.40</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661703" target="_blank" rel="noopener noreferrer">6689</a></td><td>Folsom CA</td><td>N/A</td><td style="display: none;">1124</td></tr>
-      <tr data-player-key="HAREL|LEAH" data-section-rank="356"><td class="col-rank">13</td><td>Leah</td><td>Harel</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019581512" target="_blank" rel="noopener noreferrer">36.65</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4149923" target="_blank" rel="noopener noreferrer">2.90</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019581512" target="_blank" rel="noopener noreferrer">6752</a></td><td>Sacramento CA</td><td>N/A</td><td style="display: none;">356</td></tr>
-      <tr data-player-key="BURGER|ADISON" data-section-rank="117"><td class="col-rank">14</td><td>Adison</td><td>Burger</td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017287559" target="_blank" rel="noopener noreferrer">34.98</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2674832" target="_blank" rel="noopener noreferrer">3.85</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017287559" target="_blank" rel="noopener noreferrer">2171</a></td><td>Davis CA</td><td><a href="#" class="partner-jump" data-partner-key="HOSKINS|EMMA">Hoskins, Emma</a></td><td style="display: none;">117</td></tr>
+      <tr data-player-key="CHEN|ANGELA" data-entry-status="entry" data-section-rank="16"><td class="col-rank">1</td><td>Angela</td><td>Chen</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018617048" target="_blank" rel="noopener noreferrer">29.99</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3404514" target="_blank" rel="noopener noreferrer">6.46</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018617048" target="_blank" rel="noopener noreferrer">355</a></td><td>San Jose CA</td><td style="display: none;">16</td></tr>
+      <tr data-player-key="YAN|LUJIA" data-entry-status="entry" data-section-rank="15"><td class="col-rank">2</td><td>Lujia</td><td>Yan</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018557493" target="_blank" rel="noopener noreferrer">31.35</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2718759" target="_blank" rel="noopener noreferrer">6.06</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018557493" target="_blank" rel="noopener noreferrer">331</a></td><td>Davis CA</td><td style="display: none;">15</td></tr>
+      <tr data-player-key="COULOMBE|ELOISE" data-entry-status="entry" data-section-rank="18"><td class="col-rank">3</td><td>Eloise</td><td>Coulombe</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018790528" target="_blank" rel="noopener noreferrer">30.40</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4807461" target="_blank" rel="noopener noreferrer">6.16</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018790528" target="_blank" rel="noopener noreferrer">374</a></td><td>San Francisco CA</td><td style="display: none;">18</td></tr>
+      <tr data-player-key="SYME|OLIVIA" data-entry-status="entry" data-section-rank="19"><td class="col-rank">4</td><td>Olivia</td><td>Syme</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019085203" target="_blank" rel="noopener noreferrer">30.22</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3936957" target="_blank" rel="noopener noreferrer">6.16</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019085203" target="_blank" rel="noopener noreferrer">388</a></td><td>Sacramento CA</td><td style="display: none;">19</td></tr>
+      <tr data-player-key="GUO|SERENA" data-entry-status="entry" data-section-rank="34"><td class="col-rank">5</td><td>Serena</td><td>Guo</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019277087" target="_blank" rel="noopener noreferrer">32.93</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3756943" target="_blank" rel="noopener noreferrer">5.49</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019277087" target="_blank" rel="noopener noreferrer">611</a></td><td>Mountain View CA</td><td style="display: none;">34</td></tr>
+      <tr data-player-key="ANGUS|CIENNA" data-entry-status="entry" data-section-rank="29"><td class="col-rank">6</td><td>Cienna</td><td>Angus</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018649966" target="_blank" rel="noopener noreferrer">31.41</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2093810" target="_blank" rel="noopener noreferrer">5.77</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018649966" target="_blank" rel="noopener noreferrer">556</a></td><td>San Francisco CA</td><td style="display: none;">29</td></tr>
+      <tr data-player-key="TONG|YSABEL" data-entry-status="entry" data-section-rank="59"><td class="col-rank">7</td><td>Ysabel</td><td>Tong</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668533" target="_blank" rel="noopener noreferrer">34.22</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2770522" target="_blank" rel="noopener noreferrer">4.41</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668533" target="_blank" rel="noopener noreferrer">1116</a></td><td>San Francisco CA</td><td style="display: none;">59</td></tr>
+      <tr data-h2h="1" data-h2h-anchor="h2h-9e074e2db92730b1f7ad" data-h2h-matches="1" data-player-key="CHOI|ELLINOR" data-entry-status="entry" data-section-rank="64"><td class="col-rank">8</td><td><a class="h2h-jump" href="#h2h-9e074e2db92730b1f7ad">Ellinor</a></td><td><a class="h2h-jump" href="#h2h-9e074e2db92730b1f7ad">Choi</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2025-05-17&quot;, &quot;t&quot;: &quot;Santa Cruz Level 5 Junior 14s &amp; 12s Championships @ La Madrona Athletic Club MAY 17 - 18&quot;, &quot;r&quot;: &quot;Round of 16&quot;, &quot;s&quot;: &quot;6-2 6-0&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019003273" target="_blank" rel="noopener noreferrer">33.86</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5414803" target="_blank" rel="noopener noreferrer">4.58</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019003273" target="_blank" rel="noopener noreferrer">1205</a></td><td>San Francisco CA</td><td style="display: none;">64</td></tr>
+      <tr data-h2h="1" data-h2h-anchor="h2h-b3330ebb394b245dc155" data-h2h-matches="1" data-player-key="DIVEKAR|RIYA" data-entry-status="entry" data-section-rank="60"><td class="col-rank">9</td><td><a class="h2h-jump" href="#h2h-b3330ebb394b245dc155">Riya</a></td><td><a class="h2h-jump" href="#h2h-b3330ebb394b245dc155">Divekar</a></td><td class="col-h2h" data-sort-val="-1"><span class="h2h-badge h2h-loss" data-h2h="[{&quot;d&quot;: &quot;2024-03-30&quot;, &quot;t&quot;: &quot;Arora Tennis Level 6 Junior Open MAR 30 - 31&quot;, &quot;r&quot;: &quot;C-Semifinals&quot;, &quot;s&quot;: &quot;1-4 2-4&quot;, &quot;w&quot;: 0}]">0-1</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018612405" target="_blank" rel="noopener noreferrer">34.14</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5639487" target="_blank" rel="noopener noreferrer">4.60</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018612405" target="_blank" rel="noopener noreferrer">1125</a></td><td>Union City CA</td><td style="display: none;">60</td></tr>
+      <tr data-player-key="DOUGHERTY|EVIE" data-entry-status="entry" data-section-rank="82"><td class="col-rank">10</td><td>Evie</td><td>Dougherty</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019278717" target="_blank" rel="noopener noreferrer">36.37</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5709395" target="_blank" rel="noopener noreferrer">2.87</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019278717" target="_blank" rel="noopener noreferrer">1614</a></td><td>Woodland CA</td><td style="display: none;">82</td></tr>
+      <tr data-h2h="1" data-h2h-anchor="h2h-1ab6762f7d608b629d84" data-h2h-matches="2" data-player-key="KUNKEL|CAMILLE" data-entry-status="entry" data-section-rank="109"><td class="col-rank">11</td><td><a class="h2h-jump" href="#h2h-1ab6762f7d608b629d84">Camille</a></td><td><a class="h2h-jump" href="#h2h-1ab6762f7d608b629d84">Kunkel</a></td><td class="col-h2h" data-sort-val="0"><span class="h2h-badge h2h-even" data-h2h="[{&quot;d&quot;: &quot;2026-01-10&quot;, &quot;t&quot;: &quot;FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18&quot;, &quot;r&quot;: &quot;&quot;, &quot;s&quot;: &quot;&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2025-03-08&quot;, &quot;t&quot;: &quot;Johnson Ranch Level 5 Junior 18s, 14s and 12s Super Series MAR 8 - 9&quot;, &quot;r&quot;: &quot;E-QF&quot;, &quot;s&quot;: &quot;2-6 3-6&quot;, &quot;w&quot;: 0}]">1-1</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018867069" target="_blank" rel="noopener noreferrer">33.02</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3338600" target="_blank" rel="noopener noreferrer">5.26</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018867069" target="_blank" rel="noopener noreferrer">2153</a></td><td>Fremont CA</td><td style="display: none;">109</td></tr>
+      <tr data-player-key="SMITH|GISELE" data-entry-status="entry" data-section-rank="775"><td class="col-rank">12</td><td>Gisele</td><td>Smith</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661703" target="_blank" rel="noopener noreferrer">34.16</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3947292" target="_blank" rel="noopener noreferrer">2.40</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661703" target="_blank" rel="noopener noreferrer">4738</a></td><td>Folsom CA</td><td style="display: none;">775</td></tr>
+      <tr data-player-key="HAREL|LEAH" data-entry-status="entry" data-section-rank="155"><td class="col-rank">13</td><td>Leah</td><td>Harel</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019581512" target="_blank" rel="noopener noreferrer">36.09</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4149923" target="_blank" rel="noopener noreferrer">2.92</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019581512" target="_blank" rel="noopener noreferrer">2954</a></td><td>Sacramento CA</td><td style="display: none;">155</td></tr>
+      <tr data-player-key="BURGER|ADISON" data-entry-status="entry" data-section-rank="123"><td class="col-rank">14</td><td>Adison</td><td>Burger</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017287559" target="_blank" rel="noopener noreferrer">35.34</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2674832" target="_blank" rel="noopener noreferrer">3.87</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017287559" target="_blank" rel="noopener noreferrer">2450</a></td><td>Davis CA</td><td style="display: none;">123</td></tr>
+      <tr class="alternate-player" data-player-key="OSEN|ALEXA" data-entry-status="alternate" data-section-rank="41"><td class="col-rank">15</td><td>Alexa</td><td>Osen</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019108120" target="_blank" rel="noopener noreferrer">32.16</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/2836633" target="_blank" rel="noopener noreferrer">5.25</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019108120" target="_blank" rel="noopener noreferrer">718</a></td><td>El Dorado Hills CA</td><td style="display: none;">41</td></tr>
     </tbody>
   </table>
 
@@ -272,19 +320,19 @@
     <div class="stats-grid">
       <div class="stat-box">
         <div class="stat-label">Total Players</div>
-        <div class="stat-value">14</div>
+        <div class="stat-value">15</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">WTN Range</div>
-        <div class="stat-value">30.45 - 36.79</div>
+        <div class="stat-value">29.99 - 36.37</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg WTN</div>
-        <div class="stat-value">33.18</div>
+        <div class="stat-value">33.04</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
-        <div class="stat-value">4.71</div>
+        <div class="stat-value">4.82</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Draw Size</div>
@@ -292,7 +340,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Registered</div>
-        <div class="stat-value">14</div>
+        <div class="stat-value">15</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Registration Closes</div>
@@ -300,11 +348,11 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Best Nat Rank</div>
-        <div class="stat-value">341</div>
+        <div class="stat-value">331</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
-        <div class="stat-value">6.17</div>
+        <div class="stat-value">6.46</div>
       </div>
     </div>
   </div>
@@ -320,7 +368,7 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Registered:</span>
-      <span class="detail-value">21</span>
+      <span class="detail-value">22</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Registration Closes:</span>
@@ -360,7 +408,7 @@
     <h3>Tournament Contact</h3>
     <div class="detail-row">
       <span class="detail-label">Tournament Director:</span>
-      <span class="detail-value">Matt Brunner</span>
+      <span class="detail-value">Matthew Brunner</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Email:</span>
@@ -387,7 +435,11 @@
     <header class="mobile-header">
       <div class="mobile-header-top">
         <a class="mobile-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
-          <img src="assets/tennis-report/favicon-256.png" alt="Logo" class="mobile-header-logo">
+          <svg class="mobile-header-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
         </a>
         <div class="mobile-header-content">
           <h1 class="mobile-header-title" id="mobile-title"></h1>
@@ -404,7 +456,7 @@
     <div class="mobile-hero-stats">
       <!-- Tournament Name Link (inside card) -->
       <a href="https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/overview/832420EF-F6CC-48A4-AC06-1C54E9C8533D" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
-        Open Level 5 Championship — Fair Oaks (G12/G14 Singles)
+        JMG Academy Presidents' Day Level 5 Junior 12s, 14s & 18s Championships
       </a>
 
       <!-- Stats Grid -->
@@ -464,132 +516,29 @@
 	      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
 	    </div>
   </div><!-- end mobile-view -->
-<!-- ALEXIS_ROSTER_H2H_START -->
+<!-- PRIMARY_ROSTER_H2H_START -->
+<div id="alexis-roster-h2h-wrapper" data-h2h-wrapper="primary-roster-h2h-wrapper">
 
-<div id="alexis-roster-h2h-wrapper">
-<style id="alexis-roster-h2h-style">
-  .h2h-block { max-width: 1000px; margin: 28px auto; padding: 18px 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); color: inherit; }
-  .h2h-block h2 { margin: 0 0 10px 0; font-size: 20px; }
-  .h2h-block .h2h-note { margin: 0 0 14px 0; opacity: 0.85; }
-  .h2h-summary { margin: 0 0 14px 0; padding: 0; list-style: none; }
-  .h2h-summary li { margin: 6px 0; }
-  .h2h-jump { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
-  .h2h-player { margin-top: 18px; }
-  .h2h-player h3 { margin: 0 0 8px 0; font-size: 16px; }
-  .h2h-player .h2h-meta { opacity: 0.8; font-weight: 400; font-size: 13px; margin-left: 8px; }
-  .h2h-mini { margin: 6px 0 0 0; padding: 10px 12px; border-radius: 12px; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.06); }
-  .h2h-mini-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 8px; }
-  .h2h-mini-head .h2h-record { font-weight: 800; }
-  .h2h-mini-head .h2h-record span { font-weight: 700; opacity: 0.8; }
-  .h2h-mini-head .h2h-updated { font-size: 12px; opacity: 0.75; }
-  .h2h-mini-list { margin: 0; padding-left: 18px; }
-  .h2h-mini-list li { margin: 6px 0; }
-  .h2h-mini-line { display: inline; }
-  .h2h-mini-date { font-weight: 700; }
-  .h2h-mini-res { display: inline-block; min-width: 18px; text-align: center; font-weight: 800; }
-  .h2h-mini-score { font-variant-numeric: tabular-nums; }
-  .h2h-mini-event { opacity: 0.88; }
-  .h2h-mini-loc { opacity: 0.75; }
-  .h2h-mini a { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
-
-  details.h2h-more { margin-top: 10px; }
-  details.h2h-more summary { cursor: pointer; font-weight: 700; opacity: 0.9; }
-
-  .h2h-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .h2h-table { width: 100%; min-width: 760px; margin: 0; max-width: none; border-collapse: collapse; font-size: 13px; box-shadow: none; background: transparent; }
-  .h2h-table th, .h2h-table td { padding: 7px 8px; border-bottom: 1px solid rgba(0,0,0,0.08); vertical-align: top; }
-  /* Override global table styles in the report template (zebra stripes + header fill). */
-  .h2h-table th { text-align: left; opacity: 0.9; font-weight: 700; font-size: 12px; letter-spacing: 0.2px; white-space: nowrap; background: rgba(0,0,0,0.04) !important; }
-  .h2h-table td { white-space: nowrap; }
-  .h2h-table td:nth-child(2) { white-space: normal; min-width: 280px; }
-  .h2h-table tbody tr:nth-child(odd) { background: rgba(0,0,0,0.018) !important; }
-  .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
-  .h2h-table tbody tr:hover { background: rgba(68,114,196,0.10) !important; }
-  .h2h-event-main { font-weight: 700; }
-  .h2h-event-sub { font-size: 12px; opacity: 0.8; margin-top: 1px; }
-  tr[data-h2h="1"] td:nth-child(3)::after { content: " *"; color: #C58A00; font-weight: 800; }
-
-  @media (prefers-color-scheme: dark) {
-    .h2h-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
-    .h2h-block h2, .h2h-block h3 { color: #ffffff; }
-    .h2h-block .h2h-note { color: rgba(255,255,255,0.86); }
-    .h2h-mini { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
-    .h2h-table th, .h2h-table td { border-bottom-color: rgba(255,255,255,0.12); }
-    .h2h-table th { background: rgba(255,255,255,0.08) !important; }
-    .h2h-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.03) !important; }
-    .h2h-table tbody tr:nth-child(even) { background: transparent !important; }
-    .h2h-table tbody tr:hover { background: rgba(107,155,209,0.16) !important; }
-    .h2h-event-sub { opacity: 0.78; }
+<script>(function(){
+  function h2hToggleMore(btn){
+    var gid=btn.getAttribute('data-gid');
+    var rows=document.querySelectorAll('.h2h-match[data-gid="'+gid+'"]');
+    var open=btn.getAttribute('data-open')==='1';
+    rows.forEach(function(r){r.classList.toggle('h2h-match-hidden',open);});
+    btn.setAttribute('data-open',open?'0':'1');
   }
-
-  @media (max-width: 640px) {
-    .h2h-block { padding: 14px 12px; }
-    .h2h-table { min-width: 680px; }
-  }
-</style>
-<section class="h2h-block" id="alexis-roster-h2h">
-  <h2>Alexis Malakhova vs This Roster</h2>
-  <p class="h2h-note">Mini report: Alexis Malakhova match history vs players on this roster. Data comes from the internal DB (UTR/USTA). Generated Feb 11, 2026 11:20 AM PST.</p>
-  <div class="selection-callout">Asterisk (*) in the roster table means Alexis Malakhova has prior match history with that player.</div>
-  <ul class="h2h-summary"><li><a class="h2h-jump" href="#h2h-1ab6762f7d608b629d84">Camille Kunkel</a> <span class="h2h-meta">Fremont CA</span> — H2H 1-1 <span class="h2h-meta">(latest Jan 10th, 2026)</span></li><li><a class="h2h-jump" href="#h2h-9e074e2db92730b1f7ad">Ellinor Choi</a> <span class="h2h-meta">San Francisco CA</span> — H2H 1-0 <span class="h2h-meta">(latest May 17th, 2025)</span></li></ul>
-  <div class="h2h-player" id="h2h-1ab6762f7d608b629d84" data-h2h-player-id="player:1ab6762f7d608b629d84">
-    <h3>Camille Kunkel <span class="h2h-meta">Fremont CA</span></h3>
-    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
-    <div class="h2h-mini">
-      <div class="h2h-mini-head">
-        <div class="h2h-record"><span>Record:</span> H2H 1-1</div>
-        <div class="h2h-updated">Latest Jan 10th, 2026</div>
-      </div>
-      <ol class="h2h-mini-list">
-        <li><span class="h2h-mini-line"><span class="h2h-mini-date">Jan 10th, 2026</span> <span class="h2h-mini-res">W</span> <span class="h2h-mini-score">Score unavailable</span> <span class="h2h-mini-event">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(— • vs)</span></span></li><li><span class="h2h-mini-line"><span class="h2h-mini-date">Mar 8th, 2025</span> <span class="h2h-mini-res">L</span> <span class="h2h-mini-score">2-6 3-6</span> <span class="h2h-mini-event">Johnson Ranch Level 5 Junior 18s, 14s and 12s Super Series MAR 8 - 9</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(Johnson Ranch • vs)</span></span></li>
-      </ol>
-      <details class="h2h-more">
-        <summary>Show all matches (2)</summary>
-        <div class="h2h-table-wrap">
-          <table class="h2h-table">
-            <thead>
-              <tr>
-                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Jan 10th, 2026</td><td><div class="h2h-event-main">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>—</td><td>vs</td><td>W</td><td>Score unavailable</td><td>—</td><td>utr</td></tr><tr><td>Mar 8th, 2025</td><td><div class="h2h-event-main">Johnson Ranch Level 5 Junior 18s, 14s and 12s Super Series MAR 8 - 9</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>Johnson Ranch</td><td>vs</td><td>L</td><td>2-6 3-6</td><td>E-QF</td><td>utr</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </div>
-  </div><div class="h2h-player" id="h2h-9e074e2db92730b1f7ad" data-h2h-player-id="player:9e074e2db92730b1f7ad">
-    <h3>Ellinor Choi <span class="h2h-meta">San Francisco CA</span></h3>
-    <div class="selection-callout">Click the player name in the roster table to jump here.</div>
-    <div class="h2h-mini">
-      <div class="h2h-mini-head">
-        <div class="h2h-record"><span>Record:</span> H2H 1-0</div>
-        <div class="h2h-updated">Latest May 17th, 2025</div>
-      </div>
-      <ol class="h2h-mini-list">
-        <li><span class="h2h-mini-line"><span class="h2h-mini-date">May 17th, 2025</span> <span class="h2h-mini-res">W</span> <span class="h2h-mini-score">6-2 6-0</span> <span class="h2h-mini-event">Santa Cruz Level 5 Junior 14s &amp; 12s Championships @ La Madrona Athletic Club MAY 17 - 18</span> <span class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</span> <span class="h2h-mini-loc">(Santa Cruz • vs)</span></span></li>
-      </ol>
-      <details class="h2h-more">
-        <summary>Show all matches (1)</summary>
-        <div class="h2h-table-wrap">
-          <table class="h2h-table">
-            <thead>
-              <tr>
-                <th>Date</th><th>Tournament</th><th>Location</th><th>Rel</th><th>Res</th><th>Score</th><th>Round</th><th>Src</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>May 17th, 2025</td><td><div class="h2h-event-main">Santa Cruz Level 5 Junior 14s &amp; 12s Championships @ La Madrona Athletic Club MAY 17 - 18</div><div class="h2h-event-sub">Girls&#x27; 12 &amp; under singles</div></td><td>Santa Cruz</td><td>vs</td><td>W</td><td>6-2 6-0</td><td>Round of 16</td><td>utr</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </div>
+  window.h2hToggleMore=h2hToggleMore;
+})();</script>
+<section class="h2h-block" id="primary-roster-h2h">
+  <div class="h2h-section-header">
+    <h2 class="h2h-section-title">Alexis Malakhova vs This Roster</h2>
+    <span class="h2h-section-subtitle">7 opponents in this draw</span>
   </div>
+  <div class="h2h-chips"><a class="h2h-chip" href="#h2h-19f474b0755d3dbc60cc"><span class="h2h-chip-name">Emma Hoskins</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-2d05d30695a0642c0e2b"><span class="h2h-chip-name">Leola Smith</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-dacb4a09925646b532c0"><span class="h2h-chip-name">Liana Cai</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-91d717e4e21e60aa6035"><span class="h2h-chip-name">Misha Kataria</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-1ab6762f7d608b629d84"><span class="h2h-chip-name">Camille Kunkel</span><span class="h2h-chip-record">H2H 1–1</span></a><a class="h2h-chip" href="#h2h-9e074e2db92730b1f7ad"><span class="h2h-chip-name">Ellinor Choi</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-b3330ebb394b245dc155"><span class="h2h-chip-name">Riya Divekar</span><span class="h2h-chip-record">H2H 0–1</span></a></div>
+  <div class="h2h-player-card" id="h2h-19f474b0755d3dbc60cc" data-h2h-player-id="player:19f474b0755d3dbc60cc"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Emma Hoskins</span><span class="h2h-player-loc">El Dorado Hills CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Mar 7th, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">Johnson Ranch Level 5 Junior 12s, 14s &amp; 18s Super Series MAR 7 - 8</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · Johnson Ranch</div></div><div class="h2h-match-score">7-5 7-5</div></div></div></div><div class="h2h-player-card" id="h2h-2d05d30695a0642c0e2b" data-h2h-player-id="player:2d05d30695a0642c0e2b"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Leola Smith</span><span class="h2h-player-loc">Folsom CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Feb 14th, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">JMG Academy Presidents&#x27; Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · JMG Academy Presidents&#x27; Day</div></div><div class="h2h-match-score">6-1 6-0</div></div></div></div><div class="h2h-player-card" id="h2h-dacb4a09925646b532c0" data-h2h-player-id="player:dacb4a09925646b532c0"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Liana Cai</span><span class="h2h-player-loc">San Jose CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Feb 14th, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">JMG Academy Presidents&#x27; Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · JMG Academy Presidents&#x27; Day</div></div><div class="h2h-match-score">No score posted (possible WO/WD/RET)</div></div></div></div><div class="h2h-player-card" id="h2h-91d717e4e21e60aa6035" data-h2h-player-id="player:91d717e4e21e60aa6035"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Misha Kataria</span><span class="h2h-player-loc">Fremont CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Feb 14th, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">JMG Academy Presidents&#x27; Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · JMG Academy Presidents&#x27; Day</div></div><div class="h2h-match-score">6-4 6-4</div></div></div></div><div class="h2h-player-card" id="h2h-1ab6762f7d608b629d84" data-h2h-player-id="player:1ab6762f7d608b629d84"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Camille Kunkel</span><span class="h2h-player-loc">Fremont CA</span></div><div class="h2h-record-summary">H2H 1–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Jan 10th, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">No score posted (possible WO/WD/RET)</div></div><div class="h2h-match"><div class="h2h-match-date">Mar 8th, 2025</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">Johnson Ranch Level 5 Junior 18s, 14s and 12s Super Series MAR 8 - 9</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · Johnson Ranch</div></div><div class="h2h-match-score">2-6 3-6</div></div></div></div><div class="h2h-player-card" id="h2h-9e074e2db92730b1f7ad" data-h2h-player-id="player:9e074e2db92730b1f7ad"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Ellinor Choi</span><span class="h2h-player-loc">San Francisco CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">May 17th, 2025</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">Santa Cruz Level 5 Junior 14s &amp; 12s Championships @ La Madrona Athletic Club MAY 17 - 18</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · Santa Cruz</div></div><div class="h2h-match-score">6-2 6-0</div></div></div></div><div class="h2h-player-card" id="h2h-b3330ebb394b245dc155" data-h2h-player-id="player:b3330ebb394b245dc155"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Riya Divekar</span><span class="h2h-player-loc">Union City CA</span></div><div class="h2h-record-summary">H2H 0–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Mar 30th, 2024</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">Arora Tennis Level 6 Junior Open MAR 30 - 31</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · Arora Tennis</div></div><div class="h2h-match-score">1-4 2-4</div></div></div></div>
 </section>
 </div>
-<!-- ALEXIS_ROSTER_H2H_END -->
+<!-- PRIMARY_ROSTER_H2H_END -->
 <!-- Mobile View JavaScript -->
   <script>
     // ========================================
@@ -1300,7 +1249,7 @@
       
       // Render header
       // Use title as-is (already contains "Open Level 5 Championship Singles - Girls' 12 Singles")
-      const titleText = info.title || "Open Level 5 Championship — Fair Oaks (G12/G14 Singles)";
+      const titleText = info.title || "JMG Academy Presidents' Day Level 5 Junior 12s, 14s & 18s Championships";
       document.getElementById('mobile-title').textContent = titleText;
       
       // Format: "Jan 10-18, 2026 • San Jose, CA"
@@ -1630,6 +1579,7 @@
       "GISELE|SMITH": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018661703",
       "LEAH|HAREL": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019581512",
       "ADISON|BURGER": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2017287559",
+      "ALEXA|OSEN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019108120",
     };
 
 	    function decorateMetricCellWithProfileLink(cell, url) {
@@ -2130,8 +2080,21 @@
       const normalized = (text || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
       if (!normalized || /registration closed/i.test(normalized)) return null;
 
+      const months = {
+        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+      };
+
       const match = normalized.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)(?:\s+([A-Z]{2,4}))?/i);
-      if (!match) return null;
+      if (!match) {
+        // Date-only fallback: "April 23, 2026"
+        const dm = normalized.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+        if (!dm) return null;
+        const mName = dm[1].charAt(0).toUpperCase() + dm[1].slice(1).toLowerCase();
+        const month = months[mName];
+        if (month === undefined) return null;
+        return new Date(parseInt(dm[3], 10), month, parseInt(dm[2], 10), 23, 59, 0);
+      }
 
       const monthName = match[1];
       const day = parseInt(match[2], 10);
@@ -2141,10 +2104,6 @@
       const ampm = (match[6] || '').toUpperCase();
       const tz = (match[7] || '').toUpperCase();
 
-      const months = {
-        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
-        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
-      };
       const month = months[monthName];
       if (month === undefined) return null;
 
@@ -2284,7 +2243,7 @@
       if (navigator.share) {
         try {
           await navigator.share({
-            title: "Open Level 5 Championship — Fair Oaks (G12/G14 Singles)",
+            title: "JMG Academy Presidents' Day Level 5 Junior 12s, 14s & 18s Championships",
             text: 'Tournament Report - February 14 - 16, 2026',
             url: window.location.href
           });
@@ -2305,6 +2264,21 @@
     });
 
     document.body.appendChild(shareButton);
+  </script>
+  <script>
+(function() {
+  const toggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const html = document.documentElement;
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      toggleTheme();
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (themeIcon) themeIcon.textContent = isDark ? '☀️' : '🌙';
+    });
+  }
+  if (themeIcon) themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+})();
   </script>
 </body>
 </html>
