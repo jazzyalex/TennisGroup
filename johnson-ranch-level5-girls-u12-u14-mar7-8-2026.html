@@ -109,7 +109,49 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
 
-  <h3 class="table-section-title">Girls&#x27; 12 &amp; under Singles</h3>
+  <div id="player-match-results">
+<style id="player-match-results-style">
+  .pmr-block { max-width: 1000px; margin: 28px auto; padding: 20px 18px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); }
+  .pmr-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+  .pmr-header h2 { margin: 0; font-size: 18px; font-weight: 700; }
+  .pmr-summary { font-size: 14px; }
+  .pmr-result { font-weight: 700; color: var(--accent-report, #16a34a); }
+  .pmr-points { font-variant-numeric: tabular-nums; opacity: 0.85; }
+  .pmr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pmr-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 6px 10px; border-bottom: 2px solid rgba(0,0,0,0.1); opacity: 0.7; }
+  .pmr-table td { padding: 8px 10px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; }
+  .pmr-round { font-weight: 700; font-size: 12px; white-space: nowrap; width: 60px; }
+  .pmr-wl { font-weight: 800; width: 24px; text-align: center; }
+  .pmr-win .pmr-wl { color: var(--accent-report, #16a34a); }
+  .pmr-loss .pmr-wl { color: #dc2626; }
+  .pmr-win { background: rgba(22, 163, 74, 0.04); }
+  .pmr-opponent { font-weight: 500; }
+  .pmr-partner { font-weight: 400; opacity: 0.7; font-size: 12px; }
+  .pmr-score { font-variant-numeric: tabular-nums; white-space: nowrap; opacity: 0.9; }
+
+  html[data-theme="dark"] .pmr-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
+  html[data-theme="dark"] .pmr-block h2 { color: #fff; }
+  html[data-theme="dark"] .pmr-table th { border-bottom-color: rgba(255,255,255,0.15); }
+  html[data-theme="dark"] .pmr-table td { border-bottom-color: rgba(255,255,255,0.08); }
+  html[data-theme="dark"] .pmr-win { background: rgba(34, 197, 94, 0.08); }
+  html[data-theme="dark"] .pmr-loss .pmr-wl { color: #f87171; }
+</style>
+<div class="pmr-block">
+  <div class="pmr-header">
+    <h2>Alexis Malakhova — Match Results</h2>
+    <span class="pmr-summary"><span class="pmr-result">Event Finals</span> · <span class="pmr-points">225 pts + 11 bonus</span></span>
+  </div>
+  <table class="pmr-table">
+    <thead><tr><th>Round</th><th></th><th>Opponent</th><th>Score</th></tr></thead>
+    <tbody>
+<tr class="pmr-loss"><td class="pmr-round">E-F</td><td class="pmr-wl">L</td><td class="pmr-opponent">Ellie WANG</td><td class="pmr-score">2-6 4-6</td></tr>
+<tr class="pmr-win"><td class="pmr-round">E-SF</td><td class="pmr-wl">W</td><td class="pmr-opponent">Emma HOSKINS</td><td class="pmr-score">7-5 7-5</td></tr>
+<tr class="pmr-win"><td class="pmr-round">E-QF</td><td class="pmr-wl">W</td><td class="pmr-opponent">Elise WATT</td><td class="pmr-score">6-1 6-1</td></tr>
+    </tbody>
+  </table>
+</div>
+</div><!-- /player-match-results -->
+<h3 class="table-section-title">Girls&#x27; 12 &amp; under Singles</h3>
 
   <table id="players-table-g12" class="primary-table players-table">
     <thead class="sticky-header">
@@ -437,48 +479,7 @@
 	    </div>
   </div><!-- end mobile-view -->
 <!-- PRIMARY_ROSTER_H2H_START -->
-<div id="player-match-results">
-<style id="player-match-results-style">
-  .pmr-block { max-width: 1000px; margin: 28px auto; padding: 20px 18px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); }
-  .pmr-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-  .pmr-header h2 { margin: 0; font-size: 18px; font-weight: 700; }
-  .pmr-summary { font-size: 14px; }
-  .pmr-result { font-weight: 700; color: var(--accent-report, #16a34a); }
-  .pmr-points { font-variant-numeric: tabular-nums; opacity: 0.85; }
-  .pmr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .pmr-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 6px 10px; border-bottom: 2px solid rgba(0,0,0,0.1); opacity: 0.7; }
-  .pmr-table td { padding: 8px 10px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; }
-  .pmr-round { font-weight: 700; font-size: 12px; white-space: nowrap; width: 60px; }
-  .pmr-wl { font-weight: 800; width: 24px; text-align: center; }
-  .pmr-win .pmr-wl { color: var(--accent-report, #16a34a); }
-  .pmr-loss .pmr-wl { color: #dc2626; }
-  .pmr-win { background: rgba(22, 163, 74, 0.04); }
-  .pmr-opponent { font-weight: 500; }
-  .pmr-partner { font-weight: 400; opacity: 0.7; font-size: 12px; }
-  .pmr-score { font-variant-numeric: tabular-nums; white-space: nowrap; opacity: 0.9; }
 
-  html[data-theme="dark"] .pmr-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
-  html[data-theme="dark"] .pmr-block h2 { color: #fff; }
-  html[data-theme="dark"] .pmr-table th { border-bottom-color: rgba(255,255,255,0.15); }
-  html[data-theme="dark"] .pmr-table td { border-bottom-color: rgba(255,255,255,0.08); }
-  html[data-theme="dark"] .pmr-win { background: rgba(34, 197, 94, 0.08); }
-  html[data-theme="dark"] .pmr-loss .pmr-wl { color: #f87171; }
-</style>
-<div class="pmr-block">
-  <div class="pmr-header">
-    <h2>Alexis Malakhova — Match Results</h2>
-    <span class="pmr-summary"><span class="pmr-result">Event Finals</span> · <span class="pmr-points">225 pts + 11 bonus</span></span>
-  </div>
-  <table class="pmr-table">
-    <thead><tr><th>Round</th><th></th><th>Opponent</th><th>Score</th></tr></thead>
-    <tbody>
-<tr class="pmr-loss"><td class="pmr-round">E-F</td><td class="pmr-wl">L</td><td class="pmr-opponent">Ellie WANG</td><td class="pmr-score">2-6 4-6</td></tr>
-<tr class="pmr-win"><td class="pmr-round">E-SF</td><td class="pmr-wl">W</td><td class="pmr-opponent">Emma HOSKINS</td><td class="pmr-score">7-5 7-5</td></tr>
-<tr class="pmr-win"><td class="pmr-round">E-QF</td><td class="pmr-wl">W</td><td class="pmr-opponent">Elise WATT</td><td class="pmr-score">6-1 6-1</td></tr>
-    </tbody>
-  </table>
-</div>
-</div><!-- /player-match-results -->
 <div id="alexis-roster-h2h-wrapper" data-h2h-wrapper="primary-roster-h2h-wrapper">
 <style id="alexis-roster-h2h-style">
   .h2h-block { max-width: 1000px; margin: 28px auto; padding: 18px 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); color: inherit; }
