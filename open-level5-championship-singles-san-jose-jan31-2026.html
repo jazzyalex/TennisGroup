@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
   <link rel="icon" type="image/x-icon" href="assets/tennis-report/favicon-32thin.ico">
   <link rel="shortcut icon" href="assets/tennis-report/favicon-32thin.ico">
-  <link rel="icon" type="image/png" sizes="128x128" href="assets/tennis-report/favicon-128.png">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Level 5 Open: FDT Level 5 Junior Singles Championship — Girls' 12 Singles">
+  <meta property="og:title" content="FDT Level 5 Junior Singles Championship">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
@@ -19,74 +21,115 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
   <meta name="twitter:image:alt" content="Tournament report preview">
-  <title>Level 5 Open: FDT Level 5 Junior Singles Championship — Girls' 12 Singles, January 31 - February 1, 2026, San Jose, CA</title>
+  <title>FDT Level 5 Junior Singles Championship, January 31 - February 1, 2026, Willow Glen High School, San Jose, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css">
   <link rel="stylesheet" href="assets/css/report.css">
-                
-
-  <!-- Navbar styles injected by visual redesign -->
-  <style id="navbar-redesign-css">
-    .tt-navbar {
-      position: sticky; top: 0; height: 52px; z-index: 9999;
-      background: #fff; border-bottom: 1px solid #e2e8f0;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      transition: background 0.2s, border-color 0.2s;
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
     }
-    html.dark .tt-navbar { background: #0f172a; border-color: #334155; }
-    .tt-navbar-left { display: flex; align-items: center; gap: 12px; }
-    .tt-navbar-logo-link { display: inline-flex; line-height: 0; text-decoration: none; }
-    .tt-navbar-brand { font-size: 1rem; font-weight: 700; color: #16a34a; text-decoration: none; }
-    html.dark .tt-navbar-brand { color: #4ade80; }
-    .tt-navbar-center { flex: 1; display: flex; justify-content: center; gap: 24px; align-items: center; }
-    .tt-nav-link { font-size: 0.875rem; font-weight: 500; color: #475569; text-decoration: none; transition: color 0.2s; }
-    .tt-nav-link:hover { color: #16a34a; }
-    html.dark .tt-nav-link { color: #94a3b8; }
-    html.dark .tt-nav-link:hover { color: #4ade80; }
-    .tt-navbar-right { display: flex; align-items: center; }
-    .tt-toggle-btn { background: none; border: none; cursor: pointer; font-size: 1.25rem; padding: 8px; display: flex; align-items: center; justify-content: center; color: #0f172a; transition: color 0.2s; }
-    html.dark .tt-toggle-btn { color: #f1f5f9; }
-    .tt-toggle-btn:hover { color: #16a34a; }
-    html.dark .tt-toggle-btn:hover { color: #4ade80; }
-    @media (max-width: 640px) { .tt-navbar-brand { display: none; } .tt-navbar-center { gap: 16px; } .tt-nav-link { font-size: 0.8rem; } }
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <style>
+    /* H2H inline badge */
+    .h2h-badge {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 1px 6px; border-radius: 10px; white-space: nowrap;
+      line-height: 1.6; vertical-align: middle; margin-left: 4px; cursor: default;
+    }
+    .h2h-win  { background: rgba(22,163,74,0.15);  color: #16a34a; }
+    .h2h-loss { background: rgba(220,38,38,0.15);  color: #dc2626; }
+    .h2h-even { background: rgba(220,38,38,0.08);  color: #ef4444; }
+    html[data-theme="dark"] .h2h-win  { background: rgba(74,222,128,0.15);  color: #4ade80; }
+    html[data-theme="dark"] .h2h-loss { background: rgba(248,113,113,0.15); color: #f87171; }
+    html[data-theme="dark"] .h2h-even { background: rgba(248,113,113,0.08); color: #fca5a5; }
+    /* H2H tooltip */
+    #h2h-tooltip {
+      position: fixed; z-index: 9999; display: none; pointer-events: none;
+      min-width: 220px; max-width: 380px;
+      background: var(--surface, #fff); border: 1px solid var(--border, #e5e7eb);
+      border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      padding: 10px 12px; font-size: 12px; line-height: 1.4;
+    }
+    .h2h-tip-header {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--text-muted, #6b7280);
+      margin-bottom: 7px; padding-bottom: 6px; border-bottom: 1px solid var(--border, #e5e7eb);
+    }
+    .h2h-tip-match {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 5px 0; border-bottom: 1px solid var(--border, #e5e7eb);
+      font-variant-numeric: tabular-nums;
+    }
+    .h2h-tip-match:last-child { border-bottom: none; }
+    .h2h-tip-result { font-weight: 700; font-size: 12px; flex-shrink: 0; padding-top: 1px; }
+    .h2h-tip-result.win  { color: #16a34a; }
+    .h2h-tip-result.loss { color: #dc2626; }
+    html[data-theme="dark"] .h2h-tip-result.win  { color: #4ade80; }
+    html[data-theme="dark"] .h2h-tip-result.loss { color: #f87171; }
+    .h2h-tip-sets {
+      display: flex; flex-direction: column; flex-shrink: 0;
+      font-weight: 600; font-size: 12px; color: var(--text-primary, #111); min-width: 34px;
+    }
+    .h2h-tip-meta { font-size: 11px; color: var(--text-secondary, #6b7280); line-height: 1.45; }
+    /* H2H column */
+    th.col-h2h { width: 52px; text-align: center; font-size: 11px; }
+    td.col-h2h { text-align: center; white-space: nowrap; }
+    td.col-h2h .h2h-badge { margin-left: 0; }
   </style>
-  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');})();</script>
 </head>
 <body>
-<nav class="tt-navbar">
-    <div class="tt-navbar-left">
-      <a href="index.html" class="tt-navbar-logo-link" aria-label="Home">
-        <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="8" fill="#2d5a27"/>
-          <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
-          <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
-        </svg>
+  <div id="h2h-tooltip"></div>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo-link" aria-label="Home">
+        <div class="nav-logo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </div>
       </a>
-      <a href="index.html" class="tt-navbar-brand">Tennis Tracker</a>
+      <span class="nav-brand">Tennis Tracker</span>
     </div>
-    <div class="tt-navbar-center">
-      <a href="2025-usta-norcal-national.html" class="tt-nav-link">Calendar</a>
-      <a href="player.html" class="tt-nav-link">Player</a>
-      <a href="ranking-simulator.html" class="tt-nav-link">Simulator</a>
-      <a href="usta-national-rankings.html" class="tt-nav-link">Rankings</a>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+        <a href="player.html" class="nav-link">Player</a>
+        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+      </div>
     </div>
-    <div class="tt-navbar-right">
-      <button class="tt-toggle-btn" id="tt-theme-toggle" aria-label="Toggle dark mode">
-        <span id="tt-theme-icon">🌙</span>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
       </button>
     </div>
   </nav>
-
-                <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-06T13:15:47-08:00" title="2026-02-06T13:15:47-08:00">
-    <span class="report-updated-badge__pill">Updated Feb 6, 2026 1:15 PM PST</span>
-  </div>
   <div class="desktop-view">
   <div class="report-header">
     <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
-      <img class="report-header-logo" src="assets/tennis-report/favicon-256.png" alt="Tennis report logo">
+      <svg class="report-header-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+        <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+        <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+      </svg>
     </a>
     <div class="report-header-text">
-	      <h1>Level 5 Open: FDT Level 5 Junior Singles Championship — Girls' 12 Singles</h1>
+      <h1>FDT Level 5 Junior Singles Championship</h1>
       <div class="tournament-dates-row">
         <div class="tournament-dates">
           January 31 - February 1, 2026
@@ -96,91 +139,31 @@
           <div class="deadline-date" id="registration-deadline-date">--</div>
         </div>
       </div>
-      <div class="tournament-info">
-	        <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" title="Open tournament page">Level 5 Open: FDT Level 5 Junior Singles Championship</a><br>
-        Willow Glen High School &amp; Middle School, San Jose, CA • 16 Players
+            <div class="tournament-info">
+        <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" title="Open tournament page">FDT Level 5 Junior Singles Championship</a><br>
+        Willow Glen High School, San Jose, CA • 24 Players
       </div>
     </div>
   </div>
-    <div class="table-meta">
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-03-31T20:55:24-07:00" title="2026-03-31T20:55:24-07:00">
+    <span class="report-updated-badge__pill">Updated Mar 31, 2026 8:55 PM PDT</span>
+  </div>
+  <div class="table-meta">
     <div class="key-stats">
-      <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">16</span></div>
-      <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">January 21, 2026 at 2:59 PM PST</span></div>
-      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">16</span></div>
+      <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
+      <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">Registration closed</span></div>
+      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">24</span></div>
     </div>
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
 
-  <section class="path-to-final" id="path-to-final">
-    <div class="path-to-final-header">
-      <div>
-        <h2 class="path-to-final-title" id="ptf-title">Path to Final</h2>
-        <div class="path-to-final-subtitle" id="ptf-subtitle"></div>
-      </div>
-	      <div class="ptf-controls">
-	        <a id="ptf-source" href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1/EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC" target="_blank" rel="noopener noreferrer" title="Open official draw on USTA PlayTennis">Official draw</a>
-	      </div>
-    </div>
-    <div id="ptf-body"></div>
-    <details class="ptf-import" id="ptf-import">
-      <summary>Paste official draw (JSON positions)</summary>
-      <textarea id="ptf-json" spellcheck="false" placeholder='Paste JSON array/object with bracket positions.\nExample: [\"Alexis Malakhova\",\"Grace Li\", ...]'></textarea>
-      <div class="ptf-import-actions">
-        <button class="ptf-button primary" id="ptf-apply" type="button">Apply</button>
-        <div class="ptf-error" id="ptf-error" aria-live="polite"></div>
-      </div>
-    </details>
-  </section>
-
-  <div id="player-match-results">
-<style id="player-match-results-style">
-  .pmr-block { max-width: 1000px; margin: 28px auto; padding: 20px 18px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); }
-  .pmr-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-  .pmr-header h2 { margin: 0; font-size: 18px; font-weight: 700; }
-  .pmr-summary { font-size: 14px; }
-  .pmr-result { font-weight: 700; color: var(--accent-report, #16a34a); }
-  .pmr-points { font-variant-numeric: tabular-nums; opacity: 0.85; }
-  .pmr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .pmr-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 6px 10px; border-bottom: 2px solid rgba(0,0,0,0.1); opacity: 0.7; }
-  .pmr-table td { padding: 8px 10px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; }
-  .pmr-round { font-weight: 700; font-size: 12px; white-space: nowrap; width: 60px; }
-  .pmr-wl { font-weight: 800; width: 24px; text-align: center; }
-  .pmr-win .pmr-wl { color: var(--accent-report, #16a34a); }
-  .pmr-loss .pmr-wl { color: #dc2626; }
-  .pmr-win { background: rgba(22, 163, 74, 0.04); }
-  .pmr-opponent { font-weight: 500; }
-  .pmr-partner { font-weight: 400; opacity: 0.7; font-size: 12px; }
-  .pmr-score { font-variant-numeric: tabular-nums; white-space: nowrap; opacity: 0.9; }
-
-  html[data-theme="dark"] .pmr-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
-  html[data-theme="dark"] .pmr-block h2 { color: #fff; }
-  html[data-theme="dark"] .pmr-table th { border-bottom-color: rgba(255,255,255,0.15); }
-  html[data-theme="dark"] .pmr-table td { border-bottom-color: rgba(255,255,255,0.08); }
-  html[data-theme="dark"] .pmr-win { background: rgba(34, 197, 94, 0.08); }
-  html[data-theme="dark"] .pmr-loss .pmr-wl { color: #f87171; }
-</style>
-<div class="pmr-block">
-  <div class="pmr-header">
-    <h2>Alexis Malakhova — Match Results</h2>
-    <span class="pmr-summary"><span class="pmr-result">Semifinals</span> · <span class="pmr-points">150 pts + 11 bonus</span></span>
-  </div>
-  <table class="pmr-table">
-    <thead><tr><th>Round</th><th></th><th>Opponent</th><th>Score</th></tr></thead>
-    <tbody>
-<tr class="pmr-loss"><td class="pmr-round">P-F</td><td class="pmr-wl">L</td><td class="pmr-opponent">Annabel HU</td><td class="pmr-score">6-7(4) 1-6</td></tr>
-<tr class="pmr-loss"><td class="pmr-round">SF</td><td class="pmr-wl">L</td><td class="pmr-opponent">Margaret DORAN</td><td class="pmr-score">2-6 2-6</td></tr>
-<tr class="pmr-win"><td class="pmr-round">QF</td><td class="pmr-wl">W</td><td class="pmr-opponent">Megan LAI</td><td class="pmr-score">6-1 0-6 [11-9]</td></tr>
-<tr class="pmr-win"><td class="pmr-round">R16</td><td class="pmr-wl">W</td><td class="pmr-opponent">Kendra WU</td><td class="pmr-score">6-4 6-3</td></tr>
-    </tbody>
-  </table>
-</div>
-</div><!-- /player-match-results -->
-<table>
+  <table id="players-table-main" class="players-table primary-table">
     <thead class="sticky-header">
       <tr>
         <th class="col-rank">#</th>
         <th class="sortable">First Name</th>
         <th class="sortable">Last Name</th>
+        <th class="col-h2h sortable">H2H</th>
         <th class="col-wtn sortable">WTN</th>
         <th class="col-utr sortable">UTR</th>
         <th class="col-national sortable">Nat Rank</th>
@@ -189,213 +172,77 @@
       </tr>
     </thead>
     <tbody>
-      <tr data-section-rank="12">
-        <td class="col-rank">1</td>
-        <td>Valentina</td>
-        <td>KUKEEVA</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">31.18</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3395363" target="_blank" rel="noopener noreferrer">5.28</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">301</a></td>
-        <td>Campbell CA</td>
-        <td style="display: none;">12</td>
-      </tr>
-      <tr data-section-rank="20">
-        <td class="col-rank">2</td>
-        <td>Kendra</td>
-        <td>WU</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018931899" target="_blank" rel="noopener noreferrer">32.77</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3113178" target="_blank" rel="noopener noreferrer">5.32</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018931899" target="_blank" rel="noopener noreferrer">382</a></td>
-        <td>Cupertino CA</td>
-        <td style="display: none;">20</td>
-      </tr>
-      <tr data-section-rank="27">
-        <td class="col-rank">3</td>
-        <td>Annabel</td>
-        <td>HU</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637000" target="_blank" rel="noopener noreferrer">33.64</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3095546" target="_blank" rel="noopener noreferrer">4.36</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637000" target="_blank" rel="noopener noreferrer">464</a></td>
-        <td>Palo Alto CA</td>
-        <td style="display: none;">27</td>
-      </tr>
-      <tr data-section-rank="28">
-        <td class="col-rank">4</td>
-        <td>Eileen</td>
-        <td>LI</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732" target="_blank" rel="noopener noreferrer">34.05</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3110205" target="_blank" rel="noopener noreferrer">4.29</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732" target="_blank" rel="noopener noreferrer">477</a></td>
-        <td>Sunnyvale CA</td>
-        <td style="display: none;">28</td>
-      </tr>
-      <tr data-section-rank="29">
-        <td class="col-rank">5</td>
-        <td>Margaret</td>
-        <td>DORAN</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019941530" target="_blank" rel="noopener noreferrer">31.82</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5713436" target="_blank" rel="noopener noreferrer">4.84</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019941530" target="_blank" rel="noopener noreferrer">486</a></td>
-        <td>Atherton CA</td>
-        <td style="display: none;">29</td>
-      </tr>
-      <tr data-section-rank="30">
-        <td class="col-rank">6</td>
-        <td>Angela</td>
-        <td>LIU</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018981779" target="_blank" rel="noopener noreferrer">34.46</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3914845" target="_blank" rel="noopener noreferrer">4.61</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018981779" target="_blank" rel="noopener noreferrer">524</a></td>
-        <td>Sunnyvale CA</td>
-        <td style="display: none;">30</td>
-      </tr>
-      <tr class="highlight-player" data-section-rank="34">
-        <td class="col-rank">7</td>
-        <td>Alexis</td>
-        <td>MALAKHOVA</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.81</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.07</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">589</a></td>
-        <td>Mountain View CA</td>
-        <td style="display: none;">34</td>
-      </tr>
-      <tr data-section-rank="38">
-        <td class="col-rank">8</td>
-        <td>Grace</td>
-        <td>LI</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018857955" target="_blank" rel="noopener noreferrer">35.18</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3291862" target="_blank" rel="noopener noreferrer">3.87</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018857955" target="_blank" rel="noopener noreferrer">652</a></td>
-        <td>Cupertino CA</td>
-        <td style="display: none;">38</td>
-      </tr>
-      <tr data-section-rank="41">
-        <td class="col-rank">9</td>
-        <td>Emma</td>
-        <td>LI</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736" target="_blank" rel="noopener noreferrer">35.55</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5524070" target="_blank" rel="noopener noreferrer">3.57</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736" target="_blank" rel="noopener noreferrer">687</a></td>
-        <td>Pleasanton CA</td>
-        <td style="display: none;">41</td>
-      </tr>
-      <tr data-section-rank="44">
-        <td class="col-rank">10</td>
-        <td>Sharanya</td>
-        <td>PRASAD</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018706747" target="_blank" rel="noopener noreferrer">36.55</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4232582" target="_blank" rel="noopener noreferrer">3.57</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018706747" target="_blank" rel="noopener noreferrer">754</a></td>
-        <td>Fremont CA</td>
-        <td style="display: none;">44</td>
-      </tr>
-      <tr data-section-rank="45">
-        <td class="col-rank">11</td>
-        <td>Megan</td>
-        <td>LAI</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678" target="_blank" rel="noopener noreferrer">33.94</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/5078823" target="_blank" rel="noopener noreferrer">3.80</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678" target="_blank" rel="noopener noreferrer">761</a></td>
-        <td>San Ramon CA</td>
-        <td style="display: none;">45</td>
-      </tr>
-      <tr data-section-rank="46">
-        <td class="col-rank">12</td>
-        <td>Avaline</td>
-        <td>WANG</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019122088" target="_blank" rel="noopener noreferrer">34.91</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3987069" target="_blank" rel="noopener noreferrer">3.68</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019122088" target="_blank" rel="noopener noreferrer">775</a></td>
-        <td>Saratoga CA</td>
-        <td style="display: none;">46</td>
-      </tr>
-      <tr data-section-rank="47">
-        <td class="col-rank">13</td>
-        <td>Amy</td>
-        <td>LI</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019389340" target="_blank" rel="noopener noreferrer">35.54</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4747020" target="_blank" rel="noopener noreferrer">3.38</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019389340" target="_blank" rel="noopener noreferrer">800</a></td>
-        <td>Saratoga CA</td>
-        <td style="display: none;">47</td>
-      </tr>
-      <tr data-section-rank="56">
-        <td class="col-rank">14</td>
-        <td>Ruoyu</td>
-        <td>SUN</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144" target="_blank" rel="noopener noreferrer">34.18</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4324163" target="_blank" rel="noopener noreferrer">3.98</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144" target="_blank" rel="noopener noreferrer">929</a></td>
-        <td>San Jose CA</td>
-        <td style="display: none;">56</td>
-      </tr>
-      <tr data-section-rank="57">
-        <td class="col-rank">15</td>
-        <td>Misha</td>
-        <td>KATARIA</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">33.30</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/4426031" target="_blank" rel="noopener noreferrer">4.21</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">955</a></td>
-        <td>Fremont CA</td>
-        <td style="display: none;">57</td>
-      </tr>
-      <tr data-section-rank="58">
-        <td class="col-rank">16</td>
-        <td>Akshaya</td>
-        <td>ASHOK</td>
-        <td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018948492" target="_blank" rel="noopener noreferrer">34.33</a></td>
-        <td class="col-utr"><a href="https://app.utrsports.net/profiles/3505558" target="_blank" rel="noopener noreferrer">3.63</a></td>
-        <td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018948492" target="_blank" rel="noopener noreferrer">968</a></td>
-        <td>Milpitas CA</td>
-        <td style="display: none;">58</td>
-      </tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-14b5582313c3c42fdae7" data-h2h-matches="1" data-player-key="KUKEEVA|VALENTINA" data-entry-status="entry" data-section-rank="9"><td class="col-rank">1</td><td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Valentina</a></td><td><a class="h2h-jump" href="#h2h-14b5582313c3c42fdae7">Kukeeva</a></td><td class="col-h2h" data-sort-val="-1"><span class="h2h-badge h2h-loss" data-h2h="[{&quot;d&quot;: &quot;2025-11-15&quot;, &quot;t&quot;: &quot;FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16&quot;, &quot;r&quot;: &quot;Quarterfinals&quot;, &quot;s&quot;: &quot;2-4 1-4&quot;, &quot;w&quot;: 0}]">0-1</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">31.59</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3395363" target="_blank" rel="noopener noreferrer">5.51</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018899502" target="_blank" rel="noopener noreferrer">214</a></td><td>Campbell CA</td><td style="display: none;">9</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-f4d05a48e18503f8b9e9" data-h2h-matches="3" data-player-key="WU|KENDRA" data-entry-status="entry" data-section-rank="21"><td class="col-rank">2</td><td><a class="h2h-jump" href="#h2h-f4d05a48e18503f8b9e9">Kendra</a></td><td><a class="h2h-jump" href="#h2h-f4d05a48e18503f8b9e9">Wu</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2026-01-31&quot;, &quot;t&quot;: &quot;Open Level 5 Championship Singles - G12&quot;, &quot;r&quot;: &quot;R16&quot;, &quot;s&quot;: &quot;6-4 6-3&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2026-01-31&quot;, &quot;t&quot;: &quot;FDT Level 5 Junior Singles Championship&quot;, &quot;r&quot;: &quot;Round of 16&quot;, &quot;s&quot;: &quot;6-4 6-3&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2024-06-12&quot;, &quot;t&quot;: &quot;Bay Area Tennis Singles Tournament 2024 07 Pearl Singles&quot;, &quot;r&quot;: &quot;&quot;, &quot;s&quot;: &quot;1-6 4-6&quot;, &quot;w&quot;: 0}]">2-1</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018931899" target="_blank" rel="noopener noreferrer">32.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3113178" target="_blank" rel="noopener noreferrer">5.39</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018931899" target="_blank" rel="noopener noreferrer">399</a></td><td>Cupertino CA</td><td style="display: none;">21</td></tr>
+      <tr class="entry-list-player" data-player-key="LI|EILEEN" data-entry-status="entry" data-section-rank="28"><td class="col-rank">3</td><td>Eileen</td><td>Li</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732" target="_blank" rel="noopener noreferrer">34.05</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3110205" target="_blank" rel="noopener noreferrer">4.46</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018605732" target="_blank" rel="noopener noreferrer">453</a></td><td>Sunnyvale CA</td><td style="display: none;">28</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-b21504f37f617185000a" data-h2h-matches="4" data-player-key="HU|ANNABEL" data-entry-status="entry" data-section-rank="30"><td class="col-rank">4</td><td><a class="h2h-jump" href="#h2h-b21504f37f617185000a">Annabel</a></td><td><a class="h2h-jump" href="#h2h-b21504f37f617185000a">Hu</a></td><td class="col-h2h" data-sort-val="-4"><span class="h2h-badge h2h-loss" data-h2h="[{&quot;d&quot;: &quot;2026-02-01&quot;, &quot;t&quot;: &quot;Open Level 5 Championship Singles - G12&quot;, &quot;r&quot;: &quot;PL-Final&quot;, &quot;s&quot;: &quot;6-7(4) 1-6&quot;, &quot;w&quot;: 0}, {&quot;d&quot;: &quot;2026-01-31&quot;, &quot;t&quot;: &quot;FDT Level 5 Junior Singles Championship&quot;, &quot;r&quot;: &quot;&quot;, &quot;s&quot;: &quot;6-7(4) 1-6&quot;, &quot;w&quot;: 0}, {&quot;d&quot;: &quot;2025-07-19&quot;, &quot;t&quot;: &quot;Chamisal Level 5 Junior 12s Championships - Singles &amp; Doubles JUL 19 - 21&quot;, &quot;r&quot;: &quot;Round of 16&quot;, &quot;s&quot;: &quot;1-6 1-6&quot;, &quot;w&quot;: 0}, {&quot;d&quot;: &quot;2025-04-05&quot;, &quot;t&quot;: &quot;NPT Level 5 Junior 12s &amp; 14s Super Series APR 5 - 6&quot;, &quot;r&quot;: &quot;E-QF&quot;, &quot;s&quot;: &quot;6-4 3-6 1-6&quot;, &quot;w&quot;: 0}]">0-4</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637000" target="_blank" rel="noopener noreferrer">33.64</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3095546" target="_blank" rel="noopener noreferrer">4.61</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018637000" target="_blank" rel="noopener noreferrer">478</a></td><td>Palo Alto CA</td><td style="display: none;">30</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-72a97c25b1c76ff8218b" data-h2h-matches="2" data-player-key="LIU|ANGELA" data-entry-status="entry" data-section-rank="31"><td class="col-rank">5</td><td><a class="h2h-jump" href="#h2h-72a97c25b1c76ff8218b">Angela</a></td><td><a class="h2h-jump" href="#h2h-72a97c25b1c76ff8218b">Liu</a></td><td class="col-h2h" data-sort-val="2"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2025-11-15&quot;, &quot;t&quot;: &quot;FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16&quot;, &quot;r&quot;: &quot;Round of 32&quot;, &quot;s&quot;: &quot;5-3 4-1&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2025-01-25&quot;, &quot;t&quot;: &quot;NPT Level 6 Junior Open JAN 25 - 26&quot;, &quot;r&quot;: &quot;Final&quot;, &quot;s&quot;: &quot;6-0 6-1&quot;, &quot;w&quot;: 1}]">2-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018981779" target="_blank" rel="noopener noreferrer">34.32</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3914845" target="_blank" rel="noopener noreferrer">4.58</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018981779" target="_blank" rel="noopener noreferrer">512</a></td><td>Sunnyvale CA</td><td style="display: none;">31</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-feaa85cd64930c5a39ea" data-h2h-matches="3" data-player-key="DORAN|MARGARET" data-entry-status="entry" data-section-rank="29"><td class="col-rank">6</td><td><a class="h2h-jump" href="#h2h-feaa85cd64930c5a39ea">Margaret</a></td><td><a class="h2h-jump" href="#h2h-feaa85cd64930c5a39ea">Doran</a></td><td class="col-h2h" data-sort-val="-3"><span class="h2h-badge h2h-loss" data-h2h="[{&quot;d&quot;: &quot;2026-02-01&quot;, &quot;t&quot;: &quot;Open Level 5 Championship Singles - G12&quot;, &quot;r&quot;: &quot;Semifinals&quot;, &quot;s&quot;: &quot;2-6 2-6&quot;, &quot;w&quot;: 0}, {&quot;d&quot;: &quot;2026-01-31&quot;, &quot;t&quot;: &quot;FDT Level 5 Junior Singles Championship&quot;, &quot;r&quot;: &quot;Semifinals&quot;, &quot;s&quot;: &quot;2-6 2-6&quot;, &quot;w&quot;: 0}, {&quot;d&quot;: &quot;2026-01-10&quot;, &quot;t&quot;: &quot;FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18&quot;, &quot;r&quot;: &quot;&quot;, &quot;s&quot;: &quot;0-4 2-4&quot;, &quot;w&quot;: 0}]">0-3</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019941530" target="_blank" rel="noopener noreferrer">31.76</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5713436" target="_blank" rel="noopener noreferrer">5.11</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019941530" target="_blank" rel="noopener noreferrer">462</a></td><td>Atherton CA</td><td style="display: none;">29</td></tr>
+      <tr class="highlight-player entry-list-player" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="entry" data-section-rank="23"><td class="col-rank">7</td><td>Alexis</td><td>Malakhova</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.34</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.25</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">405</a></td><td>Mountain View CA</td><td style="display: none;">23</td></tr>
+      <tr class="entry-list-player" data-player-key="LI|GRACE" data-entry-status="entry" data-section-rank="40"><td class="col-rank">8</td><td>Grace</td><td>Li</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018857955" target="_blank" rel="noopener noreferrer">35.18</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3291862" target="_blank" rel="noopener noreferrer">4.00</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018857955" target="_blank" rel="noopener noreferrer">658</a></td><td>Cupertino CA</td><td style="display: none;">40</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-7e0b1ef210aa91f133ee" data-h2h-matches="1" data-player-key="LI|EMMA" data-entry-status="entry" data-section-rank="43"><td class="col-rank">9</td><td><a class="h2h-jump" href="#h2h-7e0b1ef210aa91f133ee">Emma</a></td><td><a class="h2h-jump" href="#h2h-7e0b1ef210aa91f133ee">Li</a></td><td class="col-h2h" data-sort-val="-1"><span class="h2h-badge h2h-loss" data-h2h="[{&quot;d&quot;: &quot;2024-03-30&quot;, &quot;t&quot;: &quot;Arora Tennis Level 6 Junior Open MAR 30 - 31&quot;, &quot;r&quot;: &quot;Round of 16&quot;, &quot;s&quot;: &quot;1-6 3-6&quot;, &quot;w&quot;: 0}]">0-1</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736" target="_blank" rel="noopener noreferrer">34.96</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5524070" target="_blank" rel="noopener noreferrer">3.78</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018930736" target="_blank" rel="noopener noreferrer">687</a></td><td>Pleasanton CA</td><td style="display: none;">43</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-e57ad97c73764d16f7e9" data-h2h-matches="2" data-player-key="PRASAD|SHARANYA" data-entry-status="entry" data-section-rank="67"><td class="col-rank">10</td><td><a class="h2h-jump" href="#h2h-e57ad97c73764d16f7e9">Sharanya</a></td><td><a class="h2h-jump" href="#h2h-e57ad97c73764d16f7e9">Prasad</a></td><td class="col-h2h" data-sort-val="2"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2024-11-30&quot;, &quot;t&quot;: &quot;N.P.T. Level 6 Junior Open&quot;, &quot;r&quot;: &quot;C-QF-Q&quot;, &quot;s&quot;: &quot;4-0 4-0&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2024-10-12&quot;, &quot;t&quot;: &quot;N.P.T. Level 6 Junior Open OCT 12 - 13&quot;, &quot;r&quot;: &quot;C-QF&quot;, &quot;s&quot;: &quot;4-1 1-4 1-0&quot;, &quot;w&quot;: 1}]">2-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018706747" target="_blank" rel="noopener noreferrer">36.35</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4232582" target="_blank" rel="noopener noreferrer">3.51</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018706747" target="_blank" rel="noopener noreferrer">1114</a></td><td>Fremont CA</td><td style="display: none;">67</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-d9eebd7bce6e344eb929" data-h2h-matches="3" data-player-key="LAI|MEGAN" data-entry-status="entry" data-section-rank="36"><td class="col-rank">11</td><td><a class="h2h-jump" href="#h2h-d9eebd7bce6e344eb929">Megan</a></td><td><a class="h2h-jump" href="#h2h-d9eebd7bce6e344eb929">Lai</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2026-01-31&quot;, &quot;t&quot;: &quot;Open Level 5 Championship Singles - G12&quot;, &quot;r&quot;: &quot;Quarterfinals&quot;, &quot;s&quot;: &quot;6-1 0-6 [9-11]&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2026-01-31&quot;, &quot;t&quot;: &quot;FDT Level 5 Junior Singles Championship&quot;, &quot;r&quot;: &quot;Quarterfinals&quot;, &quot;s&quot;: &quot;6-1 0-6 MTB 11-9&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2025-10-25&quot;, &quot;t&quot;: &quot;BAWT \&quot;THE GOAT\&quot; Level 6 Junior Open OCT 25 - 26&quot;, &quot;r&quot;: &quot;Semifinals&quot;, &quot;s&quot;: &quot;4-6 1-6&quot;, &quot;w&quot;: 0}]">2-1</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678" target="_blank" rel="noopener noreferrer">33.35</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5078823" target="_blank" rel="noopener noreferrer">4.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019656678" target="_blank" rel="noopener noreferrer">609</a></td><td>San Ramon CA</td><td style="display: none;">36</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-0c6d43b996cb16c947fc" data-h2h-matches="1" data-player-key="LI|AMY" data-entry-status="entry" data-section-rank="46"><td class="col-rank">12</td><td><a class="h2h-jump" href="#h2h-0c6d43b996cb16c947fc">Amy</a></td><td><a class="h2h-jump" href="#h2h-0c6d43b996cb16c947fc">Li</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2024-09-01&quot;, &quot;t&quot;: &quot;Equal Chance Level 7 Junior Challenger - SEP 1&quot;, &quot;r&quot;: &quot;Round 1&quot;, &quot;s&quot;: &quot;6-1&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019389340" target="_blank" rel="noopener noreferrer">34.89</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4747020" target="_blank" rel="noopener noreferrer">3.72</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019389340" target="_blank" rel="noopener noreferrer">733</a></td><td>Saratoga CA</td><td style="display: none;">46</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-14bd73cc999d6d6f6185" data-h2h-matches="1" data-player-key="WANG|AVALINE" data-entry-status="entry" data-section-rank="50"><td class="col-rank">13</td><td><a class="h2h-jump" href="#h2h-14bd73cc999d6d6f6185">Avaline</a></td><td><a class="h2h-jump" href="#h2h-14bd73cc999d6d6f6185">Wang</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2024-11-30&quot;, &quot;t&quot;: &quot;N.P.T. Level 6 Junior Open&quot;, &quot;r&quot;: &quot;C-QF&quot;, &quot;s&quot;: &quot;4-0 4-1&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019122088" target="_blank" rel="noopener noreferrer">34.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3987069" target="_blank" rel="noopener noreferrer">3.97</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019122088" target="_blank" rel="noopener noreferrer">793</a></td><td>Saratoga CA</td><td style="display: none;">50</td></tr>
+      <tr class="entry-list-player" data-h2h="1" data-h2h-anchor="h2h-91d717e4e21e60aa6035" data-h2h-matches="1" data-player-key="KATARIA|MISHA" data-entry-status="entry" data-section-rank="45"><td class="col-rank">14</td><td><a class="h2h-jump" href="#h2h-91d717e4e21e60aa6035">Misha</a></td><td><a class="h2h-jump" href="#h2h-91d717e4e21e60aa6035">Kataria</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2026-02-14&quot;, &quot;t&quot;: &quot;JMG Academy Presidents' Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16&quot;, &quot;r&quot;: &quot;Final&quot;, &quot;s&quot;: &quot;6-4 6-4&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">32.90</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4426031" target="_blank" rel="noopener noreferrer">4.58</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835" target="_blank" rel="noopener noreferrer">705</a></td><td>Fremont CA</td><td style="display: none;">45</td></tr>
+      <tr class="entry-list-player" data-player-key="SUN|RUOYU" data-entry-status="entry" data-section-rank="58"><td class="col-rank">15</td><td>Ruoyu</td><td>Sun</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144" target="_blank" rel="noopener noreferrer">34.30</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4324163" target="_blank" rel="noopener noreferrer">4.10</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144" target="_blank" rel="noopener noreferrer">960</a></td><td>San Jose CA</td><td style="display: none;">58</td></tr>
+      <tr class="entry-list-player" data-player-key="ASHOK|AKSHAYA" data-entry-status="entry" data-section-rank="54"><td class="col-rank">16</td><td>Akshaya</td><td>Ashok</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018948492" target="_blank" rel="noopener noreferrer">33.09</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3505558" target="_blank" rel="noopener noreferrer">4.16</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018948492" target="_blank" rel="noopener noreferrer">904</a></td><td>Milpitas CA</td><td style="display: none;">54</td></tr>
+      <tr class="alternate-player" data-player-key="SUN|MAY" data-entry-status="alternate" data-section-rank="56"><td class="col-rank">17</td><td>May</td><td>Sun</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027" target="_blank" rel="noopener noreferrer">34.62</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3860946" target="_blank" rel="noopener noreferrer">3.76</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027" target="_blank" rel="noopener noreferrer">926</a></td><td>Sunnyvale CA</td><td style="display: none;">56</td></tr>
+      <tr class="alternate-player" data-h2h="1" data-h2h-anchor="h2h-8e42b8d7e68bd67dfe83" data-h2h-matches="1" data-player-key="BHAMBANI|SANIA" data-entry-status="alternate" data-section-rank="65"><td class="col-rank">18</td><td><a class="h2h-jump" href="#h2h-8e42b8d7e68bd67dfe83">Sania</a></td><td><a class="h2h-jump" href="#h2h-8e42b8d7e68bd67dfe83">Bhambani</a></td><td class="col-h2h" data-sort-val="1"><span class="h2h-badge h2h-win" data-h2h="[{&quot;d&quot;: &quot;2025-01-25&quot;, &quot;t&quot;: &quot;NPT Level 6 Junior Open JAN 25 - 26&quot;, &quot;r&quot;: &quot;Semifinals&quot;, &quot;s&quot;: &quot;6-2 7-5&quot;, &quot;w&quot;: 1}]">1-0</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668291" target="_blank" rel="noopener noreferrer">35.55</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3114224" target="_blank" rel="noopener noreferrer">3.09</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668291" target="_blank" rel="noopener noreferrer">1099</a></td><td>Saratoga CA</td><td style="display: none;">65</td></tr>
+      <tr class="alternate-player" data-player-key="MODI|AASHNA" data-entry-status="alternate" data-section-rank="76"><td class="col-rank">19</td><td>Aashna</td><td>Modi</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563728" target="_blank" rel="noopener noreferrer">35.45</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3173877" target="_blank" rel="noopener noreferrer">3.26</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563728" target="_blank" rel="noopener noreferrer">1341</a></td><td>San Jose CA</td><td style="display: none;">76</td></tr>
+      <tr class="alternate-player" data-player-key="KNAPP|OLIVIA" data-entry-status="alternate" data-section-rank="85"><td class="col-rank">20</td><td>Olivia</td><td>Knapp</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018820003" target="_blank" rel="noopener noreferrer">35.97</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610832" target="_blank" rel="noopener noreferrer">3.14</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018820003" target="_blank" rel="noopener noreferrer">1434</a></td><td>Menlo Park CA</td><td style="display: none;">85</td></tr>
+      <tr class="alternate-player" data-player-key="CAO|KATHERINE" data-entry-status="alternate" data-section-rank="84"><td class="col-rank">21</td><td>Katherine</td><td>Cao</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019303547" target="_blank" rel="noopener noreferrer">35.53</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5096309" target="_blank" rel="noopener noreferrer">2.73</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019303547" target="_blank" rel="noopener noreferrer">1419</a></td><td>Los Altos CA</td><td style="display: none;">84</td></tr>
+      <tr class="alternate-player" data-player-key="LI|STEPHANIE" data-entry-status="alternate" data-section-rank="66"><td class="col-rank">22</td><td>Stephanie</td><td>Li</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832557" target="_blank" rel="noopener noreferrer">33.42</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4315954" target="_blank" rel="noopener noreferrer">3.92</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832557" target="_blank" rel="noopener noreferrer">1100</a></td><td>Cupertino CA</td><td style="display: none;">66</td></tr>
+      <tr class="alternate-player" data-player-key="GOUDIE|ZOE" data-entry-status="alternate" data-section-rank="171"><td class="col-rank">23</td><td>Zoe</td><td>Goudie</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018414360" target="_blank" rel="noopener noreferrer">38.02</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5123031" target="_blank" rel="noopener noreferrer">N/A</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018414360" target="_blank" rel="noopener noreferrer">2775</a></td><td>Oakley CA</td><td style="display: none;">171</td></tr>
+      <tr class="alternate-player" data-player-key="XIE|CECILIA" data-entry-status="alternate" data-section-rank="119"><td class="col-rank">24</td><td>Cecilia</td><td>Xie</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018947627" target="_blank" rel="noopener noreferrer">36.86</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5172705" target="_blank" rel="noopener noreferrer">2.04</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018947627" target="_blank" rel="noopener noreferrer">1854</a></td><td>Campbell CA</td><td style="display: none;">119</td></tr>
     </tbody>
   </table>
 
   <div class="utr-histogram">
-    <h2>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span></h2>
-    <div id="utr-histogram-chart" class="utr-histogram-chart"></div>
+    <h3>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span></h3>
+    <div id="utr-histogram-chart" class="utr-histogram-chart" data-utr-table="#players-table-main"></div>
     <div class="utr-histogram-caption" id="utr-histogram-caption">Based on UTR values from the player list.</div>
   </div>
 
-                                    <div class="stats-section">
+                          <div class="stats-section">
     <h2>Tournament Statistics</h2>
     <div class="stats-grid">
       <div class="stat-box">
         <div class="stat-label">Total Players</div>
-        <div class="stat-value">16</div>
+        <div class="stat-value">24</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">WTN Range</div>
-        <div class="stat-value">31.18 - 36.55</div>
+        <div class="stat-value">31.59 - 38.02</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg WTN</div>
-        <div class="stat-value">34.08</div>
+        <div class="stat-value">34.41</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
-        <div class="stat-value">4.15</div>
+        <div class="stat-value">4.00</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Draw Size</div>
-        <div class="stat-value">16</div>
+        <div class="stat-value">32</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Registered</div>
-        <div class="stat-value">16</div>
+        <div class="stat-value">24</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Registration Closes</div>
-        <div class="stat-value">See USTA tournament page</div>
+        <div class="stat-value">Registration closed</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Best Nat Rank</div>
-        <div class="stat-value">301</div>
+        <div class="stat-value">214</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
-        <div class="stat-value">5.32</div>
+        <div class="stat-value">5.51</div>
       </div>
     </div>
   </div>
@@ -406,41 +253,41 @@
     <div class="selection-callout">Details are based on the current USTA PlayTennis entry list.</div>
     <div class="detail-row">
       <span class="detail-label">Draw Size:</span>
-      <span class="detail-value">16</span>
+      <span class="detail-value">32</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Registered:</span>
-      <span class="detail-value">16</span>
+      <span class="detail-value">24</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Registration Closes:</span>
-      <span class="detail-value">January 21, 2026 at 2:59 PM PST</span>
+      <span class="detail-value">Registration closed</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Selection / Seeding:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Willow Glen MS/HS, Piedmont Hills HS and/or Yerba Buena HS in SJ. It is important you go to the correct courts as delay penalites will be strictly enforced! You are responsible for checking the Draws for each match and checking the v. Selection &amp; seeding will be top-down, utilizing the latest National Standings List.</span>
     </div>
 
     <h3>Format & Scoring</h3>
     <div class="detail-row">
       <span class="detail-label">Match Format:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Feed-in consolation or modified Feed-in (depending on draw limit), with playoff for 3rd/4th place. Main Draw/Playoff will play best of 3 Tiebreak Sets &amp; 10-point TB in lieu of a 3rd set. Consolation will play 2 short sets to 4, 7 pt TB if sets are split, N0-Ad scoring. Inclement weather may alter the format or, in...</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Tiebreaks:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Feed-in consolation or modified Feed-in (depending on draw limit), with playoff for 3rd/4th place. Main Draw/Playoff will play best of 3 Tiebreak Sets &amp; 10-point TB in lieu of a 3rd set. Consolation will play 2 short sets to 4, 7 pt TB if sets are split, N0-Ad scoring. Inclement weather may alter the format or, in...</span>
     </div>
 
     <h3>Venue Information</h3>
     <div class="detail-row">
       <span class="detail-label">Site:</span>
-      <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=Willow+Glen+High+School+San+Jose+CA" target="_blank" style="color: #4472C4; text-decoration: none;">Willow Glen High School &amp; Middle School, San Jose, CA</a></span>
+      <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=Willow Glen High School San Jose CA" target="_blank" style="color: #4472C4; text-decoration: none;">Willow Glen High School, San Jose, CA</a></span>
     </div>
 
     <h3>Tournament Location</h3>
     <div class="detail-row">
       <span class="detail-label">Tournament Location:</span>
-      <span class="detail-value">Willow Glen High School &amp; Middle School, San Jose, CA</span>
+      <span class="detail-value">Willow Glen High School, San Jose, CA</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Tournament Dates:</span>
@@ -450,26 +297,26 @@
     <h3>Tournament Contact</h3>
     <div class="detail-row">
       <span class="detail-label">Tournament Director:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">Lyn Pasqua</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Email:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">craig@fourdirectionstennis.net</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Phone:</span>
-      <span class="detail-value">See USTA tournament page</span>
+      <span class="detail-value">408-590-7347</span>
     </div>
 
-    <div class="important-note">
-      <strong>Note:</strong> Registration status and roster are updated daily from USTA PlayTennis.
-    </div>
-  </div>
+	  </div>
 
-  <div class="desktop-view-toggle">
-    <a href="#" id="desktop-toggle-mobile">View Mobile Version</a>
-  </div>
-  </div><!-- end desktop-view -->
+    <!-- Alexis vs roster match-history (desktop slot) -->
+    <div id="alexis-h2h-slot-desktop"></div>
+
+	  <div class="desktop-view-toggle">
+	    <a href="#" id="desktop-toggle-mobile">View Mobile Version</a>
+	  </div>
+	  </div><!-- end desktop-view -->
 
   <!-- Mobile View Container -->
   <div class="mobile-view">
@@ -477,7 +324,11 @@
     <header class="mobile-header">
       <div class="mobile-header-top">
         <a class="mobile-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
-          <img src="assets/tennis-report/favicon-256.png" alt="Logo" class="mobile-header-logo">
+          <svg class="mobile-header-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
         </a>
         <div class="mobile-header-content">
           <h1 class="mobile-header-title" id="mobile-title"></h1>
@@ -493,8 +344,8 @@
     <!-- Hero Stats -->
     <div class="mobile-hero-stats">
       <!-- Tournament Name Link (inside card) -->
-      <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
-	        Level 5 Open: FDT Level 5 Junior Singles Championship
+      <a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/overview/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
+        FDT Level 5 Junior Singles Championship
       </a>
 
       <!-- Stats Grid -->
@@ -520,15 +371,6 @@
     <!-- Position Gauge -->
     <div class="mobile-position-gauge" id="mobile-position-gauge"></div>
 
-    <!-- Path to Final -->
-    <div class="mobile-section-header">
-      <span class="mobile-section-title" id="mobile-ptf-title">Path to Final</span>
-      <a class="mobile-section-link" id="mobile-ptf-source" href="#" target="_blank" rel="noopener noreferrer">Official draw</a>
-    </div>
-    <div class="mobile-path-section">
-      <div class="mobile-path-card" id="mobile-path-to-final"></div>
-    </div>
-
     <!-- UTR Distribution -->
     <div class="mobile-section-header">
       <span class="mobile-section-title">UTR Distribution</span>
@@ -552,25 +394,54 @@
     <!-- Tournament Details -->
     <div class="mobile-section-header">
       <span class="mobile-section-title">Tournament Details</span>
-    </div>
-    <div class="mobile-info-section" id="mobile-info-section"></div>
+	    </div>
+	    <div class="mobile-info-section" id="mobile-info-section"></div>
 
-    <!-- View Toggle -->
-    <div class="mobile-view-toggle">
-      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
-    </div>
+	    <!-- Alexis vs roster match-history (mobile slot) -->
+	    <div id="alexis-h2h-slot-mobile"></div>
+
+	    <!-- View Toggle -->
+	    <div class="mobile-view-toggle">
+	      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
+	    </div>
   </div><!-- end mobile-view -->
+<!-- PRIMARY_ROSTER_H2H_START -->
+<div id="alexis-roster-h2h-wrapper" data-h2h-wrapper="primary-roster-h2h-wrapper">
 
-  <!-- Mobile View JavaScript -->
+<script>(function(){
+  function h2hToggleMore(btn){
+    var gid=btn.getAttribute('data-gid');
+    var rows=document.querySelectorAll('.h2h-match[data-gid="'+gid+'"]');
+    var open=btn.getAttribute('data-open')==='1';
+    rows.forEach(function(r){r.classList.toggle('h2h-match-hidden',open);});
+    btn.setAttribute('data-open',open?'0':'1');
+  }
+  window.h2hToggleMore=h2hToggleMore;
+})();</script>
+<section class="h2h-block" id="primary-roster-h2h">
+  <div class="h2h-section-header">
+    <h2 class="h2h-section-title">Alexis Malakhova vs This Roster</h2>
+    <span class="h2h-section-subtitle">12 opponents in this draw</span>
+  </div>
+  <div class="h2h-chips"><a class="h2h-chip" href="#h2h-91d717e4e21e60aa6035"><span class="h2h-chip-name">Misha Kataria</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-b21504f37f617185000a"><span class="h2h-chip-name">Annabel Hu</span><span class="h2h-chip-record">H2H 0–4</span></a><a class="h2h-chip" href="#h2h-feaa85cd64930c5a39ea"><span class="h2h-chip-name">Margaret Doran</span><span class="h2h-chip-record">H2H 0–3</span></a><a class="h2h-chip" href="#h2h-d9eebd7bce6e344eb929"><span class="h2h-chip-name">Megan Lai</span><span class="h2h-chip-record">H2H 2–1</span></a><a class="h2h-chip" href="#h2h-f4d05a48e18503f8b9e9"><span class="h2h-chip-name">Kendra Wu</span><span class="h2h-chip-record">H2H 2–1</span></a><a class="h2h-chip" href="#h2h-72a97c25b1c76ff8218b"><span class="h2h-chip-name">Angela Liu</span><span class="h2h-chip-record">H2H 2–0</span></a><a class="h2h-chip" href="#h2h-14b5582313c3c42fdae7"><span class="h2h-chip-name">Valentina Kukeeva</span><span class="h2h-chip-record">H2H 0–1</span></a><a class="h2h-chip" href="#h2h-8e42b8d7e68bd67dfe83"><span class="h2h-chip-name">Sania Bhambani</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-14bd73cc999d6d6f6185"><span class="h2h-chip-name">Avaline Wang</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-e57ad97c73764d16f7e9"><span class="h2h-chip-name">Sharanya Prasad</span><span class="h2h-chip-record">H2H 2–0</span></a><a class="h2h-chip" href="#h2h-0c6d43b996cb16c947fc"><span class="h2h-chip-name">Amy Li</span><span class="h2h-chip-record">H2H 1–0</span></a><a class="h2h-chip" href="#h2h-7e0b1ef210aa91f133ee"><span class="h2h-chip-name">Emma Li</span><span class="h2h-chip-record">H2H 0–1</span></a></div>
+  <div class="h2h-player-card" id="h2h-91d717e4e21e60aa6035" data-h2h-player-id="player:91d717e4e21e60aa6035"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Misha Kataria</span><span class="h2h-player-loc">Fremont CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Feb 14th, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">JMG Academy Presidents&#x27; Day Level 5 Junior 12s, 14s &amp; 18s Championships FEB 14 - 16</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · JMG Academy Presidents&#x27; Day</div></div><div class="h2h-match-score">6-4 6-4</div></div></div></div><div class="h2h-player-card" id="h2h-b21504f37f617185000a" data-h2h-player-id="player:b21504f37f617185000a"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Annabel Hu</span><span class="h2h-player-loc">Palo Alto CA</span></div><div class="h2h-record-summary">H2H 0–4</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Feb 1st, 2026</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main"><a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer">Open Level 5 Championship Singles - G12</a></div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under Singles · Open</div></div><div class="h2h-match-score">6-7(4) 1-6</div></div><div class="h2h-match"><div class="h2h-match-date">Jan 31st, 2026</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 5 Junior Singles Championship</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">6-7(4) 1-6</div></div><div class="h2h-match"><div class="h2h-match-date">Jul 19th, 2025</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">Chamisal Level 5 Junior 12s Championships - Singles &amp; Doubles JUL 19 - 21</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · Chamisal</div></div><div class="h2h-match-score">1-6 1-6</div></div><div class="h2h-match h2h-match-hidden" data-gid="h2h-b21504f37f617185000a"><div class="h2h-match-date">Apr 5th, 2025</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">NPT Level 5 Junior 12s &amp; 14s Super Series APR 5 - 6</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">6-4 3-6 1-6</div></div></div><div class="h2h-show-more-row"><button class="h2h-show-more" data-gid="h2h-b21504f37f617185000a" data-open="0" onclick="h2hToggleMore(this)" aria-label="Show 1 more match"><svg class="h2h-smc" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,5 7,9.5 11,5"/></svg><span class="h2h-smn">+1</span></button></div></div><div class="h2h-player-card" id="h2h-feaa85cd64930c5a39ea" data-h2h-player-id="player:feaa85cd64930c5a39ea"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Margaret Doran</span><span class="h2h-player-loc">Atherton CA</span></div><div class="h2h-record-summary">H2H 0–3</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Feb 1st, 2026</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main"><a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer">Open Level 5 Championship Singles - G12</a></div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under Singles · Open</div></div><div class="h2h-match-score">2-6 2-6</div></div><div class="h2h-match"><div class="h2h-match-date">Jan 31st, 2026</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 5 Junior Singles Championship</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">2-6 2-6</div></div><div class="h2h-match"><div class="h2h-match-date">Jan 10th, 2026</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 4 Junior 12s &amp; 14s Singles Excellence JAN 10 - 18</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">0-4 2-4</div></div></div></div><div class="h2h-player-card" id="h2h-d9eebd7bce6e344eb929" data-h2h-player-id="player:d9eebd7bce6e344eb929"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Megan Lai</span><span class="h2h-player-loc">San Ramon CA</span></div><div class="h2h-record-summary">H2H 2–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Jan 31st, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main"><a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer">Open Level 5 Championship Singles - G12</a></div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under Singles · Open</div></div><div class="h2h-match-score">6-1 0-6 [9-11]</div></div><div class="h2h-match"><div class="h2h-match-date">Jan 31st, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 5 Junior Singles Championship</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">6-1 0-6 MTB 11-9</div></div><div class="h2h-match"><div class="h2h-match-date">Oct 25th, 2025</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">BAWT &quot;THE GOAT&quot; Level 6 Junior Open OCT 25 - 26</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">4-6 1-6</div></div></div></div><div class="h2h-player-card" id="h2h-f4d05a48e18503f8b9e9" data-h2h-player-id="player:f4d05a48e18503f8b9e9"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Kendra Wu</span><span class="h2h-player-loc">Cupertino CA</span></div><div class="h2h-record-summary">H2H 2–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Jan 31st, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main"><a href="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1" target="_blank" rel="noopener noreferrer">Open Level 5 Championship Singles - G12</a></div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under Singles · Open</div></div><div class="h2h-match-score">6-4 6-3</div></div><div class="h2h-match"><div class="h2h-match-date">Jan 31st, 2026</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 5 Junior Singles Championship</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">6-4 6-3</div></div><div class="h2h-match"><div class="h2h-match-date">Jun 12th, 2024</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">Bay Area Tennis Singles Tournament 2024 07 Pearl Singles</div></div><div class="h2h-match-score">1-6 4-6</div></div></div></div><div class="h2h-player-card" id="h2h-72a97c25b1c76ff8218b" data-h2h-player-id="player:72a97c25b1c76ff8218b"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Angela Liu</span><span class="h2h-player-loc">Sunnyvale CA</span></div><div class="h2h-record-summary">H2H 2–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Nov 15th, 2025</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">5-3 4-1</div></div><div class="h2h-match"><div class="h2h-match-date">Jan 25th, 2025</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">NPT Level 6 Junior Open JAN 25 - 26</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">6-0 6-1</div></div></div></div><div class="h2h-player-card" id="h2h-14b5582313c3c42fdae7" data-h2h-player-id="player:14b5582313c3c42fdae7"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Valentina Kukeeva</span><span class="h2h-player-loc">Campbell CA</span></div><div class="h2h-record-summary">H2H 0–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Nov 15th, 2025</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">FDT Level 5 Junior 12s, 16s &amp; 18s Singles Championship NOV 15 - 16</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">2-4 1-4</div></div></div></div><div class="h2h-player-card" id="h2h-8e42b8d7e68bd67dfe83" data-h2h-player-id="player:8e42b8d7e68bd67dfe83"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Sania Bhambani</span><span class="h2h-player-loc">Saratoga CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Jan 25th, 2025</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">NPT Level 6 Junior Open JAN 25 - 26</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles</div></div><div class="h2h-match-score">6-2 7-5</div></div></div></div><div class="h2h-player-card" id="h2h-14bd73cc999d6d6f6185" data-h2h-player-id="player:14bd73cc999d6d6f6185"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Avaline Wang</span><span class="h2h-player-loc">Saratoga CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Nov 30th, 2024</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">N.P.T. Level 6 Junior Open</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · N.P.T.</div></div><div class="h2h-match-score">4-0 4-1</div></div></div></div><div class="h2h-player-card" id="h2h-e57ad97c73764d16f7e9" data-h2h-player-id="player:e57ad97c73764d16f7e9"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Sharanya Prasad</span><span class="h2h-player-loc">Fremont CA</span></div><div class="h2h-record-summary">H2H 2–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Nov 30th, 2024</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">N.P.T. Level 6 Junior Open</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · N.P.T.</div></div><div class="h2h-match-score">4-0 4-0</div></div><div class="h2h-match"><div class="h2h-match-date">Oct 12th, 2024</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">N.P.T. Level 6 Junior Open OCT 12 - 13</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · N.P.T.</div></div><div class="h2h-match-score">4-1 1-4 1-0</div></div></div></div><div class="h2h-player-card" id="h2h-0c6d43b996cb16c947fc" data-h2h-player-id="player:0c6d43b996cb16c947fc"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Amy Li</span><span class="h2h-player-loc">Saratoga CA</span></div><div class="h2h-record-summary">H2H 1–0</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Sep 1st, 2024</div><div class="h2h-pill h2h-pill-w">W</div><div class="h2h-match-event"><div class="h2h-match-event-main">Equal Chance Level 7 Junior Challenger - SEP 1</div><div class="h2h-match-event-sub">Boys &amp; Girls 12&#x27;s, 14&#x27;s Girls&#x27; 12 &amp; under singles · Equal Chance</div></div><div class="h2h-match-score">6-1</div></div></div></div><div class="h2h-player-card" id="h2h-7e0b1ef210aa91f133ee" data-h2h-player-id="player:7e0b1ef210aa91f133ee"><div class="h2h-player-card-header"><div class="h2h-player-name-row"><span class="h2h-player-name">Emma Li</span><span class="h2h-player-loc">Pleasanton CA</span></div><div class="h2h-record-summary">H2H 0–1</div></div><div class="h2h-matches"><div class="h2h-match"><div class="h2h-match-date">Mar 30th, 2024</div><div class="h2h-pill h2h-pill-l">L</div><div class="h2h-match-event"><div class="h2h-match-event-main">Arora Tennis Level 6 Junior Open MAR 30 - 31</div><div class="h2h-match-event-sub">Girls&#x27; 12 &amp; under singles · Arora Tennis</div></div><div class="h2h-match-score">1-6 3-6</div></div></div></div>
+</section>
+</div>
+<!-- PRIMARY_ROSTER_H2H_END -->
+<!-- Mobile View JavaScript -->
   <script>
     // ========================================
     // MOBILE VIEW IMPLEMENTATION
     // ========================================
 
     let currentSort = 'natRank';
-    let isExpanded = false;
-    let allPlayers = [];
-    let targetPlayer = null;
+	    let isExpanded = false;
+	    let allPlayers = [];
+	    let isMixedEvent = false;
+	    let mixedGroups = null;
+	    let multiGroups = null;
+	    let playerByKey = {};
+	    let targetPlayer = null;
 
     // Section ranks are sourced directly from the hidden table column.
     const SECTION_RANKS = {};
@@ -583,34 +454,111 @@
     // DATA PARSING FUNCTIONS
     // ========================================
 
-    function parsePlayerData() {
+    function detectMixedEvent() {
+      const tables = document.querySelectorAll('.desktop-view table.players-table');
+      if (tables.length < 2) return false;
+      const headers = Array.from(document.querySelectorAll('.desktop-view table.players-table thead th')).map((th) =>
+        (th.textContent || '').trim().toLowerCase()
+      );
+      // Mixed doubles reports include a partner column AND a Team/Combined NST column.
+      // Singles reports may also include a Partner column (doubles partner mapping).
+      return headers.includes('team nst') || headers.includes('combined nst');
+    }
+
+    function makePlayerKey(firstName, lastName) {
+      const first = (firstName || '').trim().toUpperCase();
+      const last = (lastName || '').trim().toUpperCase();
+      return `${last}|${first}`;
+    }
+
+    function partnerKeyFromText(text) {
+      const raw = (text || '').trim();
+      if (!raw) return '';
+      // Expected format: "Last, First"
+      if (raw.includes(',')) {
+        const parts = raw.split(',');
+        const last = (parts[0] || '').trim();
+        const first = (parts.slice(1).join(',') || '').trim();
+        return makePlayerKey(first, last);
+      }
+      // Fallback: "First Last"
+      const parts = raw.split(/\s+/).filter(Boolean);
+      if (parts.length === 1) return makePlayerKey(parts[0], '');
+      return makePlayerKey(parts[0], parts.slice(1).join(' '));
+    }
+
+    function parsePlayersFromTable(table, groupLabel) {
       const players = [];
-      const rows = document.querySelectorAll('.desktop-view tbody tr');
-      
-      rows.forEach((row, index) => {
+      const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+        (th.textContent || '').trim().toLowerCase()
+      );
+
+      const col = (name, fallback) => {
+        const idx = headers.findIndex((h) => h === name);
+        return idx !== -1 ? idx : fallback;
+      };
+
+      // Column indices (fallbacks match the single-table report layout).
+      const colRank = 0;
+      const colFirst = col('first name', 1);
+      const colLast = col('last name', 2);
+      const colWtn = col('wtn', 3);
+      const colUtr = col('utr', 4);
+      const colNat = col('nat rank', 5);
+      const colLocation = col('location', 6);
+
+      const partnerColIdx = headers.findIndex((h) => h === 'partner');
+      const hasPartner = partnerColIdx !== -1;
+      const sectionColIdx = headers.findIndex((h) => h === 'section rank');
+      const combinedColIdx = (() => {
+        const teamIdx = headers.findIndex((h) => h === 'team nst');
+        if (teamIdx !== -1) return teamIdx;
+        return headers.findIndex((h) => h === 'combined nst');
+      })();
+
+      const requiredCols = [colRank, colFirst, colLast, colWtn, colUtr, colNat, colLocation].filter((idx) => idx !== -1);
+      const minCells = requiredCols.length ? Math.max(...requiredCols) + 1 : 7;
+
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach((row) => {
         const cells = row.querySelectorAll('td');
-        if (cells.length < 7) return;
-        
-        const rank = parseInt(cells[0].textContent.trim());
-        const firstName = cells[1].textContent.trim();
-        const lastName = cells[2].textContent.trim();
-        const wtn = cells[3].textContent.trim();
-        const utrCell = cells[4];
-        const utrLink = utrCell.querySelector('a');
-        const utr = parseFloat(utrLink ? utrLink.textContent.trim() : utrCell.textContent.trim());
+        if (cells.length < minCells) return;
+
+        const rank = parseInt((cells[colRank].textContent || '').trim(), 10);
+        const firstName = (cells[colFirst].textContent || '').trim();
+        const lastName = (cells[colLast].textContent || '').trim();
+        const fullName = `${firstName} ${lastName}`.trim();
+
+        const wtnCell = cells[colWtn];
+        const wtn = (wtnCell.textContent || '').trim();
+        const ustaLink = wtnCell ? wtnCell.querySelector('a') : null;
+
+        const utrCell = cells[colUtr];
+        const utrLink = utrCell ? utrCell.querySelector('a') : null;
+        const utrText = (utrLink ? utrLink.textContent : utrCell.textContent) || '';
+        const utrVal = parseFloat(utrText.trim());
+        const utr = Number.isFinite(utrVal) ? utrVal : NaN;
         const utrUrl = utrLink ? utrLink.href : null;
-        const natRank = parseInt(cells[5].textContent.trim());
-        const location = cells[6].textContent.trim();
+
+        const natCell = cells[colNat];
+        const natLink = natCell ? natCell.querySelector('a') : null;
+        const ustaUrl = (ustaLink && ustaLink.href) || (natLink && natLink.href) || null;
+        const natVal = parseInt((natCell.textContent || '').trim(), 10);
+        const natRank = Number.isFinite(natVal) ? natVal : NaN;
+
+        const location = (cells[colLocation].textContent || '').trim();
         const isTarget = row.classList.contains('highlight-player');
-        
-        const fullName = `${firstName} ${lastName}`;
-        const sectionCell = cells[7];
-        const sectionRank = sectionCell ? parseInt(sectionCell.textContent.trim(), 10) || null : null;
-        
-        const ustaLink =
-          (cells[3] ? cells[3].querySelector('a') : null) ||
-          (cells[5] ? cells[5].querySelector('a') : null);
-        const ustaUrl = ustaLink ? ustaLink.href : null;
+        const teamNst =
+          combinedColIdx !== -1 && cells[combinedColIdx] ? (cells[combinedColIdx].textContent || '').trim() : '';
+
+        let partner = '';
+        let partnerKey = '';
+        if (hasPartner && cells[partnerColIdx]) {
+          const partnerCell = cells[partnerColIdx];
+          const partnerLink = partnerCell.querySelector('.partner-jump');
+          partner = (partnerCell.textContent || '').trim();
+          partnerKey = partnerLink ? (partnerLink.getAttribute('data-partner-key') || '').trim() : partnerKeyFromText(partner);
+        }
 
         // Extract UAID from USTA URL if available
         let uaid = null;
@@ -618,8 +566,27 @@
           const uaidMatch = ustaUrl.match(/uaid=(\d+)/);
           if (uaidMatch) uaid = uaidMatch[1];
         }
-        
+
+	        const playerKey = (row.getAttribute('data-player-key') || '').trim() || makePlayerKey(firstName, lastName);
+	        const groupPrefix = (() => {
+	          const g = (groupLabel || '').trim();
+	          if (!g) return '';
+	          const m = g.match(/\b(10|12|14|16|18)\b/);
+	          if (m) return m[1] + '-';
+	          return g[0].toUpperCase() + '-';
+	        })();
+	        const id = groupPrefix + playerKey.replace(/[^A-Z0-9]+/g, '-');
+
+        // Section ranks exist only for singles reports (hidden column).
+        const sectionCell = sectionColIdx !== -1 ? cells[sectionColIdx] : null;
+        const sectionRank = sectionCell ? parseInt((sectionCell.textContent || '').trim(), 10) || null : null;
+
         players.push({
+          id,
+          group: groupLabel || '',
+          playerKey,
+          partner,
+          partnerKey,
           rank,
           firstName,
           lastName,
@@ -630,20 +597,65 @@
           natRank,
           sectionRank,
           uaid,
+          teamNst,
           location,
           isTarget
         });
       });
-      
+
       return players;
     }
 
+	    function parsePlayerData() {
+	      isMixedEvent = detectMixedEvent();
+	      mixedGroups = null;
+	      multiGroups = null;
+	
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return [];
+	
+	      if (isMixedEvent) {
+        const girls = [];
+        const boys = [];
+
+        tables.forEach((table) => {
+          const titleEl = table.previousElementSibling;
+          const titleText = titleEl ? (titleEl.textContent || '').trim().toLowerCase() : '';
+          const group = titleText.includes('boys') ? 'Boys' : titleText.includes('girls') ? 'Girls' : '';
+          const parsed = parsePlayersFromTable(table, group);
+          if (group === 'Boys') boys.push(...parsed);
+          else girls.push(...parsed);
+        });
+
+	        mixedGroups = { girls, boys };
+	        return [...girls, ...boys];
+	      }
+
+	      if (tables.length > 1) {
+	        // Multiple singles tables (e.g., U12 + U14 on one page).
+	        const groups = [];
+	        tables.forEach((table, idx) => {
+	          const titleEl = table.previousElementSibling;
+	          const titleText = titleEl ? (titleEl.textContent || '').trim() : '';
+	          const group = titleText || `Event ${idx + 1}`;
+	          const parsed = parsePlayersFromTable(table, group);
+	          groups.push({ label: group, players: parsed });
+	        });
+	        multiGroups = groups;
+	        return groups.flatMap((g) => g.players);
+	      }
+	
+	      // Singles: only one table.
+	      return parsePlayersFromTable(tables[0], '');
+	    }
+
     function parseKeyStats() {
       const stats = {
-        drawSize: 16,
-        seed: '',
-        closesText: '',
+        drawSize: 32,
+        closes: '',
         registered: 0,
+        // Legacy/optional (Alexis-focused reports).
+        seed: null,
         percentAbove: null
       };
       
@@ -657,32 +669,26 @@
         const valueText = value.textContent.trim();
         
         if (labelText === 'Draw') {
-          const size = parseInt(valueText, 10);
-          if (Number.isFinite(size)) stats.drawSize = size;
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.drawSize = parsed;
         } else if (labelText === 'Closes') {
-          stats.closesText = valueText;
+          stats.closes = valueText;
         } else if (labelText === 'Registered') {
-          const reg = parseInt(valueText, 10);
-          if (Number.isFinite(reg)) stats.registered = reg;
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.registered = parsed;
         } else if (labelText === 'Alexis Seed') {
           const parts = valueText.split('/');
           if (parts.length === 2) {
-            const seed = parseInt(parts[0].trim(), 10);
-            const reg = parseInt(parts[1].trim(), 10);
-            if (Number.isFinite(seed)) stats.seed = seed;
-            if (Number.isFinite(reg)) stats.registered = reg;
+            const seedParsed = parseInt(parts[0].trim(), 10);
+            const regParsed = parseInt(parts[1].trim(), 10);
+            if (Number.isFinite(seedParsed)) stats.seed = seedParsed;
+            if (Number.isFinite(regParsed)) stats.registered = regParsed;
           }
         } else if (labelText === '% Above Alexis (UTR)') {
-          const pct = parseInt(valueText, 10);
-          if (Number.isFinite(pct)) stats.percentAbove = pct;
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.percentAbove = parsed;
         }
       });
-
-      if (stats.closesText) {
-        stats.seed = stats.closesText;
-      } else if (stats.seed === '' || stats.seed === null || stats.seed === undefined) {
-        stats.seed = '—';
-      }
       
       return stats;
     }
@@ -731,6 +737,7 @@
           
           // Format & Scoring
           if (labelText === 'Match Format') info.format.matchFormat = valueText;
+          if (labelText === 'Tiebreaks') info.format.tiebreaks = valueText;
           if (labelText === 'Set Tiebreak') info.format.setTiebreak = valueText;
           if (labelText === 'Match Tiebreak') info.format.matchTiebreak = valueText;
           
@@ -785,11 +792,11 @@
             <div class="mobile-alexis-stat-label">WTN</div>
           </div>
           <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${player.utr}</div>
+            <div class="mobile-alexis-stat-value">${formatUtrValue(player.utr)}</div>
             <div class="mobile-alexis-stat-label">UTR</div>
           </div>
           <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${player.natRank}</div>
+            <div class="mobile-alexis-stat-value">${formatNatRankValue(player.natRank)}</div>
             <div class="mobile-alexis-stat-label">Nat Rank</div>
           </div>
           <div class="mobile-alexis-stat">
@@ -885,15 +892,40 @@
       `;
     }
 
+    function formatUtrValue(value) {
+      if (Number.isFinite(value)) return value.toFixed(2);
+      return 'N/A';
+    }
+
+    function formatNatRankValue(value) {
+      if (Number.isFinite(value)) return String(value);
+      return 'N/A';
+    }
+
+    function isProbablyEmail(value) {
+      const email = (value || '').trim();
+      if (!email) return false;
+      if (email.toUpperCase() === 'N/A') return false;
+      return /.+@.+\..+/.test(email);
+    }
+
     function sortPlayers(players, sortBy) {
       const sorted = [...players];
       
       if (sortBy === 'rank') {
         sorted.sort((a, b) => a.rank - b.rank);
       } else if (sortBy === 'utr') {
-        sorted.sort((a, b) => b.utr - a.utr); // Descending (higher is better)
+        sorted.sort((a, b) => {
+          const aVal = Number.isFinite(a.utr) ? a.utr : -1e9;
+          const bVal = Number.isFinite(b.utr) ? b.utr : -1e9;
+          return bVal - aVal; // Descending (higher is better)
+        });
       } else if (sortBy === 'natRank') {
-        sorted.sort((a, b) => a.natRank - b.natRank); // Ascending (lower is better)
+        sorted.sort((a, b) => {
+          const aVal = Number.isFinite(a.natRank) ? a.natRank : 1e9;
+          const bVal = Number.isFinite(b.natRank) ? b.natRank : 1e9;
+          return aVal - bVal; // Ascending (lower is better)
+        });
       } else if (sortBy === 'wtn') {
         sorted.sort((a, b) => {
           const aWtn = parseFloat(a.wtn) || 999;
@@ -927,7 +959,7 @@
         if (player.isTarget) cardClass.push('target-player');
         
         html += `
-          <div class="${cardClass.join(' ')}" data-player-id="${player.rank}">
+          <div class="${cardClass.join(' ')}" data-player-id="${player.id}">
             <div class="mobile-player-rank">${player.rank}</div>
             <div class="mobile-player-info">
               <div class="mobile-player-name">${player.fullName}</div>
@@ -936,30 +968,30 @@
             <div class="mobile-player-ratings">
               ${player.utrUrl ? `
                 <a href="${player.utrUrl}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
-                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
                   <div class="mobile-rating-label">UTR</div>
                 </a>
               ` : `
                 <div class="mobile-rating-badge utr">
-                  <div class="mobile-rating-value">${player.utr}</div>
+                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
                   <div class="mobile-rating-label">UTR</div>
                 </div>
               `}
               ${player.uaid ? `
                 <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
-                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
                   <div class="mobile-rating-label">Nat</div>
                 </a>
               ` : `
                 <div class="mobile-rating-badge nat">
-                  <div class="mobile-rating-value">${player.natRank}</div>
+                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
                   <div class="mobile-rating-label">Nat</div>
                 </div>
               `}
             </div>
             <div class="mobile-player-expand-icon">▼</div>
           </div>
-          <div class="mobile-player-details" data-player-id="${player.rank}">
+          <div class="mobile-player-details" data-player-id="${player.id}">
             <div class="mobile-player-details-grid">
               <div class="mobile-detail-item">
                 <div class="mobile-detail-label">WTN</div>
@@ -973,6 +1005,16 @@
                 <div class="mobile-detail-label">Seed</div>
                 <div class="mobile-detail-value">#${player.rank}</div>
               </div>
+              ${player.partner ? `
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Partner</div>
+                <div class="mobile-detail-value">
+                  ${player.partnerKey ? `
+                    <button class="mobile-partner-jump" data-partner-key="${player.partnerKey}" onclick="event.stopPropagation()">${player.partner}</button>
+                  ` : player.partner}
+                </div>
+              </div>
+              ` : ''}
             </div>
           </div>
         `;
@@ -983,30 +1025,33 @@
 
     function buildInfoCards(info) {
       let html = '';
+
+      const cleanText = (value) => (value || '').replace(/\s+/g, ' ').trim();
+      const isLongValue = (value) => cleanText(value).length > 80;
+      const renderRow = (label, value) => {
+        const v = cleanText(value);
+        if (!v) return '';
+        const rowClass = isLongValue(v) ? 'mobile-info-row is-stacked' : 'mobile-info-row';
+        return `
+          <div class="${rowClass}">
+            <span class="mobile-info-label">${label}</span>
+            <span class="mobile-info-value">${v}</span>
+          </div>
+        `;
+      };
       
       // Format & Scoring Card
-      if (info.format.matchFormat) {
+      if (info.format.matchFormat || info.format.tiebreaks || info.format.setTiebreak || info.format.matchTiebreak) {
         html += `
           <div class="mobile-info-card">
             <div class="mobile-info-card-header">
               <span class="icon">🎾</span>
               Format & Scoring
             </div>
-            ${info.format.matchFormat ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Match Format</span>
-              <span class="mobile-info-value">${info.format.matchFormat}</span>
-            </div>` : ''}
-            ${info.format.setTiebreak ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Set Tiebreak</span>
-              <span class="mobile-info-value">${info.format.setTiebreak}</span>
-            </div>` : ''}
-            ${info.format.matchTiebreak ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">3rd Set</span>
-              <span class="mobile-info-value">${info.format.matchTiebreak}</span>
-            </div>` : ''}
+            ${renderRow('Match Format', info.format.matchFormat)}
+            ${renderRow('Tiebreaks', info.format.tiebreaks)}
+            ${renderRow('Set Tiebreak', info.format.setTiebreak)}
+            ${renderRow('3rd Set', info.format.matchTiebreak)}
           </div>
         `;
       }
@@ -1025,7 +1070,7 @@
             <div class="mobile-info-row">
               <span class="mobile-info-label">Site ${i + 1}</span>
               <span class="mobile-info-value">
-                ${venue.url ? `<a href="${venue.url}" target="_blank">${venue.name} →</a>` : venue.name}
+                ${venue.url ? `<a href="${venue.url}" target="_blank" rel="noopener noreferrer">${venue.name} →</a>` : venue.name}
               </span>
             </div>
           `;
@@ -1049,7 +1094,9 @@
             ${info.contact.email ? `
             <div class="mobile-info-row">
               <span class="mobile-info-label">Email</span>
-              <span class="mobile-info-value"><a href="mailto:${info.contact.email}">${info.contact.email}</a></span>
+              <span class="mobile-info-value">
+                ${isProbablyEmail(info.contact.email) ? `<a href="mailto:${info.contact.email}">${info.contact.email}</a>` : info.contact.email}
+              </span>
             </div>` : ''}
             ${info.contact.phone ? `
             <div class="mobile-info-row">
@@ -1072,21 +1119,55 @@
     function renderMobileView() {
       // Parse all data
       allPlayers = parsePlayerData();
+      playerByKey = {};
+      allPlayers.forEach(p => {
+        if (p && p.playerKey) playerByKey[p.playerKey] = p;
+      });
       targetPlayer = allPlayers.find(p => p.isTarget);
       const stats = parseKeyStats();
       const info = parseTournamentInfo();
+
+      // Keep the mobile tournament link aligned with the desktop header.
+      const desktopTournamentLink = document.querySelector('.desktop-view .tournament-info a');
+      const mobileTournamentLink = document.querySelector('a.mobile-tournament-link');
+      if (desktopTournamentLink && mobileTournamentLink) {
+        if (desktopTournamentLink.href) mobileTournamentLink.href = desktopTournamentLink.href;
+        const title = (desktopTournamentLink.textContent || '').trim();
+        if (title) mobileTournamentLink.textContent = title;
+      }
       
       // Render header
-      const titleText = info.title || "Level 5 Open: FDT Level 5 Junior Singles Championship — Girls' 12 Singles";
+      // Use title as-is (already contains "Open Level 5 Championship Singles - Girls' 12 Singles")
+      const titleText = info.title || "FDT Level 5 Junior Singles Championship";
       document.getElementById('mobile-title').textContent = titleText;
       
       // Format: "Jan 10-18, 2026 • San Jose, CA"
-      document.getElementById('mobile-meta').textContent = `${info.dates} • ${info.location}`;
+      const metaEl = document.getElementById('mobile-meta');
+      if (metaEl) {
+        const datesText = (info.dates || '').trim();
+        const locText = (info.location || '').trim();
+        const sep = datesText && locText ? ' • ' : '';
+        const mapUrl = info?.venues?.[0]?.url || '';
+
+        metaEl.textContent = '';
+        metaEl.append(document.createTextNode(datesText + sep));
+        if (mapUrl && locText) {
+          const a = document.createElement('a');
+          a.href = mapUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = locText;
+          metaEl.append(a);
+        } else {
+          metaEl.append(document.createTextNode(locText));
+        }
+      }
       
       // Render hero stats
-      document.getElementById('mobile-draw-size').textContent = stats.drawSize;
-      document.getElementById('mobile-seed').textContent = stats.seed;
-      document.getElementById('mobile-registered').textContent = stats.registered;
+      document.getElementById('mobile-draw-size').textContent = Number.isFinite(stats.drawSize) ? stats.drawSize : '';
+      document.getElementById('mobile-seed').textContent =
+        (stats.closes || '').trim() || (Number.isFinite(stats.seed) ? String(stats.seed) : '');
+      document.getElementById('mobile-registered').textContent = Number.isFinite(stats.registered) ? stats.registered : '';
       
       // Render Alexis card
       if (targetPlayer) {
@@ -1118,9 +1199,34 @@
       document.getElementById('mobile-info-section').innerHTML = buildInfoCards(info);
     }
 
-    function renderPlayerList(sortBy, limit = null) {
-      const html = buildPlayerCards(allPlayers, sortBy, limit);
-      document.getElementById('mobile-player-list').innerHTML = html;
+	    function renderPlayerList(sortBy, limit = null) {
+	      if (isMixedEvent && mixedGroups) {
+	        const groupLimit = limit === null ? null : 8;
+	        const girlsHtml = buildPlayerCards(mixedGroups.girls, sortBy, groupLimit);
+	        const boysHtml = buildPlayerCards(mixedGroups.boys, sortBy, groupLimit);
+	        const html = `
+	          <div class="mobile-group-header">Girls</div>
+	          ${girlsHtml}
+	          <div class="mobile-group-header">Boys</div>
+	          ${boysHtml}
+	        `;
+	        document.getElementById('mobile-player-list').innerHTML = html;
+	      } else if (multiGroups && Array.isArray(multiGroups) && multiGroups.length > 0) {
+	        const groupLimit = limit === null ? null : 8;
+	        const html = multiGroups.map((group) => {
+	          const label = group && group.label ? group.label : 'Players';
+	          const players = group && Array.isArray(group.players) ? group.players : [];
+	          const cards = buildPlayerCards(players, sortBy, groupLimit);
+	          return `
+	            <div class="mobile-group-header">${label}</div>
+	            ${cards}
+	          `;
+	        }).join('');
+	        document.getElementById('mobile-player-list').innerHTML = html;
+	      } else {
+	        const html = buildPlayerCards(allPlayers, sortBy, limit);
+	        document.getElementById('mobile-player-list').innerHTML = html;
+	      }
       
       // Update show more button
       const showMoreBtn = document.getElementById('mobile-show-more');
@@ -1181,6 +1287,23 @@
       return window.innerWidth <= 600;
     }
 
+    function isMobileViewActive() {
+      if (document.body.classList.contains('force-mobile')) return true;
+      if (document.body.classList.contains('force-desktop')) return false;
+      return detectMobileDevice();
+    }
+
+    function placeH2HBlock() {
+      const wrapper = document.getElementById('alexis-roster-h2h-wrapper');
+      if (!wrapper) return;
+      const target = isMobileViewActive()
+        ? document.getElementById('alexis-h2h-slot-mobile')
+        : document.getElementById('alexis-h2h-slot-desktop');
+      if (!target) return;
+      if (wrapper.parentElement === target) return;
+      target.appendChild(wrapper);
+    }
+
     function toggleView(targetView) {
       setUserViewPreference(targetView);
       
@@ -1191,6 +1314,7 @@
         document.body.classList.add('force-desktop');
         document.body.classList.remove('force-mobile');
       }
+      placeH2HBlock();
     }
 
     function applyViewPreference() {
@@ -1200,6 +1324,7 @@
       // On desktop (>600px), always show desktop regardless of preference
       if (!isMobile) {
         document.body.classList.remove('force-mobile', 'force-desktop');
+        placeH2HBlock();
         return;
       }
       
@@ -1212,6 +1337,7 @@
         document.body.classList.remove('force-desktop');
       }
       // If no preference, let CSS media query handle it
+      placeH2HBlock();
     }
 
     // ========================================
@@ -1256,6 +1382,22 @@
       
       // Player card click handlers
       document.addEventListener('click', (e) => {
+        const partnerBtn = e.target.closest('.mobile-partner-jump');
+        if (partnerBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          const key = (partnerBtn.getAttribute('data-partner-key') || '').trim();
+          if (!key) return;
+          const partner = playerByKey[key];
+          if (!partner) return;
+          const card = document.querySelector(`.mobile-player-card[data-player-id="${partner.id}"]`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            togglePlayerDetails(partner.id);
+          }
+          return;
+        }
+
         const card = e.target.closest('.mobile-player-card');
         if (card) {
           const playerId = card.getAttribute('data-player-id');
@@ -1300,8 +1442,6 @@
     }
   </script>
 
-  <script type="application/json" id="actual-draw-json">{"tournamentId":"AADD3F01-D779-44EB-8F33-3CD79A3018F1","eventId":"EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC","orgSegment":"fourdirectionstennis","drawUrl":"https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/draws/AADD3F01-D779-44EB-8F33-3CD79A3018F1/EBD2D174-DA9E-48AC-8AB5-5F4E9CA444EC","observedAt":"2026-02-02T05:49:00Z","source":"playtennis.draws.apollo","positions":["Valentina Kukeeva","Angela Liu","Avaline Wang","Misha Kataria","Annabel Hu","Amy Li","Ruoyu Sun","Sharanya Prasad","Grace Li","Akshaya Ashok","Margaret Doran","Eileen Li","Megan Lai","Emma Li","Alexis Malakhova","Kendra Wu"],"matches":[{"round":"Round of 16","status":"COMPLETED","result":"W","opponent":"Kendra Wu","score":"6-4 6-3"},{"round":"Quarterfinal","status":"COMPLETED","result":"W","opponent":"Megan Lai","score":"6-1 0-6 [11-9]"},{"round":"Semifinal","status":"COMPLETED","result":"L","opponent":"Margaret Doran","score":"2-6 2-6"},{"round":"3rd/4th Playoff","status":"COMPLETED","result":"L","opponent":"Annabel Hu","score":"6-7(4) 1-6"}]}</script>
-
   <!-- Share Button -->
   <script>
     // Player profile links keyed by "FIRST|LAST" (uppercase)
@@ -1323,39 +1463,61 @@
       "MISHA|KATARIA": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019420835",
       "RUOYU|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018989144",
       "AKSHAYA|ASHOK": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018948492",
+      "MAY|SUN": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018905027",
+      "SANIA|BHAMBANI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018668291",
+      "AASHNA|MODI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018563728",
+      "OLIVIA|KNAPP": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018820003",
+      "KATHERINE|CAO": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019303547",
+      "STEPHANIE|LI": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018832557",
+      "ZOE|GOUDIE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018414360",
+      "CECILIA|XIE": "https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018947627",
     };
 
-    function decorateMetricCellWithProfileLink(cell, url) {
-      if (!cell || !url) return;
-      if (cell.querySelector('a')) return;
-      const text = cell.textContent.trim();
-      const a = document.createElement('a');
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.textContent = text;
-      a.title = 'Open player profile';
-      cell.textContent = '';
-      cell.appendChild(a);
-    }
-
-    function decoratePlayerLinks() {
-      const tbody = document.querySelector('tbody');
-      if (!tbody) return;
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length < 7) return;
-        const first = cells[1].textContent.trim().toUpperCase();
-        const last = cells[2].textContent.trim().toUpperCase();
-        const key = `${first}|${last}`;
-        const url = window.playerProfileUrlByName[key];
-        if (!url) return;
-        // WTN (col 3) and Nat Rank (col 5)
-        decorateMetricCellWithProfileLink(cells[3], url);
-        decorateMetricCellWithProfileLink(cells[5], url);
-      });
-    }
+	    function decorateMetricCellWithProfileLink(cell, url) {
+	      if (!cell || !url) return;
+	      if (cell.querySelector('a')) return;
+	      const text = cell.textContent.trim();
+	      const a = document.createElement('a');
+	      a.href = url;
+	      a.target = '_blank';
+	      a.rel = 'noopener noreferrer';
+	      a.textContent = text;
+	      a.title = 'Open player profile';
+	      cell.textContent = '';
+	      cell.appendChild(a);
+	    }
+	
+	    function decoratePlayerLinks() {
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return;
+	
+	      tables.forEach((table) => {
+	        const tbody = table.querySelector('tbody');
+	        if (!tbody) return;
+	        const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+	          (th.textContent || '').trim().toLowerCase()
+	        );
+	        const wtnIdx = headers.findIndex((h) => h === 'wtn');
+	        const natIdx = headers.findIndex((h) => h === 'nat rank' || h === 'national rank' || h === 'nat');
+	
+	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        rows.forEach((row) => {
+	          const cells = row.querySelectorAll('td');
+	          if (cells.length < 3) return;
+	          const first = (cells[1]?.textContent || '').trim().toUpperCase();
+	          const last = (cells[2]?.textContent || '').trim().toUpperCase();
+	          if (!first && !last) return;
+	          const key = `${first}|${last}`;
+	          const url = window.playerProfileUrlByName[key];
+	          if (!url) return;
+	
+	          const wtnCell = cells[wtnIdx !== -1 ? wtnIdx : 3];
+	          const natCell = cells[natIdx !== -1 ? natIdx : 5];
+	          decorateMetricCellWithProfileLink(wtnCell, url);
+	          decorateMetricCellWithProfileLink(natCell, url);
+	        });
+	      });
+	    }
 
     function toTitleCase(value) {
       return value
@@ -1363,38 +1525,52 @@
         .replace(/\b\w/g, letter => letter.toUpperCase());
     }
 
-    function normalizeLastNames() {
-      const tbody = document.querySelector('tbody');
-      if (!tbody) return;
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length < 3) return;
-        const lastCell = cells[2];
-        const text = lastCell.textContent.trim();
-        if (!text) return;
-        lastCell.textContent = toTitleCase(text);
-      });
-    }
-
-    function normalizeLocations() {
-      const tbody = document.querySelector('tbody');
-      if (!tbody) return;
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length < 7) return;
-        const locationCell = cells[6];
-        const text = locationCell.textContent.trim();
-        if (!text) return;
-        if (text.includes(',')) return;
-        const parts = text.split(/\s+/);
-        if (parts.length < 2) return;
-        const state = parts.pop();
-        const city = parts.join(' ');
-        locationCell.textContent = `${city}, ${state}`;
-      });
-    }
+	    function normalizeLastNames() {
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return;
+	      tables.forEach((table) => {
+	        const tbody = table.querySelector('tbody');
+	        if (!tbody) return;
+	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        rows.forEach((row) => {
+	          const cells = row.querySelectorAll('td');
+	          if (cells.length < 3) return;
+	          const lastCell = cells[2];
+	          const text = (lastCell.textContent || '').trim();
+	          if (!text) return;
+	          lastCell.textContent = toTitleCase(text);
+	        });
+	      });
+	    }
+	
+	    function normalizeLocations() {
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return;
+	      tables.forEach((table) => {
+	        const tbody = table.querySelector('tbody');
+	        if (!tbody) return;
+	        const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+	          (th.textContent || '').trim().toLowerCase()
+	        );
+	        const locationIdx = headers.findIndex((h) => h === 'location');
+	
+	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        rows.forEach((row) => {
+	          const cells = row.querySelectorAll('td');
+	          const idx = locationIdx !== -1 ? locationIdx : 6;
+	          if (cells.length <= idx) return;
+	          const locationCell = cells[idx];
+	          const text = (locationCell.textContent || '').trim();
+	          if (!text) return;
+	          if (text.includes(',')) return;
+	          const parts = text.split(/\s+/);
+	          if (parts.length < 2) return;
+	          const state = parts.pop();
+	          const city = parts.join(' ');
+	          locationCell.textContent = `${city}, ${state}`;
+	        });
+	      });
+	    }
 
     function formatUtrRangeLabel(start, binSize) {
       const end = start + binSize - 0.01;
@@ -1415,171 +1591,323 @@
       return null;
     }
 
-    function buildUtrHistogram() {
-      const container = document.getElementById('utr-histogram-chart');
-      if (!container) return;
-      const rows = Array.from(document.querySelectorAll('tbody tr'));
-      if (!rows.length) return;
+	    function buildUtrHistogram() {
+	      function isMixedEventPage() {
+	        try {
+	          return typeof detectMixedEvent === 'function' && detectMixedEvent();
+	        } catch (err) {
+	          return false;
+	        }
+	      }
 
-      const players = rows.map(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length < 6) return null;
-        const utr = parseFloat(cells[4].textContent.trim());
-        const natRank = parseInt(cells[5].textContent.trim(), 10);
-        if (!Number.isFinite(natRank)) return null;
-        return {
-          utr: Number.isFinite(utr) ? utr : null,
-          natRank,
-          highlight: row.classList.contains('highlight-player'),
-        };
-      }).filter(Boolean);
+	      function findTableForChart(chartEl) {
+	        if (!chartEl) return null;
 
-      if (!players.length) return;
+	        const tableSelector = (chartEl.getAttribute('data-utr-table') || '').trim();
+	        if (tableSelector) {
+	          const explicit = document.querySelector(tableSelector);
+	          if (explicit && explicit.tagName === 'TABLE') return explicit;
+	        }
 
-      players.sort((a, b) => a.natRank - b.natRank);
-      const drawSize = getDrawSizeFromKeyStats() || players.length;
-      const drawPlayers = players.slice(0, drawSize);
-      const values = drawPlayers
-        .map(player => player.utr)
-        .filter(value => Number.isFinite(value));
+	        // Walk up the DOM tree looking for a previous sibling table.
+	        let el = chartEl;
+	        while (el && el !== document.body) {
+	          let sib = el.previousElementSibling;
+	          while (sib) {
+	            if (sib.tagName === 'TABLE') return sib;
+	            const inner = sib.querySelector ? sib.querySelector('table') : null;
+	            if (inner) return inner;
+	            sib = sib.previousElementSibling;
+	          }
+	          el = el.parentElement;
+	        }
 
-      if (!values.length) return;
+	        return (
+	          document.querySelector('.desktop-view .primary-table') ||
+	          document.querySelector('.desktop-view table.players-table') ||
+	          null
+	        );
+	      }
 
-      const highlightPlayer = drawPlayers.find(
-        player => player.highlight && Number.isFinite(player.utr)
+	      function findTablesForChart(chartEl) {
+	        const tableSelector = (chartEl?.getAttribute('data-utr-table') || '').trim();
+	        if (tableSelector) {
+	          const explicit = document.querySelector(tableSelector);
+	          return explicit && explicit.tagName === 'TABLE' ? [explicit] : [];
+	        }
+
+	        if (isMixedEventPage()) {
+	          const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table')).filter(
+	            (table) => table.querySelectorAll('tbody tr').length > 0
+	          );
+	          if (tables.length) return tables;
+	        }
+
+	        const single = findTableForChart(chartEl);
+	        return single ? [single] : [];
+	      }
+
+	      function headerIndex(table, want) {
+	        if (!table) return -1;
+	        const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+	          (th.textContent || '').trim().toLowerCase()
+	        );
+	        const wantNorm = (want || '').trim().toLowerCase();
+	        if (!wantNorm) return -1;
+	        return headers.findIndex((h) => h === wantNorm);
+	      }
+
+	      function cellText(cell) {
+	        if (!cell) return '';
+	        const a = cell.querySelector && cell.querySelector('a');
+	        return (a ? a.textContent : cell.textContent || '').trim();
+	      }
+
+	      function playersFromTable(table) {
+	        if (!table) return [];
+	        const utrIdx = (() => {
+	          const idx = headerIndex(table, 'utr');
+	          return idx !== -1 ? idx : 4;
+	        })();
+	        const natIdx = (() => {
+	          const idx = headerIndex(table, 'nat rank');
+	          return idx !== -1 ? idx : 5;
+	        })();
+
+	        return Array.from(table.querySelectorAll('tbody tr'))
+	          .map((row) => {
+	            const cells = row.querySelectorAll('td');
+	            const maxIdx = Math.max(utrIdx, natIdx);
+	            if (!cells || cells.length <= maxIdx) return null;
+	            const utr = parseFloat(cellText(cells[utrIdx]));
+	            const natRaw = cellText(cells[natIdx]);
+	            const natRank = parseInt(natRaw, 10);
+	            return {
+	              utr: Number.isFinite(utr) ? utr : null,
+	              natRank: Number.isFinite(natRank) ? natRank : Number.POSITIVE_INFINITY,
+	              highlight: row.classList.contains('highlight-player'),
+	            };
+	          })
+	          .filter(Boolean);
+	      }
+
+	      function selectMixedDrawPlayers(playersByTable, drawSize) {
+	        const sortedByTable = playersByTable.map((group) =>
+	          group.slice().sort((a, b) => a.natRank - b.natRank)
+	        );
+	        const allPlayers = sortedByTable.flat();
+	        if (!allPlayers.length) return [];
+
+	        if (!Number.isFinite(drawSize) || drawSize <= 0 || drawSize >= allPlayers.length) {
+	          return allPlayers;
+	        }
+
+	        const tableCount = sortedByTable.length;
+	        const baseSlots = Math.floor(drawSize / tableCount);
+	        let remainder = drawSize % tableCount;
+	        const selected = [];
+
+	        sortedByTable.forEach((group) => {
+	          const slots = baseSlots + (remainder > 0 ? 1 : 0);
+	          if (remainder > 0) remainder -= 1;
+	          if (slots > 0) selected.push(...group.slice(0, slots));
+	        });
+
+	        if (selected.length < drawSize) {
+	          const leftovers = sortedByTable
+	            .flat()
+	            .filter((player) => !selected.includes(player))
+	            .sort((a, b) => a.natRank - b.natRank);
+	          selected.push(...leftovers.slice(0, drawSize - selected.length));
+	        }
+
+	        return selected.slice(0, drawSize);
+	      }
+
+	      function chartDrawOverride(chartEl) {
+	        if (!chartEl) return null;
+	        const raw = (chartEl.getAttribute('data-utr-draw') || '').trim();
+	        const parsed = parseInt(raw, 10);
+	        return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+	      }
+
+	      const charts = Array.from(document.querySelectorAll('.desktop-view .utr-histogram-chart'));
+	      if (!charts.length) return;
+
+	      charts.forEach((container, chartIndex) => {
+	        if (!container) return;
+	        const tables = findTablesForChart(container);
+	        if (!tables.length) return;
+
+	        const playersByTable = tables.map(playersFromTable).filter((group) => group.length > 0);
+	        if (!playersByTable.length) return;
+
+	        const allPlayers = playersByTable.flat();
+	        if (!allPlayers.length) return;
+
+	        const drawSize = getDrawSizeFromKeyStats() || allPlayers.length;
+	        const mixedPage = isMixedEventPage() && playersByTable.length > 1;
+	        let drawPlayers;
+	        if (mixedPage) {
+	          drawPlayers = selectMixedDrawPlayers(playersByTable, drawSize);
+	        } else {
+	          const explicitDraw = chartDrawOverride(container);
+	          const drawLimit = explicitDraw || drawSize;
+	          drawPlayers = allPlayers
+	            .slice()
+	            .sort((a, b) => a.natRank - b.natRank)
+	            .slice(0, drawLimit);
+	        }
+
+	        const values = drawPlayers.map((p) => p.utr).filter((v) => Number.isFinite(v));
+	        container.innerHTML = '';
+
+	        const captionEl =
+	          container.closest('.utr-histogram')?.querySelector('.utr-histogram-caption') ||
+	          document.getElementById('utr-histogram-caption');
+
+	        if (!values.length) {
+	          if (captionEl) {
+	            captionEl.textContent = 'No UTR ratings found for this table.';
+	          }
+	          return;
+	        }
+
+	        const highlightPlayer = drawPlayers.find((p) => p.highlight && Number.isFinite(p.utr));
+	        const highlightUtr = highlightPlayer ? highlightPlayer.utr : null;
+
+	        const binSize = 0.5;
+	        const min = Math.min(...values);
+	        const max = Math.max(...values);
+	        const startBin = Math.floor(min / binSize) * binSize;
+	        const endBin = Math.floor(max / binSize) * binSize;
+	        const binCount = Math.round((endBin - startBin) / binSize) + 1;
+	        const bins = new Array(binCount).fill(0);
+
+	        values.forEach((value) => {
+	          const idx = Math.floor((value - startBin) / binSize);
+	          if (idx >= 0 && idx < bins.length) bins[idx] += 1;
+	        });
+
+	        const maxCount = Math.max(...bins, 1);
+	        const highlightIndex =
+	          highlightUtr !== null ? Math.floor((highlightUtr - startBin) / binSize) : null;
+
+	        bins.forEach((count, index) => {
+	          if (count === 0) return;
+	          const start = startBin + index * binSize;
+	          const row = document.createElement('div');
+	          row.className = 'utr-bin';
+
+	          if (highlightIndex !== null && highlightIndex === index) {
+	            row.classList.add('is-highlight');
+	          }
+
+	          const label = document.createElement('div');
+	          label.className = 'utr-bin-label';
+	          label.textContent = formatUtrRangeLabel(start, binSize);
+
+	          const barWrap = document.createElement('div');
+	          barWrap.className = 'utr-bin-bar-wrap';
+
+	          const bar = document.createElement('div');
+	          bar.className = 'utr-bin-bar';
+	          bar.style.width = `${(count / maxCount) * 100}%`;
+	          barWrap.appendChild(bar);
+
+	          const countEl = document.createElement('div');
+	          countEl.className = 'utr-bin-count';
+	          countEl.textContent = String(count);
+
+	          row.appendChild(label);
+	          row.appendChild(barWrap);
+	          row.appendChild(countEl);
+	          container.appendChild(row);
+	        });
+
+	        if (captionEl) {
+	          let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
+	          if (highlightUtr !== null) caption += ' Alexis bin highlighted.';
+	          captionEl.textContent = caption;
+	        }
+	      });
+	    }
+
+    // Sorting: support 1+ tables (e.g., mixed doubles has Girls + Boys tables).
+    function initSortableTable(table) {
+      const headers = Array.from(table.querySelectorAll('th'));
+      const tbody = table.querySelector('tbody');
+      if (!tbody || headers.length < 7) return;
+
+      const sortableColumns = new Set([1, 2, 3, 4, 5, 6, 7]);
+      const numericColumns = new Set();
+      headers.forEach((header, idx) => {
+        const label = (header.textContent || '').trim().toLowerCase();
+        if (['wtn', 'utr', 'nat rank', 'combined nst', 'team nst'].includes(label)) {
+          numericColumns.add(idx);
+        }
+      });
+      const sortableHeaders = headers.filter((header, columnIndex) =>
+        sortableColumns.has(columnIndex) && header.classList.contains('sortable')
       );
-      const highlightUtr = highlightPlayer ? highlightPlayer.utr : null;
 
-      const binSize = 0.5;
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      const startBin = Math.floor(min / binSize) * binSize;
-      const endBin = Math.floor(max / binSize) * binSize;
-      const binCount = Math.round((endBin - startBin) / binSize) + 1;
-      const bins = new Array(binCount).fill(0);
-
-      values.forEach(value => {
-        const idx = Math.floor((value - startBin) / binSize);
-        if (idx >= 0 && idx < bins.length) {
-          bins[idx] += 1;
-        }
-      });
-
-      const maxCount = Math.max(...bins, 1);
-      container.innerHTML = '';
-
-      const highlightIndex =
-        highlightUtr !== null ? Math.floor((highlightUtr - startBin) / binSize) : null;
-
-      bins.forEach((count, index) => {
-        if (count === 0) return;
-        const start = startBin + index * binSize;
-        const row = document.createElement('div');
-        row.className = 'utr-bin';
-
-        if (highlightIndex !== null && highlightIndex === index) {
-          row.classList.add('is-highlight');
-        }
-
-        const label = document.createElement('div');
-        label.className = 'utr-bin-label';
-        label.textContent = formatUtrRangeLabel(start, binSize);
-
-        const barWrap = document.createElement('div');
-        barWrap.className = 'utr-bin-bar-wrap';
-
-        const bar = document.createElement('div');
-        bar.className = 'utr-bin-bar';
-        bar.style.width = `${(count / maxCount) * 100}%`;
-        barWrap.appendChild(bar);
-
-        const countEl = document.createElement('div');
-        countEl.className = 'utr-bin-count';
-        countEl.textContent = String(count);
-
-        row.appendChild(label);
-        row.appendChild(barWrap);
-        row.appendChild(countEl);
-
-        container.appendChild(row);
-      });
-
-      const captionEl = document.getElementById('utr-histogram-caption');
-      if (captionEl) {
-        let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
-        if (highlightUtr !== null) {
-          caption += ' Alexis bin highlighted.';
-        }
-        captionEl.textContent = caption;
+      function updateRowNumbers() {
+        const rows = tbody.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+          if (row.cells && row.cells[0]) row.cells[0].textContent = index + 1;
+        });
       }
-    }
 
-    // Update row numbers dynamically
-    function updateRowNumbers() {
-      const tbody = document.querySelector('tbody');
-      const rows = tbody.querySelectorAll('tr');
-      rows.forEach((row, index) => {
-        row.cells[0].textContent = index + 1;
-      });
-    }
+      function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
+        const rows = Array.from(tbody.querySelectorAll('tr'));
 
-    // Add click-to-sort functionality
-    const headers = document.querySelectorAll('th');
-    const tbody = document.querySelector('tbody');
-    const sortableColumns = new Set([1, 2, 3, 4, 5, 6]);
-    const numericColumns = new Set([3, 4, 5]);
-    const sortableHeaders = Array.from(headers).filter((header, columnIndex) =>
-      sortableColumns.has(columnIndex)
-    );
+        rows.sort((a, b) => {
+          const aText = a.cells[columnIndex]?.textContent.trim() || '';
+          const bText = b.cells[columnIndex]?.textContent.trim() || '';
+          const isNumeric = numericColumns.has(columnIndex);
+          if (isNumeric) {
+            const aVal = parseFloat(aText);
+            const bVal = parseFloat(bText);
+            if (Number.isNaN(aVal) && Number.isNaN(bVal)) return 0;
+            if (Number.isNaN(aVal)) return 1;
+            if (Number.isNaN(bVal)) return -1;
+            return direction === 'asc' ? aVal - bVal : bVal - aVal;
+          }
+          const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
+          return direction === 'asc' ? cmp : -cmp;
+        });
 
-    sortableHeaders.forEach(header => {
-      if (!header.dataset.sort) header.dataset.sort = 'none';
-      if (!header.title) header.title = 'Click to sort';
-    });
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+        updateRowNumbers();
 
-    function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-
-      rows.sort((a, b) => {
-        const aText = a.cells[columnIndex].textContent.trim();
-        const bText = b.cells[columnIndex].textContent.trim();
-        const isNumeric = numericColumns.has(columnIndex);
-        if (isNumeric) {
-          const aVal = parseFloat(aText);
-          const bVal = parseFloat(bText);
-          if (Number.isNaN(aVal) && Number.isNaN(bVal)) return 0;
-          if (Number.isNaN(aVal)) return 1;
-          if (Number.isNaN(bVal)) return -1;
-          return direction === 'asc' ? aVal - bVal : bVal - aVal;
+        if (updateHeaderStyle) {
+          headers.forEach(h => (h.style.backgroundColor = '#4472C4'));
+          if (activeHeader) activeHeader.style.backgroundColor = '#2c5aa0';
         }
-        const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
-        return direction === 'asc' ? cmp : -cmp;
-      });
-
-      tbody.innerHTML = '';
-      rows.forEach(row => tbody.appendChild(row));
-      updateRowNumbers();
-
-      if (updateHeaderStyle) {
-        headers.forEach(h => h.style.backgroundColor = '#4472C4');
-        if (activeHeader) activeHeader.style.backgroundColor = '#2c5aa0';
       }
-    }
 
-    const defaultHeader = sortableHeaders.find(header => header.classList.contains('col-national'));
-    if (defaultHeader) {
-      sortableHeaders.forEach(h => {
-        if (h !== defaultHeader) h.dataset.sort = 'none';
+      sortableHeaders.forEach(header => {
+        if (!header.dataset.sort) header.dataset.sort = 'none';
+        if (!header.title) header.title = 'Click to sort';
       });
-      defaultHeader.dataset.sort = 'asc';
-      applySort(5, 'asc', defaultHeader, true);
-    }
 
-    headers.forEach((header, columnIndex) => {
-      // Only enable sorting for First/Last, WTN, UTR, Nat Rank, Location
-      if (sortableColumns.has(columnIndex)) {
+      const natIdx = headers.findIndex(h => h.classList.contains('col-national'));
+      const defaultIdx = natIdx >= 0 ? natIdx : 5;
+      const defaultHeader = headers[defaultIdx];
+      if (defaultHeader && sortableHeaders.includes(defaultHeader)) {
+        sortableHeaders.forEach(h => {
+          if (h !== defaultHeader) h.dataset.sort = 'none';
+        });
+        defaultHeader.dataset.sort = 'asc';
+        applySort(defaultIdx, 'asc', defaultHeader, true);
+      } else {
+        updateRowNumbers();
+      }
+
+      headers.forEach((header, columnIndex) => {
+        if (!sortableHeaders.includes(header)) return;
         header.addEventListener('click', () => {
-          // Toggle sort direction
           const currentSort = header.dataset.sort || 'none';
           const newSort = currentSort === 'asc' ? 'desc' : 'asc';
           sortableHeaders.forEach(h => {
@@ -1588,415 +1916,32 @@
           header.dataset.sort = newSort;
           applySort(columnIndex, newSort, header, true);
         });
-      }
-    });
+      });
+    }
 
-    // Initialize row numbers on page load
-    if (!defaultHeader) updateRowNumbers();
+    document.querySelectorAll('.desktop-view table.players-table').forEach(initSortableTable);
+
+    // Partner jump (mixed doubles): click partner name to scroll to their row.
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('.partner-jump');
+      if (!link) return;
+      e.preventDefault();
+      const partnerKey = (link.getAttribute('data-partner-key') || '').trim();
+      if (!partnerKey) return;
+      const esc = (s) =>
+        window.CSS && CSS.escape ? CSS.escape(s) : s.replace(/[^a-zA-Z0-9_-]/g, '\\\\$&');
+      const row = document.querySelector(`.desktop-view tr[data-player-key="${esc(partnerKey)}"]`);
+      if (!row) return;
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      row.classList.add('partner-highlight');
+      window.setTimeout(() => row.classList.remove('partner-highlight'), 1600);
+    });
     decoratePlayerLinks();
     normalizeLastNames();
     normalizeLocations();
     buildUtrHistogram();
     updateRegistrationCountdown();
     setInterval(updateRegistrationCountdown, 60 * 1000);
-
-    const PTF_PRIMARY_PLAYER = { first: 'Alexis', last: 'Malakhova' };
-    const PTF_ACTUAL_DRAW_KEY = `tennis_tracker_actual_draw_positions_v1:${window.location.pathname}`;
-
-    function ptfNormalizeName(value) {
-      return (value || '').toString().trim().replace(/\s+/g, ' ').toLowerCase();
-    }
-
-    function ptfFindTarget(players) {
-      const first = PTF_PRIMARY_PLAYER.first.toLowerCase();
-      const last = PTF_PRIMARY_PLAYER.last.toLowerCase();
-      return (
-        players.find(
-          p => (p.firstName || '').toLowerCase() === first && (p.lastName || '').toLowerCase() === last
-        ) || null
-      );
-    }
-
-    function ptfRoundLabels(drawSize) {
-      const labels = [];
-      for (let size = drawSize; size >= 2; size = size / 2) {
-        if (size === 2) {
-          labels.push('Final');
-          break;
-        }
-        if (size === 4) labels.push('Semifinal');
-        else if (size === 8) labels.push('Quarterfinal');
-        else labels.push(`Round of ${size}`);
-      }
-      return labels;
-    }
-
-    function ptfReadActualPositions(drawSize) {
-      const scriptTag = document.getElementById('actual-draw-json');
-      if (scriptTag && scriptTag.textContent.trim()) {
-        try {
-          const parsed = JSON.parse(scriptTag.textContent.trim());
-          const positions = Array.isArray(parsed) ? parsed : parsed?.positions;
-          if (Array.isArray(positions) && positions.length >= drawSize) return positions;
-        } catch {}
-      }
-
-      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
-      if (!raw) return null;
-      try {
-        const parsed = JSON.parse(raw);
-        const positions = Array.isArray(parsed) ? parsed : parsed?.positions;
-        if (Array.isArray(positions) && positions.length >= drawSize) return positions;
-      } catch {}
-      return null;
-    }
-
-    function ptfReadActualPayload(drawSize) {
-      const scriptTag = document.getElementById('actual-draw-json');
-      if (scriptTag && scriptTag.textContent.trim()) {
-        try {
-          const parsed = JSON.parse(scriptTag.textContent.trim());
-          if (parsed && typeof parsed === 'object') {
-            const positions = Array.isArray(parsed.positions) ? parsed.positions : null;
-            if (positions && positions.length >= drawSize) return parsed;
-          }
-          if (Array.isArray(parsed) && parsed.length >= drawSize) return { positions: parsed };
-        } catch {}
-      }
-
-      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
-      if (!raw) return null;
-      try {
-        const parsed = JSON.parse(raw);
-        if (parsed && typeof parsed === 'object') {
-          const positions = Array.isArray(parsed.positions) ? parsed.positions : null;
-          if (positions && positions.length >= drawSize) return parsed;
-        }
-        if (Array.isArray(parsed) && parsed.length >= drawSize) return { positions: parsed };
-      } catch {}
-      return null;
-    }
-
-    function ptfReadActualMeta() {
-      const scriptTag = document.getElementById('actual-draw-json');
-      if (scriptTag && scriptTag.textContent.trim()) {
-        try {
-          return JSON.parse(scriptTag.textContent.trim());
-        } catch {}
-      }
-
-      const raw = localStorage.getItem(PTF_ACTUAL_DRAW_KEY);
-      if (!raw) return null;
-      try {
-        return JSON.parse(raw);
-      } catch {}
-      return null;
-    }
-
-    function ptfGetOverviewUrl() {
-      const a = document.querySelector('.desktop-view .tournament-info a');
-      if (a && a.href) return a.href;
-      const b = document.querySelector('a.mobile-tournament-link');
-      if (b && b.href) return b.href;
-      return '';
-    }
-
-    function ptfResolveDrawUrl(meta) {
-      const m = meta && typeof meta === 'object' ? meta : null;
-      const direct = m?.drawUrl;
-      if (typeof direct === 'string' && /^https?:\\/\\//.test(direct)) return direct;
-
-      const org = m?.orgSegment;
-      const tournamentId = m?.tournamentId;
-      const eventId = m?.eventId;
-      if (org && tournamentId) {
-        const base = `https://playtennis.usta.com/Competitions/${encodeURIComponent(org)}/Tournaments/draws/${encodeURIComponent(tournamentId)}`;
-        return eventId ? `${base}/${encodeURIComponent(eventId)}` : base;
-      }
-
-      const overviewUrl = ptfGetOverviewUrl();
-      const match = (overviewUrl || '').match(/\\/Competitions\\/([^/]+)\\/Tournaments\\/Overview\\/([A-F0-9-]+)/i);
-      if (!match) return null;
-      return `https://playtennis.usta.com/Competitions/${encodeURIComponent(match[1])}/Tournaments/draws/${encodeURIComponent(match[2])}`;
-    }
-
-    function ptfBuildActual(players, drawSize, positions) {
-      const byName = new Map(players.map(p => [ptfNormalizeName(p.fullName), p]));
-      const bracket = new Array(drawSize).fill(null);
-      for (let i = 0; i < drawSize; i += 1) {
-        const name = positions[i];
-        if (!name) continue;
-        bracket[i] =
-          byName.get(ptfNormalizeName(name)) || { fullName: String(name), utr: NaN, natRank: NaN, wtn: '' };
-      }
-      return bracket;
-    }
-
-    function ptfTopOpponents(candidates, limit) {
-      const filtered = (candidates || []).filter(Boolean);
-      const scored = filtered
-        .map(p => ({
-          p,
-          utr: Number.isFinite(p?.utr) ? p.utr : -1e9,
-          natRank: Number.isFinite(p?.natRank) ? p.natRank : 1e9,
-        }))
-        .sort((a, b) => {
-          if (b.utr !== a.utr) return b.utr - a.utr;
-          return a.natRank - b.natRank;
-        })
-        .map(x => x.p);
-      return scored.slice(0, Math.max(1, Math.min(2, limit || 2)));
-    }
-
-    function ptfFormatUtr(player) {
-      return Number.isFinite(player?.utr) ? `UTR ${player.utr.toFixed(2)}` : 'UTR —';
-    }
-
-    function ptfComputeLikelyOpponents(bracket, targetPos, drawSize) {
-      const labels = ptfRoundLabels(drawSize);
-      const target = bracket[targetPos - 1];
-      const path = [];
-
-      for (let roundIndex = 0; roundIndex < labels.length; roundIndex += 1) {
-        const groupSize = Math.pow(2, roundIndex + 1);
-        const groupStart = Math.floor((targetPos - 1) / groupSize) * groupSize + 1;
-        const halfSize = groupSize / 2;
-        const inSecondHalf = targetPos > groupStart + halfSize - 1;
-        const otherHalfStart = groupStart + (inSecondHalf ? 0 : halfSize);
-
-        const candidates = [];
-        for (let pos = otherHalfStart; pos < otherHalfStart + halfSize; pos += 1) {
-          const p = bracket[pos - 1] || null;
-          if (p && ptfNormalizeName(p.fullName) === ptfNormalizeName(target.fullName)) continue;
-          candidates.push(p);
-        }
-
-        const limit = roundIndex === 0 ? 1 : 2;
-        path.push({ label: labels[roundIndex], opponents: ptfTopOpponents(candidates, limit) });
-      }
-
-      return path;
-    }
-
-    function ptfRenderOpponentBlocks(opponents) {
-      const list = Array.isArray(opponents) ? opponents.filter(Boolean) : [];
-      if (!list.length) return '<div class="ptf-muted">—</div>';
-      return list
-        .map(
-          (p, idx) => `
-            <div${idx ? ' style="margin-top:10px;"' : ''}>
-              <div class="ptf-opponent">${p.fullName || '—'}</div>
-              <div class="ptf-muted">${ptfFormatUtr(p)}</div>
-            </div>`
-        )
-        .join('');
-    }
-
-    function ptfRenderHtml(path) {
-      if (!path || !path.length) return '<div class="ptf-muted">Not enough data to compute a path.</div>';
-      const rows = path
-        .map(
-          step => `
-          <tr>
-            <td>${step.label}</td>
-            <td>${ptfRenderOpponentBlocks(step.opponents)}</td>
-          </tr>`
-        )
-        .join('');
-      return `
-        <table class="ptf-table">
-          <thead><tr><th>Round</th><th>Likely opponents (UTR)</th></tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-      `;
-    }
-
-    function ptfRenderResultsHtml(matches, labelName) {
-      const list = Array.isArray(matches)
-        ? matches.filter(m => m && (m.round || m.roundName || m.opponent || m.score || m.result || m.status))
-        : [];
-      if (!list.length) return '';
-
-      const anyCompleted = list.some(m => {
-        const status = (m.status || '').toString().toUpperCase();
-        if (status === 'COMPLETED') return true;
-        if ((m.score || '').toString().trim()) return true;
-        if ((m.result || '').toString().trim()) return true;
-        return false;
-      });
-      const titleSuffix = anyCompleted ? 'Results' : 'Matches';
-      const titleText = (labelName || '').toString().trim()
-        ? `${(labelName || '').toString().trim()} ${titleSuffix}`
-        : titleSuffix;
-
-      const items = list
-        .map(m => {
-          const round = (m.round || m.roundName || '').toString() || 'Match';
-          const opponent = (m.opponent || '').toString() || 'TBD';
-          const status = (m.status || '').toString();
-          const result = (m.result || '').toString();
-          const score = (m.score || '').toString();
-          const meta = [status].filter(Boolean).join(' • ');
-          const scoreText = [result, score].filter(Boolean).join(' ');
-          return `
-            <li class="ptf-result-item">
-              <div class="ptf-result-top">
-                <div class="ptf-result-round">${round}</div>
-                <div class="ptf-result-score">${scoreText || '—'}</div>
-              </div>
-              <div class="ptf-opponent" style="margin-top:6px;">vs ${opponent}</div>
-              ${meta ? `<div class="ptf-muted" style="margin-top:4px;">${meta}</div>` : ''}
-            </li>`;
-        })
-        .join('');
-      return `
-        <div class="ptf-results">
-          <div class="ptf-results-title">${titleText}</div>
-          <ul class="ptf-results-list">${items}</ul>
-        </div>
-      `;
-    }
-
-    function ptfRenderMobileHtml(path) {
-      if (!path || !path.length) return '<div class="mobile-ptf-meta">Not enough data to compute a path.</div>';
-      const rows = path
-        .map(step => {
-          const opponents = Array.isArray(step.opponents) ? step.opponents.filter(Boolean) : [];
-          if (!opponents.length) {
-            return `
-            <tr>
-              <td>${step.label}</td>
-              <td><div class="mobile-ptf-meta">—</div></td>
-            </tr>`;
-          }
-          const blocks = opponents
-            .map(
-              (p, idx) => `
-              <div${idx ? ' style="margin-top:8px;"' : ''}>
-                <div class="mobile-ptf-name">${p.fullName || '—'}</div>
-                <div class="mobile-ptf-meta">${ptfFormatUtr(p)}</div>
-              </div>`
-            )
-            .join('');
-          return `
-            <tr>
-              <td>${step.label}</td>
-              <td>${blocks}</td>
-            </tr>`;
-        })
-        .join('');
-
-      return `
-        <table class="mobile-ptf-table">
-          <thead><tr><th>Round</th><th>Likely opponents</th></tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-      `;
-    }
-
-    function renderPathToFinal() {
-      const players = Array.isArray(allPlayers) && allPlayers.length ? allPlayers : parsePlayerData();
-      const alexis = ptfFindTarget(players);
-      const stats = parseKeyStats();
-      const drawSize = Number.isFinite(stats.drawSize) ? stats.drawSize : 16;
-
-      const desktopBody = document.getElementById('ptf-body');
-      const mobileBody = document.getElementById('mobile-path-to-final');
-      const subtitleEl = document.getElementById('ptf-subtitle');
-      const titleEl = document.getElementById('ptf-title');
-      const sourceEl = document.getElementById('ptf-source');
-      const mobileTitleEl = document.getElementById('mobile-ptf-title');
-      const mobileSourceEl = document.getElementById('mobile-ptf-source');
-      if (!desktopBody || !subtitleEl || !titleEl) return;
-
-      const titleText = alexis ? `Path to Final: ${alexis.fullName}` : 'Path to Final';
-      titleEl.textContent = titleText;
-      if (mobileTitleEl) mobileTitleEl.textContent = titleText;
-
-      const meta = ptfReadActualMeta();
-      const drawUrl = ptfResolveDrawUrl(meta);
-      for (const el of [sourceEl, mobileSourceEl]) {
-        if (!el) continue;
-        if (drawUrl) {
-          el.href = drawUrl;
-          el.textContent = 'Official draw';
-          el.title = 'Open official draw on USTA PlayTennis';
-          el.style.display = '';
-        } else {
-          el.textContent = '';
-          el.removeAttribute('href');
-          el.style.display = 'none';
-        }
-      }
-
-      const applyBtn = document.getElementById('ptf-apply');
-      const jsonTextarea = document.getElementById('ptf-json');
-      const errorEl = document.getElementById('ptf-error');
-
-      function showEmpty(message) {
-        subtitleEl.textContent = message;
-        desktopBody.innerHTML = `<div class="ptf-muted">${message}</div>`;
-        if (mobileBody) mobileBody.innerHTML = `<div class="mobile-ptf-meta">${message}</div>`;
-      }
-
-      if (applyBtn && jsonTextarea) {
-        applyBtn.onclick = () => {
-          if (errorEl) errorEl.textContent = '';
-          let parsed;
-          try {
-            parsed = JSON.parse(jsonTextarea.value || 'null');
-          } catch {
-            if (errorEl) errorEl.textContent = 'Invalid JSON.';
-            return;
-          }
-
-          const payload = Array.isArray(parsed) ? { positions: parsed } : (parsed || {});
-          const positions = payload?.positions;
-          if (!Array.isArray(positions) || positions.length < drawSize) {
-            if (errorEl) errorEl.textContent = `Expected an array (or {positions:[...]}) with at least ${drawSize} entries.`;
-            return;
-          }
-
-          const stored = { positions };
-          if (Array.isArray(payload?.matches)) stored.matches = payload.matches;
-          localStorage.setItem(PTF_ACTUAL_DRAW_KEY, JSON.stringify(stored));
-          renderPathToFinal();
-        };
-      }
-
-      if (!alexis) {
-        showEmpty('Primary player not found in entry list.');
-        return;
-      }
-
-      const payload = ptfReadActualPayload(drawSize);
-      const actualPositions = payload?.positions || null;
-      if (!actualPositions) {
-        showEmpty('Paste official draw positions below to compute a path.');
-        return;
-      }
-
-      const bracket = ptfBuildActual(players, drawSize, actualPositions);
-      const targetPos = bracket.findIndex(p => ptfNormalizeName(p?.fullName) === ptfNormalizeName(alexis.fullName)) + 1;
-      if (!targetPos) {
-        showEmpty('Alexis was not found in the official draw positions.');
-        return;
-      }
-
-      subtitleEl.textContent = 'Likely opponents = top 1–2 by UTR in each round’s opponent pool.';
-      const path = ptfComputeLikelyOpponents(bracket, targetPos, drawSize);
-      const matches = Array.isArray(payload?.matches) ? payload.matches : [];
-      desktopBody.innerHTML = ptfRenderHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
-      if (mobileBody) {
-        mobileBody.innerHTML = ptfRenderMobileHtml(path) + ptfRenderResultsHtml(matches, alexis?.firstName || alexis?.fullName);
-      }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderPathToFinal);
-    } else {
-      renderPathToFinal();
-    }
 
     function getRegistrationCloseText() {
       const keyStats = document.querySelectorAll('.desktop-view .key-stat');
@@ -2026,8 +1971,21 @@
       const normalized = (text || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
       if (!normalized || /registration closed/i.test(normalized)) return null;
 
+      const months = {
+        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+      };
+
       const match = normalized.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)(?:\s+([A-Z]{2,4}))?/i);
-      if (!match) return null;
+      if (!match) {
+        // Date-only fallback: "April 23, 2026"
+        const dm = normalized.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+        if (!dm) return null;
+        const mName = dm[1].charAt(0).toUpperCase() + dm[1].slice(1).toLowerCase();
+        const month = months[mName];
+        if (month === undefined) return null;
+        return new Date(parseInt(dm[3], 10), month, parseInt(dm[2], 10), 23, 59, 0);
+      }
 
       const monthName = match[1];
       const day = parseInt(match[2], 10);
@@ -2037,10 +1995,6 @@
       const ampm = (match[6] || '').toUpperCase();
       const tz = (match[7] || '').toUpperCase();
 
-      const months = {
-        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
-        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
-      };
       const month = months[monthName];
       if (month === undefined) return null;
 
@@ -2180,7 +2134,7 @@
       if (navigator.share) {
         try {
           await navigator.share({
-	            title: "Level 5 Open: FDT Level 5 Junior Singles Championship — Girls' 12 Singles",
+            title: "FDT Level 5 Junior Singles Championship",
             text: 'Tournament Report - January 31 - February 1, 2026',
             url: window.location.href
           });
@@ -2204,19 +2158,61 @@
   </script>
   <script>
 (function() {
-  var toggle = document.getElementById('tt-theme-toggle');
-  var icon = document.getElementById('tt-theme-icon');
-  var html = document.documentElement;
-  if (icon) icon.textContent = html.classList.contains('dark') ? '☀️' : '🌙';
+  const toggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const html = document.documentElement;
   if (toggle) {
-    toggle.addEventListener('click', function() {
-      var dark = html.classList.toggle('dark');
-      localStorage.setItem('theme', dark ? 'dark' : 'light');
-      if (icon) icon.textContent = dark ? '☀️' : '🌙';
+    toggle.addEventListener('click', () => {
+      toggleTheme();
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (themeIcon) themeIcon.textContent = isDark ? '☀️' : '🌙';
     });
   }
+  if (themeIcon) themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
 })();
   </script>
+<div id="player-match-results">
+<style id="player-match-results-style">
+  .pmr-block { max-width: 1000px; margin: 28px auto; padding: 20px 18px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: rgba(255,255,255,0.84); }
+  .pmr-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+  .pmr-header h2 { margin: 0; font-size: 18px; font-weight: 700; }
+  .pmr-summary { font-size: 14px; }
+  .pmr-result { font-weight: 700; color: var(--accent-report, #16a34a); }
+  .pmr-points { font-variant-numeric: tabular-nums; opacity: 0.85; }
+  .pmr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pmr-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 6px 10px; border-bottom: 2px solid rgba(0,0,0,0.1); opacity: 0.7; }
+  .pmr-table td { padding: 8px 10px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; }
+  .pmr-round { font-weight: 700; font-size: 12px; white-space: nowrap; width: 60px; }
+  .pmr-wl { font-weight: 800; width: 24px; text-align: center; }
+  .pmr-win .pmr-wl { color: var(--accent-report, #16a34a); }
+  .pmr-loss .pmr-wl { color: #dc2626; }
+  .pmr-win { background: rgba(22, 163, 74, 0.04); }
+  .pmr-opponent { font-weight: 500; }
+  .pmr-partner { font-weight: 400; opacity: 0.7; font-size: 12px; }
+  .pmr-score { font-variant-numeric: tabular-nums; white-space: nowrap; opacity: 0.9; }
 
+  html[data-theme="dark"] .pmr-block { background: rgba(42, 42, 42, 0.96); border-color: rgba(255,255,255,0.14); }
+  html[data-theme="dark"] .pmr-block h2 { color: #fff; }
+  html[data-theme="dark"] .pmr-table th { border-bottom-color: rgba(255,255,255,0.15); }
+  html[data-theme="dark"] .pmr-table td { border-bottom-color: rgba(255,255,255,0.08); }
+  html[data-theme="dark"] .pmr-win { background: rgba(34, 197, 94, 0.08); }
+  html[data-theme="dark"] .pmr-loss .pmr-wl { color: #f87171; }
+</style>
+<div class="pmr-block">
+  <div class="pmr-header">
+    <h2>Alexis Malakhova — Match Results</h2>
+    <span class="pmr-summary"><span class="pmr-result">Semifinals</span> · <span class="pmr-points">150 pts + 11 bonus</span></span>
+  </div>
+  <table class="pmr-table">
+    <thead><tr><th>Round</th><th></th><th>Opponent</th><th>Score</th></tr></thead>
+    <tbody>
+<tr class="pmr-loss"><td class="pmr-round">P-F</td><td class="pmr-wl">L</td><td class="pmr-opponent">Annabel HU</td><td class="pmr-score">6-7(4) 1-6</td></tr>
+<tr class="pmr-loss"><td class="pmr-round">SF</td><td class="pmr-wl">L</td><td class="pmr-opponent">Margaret DORAN</td><td class="pmr-score">2-6 2-6</td></tr>
+<tr class="pmr-win"><td class="pmr-round">QF</td><td class="pmr-wl">W</td><td class="pmr-opponent">Megan LAI</td><td class="pmr-score">6-1 0-6 [11-9]</td></tr>
+<tr class="pmr-win"><td class="pmr-round">R16</td><td class="pmr-wl">W</td><td class="pmr-opponent">Kendra WU</td><td class="pmr-score">6-4 6-3</td></tr>
+    </tbody>
+  </table>
+</div>
+</div><!-- /player-match-results -->
 </body>
 </html>
