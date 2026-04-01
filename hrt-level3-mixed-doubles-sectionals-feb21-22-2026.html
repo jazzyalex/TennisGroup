@@ -73,8 +73,51 @@
       }
     }
   </style>
+<script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
 <body>
+<nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo-link" aria-label="Home">
+        <div class="nav-logo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </div>
+      </a>
+      <span class="nav-brand">Tennis Tracker</span>
+    </div>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+        <a href="player.html" class="nav-link">Player</a>
+        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
   <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-02-18T17:13:20-08:00" title="2026-02-18T17:13:20-08:00">
     <span class="report-updated-badge__pill">Updated Feb 18, 2026 5:13 PM PST</span>
   </div>
