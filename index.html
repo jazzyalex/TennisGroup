@@ -1583,7 +1583,12 @@
 		      const ex = card.querySelector('[data-card-result-display]');
 		      if (ex) ex.remove();
 		      const result = (card.getAttribute('data-card-result') || '').trim();
-		      const points = (card.getAttribute('data-card-points') || '').trim();
+		      // Prefer the raw event value (bucket) over the weighted ranking
+		      // contribution so cards display the USTA "sticker" points
+		      // (e.g., L5 Champion = 300, not the 60 bucket-weighted value).
+		      const bucket = (card.getAttribute('data-card-bucket') || '').trim();
+		      const pointsAttr = (card.getAttribute('data-card-points') || '').trim();
+		      const points = bucket || pointsAttr;
 		      const bonus = (card.getAttribute('data-card-bonus') || '').trim();
 		      if (!result && !points) return;
 		      const meta = card.querySelector('.card-meta');
