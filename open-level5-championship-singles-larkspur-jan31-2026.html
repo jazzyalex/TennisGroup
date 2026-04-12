@@ -4115,6 +4115,14 @@
       const errorEl = document.getElementById('ptf-error');
 
       function showEmpty(message) {
+        // Hide the entire Path-to-Final section when the primary player
+        // isn't in the draw or no actual positions have been pasted —
+        // avoids rendering a broken-looking empty block above the roster.
+        const section = document.getElementById('path-to-final');
+        if (section) section.style.display = 'none';
+        const mobileSection = document.getElementById('mobile-path-to-final-section') || (mobileBody && mobileBody.closest && mobileBody.closest('section, .mobile-path-card'));
+        if (mobileSection && mobileSection !== mobileBody) mobileSection.style.display = 'none';
+        if (mobileBody) mobileBody.style.display = 'none';
         subtitleEl.textContent = message;
         desktopBody.innerHTML = `<div class="ptf-muted">${message}</div>`;
         if (mobileBody) mobileBody.innerHTML = `<div class="mobile-ptf-meta">${message}</div>`;
