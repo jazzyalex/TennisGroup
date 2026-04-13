@@ -14,1201 +14,51 @@
   <meta property="og:title" content="Tennis Tracker">
   <meta property="og:description" content="Tournament calendars, match reports, and player analysis for junior tennis">
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-
-    :root {
-      --bg-primary: #f8fafc;
-      --bg-secondary: #ffffff;
-      --bg-tertiary: #f1f5f9;
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-      --text-muted: #94a3b8;
-      --border: #e2e8f0;
-      --border-subtle: #f1f5f9;
-      --court-green: #2d5a27;
-      --court-green-light: #3d7a37;
-      --accent-cyan: #0891b2;
-      --accent-amber: #f59e0b;
-      --accent-emerald: #10b981;
-      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-      --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-      --hero-card-bg: rgba(255, 255, 255, 0.94);
-      --hero-card-text: #0f172a;
-      --hero-card-muted: #475569;
-      --hero-card-border: rgba(255, 255, 255, 0.6);
-      --hero-card-stat-bg: rgba(15, 23, 42, 0.08);
-      --hero-badge-bg: rgba(16, 185, 129, 0.15);
-      --hero-badge-text: #065f46;
-      --player-green: #2d5a2d;
-      --player-green-soft: #3d6f3d;
-      --player-light: #e8f5e9;
-      --player-border: #c8e6c9;
-      --player-text: #1f2937;
-      --player-text-muted: #6b7280;
-      --player-text-light: #9ca3af;
-      --player-trend-up: #10b981;
-      --player-trend-down: #ef4444;
-      --player-card-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-primary: #0f172a;
-        --bg-secondary: #1e293b;
-        --bg-tertiary: #334155;
-        --text-primary: #e2e8f0;
-        --text-secondary: #94a3b8;
-        --text-muted: #64748b;
-        --border: rgba(255,255,255,0.08);
-        --border-subtle: rgba(255,255,255,0.04);
-        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
-        --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-        --hero-card-bg: rgba(15, 23, 42, 0.85);
-        --hero-card-text: #e2e8f0;
-        --hero-card-muted: #cbd5f5;
-        --hero-card-border: rgba(148, 163, 184, 0.3);
-        --hero-card-stat-bg: rgba(255, 255, 255, 0.08);
-        --hero-badge-bg: rgba(16, 185, 129, 0.25);
-        --hero-badge-text: #d1fae5;
-      }
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
-      position: relative;
-      overflow: hidden;
-      padding: 48px 32px;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.15) 49.5%, rgba(255,255,255,0.15) 50.5%, transparent 50.5%),
-        linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.15) 3%, transparent 3%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(380px, 1fr);
-      gap: 24px;
-      align-items: center;
-      text-align: left;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .hero-header {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .logo svg {
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    }
-
-    .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      color: white;
-      margin: 0;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-subtitle {
-      font-size: 1.125rem;
-      color: rgba(255,255,255,0.85);
-      max-width: 600px;
-      margin: 0;
-    }
-
-    .player-card {
-      background: #ffffff;
-      color: var(--player-text);
-      border-radius: 16px;
-      padding: 16px 18px 18px;
-      box-shadow: var(--player-card-shadow);
-      min-width: 0;
-      width: 100%;
-      max-width: 380px;
-      justify-self: end;
-      align-self: center;
-      border-top: 3px solid var(--player-green);
-    }
-
-    .player-card__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    .player-card__name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--player-text);
-    }
-
-    .player-card__updated {
-      font-size: 0.7rem;
-      color: var(--player-text-light);
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .player-card__divider {
-      display: none;
-    }
-
-    .player-card__metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .player-card__metric,
-    .player-card__panel {
-      background: #f8f9fa;
-      border: 1px solid #eaeaea;
-      border-radius: 10px;
-      padding: 10px 12px;
-      transition: all 0.15s ease;
-    }
-
-    .player-card__metric:hover,
-    .player-card__metric:focus-within,
-    .player-card__panel:hover,
-    .player-card__panel:focus-within {
-      background-color: #f0f4f0;
-      border-color: #d4e5d4;
-    }
-
-    .player-card__metric-title {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--player-text-muted);
-    }
-
-    .player-card__metric-value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--player-green);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 4px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .player-card__metric-value a,
-    .player-card__panel a,
-    .player-card__utr-values,
-    .player-card__ranking-list {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .player-card__utr-values {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 6px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .player-card__utr-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .player-card__utr-label {
-      font-size: 0.65rem;
-      color: var(--player-text-muted);
-      font-weight: 500;
-      min-width: 10px;
-    }
-
-    .player-card__utr-value {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--player-green);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .player-card__utr-value-small {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--player-green);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .player-card__trend {
-      font-size: 0.8rem;
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    .player-card__trend--up {
-      color: var(--player-trend-up);
-    }
-
-    .player-card__trend--down {
-      color: var(--player-trend-down);
-    }
-
-    .player-card__ranking-list {
-      margin-top: 4px;
-      display: grid;
-      gap: 3px;
-      font-weight: 600;
-      color: var(--player-green);
-      font-variant-numeric: tabular-nums;
-      font-size: 0.85rem;
-    }
-
-    .player-card__ranking-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-    }
-
-    .player-card__ranking-row span:first-child {
-      font-size: 0.65rem;
-      color: var(--player-text-muted);
-      font-weight: 500;
-    }
-
-    .player-card__bottom {
-      margin-top: 10px;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 8px;
-    }
-
-    .player-card__panel--points {
-      background: #f8f9fa;
-    }
-
-    .player-card__panel-title {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      color: var(--player-green);
-      margin-bottom: 8px;
-    }
-
-    .player-card__points-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    .player-card__points-grid > span {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .player-card__points-grid > span:first-child {
-      align-items: flex-start;
-    }
-
-    .player-card__points-grid > span:not(:first-child) {
-      align-items: center;
-    }
-
-    .player-card__points-label {
-      font-size: 0.6rem;
-      color: var(--player-text-muted);
-      font-weight: 500;
-    }
-
-    .player-card__points-value {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--player-green);
-      margin-top: 3px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .player-card__tr-grid {
-      display: grid;
-      gap: 4px;
-    }
-
-    .player-card__tr-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      color: var(--player-green);
-      font-variant-numeric: tabular-nums;
-      font-size: 0.85rem;
-    }
-
-    .player-card__tr-row span:first-child {
-      font-size: 0.65rem;
-      color: var(--player-text-muted);
-      font-weight: 500;
-    }
-
-    /* Expiration Alert - Simple banner style */
-    .player-card__alert {
-      margin-top: 10px;
-      padding: 10px 14px;
-      background: linear-gradient(90deg, #fef3c7 0%, #fef9c3 100%);
-      border-left: 4px solid #f59e0b;
-      border-radius: 8px;
-      color: #92400e;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    /* View Profile Link */
-    .player-card__profile-link {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 12px;
-      background: var(--player-green);
-      border-radius: 10px;
-      color: #ffffff;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s ease;
-    }
-
-    .player-card__profile-link:hover {
-      background: var(--player-green-soft);
-      transform: translateY(-1px);
-    }
-
-    .player-card__profile-link svg {
-      width: 16px;
-      height: 16px;
-    }
-
-
-    /* Main Content */
-    .main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 48px 24px;
-    }
-
-    /* Section Headers */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .section-bar {
-      width: 6px;
-      height: 28px;
-      background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-emerald) 100%);
-      border-radius: 3px;
-    }
-
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .section-badge {
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border);
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .section-actions {
-      margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .favorites-filter-toggle {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-tertiary);
-      color: var(--text-muted);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
-    }
-
-    .favorites-filter-toggle:hover {
-      opacity: 0.95;
-      transform: translateY(-1px);
-    }
-
-    .favorites-filter-toggle:focus-visible {
-      outline: 2px solid var(--accent-cyan);
-      outline-offset: 3px;
-    }
-
-    .favorites-filter-toggle svg {
-      width: 16px;
-      height: 16px;
-      fill: transparent;
-      stroke: currentColor;
-      stroke-width: 2;
-    }
-
-    .favorites-filter-toggle.is-active {
-      color: var(--accent-amber);
-      border-color: rgba(245, 158, 11, 0.55);
-    }
-
-    .favorites-filter-toggle.is-active svg {
-      fill: currentColor;
-    }
-
-    /* Tournament Cards Grid */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-      margin-bottom: 48px;
-    }
-
-    .calendar-row {
-      margin-bottom: 24px;
-    }
-
-    .calendar-row .tournament-card {
-      width: 100%;
-    }
-
-    .calendar-card {
-      min-height: 110px;
-      padding: 14px 20px;
-    }
-
-    .tournament-card.calendar-card {
-      background: var(--court-green);
-      border-color: rgba(255, 255, 255, 0.22);
-    }
-
-    .tournament-card.calendar-card::before {
-      background: none;
-    }
-
-    .calendar-card .card-title,
-    .calendar-card .card-description {
-      color: rgba(255, 255, 255, 0.95);
-    }
-
-    .calendar-card .card-description {
-      color: rgba(255, 255, 255, 0.82);
-      margin-bottom: 12px;
-    }
-
-    .calendar-card .card-type.calendar {
-      background: rgba(255, 255, 255, 0.16);
-      color: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .calendar-card .calendar-header-meta .meta-item {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .calendar-card .calendar-header-meta .meta-icon {
-      opacity: 0.9;
-    }
-
-    .calendar-card .card-arrow {
-      background: rgba(255, 255, 255, 0.16);
-      color: rgba(255, 255, 255, 0.95);
-    }
-
-    .tournament-card.calendar-card:hover {
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .calendar-card:hover .card-arrow {
-      background: rgba(255, 255, 255, 0.24);
-      transform: translateX(4px);
-    }
-
-    .tournament-card.is-upcoming {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(255, 255, 255, 0.9));
-      border-color: rgba(16, 185, 129, 0.35);
-    }
-
-    .tournament-card.is-past {
-      background: linear-gradient(135deg, rgba(148, 163, 184, 0.18), rgba(255, 255, 255, 0.85));
-      border-color: rgba(148, 163, 184, 0.45);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .tournament-card.is-upcoming {
-        background: rgba(16, 185, 129, 0.12);
-        border-color: rgba(16, 185, 129, 0.3);
-      }
-
-      .tournament-card.is-past {
-        background: rgba(148, 163, 184, 0.15);
-        border-color: rgba(148, 163, 184, 0.35);
-      }
-    }
-
-    .tournament-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: block;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tournament-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--court-green) 0%, var(--court-green-light) 100%);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .tournament-card:hover {
-      box-shadow: var(--card-shadow-hover);
-      transform: translateY(-4px);
-      border-color: var(--court-green);
-    }
-
-    .tournament-card:hover::before {
-      transform: scaleX(1);
-    }
-
-	    .card-header {
-	      display: flex;
-	      align-items: flex-start;
-	      justify-content: space-between;
-	      margin-bottom: 16px;
-	    }
-
-		    .card-actions {
-		      display: flex;
-		      align-items: center;
-		      gap: 8px;
-		      margin-left: auto;
-		    }
-
-        .card-favorite-toggle {
-          width: 30px;
-          height: 30px;
-          border-radius: 999px;
-          border: 1px solid var(--border);
-          background: var(--bg-tertiary);
-          color: var(--text-muted);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
-          user-select: none;
-          flex-shrink: 0;
-        }
-
-        .card-favorite-toggle:hover {
-          opacity: 0.95;
-          transform: translateY(-1px);
-        }
-
-        .card-favorite-toggle:focus-visible {
-          outline: 2px solid var(--accent-cyan);
-          outline-offset: 3px;
-        }
-
-        .card-favorite-toggle svg {
-          width: 16px;
-          height: 16px;
-          fill: transparent;
-          stroke: currentColor;
-          stroke-width: 2;
-        }
-
-        .tournament-card[data-favorited="true"] .card-favorite-toggle {
-          color: var(--accent-amber);
-          border-color: rgba(245, 158, 11, 0.55);
-        }
-
-        .tournament-card[data-favorited="true"] .card-favorite-toggle svg {
-          fill: currentColor;
-        }
-
-        .tournament-card.is-hidden-by-favorite-filter {
-          display: none;
-        }
-
-        .calendar-card .card-favorite-toggle {
-          background: rgba(255, 255, 255, 0.16);
-          border-color: rgba(255, 255, 255, 0.22);
-          color: rgba(255, 255, 255, 0.9);
-        }
-
-        .calendar-card[data-favorited="true"] .card-favorite-toggle {
-          color: #fbbf24;
-          border-color: rgba(251, 191, 36, 0.6);
-        }
-
-		    .card-usta-link {
-		      display: inline-flex;
-		      align-items: center;
-		      justify-content: center;
-		      padding: 6px 10px;
-	      border-radius: 999px;
-	      border: 1px solid var(--border);
-	      background: var(--bg-tertiary);
-	      color: var(--text-secondary);
-	      font-size: 0.7rem;
-	      font-weight: 700;
-	      text-transform: uppercase;
-	      letter-spacing: 0.05em;
-	      cursor: pointer;
-	      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
-	      user-select: none;
-	    }
-
-	    .card-usta-link:hover {
-	      opacity: 0.9;
-	      transform: translateY(-1px);
-	    }
-
-	    .card-usta-link:focus-visible {
-	      outline: 2px solid var(--accent-cyan);
-	      outline-offset: 3px;
-	    }
-
-    .calendar-header {
-      align-items: center;
-    }
-
-    .calendar-header-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .calendar-header-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .calendar-header-meta .meta-item {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .calendar-header-meta .meta-icon {
-      width: 14px;
-      height: 14px;
-      opacity: 0.65;
-    }
-
-    .card-type {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .card-type.calendar {
-      background: rgba(8, 145, 178, 0.12);
-      color: var(--accent-cyan);
-    }
-
-    .card-type.report {
-      background: rgba(245, 158, 11, 0.12);
-      color: var(--accent-amber);
-    }
-
-    .card-type.report.is-closing-soon {
-      background: rgba(239, 68, 68, 0.16);
-      color: #ef4444;
-    }
-
-    .card-type.report.is-closed {
-      background: rgba(148, 163, 184, 0.16);
-      color: var(--text-muted);
-    }
-
-    .card-type-icon {
-      width: 14px;
-      height: 14px;
-    }
-
-    .card-arrow {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--bg-tertiary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      transition: all 0.2s ease;
-    }
-
-    .tournament-card:hover .card-arrow {
-      background: var(--court-green);
-      color: white;
-      transform: translateX(4px);
-    }
-
-    .card-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-
-    .card-description {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-	    .meta-item {
-	      display: flex;
-	      align-items: center;
-	      gap: 6px;
-	      font-size: 0.8rem;
-	      color: var(--text-muted);
-	    }
-
-	    .meta-item.meta-updated {
-	      opacity: 0.95;
-	    }
-
-	    .meta-icon {
-	      width: 16px;
-	      height: 16px;
-	      opacity: 0.7;
-	    }
-
-    /* Coming Soon Section */
-    .coming-soon {
-      background: var(--bg-tertiary);
-      border: 1px dashed var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .coming-soon-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 16px;
-      color: var(--text-muted);
-      opacity: 0.5;
-    }
-
-    .coming-soon h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .coming-soon p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      text-align: center;
-    }
-
-    .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .footer p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .footer a {
-      color: var(--accent-cyan);
-      text-decoration: none;
-      border-bottom: 1px dotted var(--accent-cyan);
-      transition: opacity 0.2s;
-    }
-
-    .footer a:hover {
-      opacity: 0.8;
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-      }
-
-      .player-card {
-        min-width: 0;
-        max-width: 720px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .player-card__metrics {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      /* Keep Rankings in normal grid flow for tablet */
-      .player-card__bottom {
-        grid-template-columns: 1.5fr 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      /* Remove single column layout - keep 2 columns from 768px breakpoint */
-
-      .player-card__header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-
-      .player-card__updated {
-        font-size: 0.75rem;
-      }
-
-      .player-card__name {
-        font-size: 1.1rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 24px 16px;
-      }
-
-      /* Hide decorative court pattern on mobile */
-      .hero::before {
-        display: none;
-      }
-
-      /* Hide subtitle on mobile */
-      .hero-subtitle {
-        display: none;
-      }
-
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        text-align: left;
-      }
-
-      .logo svg {
-        width: 48px;
-        height: 48px;
-      }
-
-      /* ========================================
-         MOBILE PLAYER CARD - Premium Design
-         ======================================== */
-      .player-card {
-        width: 100%;
-        max-width: 100%;
-        padding: 0;
-        border-radius: 14px;
-        border-top: none;
-        overflow: hidden;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      }
-
-      /* Header with green accent background */
-      .player-card__header {
-        background: linear-gradient(135deg, var(--player-green) 0%, var(--player-green-soft) 100%);
-        padding: 12px 14px;
-        margin-bottom: 0;
-        flex-direction: row;
-        align-items: center;
-      }
-
-      .player-card__name {
-        font-size: 1rem;
-        color: #ffffff;
-      }
-
-      .player-card__updated {
-        font-size: 0.65rem;
-        color: rgba(255, 255, 255, 0.75);
-        margin-top: 0;
-      }
-
-      /* Metrics container */
-      .player-card__metrics {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: #e8e8e8;
-        margin-bottom: 1px;
-      }
-
-      /* Remove the full-width span for Rankings */
-      .player-card__metric:nth-child(3) {
-        grid-column: auto;
-      }
-
-      /* Individual metric boxes - equal height */
-      .player-card__metric {
-        background: #ffffff;
-        border: none;
-        border-radius: 0;
-        padding: 10px 8px;
-        display: flex;
-        flex-direction: column;
-        min-height: 68px;
-      }
-
-      .player-card__metric-title {
-        font-size: 0.6rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--player-green);
-        margin-bottom: auto;
-      }
-
-      /* UTR styling */
-      .player-card__utr-values {
-        gap: 1px;
-        margin-top: 6px;
-      }
-
-      .player-card__utr-row {
-        gap: 4px;
-      }
-
-      .player-card__utr-label {
-        font-size: 0.55rem;
-        min-width: 10px;
-        color: #888;
-      }
-
-      .player-card__utr-value {
-        font-size: 1rem;
-        font-weight: 700;
-      }
-
-      .player-card__utr-value-small {
-        font-size: 0.85rem;
-        font-weight: 600;
-      }
-
-      .player-card__trend {
-        font-size: 0.75rem;
-      }
-
-      /* WTN styling */
-      .player-card__metric-value {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-top: 6px;
-      }
-
-      /* Rankings styling */
-      .player-card__ranking-list {
-        margin-top: 6px;
-        gap: 1px;
-      }
-
-      .player-card__ranking-row {
-        font-size: 0.9rem;
-        font-weight: 700;
-        gap: 6px;
-      }
-
-      .player-card__ranking-row span:first-child {
-        font-size: 0.55rem;
-        color: #888;
-        min-width: 32px;
-      }
-
-      /* Bottom section */
-      .player-card__bottom {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1px;
-        background: #e8e8e8;
-        margin-top: 0;
-      }
-
-      .player-card__panel {
-        background: #ffffff;
-        border: none;
-        border-radius: 0;
-        padding: 10px 8px;
-        min-height: 64px;
-      }
-
-      .player-card__panel-title {
-        font-size: 0.6rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--player-green);
-        margin-bottom: 6px;
-      }
-
-      /* USTA Points grid */
-      .player-card__points-grid {
-        display: flex;
-        justify-content: space-between;
-        gap: 2px;
-      }
-
-      .player-card__points-grid > span {
-        flex: 1;
-        text-align: center;
-      }
-
-      .player-card__points-grid > span:first-child {
-        text-align: left;
-      }
-
-      .player-card__points-label {
-        font-size: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        color: #888;
-      }
-
-      .player-card__points-value {
-        font-size: 0.95rem;
-        font-weight: 700;
-        margin-top: 2px;
-      }
-
-      /* TR grid */
-      .player-card__tr-grid {
-        gap: 1px;
-      }
-
-      .player-card__tr-row {
-        font-size: 0.9rem;
-        font-weight: 700;
-      }
-
-      .player-card__tr-row span:first-child {
-        font-size: 0.55rem;
-        color: #888;
-      }
-
-      .main {
-        padding: 32px 16px;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .tournament-card {
-        padding: 20px;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/core.css?v=20260326">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=20260327b">
+  <script>
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
+  <nav id="main-nav">
+    <a href="index.html" class="nav-home-link" aria-label="Go to home page">
+      <div class="nav-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+          <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+          <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+        </svg>
+      </div>
+      <span class="nav-brand">Tennis Tracker</span>
+    </a>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="player.html" class="nav-link">Player</a>
+        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+      <button class="nav-burger" id="nav-burger" aria-label="Open navigation menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -1227,89 +77,58 @@
       </div>
       <aside class="player-card" aria-labelledby="player-card-name">
         <header class="player-card__header">
-          <h2 class="player-card__name" id="player-card-name" data-player-name>Alexis Malakhova</h2>
-          <span class="player-card__updated" data-player-updated>Updated Feb 6, 2026</span>
+          <h2 class="player-card__name" id="player-card-name"><a href="player.html" data-player-name>Alexis Malakhova</a></h2>
+          <span class="player-card__date-badge" data-player-updated>Apr 12, 2026</span>
         </header>
-        <div class="player-card__divider"></div>
-        <section class="player-card__metrics" aria-label="Player metrics">
-          <div class="player-card__metric">
-            <div class="player-card__metric-title">UTR</div>
-            <a class="player-card__utr-values" href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener">
-              <span class="player-card__utr-row">
-                <span class="player-card__utr-label">S</span>
-                <span class="player-card__utr-value" data-player-stat="utr">4.48</span>
-                <span class="player-card__trend player-card__trend--up">↑</span>
-              </span>
-              <span class="player-card__utr-row">
-                <span class="player-card__utr-label">D</span>
-                <span class="player-card__utr-value-small" data-player-stat="utr_doubles">4.33</span>
-              </span>
+        <!-- Ratings row: UTR Singles / WTN -->
+        <div class="player-card__hero-row">
+          <a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener" class="player-card__hero-stat player-card__hero-stat--accent">
+            <div class="player-card__hero-label">UTR Singles</div>
+            <div class="player-card__hero-value"><span data-player-stat="utr">4.48</span><span class="player-card__trend-badge player-card__trend-badge--up">&#x25B2;</span></div>
+          </a>
+          <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" class="player-card__hero-stat player-card__hero-stat--gold">
+            <div class="player-card__hero-label">WTN</div>
+            <div class="player-card__hero-value"><span data-player-stat="wtn">33.26</span><span class="player-card__trend-badge player-card__trend-badge--up player-card__trend-badge--gold" aria-label="Trending up">&#x25B2;</span></div>
+          </a>
+        </div>
+        <!-- Rankings section -->
+        <div class="player-card__rankings-section">
+          <div class="player-card__rankings-grid">
+            <a href="usta-national-rankings.html" class="player-card__rank-cell">
+              <div class="player-card__rank-scope">National</div>
+              <div class="player-card__rank-value"><span class="player-card__hash">#</span><span data-player-stat="usta_national">397</span><span class="player-card__trend player-card__trend--down" data-player-trend="usta_national">↓</span></div>
+            </a>
+            <a href="usta-national-rankings.html" class="player-card__rank-cell">
+              <div class="player-card__rank-scope">NorCal</div>
+              <div class="player-card__rank-value"><span class="player-card__hash">#</span><span data-player-stat="usta_section">23</span><span class="player-card__trend" data-player-trend="usta_section"></span></div>
+            </a>
+            <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener" class="player-card__rank-cell player-card__rank-cell--wide">
+              <div class="player-card__rank-scope">USTA NST Points</div>
+              <div class="player-card__rank-value"><span data-player-stat="usta_points_total">1083</span></div>
             </a>
           </div>
-          <div class="player-card__metric">
-            <div class="player-card__metric-title">WTN</div>
-            <div class="player-card__metric-value">
-              <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener" data-player-stat="wtn">33.81</a>
-              <span class="player-card__trend" aria-label="No change">→</span>
-            </div>
-          </div>
-          <div class="player-card__metric">
-            <div class="player-card__metric-title">Rankings</div>
-            <a class="player-card__ranking-list" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
-              <div class="player-card__ranking-row">
-                <span>Nat</span>
-                <span data-player-stat="usta_national">589</span>
-              </div>
-              <div class="player-card__ranking-row">
-                <span>NorCal</span>
-                <span data-player-stat="usta_section">34</span>
-              </div>
-            </a>
-          </div>
-        </section>
-        <section class="player-card__bottom" aria-label="Ranking summaries">
-          <div class="player-card__panel player-card__panel--points">
-            <div class="player-card__panel-title">USTA Points</div>
-            <a class="player-card__points-grid" href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796&tab=rankings" target="_blank" rel="noopener">
-              <span>
-                <span class="player-card__points-label">Total</span>
-                <span class="player-card__points-value" data-player-stat="usta_points_total">713</span>
-              </span>
-              <span>
-                <span class="player-card__points-label">Singles</span>
-                <span class="player-card__points-value" data-player-stat="usta_points_singles">708</span>
-              </span>
-              <span>
-                <span class="player-card__points-label">Doubles</span>
-                <span class="player-card__points-value" data-player-stat="usta_points_doubles">5</span>
-              </span>
-            </a>
-          </div>
-          <div class="player-card__panel">
-            <div class="player-card__panel-title">TR</div>
-            <a class="player-card__tr-grid" href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener">
-              <div class="player-card__tr-row">
-                <span>Nat</span>
-                <span data-player-stat="tr_national">6</span>
-              </div>
-              <div class="player-card__tr-row">
-                <span>CA</span>
-                <span data-player-stat="tr_california">3</span>
-              </div>
-            </a>
-          </div>
-        </section>
-        <!-- Expiration Alert (shown only if points expiring soon) -->
+        </div>
+        <!-- Tennis Recruiting -->
+        <div class="player-card__tr-row">
+          <a href="https://www.tennisrecruiting.net/player/overview.asp?id=1088299" target="_blank" rel="noopener" class="player-card__tr-badge player-card__tr-badge--full">
+            <span class="player-card__tr-icon">&#x2605;</span>
+            <span class="player-card__tr-text">
+              <span class="player-card__tr-scope">Tennis Recruiting</span>
+              <span class="player-card__tr-rank">Nat #<span data-player-stat="tr_national">7</span> &middot; CA #<span data-player-stat="tr_california">3</span></span>
+            </span>
+          </a>
+        </div>
+        <!-- Expiration Alert -->
         <div class="player-card__alert" data-expiration-alert style="display: none;">
           <span data-expiration-text>75 points expiring soon (23 days)</span>
         </div>
-        <!-- View Full Profile Link -->
-        <a href="player.html" class="player-card__profile-link">
-          View Full Profile
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
+        <!-- Simulator button -->
+        <div class="player-card__footer">
+          <a href="ranking-simulator.html" class="player-card__btn player-card__btn--primary">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+            Ranking Simulator
+          </a>
+        </div>
       </aside>
     </div>
   </section>
@@ -1320,14 +139,17 @@
 	    <section data-tournament-section="reports">
 	      <div class="section-header">
 	        <div class="section-bar"></div>
-	        <h2 class="section-title">Tournament Reports</h2>
+	        <h2 class="section-title">Tournaments</h2>
 	        <div class="section-actions">
-	          <span class="section-badge" data-tournament-count>5 Tournaments</span>
-	          <button class="favorites-filter-toggle" type="button" aria-label="Show starred tournaments only" title="Show starred tournaments only" aria-pressed="false" data-favorites-filter-toggle>
-	            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-	              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-	            </svg>
-	          </button>
+			          <span class="section-badge" data-tournament-count>10 Tournaments</span>
+		          <button class="signed-up-filter-toggle" type="button" aria-label="Show registered tournaments only" title="Show registered tournaments only" aria-pressed="false" data-signed-up-filter-toggle>
+		            Registered
+		          </button>
+		          <button class="favorites-filter-toggle" type="button" aria-label="Show starred tournaments only" title="Show starred tournaments only" aria-pressed="false" data-favorites-filter-toggle>
+		            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		            </svg>
+		          </button>
 	        </div>
 	      </div>
 
@@ -1383,14 +205,14 @@
 
 	      <div class="cards-grid">
 	        <!-- Level 3 Mixed Doubles Sectionals (HRT) -->
-		        <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-08T12:21:02-08:00" data-card-close-text="February 11, 2026 at 2:59 PM PST">
+		        <a href="hrt-level3-mixed-doubles-sectionals-feb21-22-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-18T17:13:20-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;46&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-points="1" data-card-points-lost="4" data-card-expires="2027-02-21" data-card-result="Consolation Semifinals">
 		          <div class="card-header">
 		            <span class="card-type report" data-registration-pill>
 		              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
 		                <circle cx="12" cy="12" r="10"/>
 		                <path d="M12 6v6l4 2"/>
 		              </svg>
-		              <span data-registration-pill-text>Closes Feb 11</span>
+		              <span data-registration-pill-text>Closed</span>
 		            </span>
 		            <div class="card-actions">
 	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
@@ -1433,24 +255,20 @@
 		            </span>
 		          
 		            <span class="meta-item meta-updated" data-card-updated="1">
-		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-		                <circle cx="12" cy="12" r="10"/>
-		                <path d="M12 6v6l4 2"/>
-		              </svg>
-		              <span data-card-updated-text>Updated Feb 8, 2026 12:21 PM PST</span>
+		              <span data-card-updated-text>Updated Feb 18, 2026 5:13 PM PST</span>
 		            </span>
 		          </div>
 		        </a>
 
 	        <!-- Open Level 5 Championship Singles -->
-		        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-06T13:15:47-08:00" data-card-close-text="January 21, 2026 at 2:59 PM PST">
+		        <a href="open-level5-championship-singles-san-jose-jan31-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-03-31T20:55:24-07:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;24&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-result="Semifinals" data-card-points="150" data-card-bonus="11" data-card-bucket="150" data-card-slot="4" data-card-points-lost="161" data-card-expires="2027-01-31">
 		          <div class="card-header">
 		            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
 	                <circle cx="12" cy="12" r="10"/>
 	                <path d="M12 6v6l4 2"/>
 	              </svg>
-	              <span data-registration-pill-text>Closes Jan 21</span>
+	              <span data-registration-pill-text>Closed</span>
 	            </span>
 		            <div class="card-actions">
 		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
@@ -1493,17 +311,13 @@
             </span>
           
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
-              <span data-card-updated-text>Updated Feb 6, 2026 1:15 PM PST</span>
+              <span data-card-updated-text>Updated Mar 31, 2026 8:55 PM PDT</span>
             </span>
 </div>
         </a>
 
 	        <!-- Open Level 5 Championship Singles (Larkspur) -->
-	        <a href="open-level5-championship-singles-larkspur-jan31-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-06T13:12:29-08:00" data-card-close-text="January 21, 2026 at 2:59 PM PST">
+	        <a href="open-level5-championship-singles-larkspur-jan31-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-06T13:12:29-08:00" data-card-close-text="January 21, 2026 at 2:59 PM PST" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;14&quot;,&quot;draw&quot;:&quot;16&quot;}]">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1553,17 +367,13 @@
             </span>
           
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
               <span data-card-updated-text>Updated Feb 6, 2026 1:12 PM PST</span>
             </span>
 </div>
 	        </a>
 
 	        <!-- Open Level 5 Championship (Rollingwood YMCA - Fair Oaks) -->
-	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship" data-card-updated-iso="2026-02-08T12:15:50-08:00" data-card-close-text="Registration closed">
+	        <a href="open-level5-championship-fairoaks-feb14-2026.html" class="tournament-card is-upcoming" data-tournament-id="february|14-16|rollingwood ymca|rollingwood ymca|fair oaks|open level 5 championship" data-card-updated-iso="2026-03-31T20:49:21-07:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;7&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;15&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-points="60" data-card-bucket="300" data-card-slot="1" data-card-points-lost="300" data-card-expires="2027-02-15" data-card-result="Champion">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1613,17 +423,123 @@
 	            </span>
 	          
             <span class="meta-item meta-updated" data-card-updated="1">
-              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
-              <span data-card-updated-text>Updated Feb 8, 2026 12:15 PM PST</span>
+              <span data-card-updated-text>Updated Mar 31, 2026 8:49 PM PDT</span>
             </span>
 </div>
 	        </a>
 
-	        <!-- L4 Excellence Tournament Report -->
-	        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past" data-card-updated-iso="2026-02-05T12:08:23-08:00" data-card-close-text="Registration closed">
+		        <!-- Johnson Ranch Level 5 Super Series (Girls U12/U14) -->
+		        <a href="johnson-ranch-level5-girls-u12-u14-mar7-8-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-03-31T20:53:54-07:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis Malakhova" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;16&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;22&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-points="45" data-card-bonus="2" data-card-bucket="225" data-card-slot="2" data-card-points-lost="236" data-card-expires="2027-03-07" data-card-result="Event Finals">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/johnsonranchsportsclub/Tournaments/overview/D1A69027-65F2-46B4-A650-0559A5677324">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 5 Closed: Johnson Ranch — Girls U12/U14 Singles</h3>
+	          <p class="card-description">Roster report with USTA WTN, national/section rankings, and UTR ratings for Girls' 12 &amp; under + Girls' 14 &amp; under singles at Johnson Ranch.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Mar 7-8, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Roseville, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 5
+	            </span>
+	            <span class="meta-item meta-updated" data-card-updated="1">
+	              <span data-card-updated-text>Updated Mar 31, 2026 8:53 PM PDT</span>
+	            </span>
+		          </div>
+		        </a>
+
+		        <!-- Closed Level 4 Excellence Doubles (FDT) -->
+		        <a href="closed-level4-excellence-doubles-san-jose-mar14-15-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-03-04T16:01:51-08:00" data-card-close-text="March 8, 2026 at 2:59 PM PDT" data-card-fills="[{&quot;label&quot;:&quot;G12D&quot;,&quot;registered&quot;:&quot;17&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14D&quot;,&quot;registered&quot;:&quot;14&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+		          <div class="card-header">
+		            <span class="card-type report" data-registration-pill>
+		              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+		                <circle cx="12" cy="12" r="10"/>
+		                <path d="M12 6v6l4 2"/>
+		              </svg>
+		              <span data-registration-pill-text>Closes Mar 8</span>
+		            </span>
+		            <div class="card-actions">
+		              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+		                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		                </svg>
+		              </span>
+		              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/Competitions/fourdirectionstennis/Tournaments/Overview/ae2e1360-51d8-48c9-a87e-a41d0088ad2c">USTA</span>
+		              <div class="card-arrow">
+		                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                  <path d="M5 12h14M12 5l7 7-7 7"/>
+		                </svg>
+		              </div>
+		            </div>
+		          </div>
+		          <h3 class="card-title">Closed Level 4 Excellence Doubles — FDT (BG18-12)</h3>
+		          <p class="card-description">Event page for the March 14-15, 2026 Four Directions Tennis Level 4 excellence doubles tournament in San Jose.</p>
+		          <div class="card-meta">
+		            <span class="meta-item">
+		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+		                <line x1="16" y1="2" x2="16" y2="6"/>
+		                <line x1="8" y1="2" x2="8" y2="6"/>
+		                <line x1="3" y1="10" x2="21" y2="10"/>
+		              </svg>
+		              Mar 14-15, 2026
+		            </span>
+		            <span class="meta-item">
+		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+		                <circle cx="12" cy="10" r="3"/>
+		              </svg>
+		              San Jose, CA
+		            </span>
+		            <span class="meta-item">
+		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+		              </svg>
+		              Level 4
+		            </span>
+		            <span class="meta-item meta-updated" data-card-updated="1">
+		              <span data-card-updated-text>Updated Mar 4, 2026 4:01 PM PST</span>
+		            </span>
+		          </div>
+		        </a>
+
+		        <!-- L4 Excellence Tournament Report -->
+		        <a href="u12-girls-fdt-level4-jan2026.html" class="tournament-card is-past" data-card-updated-iso="2026-02-05T12:08:23-08:00" data-card-close-text="Registration closed" data-card-primary-name="Alexis MALAKHOVA" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-points="35" data-card-bucket="173" data-card-slot="3" data-card-points-lost="173" data-card-expires="2027-01-17" data-card-result="Playoff Finals">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1676,33 +592,630 @@
             </span>
           
             <span class="meta-item meta-updated" data-card-updated="1">
+              <span data-card-updated-text>Updated Feb 5, 2026 12:08 PM PST</span>
+            </span>
+</div>
+	        </a>
+
+	        <!-- Level 3 Open Las Vegas Tournament Report -->
+	        <a href="level3-open-las-vegas-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-03-04T16:01:40-08:00" data-card-close-text="Registration closed" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;41&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;50&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/darlingmemorialtenniscenter/Tournaments/overview/68DE1C49-3DE7-4F4A-AD83-842BEDEF1833">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 3 Open: Las Vegas, NV — G12 Singles</h3>
+	          <p class="card-description">Daily roster tracking with USTA WTN and national/section standings for the Mar 14-16, 2026 Level 3 Open at Darling Memorial Tennis Center.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Mar 14-16, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Las Vegas, NV
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 3
+	            </span>
+	            <span class="meta-item meta-updated" data-card-updated="1">
+	              <span data-card-updated-text>Updated Mar 4, 2026 4:01 PM PST</span>
+	            </span>
+	          </div>
+	        </a>
+
+	        <!-- Level 3 Open Tempe Tournament Report -->
+	        <a href="level3-open-tempe-g12-mar14-16-2026.html" class="tournament-card is-upcoming" data-card-updated-iso="2026-02-23T12:34:26-08:00" data-card-close-text="Registration closed" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;24&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/davenowickstennis/Tournaments/overview/AF9B3C12-7E35-4C13-B0EB-9DFC863E195A">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 3 Open: Tempe, AZ — G12 Singles</h3>
+	          <p class="card-description">Daily roster tracking with USTA WTN and national/section standings for the Mar 14-16, 2026 Level 3 Open at Kiwanis Tennis Center.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Mar 14-16, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Tempe, AZ
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 3
+	            </span>
+	            <span class="meta-item meta-updated" data-card-updated="1">
+	              <span data-card-updated-text>Updated Feb 23, 2026 12:34 PM PST</span>
+	            </span>
+	          </div>
+	        </a>
+
+	        <!-- Level 1 Easter Bowl Tournament Report -->
+	        <a href="level1-easter-bowl-indian-wells-g12-g14-mar21-29-2026.html" class="tournament-card is-upcoming" data-tournament-id="level1-easter-bowl-indian-wells-g12-g14-mar21-29-2026" data-card-updated-iso="2026-03-21T14:08:47-07:00" data-card-close-text="Registration closed" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;104&quot;,&quot;draw&quot;:&quot;64&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;136&quot;,&quot;draw&quot;:&quot;64&quot;}]">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/desertchampionsllc/Tournaments/overview/78CE4C97-6EAE-4CF4-969E-9238DA03B64F">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 1 Easter Bowl — Indian Wells (Girls U12/U14 Singles)</h3>
+	          <p class="card-description">Roster report for Girls' 12 &amp; under + Girls' 14 &amp; under singles at the USTA National Spring Championship: Easter Bowl.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Mar 21-29, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Indian Wells, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 1
+	            </span>
+	            <span class="meta-item meta-updated" data-card-updated="1">
+	              <span data-card-updated-text>Updated Mar 21, 2026 2:08 PM PDT</span>
+	            </span>
+	          </div>
+	        </a>
+	        <!-- Open Level 4 Super Series (Fairfield Girls U14) -->
+	        <a href="open-level4-super-series-fairfield-g14-apr4-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|4-5|cello international tennis academy|solano community college|fairfield|open level 4 super series" data-card-close-text="Registration closed" data-card-updated-iso="2026-03-28T18:12:42-07:00" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;36&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/cellointernationaltennisacademy/Tournaments/overview/4EB37C93-C7F0-4E05-A1EE-0F3DB1A8FAA5">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Open Level 4 Super Series — Fairfield (Girls U14 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 14 &amp; under singles at Solano Community College.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Apr 4-5, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Fairfield, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 4
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <span data-card-updated-text>Updated Mar 28, 2026 6:12 PM PDT</span>
+            </span>
+</div>
+	        </a>
+	        <!-- Open Level 4 Super Series (Fair Oaks Girls U12) -->
+	        <a href="open-level4-super-series-fair-oaks-g12-apr4-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|4-5|rollingwood ymca|rollingwood ymca|fair oaks|open level 4 super series" data-card-close-text="Registration closed" data-card-updated-iso="2026-04-01T11:29:29-07:00" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;22&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-primary-name="Alexis Malakhova">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/rollingwoodymca/Tournaments/overview/D773BCAB-9E32-4E6C-A7D2-EB1D3DD664FA">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Open Level 4 Super Series — Fair Oaks (Girls U12 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles at Rollingwood YMCA.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Apr 4-5, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Fair Oaks, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 4
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <span data-card-updated-text>Updated Apr 1, 2026 11:29 AM PDT</span>
+            </span>
+</div>
+	        </a>
+	        <!-- Open Level 5 Super Series (Larkspur Girls U12) -->
+	        <a href="open-level5-super-series-larkspur-g12-apr4-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|4-5|hrt academia de tenis|redwood high school|larkspur|open level 5 super series" data-card-updated-iso="2026-04-01T11:29:45-07:00" data-card-close-text="Registration closed" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;24&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/hrtacademiadetenis/Tournaments/overview/AEA2FA56-9549-471A-B774-2B8074116EBF">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Open Level 5 Super Series — Larkspur (Girls U12 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles at Redwood High School.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Apr 4-5, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Larkspur, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 5
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <span data-card-updated-text>Updated Apr 1, 2026 11:29 AM PDT</span>
+            </span>
+</div>
+	        </a>
+	        <!-- Level 3 Long Beach (Girls U14) -->
+	        <a href="level3-long-beach-g14-apr11-13-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|11-13|el dorado park tennis center|el dorado park tennis center|long beach ca|level 3" data-card-updated-iso="2026-04-08T16:46:11-07:00" data-card-close-text="Registration closed" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;41&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/southerncaliforniatennisacademy/Tournaments/overview/BCCFBFE7-19C2-4782-B63D-4F8972496C85">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 3 — Long Beach (Girls U14 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 14 &amp; under singles at El Dorado Park Tennis Center.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Apr 11-13, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Long Beach, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 3
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <span data-card-updated-text>Updated Apr 8, 2026 4:46 PM PDT</span>
+            </span>
+</div>
+	        </a>
+	        <!-- Level 3 Irvine (Girls U12) -->
+	        <a href="level3-irvine-g12-apr11-13-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|11-13|racquet club of irvine|racquet club of irvine|irvine ca|level 3" data-card-updated-iso="2026-04-08T16:46:28-07:00" data-card-close-text="Registration closed" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;41&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/racquetclubofirvine/Tournaments/overview/3A0E3F36-53F5-4DEC-91A6-39299E166207">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 3 — Irvine (Girls U12 Singles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles at Racquet Club of Irvine.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Apr 11-13, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Irvine, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 3
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <span data-card-updated-text>Updated Apr 8, 2026 4:46 PM PDT</span>
+            </span>
+</div>
+	        </a>
+	        <!-- Level 3 Mixed Doubles Sectionals — Stockton (U12/U14) -->
+	        <a href="level3-mixed-doubles-sectionals-sjvta-stockton-apr18-2026.html" class="tournament-card is-upcoming" data-tournament-id="april|18-19|sjvta|bear creek high school|stockton|closed level 3 mixed sectionals" data-card-close-text="April 8, 2026" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;42&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-updated-iso="2026-04-11T14:15:45-07:00" data-card-primary-name="Alexis Malakhova">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closes Apr 8</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/sanjoaquinvalleytennisacademyfuturestars200/Tournaments/overview/BE6EB6EA-6040-447D-80C6-C947BA8F3D5B">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 3 Mixed Doubles Sectionals — Stockton (U12/U14)</h3>
+	          <p class="card-description">Roster report with USTA WTN and section standings for Mixed 12 &amp; under and 14 &amp; under doubles at Bear Creek High School.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              Apr 18-19, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Stockton, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 3 Sectional
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
               <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 6v6l4 2"/>
               </svg>
-              <span data-card-updated-text>Updated Feb 5, 2026 12:08 PM PST</span>
+              <span data-card-updated-text>Updated Apr 11, 2026 2:15 PM PDT</span>
             </span>
 </div>
-        </a>
-      </div>
-    </section>
+	        </a>
+	        <!-- Level 3 Open — Las Vegas, Team Bryan Championships (Girls U12) -->
+	        <a href="level3-las-vegas-g12-may2-2026.html" class="tournament-card is-upcoming" data-tournament-id="may|2-4|marty hennessy inspiring children foundation|darling memorial tennis center|las vegas|level 3" data-card-close-text="Registration closed" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;33&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-updated-iso="2026-04-11T15:40:47-07:00" data-card-primary-name="Alexis Malakhova">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closed</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/martyhennessyinspiringchildrenfounda/Tournaments/overview/FA520CC6-12D7-43E0-B2E7-F547A166458C">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 3 Open — Las Vegas, Team Bryan Championships (Girls U12)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles at Darling Memorial Tennis Center.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              May 2-4, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Las Vegas, NV
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 3 National
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              <span data-card-updated-text>Updated Apr 11, 2026 3:40 PM PDT</span>
+            </span>
+</div>
+	        </a>
+	        <!-- Level 2 — Long Beach (Girls U12) -->
+	        <a href="level2-long-beach-g12-may16-2026.html" class="tournament-card is-upcoming" data-tournament-id="may|16-18|southern california tennis academy|el dorado park tennis center|long beach|level 2" data-card-close-text="April 23, 2026" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;42&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G12D&quot;,&quot;registered&quot;:&quot;31&quot;,&quot;draw&quot;:&quot;32&quot;}]" data-card-updated-iso="2026-04-08T16:46:56-07:00">
+	          <div class="card-header">
+	            <span class="card-type report" data-registration-pill>
+	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+	                <circle cx="12" cy="12" r="10"/>
+	                <path d="M12 6v6l4 2"/>
+	              </svg>
+	              <span data-registration-pill-text>Closes Apr 23</span>
+	            </span>
+	            <div class="card-actions">
+	              <span class="card-favorite-toggle" role="button" tabindex="0" aria-label="Star tournament" aria-pressed="false" data-favorite-toggle>
+	                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	                </svg>
+	              </span>
+	              <span class="card-usta-link" role="button" tabindex="0" data-usta-url="https://playtennis.usta.com/competitions/southerncaliforniatennisacademy/Tournaments/overview/E812F60F-0760-4E2E-A350-2499F33DD951">USTA</span>
+	              <div class="card-arrow">
+	                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                  <path d="M5 12h14M12 5l7 7-7 7"/>
+	                </svg>
+	              </div>
+	            </div>
+	          </div>
+	          <h3 class="card-title">Level 2 — Long Beach (Girls U12 Singles &amp; Doubles)</h3>
+	          <p class="card-description">Roster report with USTA WTN, national standings, and UTR ratings for Girls' 12 &amp; under singles and doubles at El Dorado Park Tennis Center.</p>
+	          <div class="card-meta">
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+	                <line x1="16" y1="2" x2="16" y2="6"/>
+	                <line x1="8" y1="2" x2="8" y2="6"/>
+	                <line x1="3" y1="10" x2="21" y2="10"/>
+	              </svg>
+	              May 16-18, 2026
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+	                <circle cx="12" cy="10" r="3"/>
+	              </svg>
+	              Long Beach, CA
+	            </span>
+	            <span class="meta-item">
+	              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+	              </svg>
+	              Level 2 National
+	            </span>
+	          
+            <span class="meta-item meta-updated" data-card-updated="1">
+              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              <span data-card-updated-text>Updated Apr 8, 2026 4:46 PM PDT</span>
+            </span>
+</div>
+	        </a>
+	      </div>
+	    </section>
 
-    <!-- Coming Soon Section -->
-    <section>
-      <div class="section-header">
-        <div class="section-bar"></div>
-        <h2 class="section-title">Coming Soon</h2>
-      </div>
-
-      <div class="coming-soon">
-        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 6v6l4 2"/>
-        </svg>
-        <h3>More Reports on the Way</h3>
-        <p>Additional tournament reports and analysis tools will be added throughout the 2026 season.</p>
-      </div>
-    </section>
   </main>
 
   <!-- Footer -->
@@ -1735,15 +1248,16 @@
 		      if (!iso) return '';
 		      const d = new Date(iso);
 		      if (Number.isNaN(d.getTime())) return '';
+		      const now = new Date();
+		      const sameYear = d.getFullYear() === now.getFullYear();
 		      const fmt = new Intl.DateTimeFormat('en-US', {
 		        month: 'short',
 		        day: 'numeric',
-		        year: 'numeric',
+		        ...(sameYear ? {} : { year: 'numeric' }),
 		        hour: 'numeric',
 		        minute: '2-digit',
-		        timeZoneName: 'short',
 		      });
-		      return `Updated ${fmt.format(d)}`;
+		      return `↻ ${fmt.format(d)}`;
 		    }
 
 		    function parseEndDateFromText(text) {
@@ -1781,6 +1295,92 @@
 		      return null;
 		    }
 
+		    function parseStartDateFromText(text) {
+		      const raw = (text || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
+		      if (!raw) return null;
+		      const yearMatch = raw.match(/\b(20\d{2})\b/);
+		      const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
+
+		      const parseMonth = (m) => MONTHS[(m || '').toLowerCase()] ?? null;
+
+		      let m = raw.match(/\b([A-Za-z]+)\s*(\d{1,2})\s*-\s*([A-Za-z]+)\s*(\d{1,2})\b/);
+		      if (m) {
+		        const startMonth = parseMonth(m[1]);
+		        const startDay = parseInt(m[2], 10);
+		        if (startMonth === null || !Number.isFinite(startDay)) return null;
+		        return new Date(year, startMonth, startDay);
+		      }
+
+		      m = raw.match(/\b([A-Za-z]+)\s*(\d{1,2})\s*-\s*(\d{1,2})\b/);
+		      if (m) {
+		        const startMonth = parseMonth(m[1]);
+		        const startDay = parseInt(m[2], 10);
+		        if (startMonth === null || !Number.isFinite(startDay)) return null;
+		        return new Date(year, startMonth, startDay);
+		      }
+
+		      m = raw.match(/\b([A-Za-z]+)\s*(\d{1,2})\b/);
+		      if (m) {
+		        const startMonth = parseMonth(m[1]);
+		        const startDay = parseInt(m[2], 10);
+		        if (startMonth === null || !Number.isFinite(startDay)) return null;
+		        return new Date(year, startMonth, startDay);
+		      }
+
+		      return null;
+		    }
+
+		    function normalizePrimaryName(value) {
+		      const text = (value || '').replace(/\s+/g, ' ').trim();
+		      if (!text) return '';
+		      if (/^primary player$/i.test(text)) return '';
+		      return text;
+		    }
+
+		    function extractPrimaryNameFromReportDoc(doc) {
+		      if (!doc) return '';
+
+		      const row = doc.querySelector('tr.highlight-player');
+		      if (row) {
+		        const cells = Array.from(row.querySelectorAll('td'));
+		        if (cells.length >= 3) {
+		          const first = normalizePrimaryName(cells[1]?.textContent || '');
+		          const last = normalizePrimaryName(cells[2]?.textContent || '');
+		          const name = normalizePrimaryName(`${first} ${last}`);
+		          if (name) return name;
+		        }
+		      }
+
+		      return '';
+		    }
+
+		    function clearCardPrimaryBadge(card) {
+		      if (!card) return;
+		      card.classList.remove('has-primary-badge');
+		      card.removeAttribute('data-card-primary-name');
+		      const badge = card.querySelector('.card-primary-badge');
+		      if (badge) badge.remove();
+		    }
+
+		    function setCardPrimaryBadge(card, primaryName) {
+		      if (!card) return;
+		      const name = normalizePrimaryName(primaryName);
+		      if (!name) {
+		        clearCardPrimaryBadge(card);
+		        return;
+		      }
+		      card.classList.add('has-primary-badge');
+		      card.setAttribute('data-card-primary-name', name);
+		      let badge = card.querySelector('.card-primary-badge');
+		      if (!badge) {
+		        badge = document.createElement('span');
+		        badge.className = 'card-primary-badge';
+		        badge.setAttribute('aria-hidden', 'true');
+		        card.appendChild(badge);
+		      }
+		      badge.textContent = '';
+		    }
+
 		    function ensureUpdatedMeta(card) {
 		      const meta = card.querySelector('.card-meta');
 		      if (!meta) return null;
@@ -1790,24 +1390,22 @@
 		      const span = document.createElement('span');
 		      span.className = 'meta-item meta-updated';
 		      span.setAttribute('data-card-updated', '1');
-		      span.innerHTML = `
-		        <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-		          <circle cx="12" cy="12" r="10"/>
-		          <path d="M12 6v6l4 2"/>
-		        </svg>
-		        <span data-card-updated-text>Updated —</span>
-		      `;
+		      span.innerHTML = '<span data-card-updated-text>↻ —</span>';
 		      meta.appendChild(span);
 		      return span;
 		    }
 
 		    function setCardUpdatedText(card, iso) {
-		      const label = formatUpdatedIso(iso) || 'Updated —';
+		      const label = formatUpdatedIso(iso) || '↻ —';
 		      const node = ensureUpdatedMeta(card);
 		      if (!node) return;
 		      const textEl = node.querySelector('[data-card-updated-text]') || node;
 		      textEl.textContent = label;
-		      if (iso) card.setAttribute('data-card-updated-iso', iso);
+		      if (iso) {
+		        card.setAttribute('data-card-updated-iso', iso);
+		        const ageMs = Date.now() - new Date(iso).getTime();
+		        node.setAttribute('data-freshness', ageMs <= 86400000 ? 'fresh' : 'stale');
+		      }
 		    }
 
 		    function updateCardPastStatus(card) {
@@ -1835,25 +1433,16 @@
 		      const cards = Array.from(cardsRoot.querySelectorAll(':scope > a.tournament-card'));
 		      if (cards.length <= 1) return;
 
-		      const today = new Date();
-		      today.setHours(0, 0, 0, 0);
-		      const todayMs = today.getTime();
-
 		      const keyed = cards.map((card, idx) => {
 		        const dateText = card.querySelector('.card-meta .meta-item')?.textContent || '';
-		        const end = parseEndDateFromText(dateText);
-		        const endDate = end ? new Date(end.getFullYear(), end.getMonth(), end.getDate()) : null;
-		        const endMs = endDate ? endDate.getTime() : Number.NEGATIVE_INFINITY;
-		        const isPast = endDate ? endMs < todayMs : false;
-		        return { card, idx, endMs, isPast };
+		        const start = parseStartDateFromText(dateText);
+		        const startDate = start ? new Date(start.getFullYear(), start.getMonth(), start.getDate()) : null;
+		        const startMs = startDate ? startDate.getTime() : Number.NEGATIVE_INFINITY;
+		        return { card, idx, startMs };
 		      });
 
 			      keyed.sort((a, b) => {
-			        if (a.isPast !== b.isPast) return a.isPast ? 1 : -1;
-			        if (a.endMs !== b.endMs) {
-			          // Upcoming: soonest first. Past: most recent first.
-			          return a.isPast ? (b.endMs - a.endMs) : (a.endMs - b.endMs);
-			        }
+			        if (a.startMs !== b.startMs) return b.startMs - a.startMs;
 			        return a.idx - b.idx;
 			      });
 
@@ -1907,14 +1496,125 @@
 		      return '';
 		    }
 
+		    function extractVenueFromReportDoc(doc) {
+		      if (!doc) return '';
+		      const mapLink = doc.querySelector('a[href*="maps/search"]');
+		      if (mapLink) return (mapLink.textContent || '').trim();
+		      return '';
+		    }
+
+		    function applyCardVenue(card, venue) {
+		      let el = card.querySelector('.card-venue');
+		      if (!venue) { if (el) el.remove(); return; }
+		      if (!el) {
+		        el = document.createElement('p');
+		        el.className = 'card-venue';
+		        const title = card.querySelector('.card-title');
+		        const desc = card.querySelector('.card-description');
+		        const anchor = title || desc;
+		        if (anchor) anchor.after(el); else card.prepend(el);
+		      }
+		      el.textContent = venue;
+		    }
+
+		    function setupCardTitleLinks() {
+		      document.querySelectorAll('a.tournament-card:not(.calendar-card)').forEach(card => {
+		        const ustaEl = card.querySelector('.card-usta-link[data-usta-url]');
+		        const title = card.querySelector('.card-title');
+		        if (ustaEl && title) {
+		          title.setAttribute('data-usta-url', ustaEl.getAttribute('data-usta-url'));
+		        }
+		      });
+		      document.addEventListener('click', (event) => {
+		        const el = event.target?.closest?.('.card-title[data-usta-url]');
+		        if (!el) return;
+		        event.preventDefault();
+		        event.stopPropagation();
+		        const url = el.getAttribute('data-usta-url');
+		        if (url) window.open(url, '_blank', 'noopener');
+		      });
+		    }
+
+		    function extractFillsFromReportDoc(doc) {
+		      if (!doc) return null;
+		      const blocks = Array.from(doc.querySelectorAll('.key-stats'));
+		      if (!blocks.length) return null;
+		      const fills = blocks.map(block => {
+		        let registered = null, draw = null;
+		        block.querySelectorAll('.key-stat').forEach(stat => {
+		          const lbl = (stat.querySelector('.key-label')?.textContent || '').trim().toLowerCase();
+		          const val = (stat.querySelector('.key-value')?.textContent || '').trim();
+		          if (lbl === 'registered') registered = val;
+		          else if (lbl === 'draw') draw = val;
+		        });
+		        if (registered === null && draw === null) return null;
+		        let label = '';
+		        if (blocks.length > 1) {
+		          const sec = block.closest('section') || block.parentElement;
+		          label = (sec?.querySelector('h2, h3')?.textContent || '').trim()
+		            .replace(/Girls['’\s]*/gi, 'G').replace(/Boys['’\s]*/gi, 'B')
+		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
+		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '').trim();
+		        }
+		        return { label, registered, draw };
+		      }).filter(Boolean);
+		      return fills.length ? fills : null;
+		    }
+
+		    function applyCardFills(card, fills) {
+		      const ex = card.querySelector('[data-card-fills-display]');
+		      if (ex) ex.remove();
+		      if (!fills || !fills.length) return;
+		      if (card.classList.contains('is-past') || card.classList.contains('calendar-card')) return;
+		      const meta = card.querySelector('.card-meta');
+		      if (!meta) return;
+		      const el = document.createElement('span');
+		      el.className = 'meta-item meta-fills';
+		      el.setAttribute('data-card-fills-display', '1');
+		      el.textContent = fills.map(f => {
+		        const pre = f.label ? f.label + ' ' : '';
+		        return pre + (f.registered || '–') + '/' + (f.draw || '–');
+		      }).join(' · ');
+		      const upd = meta.querySelector('[data-card-updated]');
+		      if (upd) meta.insertBefore(el, upd); else meta.appendChild(el);
+		    }
+
+		    function applyCardResult(card) {
+		      const ex = card.querySelector('[data-card-result-display]');
+		      if (ex) ex.remove();
+		      const result = (card.getAttribute('data-card-result') || '').trim();
+		      // Prefer the raw event value (bucket) over the weighted ranking
+		      // contribution so cards display the USTA "sticker" points
+		      // (e.g., L5 Champion = 300, not the 60 bucket-weighted value).
+		      const bucket = (card.getAttribute('data-card-bucket') || '').trim();
+		      const pointsAttr = (card.getAttribute('data-card-points') || '').trim();
+		      const points = bucket || pointsAttr;
+		      const bonus = (card.getAttribute('data-card-bonus') || '').trim();
+		      if (!result && !points) return;
+		      const meta = card.querySelector('.card-meta');
+		      if (!meta) return;
+		      const el = document.createElement('span');
+		      el.className = 'meta-item meta-result';
+		      el.setAttribute('data-card-result-display', '1');
+		      let text = '';
+		      if (result === 'Champion') {
+		        text = '\u{1F3C6} ' + result;
+		      } else if (result) {
+		        text = result;
+		      }
+		      if (points) {
+		        text += (text ? ' \u00B7 ' : '') + points + (bonus && bonus !== '0' ? ' + ' + bonus + ' bonus' : ' pts');
+		      }
+		      el.textContent = text;
+		      const upd = meta.querySelector('[data-card-updated]');
+		      if (upd) meta.insertBefore(el, upd); else meta.appendChild(el);
+		    }
+
 		    function parseCloseDate(closeText) {
 		      const text = (closeText || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
 		      if (!text) return null;
 		      if (/registration closed/i.test(text)) return { status: 'closed', date: null };
 		      if (/see usta/i.test(text)) return { status: 'unknown', date: null };
-
-		      const m = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*(AM|PM)\s*([A-Z]{2,4})?/i);
-		      if (!m) return { status: 'unknown', date: null };
 
 		      const MONTHS = {
 		        january: 0,
@@ -1931,6 +1631,18 @@
 		        december: 11,
 		      };
 
+		      const m = text.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*(AM|PM)\s*([A-Z]{2,4})?/i);
+		      if (!m) {
+		        // Date-only fallback: "April 23, 2026"
+		        const dm = text.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+		        if (!dm) return { status: 'unknown', date: null };
+		        const month = MONTHS[(dm[1] || '').toLowerCase()];
+		        const day = parseInt(dm[2], 10);
+		        const year = parseInt(dm[3], 10);
+		        if (![month, day, year].every((x) => Number.isFinite(x))) return { status: 'unknown', date: null };
+		        return { status: 'ok', date: new Date(year, month, day, 23, 59) };
+		      }
+
 		      const month = MONTHS[(m[1] || '').toLowerCase()];
 		      const day = parseInt(m[2], 10);
 		      const year = parseInt(m[3], 10);
@@ -1943,7 +1655,14 @@
 		      if (ampm === 'PM' && hour !== 12) hour += 12;
 		      if (ampm === 'AM' && hour === 12) hour = 0;
 
-		      const tzOffsets = { PST: -480, PDT: -420 };
+		      const tzOffsets = {
+		        PT: -480, PST: -480, PDT: -420,
+		        MT: -420, MST: -420, MDT: -360,
+		        CT: -360, CST: -360, CDT: -300,
+		        ET: -300, EST: -300, EDT: -240,
+		        AKT: -540, AKST: -540, AKDT: -480,
+		        HST: -600, UTC: 0, GMT: 0,
+		      };
 		      const offsetMin = tzOffsets[tz];
 		      if (Number.isFinite(offsetMin)) {
 		        const utcMs = Date.UTC(year, month, day, hour, minute) - offsetMin * 60 * 1000;
@@ -1971,6 +1690,18 @@
 		        if (!Number.isFinite(d.getTime())) return '';
 		        const fmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
 		        return fmt.format(d);
+		      } catch {
+		        return '';
+		      }
+		    }
+
+		    function formatCloseDateLong(dt) {
+		      try {
+		        const d = dt instanceof Date ? dt : new Date(dt);
+		        if (!Number.isFinite(d.getTime())) return '';
+		        const datePart = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
+		        const timePart = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZoneName: 'short' }).format(d);
+		        return `${datePart} at ${timePart}`;
 		      } catch {
 		        return '';
 		      }
@@ -2008,7 +1739,12 @@
 		        return;
 		      }
 
-		      if (closeText) pill.setAttribute('title', closeText);
+		      const localizedTitle = formatCloseDateLong(dt);
+		      if (localizedTitle) {
+		        pill.setAttribute('title', localizedTitle);
+		      } else if (closeText) {
+		        pill.setAttribute('title', closeText);
+		      }
 		      pill.setAttribute('data-close-ms', String(dt.getTime()));
 		      updateRegistrationPillCountdown(pill);
 		    }
@@ -2051,7 +1787,7 @@
 		      });
 		    }
 
-		    async function populateReportCardUpdatedLabels() {
+		    async function populateReportCardUpdatedLabels(favoritesApi) {
 		      const CACHE_MAX_AGE_MS = 6 * 60 * 60 * 1000;
 		      const cache = loadUpdatedCache();
 		      const reportCards = Array.from(document.querySelectorAll('a.tournament-card')).filter((card) => {
@@ -2072,6 +1808,21 @@
 		        if (directClose) {
 		          applyRegistrationPill(card, directClose);
 		        }
+
+		        const directPrimary = normalizePrimaryName(card.getAttribute('data-card-primary-name') || '');
+		        if (directPrimary) {
+		          setCardPrimaryBadge(card, directPrimary);
+		        } else {
+		          clearCardPrimaryBadge(card);
+		        }
+
+		        const directFills = (() => { try { const r = card.getAttribute('data-card-fills'); return r ? JSON.parse(r) : null; } catch { return null; } })();
+		        if (directFills) applyCardFills(card, directFills);
+
+		        applyCardResult(card);
+
+		        const directVenue = (card.getAttribute('data-card-venue') || '').trim();
+		        if (directVenue) applyCardVenue(card, directVenue);
 	
 		        const href = (card.getAttribute('href') || '').trim();
 		        if (!href || href.startsWith('http')) continue;
@@ -2079,10 +1830,21 @@
 		        const meta = normalizeCachedMeta(cache[href]);
 		        const cachedIso = (meta.updatedIso || '').trim();
 		        const cachedClose = (meta.closeText || '').trim();
+		        const cachedPrimary = normalizePrimaryName(meta.primaryName || '');
+		        const cachedPrimaryChecked = meta.primaryChecked === true;
 		        const cachedAt = Number(meta.cachedAt || 0);
 
 		        if (!directIso && cachedIso) setCardUpdatedText(card, cachedIso);
 		        if (!directClose && cachedClose) applyRegistrationPill(card, cachedClose);
+		        if (!directPrimary && cachedPrimary) {
+		          setCardPrimaryBadge(card, cachedPrimary);
+		        } else if (!directPrimary && !cachedPrimary && cachedPrimaryChecked) {
+		          clearCardPrimaryBadge(card);
+		        }
+		        const cachedFills = Array.isArray(meta.fills) ? meta.fills : null;
+		        if (!directFills && cachedFills) applyCardFills(card, cachedFills);
+		        const cachedVenue = (meta.venue || '').trim();
+		        if (!directVenue && cachedVenue) applyCardVenue(card, cachedVenue);
 	
 		        const freshEnough = cachedAt && (Date.now() - cachedAt) < CACHE_MAX_AGE_MS;
 		        const directIsoOk = !!formatUpdatedIso(directIso);
@@ -2095,7 +1857,8 @@
 		          const p = parseCloseDate(cachedClose);
 		          return p && p.status !== 'unknown';
 		        })();
-		        const hasEnough = (directIsoOk || cachedIsoOk) && (directCloseOk || cachedCloseOk || meta.closeText === '');
+		        const hasPrimaryKnown = !!directPrimary || !!cachedPrimary || cachedPrimaryChecked;
+		        const hasEnough = (directIsoOk || cachedIsoOk) && (directCloseOk || cachedCloseOk || meta.closeText === '') && hasPrimaryKnown;
 		        if (freshEnough && hasEnough) continue;
 
 		        try {
@@ -2106,21 +1869,33 @@
 
 		          const iso = (doc.querySelector('#report-updated-badge')?.getAttribute('data-updated-iso') || '').trim();
 		          const closeText = extractCloseTextFromReportDoc(doc);
+		          const primaryName = extractPrimaryNameFromReportDoc(doc);
+		          const fetchedFills = extractFillsFromReportDoc(doc);
+		          const fetchedVenue = extractVenueFromReportDoc(doc);
 
 		          cache[href] = {
 		            updatedIso: iso,
 		            closeText,
+		            primaryName,
+		            primaryChecked: true,
+		            fills: fetchedFills,
+		            venue: fetchedVenue,
 		            cachedAt: Date.now(),
 		          };
 
 		          if (!directIso && iso) setCardUpdatedText(card, iso);
 		          applyRegistrationPill(card, closeText);
+		          if (primaryName) setCardPrimaryBadge(card, primaryName);
+		          else clearCardPrimaryBadge(card);
+		          applyCardFills(card, fetchedFills);
+		          applyCardVenue(card, fetchedVenue);
 		        } catch {
 		          // ignore
 		        }
 		      }
 
 		      saveUpdatedCache(cache);
+		      favoritesApi?.refresh?.();
 		    }
 
 		    function setupUstaLinkDelegation() {
@@ -2149,12 +1924,14 @@
 	    function initTournamentFavorites() {
 	      const STORAGE_KEY = 'tennis_tracker_starred_tournaments_v1';
 	      const FILTER_KEY = 'tennis_tracker_starred_filter_v1';
+	      const SIGNED_UP_FILTER_KEY = 'tennis_tracker_signed_up_filter_v1';
 	
 	      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
 	      if (!tournamentSection) return null;
 	
 	      const countEl = tournamentSection.querySelector('[data-tournament-count]');
 	      const filterToggle = tournamentSection.querySelector('[data-favorites-filter-toggle]');
+	      const signedUpFilterToggle = tournamentSection.querySelector('[data-signed-up-filter-toggle]');
 	      const cardsRoot = tournamentSection.querySelector('.cards-grid') || tournamentSection;
 	
 	      const getCards = () => Array.from(cardsRoot.querySelectorAll('a.tournament-card'));
@@ -2203,6 +1980,22 @@
 	          // ignore
 	        }
 	      };
+
+	      const readSignedUpFilterEnabled = () => {
+	        try {
+	          return window.localStorage.getItem(SIGNED_UP_FILTER_KEY) === '1';
+	        } catch {
+	          return false;
+	        }
+	      };
+
+	      const writeSignedUpFilterEnabled = (enabled) => {
+	        try {
+	          window.localStorage.setItem(SIGNED_UP_FILTER_KEY, enabled ? '1' : '0');
+	        } catch {
+	          // ignore
+	        }
+	      };
 	
 	      const starred = loadStarred();
 	
@@ -2222,21 +2015,22 @@
 	        if (!countEl) return;
 	        const cards = getCards();
 	        const total = cards.length;
-	        const visible = cards.filter((card) => !card.classList.contains('is-hidden-by-favorite-filter')).length;
-	        const filterOn = filterToggle?.classList.contains('is-active');
-	        const shown = filterOn ? visible : total;
+	        const visible = cards.filter((card) => {
+	          return !card.classList.contains('is-hidden-by-favorite-filter') && !card.classList.contains('is-hidden-by-signed-up-filter');
+	        }).length;
+	        const anyFilterOn = filterToggle?.classList.contains('is-active') || signedUpFilterToggle?.classList.contains('is-active');
+	        const shown = anyFilterOn ? visible : total;
 	        countEl.textContent = `${shown} Tournaments`;
 	      };
-	
+
 	      const applyFilter = () => {
 	        const filterOn = filterToggle?.classList.contains('is-active');
+	        const signedUpFilterOn = signedUpFilterToggle?.classList.contains('is-active');
 	        getCards().forEach((card) => {
-	          if (!filterOn) {
-	            card.classList.remove('is-hidden-by-favorite-filter');
-	            return;
-	          }
 	          const id = getTournamentId(card);
-	          card.classList.toggle('is-hidden-by-favorite-filter', !starred.has(id));
+	          const primaryName = normalizePrimaryName(card.getAttribute('data-card-primary-name') || '');
+	          card.classList.toggle('is-hidden-by-favorite-filter', filterOn && !starred.has(id));
+	          card.classList.toggle('is-hidden-by-signed-up-filter', signedUpFilterOn && !primaryName);
 	        });
 	        updateCount();
 	      };
@@ -2288,6 +2082,19 @@
 	          filterToggle.classList.toggle('is-active', enabled);
 	          filterToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
 	          writeFilterEnabled(enabled);
+	          applyFilter();
+	        });
+	      }
+
+	      if (signedUpFilterToggle) {
+	        const filterEnabled = readSignedUpFilterEnabled();
+	        signedUpFilterToggle.classList.toggle('is-active', filterEnabled);
+	        signedUpFilterToggle.setAttribute('aria-pressed', filterEnabled ? 'true' : 'false');
+	        signedUpFilterToggle.addEventListener('click', () => {
+	          const enabled = !signedUpFilterToggle.classList.contains('is-active');
+	          signedUpFilterToggle.classList.toggle('is-active', enabled);
+	          signedUpFilterToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+	          writeSignedUpFilterEnabled(enabled);
 	          applyFilter();
 	        });
 	      }
@@ -2594,11 +2401,7 @@
 		              ${level}
 		            </span>
 		            <span class="meta-item meta-updated" data-card-updated="1">
-		              <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-		                <circle cx="12" cy="12" r="10"/>
-		                <path d="M12 6v6l4 2"/>
-		              </svg>
-		              <span data-card-updated-text>${formatUpdatedIso(lastUpdated) || 'Updated —'}</span>
+		              <span data-card-updated-text>${formatUpdatedIso(lastUpdated) || '↻ —'}</span>
 		            </span>
 		          </div>
 		        `;
@@ -2629,12 +2432,13 @@
 	
 		    function init() {
 		      setupUstaLinkDelegation();
+		      setupCardTitleLinks();
 		      const favoritesApi = initTournamentFavorites();
 		      addStarredCalendarEventCards(favoritesApi);
 		      updateExpirationAlert();
 		      updateAllCardPastStatuses();
 		      sortTournamentCardsByDate();
-		      populateReportCardUpdatedLabels();
+		      populateReportCardUpdatedLabels(favoritesApi);
 		      updateAllRegistrationPills();
 		      setInterval(updateAllRegistrationPills, 60 * 1000);
 		    }
@@ -2645,5 +2449,63 @@
 	      init();
 	    }
 	  </script>
+  <script>
+  (function() {
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    function updateThemeIcons(isDark) {
+      const moon = document.getElementById('theme-icon-moon');
+      const sun = document.getElementById('theme-icon-sun');
+      if (moon) moon.style.display = isDark ? 'none' : '';
+      if (sun) sun.style.display = isDark ? '' : 'none';
+    }
+    const stored = localStorage.getItem('theme');
+    if (stored) {
+      html.setAttribute('data-theme', stored);
+      updateThemeIcons(stored === 'dark');
+    }
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateThemeIcons(next === 'dark');
+      });
+    }
+  })();
+  </script>
+  <script>
+  (function() {
+    var burger = document.getElementById('nav-burger');
+    var nav = document.getElementById('main-nav');
+    if (!burger || !nav) return;
+    burger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('nav-open');
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target)) {
+        nav.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    nav.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+  </script>
+  <script>
+  (function() {
+    window.addEventListener('scroll', function() {
+      var nav = document.getElementById('main-nav');
+      if (nav) nav.classList.toggle('nav-scrolled', window.scrollY > 0);
+    }, { passive: true });
+  })();
+  </script>
 </body>
 </html>
