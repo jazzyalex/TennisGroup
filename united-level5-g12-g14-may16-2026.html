@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/tennis-report/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/tennis-report/favicon-48.png">
+  <link rel="icon" type="image/x-icon" href="assets/tennis-report/favicon-32thin.ico">
+  <link rel="shortcut icon" href="assets/tennis-report/favicon-32thin.ico">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="United by Tennis Spring Level 5 Junior 14s & 12s Singles Championship">
+  <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tournament report preview">
+  <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image:alt" content="Tournament report preview">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-edge-1200x630.png">
+  <meta name="twitter:image:alt" content="Tournament report preview">
+  <title>United by Tennis Spring Level 5 Junior 14s & 12s Singles Championship, May 16–17, 2026, Northgate High School, Walnut Creek, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/core.css">
+  <link rel="stylesheet" href="assets/css/report.css">
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <style>
+    /* H2H inline badge */
+    .h2h-badge {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 1px 6px; border-radius: 10px; white-space: nowrap;
+      line-height: 1.6; vertical-align: middle; margin-left: 4px; cursor: default;
+    }
+    .h2h-win  { background: rgba(22,163,74,0.15);  color: #16a34a; }
+    .h2h-loss { background: rgba(220,38,38,0.15);  color: #dc2626; }
+    .h2h-even { background: rgba(220,38,38,0.08);  color: #ef4444; }
+    html[data-theme="dark"] .h2h-win  { background: rgba(74,222,128,0.15);  color: #4ade80; }
+    html[data-theme="dark"] .h2h-loss { background: rgba(248,113,113,0.15); color: #f87171; }
+    html[data-theme="dark"] .h2h-even { background: rgba(248,113,113,0.08); color: #fca5a5; }
+    /* H2H tooltip */
+    #h2h-tooltip {
+      position: fixed; z-index: 9999; display: none; pointer-events: none;
+      min-width: 220px; max-width: 380px;
+      background: var(--surface, #fff); border: 1px solid var(--border, #e5e7eb);
+      border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      padding: 10px 12px; font-size: 12px; line-height: 1.4;
+    }
+    .h2h-tip-header {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--text-muted, #6b7280);
+      margin-bottom: 7px; padding-bottom: 6px; border-bottom: 1px solid var(--border, #e5e7eb);
+    }
+    .h2h-tip-match {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 5px 0; border-bottom: 1px solid var(--border, #e5e7eb);
+      font-variant-numeric: tabular-nums;
+    }
+    .h2h-tip-match:last-child { border-bottom: none; }
+    .h2h-tip-result { font-weight: 700; font-size: 12px; flex-shrink: 0; padding-top: 1px; }
+    .h2h-tip-result.win  { color: #16a34a; }
+    .h2h-tip-result.loss { color: #dc2626; }
+    html[data-theme="dark"] .h2h-tip-result.win  { color: #4ade80; }
+    html[data-theme="dark"] .h2h-tip-result.loss { color: #f87171; }
+    .h2h-tip-sets {
+      display: flex; flex-direction: column; flex-shrink: 0;
+      font-weight: 600; font-size: 12px; color: var(--text-primary, #111); min-width: 34px;
+    }
+    .h2h-tip-meta { font-size: 11px; color: var(--text-secondary, #6b7280); line-height: 1.45; }
+    /* H2H column */
+    th.col-h2h { width: 52px; text-align: center; font-size: 11px; }
+    td.col-h2h { text-align: center; white-space: nowrap; }
+    td.col-h2h .h2h-badge { margin-left: 0; }
+  </style>
+</head>
+<body>
+  <div id="h2h-tooltip"></div>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo-link" aria-label="Home">
+        <div class="nav-logo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </div>
+      </a>
+      <span class="nav-brand">Tennis Tracker</span>
+    </div>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
+        <a href="player.html" class="nav-link">Player</a>
+        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="desktop-view">
+  <div class="report-header">
+    <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
+      <svg class="report-header-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+        <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+        <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+      </svg>
+    </a>
+    <div class="report-header-text">
+      <h1>United by Tennis Spring Level 5 Junior 14s & 12s Singles Championship</h1>
+      <div class="tournament-dates-row">
+        <div class="tournament-dates">
+          May 16–17, 2026
+        </div>
+        <div class="deadline-badge" id="registration-deadline-badge">
+          <div class="deadline-countdown" id="registration-countdown">Closes in --</div>
+          <div class="deadline-date" id="registration-deadline-date">--</div>
+        </div>
+      </div>
+            <div class="tournament-info">
+        <a href="https://playtennis.usta.com/Competitions/trivalleytennisacademy/Tournaments/Overview/c85199d8-8029-4bd6-a7be-99585a03bdcf" target="_blank" rel="noopener noreferrer" title="Open tournament page">United by Tennis Spring Level 5 Junior 14s & 12s Singles Championship</a><br>
+        Northgate High School, Walnut Creek, CA • 0 Players
+      </div>
+    </div>
+  </div>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-04-15T14:42:19-07:00" title="2026-04-15T14:42:19-07:00">
+    <span class="report-updated-badge__pill">Updated Apr 15, 2026 2:42 PM PDT</span>
+  </div>
+  <div class="table-meta">
+    <div class="key-stats">
+      <div class="key-stat"><span class="key-label">Draw</span><span class="key-value">32</span></div>
+      <div class="key-stat"><span class="key-label">Closes</span><span class="key-value">May 6, 2026 at 2:59 PM PDT</span></div>
+      <div class="key-stat"><span class="key-label">Registered</span><span class="key-value">0</span></div>
+    </div>
+    <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
+  </div>
+
+  <h3 class="table-section-title">Girls&#x27; 12 &amp; under Singles</h3>
+
+  <table id="players-table-g12" class="primary-table players-table">
+    <thead class="sticky-header">
+      <tr>
+        <th class="col-rank">#</th>
+        <th class="sortable">First Name</th>
+        <th class="sortable">Last Name</th>
+        <th class="col-wtn sortable">WTN</th>
+        <th class="col-utr sortable">UTR</th>
+        <th class="col-national sortable">Nat Rank</th>
+        <th class="sortable">Location</th>
+        <th style="display: none;">Section Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <div class="utr-histogram">
+    <h2>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span> <span class="utr-subtitle">— Girls&#x27; 12 &amp; under Singles</span></h2>
+    <div class="utr-histogram-chart" data-utr-table="#players-table-g12"></div>
+    <div class="utr-histogram-caption">Based on UTR values from the player list.</div>
+  </div>
+
+  <div class="stats-section">
+    <h2>Event Statistics — Girls&#x27; 12 &amp; under Singles</h2>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Total Players</div>
+        <div class="stat-value">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">WTN Range</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avg WTN</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avg UTR (known)</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Draw Size</div>
+        <div class="stat-value">32</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Registered</div>
+        <div class="stat-value">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Registration Closes</div>
+        <div class="stat-value">May 6, 2026 at 2:59 PM PDT</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Best Nat Rank</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Top UTR</div>
+        <div class="stat-value">N/A</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="table-section-title" style="margin-top: 32px;">Girls&#x27; 14 &amp; under Singles</h3>
+
+  <table id="players-table-g14" class="players-table">
+    <thead class="sticky-header">
+      <tr>
+        <th class="col-rank">#</th>
+        <th class="sortable">First Name</th>
+        <th class="sortable">Last Name</th>
+        <th class="col-wtn sortable">WTN</th>
+        <th class="col-utr sortable">UTR</th>
+        <th class="col-national sortable">Nat Rank</th>
+        <th class="sortable">Location</th>
+        <th style="display: none;">Section Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <div class="utr-histogram">
+    <h2>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span> <span class="utr-subtitle">— Girls&#x27; 14 &amp; under Singles</span></h2>
+    <div class="utr-histogram-chart" data-utr-table="#players-table-g14"></div>
+    <div class="utr-histogram-caption">Based on UTR values from the player list.</div>
+  </div>
+
+  <div class="stats-section">
+    <h2>Event Statistics — Girls&#x27; 14 &amp; under Singles</h2>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Total Players</div>
+        <div class="stat-value">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">WTN Range</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avg WTN</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avg UTR (known)</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Draw Size</div>
+        <div class="stat-value">32</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Registered</div>
+        <div class="stat-value">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Registration Closes</div>
+        <div class="stat-value">May 6, 2026 at 2:59 PM PDT</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Best Nat Rank</div>
+        <div class="stat-value">N/A</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Top UTR</div>
+        <div class="stat-value">N/A</div>
+      </div>
+    </div>
+  </div>
+
+<div class="tournament-details-page">
+    <h2>Tournament Information & Details</h2>
+
+    <h3>Draw & Registration</h3>
+    <div class="selection-callout">Details are based on the current USTA PlayTennis entry list.</div>
+    <div class="detail-row">
+      <span class="detail-label">Draw Size:</span>
+      <span class="detail-value">32</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Registered:</span>
+      <span class="detail-value">0</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Registration Closes:</span>
+      <span class="detail-value">May 6, 2026 at 2:59 PM PDT</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Selection / Seeding:</span>
+      <span class="detail-value">Players will be selected and seeded using the most recently published National Standings List. Selection will be done by the Friday after the Wednesday entry deadline. Click here to review the currently published lists.</span>
+    </div>
+
+    <h3>Format & Scoring</h3>
+    <div class="detail-row">
+      <span class="detail-label">Match Format:</span>
+      <span class="detail-value">Main Draw and 3rd Place Playoff Match Format: Best of 3 Tiebreak Sets (6-game sets) with a 10-Point Match Tiebreak played in lieu of the 3rd set.</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Tiebreaks:</span>
+      <span class="detail-value">Main Draw and 3rd Place Playoff Match Format: Best of 3 Tiebreak Sets (6-game sets) with a 10-Point Match Tiebreak played in lieu of the 3rd set. Consolation Draw Match Format: Best of 3 Short Sets (4-game sets) with a 7-Point Match Tiebreak played in lieu of the 3rd set. (A 7-point Set Tiebreak is played at 4 games...</span>
+    </div>
+
+    <h3>Venue Information</h3>
+    <div class="detail-row">
+      <span class="detail-label">Site:</span>
+      <span class="detail-value"><a href="https://www.google.com/maps/search/?api=1&query=1000 Hutchinson Road Walnut Creek CA" target="_blank" style="color: #4472C4; text-decoration: none;">Northgate High School, Walnut Creek, CA</a></span>
+    </div>
+
+    <h3>Tournament Location</h3>
+    <div class="detail-row">
+      <span class="detail-label">Tournament Location:</span>
+      <span class="detail-value">Northgate High School, Walnut Creek, CA</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Tournament Dates:</span>
+      <span class="detail-value">May 16–17, 2026</span>
+    </div>
+
+    <h3>Tournament Contact</h3>
+    <div class="detail-row">
+      <span class="detail-label">Tournament Director:</span>
+      <span class="detail-value">Tanner Thompson</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Email:</span>
+      <span class="detail-value">thompsontennis925@gmail.com</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Phone:</span>
+      <span class="detail-value">925-577-8807</span>
+    </div>
+
+	  </div>
+
+    <!-- Alexis vs roster match-history (desktop slot) -->
+    <div id="alexis-h2h-slot-desktop"></div>
+
+	  <div class="desktop-view-toggle">
+	    <a href="#" id="desktop-toggle-mobile">View Mobile Version</a>
+	  </div>
+	  </div><!-- end desktop-view -->
+
+  <!-- Mobile View Container -->
+  <div class="mobile-view">
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="mobile-header-top">
+        <a class="mobile-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
+          <svg class="mobile-header-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+          </svg>
+        </a>
+        <div class="mobile-header-content">
+          <h1 class="mobile-header-title" id="mobile-title"></h1>
+          <div class="mobile-header-meta" id="mobile-meta"></div>
+          <div class="mobile-deadline-badge" id="mobile-deadline-badge">
+            <div class="mobile-deadline-countdown" id="mobile-registration-countdown">Closes in --</div>
+            <div class="mobile-deadline-date" id="mobile-registration-date">--</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Stats -->
+    <div class="mobile-hero-stats">
+      <!-- Tournament Name Link (inside card) -->
+      <a href="https://playtennis.usta.com/Competitions/trivalleytennisacademy/Tournaments/Overview/c85199d8-8029-4bd6-a7be-99585a03bdcf" target="_blank" rel="noopener noreferrer" class="mobile-tournament-link">
+        United by Tennis Spring Level 5 Junior 14s & 12s Singles Championship
+      </a>
+
+      <!-- Stats Grid -->
+      <div class="mobile-stats-grid">
+        <div class="mobile-stat-card">
+          <div class="mobile-stat-value" id="mobile-draw-size"></div>
+          <div class="mobile-stat-label">Draw Size</div>
+        </div>
+        <div class="mobile-stat-card highlight">
+          <div class="mobile-stat-value" id="mobile-seed"></div>
+          <div class="mobile-stat-label">Closes</div>
+        </div>
+        <div class="mobile-stat-card">
+          <div class="mobile-stat-value" id="mobile-registered"></div>
+          <div class="mobile-stat-label">Registered</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alexis Spotlight Card -->
+    <div class="mobile-alexis-card" id="mobile-alexis-card"></div>
+
+    <!-- Position Gauge -->
+    <div class="mobile-position-gauge" id="mobile-position-gauge"></div>
+
+    <!-- UTR Distribution -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">UTR Distribution</span>
+    </div>
+    <div class="mobile-chart-section">
+      <div class="mobile-chart-card" id="mobile-histogram"></div>
+    </div>
+
+    <!-- Player List -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">All Players (<span id="mobile-player-count"></span>)</span>
+    </div>
+    <div class="mobile-sort-controls">
+      <button class="mobile-sort-btn" data-sort="utr">UTR</button>
+      <button class="mobile-sort-btn active" data-sort="natRank">Nat Rank</button>
+      <button class="mobile-sort-btn" data-sort="wtn">WTN</button>
+    </div>
+    <div class="mobile-player-list" id="mobile-player-list"></div>
+    <button class="mobile-show-more" id="mobile-show-more">Show all players ↓</button>
+
+    <!-- Tournament Details -->
+    <div class="mobile-section-header">
+      <span class="mobile-section-title">Tournament Details</span>
+	    </div>
+	    <div class="mobile-info-section" id="mobile-info-section"></div>
+
+	    <!-- Alexis vs roster match-history (mobile slot) -->
+	    <div id="alexis-h2h-slot-mobile"></div>
+
+	    <!-- View Toggle -->
+	    <div class="mobile-view-toggle">
+	      <a href="#" id="mobile-toggle-desktop">View Desktop Version</a>
+	    </div>
+  </div><!-- end mobile-view -->
+<!-- PRIMARY_ROSTER_H2H_START -->
+<div id="alexis-roster-h2h-wrapper" data-h2h-wrapper="primary-roster-h2h-wrapper">
+
+<script>(function(){
+  function h2hToggleMore(btn){
+    var gid=btn.getAttribute('data-gid');
+    var rows=document.querySelectorAll('.h2h-match[data-gid="'+gid+'"]');
+    var open=btn.getAttribute('data-open')==='1';
+    rows.forEach(function(r){r.classList.toggle('h2h-match-hidden',open);});
+    btn.setAttribute('data-open',open?'0':'1');
+  }
+  window.h2hToggleMore=h2hToggleMore;
+})();</script>
+<section class="h2h-block" id="primary-roster-h2h">
+  <div class="h2h-section-header">
+    <h2 class="h2h-section-title">Alexis Malakhova vs This Roster</h2>
+  </div>
+  <p style="color:var(--text-muted,#94a3b8);font-size:13px;">No prior matches found.</p>
+</section>
+</div>
+<!-- PRIMARY_ROSTER_H2H_END -->
+<!-- Mobile View JavaScript -->
+  <script>
+    // ========================================
+    // MOBILE VIEW IMPLEMENTATION
+    // ========================================
+
+    let currentSort = 'natRank';
+	    let isExpanded = false;
+	    let allPlayers = [];
+	    let isMixedEvent = false;
+	    let mixedGroups = null;
+	    let multiGroups = null;
+	    let playerByKey = {};
+	    let targetPlayer = null;
+
+    // Section ranks are sourced directly from the hidden table column.
+    const SECTION_RANKS = {};
+
+    // USTA UAID mapping from rankings_results_v1.csv
+    // USTA profile links - will be populated from desktop version's playerProfileUrlByName
+    const PLAYER_USTA_URLS = {};
+
+    // ========================================
+    // DATA PARSING FUNCTIONS
+    // ========================================
+
+    function detectMixedEvent() {
+      const tables = document.querySelectorAll('.desktop-view table.players-table');
+      if (tables.length < 2) return false;
+      const headers = Array.from(document.querySelectorAll('.desktop-view table.players-table thead th')).map((th) =>
+        (th.textContent || '').trim().toLowerCase()
+      );
+      // Mixed doubles reports include a partner column AND a Team/Combined NST column.
+      // Singles reports may also include a Partner column (doubles partner mapping).
+      return headers.includes('team nst') || headers.includes('combined nst');
+    }
+
+    function makePlayerKey(firstName, lastName) {
+      const first = (firstName || '').trim().toUpperCase();
+      const last = (lastName || '').trim().toUpperCase();
+      return `${last}|${first}`;
+    }
+
+    function partnerKeyFromText(text) {
+      const raw = (text || '').trim();
+      if (!raw) return '';
+      // Expected format: "Last, First"
+      if (raw.includes(',')) {
+        const parts = raw.split(',');
+        const last = (parts[0] || '').trim();
+        const first = (parts.slice(1).join(',') || '').trim();
+        return makePlayerKey(first, last);
+      }
+      // Fallback: "First Last"
+      const parts = raw.split(/\s+/).filter(Boolean);
+      if (parts.length === 1) return makePlayerKey(parts[0], '');
+      return makePlayerKey(parts[0], parts.slice(1).join(' '));
+    }
+
+    function parsePlayersFromTable(table, groupLabel) {
+      const players = [];
+      const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+        (th.textContent || '').trim().toLowerCase()
+      );
+
+      const col = (name, fallback) => {
+        const idx = headers.findIndex((h) => h === name);
+        return idx !== -1 ? idx : fallback;
+      };
+
+      // Column indices (fallbacks match the single-table report layout).
+      const colRank = 0;
+      const colFirst = col('first name', 1);
+      const colLast = col('last name', 2);
+      const colWtn = col('wtn', 3);
+      const colUtr = col('utr', 4);
+      const colNat = col('nat rank', 5);
+      const colLocation = col('location', 6);
+
+      const partnerColIdx = headers.findIndex((h) => h === 'partner');
+      const hasPartner = partnerColIdx !== -1;
+      const sectionColIdx = headers.findIndex((h) => h === 'section rank');
+      const combinedColIdx = (() => {
+        const teamIdx = headers.findIndex((h) => h === 'team nst');
+        if (teamIdx !== -1) return teamIdx;
+        return headers.findIndex((h) => h === 'combined nst');
+      })();
+
+      const requiredCols = [colRank, colFirst, colLast, colWtn, colUtr, colNat, colLocation].filter((idx) => idx !== -1);
+      const minCells = requiredCols.length ? Math.max(...requiredCols) + 1 : 7;
+
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach((row) => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < minCells) return;
+
+        const rank = parseInt((cells[colRank].textContent || '').trim(), 10);
+        const firstName = (cells[colFirst].textContent || '').trim();
+        const lastName = (cells[colLast].textContent || '').trim();
+        const fullName = `${firstName} ${lastName}`.trim();
+
+        const wtnCell = cells[colWtn];
+        const wtn = (wtnCell.textContent || '').trim();
+        const ustaLink = wtnCell ? wtnCell.querySelector('a') : null;
+
+        const utrCell = cells[colUtr];
+        const utrLink = utrCell ? utrCell.querySelector('a') : null;
+        const utrText = (utrLink ? utrLink.textContent : utrCell.textContent) || '';
+        const utrVal = parseFloat(utrText.trim());
+        const utr = Number.isFinite(utrVal) ? utrVal : NaN;
+        const utrUrl = utrLink ? utrLink.href : null;
+
+        const natCell = cells[colNat];
+        const natLink = natCell ? natCell.querySelector('a') : null;
+        const ustaUrl = (ustaLink && ustaLink.href) || (natLink && natLink.href) || null;
+        const natVal = parseInt((natCell.textContent || '').trim(), 10);
+        const natRank = Number.isFinite(natVal) ? natVal : NaN;
+
+        const location = (cells[colLocation].textContent || '').trim();
+        const isTarget = row.classList.contains('highlight-player');
+        const teamNst =
+          combinedColIdx !== -1 && cells[combinedColIdx] ? (cells[combinedColIdx].textContent || '').trim() : '';
+
+        let partner = '';
+        let partnerKey = '';
+        if (hasPartner && cells[partnerColIdx]) {
+          const partnerCell = cells[partnerColIdx];
+          const partnerLink = partnerCell.querySelector('.partner-jump');
+          partner = (partnerCell.textContent || '').trim();
+          partnerKey = partnerLink ? (partnerLink.getAttribute('data-partner-key') || '').trim() : partnerKeyFromText(partner);
+        }
+
+        // Extract UAID from USTA URL if available
+        let uaid = null;
+        if (ustaUrl) {
+          const uaidMatch = ustaUrl.match(/uaid=(\d+)/);
+          if (uaidMatch) uaid = uaidMatch[1];
+        }
+
+	        const playerKey = (row.getAttribute('data-player-key') || '').trim() || makePlayerKey(firstName, lastName);
+	        const groupPrefix = (() => {
+	          const g = (groupLabel || '').trim();
+	          if (!g) return '';
+	          const m = g.match(/\b(10|12|14|16|18)\b/);
+	          if (m) return m[1] + '-';
+	          return g[0].toUpperCase() + '-';
+	        })();
+	        const id = groupPrefix + playerKey.replace(/[^A-Z0-9]+/g, '-');
+
+        // Section ranks exist only for singles reports (hidden column).
+        const sectionCell = sectionColIdx !== -1 ? cells[sectionColIdx] : null;
+        const sectionRank = sectionCell ? parseInt((sectionCell.textContent || '').trim(), 10) || null : null;
+
+        players.push({
+          id,
+          group: groupLabel || '',
+          playerKey,
+          partner,
+          partnerKey,
+          rank,
+          firstName,
+          lastName,
+          fullName,
+          wtn,
+          utr,
+          utrUrl,
+          natRank,
+          sectionRank,
+          uaid,
+          teamNst,
+          location,
+          isTarget
+        });
+      });
+
+      return players;
+    }
+
+	    function parsePlayerData() {
+	      isMixedEvent = detectMixedEvent();
+	      mixedGroups = null;
+	      multiGroups = null;
+	
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return [];
+	
+	      if (isMixedEvent) {
+        const girls = [];
+        const boys = [];
+
+        tables.forEach((table) => {
+          const titleEl = table.previousElementSibling;
+          const titleText = titleEl ? (titleEl.textContent || '').trim().toLowerCase() : '';
+          const group = titleText.includes('boys') ? 'Boys' : titleText.includes('girls') ? 'Girls' : '';
+          const parsed = parsePlayersFromTable(table, group);
+          if (group === 'Boys') boys.push(...parsed);
+          else girls.push(...parsed);
+        });
+
+	        mixedGroups = { girls, boys };
+	        return [...girls, ...boys];
+	      }
+
+	      if (tables.length > 1) {
+	        // Multiple singles tables (e.g., U12 + U14 on one page).
+	        const groups = [];
+	        tables.forEach((table, idx) => {
+	          const titleEl = table.previousElementSibling;
+	          const titleText = titleEl ? (titleEl.textContent || '').trim() : '';
+	          const group = titleText || `Event ${idx + 1}`;
+	          const parsed = parsePlayersFromTable(table, group);
+	          groups.push({ label: group, players: parsed });
+	        });
+	        multiGroups = groups;
+	        return groups.flatMap((g) => g.players);
+	      }
+	
+	      // Singles: only one table.
+	      return parsePlayersFromTable(tables[0], '');
+	    }
+
+    function parseKeyStats() {
+      const stats = {
+        drawSize: 32,
+        closes: '',
+        registered: 0,
+        // Legacy/optional (Alexis-focused reports).
+        seed: null,
+        percentAbove: null
+      };
+      
+      const keyStats = document.querySelectorAll('.desktop-view .key-stat');
+      keyStats.forEach(stat => {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) return;
+        
+        const labelText = label.textContent.trim();
+        const valueText = value.textContent.trim();
+        
+        if (labelText === 'Draw') {
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.drawSize = parsed;
+        } else if (labelText === 'Closes') {
+          stats.closes = valueText;
+        } else if (labelText === 'Registered') {
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.registered = parsed;
+        } else if (labelText === 'Alexis Seed') {
+          const parts = valueText.split('/');
+          if (parts.length === 2) {
+            const seedParsed = parseInt(parts[0].trim(), 10);
+            const regParsed = parseInt(parts[1].trim(), 10);
+            if (Number.isFinite(seedParsed)) stats.seed = seedParsed;
+            if (Number.isFinite(regParsed)) stats.registered = regParsed;
+          }
+        } else if (labelText === '% Above Alexis (UTR)') {
+          const parsed = parseInt(valueText, 10);
+          if (Number.isFinite(parsed)) stats.percentAbove = parsed;
+        }
+      });
+      
+      return stats;
+    }
+
+    function parseTournamentInfo() {
+      const info = {
+        title: '',
+        dates: '',
+        location: '',
+        format: {},
+        venues: [],
+        contact: {}
+      };
+      
+      // Parse header info
+      const h1 = document.querySelector('.desktop-view h1');
+      if (h1) info.title = h1.textContent.trim();
+      
+      const datesEl = document.querySelector('.desktop-view .tournament-dates');
+      if (datesEl) info.dates = datesEl.textContent.trim();
+      
+      const tournamentInfo = document.querySelector('.desktop-view .tournament-info');
+      if (tournamentInfo) {
+        const text = tournamentInfo.textContent.trim();
+        const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+        if (lines.length > 1) {
+          const fullLocation = lines[1].replace(/•.*$/, '').trim();
+          // Extract just "City, State" from full venue addresses
+          // Example: "Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA" -> "San Jose, CA"
+          const cityStateMatch = fullLocation.match(/([^,]+,\s*[A-Z]{2})$/);
+          info.location = cityStateMatch ? cityStateMatch[1].trim() : fullLocation;
+        }
+      }
+      
+      // Parse tournament details
+      const detailsPage = document.querySelector('.desktop-view .tournament-details-page');
+      if (detailsPage) {
+        const detailRows = detailsPage.querySelectorAll('.detail-row');
+        detailRows.forEach(row => {
+          const label = row.querySelector('.detail-label');
+          const value = row.querySelector('.detail-value');
+          if (!label || !value) return;
+          
+          const labelText = label.textContent.trim().replace(':', '');
+          const valueText = value.textContent.trim();
+          
+          // Format & Scoring
+          if (labelText === 'Match Format') info.format.matchFormat = valueText;
+          if (labelText === 'Tiebreaks') info.format.tiebreaks = valueText;
+          if (labelText === 'Set Tiebreak') info.format.setTiebreak = valueText;
+          if (labelText === 'Match Tiebreak') info.format.matchTiebreak = valueText;
+          
+          // Venues
+          if (labelText.startsWith('Site')) {
+            const link = value.querySelector('a');
+            info.venues.push({
+              name: valueText.split(',')[0].trim(),
+              url: link ? link.href : null
+            });
+          }
+          
+          // Contact
+          if (labelText === 'Tournament Director') info.contact.director = valueText;
+          if (labelText === 'Email') {
+            const link = value.querySelector('a');
+            info.contact.email = link ? link.href.replace('mailto:', '') : valueText;
+          }
+          if (labelText === 'Phone') {
+            const link = value.querySelector('a');
+            info.contact.phone = link ? link.textContent.trim() : valueText;
+            info.contact.phoneUrl = link ? link.href : null;
+          }
+        });
+      }
+      
+      return info;
+    }
+
+    // ========================================
+    // RENDERING FUNCTIONS
+    // ========================================
+
+    function buildAlexisCard(player) {
+      if (!player) return '';
+      
+      const initials = `${player.firstName[0]}${player.lastName[0]}`;
+      const sectionRank = 54; // Alexis's sectional rank from MEMORY_BANK.md
+      
+      return `
+        <div class="mobile-alexis-header">
+          <div class="mobile-alexis-avatar">${initials}</div>
+          <div class="mobile-alexis-name">
+            <h3>${player.fullName}</h3>
+            <span>${player.location}</span>
+          </div>
+          <div class="mobile-alexis-seed">#${player.rank} Seed</div>
+        </div>
+        <div class="mobile-alexis-stats">
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${player.wtn}</div>
+            <div class="mobile-alexis-stat-label">WTN</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${formatUtrValue(player.utr)}</div>
+            <div class="mobile-alexis-stat-label">UTR</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${formatNatRankValue(player.natRank)}</div>
+            <div class="mobile-alexis-stat-label">Nat Rank</div>
+          </div>
+          <div class="mobile-alexis-stat">
+            <div class="mobile-alexis-stat-value">${sectionRank}</div>
+            <div class="mobile-alexis-stat-label">Section</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildPositionGauge(players, targetPlayer) {
+      if (!targetPlayer || players.length === 0) return '';
+      
+      const targetIndex = players.findIndex(p => p.isTarget);
+      const percentage = ((targetIndex / (players.length - 1)) * 100).toFixed(0);
+      const percentAbove = Math.round((targetIndex / players.length) * 100);
+      const firstPlayer = players[0];
+      const lastPlayer = players[players.length - 1];
+      const stats = parseKeyStats();
+      const cushion = stats.drawSize - targetPlayer.rank;
+      
+      return `
+        <div class="mobile-gauge-header">
+          <span class="mobile-gauge-title">Position in Draw</span>
+          <span class="mobile-gauge-value">${percentAbove}% above her</span>
+        </div>
+        <div class="mobile-gauge-bar">
+          <div class="mobile-gauge-fill" id="gauge-fill" style="width: 0%;" data-width="${percentage}%">
+            <div class="mobile-gauge-marker"></div>
+          </div>
+        </div>
+        <div class="mobile-gauge-labels">
+          <span>#1 ${firstPlayer.firstName} ${firstPlayer.lastName[0]}.</span>
+          <span>#${targetPlayer.rank} ${targetPlayer.firstName}</span>
+          <span>#${players.length}</span>
+        </div>
+        ${cushion > 0 ? `
+        <div class="mobile-gauge-note">
+          <span>✓</span>
+          ${cushion}-player cushion above cutoff — safe entry
+        </div>
+        ` : ''}
+      `;
+    }
+
+    function buildUtrHistogramMobile() {
+      // Find existing histogram data from desktop view
+      const desktopHistogram = document.querySelector('.desktop-view .utr-histogram-chart');
+      if (!desktopHistogram) return '';
+      
+      const bins = desktopHistogram.querySelectorAll('.utr-bin');
+      if (bins.length === 0) return '';
+      
+      let maxCount = 0;
+      const binData = [];
+      
+      bins.forEach(bin => {
+        const countEl = bin.querySelector('.utr-bin-count');
+        const count = parseInt(countEl.textContent.trim());
+        const isHighlight = bin.classList.contains('is-highlight');
+        binData.push({ count, isHighlight });
+        maxCount = Math.max(maxCount, count);
+      });
+      
+      // Build histogram bars
+      const bars = binData.map((bin, i) => {
+        const height = (bin.count / maxCount) * 100;
+        const className = bin.isHighlight ? 'mobile-histogram-bar alexis-range' : 'mobile-histogram-bar';
+        return `<div class="${className}" style="height: ${height}%;"></div>`;
+      }).join('');
+      
+      return `
+        <div class="mobile-histogram">
+          ${bars}
+        </div>
+        <div class="mobile-histogram-labels">
+          <span>2.0</span>
+          <span>3.0</span>
+          <span>4.0</span>
+          <span>5.0</span>
+          <span>6.0</span>
+        </div>
+        <div class="mobile-chart-legend">
+          <div class="mobile-legend-item">
+            <div class="mobile-legend-dot blue"></div>
+            <span>Other players</span>
+          </div>
+          <div class="mobile-legend-item">
+            <div class="mobile-legend-dot orange"></div>
+            <span>Alexis's range</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function formatUtrValue(value) {
+      if (Number.isFinite(value)) return value.toFixed(2);
+      return 'N/A';
+    }
+
+    function formatNatRankValue(value) {
+      if (Number.isFinite(value)) return String(value);
+      return 'N/A';
+    }
+
+    function isProbablyEmail(value) {
+      const email = (value || '').trim();
+      if (!email) return false;
+      if (email.toUpperCase() === 'N/A') return false;
+      return /.+@.+\..+/.test(email);
+    }
+
+    function sortPlayers(players, sortBy) {
+      const sorted = [...players];
+      
+      if (sortBy === 'rank') {
+        sorted.sort((a, b) => a.rank - b.rank);
+      } else if (sortBy === 'utr') {
+        sorted.sort((a, b) => {
+          const aVal = Number.isFinite(a.utr) ? a.utr : -1e9;
+          const bVal = Number.isFinite(b.utr) ? b.utr : -1e9;
+          return bVal - aVal; // Descending (higher is better)
+        });
+      } else if (sortBy === 'natRank') {
+        sorted.sort((a, b) => {
+          const aVal = Number.isFinite(a.natRank) ? a.natRank : 1e9;
+          const bVal = Number.isFinite(b.natRank) ? b.natRank : 1e9;
+          return aVal - bVal; // Ascending (lower is better)
+        });
+      } else if (sortBy === 'wtn') {
+        sorted.sort((a, b) => {
+          const aWtn = parseFloat(a.wtn) || 999;
+          const bWtn = parseFloat(b.wtn) || 999;
+          return aWtn - bWtn; // Ascending (lower is better)
+        });
+      }
+      
+      return sorted;
+    }
+
+    function buildPlayerCards(players, sortBy, limit = null) {
+      const sorted = sortPlayers(players, sortBy);
+      const displayPlayers = limit ? sorted.slice(0, limit) : sorted;
+      const stats = parseKeyStats();
+      const showCutoff = sortBy === 'rank'; // Only show cutoff when sorted by seed
+      
+      let html = '';
+      let cutoffAdded = false;
+      
+      displayPlayers.forEach((player, index) => {
+        // Add cutoff divider after player #32 (only in seed order)
+        if (showCutoff && !cutoffAdded && player.rank === stats.drawSize && index < displayPlayers.length - 1) {
+          html += '<div class="mobile-cutoff-divider">✂️ Draw cutoff after player #' + stats.drawSize + '</div>';
+          cutoffAdded = true;
+        }
+        
+        const isTopSeed = player.rank <= 8;
+        const cardClass = ['mobile-player-card'];
+        if (isTopSeed) cardClass.push('top-seed');
+        if (player.isTarget) cardClass.push('target-player');
+        
+        html += `
+          <div class="${cardClass.join(' ')}" data-player-id="${player.id}">
+            <div class="mobile-player-rank">${player.rank}</div>
+            <div class="mobile-player-info">
+              <div class="mobile-player-name">${player.fullName}</div>
+              <div class="mobile-player-location">${player.location}</div>
+            </div>
+            <div class="mobile-player-ratings">
+              ${player.utrUrl ? `
+                <a href="${player.utrUrl}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
+                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
+                  <div class="mobile-rating-label">UTR</div>
+                </a>
+              ` : `
+                <div class="mobile-rating-badge utr">
+                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
+                  <div class="mobile-rating-label">UTR</div>
+                </div>
+              `}
+              ${player.uaid ? `
+                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
+                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
+                  <div class="mobile-rating-label">Nat</div>
+                </a>
+              ` : `
+                <div class="mobile-rating-badge nat">
+                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
+                  <div class="mobile-rating-label">Nat</div>
+                </div>
+              `}
+            </div>
+            <div class="mobile-player-expand-icon">▼</div>
+          </div>
+          <div class="mobile-player-details" data-player-id="${player.id}">
+            <div class="mobile-player-details-grid">
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">WTN</div>
+                <div class="mobile-detail-value">${player.wtn}</div>
+              </div>
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Sec Rank</div>
+                <div class="mobile-detail-value">${player.sectionRank || 'N/A'}</div>
+              </div>
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Seed</div>
+                <div class="mobile-detail-value">#${player.rank}</div>
+              </div>
+              ${player.partner ? `
+              <div class="mobile-detail-item">
+                <div class="mobile-detail-label">Partner</div>
+                <div class="mobile-detail-value">
+                  ${player.partnerKey ? `
+                    <button class="mobile-partner-jump" data-partner-key="${player.partnerKey}" onclick="event.stopPropagation()">${player.partner}</button>
+                  ` : player.partner}
+                </div>
+              </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      });
+      
+      return html;
+    }
+
+    function buildInfoCards(info) {
+      let html = '';
+
+      const cleanText = (value) => (value || '').replace(/\s+/g, ' ').trim();
+      const isLongValue = (value) => cleanText(value).length > 80;
+      const renderRow = (label, value) => {
+        const v = cleanText(value);
+        if (!v) return '';
+        const rowClass = isLongValue(v) ? 'mobile-info-row is-stacked' : 'mobile-info-row';
+        return `
+          <div class="${rowClass}">
+            <span class="mobile-info-label">${label}</span>
+            <span class="mobile-info-value">${v}</span>
+          </div>
+        `;
+      };
+      
+      // Format & Scoring Card
+      if (info.format.matchFormat || info.format.tiebreaks || info.format.setTiebreak || info.format.matchTiebreak) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">🎾</span>
+              Format & Scoring
+            </div>
+            ${renderRow('Match Format', info.format.matchFormat)}
+            ${renderRow('Tiebreaks', info.format.tiebreaks)}
+            ${renderRow('Set Tiebreak', info.format.setTiebreak)}
+            ${renderRow('3rd Set', info.format.matchTiebreak)}
+          </div>
+        `;
+      }
+      
+      // Venues Card
+      if (info.venues.length > 0) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">📍</span>
+              Venues
+            </div>
+        `;
+        info.venues.forEach((venue, i) => {
+          html += `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Site ${i + 1}</span>
+              <span class="mobile-info-value">
+                ${venue.url ? `<a href="${venue.url}" target="_blank" rel="noopener noreferrer">${venue.name} →</a>` : venue.name}
+              </span>
+            </div>
+          `;
+        });
+        html += '</div>';
+      }
+      
+      // Contact Card
+      if (info.contact.director || info.contact.email || info.contact.phone) {
+        html += `
+          <div class="mobile-info-card">
+            <div class="mobile-info-card-header">
+              <span class="icon">📞</span>
+              Contact
+            </div>
+            ${info.contact.director ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Director</span>
+              <span class="mobile-info-value">${info.contact.director}</span>
+            </div>` : ''}
+            ${info.contact.email ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Email</span>
+              <span class="mobile-info-value">
+                ${isProbablyEmail(info.contact.email) ? `<a href="mailto:${info.contact.email}">${info.contact.email}</a>` : info.contact.email}
+              </span>
+            </div>` : ''}
+            ${info.contact.phone ? `
+            <div class="mobile-info-row">
+              <span class="mobile-info-label">Phone</span>
+              <span class="mobile-info-value">
+                ${info.contact.phoneUrl ? `<a href="${info.contact.phoneUrl}">${info.contact.phone}</a>` : info.contact.phone}
+              </span>
+            </div>` : ''}
+          </div>
+        `;
+      }
+      
+      return html;
+    }
+
+    // ========================================
+    // MAIN RENDER FUNCTION
+    // ========================================
+
+    function renderMobileView() {
+      // Parse all data
+      allPlayers = parsePlayerData();
+      playerByKey = {};
+      allPlayers.forEach(p => {
+        if (p && p.playerKey) playerByKey[p.playerKey] = p;
+      });
+      targetPlayer = allPlayers.find(p => p.isTarget);
+      const stats = parseKeyStats();
+      const info = parseTournamentInfo();
+
+      // Keep the mobile tournament link aligned with the desktop header.
+      const desktopTournamentLink = document.querySelector('.desktop-view .tournament-info a');
+      const mobileTournamentLink = document.querySelector('a.mobile-tournament-link');
+      if (desktopTournamentLink && mobileTournamentLink) {
+        if (desktopTournamentLink.href) mobileTournamentLink.href = desktopTournamentLink.href;
+        const title = (desktopTournamentLink.textContent || '').trim();
+        if (title) mobileTournamentLink.textContent = title;
+      }
+      
+      // Render header
+      // Use title as-is (already contains "Open Level 5 Championship Singles - Girls' 12 Singles")
+      const titleText = info.title || "United by Tennis Spring Level 5 Junior 14s & 12s Singles Championship";
+      document.getElementById('mobile-title').textContent = titleText;
+      
+      // Format: "Jan 10-18, 2026 • San Jose, CA"
+      const metaEl = document.getElementById('mobile-meta');
+      if (metaEl) {
+        const datesText = (info.dates || '').trim();
+        const locText = (info.location || '').trim();
+        const sep = datesText && locText ? ' • ' : '';
+        const mapUrl = info?.venues?.[0]?.url || '';
+
+        metaEl.textContent = '';
+        metaEl.append(document.createTextNode(datesText + sep));
+        if (mapUrl && locText) {
+          const a = document.createElement('a');
+          a.href = mapUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = locText;
+          metaEl.append(a);
+        } else {
+          metaEl.append(document.createTextNode(locText));
+        }
+      }
+      
+      // Render hero stats
+      document.getElementById('mobile-draw-size').textContent = Number.isFinite(stats.drawSize) ? stats.drawSize : '';
+      document.getElementById('mobile-seed').textContent =
+        (stats.closes || '').trim() || (Number.isFinite(stats.seed) ? String(stats.seed) : '');
+      document.getElementById('mobile-registered').textContent = Number.isFinite(stats.registered) ? stats.registered : '';
+      
+      // Render Alexis card
+      if (targetPlayer) {
+        document.getElementById('mobile-alexis-card').innerHTML = buildAlexisCard(targetPlayer);
+      }
+      
+      // Render position gauge
+      if (targetPlayer && allPlayers.length > 0) {
+        document.getElementById('mobile-position-gauge').innerHTML = buildPositionGauge(allPlayers, targetPlayer);
+        // Animate gauge after render
+        setTimeout(() => {
+          const fill = document.getElementById('gauge-fill');
+          if (fill) {
+            fill.style.width = fill.getAttribute('data-width');
+          }
+        }, 100);
+      }
+      
+      // Render UTR histogram
+      document.getElementById('mobile-histogram').innerHTML = buildUtrHistogramMobile();
+      
+      // Render player count
+      document.getElementById('mobile-player-count').textContent = allPlayers.length;
+      
+      // Render player list (initially show top 8)
+      renderPlayerList(currentSort, 8);
+      
+      // Render tournament info
+      document.getElementById('mobile-info-section').innerHTML = buildInfoCards(info);
+    }
+
+	    function renderPlayerList(sortBy, limit = null) {
+	      if (isMixedEvent && mixedGroups) {
+	        const groupLimit = limit === null ? null : 8;
+	        const girlsHtml = buildPlayerCards(mixedGroups.girls, sortBy, groupLimit);
+	        const boysHtml = buildPlayerCards(mixedGroups.boys, sortBy, groupLimit);
+	        const html = `
+	          <div class="mobile-group-header">Girls</div>
+	          ${girlsHtml}
+	          <div class="mobile-group-header">Boys</div>
+	          ${boysHtml}
+	        `;
+	        document.getElementById('mobile-player-list').innerHTML = html;
+	      } else if (multiGroups && Array.isArray(multiGroups) && multiGroups.length > 0) {
+	        const groupLimit = limit === null ? null : 8;
+	        const html = multiGroups.map((group) => {
+	          const label = group && group.label ? group.label : 'Players';
+	          const players = group && Array.isArray(group.players) ? group.players : [];
+	          const cards = buildPlayerCards(players, sortBy, groupLimit);
+	          return `
+	            <div class="mobile-group-header">${label}</div>
+	            ${cards}
+	          `;
+	        }).join('');
+	        document.getElementById('mobile-player-list').innerHTML = html;
+	      } else {
+	        const html = buildPlayerCards(allPlayers, sortBy, limit);
+	        document.getElementById('mobile-player-list').innerHTML = html;
+	      }
+      
+      // Update show more button
+      const showMoreBtn = document.getElementById('mobile-show-more');
+      if (limit && limit < allPlayers.length) {
+        showMoreBtn.style.display = 'block';
+        showMoreBtn.textContent = `Show all ${allPlayers.length} players ↓`;
+        isExpanded = false;
+      } else if (limit === null) {
+        showMoreBtn.style.display = 'block';
+        showMoreBtn.textContent = `Show less ↑`;
+        isExpanded = true;
+      } else {
+        showMoreBtn.style.display = 'none';
+      }
+    }
+
+    // ========================================
+    // EVENT HANDLERS
+    // ========================================
+
+    function handleSort(sortBy) {
+      currentSort = sortBy;
+      
+      // Update active button
+      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-sort') === sortBy) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Re-render with current expansion state
+      const limit = isExpanded ? null : 8;
+      renderPlayerList(sortBy, limit);
+    }
+
+    function handleShowMore() {
+      if (isExpanded) {
+        renderPlayerList(currentSort, 8);
+      } else {
+        renderPlayerList(currentSort, null);
+      }
+    }
+
+    // ========================================
+    // VIEW TOGGLE
+    // ========================================
+
+    function getUserViewPreference() {
+      return localStorage.getItem('tennisReportViewPref');
+    }
+
+    function setUserViewPreference(view) {
+      localStorage.setItem('tennisReportViewPref', view);
+    }
+
+    function detectMobileDevice() {
+      return window.innerWidth <= 600;
+    }
+
+    function isMobileViewActive() {
+      if (document.body.classList.contains('force-mobile')) return true;
+      if (document.body.classList.contains('force-desktop')) return false;
+      return detectMobileDevice();
+    }
+
+    function placeH2HBlock() {
+      const wrapper = document.getElementById('alexis-roster-h2h-wrapper');
+      if (!wrapper) return;
+      const target = isMobileViewActive()
+        ? document.getElementById('alexis-h2h-slot-mobile')
+        : document.getElementById('alexis-h2h-slot-desktop');
+      if (!target) return;
+      if (wrapper.parentElement === target) return;
+      target.appendChild(wrapper);
+    }
+
+    function toggleView(targetView) {
+      setUserViewPreference(targetView);
+      
+      if (targetView === 'mobile') {
+        document.body.classList.add('force-mobile');
+        document.body.classList.remove('force-desktop');
+      } else {
+        document.body.classList.add('force-desktop');
+        document.body.classList.remove('force-mobile');
+      }
+      placeH2HBlock();
+    }
+
+    function applyViewPreference() {
+      const pref = getUserViewPreference();
+      const isMobile = detectMobileDevice();
+      
+      // On desktop (>600px), always show desktop regardless of preference
+      if (!isMobile) {
+        document.body.classList.remove('force-mobile', 'force-desktop');
+        placeH2HBlock();
+        return;
+      }
+      
+      // On mobile (≤600px), apply preference if set
+      if (pref === 'desktop') {
+        document.body.classList.add('force-desktop');
+        document.body.classList.remove('force-mobile');
+      } else if (pref === 'mobile') {
+        document.body.classList.add('force-mobile');
+        document.body.classList.remove('force-desktop');
+      }
+      // If no preference, let CSS media query handle it
+      placeH2HBlock();
+    }
+
+    // ========================================
+    // PLAYER CARD INTERACTION
+    // ========================================
+
+    function togglePlayerDetails(playerId) {
+      const card = document.querySelector(`.mobile-player-card[data-player-id="${playerId}"]`);
+      const details = document.querySelector(`.mobile-player-details[data-player-id="${playerId}"]`);
+      
+      if (!card || !details) return;
+      
+      const isExpanded = card.classList.contains('expanded');
+      
+      // Close all other expanded cards
+      document.querySelectorAll('.mobile-player-card.expanded').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.mobile-player-details.expanded').forEach(d => {
+        d.classList.remove('expanded');
+      });
+      
+      // Toggle current card
+      if (!isExpanded) {
+        card.classList.add('expanded');
+        details.classList.add('expanded');
+      }
+    }
+
+    // ========================================
+    // INITIALIZATION
+    // ========================================
+
+    function initMobileView() {
+      // Apply view preference
+      applyViewPreference();
+      
+      // Render mobile view
+      renderMobileView();
+      
+      // Setup event listeners
+      
+      // Player card click handlers
+      document.addEventListener('click', (e) => {
+        const partnerBtn = e.target.closest('.mobile-partner-jump');
+        if (partnerBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          const key = (partnerBtn.getAttribute('data-partner-key') || '').trim();
+          if (!key) return;
+          const partner = playerByKey[key];
+          if (!partner) return;
+          const card = document.querySelector(`.mobile-player-card[data-player-id="${partner.id}"]`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            togglePlayerDetails(partner.id);
+          }
+          return;
+        }
+
+        const card = e.target.closest('.mobile-player-card');
+        if (card) {
+          const playerId = card.getAttribute('data-player-id');
+          if (playerId) {
+            togglePlayerDetails(playerId);
+          }
+        }
+      });
+      
+      // Sort buttons
+      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          handleSort(btn.getAttribute('data-sort'));
+        });
+      });
+      
+      // Show more/less button
+      document.getElementById('mobile-show-more').addEventListener('click', handleShowMore);
+      
+      // View toggle links
+      document.getElementById('mobile-toggle-desktop').addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleView('desktop');
+      });
+      
+      document.getElementById('desktop-toggle-mobile').addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleView('mobile');
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        applyViewPreference();
+      });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMobileView);
+    } else {
+      initMobileView();
+    }
+  </script>
+
+  <!-- Share Button -->
+  <script>
+    // Player profile links keyed by "FIRST|LAST" (uppercase)
+    // Made global so mobile view can access it
+    window.playerProfileUrlByName = {
+
+    };
+
+	    function decorateMetricCellWithProfileLink(cell, url) {
+	      if (!cell || !url) return;
+	      if (cell.querySelector('a')) return;
+	      const text = cell.textContent.trim();
+	      const a = document.createElement('a');
+	      a.href = url;
+	      a.target = '_blank';
+	      a.rel = 'noopener noreferrer';
+	      a.textContent = text;
+	      a.title = 'Open player profile';
+	      cell.textContent = '';
+	      cell.appendChild(a);
+	    }
+	
+	    function decoratePlayerLinks() {
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return;
+	
+	      tables.forEach((table) => {
+	        const tbody = table.querySelector('tbody');
+	        if (!tbody) return;
+	        const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+	          (th.textContent || '').trim().toLowerCase()
+	        );
+	        const wtnIdx = headers.findIndex((h) => h === 'wtn');
+	        const natIdx = headers.findIndex((h) => h === 'nat rank' || h === 'national rank' || h === 'nat');
+	
+	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        rows.forEach((row) => {
+	          const cells = row.querySelectorAll('td');
+	          if (cells.length < 3) return;
+	          const first = (cells[1]?.textContent || '').trim().toUpperCase();
+	          const last = (cells[2]?.textContent || '').trim().toUpperCase();
+	          if (!first && !last) return;
+	          const key = `${first}|${last}`;
+	          const url = window.playerProfileUrlByName[key];
+	          if (!url) return;
+	
+	          const wtnCell = cells[wtnIdx !== -1 ? wtnIdx : 3];
+	          const natCell = cells[natIdx !== -1 ? natIdx : 5];
+	          decorateMetricCellWithProfileLink(wtnCell, url);
+	          decorateMetricCellWithProfileLink(natCell, url);
+	        });
+	      });
+	    }
+
+    function toTitleCase(value) {
+      return value
+        .toLowerCase()
+        .replace(/\b\w/g, letter => letter.toUpperCase());
+    }
+
+	    function normalizeLastNames() {
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return;
+	      tables.forEach((table) => {
+	        const tbody = table.querySelector('tbody');
+	        if (!tbody) return;
+	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        rows.forEach((row) => {
+	          const cells = row.querySelectorAll('td');
+	          if (cells.length < 3) return;
+	          const lastCell = cells[2];
+	          const text = (lastCell.textContent || '').trim();
+	          if (!text) return;
+	          lastCell.textContent = toTitleCase(text);
+	        });
+	      });
+	    }
+	
+	    function normalizeLocations() {
+	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
+	      if (!tables.length) return;
+	      tables.forEach((table) => {
+	        const tbody = table.querySelector('tbody');
+	        if (!tbody) return;
+	        const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+	          (th.textContent || '').trim().toLowerCase()
+	        );
+	        const locationIdx = headers.findIndex((h) => h === 'location');
+	
+	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        rows.forEach((row) => {
+	          const cells = row.querySelectorAll('td');
+	          const idx = locationIdx !== -1 ? locationIdx : 6;
+	          if (cells.length <= idx) return;
+	          const locationCell = cells[idx];
+	          const text = (locationCell.textContent || '').trim();
+	          if (!text) return;
+	          if (text.includes(',')) return;
+	          const parts = text.split(/\s+/);
+	          if (parts.length < 2) return;
+	          const state = parts.pop();
+	          const city = parts.join(' ');
+	          locationCell.textContent = `${city}, ${state}`;
+	        });
+	      });
+	    }
+
+    function formatUtrRangeLabel(start, binSize) {
+      const end = start + binSize - 0.01;
+      return `${start.toFixed(1)}-${end.toFixed(2)}`;
+    }
+
+    function getDrawSizeFromKeyStats() {
+      const stats = Array.from(document.querySelectorAll('.key-stat'));
+      for (const stat of stats) {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase() === 'draw') {
+          const size = parseInt(value.textContent.trim(), 10);
+          if (Number.isFinite(size)) return size;
+        }
+      }
+      return null;
+    }
+
+	    function buildUtrHistogram() {
+	      function isMixedEventPage() {
+	        try {
+	          return typeof detectMixedEvent === 'function' && detectMixedEvent();
+	        } catch (err) {
+	          return false;
+	        }
+	      }
+
+	      function findTableForChart(chartEl) {
+	        if (!chartEl) return null;
+
+	        const tableSelector = (chartEl.getAttribute('data-utr-table') || '').trim();
+	        if (tableSelector) {
+	          const explicit = document.querySelector(tableSelector);
+	          if (explicit && explicit.tagName === 'TABLE') return explicit;
+	        }
+
+	        // Walk up the DOM tree looking for a previous sibling table.
+	        let el = chartEl;
+	        while (el && el !== document.body) {
+	          let sib = el.previousElementSibling;
+	          while (sib) {
+	            if (sib.tagName === 'TABLE') return sib;
+	            const inner = sib.querySelector ? sib.querySelector('table') : null;
+	            if (inner) return inner;
+	            sib = sib.previousElementSibling;
+	          }
+	          el = el.parentElement;
+	        }
+
+	        return (
+	          document.querySelector('.desktop-view .primary-table') ||
+	          document.querySelector('.desktop-view table.players-table') ||
+	          null
+	        );
+	      }
+
+	      function findTablesForChart(chartEl) {
+	        const tableSelector = (chartEl?.getAttribute('data-utr-table') || '').trim();
+	        if (tableSelector) {
+	          const explicit = document.querySelector(tableSelector);
+	          return explicit && explicit.tagName === 'TABLE' ? [explicit] : [];
+	        }
+
+	        if (isMixedEventPage()) {
+	          const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table')).filter(
+	            (table) => table.querySelectorAll('tbody tr').length > 0
+	          );
+	          if (tables.length) return tables;
+	        }
+
+	        const single = findTableForChart(chartEl);
+	        return single ? [single] : [];
+	      }
+
+	      function headerIndex(table, want) {
+	        if (!table) return -1;
+	        const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
+	          (th.textContent || '').trim().toLowerCase()
+	        );
+	        const wantNorm = (want || '').trim().toLowerCase();
+	        if (!wantNorm) return -1;
+	        return headers.findIndex((h) => h === wantNorm);
+	      }
+
+	      function cellText(cell) {
+	        if (!cell) return '';
+	        const a = cell.querySelector && cell.querySelector('a');
+	        return (a ? a.textContent : cell.textContent || '').trim();
+	      }
+
+	      function playersFromTable(table) {
+	        if (!table) return [];
+	        const utrIdx = (() => {
+	          const idx = headerIndex(table, 'utr');
+	          return idx !== -1 ? idx : 4;
+	        })();
+	        const natIdx = (() => {
+	          const idx = headerIndex(table, 'nat rank');
+	          return idx !== -1 ? idx : 5;
+	        })();
+
+	        return Array.from(table.querySelectorAll('tbody tr'))
+	          .map((row) => {
+	            const cells = row.querySelectorAll('td');
+	            const maxIdx = Math.max(utrIdx, natIdx);
+	            if (!cells || cells.length <= maxIdx) return null;
+	            const utr = parseFloat(cellText(cells[utrIdx]));
+	            const natRaw = cellText(cells[natIdx]);
+	            const natRank = parseInt(natRaw, 10);
+	            return {
+	              utr: Number.isFinite(utr) ? utr : null,
+	              natRank: Number.isFinite(natRank) ? natRank : Number.POSITIVE_INFINITY,
+	              highlight: row.classList.contains('highlight-player'),
+	            };
+	          })
+	          .filter(Boolean);
+	      }
+
+	      function selectMixedDrawPlayers(playersByTable, drawSize) {
+	        const sortedByTable = playersByTable.map((group) =>
+	          group.slice().sort((a, b) => a.natRank - b.natRank)
+	        );
+	        const allPlayers = sortedByTable.flat();
+	        if (!allPlayers.length) return [];
+
+	        if (!Number.isFinite(drawSize) || drawSize <= 0 || drawSize >= allPlayers.length) {
+	          return allPlayers;
+	        }
+
+	        const tableCount = sortedByTable.length;
+	        const baseSlots = Math.floor(drawSize / tableCount);
+	        let remainder = drawSize % tableCount;
+	        const selected = [];
+
+	        sortedByTable.forEach((group) => {
+	          const slots = baseSlots + (remainder > 0 ? 1 : 0);
+	          if (remainder > 0) remainder -= 1;
+	          if (slots > 0) selected.push(...group.slice(0, slots));
+	        });
+
+	        if (selected.length < drawSize) {
+	          const leftovers = sortedByTable
+	            .flat()
+	            .filter((player) => !selected.includes(player))
+	            .sort((a, b) => a.natRank - b.natRank);
+	          selected.push(...leftovers.slice(0, drawSize - selected.length));
+	        }
+
+	        return selected.slice(0, drawSize);
+	      }
+
+	      function chartDrawOverride(chartEl) {
+	        if (!chartEl) return null;
+	        const raw = (chartEl.getAttribute('data-utr-draw') || '').trim();
+	        const parsed = parseInt(raw, 10);
+	        return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+	      }
+
+	      const charts = Array.from(document.querySelectorAll('.desktop-view .utr-histogram-chart'));
+	      if (!charts.length) return;
+
+	      charts.forEach((container, chartIndex) => {
+	        if (!container) return;
+	        const tables = findTablesForChart(container);
+	        if (!tables.length) return;
+
+	        const playersByTable = tables.map(playersFromTable).filter((group) => group.length > 0);
+	        if (!playersByTable.length) return;
+
+	        const allPlayers = playersByTable.flat();
+	        if (!allPlayers.length) return;
+
+	        const drawSize = getDrawSizeFromKeyStats() || allPlayers.length;
+	        const mixedPage = isMixedEventPage() && playersByTable.length > 1;
+	        let drawPlayers;
+	        if (mixedPage) {
+	          drawPlayers = selectMixedDrawPlayers(playersByTable, drawSize);
+	        } else {
+	          const explicitDraw = chartDrawOverride(container);
+	          const drawLimit = explicitDraw || drawSize;
+	          drawPlayers = allPlayers
+	            .slice()
+	            .sort((a, b) => a.natRank - b.natRank)
+	            .slice(0, drawLimit);
+	        }
+
+	        const values = drawPlayers.map((p) => p.utr).filter((v) => Number.isFinite(v));
+	        container.innerHTML = '';
+
+	        const captionEl =
+	          container.closest('.utr-histogram')?.querySelector('.utr-histogram-caption') ||
+	          document.getElementById('utr-histogram-caption');
+
+	        if (!values.length) {
+	          if (captionEl) {
+	            captionEl.textContent = 'No UTR ratings found for this table.';
+	          }
+	          return;
+	        }
+
+	        const highlightPlayer = drawPlayers.find((p) => p.highlight && Number.isFinite(p.utr));
+	        const highlightUtr = highlightPlayer ? highlightPlayer.utr : null;
+
+	        const binSize = 0.5;
+	        const min = Math.min(...values);
+	        const max = Math.max(...values);
+	        const startBin = Math.floor(min / binSize) * binSize;
+	        const endBin = Math.floor(max / binSize) * binSize;
+	        const binCount = Math.round((endBin - startBin) / binSize) + 1;
+	        const bins = new Array(binCount).fill(0);
+
+	        values.forEach((value) => {
+	          const idx = Math.floor((value - startBin) / binSize);
+	          if (idx >= 0 && idx < bins.length) bins[idx] += 1;
+	        });
+
+	        const maxCount = Math.max(...bins, 1);
+	        const highlightIndex =
+	          highlightUtr !== null ? Math.floor((highlightUtr - startBin) / binSize) : null;
+
+	        bins.forEach((count, index) => {
+	          if (count === 0) return;
+	          const start = startBin + index * binSize;
+	          const row = document.createElement('div');
+	          row.className = 'utr-bin';
+
+	          if (highlightIndex !== null && highlightIndex === index) {
+	            row.classList.add('is-highlight');
+	          }
+
+	          const label = document.createElement('div');
+	          label.className = 'utr-bin-label';
+	          label.textContent = formatUtrRangeLabel(start, binSize);
+
+	          const barWrap = document.createElement('div');
+	          barWrap.className = 'utr-bin-bar-wrap';
+
+	          const bar = document.createElement('div');
+	          bar.className = 'utr-bin-bar';
+	          bar.style.width = `${(count / maxCount) * 100}%`;
+	          barWrap.appendChild(bar);
+
+	          const countEl = document.createElement('div');
+	          countEl.className = 'utr-bin-count';
+	          countEl.textContent = String(count);
+
+	          row.appendChild(label);
+	          row.appendChild(barWrap);
+	          row.appendChild(countEl);
+	          container.appendChild(row);
+	        });
+
+	        if (captionEl) {
+	          let caption = `Based on ${values.length} of ${drawPlayers.length} draw players with UTR ratings.`;
+	          if (highlightUtr !== null) caption += ' Alexis bin highlighted.';
+	          captionEl.textContent = caption;
+	        }
+	      });
+	    }
+
+    // Sorting: support 1+ tables (e.g., mixed doubles has Girls + Boys tables).
+    function initSortableTable(table) {
+      const headers = Array.from(table.querySelectorAll('th'));
+      const tbody = table.querySelector('tbody');
+      if (!tbody || headers.length < 7) return;
+
+      const sortableColumns = new Set([1, 2, 3, 4, 5, 6, 7]);
+      const numericColumns = new Set();
+      headers.forEach((header, idx) => {
+        const label = (header.textContent || '').trim().toLowerCase();
+        if (['wtn', 'utr', 'nat rank', 'combined nst', 'team nst'].includes(label)) {
+          numericColumns.add(idx);
+        }
+      });
+      const sortableHeaders = headers.filter((header, columnIndex) =>
+        sortableColumns.has(columnIndex) && header.classList.contains('sortable')
+      );
+
+      function updateRowNumbers() {
+        const rows = tbody.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+          if (row.cells && row.cells[0]) row.cells[0].textContent = index + 1;
+        });
+      }
+
+      function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+
+        rows.sort((a, b) => {
+          const aText = a.cells[columnIndex]?.textContent.trim() || '';
+          const bText = b.cells[columnIndex]?.textContent.trim() || '';
+          const isNumeric = numericColumns.has(columnIndex);
+          if (isNumeric) {
+            const aVal = parseFloat(aText);
+            const bVal = parseFloat(bText);
+            if (Number.isNaN(aVal) && Number.isNaN(bVal)) return 0;
+            if (Number.isNaN(aVal)) return 1;
+            if (Number.isNaN(bVal)) return -1;
+            return direction === 'asc' ? aVal - bVal : bVal - aVal;
+          }
+          const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
+          return direction === 'asc' ? cmp : -cmp;
+        });
+
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+        updateRowNumbers();
+
+        if (updateHeaderStyle) {
+          headers.forEach(h => (h.style.backgroundColor = '#4472C4'));
+          if (activeHeader) activeHeader.style.backgroundColor = '#2c5aa0';
+        }
+      }
+
+      sortableHeaders.forEach(header => {
+        if (!header.dataset.sort) header.dataset.sort = 'none';
+        if (!header.title) header.title = 'Click to sort';
+      });
+
+      const natIdx = headers.findIndex(h => h.classList.contains('col-national'));
+      const defaultIdx = natIdx >= 0 ? natIdx : 5;
+      const defaultHeader = headers[defaultIdx];
+      if (defaultHeader && sortableHeaders.includes(defaultHeader)) {
+        sortableHeaders.forEach(h => {
+          if (h !== defaultHeader) h.dataset.sort = 'none';
+        });
+        defaultHeader.dataset.sort = 'asc';
+        applySort(defaultIdx, 'asc', defaultHeader, true);
+      } else {
+        updateRowNumbers();
+      }
+
+      headers.forEach((header, columnIndex) => {
+        if (!sortableHeaders.includes(header)) return;
+        header.addEventListener('click', () => {
+          const currentSort = header.dataset.sort || 'none';
+          const newSort = currentSort === 'asc' ? 'desc' : 'asc';
+          sortableHeaders.forEach(h => {
+            if (h !== header) h.dataset.sort = 'none';
+          });
+          header.dataset.sort = newSort;
+          applySort(columnIndex, newSort, header, true);
+        });
+      });
+    }
+
+    document.querySelectorAll('.desktop-view table.players-table').forEach(initSortableTable);
+
+    // Partner jump (mixed doubles): click partner name to scroll to their row.
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('.partner-jump');
+      if (!link) return;
+      e.preventDefault();
+      const partnerKey = (link.getAttribute('data-partner-key') || '').trim();
+      if (!partnerKey) return;
+      const esc = (s) =>
+        window.CSS && CSS.escape ? CSS.escape(s) : s.replace(/[^a-zA-Z0-9_-]/g, '\\\\$&');
+      const row = document.querySelector(`.desktop-view tr[data-player-key="${esc(partnerKey)}"]`);
+      if (!row) return;
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      row.classList.add('partner-highlight');
+      window.setTimeout(() => row.classList.remove('partner-highlight'), 1600);
+    });
+    decoratePlayerLinks();
+    normalizeLastNames();
+    normalizeLocations();
+    buildUtrHistogram();
+    updateRegistrationCountdown();
+    setInterval(updateRegistrationCountdown, 60 * 1000);
+
+    function getRegistrationCloseText() {
+      const keyStats = document.querySelectorAll('.desktop-view .key-stat');
+      for (const stat of keyStats) {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase() === 'closes') {
+          return value.textContent.trim();
+        }
+      }
+
+      const detailRows = document.querySelectorAll('.desktop-view .detail-row');
+      for (const row of detailRows) {
+        const label = row.querySelector('.detail-label');
+        const value = row.querySelector('.detail-value');
+        if (!label || !value) continue;
+        if (label.textContent.trim().toLowerCase().startsWith('registration closes')) {
+          return value.textContent.trim();
+        }
+      }
+
+      return null;
+    }
+
+    function parseCloseDate(text) {
+      const normalized = (text || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
+      if (!normalized || /registration closed/i.test(normalized)) return null;
+
+      const months = {
+        January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+        July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+      };
+
+      const match = normalized.match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s+([AP]M)(?:\s+([A-Z]{2,4}))?/i);
+      if (!match) {
+        // Date-only fallback: "April 23, 2026"
+        const dm = normalized.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+        if (!dm) return null;
+        const mName = dm[1].charAt(0).toUpperCase() + dm[1].slice(1).toLowerCase();
+        const month = months[mName];
+        if (month === undefined) return null;
+        return new Date(parseInt(dm[3], 10), month, parseInt(dm[2], 10), 23, 59, 0);
+      }
+
+      const monthName = match[1];
+      const day = parseInt(match[2], 10);
+      const year = parseInt(match[3], 10);
+      let hour = parseInt(match[4], 10);
+      const minute = parseInt(match[5], 10);
+      const ampm = (match[6] || '').toUpperCase();
+      const tz = (match[7] || '').toUpperCase();
+
+      const month = months[monthName];
+      if (month === undefined) return null;
+
+      hour = hour % 12 + (ampm === 'PM' ? 12 : 0);
+
+      const offsets = {
+        PT: -480, PST: -480, PDT: -420,
+        MT: -420, MST: -420, MDT: -360,
+        CT: -360, CST: -360, CDT: -300,
+        ET: -300, EST: -300, EDT: -240,
+        AKT: -540, AKST: -540, AKDT: -480,
+        HST: -600, UTC: 0, GMT: 0
+      };
+      const offsetMinutes = offsets[tz];
+      if (Number.isFinite(offsetMinutes)) {
+        const utcMs = Date.UTC(year, month, day, hour, minute, 0) - offsetMinutes * 60 * 1000;
+        return new Date(utcMs);
+      }
+
+      return new Date(year, month, day, hour, minute, 0);
+    }
+
+    function formatLocalCloseDateText(closeDate) {
+      try {
+        const datePart = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(closeDate);
+        const timePart = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZoneName: 'short' }).format(closeDate);
+        return `${datePart} at ${timePart}`;
+      } catch {
+        return '';
+      }
+    }
+
+    function updateRegistrationCloseDisplays(sourceCloseText, localizedCloseText) {
+      if (!sourceCloseText || !localizedCloseText || /registration closed/i.test(sourceCloseText)) return;
+
+      const sourceNorm = sourceCloseText.replace(/\s+/g, ' ').trim().toLowerCase();
+      const localizedNorm = localizedCloseText.replace(/\s+/g, ' ').trim().toLowerCase();
+      const values = [];
+
+      document.querySelectorAll('.key-stat').forEach((stat) => {
+        const label = stat.querySelector('.key-label');
+        const value = stat.querySelector('.key-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase() === 'closes') values.push(value);
+      });
+
+      document.querySelectorAll('.stat-group').forEach((group) => {
+        const label = group.querySelector('.stat-label');
+        const value = group.querySelector('.stat-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase().startsWith('registration closes')) values.push(value);
+      });
+
+      document.querySelectorAll('.detail-row').forEach((row) => {
+        const label = row.querySelector('.detail-label');
+        const value = row.querySelector('.detail-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase().startsWith('registration closes')) values.push(value);
+      });
+
+      document.querySelectorAll('.mobile-stat').forEach((stat) => {
+        const label = stat.querySelector('.mobile-stat-label');
+        const value = stat.querySelector('.mobile-stat-value');
+        if (!label || !value) return;
+        if (label.textContent.trim().toLowerCase() === 'closes') values.push(value);
+      });
+
+      values.forEach((valueEl) => {
+        const currentNorm = (valueEl.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        if (!currentNorm || /registration closed/i.test(currentNorm)) return;
+        if (currentNorm !== sourceNorm && currentNorm !== localizedNorm) return;
+        valueEl.textContent = localizedCloseText;
+        valueEl.setAttribute('title', sourceCloseText);
+      });
+    }
+
+    function updateRegistrationCountdown() {
+      const badge = document.getElementById('registration-deadline-badge');
+      const countdownEl = document.getElementById('registration-countdown');
+      const dateEl = document.getElementById('registration-deadline-date');
+      const mobileBadge = document.getElementById('mobile-deadline-badge');
+      const mobileCountdown = document.getElementById('mobile-registration-countdown');
+      const mobileDate = document.getElementById('mobile-registration-date');
+
+      const discoveredCloseText = getRegistrationCloseText();
+      if (!window.__registrationCloseSourceText && discoveredCloseText) {
+        window.__registrationCloseSourceText = discoveredCloseText;
+      }
+      const closeText = window.__registrationCloseSourceText || discoveredCloseText;
+      if (!closeText) {
+        if (badge) badge.style.display = 'none';
+        if (mobileBadge) mobileBadge.style.display = 'none';
+        return;
+      }
+
+      const closeDate = parseCloseDate(closeText);
+      if (!closeDate) {
+        if (badge) badge.style.display = 'none';
+        if (mobileBadge) mobileBadge.style.display = 'none';
+        return;
+      }
+
+      const localizedCloseText = formatLocalCloseDateText(closeDate) || closeText;
+      updateRegistrationCloseDisplays(closeText, localizedCloseText);
+
+      const diffMs = closeDate.getTime() - Date.now();
+      const timeText =
+        diffMs <= 0
+          ? 'Registration closed'
+          : (() => {
+              const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+              const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+              return `Closes in ${days}d ${hours}h`;
+            })();
+
+      if (badge && countdownEl && dateEl) {
+        countdownEl.textContent = timeText;
+        dateEl.textContent = localizedCloseText;
+        dateEl.setAttribute('title', closeText);
+      }
+
+      if (mobileBadge && mobileCountdown && mobileDate) {
+        mobileCountdown.textContent = timeText;
+        mobileDate.textContent = localizedCloseText;
+        mobileDate.setAttribute('title', closeText);
+      }
+    }
+
+    // Share button functionality
+    const shareButton = document.createElement('button');
+    shareButton.className = 'share-button';
+    shareButton.innerHTML = '↗';
+    shareButton.title = 'Share this report';
+    shareButton.setAttribute('aria-label', 'Share tournament report');
+
+    shareButton.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "United by Tennis Spring Level 5 Junior 14s & 12s Singles Championship",
+            text: 'Tournament Report - May 16–17, 2026',
+            url: window.location.href
+          });
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.error('Share failed:', err);
+          }
+        }
+      } else {
+        // Fallback: Copy link to clipboard
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          shareButton.innerHTML = '✓';
+          setTimeout(() => {
+            shareButton.innerHTML = '↗';
+          }, 2000);
+        });
+      }
+    });
+
+    document.body.appendChild(shareButton);
+  </script>
+  <script>
+(function() {
+  const toggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const html = document.documentElement;
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      toggleTheme();
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (themeIcon) themeIcon.textContent = isDark ? '☀️' : '🌙';
+    });
+  }
+  if (themeIcon) themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+})();
+  </script>
+</body>
+</html>
