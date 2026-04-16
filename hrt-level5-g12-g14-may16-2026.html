@@ -2264,5 +2264,60 @@
   if (themeIcon) themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
 })();
   </script>
+  <script>
+/* H2H badge tooltip */
+(function () {
+  var tip = document.getElementById('h2h-tooltip');
+  if (!tip) return;
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmtDate(d) {
+    if (!d) return '';
+    var p = d.split('-');
+    return p.length === 3 ? MONTHS[+p[1]-1] + ' ' + +p[2] + ', ' + p[0] : d;
+  }
+  function buildTip(matches) {
+    var wins = matches.filter(function(m){return m.w;}).length;
+    var html = '<div class="h2h-tip-header">Match history — ' + wins + '–' + (matches.length - wins) + '</div>';
+    matches.forEach(function(m) {
+      var w = m.w ? 1 : 0;
+      html += '<div class="h2h-tip-match">' +
+        '<span class="h2h-tip-result ' + (w ? 'win' : 'loss') + '">' + (w ? 'W' : 'L') + '</span>' +
+        '<span class="h2h-tip-sets">' + (m.s || '—') + '</span>' +
+        '<span class="h2h-tip-meta"><b>' + (m.r || '') + '</b>' +
+          (m.t ? '<br>' + m.t : '') +
+          (m.d ? '<br>' + fmtDate(m.d) : '') +
+        '</span></div>';
+    });
+    return html;
+  }
+  function pos(e) {
+    var x = e.clientX + 14, y = e.clientY + 14;
+    if (x + tip.offsetWidth  > window.innerWidth  - 8) x = e.clientX - tip.offsetWidth  - 14;
+    if (y + tip.offsetHeight > window.innerHeight - 8) y = e.clientY - tip.offsetHeight - 14;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  }
+  function badge(el) { return el && el.closest ? el.closest('.h2h-badge') : null; }
+  document.addEventListener('mouseover', function(e) {
+    var b = badge(e.target);
+    if (!b) { tip.style.display = 'none'; return; }
+    var raw = b.getAttribute('data-h2h');
+    if (!raw) { tip.style.display = 'none'; return; }
+    var matches; try { matches = JSON.parse(raw); } catch(_) { return; }
+    if (!matches || !matches.length) return;
+    tip.innerHTML = buildTip(matches);
+    tip.style.display = 'block';
+    pos(e);
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (tip.style.display === 'none') return;
+    if (!badge(e.target)) { tip.style.display = 'none'; return; }
+    pos(e);
+  });
+  document.addEventListener('mouseout', function(e) {
+    if (badge(e.target) && !e.currentTarget.contains(e.relatedTarget)) return;
+    tip.style.display = 'none';
+  });
+})();
+  </script>
 </body>
 </html>
