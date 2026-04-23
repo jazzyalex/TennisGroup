@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="d0a5cf44-99d7-48d5-a905-66df91dd9d70">
-  <meta name="publish-ts" content="2026-04-22T19:54:04Z">
+  <meta name="publish-id" content="c4bb972d-e17c-4032-80b4-155eb8c0e1fd">
+  <meta name="publish-ts" content="2026-04-23T18:54:03Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -79,8 +79,8 @@
       </div>
       <aside class="player-card" aria-labelledby="player-card-name">
         <header class="player-card__header">
-  <meta name="publish-id" content="d0a5cf44-99d7-48d5-a905-66df91dd9d70">
-  <meta name="publish-ts" content="2026-04-22T19:54:04Z">
+  <meta name="publish-id" content="c4bb972d-e17c-4032-80b4-155eb8c0e1fd">
+  <meta name="publish-ts" content="2026-04-23T18:54:03Z">
           <h2 class="player-card__name" id="player-card-name"><a href="player.html" data-player-name>Alexis Malakhova</a></h2>
           <span class="player-card__date-badge" data-player-updated>Apr 22, 2026</span>
         </header>
@@ -1159,7 +1159,7 @@
 </div>
 	        </a>
 	        <!-- HRT Open Level 5 Championship (Girls U12/U14) -->
-	        <a href="hrt-level5-g12-g14-may16-2026.html" class="tournament-card is-upcoming" data-tournament-id="may|16-17|hrt academia de tenis|redwood high school|larkspur|open level 5 championship singles" data-card-updated-iso="2026-04-19T18:35:31-07:00" data-card-close-text="May 6, 2026 at 2:59 PM PDT" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;14&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;22&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	        <a href="hrt-level5-g12-g14-may16-2026.html" class="tournament-card is-upcoming" data-tournament-id="may|16-17|hrt academia de tenis|redwood high school|larkspur|open level 5 championship singles" data-card-updated-iso="2026-04-23T11:41:21-07:00" data-card-close-text="May 6, 2026 at 2:59 PM PDT" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;15&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;24&quot;,&quot;draw&quot;:&quot;32&quot;}]">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1212,12 +1212,12 @@
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 6v6l4 2"/>
               </svg>
-              <span data-card-updated-text>Updated Apr 19, 2026 6:35 PM PDT</span>
+              <span data-card-updated-text>Updated Apr 23, 2026 11:41 AM PDT</span>
             </span>
 </div>
 	        </a>
 	        <!-- United by Tennis Open Level 5 Championship (Girls U12/U14) -->
-	        <a href="united-level5-g12-g14-may16-2026.html" class="tournament-card is-upcoming" data-tournament-id="may|16-17|united by tennis|northgate high school|walnut creek|open level 5 championship singles" data-card-updated-iso="2026-04-19T18:36:05-07:00" data-card-close-text="May 6, 2026 at 2:59 PM PDT" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;2&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;1&quot;,&quot;draw&quot;:&quot;32&quot;}]">
+	        <a href="united-level5-g12-g14-may16-2026.html" class="tournament-card is-upcoming" data-tournament-id="may|16-17|united by tennis|northgate high school|walnut creek|open level 5 championship singles" data-card-updated-iso="2026-04-23T11:38:02-07:00" data-card-close-text="May 6, 2026 at 2:59 PM PDT" data-card-fills="[{&quot;label&quot;:&quot;G12S&quot;,&quot;registered&quot;:&quot;4&quot;,&quot;draw&quot;:&quot;32&quot;},{&quot;label&quot;:&quot;G14S&quot;,&quot;registered&quot;:&quot;4&quot;,&quot;draw&quot;:&quot;32&quot;}]">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -1270,7 +1270,7 @@
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 6v6l4 2"/>
               </svg>
-              <span data-card-updated-text>Updated Apr 19, 2026 6:36 PM PDT</span>
+              <span data-card-updated-text>Updated Apr 23, 2026 11:38 AM PDT</span>
             </span>
 </div>
 	        </a>
@@ -1657,24 +1657,63 @@
 
 		    function extractFillsFromReportDoc(doc) {
 		      if (!doc) return null;
-		      const blocks = Array.from(doc.querySelectorAll('.key-stats'));
+		      // Try per-section Event Statistics blocks first (multi-section reports: G12 + G14).
+		      const statsSections = Array.from(doc.querySelectorAll(‘.stats-section’));
+		      const sectionFills = [];
+		      for (const section of statsSections) {
+		        const h2 = section.querySelector(‘h2’);
+		        if (!h2) continue;
+		        const h2Text = (h2.textContent || ‘’).trim();
+		        const sm = h2Text.match(/Event\s+Statistics\s*[—\-]\s*(.+)/i);
+		        if (!sm) continue;
+		        const title = sm[1].trim();
+		        let registered = null, draw = null;
+		        section.querySelectorAll(‘.stat-box’).forEach(box => {
+		          const lbl = (box.querySelector(‘.stat-label’)?.textContent || ‘’).trim().toLowerCase();
+		          const val = (box.querySelector(‘.stat-value’)?.textContent || ‘’).trim();
+		          if (lbl === ‘registered’) registered = val;
+		          else if (lbl === ‘draw size’ || lbl === ‘draw’) draw = val;
+		        });
+		        if (registered !== null || draw !== null) sectionFills.push({ title, registered, draw });
+		      }
+		      if (sectionFills.length > 1) {
+		        return sectionFills.map(sf => {
+		          const label = sf.title
+		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
+		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
+		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’);
+		          const entry = { label };
+		          if (sf.registered !== null) entry.registered = sf.registered;
+		          if (sf.draw !== null) entry.draw = sf.draw;
+		          return entry;
+		        });
+		      }
+		      if (sectionFills.length === 1) {
+		        const sf = sectionFills[0];
+		        const entry = { label: ‘’ };
+		        if (sf.registered !== null) entry.registered = sf.registered;
+		        if (sf.draw !== null) entry.draw = sf.draw;
+		        return [entry];
+		      }
+		      // Fallback: .key-stats blocks (older single-section report format).
+		      const blocks = Array.from(doc.querySelectorAll(‘.key-stats’));
 		      if (!blocks.length) return null;
 		      const fills = blocks.map(block => {
 		        let registered = null, draw = null;
-		        block.querySelectorAll('.key-stat').forEach(stat => {
-		          const lbl = (stat.querySelector('.key-label')?.textContent || '').trim().toLowerCase();
-		          const val = (stat.querySelector('.key-value')?.textContent || '').trim();
-		          if (lbl === 'registered') registered = val;
-		          else if (lbl === 'draw') draw = val;
+		        block.querySelectorAll(‘.key-stat’).forEach(stat => {
+		          const lbl = (stat.querySelector(‘.key-label’)?.textContent || ‘’).trim().toLowerCase();
+		          const val = (stat.querySelector(‘.key-value’)?.textContent || ‘’).trim();
+		          if (lbl === ‘registered’) registered = val;
+		          else if (lbl === ‘draw’) draw = val;
 		        });
 		        if (registered === null && draw === null) return null;
-		        let label = '';
+		        let label = ‘’;
 		        if (blocks.length > 1) {
-		          const sec = block.closest('section') || block.parentElement;
-		          label = (sec?.querySelector('h2, h3')?.textContent || '').trim()
-		            .replace(/Girls['’\s]*/gi, 'G').replace(/Boys['’\s]*/gi, 'B')
-		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
-		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '').trim();
+		          const sec = block.closest(‘section’) || block.parentElement;
+		          label = (sec?.querySelector(‘h2, h3’)?.textContent || ‘’).trim()
+		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
+		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
+		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’).trim();
 		        }
 		        return { label, registered, draw };
 		      }).filter(Boolean);
