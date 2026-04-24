@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="c4bb972d-e17c-4032-80b4-155eb8c0e1fd">
-  <meta name="publish-ts" content="2026-04-23T18:54:03Z">
+  <meta name="publish-id" content="4a36d0e5-7f19-49c9-810c-ef2fb6a8ca3b">
+  <meta name="publish-ts" content="2026-04-24T21:38:29Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -79,8 +79,8 @@
       </div>
       <aside class="player-card" aria-labelledby="player-card-name">
         <header class="player-card__header">
-  <meta name="publish-id" content="c4bb972d-e17c-4032-80b4-155eb8c0e1fd">
-  <meta name="publish-ts" content="2026-04-23T18:54:03Z">
+  <meta name="publish-id" content="4a36d0e5-7f19-49c9-810c-ef2fb6a8ca3b">
+  <meta name="publish-ts" content="2026-04-24T21:38:29Z">
           <h2 class="player-card__name" id="player-card-name"><a href="player.html" data-player-name>Alexis Malakhova</a></h2>
           <span class="player-card__date-badge" data-player-updated>Apr 22, 2026</span>
         </header>
@@ -1657,63 +1657,24 @@
 
 		    function extractFillsFromReportDoc(doc) {
 		      if (!doc) return null;
-		      // Try per-section Event Statistics blocks first (multi-section reports: G12 + G14).
-		      const statsSections = Array.from(doc.querySelectorAll(‘.stats-section’));
-		      const sectionFills = [];
-		      for (const section of statsSections) {
-		        const h2 = section.querySelector(‘h2’);
-		        if (!h2) continue;
-		        const h2Text = (h2.textContent || ‘’).trim();
-		        const sm = h2Text.match(/Event\s+Statistics\s*[—\-]\s*(.+)/i);
-		        if (!sm) continue;
-		        const title = sm[1].trim();
-		        let registered = null, draw = null;
-		        section.querySelectorAll(‘.stat-box’).forEach(box => {
-		          const lbl = (box.querySelector(‘.stat-label’)?.textContent || ‘’).trim().toLowerCase();
-		          const val = (box.querySelector(‘.stat-value’)?.textContent || ‘’).trim();
-		          if (lbl === ‘registered’) registered = val;
-		          else if (lbl === ‘draw size’ || lbl === ‘draw’) draw = val;
-		        });
-		        if (registered !== null || draw !== null) sectionFills.push({ title, registered, draw });
-		      }
-		      if (sectionFills.length > 1) {
-		        return sectionFills.map(sf => {
-		          const label = sf.title
-		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
-		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
-		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’);
-		          const entry = { label };
-		          if (sf.registered !== null) entry.registered = sf.registered;
-		          if (sf.draw !== null) entry.draw = sf.draw;
-		          return entry;
-		        });
-		      }
-		      if (sectionFills.length === 1) {
-		        const sf = sectionFills[0];
-		        const entry = { label: ‘’ };
-		        if (sf.registered !== null) entry.registered = sf.registered;
-		        if (sf.draw !== null) entry.draw = sf.draw;
-		        return [entry];
-		      }
-		      // Fallback: .key-stats blocks (older single-section report format).
-		      const blocks = Array.from(doc.querySelectorAll(‘.key-stats’));
+		      const blocks = Array.from(doc.querySelectorAll('.key-stats'));
 		      if (!blocks.length) return null;
 		      const fills = blocks.map(block => {
 		        let registered = null, draw = null;
-		        block.querySelectorAll(‘.key-stat’).forEach(stat => {
-		          const lbl = (stat.querySelector(‘.key-label’)?.textContent || ‘’).trim().toLowerCase();
-		          const val = (stat.querySelector(‘.key-value’)?.textContent || ‘’).trim();
-		          if (lbl === ‘registered’) registered = val;
-		          else if (lbl === ‘draw’) draw = val;
+		        block.querySelectorAll('.key-stat').forEach(stat => {
+		          const lbl = (stat.querySelector('.key-label')?.textContent || '').trim().toLowerCase();
+		          const val = (stat.querySelector('.key-value')?.textContent || '').trim();
+		          if (lbl === 'registered') registered = val;
+		          else if (lbl === 'draw') draw = val;
 		        });
 		        if (registered === null && draw === null) return null;
-		        let label = ‘’;
+		        let label = '';
 		        if (blocks.length > 1) {
-		          const sec = block.closest(‘section’) || block.parentElement;
-		          label = (sec?.querySelector(‘h2, h3’)?.textContent || ‘’).trim()
-		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
-		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
-		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’).trim();
+		          const sec = block.closest('section') || block.parentElement;
+		          label = (sec?.querySelector('h2, h3')?.textContent || '').trim()
+		            .replace(/Girls['’\s]*/gi, 'G').replace(/Boys['’\s]*/gi, 'B')
+		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
+		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '').trim();
 		        }
 		        return { label, registered, draw };
 		      }).filter(Boolean);
