@@ -1678,8 +1678,9 @@
 		      }
 		      if (sectionFills.length > 1) {
 		        return sectionFills.map(sf => {
+		          // &#x27; (U+0027), U+2018, U+2019 all appear as apostrophes in textContent after HTML parsing.
 		          const label = sf.title
-		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
+		            .replace(/Girls['‘’\s]*/gi, ‘G’).replace(/Boys['‘’\s]*/gi, ‘B’)
 		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
 		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’);
 		          const entry = { label };
@@ -1688,6 +1689,7 @@
 		          return entry;
 		        });
 		      }
+		      // Single named section → blank label (mirrors Python _extract_fills; label is irrelevant for single-event cards).
 		      if (sectionFills.length === 1) {
 		        const sf = sectionFills[0];
 		        const entry = { label: ‘’ };
@@ -1711,7 +1713,7 @@
 		        if (blocks.length > 1) {
 		          const sec = block.closest(‘section’) || block.parentElement;
 		          label = (sec?.querySelector(‘h2, h3’)?.textContent || ‘’).trim()
-		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
+		            .replace(/Girls['‘’\s]*/gi, ‘G’).replace(/Boys['‘’\s]*/gi, ‘B’)
 		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
 		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’).trim();
 		        }
