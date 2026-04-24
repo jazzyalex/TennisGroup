@@ -1657,24 +1657,63 @@
 
 		    function extractFillsFromReportDoc(doc) {
 		      if (!doc) return null;
-		      const blocks = Array.from(doc.querySelectorAll('.key-stats'));
+		      // Try per-section Event Statistics blocks first (.stats-section with stat-label Registered/Draw Size).
+		      // This matches the format written by build_report_from_players.py for multi-section reports.
+		      const statsSections = Array.from(doc.querySelectorAll(‘.stats-section’));
+		      const sectionFills = [];
+		      for (const section of statsSections) {
+		        const h2 = section.querySelector(‘h2’);
+		        if (!h2) continue;
+		        const sm = (h2.textContent || ‘’).trim().match(/Event\s+Statistics\s*[—\-]\s*(.+)/i);
+		        if (!sm) continue;
+		        const title = sm[1].trim();
+		        let registered = null, draw = null;
+		        section.querySelectorAll(‘.stat-box’).forEach(box => {
+		          const lbl = (box.querySelector(‘.stat-label’)?.textContent || ‘’).trim().toLowerCase();
+		          const val = (box.querySelector(‘.stat-value’)?.textContent || ‘’).trim();
+		          if (lbl === ‘registered’) registered = val;
+		          else if (lbl === ‘draw size’ || lbl === ‘draw’) draw = val;
+		        });
+		        if (registered !== null || draw !== null) sectionFills.push({ title, registered, draw });
+		      }
+		      if (sectionFills.length > 1) {
+		        return sectionFills.map(sf => {
+		          const label = sf.title
+		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
+		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
+		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’);
+		          const entry = { label };
+		          if (sf.registered !== null) entry.registered = sf.registered;
+		          if (sf.draw !== null) entry.draw = sf.draw;
+		          return entry;
+		        });
+		      }
+		      if (sectionFills.length === 1) {
+		        const sf = sectionFills[0];
+		        const entry = { label: ‘’ };
+		        if (sf.registered !== null) entry.registered = sf.registered;
+		        if (sf.draw !== null) entry.draw = sf.draw;
+		        return [entry];
+		      }
+		      // Fallback: .key-stats blocks (single-section / older report format).
+		      const blocks = Array.from(doc.querySelectorAll(‘.key-stats’));
 		      if (!blocks.length) return null;
 		      const fills = blocks.map(block => {
 		        let registered = null, draw = null;
-		        block.querySelectorAll('.key-stat').forEach(stat => {
-		          const lbl = (stat.querySelector('.key-label')?.textContent || '').trim().toLowerCase();
-		          const val = (stat.querySelector('.key-value')?.textContent || '').trim();
-		          if (lbl === 'registered') registered = val;
-		          else if (lbl === 'draw') draw = val;
+		        block.querySelectorAll(‘.key-stat’).forEach(stat => {
+		          const lbl = (stat.querySelector(‘.key-label’)?.textContent || ‘’).trim().toLowerCase();
+		          const val = (stat.querySelector(‘.key-value’)?.textContent || ‘’).trim();
+		          if (lbl === ‘registered’) registered = val;
+		          else if (lbl === ‘draw’) draw = val;
 		        });
 		        if (registered === null && draw === null) return null;
-		        let label = '';
+		        let label = ‘’;
 		        if (blocks.length > 1) {
-		          const sec = block.closest('section') || block.parentElement;
-		          label = (sec?.querySelector('h2, h3')?.textContent || '').trim()
-		            .replace(/Girls['’\s]*/gi, 'G').replace(/Boys['’\s]*/gi, 'B')
-		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
-		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '').trim();
+		          const sec = block.closest(‘section’) || block.parentElement;
+		          label = (sec?.querySelector(‘h2, h3’)?.textContent || ‘’).trim()
+		            .replace(/Girls[‘’\s]*/gi, ‘G’).replace(/Boys[‘’\s]*/gi, ‘B’)
+		            .replace(/(\d+)\s*&\s*[Uu]nder/g, ‘$1’).replace(/Singles/gi, ‘S’)
+		            .replace(/Doubles/gi, ‘D’).replace(/Mixed/gi, ‘M’).replace(/\s+/g, ‘’).trim();
 		        }
 		        return { label, registered, draw };
 		      }).filter(Boolean);
@@ -1998,7 +2037,7 @@
 		            closeText,
 		            primaryName,
 		            primaryChecked: true,
-		            fills: fetchedFills,
+		            fills: directFills || fetchedFills,
 		            venue: fetchedVenue,
 		            cachedAt: Date.now(),
 		          };
@@ -2007,7 +2046,7 @@
 		          applyRegistrationPill(card, closeText);
 		          if (primaryName) setCardPrimaryBadge(card, primaryName);
 		          else clearCardPrimaryBadge(card);
-		          applyCardFills(card, fetchedFills);
+		          if (!directFills) applyCardFills(card, fetchedFills);
 		          applyCardVenue(card, fetchedVenue);
 		        } catch {
 		          // ignore
