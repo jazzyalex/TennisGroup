@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="e2467d94-5659-4130-a97a-212aaa7ec83d">
-  <meta name="publish-ts" content="2026-04-25T20:08:24Z">
+  <meta name="publish-id" content="43b51947-3caa-4bcd-9c51-cc04891239f3">
+  <meta name="publish-ts" content="2026-04-25T20:11:38Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -79,8 +79,8 @@
       </div>
       <aside class="player-card" aria-labelledby="player-card-name">
         <header class="player-card__header">
-  <meta name="publish-id" content="e2467d94-5659-4130-a97a-212aaa7ec83d">
-  <meta name="publish-ts" content="2026-04-25T20:08:24Z">
+  <meta name="publish-id" content="43b51947-3caa-4bcd-9c51-cc04891239f3">
+  <meta name="publish-ts" content="2026-04-25T20:11:38Z">
           <h2 class="player-card__name" id="player-card-name"><a href="player.html" data-player-name>Alexis Malakhova</a></h2>
           <span class="player-card__date-badge" data-player-updated>Apr 22, 2026</span>
         </header>
@@ -1679,7 +1679,7 @@
 		      if (sectionFills.length > 1) {
 		        return sectionFills.map(sf => {
 		          const label = sf.title
-		            .replace(/Girls['‘’\s]*/gi, 'G').replace(/Boys['‘’\s]*/gi, 'B')
+		            .replace(/Girls['\u2018\u2019\s]*/gi, 'G').replace(/Boys['\u2018\u2019\s]*/gi, 'B')
 		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
 		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '');
 		          const entry = { label };
@@ -1711,7 +1711,7 @@
 		        if (blocks.length > 1) {
 		          const sec = block.closest('section') || block.parentElement;
 		          label = (sec?.querySelector('h2, h3')?.textContent || '').trim()
-		            .replace(/Girls['‘’\s]*/gi, 'G').replace(/Boys['‘’\s]*/gi, 'B')
+		            .replace(/Girls['\u2018\u2019\s]*/gi, 'G').replace(/Boys['\u2018\u2019\s]*/gi, 'B')
 		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
 		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '').trim();
 		        }
