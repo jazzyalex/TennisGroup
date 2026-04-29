@@ -101,24 +101,18 @@ body.mobile-dark {
 }
 
 .calendar-updated-badge {
-  display: flex;
-  justify-content: flex-end;
-  margin: 10px 0 0;
-  color: var(--text-secondary);
-  font-size: 11px;
-  line-height: 1.2;
-  pointer-events: none;
-  user-select: none;
-}
-
-.calendar-updated-badge span {
   display: inline-flex;
   align-items: center;
+  min-height: 24px;
   border: 1px solid var(--border);
   border-radius: 100px;
   background: var(--bg-secondary);
-  padding: 5px 10px;
-  box-shadow: var(--card-shadow);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 /* Stats Row */
@@ -687,16 +681,13 @@ body.mobile-view { padding: 0; background: var(--m-bg); }
 }
 
 .m-header-brand .calendar-updated-badge {
-  justify-content: flex-start;
-  margin: 4px 0 0;
-  color: var(--m-text-secondary);
-  font-size: 10px;
-}
-
-.m-header-brand .calendar-updated-badge span {
+  min-height: 0;
+  margin-top: 4px;
   border-color: var(--m-border);
   background: var(--m-surface-elevated);
-  box-shadow: none;
+  color: var(--m-text-secondary);
+  font-size: 10px;
+  font-weight: 500;
   padding: 3px 7px;
 }
 
