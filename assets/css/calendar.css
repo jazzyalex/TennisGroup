@@ -100,6 +100,27 @@ body.mobile-dark {
   margin-left: 20px;
 }
 
+.calendar-updated-badge {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.calendar-updated-badge span {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg-secondary);
+  padding: 5px 10px;
+  box-shadow: var(--card-shadow);
+}
+
 /* Stats Row */
 .stats-grid {
   display: grid;
@@ -663,6 +684,20 @@ body.mobile-view { padding: 0; background: var(--m-bg); }
 .m-header-subtitle {
   font-size: 11px;
   color: var(--m-text-secondary);
+}
+
+.m-header-brand .calendar-updated-badge {
+  justify-content: flex-start;
+  margin: 4px 0 0;
+  color: var(--m-text-secondary);
+  font-size: 10px;
+}
+
+.m-header-brand .calendar-updated-badge span {
+  border-color: var(--m-border);
+  background: var(--m-surface-elevated);
+  box-shadow: none;
+  padding: 3px 7px;
 }
 
 .m-theme-toggle {
