@@ -1,0 +1,14 @@
+{
+  "ok": false,
+  "generatedAt": "2026-03-19T22:49:15Z",
+  "resolution": {
+    "status": "unresolved",
+    "player_id": "",
+    "reason": "no_mapping"
+  },
+  "matches": [],
+  "readModelRebuild": {
+    "matches_processed": 374,
+    "timeline_rows_inserted": 748
+  }
+}
