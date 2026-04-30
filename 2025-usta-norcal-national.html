@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="f8c45c33-8f53-491e-a3ca-a16596fdfbca">
-  <meta name="publish-ts" content="2026-04-30T19:47:53Z">
+  <meta name="publish-id" content="dbe5e305-3968-4906-b34a-bfba0fa816e1">
+  <meta name="publish-ts" content="2026-04-30T19:51:00Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>USTA Girls U12/U14 Tournaments · Tennis Tracker</title>
@@ -1856,6 +1856,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            const draw = getDrawCell(row);
 	            const cityState = formatCityWithState(row['City']);
 	            const isRegistered = isRegisteredTournament(row);
+	            const typeLabel = isNational ? 'Nat' : 'Sec';
 	            const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	            const tournamentLinkHtml = isValidUrl
 	              ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
@@ -1887,7 +1888,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	              <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
               <span class="cell-venue">${venueName ? `<a href="${venueMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(venueName)}</a>` : ''}</span>
               <span class="cell-draw"${draw.tooltip ? ` title="${escapeAttr(draw.tooltip)}"` : ''}>${draw.display}</span>
-              <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
+              <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${typeLabel}</span></span>
               <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
             `;
             monthGroup.appendChild(tableRow);
@@ -1919,6 +1920,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	          const draw = getDrawCell(row);
 	          const cityState = formatCityWithState(row['City']);
 	          const isRegistered = isRegisteredTournament(row);
+	          const typeLabel = isNational ? 'Nat' : 'Sec';
 	          const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	          const tournamentLinkHtml = isValidUrl
 	            ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
@@ -1950,7 +1952,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
             <span class="cell-venue">${venueName ? `<a href="${venueMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(venueName)}</a>` : ''}</span>
             <span class="cell-draw"${draw.tooltip ? ` title="${escapeAttr(draw.tooltip)}"` : ''}>${draw.display}</span>
-            <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'National' : 'Sectional'}</span></span>
+            <span><span class="type-badge ${isNational ? 'national' : 'sectional'}">${typeLabel}</span></span>
             <span><span class="proximity-indicator ${config.class}">${config.icon} ${miles ? miles + 'mi' : '—'}</span></span>
           `;
           tableBody.appendChild(tableRow);

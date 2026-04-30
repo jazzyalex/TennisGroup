@@ -274,7 +274,7 @@ body.mobile-dark {
 
 .table-header {
   display: grid;
-  grid-template-columns: 40px 50px 156px 1fr 44px 70px 90px 140px 1fr 90px 100px 110px;
+  grid-template-columns: 40px 50px 156px minmax(220px, 1.2fr) 44px 64px 78px 132px minmax(160px, 1fr) 76px 64px 96px;
   column-gap: 12px;
   padding: 12px 24px;
   background: var(--bg-tertiary);
@@ -345,7 +345,7 @@ body.mobile-dark {
 /* Table Rows */
 .table-row {
   display: grid;
-  grid-template-columns: 40px 50px 156px 1fr 44px 70px 90px 140px 1fr 90px 100px 110px;
+  grid-template-columns: 40px 50px 156px minmax(220px, 1.2fr) 44px 64px 78px 132px minmax(160px, 1fr) 76px 64px 96px;
   column-gap: 12px;
   align-items: center;
   padding: 20px 24px;
@@ -597,7 +597,7 @@ html[data-theme="dark"] .registered-dot {
 @media (max-width: 1200px) {
   .table-header,
   .table-row {
-    grid-template-columns: 35px 45px 132px 1fr 42px 62px 80px 120px 1fr 80px 90px 100px;
+    grid-template-columns: 35px 45px 132px minmax(200px, 1.2fr) 42px 58px 72px 112px minmax(150px, 1fr) 70px 58px 88px;
     column-gap: 10px;
   }
 }
