@@ -274,7 +274,7 @@ body.mobile-dark {
 
 .table-header {
   display: grid;
-  grid-template-columns: 40px 50px 156px 1fr 80px 90px 140px 1fr 90px 100px 110px;
+  grid-template-columns: 40px 50px 156px 1fr 44px 70px 90px 140px 1fr 90px 100px 110px;
   column-gap: 12px;
   padding: 12px 24px;
   background: var(--bg-tertiary);
@@ -345,7 +345,7 @@ body.mobile-dark {
 /* Table Rows */
 .table-row {
   display: grid;
-  grid-template-columns: 40px 50px 156px 1fr 80px 90px 140px 1fr 90px 100px 110px;
+  grid-template-columns: 40px 50px 156px 1fr 44px 70px 90px 140px 1fr 90px 100px 110px;
   column-gap: 12px;
   align-items: center;
   padding: 20px 24px;
@@ -358,6 +358,13 @@ body.mobile-dark {
   font-weight: 700;
   font-size: 12px;
   color: var(--text-secondary);
+  text-align: center;
+}
+
+.cell-level {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--accent-national);
   text-align: center;
 }
 
@@ -590,7 +597,7 @@ html[data-theme="dark"] .registered-dot {
 @media (max-width: 1200px) {
   .table-header,
   .table-row {
-    grid-template-columns: 35px 45px 132px 1fr 70px 80px 120px 1fr 80px 90px 100px;
+    grid-template-columns: 35px 45px 132px 1fr 42px 62px 80px 120px 1fr 80px 90px 100px;
     column-gap: 10px;
   }
 }
@@ -615,7 +622,7 @@ html[data-theme="dark"] .registered-dot {
 
   body:not(.mobile-view) .table-header,
   body:not(.mobile-view) .table-row {
-    min-width: 1080px;
+    min-width: 1160px;
   }
 }
 
