@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="ae9e852c-1dcb-43d1-9eee-d116b2f9a5ad">
-  <meta name="publish-ts" content="2026-04-30T22:47:32Z">
+  <meta name="publish-id" content="69f37fc8-814e-4008-b3a0-c06586737587">
+  <meta name="publish-ts" content="2026-04-30T22:51:12Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>USTA Girls U12/U14 Tournaments · Tennis Tracker</title>
@@ -397,7 +397,8 @@
         <span>#</span>
         <span class="sortable" data-sort="asc" data-column="dates">Dates</span>
         <span class="sortable" data-sort="none" data-column="tournament">Tournament</span>
-        <span data-column="format">Level</span>
+        <span data-column="level">Level</span>
+        <span data-column="format">Format</span>
         <span data-column="age" class="col-age">Age</span>
         <span class="sortable" data-sort="none" data-column="city">City</span>
         <span data-column="venue">Venue</span>
@@ -1849,8 +1850,8 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            const isValidUrl = isPlayTennisTournamentOverviewUrl(normalizedHomePage);
 	            const tournamentName = getTournamentTitle(row);
 	            const localPageHref = getLocalEventPageHref(row);
+	            const levelLabel = getLevelLabel(row);
 	            const format = getFormat(row);
-	            const formatLabel = [getLevelLabel(row), format].filter(Boolean).join(' ');
 	            const age = getAgeInfo(row);
 	            const draw = getDrawCell(row);
 	            const cityState = formatCityWithState(row['City']);
@@ -1881,7 +1882,8 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
               <span class="cell-number">${rowNumber}</span>
               ${datesHtml}
               <span class="cell-tournament">${registeredDot}${tournamentHtml}</span>
-              <span class="cell-format">${formatLabel}</span>
+              <span class="cell-level">${levelLabel}</span>
+              <span class="cell-format">${format}</span>
               <span class="cell-age">${age.label}</span>
 	              <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
               <span class="cell-venue">${venueName ? `<a href="${venueMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(venueName)}</a>` : ''}</span>
@@ -1912,8 +1914,8 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	          const isValidUrl = isPlayTennisTournamentOverviewUrl(normalizedHomePage);
 	          const tournamentName = getTournamentTitle(row);
 	          const localPageHref = getLocalEventPageHref(row);
+	          const levelLabel = getLevelLabel(row);
 	          const format = getFormat(row);
-	          const formatLabel = [getLevelLabel(row), format].filter(Boolean).join(' ');
 	          const age = getAgeInfo(row);
 	          const draw = getDrawCell(row);
 	          const cityState = formatCityWithState(row['City']);
@@ -1944,7 +1946,8 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
             <span class="cell-number">${index + 1}</span>
             ${datesHtml}
             <span class="cell-tournament">${registeredDot}${tournamentHtml}</span>
-            <span class="cell-format">${formatLabel}</span>
+            <span class="cell-level">${levelLabel}</span>
+            <span class="cell-format">${format}</span>
             <span class="cell-age">${age.label}</span>
 	            <span class="cell-city"><a href="${cityMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(cityState)}</a></span>
             <span class="cell-venue">${venueName ? `<a href="${venueMapUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(venueName)}</a>` : ''}</span>

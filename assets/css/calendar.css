@@ -274,7 +274,7 @@ body.mobile-dark {
 
 .table-header {
   display: grid;
-  grid-template-columns: 40px 50px 156px minmax(220px, 1.2fr) 88px 90px 140px minmax(160px, 1fr) 90px 64px 96px;
+  grid-template-columns: 32px 36px 132px minmax(220px, 1.35fr) 52px 56px 70px 122px minmax(145px, 1fr) 60px 56px 86px;
   column-gap: 12px;
   padding: 12px 24px;
   background: var(--bg-tertiary);
@@ -345,7 +345,7 @@ body.mobile-dark {
 /* Table Rows */
 .table-row {
   display: grid;
-  grid-template-columns: 40px 50px 156px minmax(220px, 1.2fr) 88px 90px 140px minmax(160px, 1fr) 90px 64px 96px;
+  grid-template-columns: 32px 36px 132px minmax(220px, 1.35fr) 52px 56px 70px 122px minmax(145px, 1fr) 60px 56px 86px;
   column-gap: 12px;
   align-items: center;
   padding: 20px 24px;
@@ -358,6 +358,13 @@ body.mobile-dark {
   font-weight: 700;
   font-size: 12px;
   color: var(--text-secondary);
+  text-align: center;
+}
+
+.cell-level {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-primary);
   text-align: center;
 }
 
@@ -590,7 +597,7 @@ html[data-theme="dark"] .registered-dot {
 @media (max-width: 1200px) {
   .table-header,
   .table-row {
-    grid-template-columns: 35px 45px 132px minmax(200px, 1.2fr) 80px 80px 120px minmax(150px, 1fr) 80px 58px 88px;
+    grid-template-columns: 30px 34px 120px minmax(200px, 1.35fr) 50px 52px 64px 110px minmax(140px, 1fr) 56px 52px 82px;
     column-gap: 10px;
   }
 }
@@ -615,7 +622,7 @@ html[data-theme="dark"] .registered-dot {
 
   body:not(.mobile-view) .table-header,
   body:not(.mobile-view) .table-row {
-    min-width: 1080px;
+    min-width: 1110px;
   }
 }
 
