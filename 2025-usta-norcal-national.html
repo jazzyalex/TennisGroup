@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="69f37fc8-814e-4008-b3a0-c06586737587">
-  <meta name="publish-ts" content="2026-04-30T22:51:12Z">
+  <meta name="publish-id" content="9dd6ec01-166c-4448-8caa-43421be3f230">
+  <meta name="publish-ts" content="2026-04-30T22:54:16Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>USTA Girls U12/U14 Tournaments · Tennis Tracker</title>
@@ -46,6 +46,50 @@
       padding: 3px 7px;
       font-size: 10px;
       font-weight: 500;
+    }
+  </style>
+  <style id="calendar-table-grid-style">
+    body:not(.mobile-view) .table-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    body:not(.mobile-view) .table-header,
+    body:not(.mobile-view) .table-row {
+      grid-template-columns:
+        32px
+        36px
+        132px
+        minmax(220px, 1.35fr)
+        52px
+        56px
+        70px
+        122px
+        minmax(145px, 1fr)
+        60px
+        56px
+        86px !important;
+      min-width: 1110px;
+    }
+
+    @media (max-width: 1200px) {
+      body:not(.mobile-view) .table-header,
+      body:not(.mobile-view) .table-row {
+        grid-template-columns:
+          30px
+          34px
+          120px
+          minmax(200px, 1.35fr)
+          50px
+          52px
+          64px
+          110px
+          minmax(140px, 1fr)
+          56px
+          52px
+          82px !important;
+        min-width: 1110px;
+      }
     }
   </style>
 </head>
