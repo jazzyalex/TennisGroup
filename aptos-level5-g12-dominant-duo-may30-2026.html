@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="f29d65e4-b49f-4f0c-8a98-1819f7fcb2c3">
-  <meta name="publish-ts" content="2026-05-02T19:45:44Z">
+  <meta name="publish-id" content="aa6591be-29f9-4857-a390-c74fa06415c3">
+  <meta name="publish-ts" content="2026-05-02T21:05:04Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -147,8 +147,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-02T12:45:43-07:00" title="2026-05-02T12:45:43-07:00">
-    <span class="report-updated-badge__pill">Updated May 2, 2026 12:45 PM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-02T14:05:03-07:00" title="2026-05-02T14:05:03-07:00">
+    <span class="report-updated-badge__pill">Updated May 2, 2026 2:05 PM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -159,6 +159,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Girls&#x27; 12 &amp; under Team</h3>
+  <div class="selection-rule-note"><strong>Team/partner event: individual National Standings List, WTN and UTR shown as context; final selection depends on posted team rules</strong><span>Nat #421 · WTN 33.27 · UTR 4.55</span></div>
 
   <table id="players-table-main" class="players-table primary-table">
     <thead class="sticky-header">
@@ -502,7 +503,7 @@
       const requiredCols = [colRank, colFirst, colLast, colWtn, colUtr, colNat, colLocation].filter((idx) => idx !== -1);
       const minCells = requiredCols.length ? Math.max(...requiredCols) + 1 : 7;
 
-      const rows = table.querySelectorAll('tbody tr');
+      const rows = table.querySelectorAll('tbody tr:not([data-primary-projection])');
       rows.forEach((row) => {
         const cells = row.querySelectorAll('td');
         if (cells.length < minCells) return;
@@ -1463,7 +1464,7 @@
 	        const wtnIdx = headers.findIndex((h) => h === 'wtn');
 	        const natIdx = headers.findIndex((h) => h === 'nat rank' || h === 'national rank' || h === 'nat');
 	
-	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          if (cells.length < 3) return;
@@ -1494,7 +1495,7 @@
 	      tables.forEach((table) => {
 	        const tbody = table.querySelector('tbody');
 	        if (!tbody) return;
-	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          if (cells.length < 3) return;
@@ -1517,7 +1518,7 @@
 	        );
 	        const locationIdx = headers.findIndex((h) => h === 'location');
 	
-	        const rows = Array.from(tbody.querySelectorAll('tr'));
+	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          const idx = locationIdx !== -1 ? locationIdx : 6;
@@ -1601,7 +1602,7 @@
 
 	        if (isMixedEventPage()) {
 	          const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table')).filter(
-	            (table) => table.querySelectorAll('tbody tr').length > 0
+	            (table) => table.querySelectorAll('tbody tr:not([data-primary-projection])').length > 0
 	          );
 	          if (tables.length) return tables;
 	        }
@@ -1637,7 +1638,7 @@
 	          return idx !== -1 ? idx : 5;
 	        })();
 
-	        return Array.from(table.querySelectorAll('tbody tr'))
+	        return Array.from(table.querySelectorAll('tbody tr:not([data-primary-projection])'))
 	          .map((row) => {
 	            const cells = row.querySelectorAll('td');
 	            const maxIdx = Math.max(utrIdx, natIdx);
@@ -1815,14 +1816,14 @@
       );
 
       function updateRowNumbers() {
-        const rows = tbody.querySelectorAll('tr');
+        const rows = tbody.querySelectorAll('tr:not([data-primary-projection])');
         rows.forEach((row, index) => {
           if (row.cells && row.cells[0]) row.cells[0].textContent = index + 1;
         });
       }
 
       function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
-        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
 
         rows.sort((a, b) => {
           const aC = a.cells[columnIndex], bC = b.cells[columnIndex];
