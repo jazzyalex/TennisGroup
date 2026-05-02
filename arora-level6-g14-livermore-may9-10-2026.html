@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="95577cc6-9770-4132-9338-8171d664d8a8">
-  <meta name="publish-ts" content="2026-05-02T20:56:30Z">
+  <meta name="publish-id" content="e09150e9-bed1-4714-b966-4c39183dc3e4">
+  <meta name="publish-ts" content="2026-05-02T21:11:13Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -147,8 +147,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-02T13:56:30-07:00" title="2026-05-02T13:56:30-07:00">
-    <span class="report-updated-badge__pill">Updated May 2, 2026 1:56 PM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-02T14:11:13-07:00" title="2026-05-02T14:11:13-07:00">
+    <span class="report-updated-badge__pill">Updated May 2, 2026 2:11 PM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -176,7 +176,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="primary-projection-row" data-primary-projection="1"><td colspan="8"><span class="primary-projection-line"><span class="primary-projection-label">Alexis Malakhova projected here by Nat #2143.</span><span class="primary-projection-metric">Nat #2143 · WTN 33.27 · UTR 4.55</span></span></td></tr>
+      <tr class="primary-projection-row" data-primary-projection="1" data-projection-index="0"><td colspan="8"><span class="primary-projection-line"><span class="primary-projection-label">Alexis Malakhova projected here by Nat #2143.</span><span class="primary-projection-metric">Nat #2143 · WTN 33.27 · UTR 4.55</span></span></td></tr>
       <tr data-player-key="ANKOTI|AARADHYA" data-entry-status="entry" data-section-rank="148"><td class="col-rank">1</td><td>Aaradhya</td><td>Ankoti</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019578831" target="_blank" rel="noopener noreferrer">37.86</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4603314" target="_blank" rel="noopener noreferrer">2.73</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019578831" target="_blank" rel="noopener noreferrer">2861</a></td><td>San Ramon CA</td><td style="display: none;">148</td></tr>
       <tr data-h2h="1" data-h2h-anchor="h2h-8c4e95b6ea9b05c56d1b" data-h2h-matches="2" data-player-key="CHAN|MADELEINE" data-entry-status="entry" data-section-rank="110"><td class="col-rank">2</td><td><a class="h2h-jump" href="#h2h-8c4e95b6ea9b05c56d1b">Madeleine</a></td><td><a class="h2h-jump" href="#h2h-8c4e95b6ea9b05c56d1b">Chan</a></td><td class="col-h2h" data-sort-val="0"><span class="h2h-badge h2h-even" data-h2h="[{&quot;d&quot;: &quot;2025-02-22&quot;, &quot;t&quot;: &quot;NPT Level 6 Junior Open FEB 22 - 23&quot;, &quot;r&quot;: &quot;Final&quot;, &quot;s&quot;: &quot;6-1 3-6 MTB 12-10&quot;, &quot;w&quot;: 1}, {&quot;d&quot;: &quot;2023-12-09&quot;, &quot;t&quot;: &quot;Cudny Tennis Academy 10U Orange, 10/12U Green, &amp; 14U Yellow🟠🟢🟡 - Green DEC 9&quot;, &quot;r&quot;: &quot;PL-Final&quot;, &quot;s&quot;: &quot;4-6&quot;, &quot;w&quot;: 0}]">1-1</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019139608" target="_blank" rel="noopener noreferrer">32.65</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4816400" target="_blank" rel="noopener noreferrer">4.52</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019139608" target="_blank" rel="noopener noreferrer">2121</a></td><td>San Carlos CA</td><td style="display: none;">110</td></tr>
       <tr data-player-key="CHANG|MADELINE" data-entry-status="entry" data-section-rank="216"><td class="col-rank">3</td><td>Madeline</td><td>Chang</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2020260614" target="_blank" rel="noopener noreferrer">31.63</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/5776687" target="_blank" rel="noopener noreferrer">4.51</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2020260614" target="_blank" rel="noopener noreferrer">4080</a></td><td>Fresno CA</td><td style="display: none;">216</td></tr>
@@ -1836,6 +1836,7 @@
       }
 
       function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
+        const projectionRows = Array.from(tbody.querySelectorAll('tr[data-primary-projection]'));
         const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
 
         rows.sort((a, b) => {
@@ -1857,6 +1858,11 @@
 
         tbody.innerHTML = '';
         rows.forEach(row => tbody.appendChild(row));
+        projectionRows.forEach((row) => {
+          const rawIndex = parseInt(row.getAttribute('data-projection-index') || '', 10);
+          const index = Number.isFinite(rawIndex) ? Math.max(0, Math.min(rawIndex, tbody.children.length)) : tbody.children.length;
+          tbody.insertBefore(row, tbody.children[index] || null);
+        });
         updateRowNumbers();
 
         if (updateHeaderStyle) {
