@@ -2114,9 +2114,23 @@ tr.alternate-player:not(.highlight-player) {
 /* ============================================================
    H2H INLINE COLUMN (table badge + tooltip)
    ============================================================ */
-th.col-h2h { width: 52px; text-align: center; font-size: 11px; }
+th.col-h2h { width: 68px; text-align: center; font-size: 11px; }
 td.col-h2h { text-align: center; white-space: nowrap; }
 td.col-h2h .h2h-badge { margin-left: 0; }
+
+.projection-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--text-primary);
+  background: var(--green-light);
+  border: 1px solid var(--border);
+}
 .h2h-badge {
   display: inline-block;
   padding: 2px 6px;
