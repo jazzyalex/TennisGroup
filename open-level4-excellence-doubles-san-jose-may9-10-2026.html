@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="578196e9-f320-4198-9ded-7d3aa83736e6">
-  <meta name="publish-ts" content="2026-05-02T20:55:48Z">
+  <meta name="publish-id" content="3c45b675-0cd2-40bd-9729-eec2992e2d00">
+  <meta name="publish-ts" content="2026-05-02T21:10:46Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -100,8 +100,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-02T13:55:48-07:00" title="2026-05-02T13:55:48-07:00">
-    <span class="report-updated-badge__pill">Updated May 2, 2026 1:55 PM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-02T14:10:46-07:00" title="2026-05-02T14:10:46-07:00">
+    <span class="report-updated-badge__pill">Updated May 2, 2026 2:10 PM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -1945,6 +1945,7 @@
       }
 
       function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
+        const projectionRows = Array.from(tbody.querySelectorAll('tr[data-primary-projection]'));
         const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
 
         rows.sort((a, b) => {
@@ -1965,6 +1966,11 @@
 
         tbody.innerHTML = '';
         rows.forEach(row => tbody.appendChild(row));
+        projectionRows.forEach((row) => {
+          const rawIndex = parseInt(row.getAttribute('data-projection-index') || '', 10);
+          const index = Number.isFinite(rawIndex) ? Math.max(0, Math.min(rawIndex, tbody.children.length)) : tbody.children.length;
+          tbody.insertBefore(row, tbody.children[index] || null);
+        });
         updateRowNumbers();
 
         if (updateHeaderStyle) {
