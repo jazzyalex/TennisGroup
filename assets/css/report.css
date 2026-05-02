@@ -330,32 +330,7 @@ tbody tr:hover {
 }
 
 tr.primary-projection-row td {
-  background-color: var(--bg-secondary) !important;
-  border-top: 1px dashed var(--border);
-  border-bottom: 1px dashed var(--border);
-  color: var(--text-secondary);
-  font-size: 12px;
-  padding: 7px 10px;
-}
-
-tr.primary-projection-row:hover td {
-  background-color: var(--bg-secondary) !important;
-}
-
-.primary-projection-line {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 10px;
-}
-
-.primary-projection-label {
   color: var(--text-primary);
-  font-weight: 700;
-}
-
-.primary-projection-metric {
-  color: var(--text-secondary);
 }
 
 /* Highlighted player row — green accent */
