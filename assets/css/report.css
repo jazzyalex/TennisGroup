@@ -216,6 +216,30 @@ tr.seeded-team td:first-child {
   border-radius: var(--radius-sm);
 }
 
+.selection-rule-note {
+  max-width: 1000px;
+  width: 100%;
+  margin: -6px auto 12px;
+  padding-left: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.selection-rule-note strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.selection-rule-band {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
 /* ============================================================
    TABLE STYLES
    ============================================================ */
@@ -303,6 +327,35 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
   background-color: var(--green-light) !important;
   cursor: pointer;
+}
+
+tr.primary-projection-row td {
+  background-color: var(--bg-secondary) !important;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+  color: var(--text-secondary);
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+tr.primary-projection-row:hover td {
+  background-color: var(--bg-secondary) !important;
+}
+
+.primary-projection-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.primary-projection-label {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.primary-projection-metric {
+  color: var(--text-secondary);
 }
 
 /* Highlighted player row — green accent */
