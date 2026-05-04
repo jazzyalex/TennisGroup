@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="94cb9cc3-8cf8-4cfd-b09e-2214135f64a5">
-  <meta name="publish-ts" content="2026-05-04T19:37:53Z">
+  <meta name="publish-id" content="59cd57c1-2767-422c-a64f-d579a42baa8d">
+  <meta name="publish-ts" content="2026-05-04T19:41:32Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -1640,7 +1640,7 @@
   </footer>
 
 		  <script>
-		    const CARD_UPDATED_CACHE_KEY = 'tennis_tracker_card_updated_cache_v1';
+		    const CARD_UPDATED_CACHE_KEY = 'tennis_tracker_card_updated_cache_v2';
 
 		    const MONTHS = {
 		      jan: 0, january: 0,
@@ -1753,8 +1753,9 @@
 		    function extractPrimaryNameFromReportDoc(doc) {
 		      if (!doc) return '';
 
-		      const row = doc.querySelector('tr.highlight-player');
-		      if (row) {
+		      const rows = Array.from(doc.querySelectorAll('tr.highlight-player'));
+		      for (const row of rows) {
+		        if (row.matches('[data-primary-projection="1"], [data-entry-status="projection"]')) continue;
 		        const cells = Array.from(row.querySelectorAll('td'));
 		        if (cells.length >= 3) {
 		          const first = normalizePrimaryName(cells[1]?.textContent || '');
