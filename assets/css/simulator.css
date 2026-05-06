@@ -339,6 +339,13 @@
   box-shadow: var(--card-shadow);
 }
 
+#simulator .sim-scenario-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+}
+
 /* ── Scope row label ── */
 #simulator .sim-scope-row {
   align-items: center;
