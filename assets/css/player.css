@@ -401,6 +401,11 @@ html[data-theme="dark"] .timeline-points {
   text-align: center;
 }
 
+.timeline-rank span {
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
 /* Events List */
 .events-list {
   display: flex;
@@ -1904,13 +1909,13 @@ html[data-theme="dark"] .event-points-value {
     font-size: 0.8rem;
   }
 
-  .timeline-event-name {
-    width: 132px;
+  .timeline-rank {
+    max-width: 112px;
     font-size: 0.55rem;
   }
 
-  .timeline-rank {
-    max-width: 112px;
+  .timeline-event-name {
+    width: 132px;
     font-size: 0.55rem;
   }
 
