@@ -82,7 +82,7 @@
 .simulator-view .header-quick-link--simulator { display: none; }
 
 .player-view #simulator { display: none; }
-.simulator-view .main > section:not(#simulator) { display: none; }
+.simulator-view .main > section:not(#simulator):not(.points-expiration-section) { display: none; }
 .simulator-view .page-footer { display: none; }
 .simulator-view #simulator .section-title {
   font-size: 1.5rem;
