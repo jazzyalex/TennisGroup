@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="6249bb08-9389-4622-a6d9-bfdd08258508">
-  <meta name="publish-ts" content="2026-05-08T19:38:38Z">
+  <meta name="publish-id" content="b8679da4-9093-4ddd-90f7-388ac179ea0c">
+  <meta name="publish-ts" content="2026-05-08T19:45:35Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css?v=20260326">
-  <link rel="stylesheet" href="assets/css/homepage.css?v=20260508c">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=20260508d">
   <script>
     (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
   </script>
@@ -2353,30 +2353,10 @@
 
 		    function parseCardEventEndDate(card) {
 		      const firstMeta = card.querySelector('.card-meta .meta-item:not(.meta-updated)');
-		      const text = (firstMeta?.textContent || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
-		      if (!text) return null;
-		      const months = {
-		        january: 0, jan: 0,
-		        february: 1, feb: 1,
-		        march: 2, mar: 2,
-		        april: 3, apr: 3,
-		        may: 4,
-		        june: 5, jun: 5,
-		        july: 6, jul: 6,
-		        august: 7, aug: 7,
-		        september: 8, sep: 8, sept: 8,
-		        october: 9, oct: 9,
-		        november: 10, nov: 10,
-		        december: 11, dec: 11,
-		      };
-		      const m = text.match(/^([A-Za-z]+)\s+(\d{1,2})(?:\s*-\s*(?:(\w+)\s+)?(\d{1,2}))?,\s*(\d{4})$/);
-		      if (!m) return null;
-		      const startMonth = months[(m[1] || '').toLowerCase()];
-		      const endMonth = m[3] ? months[(m[3] || '').toLowerCase()] : startMonth;
-		      const endDay = parseInt(m[4] || m[2], 10);
-		      const year = parseInt(m[5], 10);
-		      if (![endMonth, endDay, year].every((x) => Number.isFinite(x))) return null;
-		      return new Date(year, endMonth, endDay, 23, 59, 59, 999);
+		      const end = parseEndDateFromText(firstMeta?.textContent || '');
+		      if (!(end instanceof Date) || !Number.isFinite(end.getTime())) return null;
+		      end.setHours(23, 59, 59, 999);
+		      return end;
 		    }
 
 		    function isPastEventCard(card) {
@@ -2509,6 +2489,23 @@
 		    function updateAllRegistrationPills() {
 		      document.querySelectorAll('[data-registration-pill][data-close-ms]').forEach((pill) => {
 		        updateRegistrationPillCountdown(pill);
+		      });
+		    }
+
+		    function normalizeReportRegistrationPills() {
+		      document.querySelectorAll('a.tournament-card').forEach((card) => {
+		        if (card.classList.contains('calendar-card') || !card.querySelector('.card-type.report')) return;
+		        if (card.getAttribute('data-usta-status') === 'pending') {
+		          const pill = card.querySelector('[data-registration-pill]');
+		          const textEl = pill?.querySelector('[data-registration-pill-text]') || pill;
+		          pill?.classList.remove('is-open', 'is-closed', 'is-closing-soon', 'is-past');
+		          pill?.classList.add('is-pending');
+		          pill?.removeAttribute('data-close-ms');
+		          pill?.setAttribute('data-close-status', 'pending');
+		          if (textEl) textEl.textContent = 'USTA pending';
+		          return;
+		        }
+		        applyRegistrationPill(card, card.getAttribute('data-card-close-text') || '');
 		      });
 		    }
 
@@ -3169,6 +3166,7 @@
 		      addStarredCalendarEventCards(favoritesApi);
 		      updateExpirationAlert();
 		      updateAllCardPastStatuses();
+		      normalizeReportRegistrationPills();
 		      sortTournamentCardsByDate();
 		      populateReportCardUpdatedLabels(favoritesApi);
 		      updateAllRegistrationPills();
