@@ -878,6 +878,18 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
   outline-offset: 3px;
 }
 
+.card-usta-link.is-unavailable {
+  cursor: default;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-style: dashed;
+}
+
+.card-usta-link.is-unavailable:hover {
+  opacity: 1;
+  transform: none;
+}
+
 .calendar-header {
   align-items: center;
 }
