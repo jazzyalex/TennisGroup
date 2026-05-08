@@ -881,9 +881,13 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 .card-usta-link.is-unavailable {
   cursor: default;
   color: var(--accent-cyan);
-  background: color-mix(in srgb, var(--accent-cyan) 10%, var(--bg-primary));
-  border-color: color-mix(in srgb, var(--accent-cyan) 40%, var(--border));
+  background: var(--bg-primary);
+  border-color: var(--accent-cyan);
   border-style: dashed;
+}
+
+.tournament-card[data-usta-status="pending"] .card-usta-link.is-unavailable {
+  display: none;
 }
 
 .card-usta-link.is-unavailable:hover {
@@ -939,21 +943,21 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 }
 
 .card-type.report {
-  background: color-mix(in srgb, var(--accent-amber) 14%, var(--bg-primary));
-  color: var(--accent-amber);
-  border: 1px solid color-mix(in srgb, var(--accent-amber) 38%, var(--border));
+  background: var(--accent-amber);
+  color: white;
+  border: 1px solid var(--accent-amber);
 }
 
 .card-type.report.is-open {
-  background: color-mix(in srgb, var(--accent-emerald) 12%, var(--bg-primary));
-  color: var(--accent-emerald);
-  border-color: color-mix(in srgb, var(--accent-emerald) 38%, var(--border));
+  background: var(--accent-emerald);
+  color: white;
+  border-color: var(--accent-emerald);
 }
 
 .card-type.report.is-closing-soon {
-  background: color-mix(in srgb, var(--player-trend-down) 14%, var(--bg-primary));
-  color: var(--player-trend-down);
-  border-color: color-mix(in srgb, var(--player-trend-down) 42%, var(--border));
+  background: var(--player-trend-down);
+  color: white;
+  border-color: var(--player-trend-down);
 }
 
 .card-type.report.is-closed {
@@ -964,9 +968,9 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 
 .card-type.report.is-pending,
 .tournament-card[data-usta-status="pending"] .card-type.report {
-  background: color-mix(in srgb, var(--accent-cyan) 10%, var(--bg-primary));
+  background: var(--bg-primary);
   color: var(--accent-cyan);
-  border: 1px dashed color-mix(in srgb, var(--accent-cyan) 44%, var(--border));
+  border: 1px dashed var(--accent-cyan);
 }
 
 .card-type-icon {
