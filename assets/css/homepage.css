@@ -880,8 +880,9 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 
 .card-usta-link.is-unavailable {
   cursor: default;
-  color: var(--text-muted);
-  background: var(--bg-secondary);
+  color: var(--accent-cyan);
+  background: color-mix(in srgb, var(--accent-cyan) 10%, var(--bg-primary));
+  border-color: color-mix(in srgb, var(--accent-cyan) 40%, var(--border));
   border-style: dashed;
 }
 
@@ -938,19 +939,34 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 }
 
 .card-type.report {
-  background: #f59e0b;
-  color: #ffffff;
+  background: color-mix(in srgb, var(--accent-amber) 14%, var(--bg-primary));
+  color: var(--accent-amber);
+  border: 1px solid color-mix(in srgb, var(--accent-amber) 38%, var(--border));
+}
+
+.card-type.report.is-open {
+  background: color-mix(in srgb, var(--accent-emerald) 12%, var(--bg-primary));
+  color: var(--accent-emerald);
+  border-color: color-mix(in srgb, var(--accent-emerald) 38%, var(--border));
 }
 
 .card-type.report.is-closing-soon {
-  background: rgba(239, 68, 68, 0.16);
-  color: #ef4444;
+  background: color-mix(in srgb, var(--player-trend-down) 14%, var(--bg-primary));
+  color: var(--player-trend-down);
+  border-color: color-mix(in srgb, var(--player-trend-down) 42%, var(--border));
 }
 
 .card-type.report.is-closed {
-  background: rgba(100, 116, 139, 0.1);
-  color: #64748b;
-  border: 1px solid rgba(100, 116, 139, 0.2);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.card-type.report.is-pending,
+.tournament-card[data-usta-status="pending"] .card-type.report {
+  background: color-mix(in srgb, var(--accent-cyan) 10%, var(--bg-primary));
+  color: var(--accent-cyan);
+  border: 1px dashed color-mix(in srgb, var(--accent-cyan) 44%, var(--border));
 }
 
 .card-type-icon {
