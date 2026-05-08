@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="e50b1354-c397-47dc-b667-931b09b4980a">
-  <meta name="publish-ts" content="2026-05-08T18:47:39Z">
+  <meta name="publish-id" content="6249bb08-9389-4622-a6d9-bfdd08258508">
+  <meta name="publish-ts" content="2026-05-08T19:38:38Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css?v=20260326">
-  <link rel="stylesheet" href="assets/css/homepage.css?v=20260508b">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=20260508c">
   <script>
     (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
   </script>
@@ -2351,6 +2351,39 @@
 		      return { status: 'ok', date: new Date(year, month, day, hour, minute) };
 		    }
 
+		    function parseCardEventEndDate(card) {
+		      const firstMeta = card.querySelector('.card-meta .meta-item:not(.meta-updated)');
+		      const text = (firstMeta?.textContent || '').replace(/\u2013/g, '-').replace(/\s+/g, ' ').trim();
+		      if (!text) return null;
+		      const months = {
+		        january: 0, jan: 0,
+		        february: 1, feb: 1,
+		        march: 2, mar: 2,
+		        april: 3, apr: 3,
+		        may: 4,
+		        june: 5, jun: 5,
+		        july: 6, jul: 6,
+		        august: 7, aug: 7,
+		        september: 8, sep: 8, sept: 8,
+		        october: 9, oct: 9,
+		        november: 10, nov: 10,
+		        december: 11, dec: 11,
+		      };
+		      const m = text.match(/^([A-Za-z]+)\s+(\d{1,2})(?:\s*-\s*(?:(\w+)\s+)?(\d{1,2}))?,\s*(\d{4})$/);
+		      if (!m) return null;
+		      const startMonth = months[(m[1] || '').toLowerCase()];
+		      const endMonth = m[3] ? months[(m[3] || '').toLowerCase()] : startMonth;
+		      const endDay = parseInt(m[4] || m[2], 10);
+		      const year = parseInt(m[5], 10);
+		      if (![endMonth, endDay, year].every((x) => Number.isFinite(x))) return null;
+		      return new Date(year, endMonth, endDay, 23, 59, 59, 999);
+		    }
+
+		    function isPastEventCard(card) {
+		      const eventEnd = parseCardEventEndDate(card);
+		      return eventEnd instanceof Date && Number.isFinite(eventEnd.getTime()) && eventEnd.getTime() < Date.now();
+		    }
+
 		    function formatCloseCountdown(msRemaining) {
 		      const totalMinutes = Math.max(0, Math.ceil(msRemaining / 60000));
 		      const minutes = totalMinutes % 60;
@@ -2390,15 +2423,23 @@
 		      const pill = card.querySelector('[data-registration-pill]');
 		      if (!pill) return;
 
-		      pill.classList.remove('is-open', 'is-closed', 'is-closing-soon', 'is-pending');
+		      pill.classList.remove('is-open', 'is-closed', 'is-closing-soon', 'is-pending', 'is-past');
 		      pill.removeAttribute('data-close-ms');
 		      pill.removeAttribute('data-close-status');
 		      pill.removeAttribute('title');
 
+		      const textEl = pill.querySelector('[data-registration-pill-text]') || pill;
+
+		      if (isPastEventCard(card)) {
+		        pill.classList.add('is-past');
+		        pill.setAttribute('data-close-status', 'past');
+		        textEl.textContent = 'Past';
+		        return;
+		      }
+
 		      const parsed = parseCloseDate(closeText);
 		      const status = parsed?.status || 'unknown';
 		      const dt = parsed?.date || null;
-		      const textEl = pill.querySelector('[data-registration-pill-text]') || pill;
 
 		      if (status === 'unknown') {
 		        pill.classList.add('is-pending');
@@ -2434,7 +2475,7 @@
 		    function updateRegistrationPillCountdown(pill) {
 		      if (!pill) return;
 		      const status = pill.getAttribute('data-close-status') || '';
-		      if (status === 'closed') return;
+		      if (status === 'closed' || status === 'past') return;
 
 		      const msRaw = pill.getAttribute('data-close-ms') || '';
 		      const closeMs = parseInt(msRaw, 10);
@@ -2444,7 +2485,7 @@
 		      const textEl = pill.querySelector('[data-registration-pill-text]') || pill;
 
 		      if (remaining <= 0) {
-		        pill.classList.remove('is-open', 'is-closing-soon', 'is-pending');
+		        pill.classList.remove('is-open', 'is-closing-soon', 'is-pending', 'is-past');
 		        pill.classList.add('is-closed');
 		        pill.setAttribute('data-close-status', 'closed');
 		        textEl.textContent = 'Closed';

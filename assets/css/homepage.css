@@ -961,9 +961,15 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 }
 
 .card-type.report.is-closed {
-  background: var(--bg-secondary);
-  color: var(--text-muted);
-  border: 1px solid var(--border);
+  background: var(--accent-amber);
+  color: white;
+  border-color: var(--accent-amber);
+}
+
+.card-type.report.is-past {
+  background: var(--text-secondary);
+  color: white;
+  border-color: var(--text-secondary);
 }
 
 .card-type.report.is-pending,
