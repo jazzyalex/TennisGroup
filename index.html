@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="65264dba-67b3-44b1-801a-d047f5a87894">
-  <meta name="publish-ts" content="2026-05-10T19:32:22Z">
+  <meta name="publish-id" content="e38de5a7-ed2e-406d-879d-2b81c7378e61">
+  <meta name="publish-ts" content="2026-05-10T19:50:59Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -2240,6 +2240,16 @@
 		      return fills.length ? fills : null;
 		    }
 
+		    function parseCardFills(raw) {
+		      if (!(raw || '').trim()) return null;
+		      try {
+		        const parsed = JSON.parse(raw);
+		        return Array.isArray(parsed) ? parsed : null;
+		      } catch {
+		        return null;
+		      }
+		    }
+
 		    function applyCardFills(card, fills) {
 		      const ex = card.querySelector('[data-card-fills-display]');
 		      if (ex) ex.remove();
@@ -2545,7 +2555,7 @@
 		          clearCardPrimaryBadge(card);
 		        }
 
-		        const directFills = (() => { try { const r = card.getAttribute('data-card-fills'); return r ? JSON.parse(r) : null; } catch { return null; } })();
+		        const directFills = parseCardFills(card.getAttribute('data-card-fills') || '');
 		        if (directFills) applyCardFills(card, directFills);
 
 		        applyCardResult(card);
