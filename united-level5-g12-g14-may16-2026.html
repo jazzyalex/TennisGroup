@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="523d8be2-e184-4d54-889a-395f1b71a8b4">
-  <meta name="publish-ts" content="2026-05-13T17:20:26Z">
+  <meta name="publish-id" content="f5c01f6c-b3e3-417c-9c61-4e42f7e0d3c2">
+  <meta name="publish-ts" content="2026-05-13T17:33:44Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -98,6 +98,142 @@
       color: var(--text-primary); background: var(--green-light);
       border: 1px solid var(--border);
     }
+
+    /* Published draw path */
+    .draw-path-timeline {
+      max-width: 1000px;
+      width: 100%;
+      margin: 14px auto 18px;
+      padding: 14px 16px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
+    }
+    .draw-path-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .draw-path-kicker {
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .draw-path-header h2 {
+      margin: 2px 0 0;
+      color: var(--text-primary);
+      font-family: var(--font-heading);
+      font-size: 1.08rem;
+      line-height: 1.2;
+    }
+    .draw-path-note {
+      flex-shrink: 0;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-secondary);
+      background: var(--green-light);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .draw-path-steps {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+    .draw-path-step {
+      min-height: 86px;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 8px;
+      align-items: start;
+      padding: 10px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      background: var(--bg-primary);
+    }
+    .draw-path-round {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-report);
+      color: var(--bg-primary);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .draw-path-copy {
+      min-width: 0;
+      display: grid;
+      gap: 5px;
+    }
+    .draw-path-time {
+      color: var(--text-primary);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .draw-path-venue {
+      display: inline-block;
+      margin-left: 6px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .draw-path-opponents {
+      color: var(--text-secondary);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    .draw-path-opponents span:first-child {
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 9px;
+      margin-right: 2px;
+    }
+    .draw-path-utr {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 3px;
+      padding: 1px 5px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-primary);
+      background: var(--green-light);
+      font-size: 9px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .draw-path-utr.muted,
+    .draw-path-bye {
+      color: var(--text-muted);
+    }
+    @media (max-width: 640px) {
+      .draw-path-timeline {
+        margin: 12px auto 16px;
+        padding: 12px;
+      }
+      .draw-path-header {
+        display: grid;
+      }
+      .draw-path-steps {
+        grid-template-columns: 1fr;
+      }
+      .draw-path-step {
+        min-height: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -156,8 +292,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-13T10:20:26-07:00" title="2026-05-13T10:20:26-07:00">
-    <span class="report-updated-badge__pill">Updated May 13, 2026 10:20 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-13T10:33:44-07:00" title="2026-05-13T10:33:44-07:00">
+    <span class="report-updated-badge__pill">Updated May 13, 2026 10:33 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -492,8 +628,9 @@
       <span class="mobile-section-title">All Players (<span id="mobile-player-count"></span>)</span>
     </div>
     <div class="mobile-sort-controls">
+      <button class="mobile-sort-btn active" data-sort="rank">Draw</button>
       <button class="mobile-sort-btn" data-sort="utr">UTR</button>
-      <button class="mobile-sort-btn active" data-sort="natRank">Nat Rank</button>
+      <button class="mobile-sort-btn" data-sort="natRank">Nat Rank</button>
       <button class="mobile-sort-btn" data-sort="wtn">WTN</button>
     </div>
     <div class="mobile-player-list" id="mobile-player-list"></div>
@@ -542,7 +679,7 @@
     // MOBILE VIEW IMPLEMENTATION
     // ========================================
 
-    let currentSort = 'natRank';
+    let currentSort = 'rank';
 	    let isExpanded = false;
 	    let allPlayers = [];
 	    let isMixedEvent = false;
@@ -883,7 +1020,7 @@
       if (!player) return '';
       
       const initials = `${player.firstName[0]}${player.lastName[0]}`;
-      const sectionRank = 54; // Alexis's sectional rank from MEMORY_BANK.md
+      const sectionRank = player.sectionRank || 'N/A';
       
       return `
         <div class="mobile-alexis-header">
@@ -892,7 +1029,7 @@
             <h3>${player.fullName}</h3>
             <span>${player.location}</span>
           </div>
-          <div class="mobile-alexis-seed">#${player.rank} Seed</div>
+          <div class="mobile-alexis-seed">#${player.rank} Main Draw</div>
         </div>
         <div class="mobile-alexis-stats">
           <div class="mobile-alexis-stat">
@@ -918,7 +1055,7 @@
     function buildPositionGauge(players, targetPlayer) {
       if (!targetPlayer || players.length === 0) return '';
       
-      const targetIndex = players.findIndex(p => p.isTarget);
+      const targetIndex = players.findIndex(p => p.playerKey === targetPlayer.playerKey);
       const percentage = ((targetIndex / (players.length - 1)) * 100).toFixed(0);
       const percentAbove = Math.round((targetIndex / players.length) * 100);
       const firstPlayer = players[0];
@@ -948,6 +1085,21 @@
         </div>
         ` : ''}
       `;
+    }
+
+    function playersForTargetGroup() {
+      if (!targetPlayer) return allPlayers;
+      if (multiGroups && Array.isArray(multiGroups)) {
+        const group = multiGroups.find((g) =>
+          g && Array.isArray(g.players) && g.players.some((p) => p.playerKey === targetPlayer.playerKey)
+        );
+        if (group && Array.isArray(group.players)) return group.players;
+      }
+      if (isMixedEvent && mixedGroups) {
+        if (mixedGroups.girls && mixedGroups.girls.some((p) => p.playerKey === targetPlayer.playerKey)) return mixedGroups.girls;
+        if (mixedGroups.boys && mixedGroups.boys.some((p) => p.playerKey === targetPlayer.playerKey)) return mixedGroups.boys;
+      }
+      return allPlayers;
     }
 
     function buildUtrHistogramMobile() {
@@ -1283,8 +1435,9 @@
       }
       
       // Render position gauge
-      if (targetPlayer && allPlayers.length > 0) {
-        document.getElementById('mobile-position-gauge').innerHTML = buildPositionGauge(allPlayers, targetPlayer);
+      const targetGroupPlayers = playersForTargetGroup();
+      if (targetPlayer && targetGroupPlayers.length > 0) {
+        document.getElementById('mobile-position-gauge').innerHTML = buildPositionGauge(targetGroupPlayers, targetPlayer);
         // Animate gauge after render
         setTimeout(() => {
           const fill = document.getElementById('gauge-fill');
