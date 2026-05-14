@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-04-29T23:05:59Z",
+  "generatedAt": "2026-05-14T16:21:31Z",
   "resolution": {
     "status": "resolved",
     "player_id": "player:c10bd3026582d1396959",
@@ -9,6 +9,23 @@
   },
   "playerId": "player:c10bd3026582d1396959",
   "matches": [
+    {
+      "playerId": "player:c10bd3026582d1396959",
+      "matchId": 594,
+      "matchVersionId": 822,
+      "tournamentId": "utr:tournament:24927760d499a990fa9f",
+      "eventId": "utr:event:e323559060bd3a01eb48",
+      "playedAt": "2026-05-08T00:00:00Z",
+      "eventName": "Bay Area Tennis Singles Tournament 2026 03 Gold Round Robin I",
+      "eventLocation": "",
+      "round": "",
+      "result": "W",
+      "scoreText": "6-3 4-6 MTB 10-7",
+      "opponent": "Yu Luo",
+      "partner": "",
+      "source": "utr",
+      "observedAt": "2026-05-14T16:21:27Z"
+    },
     {
       "playerId": "player:c10bd3026582d1396959",
       "matchId": 585,
@@ -2714,6 +2731,23 @@
     },
     {
       "playerId": "player:c10bd3026582d1396959",
+      "matchId": 595,
+      "matchVersionId": 823,
+      "tournamentId": "utr:tournament:23bd23905665fae91b84",
+      "eventId": "utr:event:5c2ee0b1768bf2ab6ab8",
+      "playedAt": "2023-07-08T00:00:00Z",
+      "eventName": "Cudny Tennis Academy 10/12U Green & 14/16U Yellow🟢🟡 Coed 10 & under singles - Green JUL 8",
+      "eventLocation": "",
+      "round": "Round 5",
+      "result": "W",
+      "scoreText": "4-1",
+      "opponent": "Zagros Hadiashar",
+      "partner": "",
+      "source": "utr",
+      "observedAt": "2026-05-14T16:21:27Z"
+    },
+    {
+      "playerId": "player:c10bd3026582d1396959",
       "matchId": 592,
       "matchVersionId": 791,
       "tournamentId": "utr:tournament:23bd23905665fae91b84",
@@ -3156,6 +3190,23 @@
     },
     {
       "playerId": "player:c10bd3026582d1396959",
+      "matchId": 596,
+      "matchVersionId": 824,
+      "tournamentId": "utr:tournament:04e8374373709a5984bc",
+      "eventId": "utr:event:d72bd831c170384edfea",
+      "playedAt": "2022-11-27T00:00:00Z",
+      "eventName": "Lafayette Tennis Club 10U Orange, 12U Green, & 14U Yellow Coed 10 & under singles - Orange NOV 27",
+      "eventLocation": "",
+      "round": "Round 3",
+      "result": "W",
+      "scoreText": "",
+      "opponent": "Zagros Hadiashar",
+      "partner": "",
+      "source": "utr",
+      "observedAt": "2026-05-14T16:21:27Z"
+    },
+    {
+      "playerId": "player:c10bd3026582d1396959",
       "matchId": 593,
       "matchVersionId": 815,
       "tournamentId": "utr:tournament:04e8374373709a5984bc",
@@ -3343,7 +3394,7 @@
     }
   ],
   "readModelRebuild": {
-    "matches_processed": 392,
-    "timeline_rows_inserted": 781
+    "matches_processed": 395,
+    "timeline_rows_inserted": 787
   }
 }
