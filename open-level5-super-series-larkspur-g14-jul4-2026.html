@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="962e327d-74c9-4802-928a-f75412e0d12b">
-  <meta name="publish-ts" content="2026-05-12T21:20:36Z">
+  <meta name="publish-id" content="abdf1934-277c-457a-ac31-f40fa951601a">
+  <meta name="publish-ts" content="2026-05-14T16:13:04Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -98,6 +98,132 @@
       color: var(--text-primary); background: var(--green-light);
       border: 1px solid var(--border);
     }
+    tr.draw-roster-only:not(.highlight-player) {
+      color: var(--text-secondary);
+      background-color: var(--bg-tertiary);
+    }
+    .draw-row-badge {
+      display: block;
+      width: max-content;
+      margin: 2px auto 0;
+      padding: 1px 5px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--accent-report);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+    .draw-row-badge-muted {
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .draw-path-panel {
+      max-width: 1000px;
+      margin: 12px auto 18px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      box-shadow: var(--card-shadow);
+    }
+    .draw-path-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 2px;
+    }
+    .draw-path-head h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+    .draw-path-head a {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-report);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .draw-path-subtitle,
+    .draw-reconcile-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .draw-path-track {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .draw-path-step {
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+    .draw-path-round {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: var(--accent-report);
+      color: var(--bg-primary);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .draw-path-opponents {
+      margin-top: 8px;
+      min-height: 34px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text-primary);
+    }
+    .draw-path-rating,
+    .draw-path-seed {
+      display: inline-block;
+      margin-left: 4px;
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .draw-path-time {
+      margin-top: 7px;
+      font-size: 11px;
+      line-height: 1.35;
+      color: var(--text-secondary);
+    }
+    .draw-path-points {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px solid var(--border);
+      color: var(--accent-report);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .draw-path-points span {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .draw-reconcile-note {
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid var(--border);
+    }
   </style>
 </head>
 <body>
@@ -156,8 +282,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-12T14:20:35-07:00" title="2026-05-12T14:20:35-07:00">
-    <span class="report-updated-badge__pill">Updated May 12, 2026 2:20 PM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-14T09:13:03-07:00" title="2026-05-14T09:13:03-07:00">
+    <span class="report-updated-badge__pill">Updated May 14, 2026 9:13 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -168,7 +294,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Girls&#x27; 14 &amp; under Singles</h3>
-  <div class="selection-rule-note"><strong>Selection reference: National Standings List, lower rank is stronger</strong><span>Nat #2075 · WTN 33.27 · UTR 4.68</span></div>
+  <div class="selection-rule-note"><strong>Selection reference: National Standings List, lower rank is stronger</strong><span>Nat #2075 · WTN 33.26 · UTR 4.68</span></div>
 
   <table id="players-table-main" class="players-table primary-table">
     <thead class="sticky-header">
@@ -185,10 +311,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr data-player-key="CHEN|CINDY" data-entry-status="entry" data-section-rank="11"><td class="col-rank">1</td><td>Cindy</td><td>Chen</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">32.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4881288" target="_blank" rel="noopener noreferrer">5.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">472</a></td><td>Scottsdale AZ</td><td style="display: none;">11</td></tr>
-      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="1" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank="108"><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.27</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.68</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">2075</a></td><td>Mountain View CA</td><td style="display: none;">108</td></tr>
+      <tr data-player-key="CHEN|CINDY" data-entry-status="entry" data-section-rank="11"><td class="col-rank">1</td><td>Cindy</td><td>Chen</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">32.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4881288" target="_blank" rel="noopener noreferrer">5.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">478</a></td><td>Scottsdale AZ</td><td style="display: none;">11</td></tr>
+      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="1" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank="108"><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.68</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">2075</a></td><td>Mountain View CA</td><td style="display: none;">108</td></tr>
       <tr data-player-key="LEE|GABBY" data-entry-status="entry" data-section-rank="166"><td class="col-rank">2</td><td>Gabby</td><td>Lee</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019126181" target="_blank" rel="noopener noreferrer">35.80</a></td><td class="col-utr">N/A</td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019126181" target="_blank" rel="noopener noreferrer">3047</a></td><td>Moraga CA</td><td style="display: none;">166</td></tr>
-      <tr data-player-key="SINGH|MIHIKA" data-entry-status="entry" data-section-rank="138"><td class="col-rank">3</td><td>Mihika</td><td>Singh</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">35.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4449588" target="_blank" rel="noopener noreferrer">3.18</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">2664</a></td><td>Fremont CA</td><td style="display: none;">138</td></tr>
+      <tr data-player-key="SINGH|MIHIKA" data-entry-status="entry" data-section-rank="140"><td class="col-rank">3</td><td>Mihika</td><td>Singh</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">35.35</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4449588" target="_blank" rel="noopener noreferrer">3.18</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">2683</a></td><td>Fremont CA</td><td style="display: none;">140</td></tr>
     </tbody>
   </table>
 
@@ -211,7 +337,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg WTN</div>
-        <div class="stat-value">34.46</div>
+        <div class="stat-value">34.49</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
@@ -231,7 +357,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Best Nat Rank</div>
-        <div class="stat-value">472</div>
+        <div class="stat-value">478</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
@@ -775,7 +901,7 @@
             <h3>${player.fullName}</h3>
             <span>${player.location}</span>
           </div>
-          <div class="mobile-alexis-seed">#${player.rank} Seed</div>
+          <div class="mobile-alexis-seed">Roster #${player.rank}</div>
         </div>
         <div class="mobile-alexis-stats">
           <div class="mobile-alexis-stat">
@@ -993,7 +1119,7 @@
                 <div class="mobile-detail-value">${player.sectionRank || 'N/A'}</div>
               </div>
               <div class="mobile-detail-item">
-                <div class="mobile-detail-label">Seed</div>
+                <div class="mobile-detail-label">Roster #</div>
                 <div class="mobile-detail-value">#${player.rank}</div>
               </div>
               ${player.partner ? `
