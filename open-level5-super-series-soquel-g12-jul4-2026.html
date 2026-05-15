@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="be56e218-c579-418b-afd5-914155e08a61">
-  <meta name="publish-ts" content="2026-05-12T21:21:29Z">
+  <meta name="publish-id" content="ef79791a-8242-4704-9591-4c31ab4f843d">
+  <meta name="publish-ts" content="2026-05-15T17:48:30Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -98,6 +98,132 @@
       color: var(--text-primary); background: var(--green-light);
       border: 1px solid var(--border);
     }
+    tr.draw-roster-only:not(.highlight-player) {
+      color: var(--text-secondary);
+      background-color: var(--bg-tertiary);
+    }
+    .draw-row-badge {
+      display: block;
+      width: max-content;
+      margin: 2px auto 0;
+      padding: 1px 5px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--accent-report);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+    .draw-row-badge-muted {
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .draw-path-panel {
+      max-width: 1000px;
+      margin: 12px auto 18px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      box-shadow: var(--card-shadow);
+    }
+    .draw-path-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 2px;
+    }
+    .draw-path-head h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+    .draw-path-head a {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-report);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .draw-path-subtitle,
+    .draw-reconcile-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .draw-path-track {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .draw-path-step {
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+    .draw-path-round {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: var(--accent-report);
+      color: var(--bg-primary);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .draw-path-opponents {
+      margin-top: 8px;
+      min-height: 34px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text-primary);
+    }
+    .draw-path-rating,
+    .draw-path-seed {
+      display: inline-block;
+      margin-left: 4px;
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .draw-path-time {
+      margin-top: 7px;
+      font-size: 11px;
+      line-height: 1.35;
+      color: var(--text-secondary);
+    }
+    .draw-path-points {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px solid var(--border);
+      color: var(--accent-report);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .draw-path-points span {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .draw-reconcile-note {
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid var(--border);
+    }
   </style>
 </head>
 <body>
@@ -156,8 +282,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-12T14:21:29-07:00" title="2026-05-12T14:21:29-07:00">
-    <span class="report-updated-badge__pill">Updated May 12, 2026 2:21 PM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-15T10:48:30-07:00" title="2026-05-15T10:48:30-07:00">
+    <span class="report-updated-badge__pill">Updated May 15, 2026 10:48 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -168,7 +294,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Girls&#x27; 12 &amp; under Singles</h3>
-  <div class="selection-rule-note"><strong>Selection reference: National Standings List, lower rank is stronger</strong><span>Nat #406 · WTN 33.27 · UTR 4.68</span></div>
+  <div class="selection-rule-note"><strong>Selection reference: National Standings List, lower rank is stronger</strong><span>Nat #403 · WTN 33.26 · UTR 4.70</span></div>
 
   <table id="players-table-main" class="players-table primary-table">
     <thead class="sticky-header">
@@ -185,7 +311,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank="23"><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.27</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.68</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">406</a></td><td>Mountain View CA</td><td style="display: none;">23</td></tr>
+      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank="23"><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.70</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">403</a></td><td>Mountain View CA</td><td style="display: none;">23</td></tr>
     </tbody>
   </table>
 
@@ -772,7 +898,7 @@
             <h3>${player.fullName}</h3>
             <span>${player.location}</span>
           </div>
-          <div class="mobile-alexis-seed">#${player.rank} Seed</div>
+          <div class="mobile-alexis-seed">Roster #${player.rank}</div>
         </div>
         <div class="mobile-alexis-stats">
           <div class="mobile-alexis-stat">
@@ -990,7 +1116,7 @@
                 <div class="mobile-detail-value">${player.sectionRank || 'N/A'}</div>
               </div>
               <div class="mobile-detail-item">
-                <div class="mobile-detail-label">Seed</div>
+                <div class="mobile-detail-label">Roster #</div>
                 <div class="mobile-detail-value">#${player.rank}</div>
               </div>
               ${player.partner ? `
