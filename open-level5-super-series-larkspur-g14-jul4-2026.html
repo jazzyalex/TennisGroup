@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="2d56267a-92f3-41dd-8009-d9d0e03d5167">
-  <meta name="publish-ts" content="2026-05-15T17:47:43Z">
+  <meta name="publish-id" content="0c1105eb-1a4c-4100-8c65-0331b77f32a0">
+  <meta name="publish-ts" content="2026-05-17T14:04:38Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -122,7 +122,7 @@
       font-weight: 700;
     }
     .draw-path-panel {
-      max-width: 1000px;
+      max-width: 1120px;
       margin: 12px auto 18px;
       padding: 12px;
       border: 1px solid var(--border);
@@ -138,7 +138,7 @@
     }
     .draw-path-head h3 {
       margin: 0;
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.2;
       color: var(--text-primary);
     }
@@ -154,6 +154,17 @@
       font-size: 12px;
       color: var(--text-secondary);
       line-height: 1.4;
+    }
+    .draw-dashboard-section {
+      margin-top: 12px;
+    }
+    .draw-dashboard-section h4 {
+      margin: 0 0 7px;
+      font-size: 11px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--text-secondary);
     }
     .draw-path-track {
       display: grid;
@@ -219,10 +230,120 @@
       font-size: 10px;
       font-weight: 700;
     }
+    .draw-contingency-grid,
+    .draw-venue-grid,
+    .draw-format-grid {
+      display: grid;
+      gap: 8px;
+    }
+    .draw-contingency-grid {
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+    .draw-venue-grid {
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    }
+    .draw-format-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .draw-contingency,
+    .draw-venue,
+    .draw-format-grid > div {
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+    .draw-contingency h4 {
+      margin: 0 0 4px;
+      font-size: 12px;
+      color: var(--text-primary);
+      text-transform: none;
+    }
+    .draw-contingency p,
+    .draw-contingency li,
+    .draw-venue span,
+    .draw-venue a,
+    .draw-format-grid span {
+      font-size: 11px;
+      line-height: 1.35;
+      color: var(--text-secondary);
+    }
+    .draw-contingency p {
+      margin: 0 0 6px;
+    }
+    .draw-contingency ul {
+      margin: 0;
+      padding-left: 0;
+      display: grid;
+      gap: 6px;
+      list-style: none;
+    }
+    .draw-contingency li + li {
+      margin-top: 0;
+    }
+    .draw-contingency li {
+      padding: 7px 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    .draw-contingency-round {
+      color: var(--text-secondary);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    .draw-contingency .draw-path-points {
+      margin-top: 6px;
+      padding-top: 6px;
+    }
+    .draw-venue strong,
+    .draw-format-grid strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--text-primary);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    .draw-venue span,
+    .draw-venue a,
+    .draw-format-grid span {
+      display: block;
+    }
+    .draw-venue a {
+      margin-top: 2px;
+      color: var(--accent-report);
+      text-decoration: none;
+    }
     .draw-reconcile-note {
       margin-top: 10px;
       padding-top: 9px;
       border-top: 1px solid var(--border);
+    }
+    @media (max-width: 640px) {
+      .draw-path-panel {
+        margin: 10px 10px 16px;
+        padding: 10px;
+      }
+      .draw-path-head {
+        align-items: flex-start;
+      }
+      .draw-path-head h3 {
+        font-size: 16px;
+      }
+      .draw-path-track,
+      .draw-contingency-grid,
+      .draw-venue-grid,
+      .draw-format-grid {
+        grid-template-columns: 1fr;
+      }
+      .draw-path-step,
+      .draw-contingency,
+      .draw-venue,
+      .draw-format-grid > div {
+        padding: 8px;
+      }
+      .draw-path-opponents {
+        min-height: 0;
+      }
     }
   </style>
 </head>
@@ -282,8 +403,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-15T10:47:43-07:00" title="2026-05-15T10:47:43-07:00">
-    <span class="report-updated-badge__pill">Updated May 15, 2026 10:47 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-17T07:04:37-07:00" title="2026-05-17T07:04:37-07:00">
+    <span class="report-updated-badge__pill">Updated May 17, 2026 7:04 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -311,10 +432,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr data-player-key="CHEN|CINDY" data-entry-status="entry" data-section-rank="11"><td class="col-rank">1</td><td>Cindy</td><td>Chen</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">32.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4881288" target="_blank" rel="noopener noreferrer">5.27</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">478</a></td><td>Scottsdale AZ</td><td style="display: none;">11</td></tr>
+      <tr data-player-key="CHEN|CINDY" data-entry-status="entry" data-section-rank="11"><td class="col-rank">1</td><td>Cindy</td><td>Chen</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">32.31</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4881288" target="_blank" rel="noopener noreferrer">5.39</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018260528" target="_blank" rel="noopener noreferrer">478</a></td><td>Scottsdale AZ</td><td style="display: none;">11</td></tr>
       <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="1" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank="107"><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">33.26</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.70</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">2064</a></td><td>Mountain View CA</td><td style="display: none;">107</td></tr>
       <tr data-player-key="LEE|GABBY" data-entry-status="entry" data-section-rank="168"><td class="col-rank">2</td><td>Gabby</td><td>Lee</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019126181" target="_blank" rel="noopener noreferrer">35.80</a></td><td class="col-utr">N/A</td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019126181" target="_blank" rel="noopener noreferrer">3201</a></td><td>Moraga CA</td><td style="display: none;">168</td></tr>
-      <tr data-player-key="SINGH|MIHIKA" data-entry-status="entry" data-section-rank="140"><td class="col-rank">3</td><td>Mihika</td><td>Singh</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">35.35</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4449588" target="_blank" rel="noopener noreferrer">3.18</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">2683</a></td><td>Fremont CA</td><td style="display: none;">140</td></tr>
+      <tr data-player-key="SINGH|MIHIKA" data-entry-status="entry" data-section-rank="140"><td class="col-rank">3</td><td>Mihika</td><td>Singh</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">35.35</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4449588" target="_blank" rel="noopener noreferrer">3.21</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019452382" target="_blank" rel="noopener noreferrer">2683</a></td><td>Fremont CA</td><td style="display: none;">140</td></tr>
     </tbody>
   </table>
 
@@ -341,7 +462,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Avg UTR (known)</div>
-        <div class="stat-value">4.22</div>
+        <div class="stat-value">4.30</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Draw Size</div>
@@ -361,7 +482,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-label">Top UTR</div>
-        <div class="stat-value">5.27</div>
+        <div class="stat-value">5.39</div>
       </div>
     </div>
   </div>
@@ -394,7 +515,7 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Tiebreaks:</span>
-      <span class="detail-value">All matches will be the best of 3 Tiebreak sets and will use Regular Scoring, except that in the unlikely event that 5 entries are received in a division, the best of 3 Tiebreak sets with a 10-Point Match Tiebreak will be played. Note that in the event of inclement weather the USTA Regulations permit the Referee to...</span>
+      <span class="detail-value">All matches will be the best of 3 Tiebreak sets and will use Regular Scoring, except that in the unlikely event that 5 entries are received in a division, the best of 3 Tiebreak sets with a 10-Point Match Tiebreak will be played. Note that in the event of inclement weather the USTA Regulations permit the Referee to shorten the match format from those described below.</span>
     </div>
 
     <h3>Venue Information</h3>
