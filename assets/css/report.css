@@ -2110,12 +2110,6 @@ tr.entry-list-player:not(.highlight-player) {
 tr.alternate-player:not(.highlight-player) {
   background-color: rgba(255, 193, 7, 0.10);
 }
-tr.withdrawn-player:not(.highlight-player) {
-  color: var(--text-muted);
-  background-color: var(--status-critical-bg, var(--bg-tertiary));
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
-}
 
 /* ============================================================
    H2H INLINE COLUMN (table badge + tooltip)
