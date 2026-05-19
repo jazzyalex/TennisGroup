@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="6dc736e7-1b8c-42b4-8874-49be972771d9">
-  <meta name="publish-ts" content="2026-05-18T14:03:55Z">
+  <meta name="publish-id" content="6a7152a5-dd8b-42dc-b530-085358bb6038">
+  <meta name="publish-ts" content="2026-05-19T15:03:26Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -403,8 +403,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-18T07:03:55-07:00" title="2026-05-18T07:03:55-07:00">
-    <span class="report-updated-badge__pill">Updated May 18, 2026 7:03 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-19T08:03:26-07:00" title="2026-05-19T08:03:26-07:00">
+    <span class="report-updated-badge__pill">Updated May 19, 2026 8:03 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -415,7 +415,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Girls&#x27; 14 &amp; under Team</h3>
-  <div class="selection-rule-note"><strong>Selection criteria: Teams are selected and seeded by the most recently published Individual Doubles Seeding List for the division.</strong><span>Alexis Malakhova G14: Nat #2064 · WTN 33.26 · UTR 4.70</span></div>
+  <div class="selection-rule-note"><strong>Selection criteria: Teams are selected and seeded by the most recently published Individual Doubles Seeding List for the division.</strong><span>Alexis Malakhova G14: Nat #2064 · WTN 33.26 · UTR 4.72</span></div>
 
   <table id="players-table-main" class="players-table primary-table">
     <thead class="sticky-header">
@@ -768,6 +768,7 @@
 
       const rows = table.querySelectorAll('tbody tr:not([data-primary-projection])');
       rows.forEach((row) => {
+        if ((row.getAttribute('data-entry-status') || '').trim().toLowerCase() === 'withdrawn') return;
         const cells = row.querySelectorAll('td');
         if (cells.length < minCells) return;
 
@@ -1909,6 +1910,7 @@
 	        })();
 
 	        return Array.from(table.querySelectorAll('tbody tr:not([data-primary-projection])'))
+	          .filter((row) => (row.getAttribute('data-entry-status') || '').trim().toLowerCase() !== 'withdrawn')
 	          .map((row) => {
 	            const cells = row.querySelectorAll('td');
 	            const maxIdx = Math.max(utrIdx, natIdx);
