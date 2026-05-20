@@ -2142,10 +2142,10 @@ td.col-h2h .h2h-badge { margin-left: 0; }
 }
 .h2h-win  { background: rgba(22,163,74,0.15);  color: #16a34a; }
 .h2h-loss { background: rgba(220,38,38,0.15);  color: #dc2626; }
-.h2h-even { background: rgba(220,38,38,0.08);  color: #ef4444; }
+.h2h-even { background: var(--mobile-blue-soft); color: var(--mobile-blue); }
 html[data-theme="dark"] .h2h-win  { background: rgba(74,222,128,0.15);  color: #4ade80; }
 html[data-theme="dark"] .h2h-loss { background: rgba(248,113,113,0.15); color: #f87171; }
-html[data-theme="dark"] .h2h-even { background: rgba(248,113,113,0.08); color: #fca5a5; }
+html[data-theme="dark"] .h2h-even { background: var(--mobile-blue-soft); color: var(--mobile-blue); }
 #h2h-tooltip {
   position: fixed; z-index: 9999; pointer-events: none; display: none;
   background: var(--bg-primary, #fff); border: 1px solid var(--border-color, #e2e8f0);
