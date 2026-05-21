@@ -2380,10 +2380,61 @@ tr.draw-roster-only:not(.highlight-player) {
   border-top: 1px solid var(--border);
 }
 
+.mobile-draw-details {
+  display: none;
+}
+
 @media (max-width: 640px) {
+  .mobile-draw-details {
+    display: block;
+    margin: 10px 10px 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-primary);
+    box-shadow: var(--card-shadow);
+  }
+
+  .mobile-draw-details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mobile-draw-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-draw-details summary span {
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .mobile-draw-details summary small {
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: right;
+  }
+
+  .mobile-draw-details[open] summary {
+    border-bottom: 1px solid var(--border);
+  }
+
   .draw-path-panel {
     margin: 10px 10px 16px;
     padding: 10px;
+  }
+
+  .mobile-draw-details > .draw-path-panel {
+    margin: 0;
+    border: 0;
+    box-shadow: none;
   }
 
   .draw-path-head {
