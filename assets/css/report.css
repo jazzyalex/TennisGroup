@@ -2086,6 +2086,17 @@ html[data-theme="dark"] .report-updated-badge__pill {
 .h2h-smc { display: block; transition: transform 0.22s ease; flex-shrink: 0; }
 .h2h-show-more[data-open="1"] .h2h-smc { transform: rotate(180deg); }
 .h2h-smn { transition: opacity 0.15s; }
+
+@media (max-width: 640px) {
+  .h2h-match-event-main,
+  .h2h-match-event-main a,
+  .h2h-match-event-sub {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+  }
+}
 .h2h-show-more[data-open="1"] .h2h-smn { opacity: 0; pointer-events: none; }
 
 html[data-theme="dark"] .h2h-player-card { background: var(--bg-secondary, #1e293b); border-color: var(--border-color, #334155); }
