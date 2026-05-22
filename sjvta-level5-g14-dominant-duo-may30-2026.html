@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="b6c7cff0-870a-4c30-8e8f-dfca36e397d2">
-  <meta name="publish-ts" content="2026-05-21T16:01:15Z">
+  <meta name="publish-id" content="d510a766-552d-4b30-adf8-03ff0d74ca6f">
+  <meta name="publish-ts" content="2026-05-22T14:08:30Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -26,7 +26,7 @@
   <title>SJVTA Level 5 Junior 14s Dominant Duo Team Tournament, May 30 - 31, 2026, Bear Creek High School, Stockton, CA</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css">
-  <link rel="stylesheet" href="assets/css/report.css">
+  <link rel="stylesheet" href="assets/css/report.css?v=20260521-draw-dashboard">
   <script>
     function toggleTheme() {
       const html = document.documentElement;
@@ -208,6 +208,9 @@
       font-size: 10px;
       font-weight: 700;
     }
+    .draw-path-opponents > .draw-path-rating:first-child {
+      margin-left: 0;
+    }
     .draw-path-time {
       margin-top: 7px;
       font-size: 11px;
@@ -318,10 +321,53 @@
       padding-top: 9px;
       border-top: 1px solid var(--border);
     }
+    .mobile-draw-details {
+      display: none;
+    }
     @media (max-width: 640px) {
+      .mobile-draw-details {
+        display: block;
+        margin: 10px 10px 12px;
+        border: 1px solid var(--border);
+        background: var(--bg-primary);
+        box-shadow: var(--card-shadow);
+      }
+      .mobile-draw-details summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 12px;
+        color: var(--text-primary);
+        cursor: pointer;
+        list-style: none;
+      }
+      .mobile-draw-details summary::-webkit-details-marker {
+        display: none;
+      }
+      .mobile-draw-details summary span {
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+      .mobile-draw-details summary small {
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: right;
+      }
+      .mobile-draw-details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
       .draw-path-panel {
         margin: 10px 10px 16px;
         padding: 10px;
+      }
+      .mobile-draw-details > .draw-path-panel {
+        margin: 0;
+        border: 0;
+        box-shadow: none;
       }
       .draw-path-head {
         align-items: flex-start;
@@ -403,8 +449,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-21T09:01:15-07:00" title="2026-05-21T09:01:15-07:00">
-    <span class="report-updated-badge__pill">Updated May 21, 2026 9:01 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-22T07:08:30-07:00" title="2026-05-22T07:08:30-07:00">
+    <span class="report-updated-badge__pill">Updated May 22, 2026 7:08 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -415,7 +461,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Girls&#x27; 14 &amp; under Team</h3>
-  <div class="selection-rule-note"><strong>Selection criteria: Teams are selected and seeded by the most recently published Individual Doubles Seeding List for the division.</strong><span>Alexis Malakhova G14: Nat #1675 · WTN 32.61 · UTR 4.80</span></div>
+  <div class="selection-rule-note"><strong>Selection criteria: Teams are selected and seeded by the most recently published Individual Doubles Seeding List for the division.</strong><span>Alexis Malakhova G14: Nat #1675 · WTN 32.61 · UTR 4.83</span></div>
 
   <table id="players-table-main" class="players-table primary-table">
     <thead class="sticky-header">
@@ -621,6 +667,7 @@
     <!-- Position Gauge -->
     <div class="mobile-position-gauge" id="mobile-position-gauge"></div>
 
+    <!-- Official draw dashboard is injected here as folded mobile details. -->
     <!-- UTR Distribution -->
     <div class="mobile-section-header">
       <span class="mobile-section-title">UTR Distribution</span>
