@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="3b4d30c1-21cb-48c5-90b5-327dfb1698e9">
-  <meta name="publish-ts" content="2026-05-21T16:05:34Z">
+  <meta name="publish-id" content="e43091eb-f7d5-4f03-8417-c0f15ed24f66">
+  <meta name="publish-ts" content="2026-05-22T14:12:13Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -26,7 +26,7 @@
   <title>Open Level 5 Super Series — Soquel Girls U12, July 4 - 5, 2026, Soquel High School, Soquel, CA</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css">
-  <link rel="stylesheet" href="assets/css/report.css">
+  <link rel="stylesheet" href="assets/css/report.css?v=20260521-draw-dashboard">
   <script>
     function toggleTheme() {
       const html = document.documentElement;
@@ -208,6 +208,9 @@
       font-size: 10px;
       font-weight: 700;
     }
+    .draw-path-opponents > .draw-path-rating:first-child {
+      margin-left: 0;
+    }
     .draw-path-time {
       margin-top: 7px;
       font-size: 11px;
@@ -318,10 +321,53 @@
       padding-top: 9px;
       border-top: 1px solid var(--border);
     }
+    .mobile-draw-details {
+      display: none;
+    }
     @media (max-width: 640px) {
+      .mobile-draw-details {
+        display: block;
+        margin: 10px 10px 12px;
+        border: 1px solid var(--border);
+        background: var(--bg-primary);
+        box-shadow: var(--card-shadow);
+      }
+      .mobile-draw-details summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 12px;
+        color: var(--text-primary);
+        cursor: pointer;
+        list-style: none;
+      }
+      .mobile-draw-details summary::-webkit-details-marker {
+        display: none;
+      }
+      .mobile-draw-details summary span {
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+      .mobile-draw-details summary small {
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: right;
+      }
+      .mobile-draw-details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
       .draw-path-panel {
         margin: 10px 10px 16px;
         padding: 10px;
+      }
+      .mobile-draw-details > .draw-path-panel {
+        margin: 0;
+        border: 0;
+        box-shadow: none;
       }
       .draw-path-head {
         align-items: flex-start;
@@ -403,8 +449,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-21T09:05:33-07:00" title="2026-05-21T09:05:33-07:00">
-    <span class="report-updated-badge__pill">Updated May 21, 2026 9:05 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-05-22T07:12:13-07:00" title="2026-05-22T07:12:13-07:00">
+    <span class="report-updated-badge__pill">Updated May 22, 2026 7:12 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -415,7 +461,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Girls&#x27; 12 &amp; under Singles</h3>
-  <div class="selection-rule-note"><strong>Selection reference: National Standings List, lower rank is stronger</strong><span>Nat #405 · WTN 32.61 · UTR 4.80</span></div>
+  <div class="selection-rule-note"><strong>Selection reference: National Standings List, lower rank is stronger</strong><span>Nat #405 · WTN 32.61 · UTR 4.83</span></div>
 
   <table id="players-table-main" class="players-table primary-table">
     <thead class="sticky-header">
@@ -432,7 +478,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank="24"><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.61</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.80</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">405</a></td><td>Mountain View CA</td><td style="display: none;">24</td></tr>
+      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank="24"><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.61</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">4.83</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">405</a></td><td>Mountain View CA</td><td style="display: none;">24</td></tr>
       <tr data-player-key="CHAN|HAYDEN" data-entry-status="entry" data-section-rank="87"><td class="col-rank">1</td><td>Hayden</td><td>Chan</td><td class="col-h2h"></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019442645" target="_blank" rel="noopener noreferrer">37.71</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/4720319" target="_blank" rel="noopener noreferrer">2.03</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2019442645" target="_blank" rel="noopener noreferrer">1474</a></td><td>Los Altos CA</td><td style="display: none;">87</td></tr>
     </tbody>
   </table>
@@ -609,6 +655,7 @@
     <!-- Position Gauge -->
     <div class="mobile-position-gauge" id="mobile-position-gauge"></div>
 
+    <!-- Official draw dashboard is injected here as folded mobile details. -->
     <!-- UTR Distribution -->
     <div class="mobile-section-header">
       <span class="mobile-section-title">UTR Distribution</span>
