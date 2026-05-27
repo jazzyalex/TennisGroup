@@ -2381,184 +2381,22 @@ tr.draw-roster-only:not(.highlight-player) {
 }
 
 /* ============================================================
-   SEED OUTLOOK
+   SEED TABLE HINTS
    ============================================================ */
-.seed-outlook-panel {
-  max-width: 1120px;
-  margin: 12px auto 18px;
-  padding: 12px;
-  border: 1px solid var(--border);
-  background: var(--bg-secondary);
-  box-shadow: var(--card-shadow);
+tr.seeded-entry-row td.col-rank {
+  border-left: 3px solid var(--accent-report);
 }
 
-.seed-outlook-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.seed-outlook-head h3 {
-  margin: 0;
-  color: var(--text-primary);
-  font-size: 17px;
-  line-height: 1.2;
-}
-
-.seed-outlook-head span {
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.3;
-  text-align: right;
-}
-
-.seed-outlook-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.seed-outlook-stat,
-.seed-outlook-chip {
-  min-width: 0;
-  border: 1px solid var(--border);
-  background: var(--bg-primary);
-}
-
-.seed-outlook-stat {
-  padding: 10px;
-}
-
-.seed-outlook-stat span,
-.seed-outlook-stat small,
-.seed-outlook-chip small {
-  display: block;
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.seed-outlook-stat strong {
-  display: block;
-  margin: 3px 0;
-  color: var(--text-primary);
-  font-size: 20px;
-  line-height: 1.15;
-}
-
-.seed-outlook-primary {
-  border-color: var(--accent-report);
-}
-
-.seed-outlook-note {
-  margin-top: 10px;
-  padding-top: 9px;
-  border-top: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.seed-branch-map {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
-  gap: 6px;
-  margin-top: 10px;
-}
-
-.seed-branch-slot {
-  min-width: 0;
-  min-height: 36px;
-  padding: 6px 4px;
-  border: 1px dashed var(--border);
-  background: var(--bg-primary);
-  color: var(--text-muted);
-  text-align: center;
-}
-
-.seed-branch-slot span {
-  display: block;
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1.1;
-}
-
-.seed-branch-slot strong {
-  display: block;
-  margin-top: 3px;
-  color: var(--text-primary);
-  font-size: 10px;
-  font-weight: 900;
-  line-height: 1.1;
-  overflow-wrap: anywhere;
-}
-
-.seed-branch-filled {
-  border-style: solid;
-  border-color: var(--border);
-  color: var(--text-secondary);
-}
-
-.seed-branch-primary {
-  border-color: var(--accent-report);
+tr.seeded-entry-row td.col-seed-rank,
+tr.seeded-entry-row td.col-team-seed {
   background: var(--accent-report-light);
-  color: var(--accent-report);
 }
 
-.seed-outlook-branches {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.seed-outlook-chip {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 2px 8px;
-  padding: 8px 9px;
-  align-items: start;
-}
-
-.seed-outlook-chip strong {
-  grid-row: span 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 28px;
-  height: 24px;
-  padding: 0 6px;
-  border-radius: 999px;
-  background: var(--accent-report);
-  color: var(--bg-primary);
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.seed-outlook-chip span {
-  min-width: 0;
-  overflow-wrap: anywhere;
-  color: var(--text-primary);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.25;
-}
-
-.seed-outlook-chip-primary {
-  border-color: var(--accent-report);
-  background: var(--accent-report-light);
+tr.seed-cutoff-row td {
+  border-bottom: 2px solid var(--accent-report);
 }
 
 .mobile-draw-details {
-  display: none;
-}
-
-.mobile-seed-outlook-details {
   display: none;
 }
 
@@ -2604,49 +2442,6 @@ tr.draw-roster-only:not(.highlight-player) {
     border-bottom: 1px solid var(--border);
   }
 
-  .mobile-seed-outlook-details {
-    display: block;
-    margin: 10px 30px 14px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--bg-primary);
-    box-shadow: var(--mobile-shadow);
-    overflow: hidden;
-  }
-
-  .mobile-seed-outlook-details summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 12px 14px;
-    color: var(--text-primary);
-    cursor: pointer;
-    list-style: none;
-  }
-
-  .mobile-seed-outlook-details summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .mobile-seed-outlook-details summary span {
-    font-size: 14px;
-    font-weight: 800;
-    line-height: 1.2;
-  }
-
-  .mobile-seed-outlook-details summary small {
-    color: var(--text-secondary);
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.2;
-    text-align: right;
-  }
-
-  .mobile-seed-outlook-details[open] summary {
-    border-bottom: 1px solid var(--border);
-  }
-
   .draw-path-panel {
     margin: 10px 10px 16px;
     padding: 10px;
@@ -2684,45 +2479,6 @@ tr.draw-roster-only:not(.highlight-player) {
     min-height: 0;
   }
 
-  .seed-outlook-panel {
-    margin: 10px 10px 16px;
-    padding: 10px;
-  }
-
-  .mobile-seed-outlook-panel {
-    margin: 0;
-    border: 0;
-    box-shadow: none;
-  }
-
-  .mobile-seed-outlook-panel .seed-outlook-chip:nth-child(n+9):not(.seed-outlook-chip-primary) {
-    display: none;
-  }
-
-  .seed-branch-map {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .seed-outlook-head {
-    display: block;
-  }
-
-  .seed-outlook-head span {
-    display: block;
-    margin-top: 4px;
-    text-align: left;
-  }
-
-  .seed-outlook-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 460px) {
-  .seed-outlook-grid,
-  .seed-outlook-branches {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ============================================================
