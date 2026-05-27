@@ -2463,6 +2463,52 @@ tr.draw-roster-only:not(.highlight-player) {
   line-height: 1.4;
 }
 
+.seed-branch-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.seed-branch-slot {
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px 4px;
+  border: 1px dashed var(--border);
+  background: var(--bg-primary);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.seed-branch-slot span {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.seed-branch-slot strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-primary);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.seed-branch-filled {
+  border-style: solid;
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.seed-branch-primary {
+  border-color: var(--accent-report);
+  background: var(--accent-report-light);
+  color: var(--accent-report);
+}
+
 .seed-outlook-branches {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
@@ -2651,6 +2697,10 @@ tr.draw-roster-only:not(.highlight-player) {
 
   .mobile-seed-outlook-panel .seed-outlook-chip:nth-child(n+9):not(.seed-outlook-chip-primary) {
     display: none;
+  }
+
+  .seed-branch-map {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .seed-outlook-head {
