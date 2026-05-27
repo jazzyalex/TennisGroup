@@ -2381,19 +2381,10 @@ tr.draw-roster-only:not(.highlight-player) {
 }
 
 /* ============================================================
-   SEED TABLE HINTS
+   SEED CUTOFF
    ============================================================ */
-tr.seeded-entry-row td.col-rank {
-  border-left: 3px solid var(--accent-report);
-}
-
-tr.seeded-entry-row td.col-seed-rank,
-tr.seeded-entry-row td.col-team-seed {
-  background: var(--accent-report-light);
-}
-
 tr.seed-cutoff-row td {
-  border-bottom: 2px solid var(--accent-report);
+  border-bottom: 2px solid var(--green-primary);
 }
 
 .mobile-draw-details {
