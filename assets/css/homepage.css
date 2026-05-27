@@ -1114,6 +1114,14 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 .tournament-card:not(.calendar-card) .card-meta .meta-item:nth-child(n+3) {
   grid-column: 1 / -1;
 }
+.tournament-card:not(.calendar-card) .meta-result {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+.tournament-card:not(.calendar-card) .meta-result.is-no-play {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
 
 /* Responsive */
 @media (max-width: 1200px) {
