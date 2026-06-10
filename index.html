@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="4eb6a90e-c57f-40c8-a0ff-f2732815812b">
-  <meta name="publish-ts" content="2026-06-10T20:55:03Z">
+  <meta name="publish-id" content="1cfb448b-9dc3-4878-9e94-a153cbfe1317">
+  <meta name="publish-ts" content="2026-06-10T20:58:10Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -2815,8 +2815,9 @@
 	      const signedUpFilterToggle = tournamentSection.querySelector('[data-signed-up-filter-toggle]');
 	      const pastFilterToggle = tournamentSection.querySelector('[data-past-filter-toggle]');
 	      const cardsRoot = tournamentSection.querySelector('.cards-grid') || tournamentSection;
+	      const filterRoot = tournamentSection;
 	
-	      const getCards = () => Array.from(cardsRoot.querySelectorAll('a.tournament-card'));
+	      const getCards = () => Array.from(filterRoot.querySelectorAll('a.tournament-card:not(.calendar-card)'));
 	
 	      const getTournamentId = (card) => {
 	        const explicit = card.getAttribute('data-tournament-id');
@@ -2955,7 +2956,7 @@
 		      };
 	
 	      // Event delegation so dynamically injected cards work too.
-	      cardsRoot.addEventListener('click', (event) => {
+	      filterRoot.addEventListener('click', (event) => {
 	        const toggle = event.target?.closest?.('[data-favorite-toggle]');
 	        if (!toggle) return;
 	        const card = toggle.closest('a.tournament-card');
@@ -2965,7 +2966,7 @@
 	        toggleFavorite(card);
 	      });
 	
-	      cardsRoot.addEventListener('keydown', (event) => {
+	      filterRoot.addEventListener('keydown', (event) => {
 	        if (event.key !== 'Enter' && event.key !== ' ') return;
 	        const toggle = event.target?.closest?.('[data-favorite-toggle]');
 	        if (!toggle) return;
