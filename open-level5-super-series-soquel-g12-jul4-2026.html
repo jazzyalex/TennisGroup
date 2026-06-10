@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="e7c1ec4d-446b-4c83-a410-8b97a1ffb669">
-  <meta name="publish-ts" content="2026-06-09T19:18:47Z">
+  <meta name="publish-id" content="4823526d-d46f-4302-bbb4-8e33653489b4">
+  <meta name="publish-ts" content="2026-06-10T00:53:34Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -449,8 +449,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-06-09T12:17:03-07:00" title="2026-06-09T12:17:03-07:00">
-    <span class="report-updated-badge__pill">Updated Jun 9, 2026 12:17 PM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-06-09T17:50:35-07:00" title="2026-06-09T17:50:35-07:00">
+    <span class="report-updated-badge__pill">Updated Jun 9, 2026 5:50 PM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -463,7 +463,7 @@
   <h3 class="table-section-title">Girls&#x27; 12 &amp; under Singles</h3>
 <div class="selection-rule-note"><strong>Selection reference: WTN singles, lower is stronger</strong><span>WTN 32.55 · Nat #309 · UTR 5.08</span></div>
 
-  <table id="players-table-main" class="players-table primary-table">
+  <table id="players-table-main" class="players-table primary-table" data-default-sort="wtn" data-selection-flight-size="8">
     <thead class="sticky-header">
       <tr>
         <th class="col-rank">#</th>
@@ -729,7 +729,13 @@
     // MOBILE VIEW IMPLEMENTATION
     // ========================================
 
-    let currentSort = 'natRank';
+    function reportDefaultSort() {
+      const table = document.querySelector('.desktop-view table.players-table[data-default-sort]');
+      const value = (table?.getAttribute('data-default-sort') || '').trim();
+      return value || 'natRank';
+    }
+
+    let currentSort = reportDefaultSort();
 	    let isExpanded = false;
 	    let allPlayers = [];
 	    let isMixedEvent = false;
@@ -814,7 +820,7 @@
       const requiredCols = [colRank, colFirst, colLast, colWtn, colUtr, colNat, colLocation].filter((idx) => idx !== -1);
       const minCells = requiredCols.length ? Math.max(...requiredCols) + 1 : 7;
 
-      const rows = table.querySelectorAll('tbody tr:not([data-primary-projection])');
+      const rows = table.querySelectorAll('tbody tr:not([data-primary-projection]):not(.selection-flight-row)');
       rows.forEach((row) => {
         if ((row.getAttribute('data-entry-status') || '').trim().toLowerCase() === 'withdrawn') return;
         const cells = row.querySelectorAll('td');
@@ -1489,6 +1495,7 @@
       document.getElementById('mobile-player-count').textContent = allPlayers.length;
       
       // Render player list (initially show top 8)
+      syncMobileSortButtons(currentSort);
       renderPlayerList(currentSort, 8);
       
       // Render tournament info
@@ -1543,16 +1550,18 @@
     // EVENT HANDLERS
     // ========================================
 
-    function handleSort(sortBy) {
-      currentSort = sortBy;
-      
-      // Update active button
+    function syncMobileSortButtons(sortBy) {
       document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
         btn.classList.remove('active');
         if (btn.getAttribute('data-sort') === sortBy) {
           btn.classList.add('active');
         }
       });
+    }
+
+    function handleSort(sortBy) {
+      currentSort = sortBy;
+      syncMobileSortButtons(sortBy);
       
       // Re-render with current expansion state
       const limit = isExpanded ? null : 8;
@@ -1781,7 +1790,7 @@
 	        const wtnIdx = headers.findIndex((h) => h === 'wtn');
 	        const natIdx = headers.findIndex((h) => h === 'nat rank' || h === 'national rank' || h === 'nat');
 	
-	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          if (cells.length < 3) return;
@@ -1812,7 +1821,7 @@
 	      tables.forEach((table) => {
 	        const tbody = table.querySelector('tbody');
 	        if (!tbody) return;
-	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          if (cells.length < 3) return;
@@ -1835,7 +1844,7 @@
 	        );
 	        const locationIdx = headers.findIndex((h) => h === 'location');
 	
-	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          const idx = locationIdx !== -1 ? locationIdx : 6;
@@ -1919,7 +1928,7 @@
 
 	        if (isMixedEventPage()) {
 	          const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table')).filter(
-	            (table) => table.querySelectorAll('tbody tr:not([data-primary-projection])').length > 0
+          (table) => table.querySelectorAll('tbody tr:not([data-primary-projection]):not(.selection-flight-row)').length > 0
 	          );
 	          if (tables.length) return tables;
 	        }
@@ -1955,7 +1964,7 @@
 	          return idx !== -1 ? idx : 5;
 	        })();
 
-	        return Array.from(table.querySelectorAll('tbody tr:not([data-primary-projection])'))
+        return Array.from(table.querySelectorAll('tbody tr:not([data-primary-projection]):not(.selection-flight-row)'))
 	          .filter((row) => (row.getAttribute('data-entry-status') || '').trim().toLowerCase() !== 'withdrawn')
 	          .map((row) => {
 	            const cells = row.querySelectorAll('td');
@@ -2133,14 +2142,14 @@
       );
 
       function updateRowNumbers() {
-        const rows = tbody.querySelectorAll('tr:not([data-primary-projection])');
+        const rows = tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)');
         rows.forEach((row, index) => {
           if (row.cells && row.cells[0]) row.cells[0].textContent = index + 1;
         });
       }
 
       function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
-        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not(.selection-flight-row)'));
 
         rows.sort((a, b) => {
           const aC = a.cells[columnIndex], bC = b.cells[columnIndex];
@@ -2176,17 +2185,25 @@
         if (!header.title) header.title = 'Click to sort';
       });
 
+      const requestedDefault = (table.getAttribute('data-default-sort') || '').trim().toLowerCase();
       const teamSeedIdx = headers.findIndex(h => h.classList.contains('col-team-seed'));
       const seedIdx = headers.findIndex(h => h.classList.contains('col-seed-rank'));
+      const wtnIdx = headers.findIndex(h => h.classList.contains('col-wtn'));
       const natIdx = headers.findIndex(h => h.classList.contains('col-national'));
-      const defaultIdx = teamSeedIdx >= 0 ? teamSeedIdx : (seedIdx >= 0 ? seedIdx : (natIdx >= 0 ? natIdx : 5));
+      const defaultIdx = requestedDefault === 'wtn' && wtnIdx >= 0
+        ? wtnIdx
+        : (teamSeedIdx >= 0 ? teamSeedIdx : (seedIdx >= 0 ? seedIdx : (natIdx >= 0 ? natIdx : 5)));
       const defaultHeader = headers[defaultIdx];
       if (defaultHeader && sortableHeaders.includes(defaultHeader)) {
         sortableHeaders.forEach(h => {
           if (h !== defaultHeader) h.dataset.sort = 'none';
         });
         defaultHeader.dataset.sort = 'asc';
-        applySort(defaultIdx, 'asc', defaultHeader, true);
+        if (requestedDefault === 'wtn') {
+          updateRowNumbers();
+        } else {
+          applySort(defaultIdx, 'asc', defaultHeader, true);
+        }
       } else {
         updateRowNumbers();
       }
