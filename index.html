@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="publish-id" content="c5888125-e36d-4f4d-86d8-94503b9a4c16">
-  <meta name="publish-ts" content="2026-06-10T20:42:54Z">
+  <meta name="publish-id" content="4eb6a90e-c57f-40c8-a0ff-f2732815812b">
+  <meta name="publish-ts" content="2026-06-10T20:55:03Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tennis Tracker</title>
@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://jazzyalex.github.io/TennisGroup/assets/tennis-report/og-image-centered-1200x630.png">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css?v=20260326">
-  <link rel="stylesheet" href="assets/css/homepage.css?v=20260527a">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=20260610a">
   <script>
     (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
   </script>
@@ -146,6 +146,9 @@
 			          <span class="section-badge" data-tournament-count>10 Tournaments</span>
 		          <button class="signed-up-filter-toggle" type="button" aria-label="Show registered tournaments only" title="Show registered tournaments only" aria-pressed="false" data-signed-up-filter-toggle>
 		            Registered
+		          </button>
+		          <button class="signed-up-filter-toggle past-filter-toggle" type="button" aria-label="Show past tournaments" title="Show past tournaments" aria-pressed="false" data-past-filter-toggle>
+		            Past
 		          </button>
 		          <button class="favorites-filter-toggle" type="button" aria-label="Show starred tournaments only" title="Show starred tournaments only" aria-pressed="false" data-favorites-filter-toggle>
 		            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1685,7 +1688,7 @@
 	          </div>
 	        </a>
 	        <!-- The West Quest Level 5 Team Championships (Mixed U14, June) -->
-	        <a href="west-quest-level5-team-moraga-g14-jun27-2026.html" class="tournament-card is-upcoming" data-tournament-id="june|27-28|usta norcal|saint mary's college|moraga|the west quest level 5 team tournament" data-card-close-text="June 17, 2026 at 2:59 PM PDT" data-card-fills="[{&quot;label&quot;:&quot;&quot;,&quot;registered&quot;:&quot;28&quot;,&quot;draw&quot;:&quot;16&quot;}]" data-card-updated-iso="2026-06-10T12:35:47-07:00">
+	        <a href="west-quest-level5-team-moraga-g14-jun27-2026.html" class="tournament-card is-upcoming" data-tournament-id="june|27-28|usta norcal|saint mary's college|moraga|the west quest level 5 team tournament" data-card-close-text="June 17, 2026 at 2:59 PM PDT" data-card-fills="[{&quot;label&quot;:&quot;U14 Team&quot;,&quot;registered&quot;:&quot;28&quot;,&quot;draw&quot;:&quot;16&quot;}]" data-card-updated-iso="2026-06-10T12:35:47-07:00">
 	          <div class="card-header">
 	            <span class="card-type report" data-registration-pill>
 	              <svg class="card-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -2291,6 +2294,20 @@
 		      });
 		    }
 
+		    function abbreviateSectionFillLabel(title) {
+		      const text = (title || '').trim();
+		      const teamAge = text.match(/\b(\d{1,2})\s*&\s*under\b/i);
+		      if (/\bteam\b/i.test(text) && teamAge) return `U${teamAge[1]} Team`;
+		      return text
+		        .replace(/Girls['\u2018\u2019\s]*/gi, 'G').replace(/Boys['\u2018\u2019\s]*/gi, 'B')
+		        .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
+		        .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '');
+		    }
+
+		    function singleSectionFillLabel(title) {
+		      return /\bteam\b/i.test(title || '') ? abbreviateSectionFillLabel(title) : '';
+		    }
+
 		    function extractFillsFromReportDoc(doc) {
 		      if (!doc) return null;
 		      // Try per-section Event Statistics blocks first (multi-section reports: G12 + G14).
@@ -2314,10 +2331,7 @@
 		      }
 		      if (sectionFills.length > 1) {
 		        return sectionFills.map(sf => {
-		          const label = sf.title
-		            .replace(/Girls['\u2018\u2019\s]*/gi, 'G').replace(/Boys['\u2018\u2019\s]*/gi, 'B')
-		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
-		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '');
+		          const label = abbreviateSectionFillLabel(sf.title);
 		          const entry = { label };
 		          if (sf.registered !== null) entry.registered = sf.registered;
 		          if (sf.draw !== null) entry.draw = sf.draw;
@@ -2326,7 +2340,7 @@
 		      }
 		      if (sectionFills.length === 1) {
 		        const sf = sectionFills[0];
-		        const entry = { label: '' };
+		        const entry = { label: singleSectionFillLabel(sf.title) };
 		        if (sf.registered !== null) entry.registered = sf.registered;
 		        if (sf.draw !== null) entry.draw = sf.draw;
 		        return [entry];
@@ -2346,10 +2360,7 @@
 		        let label = '';
 		        if (blocks.length > 1) {
 		          const sec = block.closest('section') || block.parentElement;
-		          label = (sec?.querySelector('h2, h3')?.textContent || '').trim()
-		            .replace(/Girls['\u2018\u2019\s]*/gi, 'G').replace(/Boys['\u2018\u2019\s]*/gi, 'B')
-		            .replace(/(\d+)\s*&\s*[Uu]nder/g, '$1').replace(/Singles/gi, 'S')
-		            .replace(/Doubles/gi, 'D').replace(/Mixed/gi, 'M').replace(/\s+/g, '').trim();
+		          label = abbreviateSectionFillLabel(sec?.querySelector('h2, h3')?.textContent || '').trim();
 		        }
 		        return { label, registered, draw };
 		      }).filter(Boolean);
@@ -2794,6 +2805,7 @@
 	      const STORAGE_KEY = 'tennis_tracker_starred_tournaments_v1';
 	      const FILTER_KEY = 'tennis_tracker_starred_filter_v1';
 	      const SIGNED_UP_FILTER_KEY = 'tennis_tracker_signed_up_filter_v1';
+	      const PAST_FILTER_KEY = 'tennis_tracker_past_filter_v1';
 	
 	      const tournamentSection = document.querySelector('[data-tournament-section="reports"]');
 	      if (!tournamentSection) return null;
@@ -2801,6 +2813,7 @@
 	      const countEl = tournamentSection.querySelector('[data-tournament-count]');
 	      const filterToggle = tournamentSection.querySelector('[data-favorites-filter-toggle]');
 	      const signedUpFilterToggle = tournamentSection.querySelector('[data-signed-up-filter-toggle]');
+	      const pastFilterToggle = tournamentSection.querySelector('[data-past-filter-toggle]');
 	      const cardsRoot = tournamentSection.querySelector('.cards-grid') || tournamentSection;
 	
 	      const getCards = () => Array.from(cardsRoot.querySelectorAll('a.tournament-card'));
@@ -2865,6 +2878,22 @@
 	          // ignore
 	        }
 	      };
+
+	      const readPastFilterEnabled = () => {
+	        try {
+	          return window.localStorage.getItem(PAST_FILTER_KEY) === '1';
+	        } catch {
+	          return false;
+	        }
+	      };
+
+	      const writePastFilterEnabled = (enabled) => {
+	        try {
+	          window.localStorage.setItem(PAST_FILTER_KEY, enabled ? '1' : '0');
+	        } catch {
+	          // ignore
+	        }
+	      };
 	
 	      const starred = loadStarred();
 	
@@ -2885,9 +2914,12 @@
 	        const cards = getCards();
 	        const total = cards.length;
 	        const visible = cards.filter((card) => {
-	          return !card.classList.contains('is-hidden-by-favorite-filter') && !card.classList.contains('is-hidden-by-signed-up-filter');
+	          return !card.classList.contains('is-hidden-by-favorite-filter')
+	            && !card.classList.contains('is-hidden-by-signed-up-filter')
+	            && !card.classList.contains('is-hidden-by-past-filter');
 	        }).length;
-	        const anyFilterOn = filterToggle?.classList.contains('is-active') || signedUpFilterToggle?.classList.contains('is-active');
+	        const pastFilterOn = pastFilterToggle?.classList.contains('is-active');
+	        const anyFilterOn = filterToggle?.classList.contains('is-active') || signedUpFilterToggle?.classList.contains('is-active') || !pastFilterOn;
 	        const shown = anyFilterOn ? visible : total;
 	        countEl.textContent = `${shown} Tournaments`;
 	      };
@@ -2895,11 +2927,13 @@
 	      const applyFilter = () => {
 	        const filterOn = filterToggle?.classList.contains('is-active');
 	        const signedUpFilterOn = signedUpFilterToggle?.classList.contains('is-active');
+	        const pastFilterOn = pastFilterToggle?.classList.contains('is-active');
 	        getCards().forEach((card) => {
 	          const id = getTournamentId(card);
 	          const primaryName = normalizePrimaryName(card.getAttribute('data-card-primary-name') || '');
 	          card.classList.toggle('is-hidden-by-favorite-filter', filterOn && !starred.has(id));
 	          card.classList.toggle('is-hidden-by-signed-up-filter', signedUpFilterOn && !primaryName);
+	          card.classList.toggle('is-hidden-by-past-filter', !pastFilterOn && card.classList.contains('is-past'));
 	        });
 	        updateCount();
 	      };
@@ -2964,6 +2998,19 @@
 	          signedUpFilterToggle.classList.toggle('is-active', enabled);
 	          signedUpFilterToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
 	          writeSignedUpFilterEnabled(enabled);
+	          applyFilter();
+	        });
+	      }
+
+	      if (pastFilterToggle) {
+	        const filterEnabled = readPastFilterEnabled();
+	        pastFilterToggle.classList.toggle('is-active', filterEnabled);
+	        pastFilterToggle.setAttribute('aria-pressed', filterEnabled ? 'true' : 'false');
+	        pastFilterToggle.addEventListener('click', () => {
+	          const enabled = !pastFilterToggle.classList.contains('is-active');
+	          pastFilterToggle.classList.toggle('is-active', enabled);
+	          pastFilterToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+	          writePastFilterEnabled(enabled);
 	          applyFilter();
 	        });
 	      }

@@ -628,6 +628,12 @@ html[data-theme="dark"] .player-card__alert {
   background: rgba(16, 185, 129, 0.08);
 }
 
+.past-filter-toggle.is-active {
+  color: var(--accent-cyan);
+  border-color: rgba(14, 165, 233, 0.55);
+  background: rgba(14, 165, 233, 0.08);
+}
+
 /* Tournament Cards Grid */
 .cards-grid {
   display: grid;
@@ -836,6 +842,10 @@ html[data-theme="dark"] .tournament-card[data-card-primary-name]:not([data-card-
 }
 
 .tournament-card.is-hidden-by-signed-up-filter {
+  display: none;
+}
+
+.tournament-card.is-hidden-by-past-filter {
   display: none;
 }
 
