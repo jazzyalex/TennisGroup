@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="8978061b-ced7-4bcc-954c-58be2dfc9959">
-  <meta name="publish-ts" content="2026-06-09T15:51:15Z">
+  <meta name="publish-id" content="2dc94ecc-a0f2-4c0f-b618-5515f03582f7">
+  <meta name="publish-ts" content="2026-06-10T16:38:33Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -91,6 +91,29 @@
     td.col-h2h .h2h-badge { margin-left: 0; }
 
     /* Projection status */
+    .selection-flight-row td {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+    }
+    .selection-flight-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    .selection-flight-label strong {
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .selection-flight-meta {
+      color: var(--text-secondary);
+    }
     .projection-status-badge {
       display: inline-flex; align-items: center; justify-content: center;
       padding: 2px 6px; border-radius: 999px;
@@ -449,8 +472,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-06-09T08:51:15-07:00" title="2026-06-09T08:51:15-07:00">
-    <span class="report-updated-badge__pill">Updated Jun 9, 2026 8:51 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-06-10T09:38:32-07:00" title="2026-06-10T09:38:32-07:00">
+    <span class="report-updated-badge__pill">Updated Jun 10, 2026 9:38 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -461,9 +484,9 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Women&#x27;s Open Singles</h3>
-<div class="selection-rule-note"><strong>Selection reference: WTN singles, lower is stronger</strong><span>WTN 32.55 · WTN 32.55 · UTR 5.08</span></div>
+<div class="selection-rule-note"><strong>Selection reference: WTN singles, lower is stronger</strong><span>WTN 32.78 · Nat N/A · UTR 5.08</span></div>
 
-  <table id="players-table-main" class="players-table primary-table">
+  <table id="players-table-main" class="players-table primary-table" data-default-sort="wtn" data-selection-flight-size="8">
     <thead class="sticky-header">
       <tr>
         <th class="col-rank">#</th>
@@ -478,7 +501,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank=""><td class="col-rank" data-sort-val=""></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.55</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">5.08</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Mountain View CA</td><td style="display: none;"></td></tr>
+      <tr class="selection-flight-row" data-selection-flight="1"><td colspan="8"><div class="selection-flight-label"><strong>Flight 1</strong> <span class="selection-flight-meta">WTN order 1-8</span></div></td></tr>
+      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank=""><td class="col-rank" data-sort-val="1"></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.78</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">5.08</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Mountain View CA</td><td style="display: none;"></td></tr>
     </tbody>
   </table>
 
@@ -716,7 +740,13 @@
     // MOBILE VIEW IMPLEMENTATION
     // ========================================
 
-    let currentSort = 'natRank';
+    function reportDefaultSort() {
+      const table = document.querySelector('.desktop-view table.players-table[data-default-sort]');
+      const value = (table?.getAttribute('data-default-sort') || '').trim();
+      return value || 'natRank';
+    }
+
+    let currentSort = reportDefaultSort();
 	    let isExpanded = false;
 	    let allPlayers = [];
 	    let isMixedEvent = false;
@@ -801,7 +831,7 @@
       const requiredCols = [colRank, colFirst, colLast, colWtn, colUtr, colNat, colLocation].filter((idx) => idx !== -1);
       const minCells = requiredCols.length ? Math.max(...requiredCols) + 1 : 7;
 
-      const rows = table.querySelectorAll('tbody tr:not([data-primary-projection])');
+      const rows = table.querySelectorAll('tbody tr:not([data-primary-projection]):not(.selection-flight-row)');
       rows.forEach((row) => {
         if ((row.getAttribute('data-entry-status') || '').trim().toLowerCase() === 'withdrawn') return;
         const cells = row.querySelectorAll('td');
@@ -1476,6 +1506,7 @@
       document.getElementById('mobile-player-count').textContent = allPlayers.length;
       
       // Render player list (initially show top 8)
+      syncMobileSortButtons(currentSort);
       renderPlayerList(currentSort, 8);
       
       // Render tournament info
@@ -1530,16 +1561,18 @@
     // EVENT HANDLERS
     // ========================================
 
-    function handleSort(sortBy) {
-      currentSort = sortBy;
-      
-      // Update active button
+    function syncMobileSortButtons(sortBy) {
       document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
         btn.classList.remove('active');
         if (btn.getAttribute('data-sort') === sortBy) {
           btn.classList.add('active');
         }
       });
+    }
+
+    function handleSort(sortBy) {
+      currentSort = sortBy;
+      syncMobileSortButtons(sortBy);
       
       // Re-render with current expansion state
       const limit = isExpanded ? null : 8;
@@ -1760,7 +1793,7 @@
 	        const wtnIdx = headers.findIndex((h) => h === 'wtn');
 	        const natIdx = headers.findIndex((h) => h === 'nat rank' || h === 'national rank' || h === 'nat');
 	
-	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          if (cells.length < 3) return;
@@ -1791,7 +1824,7 @@
 	      tables.forEach((table) => {
 	        const tbody = table.querySelector('tbody');
 	        if (!tbody) return;
-	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          if (cells.length < 3) return;
@@ -1814,7 +1847,7 @@
 	        );
 	        const locationIdx = headers.findIndex((h) => h === 'location');
 	
-	        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection])'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)'));
 	        rows.forEach((row) => {
 	          const cells = row.querySelectorAll('td');
 	          const idx = locationIdx !== -1 ? locationIdx : 6;
@@ -1898,7 +1931,7 @@
 
 	        if (isMixedEventPage()) {
 	          const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table')).filter(
-	            (table) => table.querySelectorAll('tbody tr:not([data-primary-projection])').length > 0
+          (table) => table.querySelectorAll('tbody tr:not([data-primary-projection]):not(.selection-flight-row)').length > 0
 	          );
 	          if (tables.length) return tables;
 	        }
@@ -1934,7 +1967,7 @@
 	          return idx !== -1 ? idx : 5;
 	        })();
 
-	        return Array.from(table.querySelectorAll('tbody tr:not([data-primary-projection])'))
+        return Array.from(table.querySelectorAll('tbody tr:not([data-primary-projection]):not(.selection-flight-row)'))
 	          .filter((row) => (row.getAttribute('data-entry-status') || '').trim().toLowerCase() !== 'withdrawn')
 	          .map((row) => {
 	            const cells = row.querySelectorAll('td');
@@ -2112,14 +2145,14 @@
       );
 
       function updateRowNumbers() {
-        const rows = tbody.querySelectorAll('tr:not([data-primary-projection])');
+        const rows = tbody.querySelectorAll('tr:not([data-primary-projection]):not(.selection-flight-row)');
         rows.forEach((row, index) => {
           if (row.cells && row.cells[0]) row.cells[0].textContent = index + 1;
         });
       }
 
       function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
-        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const rows = Array.from(tbody.querySelectorAll('tr:not(.selection-flight-row)'));
 
         rows.sort((a, b) => {
           const aC = a.cells[columnIndex], bC = b.cells[columnIndex];
@@ -2145,8 +2178,7 @@
         updateRowNumbers();
 
         if (updateHeaderStyle) {
-          headers.forEach(h => (h.style.backgroundColor = '#4472C4'));
-          if (activeHeader) activeHeader.style.backgroundColor = '#2c5aa0';
+          headers.forEach(h => (h.style.backgroundColor = ''));
         }
       }
 
@@ -2155,17 +2187,25 @@
         if (!header.title) header.title = 'Click to sort';
       });
 
+      const requestedDefault = (table.getAttribute('data-default-sort') || '').trim().toLowerCase();
       const teamSeedIdx = headers.findIndex(h => h.classList.contains('col-team-seed'));
       const seedIdx = headers.findIndex(h => h.classList.contains('col-seed-rank'));
+      const wtnIdx = headers.findIndex(h => h.classList.contains('col-wtn'));
       const natIdx = headers.findIndex(h => h.classList.contains('col-national'));
-      const defaultIdx = teamSeedIdx >= 0 ? teamSeedIdx : (seedIdx >= 0 ? seedIdx : (natIdx >= 0 ? natIdx : 5));
+      const defaultIdx = requestedDefault === 'wtn' && wtnIdx >= 0
+        ? wtnIdx
+        : (teamSeedIdx >= 0 ? teamSeedIdx : (seedIdx >= 0 ? seedIdx : (natIdx >= 0 ? natIdx : 5)));
       const defaultHeader = headers[defaultIdx];
       if (defaultHeader && sortableHeaders.includes(defaultHeader)) {
         sortableHeaders.forEach(h => {
           if (h !== defaultHeader) h.dataset.sort = 'none';
         });
         defaultHeader.dataset.sort = 'asc';
-        applySort(defaultIdx, 'asc', defaultHeader, true);
+        if (requestedDefault === 'wtn') {
+          updateRowNumbers();
+        } else {
+          applySort(defaultIdx, 'asc', defaultHeader, true);
+        }
       } else {
         updateRowNumbers();
       }
