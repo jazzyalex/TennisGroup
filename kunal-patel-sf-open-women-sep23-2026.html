@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="2dc94ecc-a0f2-4c0f-b618-5515f03582f7">
-  <meta name="publish-ts" content="2026-06-10T16:38:33Z">
+  <meta name="publish-id" content="b7354984-40cb-428b-8fda-2f1e53e60993">
+  <meta name="publish-ts" content="2026-06-13T15:53:03Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -189,6 +189,85 @@
       text-transform: uppercase;
       color: var(--text-secondary);
     }
+    .draw-primary-match-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .draw-primary-match {
+      min-width: 0;
+      padding: 9px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+    .draw-primary-match-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .draw-primary-match-head strong {
+      color: var(--text-primary);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    .draw-primary-match-head span {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--accent-report);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .draw-primary-match.is-loss .draw-primary-match-head span {
+      color: var(--status-critical, var(--text-secondary));
+    }
+    .draw-primary-match.is-scheduled .draw-primary-match-head span {
+      color: var(--warning, var(--accent-report));
+    }
+    .draw-primary-match.is-projected .draw-primary-match-head span {
+      color: var(--text-secondary);
+    }
+    .draw-primary-opponent,
+    .draw-primary-score,
+    .draw-primary-time,
+    .draw-primary-points {
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    .draw-primary-opponent {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .draw-primary-score {
+      margin-top: 4px;
+      color: var(--accent-report);
+      font-weight: 800;
+    }
+    .draw-primary-time {
+      margin-top: 5px;
+      color: var(--text-secondary);
+    }
+    .draw-primary-points {
+      margin-top: 7px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      width: max-content;
+      max-width: 100%;
+      padding: 3px 7px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--accent-report);
+      font-weight: 800;
+    }
     .draw-path-track {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
@@ -198,6 +277,7 @@
     .draw-path-step {
       min-width: 0;
       padding: 9px 10px;
+      border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--bg-primary);
     }
@@ -256,6 +336,46 @@
       font-size: 10px;
       font-weight: 700;
     }
+    .draw-path-points-muted {
+      color: var(--text-secondary);
+    }
+    .draw-reference-details {
+      margin-top: 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+    .draw-reference-details > summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 10px;
+      color: var(--text-primary);
+      cursor: pointer;
+      list-style: none;
+    }
+    .draw-reference-details > summary::-webkit-details-marker {
+      display: none;
+    }
+    .draw-reference-details > summary span {
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .draw-reference-details > summary small {
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: right;
+    }
+    .draw-reference-details[open] > summary {
+      border-bottom: 1px solid var(--border);
+    }
+    .draw-reference-body {
+      padding: 0 10px 10px;
+    }
     .draw-contingency-grid,
     .draw-venue-grid,
     .draw-format-grid {
@@ -276,6 +396,7 @@
     .draw-format-grid > div {
       min-width: 0;
       padding: 9px 10px;
+      border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--bg-primary);
     }
@@ -309,6 +430,7 @@
     }
     .draw-contingency li {
       padding: 7px 8px;
+      border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--bg-secondary);
     }
@@ -399,16 +521,36 @@
         font-size: 16px;
       }
       .draw-path-track,
+      .draw-primary-match-list,
       .draw-contingency-grid,
       .draw-venue-grid,
       .draw-format-grid {
         grid-template-columns: 1fr;
       }
       .draw-path-step,
+      .draw-primary-match,
       .draw-contingency,
       .draw-venue,
       .draw-format-grid > div {
         padding: 8px;
+      }
+      .mobile-draw-path-panel .draw-reference-details {
+        border: 0;
+        background: transparent;
+      }
+      .mobile-draw-path-panel .draw-reference-details > summary {
+        justify-content: flex-start;
+        padding: 7px 0 0;
+        color: var(--accent-report);
+      }
+      .mobile-draw-path-panel .draw-reference-details > summary small {
+        display: none;
+      }
+      .mobile-draw-path-panel .draw-reference-details[open] > summary {
+        border-bottom: 0;
+      }
+      .mobile-draw-path-panel .draw-reference-body {
+        padding: 0;
       }
       .draw-path-opponents {
         min-height: 0;
@@ -472,8 +614,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-06-10T09:38:32-07:00" title="2026-06-10T09:38:32-07:00">
-    <span class="report-updated-badge__pill">Updated Jun 10, 2026 9:38 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-06-13T08:53:03-07:00" title="2026-06-13T08:53:03-07:00">
+    <span class="report-updated-badge__pill">Updated Jun 13, 2026 8:53 AM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -484,7 +626,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Women&#x27;s Open Singles</h3>
-<div class="selection-rule-note"><strong>Selection reference: WTN singles, lower is stronger</strong><span>WTN 32.78 · Nat N/A · UTR 5.08</span></div>
+<div class="selection-rule-note"><strong>Selection reference: WTN singles, lower is stronger</strong><span>WTN 32.78 · Nat N/A · UTR 5.09</span></div>
 
   <table id="players-table-main" class="players-table primary-table" data-default-sort="wtn" data-selection-flight-size="8">
     <thead class="sticky-header">
@@ -502,7 +644,7 @@
     </thead>
     <tbody>
       <tr class="selection-flight-row" data-selection-flight="1"><td colspan="8"><div class="selection-flight-label"><strong>Flight 1</strong> <span class="selection-flight-meta">WTN order 1-8</span></div></td></tr>
-      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank=""><td class="col-rank" data-sort-val="1"></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.78</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">5.08</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Mountain View CA</td><td style="display: none;"></td></tr>
+      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank=""><td class="col-rank" data-sort-val="1"></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.78</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">5.09</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Mountain View CA</td><td style="display: none;"></td></tr>
     </tbody>
   </table>
 
