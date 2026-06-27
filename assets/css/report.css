@@ -2122,6 +2122,65 @@ tr.alternate-player:not(.highlight-player) {
   background-color: rgba(255, 193, 7, 0.10);
 }
 
+.withdrawn-player-list {
+  max-width: 1120px;
+  margin: 12px auto 18px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+}
+
+.withdrawn-player-list-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.withdrawn-player-list-head strong {
+  color: var(--status-critical, var(--text-primary));
+  font-size: 13px;
+}
+
+.withdrawn-player-list ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.withdrawn-player-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.withdrawn-player-position {
+  color: var(--status-critical, var(--text-primary));
+  font-weight: 800;
+}
+
+.withdrawn-player-name {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.withdrawn-player-location {
+  color: var(--text-muted);
+}
+
 /* ============================================================
    OFFICIAL DRAW DASHBOARD
    ============================================================ */
