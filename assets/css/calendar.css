@@ -274,7 +274,7 @@ body.mobile-dark {
 
 .table-header {
   display: grid;
-  grid-template-columns: 32px 36px 132px minmax(220px, 1.35fr) 52px 56px 70px 122px minmax(145px, 1fr) 60px 56px 86px;
+  grid-template-columns: 32px 36px 132px 96px minmax(220px, 1.35fr) 52px 56px 70px 122px minmax(145px, 1fr) 60px 56px 86px;
   column-gap: 12px;
   padding: 12px 24px;
   background: var(--bg-tertiary);
@@ -345,7 +345,7 @@ body.mobile-dark {
 /* Table Rows */
 .table-row {
   display: grid;
-  grid-template-columns: 32px 36px 132px minmax(220px, 1.35fr) 52px 56px 70px 122px minmax(145px, 1fr) 60px 56px 86px;
+  grid-template-columns: 32px 36px 132px 96px minmax(220px, 1.35fr) 52px 56px 70px 122px minmax(145px, 1fr) 60px 56px 86px;
   column-gap: 12px;
   align-items: center;
   padding: 20px 24px;
@@ -366,6 +366,17 @@ body.mobile-dark {
   font-size: 12px;
   color: var(--text-primary);
   text-align: center;
+}
+
+.cell-registration-close {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.cell-registration-close.is-closed {
+  color: var(--status-warning);
 }
 
 .cell-age {
@@ -597,7 +608,7 @@ html[data-theme="dark"] .registered-dot {
 @media (max-width: 1200px) {
   .table-header,
   .table-row {
-    grid-template-columns: 30px 34px 120px minmax(200px, 1.35fr) 50px 52px 64px 110px minmax(140px, 1fr) 56px 52px 82px;
+    grid-template-columns: 30px 34px 120px 90px minmax(200px, 1.35fr) 50px 52px 64px 110px minmax(140px, 1fr) 56px 52px 82px;
     column-gap: 10px;
   }
 }
@@ -622,7 +633,7 @@ html[data-theme="dark"] .registered-dot {
 
   body:not(.mobile-view) .table-header,
   body:not(.mobile-view) .table-row {
-    min-width: 1110px;
+    min-width: 1218px;
   }
 }
 
@@ -1066,6 +1077,11 @@ body.mobile-dark .m-tournament-card.m-registered::after {
 .m-distance-text.local { color: var(--m-local); }
 .m-distance-text.road { color: var(--m-road); }
 .m-distance-text.flight { color: var(--m-flight); }
+
+.m-registration-closed {
+  color: var(--status-warning);
+  font-weight: 600;
+}
 
 /* Card Footer (Venue) */
 .m-card-footer {
