@@ -21,7 +21,7 @@
   --m-star: #f59e0b;
 }
 
-body.mobile-dark {
+html[data-theme="dark"] {
   --m-bg: #0f172a;
   --m-surface: #1e293b;
   --m-surface-elevated: #334155;
@@ -924,7 +924,7 @@ body.mobile-view { padding: 0; background: var(--m-bg); }
   z-index: 2;
 }
 
-body.mobile-dark .m-tournament-card.m-registered::after {
+html[data-theme="dark"] .m-tournament-card.m-registered::after {
   background: linear-gradient(90deg, rgba(34, 197, 94, 0.65), rgba(74, 222, 128, 0.45));
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
 }

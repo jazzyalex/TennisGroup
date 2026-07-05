@@ -96,13 +96,7 @@
   </style>
 </head>
 <body>
-  <script>
-    (function(){
-      var t=localStorage.getItem('theme');
-      if(t==='dark'){document.body.classList.add('dark');document.body.classList.add('mobile-dark');}
-    })();
-  </script>
-  <nav id="main-nav">
+  <!--SITE_NAV--><nav id="main-nav">
     <a href="index.html" class="nav-home-link" aria-label="Go to home page">
       <div class="nav-logo">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,10 +109,10 @@
     </a>
     <div class="nav-center">
       <div class="nav-links">
-        <a href="2025-usta-norcal-national.html" class="nav-link active">Calendar</a>
-        <a href="player.html" class="nav-link">Player</a>
-        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
-        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+        <a href="player.html" class="nav-link" data-nav-key="player">Player</a>
+        <a href="ranking-simulator.html" class="nav-link" data-nav-key="simulator">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link" data-nav-key="rankings">Rankings</a>
+        <a href="2025-usta-norcal-national.html" class="is-active nav-link" data-nav-key="calendar" aria-current="page">Calendar</a>
       </div>
     </div>
     <div class="nav-right">
@@ -130,8 +124,16 @@
           <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
         </svg>
       </button>
+      <button class="nav-burger" id="nav-burger" aria-label="Open navigation menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
     </div>
   </nav>
+<!--/SITE_NAV-->
   <!-- Mobile View Container -->
   <div class="mobile-container" id="mobile-view">
     <!-- Mobile Header -->
@@ -1515,27 +1517,6 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 </script>
 
   <script>
-  (function() {
-    const toggle = document.getElementById('theme-toggle');
-    const sunIcon = document.getElementById('theme-icon-sun');
-    const moonIcon = document.getElementById('theme-icon-moon');
-    const isDark = document.body.classList.contains('dark');
-    if (isDark && sunIcon && moonIcon) { sunIcon.style.display = 'none'; moonIcon.style.display = 'block'; }
-    if (toggle) {
-      toggle.addEventListener('click', () => {
-        const dark = document.body.classList.toggle('dark');
-        document.body.classList.toggle('mobile-dark', dark);
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
-        if (sunIcon && moonIcon) {
-          sunIcon.style.display = dark ? 'none' : 'block';
-          moonIcon.style.display = dark ? 'block' : 'none';
-        }
-      });
-    }
-  })();
-  </script>
-
-  <script>
     const FILTER_STORAGE_KEY = 'tournament-filters-v2';
 
     function loadFilters() {
@@ -2657,7 +2638,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 
     function setMobileTheme(theme) {
       localStorage.setItem(MOBILE_THEME_KEY, theme);
-      document.body.classList.toggle('mobile-dark', theme === 'dark');
+      document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
       const toggle = document.getElementById('m-theme-toggle');
       if (toggle) toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
     }
@@ -3187,5 +3168,6 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
       }, 250);
     });
   </script>
+  <script src="assets/js/site.js" defer></script>
 </body>
 </html>
