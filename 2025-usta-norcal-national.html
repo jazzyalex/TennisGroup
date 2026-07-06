@@ -865,7 +865,7 @@
         <span class="sortable" data-sort="none" data-column="city">City</span>
         <span data-column="venue">Venue</span>
         <span data-column="draw">Draw</span>
-        <span data-column="type">Type</span>
+        <span data-column="type">Section</span>
         <span data-column="distance">Distance</span>
       </div>
       <div id="table-body"></div>
@@ -2026,10 +2026,13 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
       if (cityStr.includes(',')) {
         return cityStr;
       }
-      // Otherwise, add state from lookup
+      // Otherwise, add state from lookup. NorCal + SoCal cities are all
+      // California, so default any bare CA-section city (missing from the
+      // lookup) to CA rather than leaving it state-less.
       const city = cityStr.trim();
+      if (!city || /^tbd$/i.test(city)) return cityStr;
       const state = cityToState[city];
-      return state ? `${city}, ${state}` : cityStr;
+      return `${city}, ${state || 'CA'}`;
     }
 
     function proximityFromMiles(miles) {
@@ -2381,7 +2384,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            const draw = getDrawCell(row);
 	            const cityState = formatCityWithState(row['City']);
 	            const isRegistered = isRegisteredTournament(row);
-	            const typeLabel = isNational ? 'Nat' : 'Sec';
+	            const typeLabel = isNational ? 'NAT' : (getSection(row) || 'Sec');
 	            const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	            const tournamentLinkHtml = isValidUrl
 	              ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
@@ -2448,7 +2451,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	          const draw = getDrawCell(row);
 	          const cityState = formatCityWithState(row['City']);
 	          const isRegistered = isRegisteredTournament(row);
-	          const typeLabel = isNational ? 'Nat' : 'Sec';
+	          const typeLabel = isNational ? 'NAT' : (getSection(row) || 'Sec');
 	          const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	          const tournamentLinkHtml = isValidUrl
 	            ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
@@ -3014,7 +3017,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
                 <div class="m-card-title">
                   <div class="m-card-name">${tournamentNameHtml}</div>
                   <div class="m-card-meta">
-                    <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NATIONAL' : 'SECTIONAL'}</span>
+                    <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NAT' : getSection(row)}</span>
                     <span class="m-format-badge">• ${formatLabel}</span>
                     ${levelLabel ? `<span class="m-format-badge">• ${levelLabel}</span>` : ''}
                     ${age.label ? `<span class="m-format-badge">• ${age.label}</span>` : ''}
