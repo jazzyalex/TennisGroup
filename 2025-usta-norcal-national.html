@@ -1705,6 +1705,35 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	      return null;
 	    }
 
+	    // USTA section org urlSegment (lowercased, hyphens stripped) -> punchy
+	    // short name. Mirrors the usta_sections DB table
+	    // (scripts/usta/seed_usta_sections.py).
+	    const HOST_SECTION_BY_ORG = {
+	      ustaeastern: 'Eastern', ustaflorida: 'Florida', ustahawaiipacific: 'Hawaii',
+	      ustaintermountain: 'Intermountain', ustamidatlantic: 'MidAtlantic',
+	      ustamiddlestates: 'MiddleStates', ustamidwest: 'Midwest',
+	      ustamissourivalley: 'MissouriValley', ustanewengland: 'NewEngland',
+	      ustanorthern: 'Northern', ustanortherncalifornia: 'NorCal',
+	      ustapacificnorthwest: 'PacNW', ustasouthern: 'Southern',
+	      ustasoutherncalifornia: 'SoCal', ustasouthwest: 'Southwest',
+	      ustatexas: 'Texas', ustacaribbean: 'Caribbean'
+	    };
+
+	    // Display label for the Section column/badge. National -> NAT. Otherwise,
+	    // if the event is hosted under a USTA *section* org (a cross-section event
+	    // such as an intersectional), show that host section; else fall back to the
+	    // sheet-derived section (NorCal/SoCal).
+	    function getSectionLabel(row) {
+	      if (row['National'] === 'TRUE') return 'NAT';
+	      const hp = (row['Home Page'] || '').toLowerCase();
+	      const m = hp.match(/competitions\/([a-z0-9-]+)\//);
+	      if (m) {
+	        const key = m[1].replace(/-/g, '');
+	        if (HOST_SECTION_BY_ORG[key]) return HOST_SECTION_BY_ORG[key];
+	      }
+	      return getSection(row);
+	    }
+
 	    function parseRegistrationCloseDate(raw) {
 	      const text = (raw || '').trim();
 	      const iso = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -2384,7 +2413,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	            const draw = getDrawCell(row);
 	            const cityState = formatCityWithState(row['City']);
 	            const isRegistered = isRegisteredTournament(row);
-	            const typeLabel = isNational ? 'NAT' : (getSection(row) || 'Sec');
+	            const typeLabel = getSectionLabel(row);
 	            const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	            const tournamentLinkHtml = isValidUrl
 	              ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
@@ -2451,7 +2480,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
 	          const draw = getDrawCell(row);
 	          const cityState = formatCityWithState(row['City']);
 	          const isRegistered = isRegisteredTournament(row);
-	          const typeLabel = isNational ? 'NAT' : (getSection(row) || 'Sec');
+	          const typeLabel = getSectionLabel(row);
 	          const registeredDot = isRegistered ? '<span class="registered-dot" title="Registered"></span>' : '';
 	          const tournamentLinkHtml = isValidUrl
 	            ? `<a href="${normalizedHomePage}" target="_blank" rel="noopener noreferrer">${escapeHtml(tournamentName)}</a>`
@@ -3017,7 +3046,7 @@ BG16-18 USTA National Winter Championships,December,28-3,7,https://playtennis.us
                 <div class="m-card-title">
                   <div class="m-card-name">${tournamentNameHtml}</div>
                   <div class="m-card-meta">
-                    <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${isNational ? 'NAT' : getSection(row)}</span>
+                    <span class="m-type-badge ${isNational ? 'national' : 'sectional'}">${getSectionLabel(row)}</span>
                     <span class="m-format-badge">• ${formatLabel}</span>
                     ${levelLabel ? `<span class="m-format-badge">• ${levelLabel}</span>` : ''}
                     ${age.label ? `<span class="m-format-badge">• ${age.label}</span>` : ''}
