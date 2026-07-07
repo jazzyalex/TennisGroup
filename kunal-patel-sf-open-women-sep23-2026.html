@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="publish-id" content="82db1009-9d77-4bb0-aff5-bb71fb3cebac">
-  <meta name="publish-ts" content="2026-07-01T17:23:12Z">
+  <meta name="publish-id" content="ddb60341-c9a6-47f1-a691-397e6bdc0337">
+  <meta name="publish-ts" content="2026-07-07T22:31:30Z">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/tennis-report/favicon-32-thin.png">
@@ -27,22 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/core.css">
   <link rel="stylesheet" href="assets/css/report.css?v=20260627-withdrawn-list">
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    }
-    (function() {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (saved === 'dark' || (!saved && prefersDark)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    })();
-  </script>
+  <script>(function(){var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d))document.documentElement.setAttribute('data-theme','dark');})();</script>
   <style>
     /* H2H inline badge */
     .h2h-badge {
@@ -560,34 +545,44 @@
 </head>
 <body>
   <div id="h2h-tooltip"></div>
-  <!-- Navigation Bar -->
-  <nav>
-    <div class="nav-left">
-      <a href="index.html" class="nav-logo-link" aria-label="Home">
-        <div class="nav-logo">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="64" height="64" rx="8" fill="#2d5a27"/>
-            <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
-            <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
-          </svg>
-        </div>
-      </a>
+  <!--SITE_NAV--><nav id="main-nav">
+    <a href="index.html" class="nav-home-link" aria-label="Go to home page">
+      <div class="nav-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="8" fill="#2d5a27"/>
+          <rect x="0" y="8" width="64" height="8" fill="#fafafa"/>
+          <rect x="28" y="8" width="8" height="56" fill="#fafafa"/>
+        </svg>
+      </div>
       <span class="nav-brand">Tennis Tracker</span>
-    </div>
+    </a>
     <div class="nav-center">
       <div class="nav-links">
-        <a href="2025-usta-norcal-national.html" class="nav-link">Calendar</a>
-        <a href="player.html" class="nav-link">Player</a>
-        <a href="ranking-simulator.html" class="nav-link">Simulator</a>
-        <a href="usta-national-rankings.html" class="nav-link">Rankings</a>
+        <a href="player.html" class="nav-link" data-nav-key="player">Player</a>
+        <a href="ranking-simulator.html" class="nav-link" data-nav-key="simulator">Simulator</a>
+        <a href="usta-national-rankings.html" class="nav-link" data-nav-key="rankings">Rankings</a>
+        <a href="2025-usta-norcal-national.html" class="nav-link" data-nav-key="calendar">Calendar</a>
       </div>
     </div>
     <div class="nav-right">
       <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
-        <span id="theme-icon">🌙</span>
+        <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+      <button class="nav-burger" id="nav-burger" aria-label="Open navigation menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
       </button>
     </div>
   </nav>
+<!--/SITE_NAV-->
   <div class="desktop-view">
   <div class="report-header">
     <a class="report-header-logo-link" href="index.html" aria-label="Back to tournament dashboard">
@@ -614,8 +609,8 @@
       </div>
     </div>
   </div>
-      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-07-01T10:23:12-07:00" title="2026-07-01T10:23:12-07:00">
-    <span class="report-updated-badge__pill">Updated Jul 1, 2026 10:23 AM PDT</span>
+      <div id="report-updated-badge" class="report-updated-badge" data-updated-iso="2026-07-07T15:18:35-07:00" title="2026-07-07T15:18:35-07:00">
+    <span class="report-updated-badge__pill">Updated Jul 7, 2026 3:18 PM PDT</span>
   </div>
   <div class="table-meta">
     <div class="key-stats">
@@ -626,7 +621,7 @@
     <div class="link-legend">Click on WTN or Nat Rank for USTA profile • on UTR for UTR profile</div>
   </div>
   <h3 class="table-section-title">Women&#x27;s Open Singles</h3>
-<div class="selection-rule-note"><strong>Selection reference: WTN singles, lower is stronger</strong><span>WTN 32.78 · Nat N/A · UTR 5.16</span></div>
+<div class="selection-rule-note"><strong>Selection reference: WTN singles, lower is stronger</strong><span>WTN 32.78 · Nat N/A · UTR 5.24</span></div>
 
   <table id="players-table-main" class="players-table primary-table" data-default-sort="wtn" data-selection-flight-size="8">
     <thead class="sticky-header">
@@ -644,9 +639,11 @@
     </thead>
     <tbody>
       <tr class="selection-flight-row" data-selection-flight="1"><td colspan="8"><div class="selection-flight-label"><strong>Flight 1</strong> <span class="selection-flight-meta">WTN order 1-8</span></div></td></tr>
-      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank=""><td class="col-rank" data-sort-val="1"></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.78</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">5.16</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Mountain View CA</td><td style="display: none;"></td></tr>
+      <tr class="highlight-player primary-projection-row" data-primary-projection="1" data-projection-index="0" data-player-key="MALAKHOVA|ALEXIS" data-entry-status="projection" data-section-rank=""><td class="col-rank" data-sort-val="1"></td><td>Alexis</td><td>Malakhova</td><td class="col-h2h projection-status-cell" data-sort-val=""><span class="projection-status-badge">Projected</span></td><td class="col-wtn"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">32.78</a></td><td class="col-utr"><a href="https://app.utrsports.net/profiles/3610257" target="_blank" rel="noopener noreferrer">5.24</a></td><td class="col-national"><a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=2018710796" target="_blank" rel="noopener noreferrer">N/A</a></td><td>Mountain View CA</td><td style="display: none;"></td></tr>
     </tbody>
   </table>
+
+  <script type="application/json" id="page-data">{"schemaVersion":1,"event":{"title":"Kunal Patel San Francisco $50,000 Open — Women","dates":"September 23 - 27, 2026","location":"Lisa and Douglas Goldman Tennis Center, San Francisco, CA","mixed":false},"keyStats":{"drawSize":48,"seed":null,"registered":0,"percentAbove":null},"format":{"matchFormat":"Through Round of 16: two tie-break sets and a 10-point match tiebreak at one set all. Quarterfinals and beyond: best of three tie-break sets.","tiebreaks":"Two tie-break sets and a 10-point match tiebreak at one set all"},"venues":[{"address":"50 Bowling Green Drive, San Francisco, CA, 94122","name":"Lisa and Douglas Goldman Tennis Center"},{"address":"50 Bowling Green Drive, San Francisco, CA 94117","name":"Lisa and Douglas Goldman Tennis Center address"},{"address":"801 Stanyan St","name":"Kezar Stadium Parking"},{"address":"55 Hagiwara Tea Garden Dr","name":"de Young Museum"}],"contact":{"director":"Marin Tennis Club","email":"jbroda-schunck@norcal.usta.com","phone":"415-581-2540","phoneUrl":null},"utrHistogram":[],"players":[]}</script>
 
   <div class="utr-histogram">
     <h3>UTR Distribution <span class="utr-subtitle">(0.5-point bins)</span></h3>
@@ -877,1028 +874,7 @@
 </div>
 <!-- PRIMARY_ROSTER_H2H_END -->
 <!-- Mobile View JavaScript -->
-  <script>
-    // ========================================
-    // MOBILE VIEW IMPLEMENTATION
-    // ========================================
-
-    function reportDefaultSort() {
-      const table = document.querySelector('.desktop-view table.players-table[data-default-sort]');
-      const value = (table?.getAttribute('data-default-sort') || '').trim();
-      return value || 'natRank';
-    }
-
-    let currentSort = reportDefaultSort();
-	    let isExpanded = false;
-	    let allPlayers = [];
-	    let isMixedEvent = false;
-	    let mixedGroups = null;
-	    let multiGroups = null;
-	    let playerByKey = {};
-	    let targetPlayer = null;
-
-    // Section ranks are sourced directly from the hidden table column.
-    const SECTION_RANKS = {};
-
-    // USTA UAID mapping from rankings_results_v1.csv
-    // USTA profile links - will be populated from desktop version's playerProfileUrlByName
-    const PLAYER_USTA_URLS = {};
-
-    // ========================================
-    // DATA PARSING FUNCTIONS
-    // ========================================
-
-    function detectMixedEvent() {
-      const tables = document.querySelectorAll('.desktop-view table.players-table');
-      if (tables.length < 2) return false;
-      const headers = Array.from(document.querySelectorAll('.desktop-view table.players-table thead th')).map((th) =>
-        (th.textContent || '').trim().toLowerCase()
-      );
-      // Mixed doubles reports include a partner column AND a Team/Combined NST column.
-      // Singles reports may also include a Partner column (doubles partner mapping).
-      return headers.includes('team nst') || headers.includes('combined nst');
-    }
-
-    function makePlayerKey(firstName, lastName) {
-      const first = (firstName || '').trim().toUpperCase();
-      const last = (lastName || '').trim().toUpperCase();
-      return `${last}|${first}`;
-    }
-
-    function partnerKeyFromText(text) {
-      const raw = (text || '').trim();
-      if (!raw) return '';
-      // Expected format: "Last, First"
-      if (raw.includes(',')) {
-        const parts = raw.split(',');
-        const last = (parts[0] || '').trim();
-        const first = (parts.slice(1).join(',') || '').trim();
-        return makePlayerKey(first, last);
-      }
-      // Fallback: "First Last"
-      const parts = raw.split(/\s+/).filter(Boolean);
-      if (parts.length === 1) return makePlayerKey(parts[0], '');
-      return makePlayerKey(parts[0], parts.slice(1).join(' '));
-    }
-
-    function parsePlayersFromTable(table, groupLabel) {
-      const players = [];
-      const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
-        (th.textContent || '').trim().toLowerCase()
-      );
-
-      const col = (name, fallback) => {
-        const idx = headers.findIndex((h) => h === name);
-        return idx !== -1 ? idx : fallback;
-      };
-
-      // Column indices (fallbacks match the single-table report layout).
-      const colRank = 0;
-      const colFirst = col('first name', 1);
-      const colLast = col('last name', 2);
-      const colWtn = col('wtn', 3);
-      const colUtr = col('utr', 4);
-      const colNat = col('nat rank', 5);
-      const colLocation = col('location', 6);
-
-      const partnerColIdx = headers.findIndex((h) => h === 'partner');
-      const hasPartner = partnerColIdx !== -1;
-      const sectionColIdx = headers.findIndex((h) => h === 'section rank');
-      const combinedColIdx = (() => {
-        const teamIdx = headers.findIndex((h) => h === 'team nst');
-        if (teamIdx !== -1) return teamIdx;
-        return headers.findIndex((h) => h === 'combined nst');
-      })();
-
-      const requiredCols = [colRank, colFirst, colLast, colWtn, colUtr, colNat, colLocation].filter((idx) => idx !== -1);
-      const minCells = requiredCols.length ? Math.max(...requiredCols) + 1 : 7;
-
-      const rows = table.querySelectorAll('tbody tr:not([data-primary-projection]):not(.selection-flight-row)');
-      rows.forEach((row) => {
-        if ((row.getAttribute('data-entry-status') || '').trim().toLowerCase() === 'withdrawn') return;
-        const cells = row.querySelectorAll('td');
-        if (cells.length < minCells) return;
-
-        const rank = parseInt((cells[colRank].textContent || '').trim(), 10);
-        const firstName = (cells[colFirst].textContent || '').trim();
-        const lastName = (cells[colLast].textContent || '').trim();
-        const fullName = `${firstName} ${lastName}`.trim();
-
-        const wtnCell = cells[colWtn];
-        const wtn = (wtnCell.textContent || '').trim();
-        const ustaLink = wtnCell ? wtnCell.querySelector('a') : null;
-
-        const utrCell = cells[colUtr];
-        const utrLink = utrCell ? utrCell.querySelector('a') : null;
-        const utrText = (utrLink ? utrLink.textContent : utrCell.textContent) || '';
-        const utrVal = parseFloat(utrText.trim());
-        const utr = Number.isFinite(utrVal) ? utrVal : NaN;
-        const utrUrl = utrLink ? utrLink.href : null;
-
-        const natCell = cells[colNat];
-        const natLink = natCell ? natCell.querySelector('a') : null;
-        const ustaUrl = (ustaLink && ustaLink.href) || (natLink && natLink.href) || null;
-        const natVal = parseInt((natCell.textContent || '').trim(), 10);
-        const natRank = Number.isFinite(natVal) ? natVal : NaN;
-
-        const location = (cells[colLocation].textContent || '').trim();
-        const isTarget = row.classList.contains('highlight-player');
-        const teamNst =
-          combinedColIdx !== -1 && cells[combinedColIdx] ? (cells[combinedColIdx].textContent || '').trim() : '';
-
-        let partner = '';
-        let partnerKey = '';
-        if (hasPartner && cells[partnerColIdx]) {
-          const partnerCell = cells[partnerColIdx];
-          const partnerLink = partnerCell.querySelector('.partner-jump');
-          partner = (partnerCell.textContent || '').trim();
-          partnerKey = partnerLink ? (partnerLink.getAttribute('data-partner-key') || '').trim() : partnerKeyFromText(partner);
-        }
-
-        // Extract UAID from USTA URL if available
-        let uaid = null;
-        if (ustaUrl) {
-          const uaidMatch = ustaUrl.match(/uaid=(\d+)/);
-          if (uaidMatch) uaid = uaidMatch[1];
-        }
-
-	        const playerKey = (row.getAttribute('data-player-key') || '').trim() || makePlayerKey(firstName, lastName);
-	        const groupPrefix = (() => {
-	          const g = (groupLabel || '').trim();
-	          if (!g) return '';
-	          const m = g.match(/\b(10|12|14|16|18)\b/);
-	          if (m) return m[1] + '-';
-	          return g[0].toUpperCase() + '-';
-	        })();
-	        const id = groupPrefix + playerKey.replace(/[^A-Z0-9]+/g, '-');
-
-        // Section ranks exist only for singles reports (hidden column).
-        const sectionCell = sectionColIdx !== -1 ? cells[sectionColIdx] : null;
-        const sectionRank = sectionCell ? parseInt((sectionCell.textContent || '').trim(), 10) || null : null;
-
-        players.push({
-          id,
-          group: groupLabel || '',
-          playerKey,
-          partner,
-          partnerKey,
-          rank,
-          firstName,
-          lastName,
-          fullName,
-          wtn,
-          utr,
-          utrUrl,
-          natRank,
-          sectionRank,
-          uaid,
-          teamNst,
-          location,
-          isTarget
-        });
-      });
-
-      return players;
-    }
-
-	    function parsePlayerData() {
-	      isMixedEvent = detectMixedEvent();
-	      mixedGroups = null;
-	      multiGroups = null;
-	
-	      const tables = Array.from(document.querySelectorAll('.desktop-view table.players-table'));
-	      if (!tables.length) return [];
-	
-	      if (isMixedEvent) {
-        const girls = [];
-        const boys = [];
-
-        tables.forEach((table) => {
-          const titleEl = table.previousElementSibling;
-          const titleText = titleEl ? (titleEl.textContent || '').trim().toLowerCase() : '';
-          const group = titleText.includes('boys') ? 'Boys' : titleText.includes('girls') ? 'Girls' : '';
-          const parsed = parsePlayersFromTable(table, group);
-          if (group === 'Boys') boys.push(...parsed);
-          else girls.push(...parsed);
-        });
-
-	        mixedGroups = { girls, boys };
-	        return [...girls, ...boys];
-	      }
-
-	      if (tables.length > 1) {
-	        // Multiple singles tables (e.g., U12 + U14 on one page).
-	        const groups = [];
-	        tables.forEach((table, idx) => {
-	          const titleEl = table.previousElementSibling;
-	          const titleText = titleEl ? (titleEl.textContent || '').trim() : '';
-	          const group = titleText || `Event ${idx + 1}`;
-	          const parsed = parsePlayersFromTable(table, group);
-	          groups.push({ label: group, players: parsed });
-	        });
-	        multiGroups = groups;
-	        return groups.flatMap((g) => g.players);
-	      }
-	
-	      // Singles: only one table.
-	      return parsePlayersFromTable(tables[0], '');
-	    }
-
-    function parseKeyStats() {
-      const stats = {
-        drawSize: 32,
-        closes: '',
-        registered: 0,
-        // Legacy/optional (Alexis-focused reports).
-        seed: null,
-        percentAbove: null
-      };
-      
-      const keyStats = document.querySelectorAll('.desktop-view .key-stat');
-      keyStats.forEach(stat => {
-        const label = stat.querySelector('.key-label');
-        const value = stat.querySelector('.key-value');
-        if (!label || !value) return;
-        
-        const labelText = label.textContent.trim();
-        const valueText = value.textContent.trim();
-        
-        if (labelText === 'Draw') {
-          const parsed = parseInt(valueText, 10);
-          if (Number.isFinite(parsed)) stats.drawSize = parsed;
-        } else if (labelText === 'Closes') {
-          stats.closes = valueText;
-        } else if (labelText === 'Registered') {
-          const parsed = parseInt(valueText, 10);
-          if (Number.isFinite(parsed)) stats.registered = parsed;
-        } else if (labelText === 'Alexis Seed') {
-          const parts = valueText.split('/');
-          if (parts.length === 2) {
-            const seedParsed = parseInt(parts[0].trim(), 10);
-            const regParsed = parseInt(parts[1].trim(), 10);
-            if (Number.isFinite(seedParsed)) stats.seed = seedParsed;
-            if (Number.isFinite(regParsed)) stats.registered = regParsed;
-          }
-        } else if (labelText === '% Above Alexis (UTR)') {
-          const parsed = parseInt(valueText, 10);
-          if (Number.isFinite(parsed)) stats.percentAbove = parsed;
-        }
-      });
-      
-      return stats;
-    }
-
-    function parseTournamentInfo() {
-      const info = {
-        title: '',
-        dates: '',
-        location: '',
-        format: {},
-        venues: [],
-        contact: {}
-      };
-      
-      // Parse header info
-      const h1 = document.querySelector('.desktop-view h1');
-      if (h1) info.title = h1.textContent.trim();
-      
-      const datesEl = document.querySelector('.desktop-view .tournament-dates');
-      if (datesEl) info.dates = datesEl.textContent.trim();
-      
-      const tournamentInfo = document.querySelector('.desktop-view .tournament-info');
-      if (tournamentInfo) {
-        const text = tournamentInfo.textContent.trim();
-        const lines = text.split('\n').map(l => l.trim()).filter(l => l);
-        if (lines.length > 1) {
-          const fullLocation = lines[1].replace(/•.*$/, '').trim();
-          // Extract just "City, State" from full venue addresses
-          // Example: "Willow Glen MS/HS & Piedmont Hills HS, San Jose, CA" -> "San Jose, CA"
-          const cityStateMatch = fullLocation.match(/([^,]+,\s*[A-Z]{2})$/);
-          info.location = cityStateMatch ? cityStateMatch[1].trim() : fullLocation;
-        }
-      }
-      
-      // Parse tournament details
-      const detailsPage = document.querySelector('.desktop-view .tournament-details-page');
-      if (detailsPage) {
-        const detailRows = detailsPage.querySelectorAll('.detail-row');
-        detailRows.forEach(row => {
-          const label = row.querySelector('.detail-label');
-          const value = row.querySelector('.detail-value');
-          if (!label || !value) return;
-          
-          const labelText = label.textContent.trim().replace(':', '');
-          const valueText = value.textContent.trim();
-          
-          // Format & Scoring
-          if (labelText === 'Match Format') info.format.matchFormat = valueText;
-          if (labelText === 'Tiebreaks') info.format.tiebreaks = valueText;
-          if (labelText === 'Set Tiebreak') info.format.setTiebreak = valueText;
-          if (labelText === 'Match Tiebreak') info.format.matchTiebreak = valueText;
-          
-          // Venues
-          if (labelText.startsWith('Site')) {
-            const link = value.querySelector('a');
-            info.venues.push({
-              name: valueText.split(',')[0].trim(),
-              url: link ? link.href : null
-            });
-          }
-          
-          // Contact
-          if (labelText === 'Tournament Director') info.contact.director = valueText;
-          if (labelText === 'Email') {
-            const link = value.querySelector('a');
-            info.contact.email = link ? link.href.replace('mailto:', '') : valueText;
-          }
-          if (labelText === 'Phone') {
-            const link = value.querySelector('a');
-            info.contact.phone = link ? link.textContent.trim() : valueText;
-            info.contact.phoneUrl = link ? link.href : null;
-          }
-        });
-      }
-      
-      return info;
-    }
-
-    // ========================================
-    // RENDERING FUNCTIONS
-    // ========================================
-
-    function buildAlexisCard(player) {
-      if (!player) return '';
-      
-      const initials = `${player.firstName[0]}${player.lastName[0]}`;
-      const sectionRank = 54; // Alexis's sectional rank from MEMORY_BANK.md
-      
-      return `
-        <div class="mobile-alexis-header">
-          <div class="mobile-alexis-avatar">${initials}</div>
-          <div class="mobile-alexis-name">
-            <h3>${player.fullName}</h3>
-            <span>${player.location}</span>
-          </div>
-          <div class="mobile-alexis-seed">Roster #${player.rank}</div>
-        </div>
-        <div class="mobile-alexis-stats">
-          <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${player.wtn}</div>
-            <div class="mobile-alexis-stat-label">WTN</div>
-          </div>
-          <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${formatUtrValue(player.utr)}</div>
-            <div class="mobile-alexis-stat-label">UTR</div>
-          </div>
-          <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${formatNatRankValue(player.natRank)}</div>
-            <div class="mobile-alexis-stat-label">Nat Rank</div>
-          </div>
-          <div class="mobile-alexis-stat">
-            <div class="mobile-alexis-stat-value">${sectionRank}</div>
-            <div class="mobile-alexis-stat-label">Section</div>
-          </div>
-        </div>
-      `;
-    }
-
-    function buildPositionGauge(players, targetPlayer) {
-      if (!targetPlayer || players.length === 0) return '';
-      
-      const targetIndex = players.findIndex(p => p.isTarget);
-      const percentage = ((targetIndex / (players.length - 1)) * 100).toFixed(0);
-      const percentAbove = Math.round((targetIndex / players.length) * 100);
-      const firstPlayer = players[0];
-      const lastPlayer = players[players.length - 1];
-      const stats = parseKeyStats();
-      const cushion = stats.drawSize - targetPlayer.rank;
-      
-      return `
-        <div class="mobile-gauge-header">
-          <span class="mobile-gauge-title">Position in Draw</span>
-          <span class="mobile-gauge-value">${percentAbove}% above her</span>
-        </div>
-        <div class="mobile-gauge-bar">
-          <div class="mobile-gauge-fill" id="gauge-fill" style="width: 0%;" data-width="${percentage}%">
-            <div class="mobile-gauge-marker"></div>
-          </div>
-        </div>
-        <div class="mobile-gauge-labels">
-          <span>#1 ${firstPlayer.firstName} ${firstPlayer.lastName[0]}.</span>
-          <span>#${targetPlayer.rank} ${targetPlayer.firstName}</span>
-          <span>#${players.length}</span>
-        </div>
-        ${cushion > 0 ? `
-        <div class="mobile-gauge-note">
-          <span>✓</span>
-          ${cushion}-player cushion above cutoff — safe entry
-        </div>
-        ` : ''}
-      `;
-    }
-
-    function buildUtrHistogramMobile() {
-      // Find existing histogram data from desktop view
-      const desktopHistogram = document.querySelector('.desktop-view .utr-histogram-chart');
-      if (!desktopHistogram) return '';
-      
-      const bins = desktopHistogram.querySelectorAll('.utr-bin');
-      if (bins.length === 0) return '';
-      
-      let maxCount = 0;
-      const binData = [];
-      
-      bins.forEach(bin => {
-        const countEl = bin.querySelector('.utr-bin-count');
-        const count = parseInt(countEl.textContent.trim());
-        const isHighlight = bin.classList.contains('is-highlight');
-        binData.push({ count, isHighlight });
-        maxCount = Math.max(maxCount, count);
-      });
-      
-      // Build histogram bars
-      const bars = binData.map((bin, i) => {
-        const height = (bin.count / maxCount) * 100;
-        const className = bin.isHighlight ? 'mobile-histogram-bar alexis-range' : 'mobile-histogram-bar';
-        return `<div class="${className}" style="height: ${height}%;"></div>`;
-      }).join('');
-      
-      return `
-        <div class="mobile-histogram">
-          ${bars}
-        </div>
-        <div class="mobile-histogram-labels">
-          <span>2.0</span>
-          <span>3.0</span>
-          <span>4.0</span>
-          <span>5.0</span>
-          <span>6.0</span>
-        </div>
-        <div class="mobile-chart-legend">
-          <div class="mobile-legend-item">
-            <div class="mobile-legend-dot blue"></div>
-            <span>Other players</span>
-          </div>
-          <div class="mobile-legend-item">
-            <div class="mobile-legend-dot orange"></div>
-            <span>Alexis's range</span>
-          </div>
-        </div>
-      `;
-    }
-
-    function formatUtrValue(value) {
-      if (Number.isFinite(value)) return value.toFixed(2);
-      return 'N/A';
-    }
-
-    function formatNatRankValue(value) {
-      if (Number.isFinite(value)) return String(value);
-      return 'N/A';
-    }
-
-    function isProbablyEmail(value) {
-      const email = (value || '').trim();
-      if (!email) return false;
-      if (email.toUpperCase() === 'N/A') return false;
-      return /.+@.+\..+/.test(email);
-    }
-
-    function sortPlayers(players, sortBy) {
-      const sorted = [...players];
-      
-      if (sortBy === 'rank') {
-        sorted.sort((a, b) => a.rank - b.rank);
-      } else if (sortBy === 'utr') {
-        sorted.sort((a, b) => {
-          const aVal = Number.isFinite(a.utr) ? a.utr : -1e9;
-          const bVal = Number.isFinite(b.utr) ? b.utr : -1e9;
-          return bVal - aVal; // Descending (higher is better)
-        });
-      } else if (sortBy === 'natRank') {
-        sorted.sort((a, b) => {
-          const aVal = Number.isFinite(a.natRank) ? a.natRank : 1e9;
-          const bVal = Number.isFinite(b.natRank) ? b.natRank : 1e9;
-          return aVal - bVal; // Ascending (lower is better)
-        });
-      } else if (sortBy === 'wtn') {
-        sorted.sort((a, b) => {
-          const aWtn = parseFloat(a.wtn) || 999;
-          const bWtn = parseFloat(b.wtn) || 999;
-          return aWtn - bWtn; // Ascending (lower is better)
-        });
-      }
-      
-      return sorted;
-    }
-
-    function buildPlayerCards(players, sortBy, limit = null) {
-      const sorted = sortPlayers(players, sortBy);
-      const displayPlayers = limit ? sorted.slice(0, limit) : sorted;
-      const stats = parseKeyStats();
-      const showCutoff = sortBy === 'rank'; // Only show cutoff when sorted by seed
-      
-      let html = '';
-      let cutoffAdded = false;
-      
-      displayPlayers.forEach((player, index) => {
-        // Add cutoff divider after player #32 (only in seed order)
-        if (showCutoff && !cutoffAdded && player.rank === stats.drawSize && index < displayPlayers.length - 1) {
-          html += '<div class="mobile-cutoff-divider">✂️ Draw cutoff after player #' + stats.drawSize + '</div>';
-          cutoffAdded = true;
-        }
-        
-        const isTopSeed = player.rank <= 8;
-        const cardClass = ['mobile-player-card'];
-        if (isTopSeed) cardClass.push('top-seed');
-        if (player.isTarget) cardClass.push('target-player');
-        
-        html += `
-          <div class="${cardClass.join(' ')}" data-player-id="${player.id}">
-            <div class="mobile-player-rank">${player.rank}</div>
-            <div class="mobile-player-info">
-              <div class="mobile-player-name">${player.fullName}</div>
-              <div class="mobile-player-location">${player.location}</div>
-            </div>
-            <div class="mobile-player-ratings">
-              ${player.utrUrl ? `
-                <a href="${player.utrUrl}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge utr" onclick="event.stopPropagation()">
-                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
-                  <div class="mobile-rating-label">UTR</div>
-                </a>
-              ` : `
-                <div class="mobile-rating-badge utr">
-                  <div class="mobile-rating-value">${formatUtrValue(player.utr)}</div>
-                  <div class="mobile-rating-label">UTR</div>
-                </div>
-              `}
-              ${player.uaid ? `
-                <a href="https://www.usta.com/en/home/play/player-search/profile.html#?uaid=${player.uaid}" target="_blank" rel="noopener noreferrer" class="mobile-rating-badge nat" onclick="event.stopPropagation()">
-                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
-                  <div class="mobile-rating-label">Nat</div>
-                </a>
-              ` : `
-                <div class="mobile-rating-badge nat">
-                  <div class="mobile-rating-value">${formatNatRankValue(player.natRank)}</div>
-                  <div class="mobile-rating-label">Nat</div>
-                </div>
-              `}
-            </div>
-            <div class="mobile-player-expand-icon">▼</div>
-          </div>
-          <div class="mobile-player-details" data-player-id="${player.id}">
-            <div class="mobile-player-details-grid">
-              <div class="mobile-detail-item">
-                <div class="mobile-detail-label">WTN</div>
-                <div class="mobile-detail-value">${player.wtn}</div>
-              </div>
-              <div class="mobile-detail-item">
-                <div class="mobile-detail-label">Sec Rank</div>
-                <div class="mobile-detail-value">${player.sectionRank || 'N/A'}</div>
-              </div>
-              <div class="mobile-detail-item">
-                <div class="mobile-detail-label">Roster #</div>
-                <div class="mobile-detail-value">#${player.rank}</div>
-              </div>
-              ${player.partner ? `
-              <div class="mobile-detail-item">
-                <div class="mobile-detail-label">Partner</div>
-                <div class="mobile-detail-value">
-                  ${player.partnerKey ? `
-                    <button class="mobile-partner-jump" data-partner-key="${player.partnerKey}" onclick="event.stopPropagation()">${player.partner}</button>
-                  ` : player.partner}
-                </div>
-              </div>
-              ` : ''}
-            </div>
-          </div>
-        `;
-      });
-      
-      return html;
-    }
-
-    function buildInfoCards(info) {
-      let html = '';
-
-      const cleanText = (value) => (value || '').replace(/\s+/g, ' ').trim();
-      const isLongValue = (value) => cleanText(value).length > 80;
-      const renderRow = (label, value) => {
-        const v = cleanText(value);
-        if (!v) return '';
-        const rowClass = isLongValue(v) ? 'mobile-info-row is-stacked' : 'mobile-info-row';
-        return `
-          <div class="${rowClass}">
-            <span class="mobile-info-label">${label}</span>
-            <span class="mobile-info-value">${v}</span>
-          </div>
-        `;
-      };
-      
-      // Format & Scoring Card
-      if (info.format.matchFormat || info.format.tiebreaks || info.format.setTiebreak || info.format.matchTiebreak) {
-        html += `
-          <div class="mobile-info-card">
-            <div class="mobile-info-card-header">
-              <span class="icon">🎾</span>
-              Format & Scoring
-            </div>
-            ${renderRow('Match Format', info.format.matchFormat)}
-            ${renderRow('Tiebreaks', info.format.tiebreaks)}
-            ${renderRow('Set Tiebreak', info.format.setTiebreak)}
-            ${renderRow('3rd Set', info.format.matchTiebreak)}
-          </div>
-        `;
-      }
-      
-      // Venues Card
-      if (info.venues.length > 0) {
-        html += `
-          <div class="mobile-info-card">
-            <div class="mobile-info-card-header">
-              <span class="icon">📍</span>
-              Venues
-            </div>
-        `;
-        info.venues.forEach((venue, i) => {
-          html += `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Site ${i + 1}</span>
-              <span class="mobile-info-value">
-                ${venue.url ? `<a href="${venue.url}" target="_blank" rel="noopener noreferrer">${venue.name} →</a>` : venue.name}
-              </span>
-            </div>
-          `;
-        });
-        html += '</div>';
-      }
-      
-      // Contact Card
-      if (info.contact.director || info.contact.email || info.contact.phone) {
-        html += `
-          <div class="mobile-info-card">
-            <div class="mobile-info-card-header">
-              <span class="icon">📞</span>
-              Contact
-            </div>
-            ${info.contact.director ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Director</span>
-              <span class="mobile-info-value">${info.contact.director}</span>
-            </div>` : ''}
-            ${info.contact.email ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Email</span>
-              <span class="mobile-info-value">
-                ${isProbablyEmail(info.contact.email) ? `<a href="mailto:${info.contact.email}">${info.contact.email}</a>` : info.contact.email}
-              </span>
-            </div>` : ''}
-            ${info.contact.phone ? `
-            <div class="mobile-info-row">
-              <span class="mobile-info-label">Phone</span>
-              <span class="mobile-info-value">
-                ${info.contact.phoneUrl ? `<a href="${info.contact.phoneUrl}">${info.contact.phone}</a>` : info.contact.phone}
-              </span>
-            </div>` : ''}
-          </div>
-        `;
-      }
-      
-      return html;
-    }
-
-    // ========================================
-    // MAIN RENDER FUNCTION
-    // ========================================
-
-    function renderMobileView() {
-      // Parse all data
-      allPlayers = parsePlayerData();
-      playerByKey = {};
-      allPlayers.forEach(p => {
-        if (p && p.playerKey) playerByKey[p.playerKey] = p;
-      });
-      targetPlayer = allPlayers.find(p => p.isTarget);
-      const stats = parseKeyStats();
-      const info = parseTournamentInfo();
-
-      // Keep the mobile tournament link aligned with the desktop header.
-      const desktopTournamentLink = document.querySelector('.desktop-view .tournament-info a');
-      const mobileTournamentLink = document.querySelector('a.mobile-tournament-link');
-      if (desktopTournamentLink && mobileTournamentLink) {
-        if (desktopTournamentLink.href) mobileTournamentLink.href = desktopTournamentLink.href;
-        const title = (desktopTournamentLink.textContent || '').trim();
-        if (title) mobileTournamentLink.textContent = title;
-      }
-      
-      // Render header
-      // Use title as-is (already contains "Open Level 5 Championship Singles - Girls' 12 Singles")
-      const titleText = info.title || "Kunal Patel San Francisco $50,000 Open — Women";
-      document.getElementById('mobile-title').textContent = titleText;
-      
-      // Format: "Jan 10-18, 2026 • San Jose, CA"
-      const metaEl = document.getElementById('mobile-meta');
-      if (metaEl) {
-        const datesText = (info.dates || '').trim();
-        const locText = (info.location || '').trim();
-        const sep = datesText && locText ? ' • ' : '';
-        const mapUrl = info?.venues?.[0]?.url || '';
-
-        metaEl.textContent = '';
-        metaEl.append(document.createTextNode(datesText + sep));
-        if (mapUrl && locText) {
-          const a = document.createElement('a');
-          a.href = mapUrl;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.textContent = locText;
-          metaEl.append(a);
-        } else {
-          metaEl.append(document.createTextNode(locText));
-        }
-      }
-      
-      // Render hero stats
-      document.getElementById('mobile-draw-size').textContent = Number.isFinite(stats.drawSize) ? stats.drawSize : '';
-      document.getElementById('mobile-seed').textContent =
-        (stats.closes || '').trim() || (Number.isFinite(stats.seed) ? String(stats.seed) : '');
-      document.getElementById('mobile-registered').textContent = Number.isFinite(stats.registered) ? stats.registered : '';
-      
-      // Render Alexis card
-      if (targetPlayer) {
-        document.getElementById('mobile-alexis-card').innerHTML = buildAlexisCard(targetPlayer);
-      }
-      
-      // Render position gauge
-      if (targetPlayer && allPlayers.length > 0) {
-        document.getElementById('mobile-position-gauge').innerHTML = buildPositionGauge(allPlayers, targetPlayer);
-        // Animate gauge after render
-        setTimeout(() => {
-          const fill = document.getElementById('gauge-fill');
-          if (fill) {
-            fill.style.width = fill.getAttribute('data-width');
-          }
-        }, 100);
-      }
-      
-      // Render UTR histogram
-      document.getElementById('mobile-histogram').innerHTML = buildUtrHistogramMobile();
-      
-      // Render player count
-      document.getElementById('mobile-player-count').textContent = allPlayers.length;
-      
-      // Render the complete roster first so mobile matches the registered count.
-      syncMobileSortButtons(currentSort);
-      renderPlayerList(currentSort, null);
-      
-      // Render tournament info
-      document.getElementById('mobile-info-section').innerHTML = buildInfoCards(info);
-    }
-
-	    function renderPlayerList(sortBy, limit = null) {
-	      if (isMixedEvent && mixedGroups) {
-	        const groupLimit = limit === null ? null : 8;
-	        const girlsHtml = buildPlayerCards(mixedGroups.girls, sortBy, groupLimit);
-	        const boysHtml = buildPlayerCards(mixedGroups.boys, sortBy, groupLimit);
-	        const html = `
-	          <div class="mobile-group-header">Girls</div>
-	          ${girlsHtml}
-	          <div class="mobile-group-header">Boys</div>
-	          ${boysHtml}
-	        `;
-	        document.getElementById('mobile-player-list').innerHTML = html;
-	      } else if (multiGroups && Array.isArray(multiGroups) && multiGroups.length > 0) {
-	        const groupLimit = limit === null ? null : 8;
-	        const html = multiGroups.map((group) => {
-	          const label = group && group.label ? group.label : 'Players';
-	          const players = group && Array.isArray(group.players) ? group.players : [];
-	          const cards = buildPlayerCards(players, sortBy, groupLimit);
-	          return `
-	            <div class="mobile-group-header">${label}</div>
-	            ${cards}
-	          `;
-	        }).join('');
-	        document.getElementById('mobile-player-list').innerHTML = html;
-	      } else {
-	        const html = buildPlayerCards(allPlayers, sortBy, limit);
-	        document.getElementById('mobile-player-list').innerHTML = html;
-	      }
-      
-      // Update show more button
-      const showMoreBtn = document.getElementById('mobile-show-more');
-      if (limit && limit < allPlayers.length) {
-        showMoreBtn.style.display = 'block';
-        showMoreBtn.textContent = `Show all ${allPlayers.length} players ↓`;
-        isExpanded = false;
-      } else if (limit === null) {
-        showMoreBtn.style.display = 'block';
-        showMoreBtn.textContent = `Show less ↑`;
-        isExpanded = true;
-      } else {
-        showMoreBtn.style.display = 'none';
-      }
-    }
-
-    // ========================================
-    // EVENT HANDLERS
-    // ========================================
-
-    function syncMobileSortButtons(sortBy) {
-      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-sort') === sortBy) {
-          btn.classList.add('active');
-        }
-      });
-    }
-
-    function handleSort(sortBy) {
-      currentSort = sortBy;
-      syncMobileSortButtons(sortBy);
-      
-      // Re-render with current expansion state
-      const limit = isExpanded ? null : 8;
-      renderPlayerList(sortBy, limit);
-    }
-
-    function handleShowMore() {
-      if (isExpanded) {
-        renderPlayerList(currentSort, 8);
-      } else {
-        renderPlayerList(currentSort, null);
-      }
-    }
-
-    // ========================================
-    // VIEW TOGGLE
-    // ========================================
-
-    function getUserViewPreference() {
-      return localStorage.getItem('tennisReportViewPref');
-    }
-
-    function setUserViewPreference(view) {
-      localStorage.setItem('tennisReportViewPref', view);
-    }
-
-    function detectMobileDevice() {
-      return window.innerWidth <= 600;
-    }
-
-    function isMobileViewActive() {
-      if (document.body.classList.contains('force-mobile')) return true;
-      if (document.body.classList.contains('force-desktop')) return false;
-      return detectMobileDevice();
-    }
-
-    function placeH2HBlock() {
-      const wrapper = document.getElementById('alexis-roster-h2h-wrapper');
-      if (!wrapper) return;
-      const target = isMobileViewActive()
-        ? document.getElementById('alexis-h2h-slot-mobile')
-        : document.getElementById('alexis-h2h-slot-desktop');
-      if (!target) return;
-      if (wrapper.parentElement === target) return;
-      target.appendChild(wrapper);
-    }
-
-    function toggleView(targetView) {
-      setUserViewPreference(targetView);
-      
-      if (targetView === 'mobile') {
-        document.body.classList.add('force-mobile');
-        document.body.classList.remove('force-desktop');
-      } else {
-        document.body.classList.add('force-desktop');
-        document.body.classList.remove('force-mobile');
-      }
-      placeH2HBlock();
-    }
-
-    function applyViewPreference() {
-      const pref = getUserViewPreference();
-      const isMobile = detectMobileDevice();
-      
-      // On desktop (>600px), always show desktop regardless of preference
-      if (!isMobile) {
-        document.body.classList.remove('force-mobile', 'force-desktop');
-        placeH2HBlock();
-        return;
-      }
-      
-      // On mobile (≤600px), apply preference if set
-      if (pref === 'desktop') {
-        document.body.classList.add('force-desktop');
-        document.body.classList.remove('force-mobile');
-      } else if (pref === 'mobile') {
-        document.body.classList.add('force-mobile');
-        document.body.classList.remove('force-desktop');
-      }
-      // If no preference, let CSS media query handle it
-      placeH2HBlock();
-    }
-
-    // ========================================
-    // PLAYER CARD INTERACTION
-    // ========================================
-
-    function togglePlayerDetails(playerId) {
-      const card = document.querySelector(`.mobile-player-card[data-player-id="${playerId}"]`);
-      const details = document.querySelector(`.mobile-player-details[data-player-id="${playerId}"]`);
-      
-      if (!card || !details) return;
-      
-      const isExpanded = card.classList.contains('expanded');
-      
-      // Close all other expanded cards
-      document.querySelectorAll('.mobile-player-card.expanded').forEach(c => {
-        c.classList.remove('expanded');
-      });
-      document.querySelectorAll('.mobile-player-details.expanded').forEach(d => {
-        d.classList.remove('expanded');
-      });
-      
-      // Toggle current card
-      if (!isExpanded) {
-        card.classList.add('expanded');
-        details.classList.add('expanded');
-      }
-    }
-
-    // ========================================
-    // INITIALIZATION
-    // ========================================
-
-    function initMobileView() {
-      // Apply view preference
-      applyViewPreference();
-      
-      // Render mobile view
-      renderMobileView();
-      
-      // Setup event listeners
-      
-      // Player card click handlers
-      document.addEventListener('click', (e) => {
-        const partnerBtn = e.target.closest('.mobile-partner-jump');
-        if (partnerBtn) {
-          e.preventDefault();
-          e.stopPropagation();
-          const key = (partnerBtn.getAttribute('data-partner-key') || '').trim();
-          if (!key) return;
-          const partner = playerByKey[key];
-          if (!partner) return;
-          const card = document.querySelector(`.mobile-player-card[data-player-id="${partner.id}"]`);
-          if (card) {
-            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            togglePlayerDetails(partner.id);
-          }
-          return;
-        }
-
-        const card = e.target.closest('.mobile-player-card');
-        if (card) {
-          const playerId = card.getAttribute('data-player-id');
-          if (playerId) {
-            togglePlayerDetails(playerId);
-          }
-        }
-      });
-      
-      // Sort buttons
-      document.querySelectorAll('.mobile-sort-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          handleSort(btn.getAttribute('data-sort'));
-        });
-      });
-      
-      // Show more/less button
-      document.getElementById('mobile-show-more').addEventListener('click', handleShowMore);
-      
-      // View toggle links
-      document.getElementById('mobile-toggle-desktop').addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleView('desktop');
-      });
-      
-      document.getElementById('desktop-toggle-mobile').addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleView('mobile');
-      });
-      
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        applyViewPreference();
-      });
-    }
-
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMobileView);
-    } else {
-      initMobileView();
-    }
-  </script>
+  <script src="assets/js/report.js" defer></script>
 
   <!-- Share Button -->
   <script>
@@ -2028,8 +1004,18 @@
 
 	    function buildUtrHistogram() {
 	      function isMixedEventPage() {
+	        // Desktop-only check (mirrors the retired detectMixedEvent(): a
+	        // second players-table plus a Team/Combined NST column means a
+	        // mixed-doubles report). Self-contained here because report.js
+	        // is deferred and must not be relied on by non-deferred desktop
+	        // scripts.
 	        try {
-	          return typeof detectMixedEvent === 'function' && detectMixedEvent();
+	          const tables = document.querySelectorAll('.desktop-view table.players-table');
+	          if (tables.length < 2) return false;
+	          const headers = Array.from(document.querySelectorAll('.desktop-view table.players-table thead th')).map((th) =>
+	            (th.textContent || '').trim().toLowerCase()
+	          );
+	          return headers.includes('team nst') || headers.includes('combined nst');
 	        } catch (err) {
 	          return false;
 	        }
@@ -2293,10 +1279,10 @@
         });
       }
 
-      function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
-        const rows = Array.from(tbody.querySelectorAll('tr:not(.selection-flight-row)'));
+      const officialFlights = (table.getAttribute('data-flight-source') || '').trim() === 'official';
 
-        rows.sort((a, b) => {
+      function applySort(columnIndex, direction, activeHeader, updateHeaderStyle) {
+        const comparator = (a, b) => {
           const aC = a.cells[columnIndex], bC = b.cells[columnIndex];
           const aExplicit = aC?.dataset.sortVal !== undefined ? aC.dataset.sortVal : aC?.querySelector('[data-sort-val]')?.getAttribute('data-sort-val');
           const bExplicit = bC?.dataset.sortVal !== undefined ? bC.dataset.sortVal : bC?.querySelector('[data-sort-val]')?.getAttribute('data-sort-val');
@@ -2313,10 +1299,41 @@
           }
           const cmp = aText.localeCompare(bText, undefined, { sensitivity: 'base' });
           return direction === 'asc' ? cmp : -cmp;
-        });
+        };
 
-        tbody.innerHTML = '';
-        rows.forEach(row => tbody.appendChild(row));
+        if (officialFlights) {
+          // Sort players only within their own official flight; dividers stay pinned.
+          // Flightless rows (alternates / non-draw) sort among themselves and stay after the flights.
+          const nodes = Array.from(tbody.children);
+          const output = [];
+          const tail = [];
+          let bucket = [];
+          const flushBucket = () => {
+            bucket.sort(comparator);
+            output.push(...bucket);
+            bucket = [];
+          };
+          nodes.forEach((node) => {
+            if (node.classList && node.classList.contains('selection-flight-row')) {
+              flushBucket();
+              output.push(node);
+            } else if (node.getAttribute && node.getAttribute('data-flight')) {
+              bucket.push(node);
+            } else {
+              tail.push(node);
+            }
+          });
+          flushBucket();
+          tail.sort(comparator);
+          output.push(...tail);
+          tbody.innerHTML = '';
+          output.forEach(node => tbody.appendChild(node));
+        } else {
+          const rows = Array.from(tbody.querySelectorAll('tr:not(.selection-flight-row)'));
+          rows.sort(comparator);
+          tbody.innerHTML = '';
+          rows.forEach(row => tbody.appendChild(row));
+        }
         updateRowNumbers();
 
         if (updateHeaderStyle) {
@@ -2604,21 +1621,6 @@
     document.body.appendChild(shareButton);
   </script>
   <script>
-(function() {
-  const toggle = document.getElementById('theme-toggle');
-  const themeIcon = document.getElementById('theme-icon');
-  const html = document.documentElement;
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      toggleTheme();
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      if (themeIcon) themeIcon.textContent = isDark ? '☀️' : '🌙';
-    });
-  }
-  if (themeIcon) themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-})();
-  </script>
-  <script>
   // H2H badge tooltip
   (function() {
     const tooltip = document.getElementById('h2h-tooltip');
@@ -2673,5 +1675,6 @@
     });
   })();
   </script>
+  <script src="assets/js/site.js" defer></script>
 </body>
 </html>
