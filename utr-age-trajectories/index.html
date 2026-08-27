@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Junior UTR Development Curves</title>
+<meta name="description" content="Interactive age-normalized UTR trajectories for selected junior tennis players." />
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="data/alexis.js"></script>
+<script src="data/liutova.js"></script>
+<script src="data/nikol.js"></script>
+<script src="data/chloe.js"></script>
+<script src="data/lindy.js"></script>
+<style>
+:root{--bg:#f4f7f3;--panel:#fff;--text:#182019;--muted:#667168;--border:#dce4dd;--brand:#285d35;--soft:#eef4ef;--shadow:0 16px 44px rgba(24,32,25,.08)}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1410;--panel:#171d18;--text:#eef4ef;--muted:#9ca79e;--border:#303931;--brand:#8bc89a;--soft:#1d2820;--shadow:0 16px 44px rgba(0,0,0,.25)}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{width:min(1540px,calc(100% - 30px));margin:auto;padding:28px 0 60px}.top{display:grid;grid-template-columns:1.35fr .65fr;gap:20px}.hero,.note,.chart-card,.card{background:var(--panel);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow)}.hero{padding:30px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}h1{font-size:clamp(34px,5vw,60px);letter-spacing:-.055em;line-height:.98;margin:8px 0 14px}.lede{color:var(--muted);line-height:1.55;margin:0;max-width:900px}.note{padding:24px;display:flex;flex-direction:column;justify-content:center}.note strong{font-size:17px;margin-bottom:8px}.note span{font-size:13px;line-height:1.5;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:16px 0 20px}.stat{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:14px 15px;box-shadow:var(--shadow)}.stat-name{font-size:12px;color:var(--muted);margin-bottom:5px}.stat-main{display:flex;align-items:baseline;gap:7px}.stat-main b{font-size:22px}.stat-main small{font-size:11px;color:var(--muted)}.stat-sub{font-size:11px;color:var(--muted);margin-top:4px}.chart-card{padding:14px}.toolbar{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:4px 6px 8px}.toolbar-copy{color:var(--muted);font-size:12px}.buttons{display:flex;flex-wrap:wrap;gap:7px}button{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:8px 11px;border-radius:9px;font:inherit;font-weight:700;font-size:12px;cursor:pointer}button:hover{border-color:var(--brand)}#chart{width:100%;height:760px}.bottom{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;margin-top:20px}.card{padding:22px}.card h2{font-size:18px;margin:0 0 10px}.card p{color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 14px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:9px 7px;border-bottom:1px solid var(--border);text-align:right}th:first-child,td:first-child{text-align:left}th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.06em}.notes{display:grid;gap:10px}.mini{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--soft)}.mini b{display:block;font-size:12px;margin-bottom:4px}.mini span{font-size:11px;color:var(--muted);line-height:1.45}footer{text-align:center;color:var(--muted);font-size:11px;margin-top:20px}@media(max-width:980px){.top,.bottom{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}#chart{height:650px}}@media(max-width:600px){.wrap{width:calc(100% - 16px);padding-top:12px}.hero,.note,.card{padding:17px}.chart-card{padding:5px}.stats{gap:7px}.stat{padding:11px}#chart{height:560px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="top">
+<div class="hero"><div class="eyebrow">Junior development analysis</div><h1>UTR trajectories by age</h1><p class="lede">Every weekly UTR point supplied for Alexis Malakhova, Kristina Liutova, Nikol Davletshina, Chloe Anthony and Lindy Zhou. Zoom into any age window, hover individual weeks, or toggle players to compare development slopes.</p></div>
+<aside class="note"><strong>How to read it</strong><span>UTR values are recorded weekly history. Alexis and Liutova use exact DOB anchors. Nikol, Chloe and Lindy use approximate DOB anchors, so their horizontal age placement is approximate. Liutova begins at her first recorded UTR; no pre-history is invented.</span></aside>
+</section>
+<section class="stats" id="stats"></section>
+<section class="chart-card"><div class="toolbar"><div class="toolbar-copy">Click legend names to hide/show. Scroll to zoom. Drag to zoom or pan. Hover for exact week, UTR and age.</div><div class="buttons"><button id="reset">Reset view</button><button id="focus8to13">Ages 8–13</button><button id="focus9to11">Ages 9–11</button><button id="showAll">Show all</button></div></div><div id="chart"></div></section>
+<section class="bottom"><div class="card"><h2>Birthday checkpoints</h2><p>Nearest recorded weekly UTR to each integer age. “~” indicates an approximate DOB anchor.</p><div style="overflow:auto"><table id="bench"></table></div></div><div class="card"><h2>Data notes</h2><div class="notes"><div class="mini"><b>Full weekly data</b><span id="countNote"></span></div><div class="mini"><b>Liutova</b><span>Her series starts at age 10.12 / UTR 6.38. The fast early rise may include rating calibration after entering the UTR ecosystem, so it should not be read as pure tennis improvement.</span></div><div class="mini"><b>Approximate ages</b><span>Nikol, Chloe and Lindy use approximate DOB anchors. Their UTR histories are exact; only x-axis age normalization is approximate.</span></div></div></div></section>
+<footer>Interactive comparison built from UTR Sports profile rating histories.</footer>
+</div>
+<script>
+const COLORS={alexis:'#1976d2',lindy:'#e53935',chloe:'#43a047',nikol:'#fb8c00',liutova:'#7e57c2'};
+const ORDER=['alexis','lindy','chloe','nikol','liutova'];
+const MS_YEAR=365.2425*24*60*60*1000;
+function parsePlayer(key,p){const dob=new Date(p.dob+'T00:00:00Z');const points=p.raw.trim().split(/\n+/).map(line=>{const [date,v]=line.trim().split(/\s+/);const dt=new Date(date+'T00:00:00Z');return{date,utr:+v,age:(dt-dob)/MS_YEAR}}).sort((a,b)=>a.age-b.age);return{...p,key,points}}
+const players=ORDER.map(k=>parsePlayer(k,window.UTR_HISTORIES[k]));
+const traces=players.map(p=>({x:p.points.map(d=>d.age),y:p.points.map(d=>d.utr),customdata:p.points.map(d=>[d.date,d.age,p.ageApprox?'Approximate age':'Exact age']),name:p.name+(p.ageApprox?'  ~':''),mode:'lines',line:{width:p.key==='alexis'?3.4:2.5,color:COLORS[p.key],dash:p.ageApprox?'dot':'solid'},hovertemplate:'<b>'+p.name+'</b><br>%{customdata[0]}<br>Age %{customdata[1]:.2f}<br>UTR %{y:.2f}<br><span style="color:#888">%{customdata[2]}</span><extra></extra>'}));
+function isDark(){return matchMedia('(prefers-color-scheme: dark)').matches}
+function layout(){const d=isDark();return{margin:{l:62,r:28,t:24,b:62},paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{family:'Inter,system-ui,sans-serif',color:d?'#eef4ef':'#182019',size:12},hovermode:'closest',dragmode:'zoom',legend:{orientation:'h',x:0,y:1.08,bgcolor:'rgba(0,0,0,0)'},xaxis:{title:'Chronological age (years)',gridcolor:d?'#2b342c':'#e3e9e4',zeroline:false,dtick:.5,minor:{dtick:.1,showgrid:true,gridcolor:d?'#202821':'#f0f3f0'}},yaxis:{title:'UTR',range:[0.5,12.5],gridcolor:d?'#2b342c':'#e3e9e4',zeroline:false,dtick:.5},uirevision:'keep'}}
+const config={responsive:true,scrollZoom:true,displaylogo:false,modeBarButtonsToRemove:['lasso2d','select2d'],toImageButtonOptions:{format:'png',filename:'utr-age-trajectories',scale:2}};
+Plotly.newPlot('chart',traces,layout(),config);
+document.getElementById('reset').onclick=()=>Plotly.relayout('chart',{'xaxis.autorange':true,'yaxis.range':[0.5,12.5]});
+document.getElementById('focus8to13').onclick=()=>Plotly.relayout('chart',{'xaxis.range':[8,13],'yaxis.range':[0.5,10.5]});
+document.getElementById('focus9to11').onclick=()=>Plotly.relayout('chart',{'xaxis.range':[9,11],'yaxis.range':[2.5,9]});
+document.getElementById('showAll').onclick=()=>Plotly.restyle('chart',{visible:true},ORDER.map((_,i)=>i));
+const stats=document.getElementById('stats');players.forEach(p=>{const latest=p.points[p.points.length-1];const div=document.createElement('div');div.className='stat';div.innerHTML=`<div class="stat-name">${p.name}${p.ageApprox?' ~':''}</div><div class="stat-main"><b>${latest.utr.toFixed(2)}</b><small>UTR</small></div><div class="stat-sub">${p.points.length} weekly points · age ${latest.age.toFixed(2)}</div>`;stats.appendChild(div)});
+const total=players.reduce((s,p)=>s+p.points.length,0);document.getElementById('countNote').textContent=`${total} weekly rating observations loaded across five players: `+players.map(p=>`${p.short} ${p.points.length}`).join(' · ')+'.';
+function nearest(p,age){let best=null;for(const d of p.points){const delta=Math.abs(d.age-age);if(!best||delta<best.delta)best={...d,delta}}return best&&best.delta<0.55?best:null}
+const ages=[8,9,10,11,12,13,14,15,16];const table=document.getElementById('bench');table.innerHTML='<thead><tr><th>Age</th>'+players.map(p=>`<th>${p.short}${p.ageApprox?' ~':''}</th>`).join('')+'</tr></thead><tbody>'+ages.map(a=>'<tr><td>'+a+'</td>'+players.map(p=>{const d=nearest(p,a);return'<td>'+(d?d.utr.toFixed(2):'—')+'</td>'}).join('')+'</tr>').join('')+'</tbody>';
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>Plotly.relayout('chart',layout()));
+</script>
+</body>
+</html>
