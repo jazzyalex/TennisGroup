@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Junior UTR Development Curves — Tennis Tracker</title>
+  <meta name="description" content="Interactive age-normalized UTR development trajectories for selected elite junior players." />
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7f4;
+      --panel: rgba(255,255,255,.88);
+      --panel-solid: #fff;
+      --text: #152018;
+      --muted: #617067;
+      --line: #dce4dd;
+      --brand: #285d35;
+      --brand-2: #3f7a4c;
+      --shadow: 0 18px 50px rgba(21,32,24,.08);
+      --radius: 22px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #101511;
+        --panel: rgba(24,31,25,.92);
+        --panel-solid: #181f19;
+        --text: #eef5ef;
+        --muted: #9eaba1;
+        --line: #303a32;
+        --brand: #9bd1a6;
+        --brand-2: #78b485;
+        --shadow: 0 18px 50px rgba(0,0,0,.28);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% -10%, rgba(93,151,105,.14), transparent 32rem),
+        radial-gradient(circle at 88% 0%, rgba(94,126,173,.11), transparent 30rem),
+        var(--bg);
+    }
+    .wrap { width: min(1500px, calc(100% - 32px)); margin: 0 auto; padding: 30px 0 64px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:18px; margin-bottom:28px; }
+    .brand { display:flex; align-items:center; gap:12px; color:var(--text); text-decoration:none; font-weight:800; letter-spacing:-.02em; }
+    .mark { width:38px; height:38px; border-radius:10px; background:var(--brand); position:relative; box-shadow:var(--shadow); }
+    .mark:before,.mark:after { content:""; position:absolute; background:#fff; opacity:.94; }
+    .mark:before { left:0; right:0; top:8px; height:5px; }
+    .mark:after { top:8px; bottom:0; left:17px; width:5px; }
+    .back { color:var(--muted); text-decoration:none; font-size:14px; }
+    .hero { display:grid; grid-template-columns: minmax(0,1.6fr) minmax(280px,.7fr); gap:24px; align-items:stretch; }
+    .hero-main,.side-note,.chart-card,.bench-card { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); backdrop-filter:blur(14px); }
+    .hero-main { padding:30px; }
+    .eyebrow { font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--brand-2); margin-bottom:10px; }
+    h1 { font-size:clamp(32px,5vw,62px); line-height:.98; margin:0; letter-spacing:-.055em; max-width:900px; }
+    .lede { margin:18px 0 0; color:var(--muted); font-size:17px; line-height:1.55; max-width:850px; }
+    .side-note { padding:24px; display:flex; flex-direction:column; justify-content:space-between; }
+    .side-note h2 { margin:0 0 8px; font-size:18px; }
+    .side-note p { margin:0; color:var(--muted); line-height:1.5; font-size:14px; }
+    .badge { margin-top:18px; display:inline-flex; align-items:center; gap:8px; width:max-content; padding:8px 11px; border-radius:999px; border:1px solid var(--line); font-size:12px; font-weight:700; color:var(--muted); background:var(--panel-solid); }
+    .dot { width:8px; height:8px; border-radius:50%; background:#d49a31; }
+    .stats { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin:18px 0 0; }
+    .stat { padding:16px; border:1px solid var(--line); border-radius:16px; background:color-mix(in srgb,var(--panel-solid) 88%, transparent); }
+    .stat .name { font-size:12px; color:var(--muted); margin-bottom:7px; }
+    .stat .value { font-size:22px; font-weight:800; letter-spacing:-.03em; }
+    .stat .sub { margin-top:4px; font-size:11px; color:var(--muted); }
+    .chart-card { margin-top:24px; padding:18px 18px 8px; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center; padding:6px 6px 2px; }
+    .toolbar-copy { color:var(--muted); font-size:13px; }
+    .buttons { display:flex; flex-wrap:wrap; gap:8px; }
+    button { appearance:none; border:1px solid var(--line); background:var(--panel-solid); color:var(--text); padding:9px 12px; border-radius:10px; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }
+    button:hover { border-color:var(--brand-2); }
+    #chart { width:100%; height:760px; }
+    .below { display:grid; grid-template-columns:1.2fr .8fr; gap:24px; margin-top:24px; }
+    .bench-card { padding:24px; }
+    .bench-card h2 { margin:0 0 14px; font-size:19px; }
+    .bench-card p { color:var(--muted); margin:0 0 18px; line-height:1.5; font-size:14px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th,td { padding:10px 8px; border-bottom:1px solid var(--line); text-align:right; }
+    th:first-child,td:first-child { text-align:left; }
+    th { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.06em; }
+    .notes { display:grid; gap:12px; }
+    .note { padding:14px 15px; border:1px solid var(--line); border-radius:14px; background:var(--panel-solid); }
+    .note b { display:block; margin-bottom:4px; font-size:13px; }
+    .note span { font-size:12px; color:var(--muted); line-height:1.45; }
+    footer { margin-top:24px; color:var(--muted); font-size:12px; text-align:center; }
+    @media (max-width: 980px) {
+      .hero,.below { grid-template-columns:1fr; }
+      .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #chart { height:650px; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width:min(100% - 18px,1500px); padding-top:14px; }
+      .topbar { margin-bottom:14px; }
+      .hero-main,.side-note,.bench-card { padding:18px; }
+      .chart-card { padding:8px 4px 2px; border-radius:16px; }
+      .stats { grid-template-columns:1fr 1fr; gap:8px; }
+      .stat { padding:12px; }
+      #chart { height:560px; }
+      .toolbar { padding:8px 8px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html"><span class="mark" aria-hidden="true"></span><span>Tennis Tracker</span></a>
+      <a class="back" href="index.html">← Back to tracker</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">Player development</div>
+        <h1>UTR trajectories, normalized by age</h1>
+        <p class="lede">An interactive comparison of junior development curves. The x-axis is chronological age rather than calendar date, making it easier to compare when each player reached the same competitive level.</p>
+        <div class="stats" id="stats"></div>
+      </div>
+      <aside class="side-note">
+        <div>
+          <h2>Read the chart carefully</h2>
+          <p>Alexis and Liutova use exact birth dates. Nikol, Chloe and Lindy use approximate age anchors because exact public DOBs were not available. Liutova begins only at her first recorded UTR; no pre-10 extrapolation is shown.</p>
+        </div>
+        <div class="badge"><span class="dot"></span> Approximate-age curves are labeled</div>
+      </aside>
+    </section>
+
+    <section class="chart-card">
+      <div class="toolbar">
+        <div class="toolbar-copy">Click legend names to hide/show players. Scroll or drag to zoom; double-click to reset.</div>
+        <div class="buttons">
+          <button id="reset">Reset view</button>
+          <button id="focus-juniors">Focus ages 8–13</button>
+          <button id="show-all">Show all players</button>
+        </div>
+      </div>
+      <div id="chart" role="img" aria-label="Interactive chart comparing age-normalized UTR trajectories"></div>
+    </section>
+
+    <section class="below">
+      <div class="bench-card">
+        <h2>Age checkpoints</h2>
+        <p>Nearest supplied UTR point to each birthday. A dash means the player’s available UTR record does not cover that age.</p>
+        <div style="overflow:auto">
+          <table id="bench"></table>
+        </div>
+      </div>
+      <div class="bench-card">
+        <h2>Interpretation notes</h2>
+        <div class="notes">
+          <div class="note"><b>Liutova’s first UTR point</b><span>Her recorded history starts at age 10.12 with UTR 6.38. The rapid rise that follows may combine real improvement with initial rating-system calibration after entering the U.S. UTR ecosystem.</span></div>
+          <div class="note"><b>Nikol as a continuous elite benchmark</b><span>Her curve is unusually strong from a young age and is useful because the UTR history spans a long continuous developmental window.</span></div>
+          <div class="note"><b>Lindy’s acceleration</b><span>Lindy was already exceptional near age 9, grew more moderately into age 10, then accelerated sharply again from roughly 10 to 11.</span></div>
+          <div class="note"><b>Alexis’s recent slope</b><span>Alexis shows a flatter period around age 9 followed by a clear re-acceleration approaching age 10. The chart is descriptive; it does not assume future UTR growth will remain linear.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>UTR histories supplied from UTR Sports profile history. Age-normalization is for comparative analysis; approximate DOB anchors are explicitly marked.</footer>
+  </div>
+
+<script>
+const players = [
+  {
+    name:'Alexis Malakhova', short:'Alexis', dob:'2016-07-25', ageApprox:false, color:'#1769aa',
+    points:[['2024-04-08',1.13],['2024-07-22',1.64],['2024-10-21',2.27],['2025-01-20',2.74],['2025-04-21',3.25],['2025-07-28',3.58],['2025-10-20',3.86],['2026-01-26',4.05],['2026-04-20',4.49],['2026-05-18',4.70],['2026-06-22',5.14],['2026-07-27',5.38],['2026-08-24',5.63]]
+  },
+  {
+    name:'Nikol Davletshina', short:'Nikol', dob:'2013-04-15', ageApprox:true, color:'#f28e2b',
+    points:[['2021-08-09',3.17],['2021-09-06',3.52],['2021-10-04',3.93],['2021-11-01',4.18],['2021-12-20',4.58],['2022-01-17',5.00],['2022-02-07',5.36],['2022-04-04',5.55],['2022-06-06',5.57],['2022-08-01',5.86],['2022-10-03',6.03],['2023-01-02',6.23],['2023-02-06',6.42],['2023-03-13',6.75],['2023-04-03',6.89],['2023-05-01',7.30],['2023-06-05',7.48],['2023-08-07',7.56],['2023-10-02',7.83],['2024-01-01',7.98],['2024-04-01',8.05],['2024-07-01',8.46],['2024-10-07',8.70],['2025-01-06',9.04],['2025-04-07',9.06],['2025-07-07',9.41],['2025-10-06',9.59],['2026-01-05',9.80],['2026-04-06',9.98],['2026-07-06',9.92],['2026-08-24',10.16]]
+  },
+  {
+    name:'Chloe Anthony', short:'Chloe', dob:'2013-09-26', ageApprox:true, color:'#2ca25f',
+    points:[['2022-04-04',1.46],['2022-07-04',1.26],['2022-10-03',1.77],['2023-01-02',2.59],['2023-04-03',3.10],['2023-07-03',3.30],['2023-10-02',4.19],['2024-01-01',4.33],['2024-04-01',4.59],['2024-07-01',5.07],['2024-10-07',5.81],['2025-01-06',6.69],['2025-04-07',7.11],['2025-07-07',7.39],['2025-10-06',7.56],['2026-01-05',7.75],['2026-03-30',8.13],['2026-04-27',8.38],['2026-06-29',8.58],['2026-08-24',8.54]]
+  },
+  {
+    name:'Lindy Zhou', short:'Lindy', dob:'2015-01-15', ageApprox:true, color:'#d62728',
+    points:[['2022-06-27',1.52],['2022-08-01',1.80],['2022-10-03',1.85],['2023-01-02',2.21],['2023-04-03',2.28],['2023-07-03',3.32],['2023-10-02',4.21],['2024-01-01',4.74],['2024-04-01',4.97],['2024-07-01',5.05],['2024-10-07',5.65],['2025-01-06',5.84],['2025-04-07',6.17],['2025-07-07',6.65],['2025-10-06',6.97],['2026-01-05',7.64],['2026-04-06',7.98],['2026-07-06',8.29],['2026-08-24',8.38]]
+  },
+  {
+    name:'Kristina Liutova', short:'Liutova', dob:'2010-02-02', ageApprox:false, color:'#8a60bd',
+    points:[['2020-03-16',6.38],['2020-06-01',6.46],['2020-08-03',6.59],['2020-10-05',6.96],['2020-12-28',7.58],['2021-02-02',8.25],['2021-08-02',8.77],['2022-02-07',8.87],['2022-08-01',9.21],['2023-02-06',9.72],['2023-08-07',10.00],['2024-02-05',10.22],['2024-08-05',10.56],['2025-02-03',10.72],['2025-08-04',11.05],['2026-02-02',11.37],['2026-08-24',11.94]]
+  }
+];
+
+function ageYears(dob, date){
+  const a=new Date(dob+'T00:00:00Z'), b=new Date(date+'T00:00:00Z');
+  return (b-a)/(365.2425*24*3600*1000);
+}
+function fmtAge(v){ return v.toFixed(2); }
+function nearestAtAge(player, target){
+  const pts=player.points.map(([d,u])=>({d,u,age:ageYears(player.dob,d)}));
+  const within=pts.filter(p=>Math.abs(p.age-target)<=0.55);
+  if(!within.length) return null;
+  return within.sort((a,b)=>Math.abs(a.age-target)-Math.abs(b.age-target))[0];
+}
+
+const traces=players.map(p=>{
+  const ages=p.points.map(([d])=>ageYears(p.dob,d));
+  const utr=p.points.map(([,u])=>u);
+  const custom=p.points.map(([d,u],i)=>[d,fmtAge(ages[i]),p.ageApprox?'Approximate age':'Exact age']);
+  return {
+    x:ages, y:utr, type:'scatter', mode:'lines+markers', name:p.name+(p.ageApprox?' ~':''),
+    line:{color:p.color,width:p.short==='Alexis'?4:3,shape:'linear'},
+    marker:{color:p.color,size:p.short==='Alexis'?7:6,line:{width:1,color:'rgba(255,255,255,.65)'}},
+    customdata:custom,
+    hovertemplate:'<b>'+p.name+'</b><br>Age %{customdata[1]} · UTR %{y:.2f}<br>%{customdata[0]} · %{customdata[2]}<extra></extra>'
+  };
+});
+
+const light=window.matchMedia('(prefers-color-scheme: light)').matches;
+const fg=light?'#203027':'#e7efe9';
+const grid=light?'rgba(65,82,69,.12)':'rgba(223,236,226,.10)';
+const paper='rgba(0,0,0,0)';
+const layout={
+  paper_bgcolor:paper, plot_bgcolor:paper,
+  margin:{l:62,r:26,t:42,b:62},
+  hovermode:'closest', dragmode:'zoom',
+  legend:{orientation:'h',x:0,y:1.08,font:{size:13,color:fg},bgcolor:'rgba(0,0,0,0)',itemclick:'toggle',itemdoubleclick:'toggleothers'},
+  xaxis:{title:'Chronological age',range:[7.35,16.75],dtick:1,minor:{dtick:.25,showgrid:true,gridcolor:grid},gridcolor:grid,zeroline:false,color:fg,fixedrange:false},
+  yaxis:{title:'UTR',range:[.5,12.5],dtick:.5,gridcolor:grid,zeroline:false,color:fg,fixedrange:false},
+  annotations:[
+    {x:ageYears('2010-02-02','2020-03-16'),y:6.38,text:'Liutova first recorded UTR<br><b>10.12y · 6.38</b>',showarrow:true,arrowhead:2,ax:68,ay:46,font:{size:11,color:fg},arrowcolor:'#8a60bd'},
+    {x:ageYears('2016-07-25','2026-08-24'),y:5.63,text:'Alexis now<br><b>10.08y · 5.63</b>',showarrow:true,arrowhead:2,ax:-55,ay:-45,font:{size:11,color:fg},arrowcolor:'#1769aa'}
+  ],
+  shapes:[
+    {type:'rect',xref:'x',yref:'paper',x0:9.0,x1:9.65,y0:0,y1:1,fillcolor:'rgba(23,105,170,.045)',line:{width:0},layer:'below'}
+  ]
+};
+const config={responsive:true,scrollZoom:true,displaylogo:false,modeBarButtonsToRemove:['lasso2d','select2d'],toImageButtonOptions:{format:'png',filename:'utr-age-trajectories',scale:2}};
+Plotly.newPlot('chart',traces,layout,config);
+
+document.getElementById('reset').onclick=()=>Plotly.relayout('chart',{'xaxis.range':[7.35,16.75],'yaxis.range':[.5,12.5]});
+document.getElementById('focus-juniors').onclick=()=>Plotly.relayout('chart',{'xaxis.range':[8,13.2],'yaxis.range':[1,10.5]});
+document.getElementById('show-all').onclick=()=>Plotly.restyle('chart',{visible:true});
+
+// Summary cards
+const stats=document.getElementById('stats');
+players.forEach(p=>{
+  const [d,u]=p.points[p.points.length-1];
+  const age=ageYears(p.dob,d);
+  const el=document.createElement('div'); el.className='stat';
+  el.innerHTML=`<div class="name">${p.short}${p.ageApprox?' · age ~':''}</div><div class="value">${u.toFixed(2)}</div><div class="sub">UTR at ${p.ageApprox?'~':''}${age.toFixed(2)} years</div>`;
+  stats.appendChild(el);
+});
+
+// Benchmark table
+const ages=[8,9,10,11,12,13];
+let html='<thead><tr><th>Player</th>'+ages.map(a=>`<th>Age ${a}</th>`).join('')+'</tr></thead><tbody>';
+players.forEach(p=>{
+  html+=`<tr><td><b>${p.short}</b>${p.ageApprox?' ~':''}</td>`;
+  ages.forEach(a=>{const n=nearestAtAge(p,a); html+=`<td>${n?n.u.toFixed(2):'—'}</td>`;});
+  html+='</tr>';
+});
+html+='</tbody>';
+document.getElementById('bench').innerHTML=html;
+</script>
+</body>
+</html>
